@@ -1,4 +1,19 @@
 disconf
 =======
 
-Distributed Configuration Management Tools
+Distributed Configuration Management Tools(分布式的配置管理工具)
+
+## 核心功能点 ##
+
+- 配置分布式化（云端存储）
+- 配置发布统一化（统一在云端发布和更新）
+- 零负担：
+    - 配置更新零负担
+    - 主备切换零负担
+    - 异构包部署统一化（零负担）
+    - 配置错误报警自动化（零负担）
+- 注解式客户端编程
+- 配置审核机制端编程
+- 配置审核机制
+
+
