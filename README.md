@@ -1,13 +1,14 @@
 disconf
 =======
 
-Distributed Configuration Management Tools(分布式的配置管理工具)
+Distributed Configuration Management Tools
 
-## 项目信息 ##
+百度联盟前端技术部内广泛使用的一款分布式的配置管理工具。
 
-- Java项目(1.6)
-- Maven管理
-- 百度联盟前端技术部使用
+## 项目依赖 ##
+
+- Java项目(1.6+)
+- Maven管理(3.0.5+)
 
 ## 核心功能点 ##
 
