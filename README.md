@@ -9,7 +9,7 @@ Distributed Configuration Management Tools
 
 - disconf-core: https://github.com/knightliao/disconf-core
 
-## 项目依赖 ##
+## 项目说明 ##
 
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
