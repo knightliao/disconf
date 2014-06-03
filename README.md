@@ -1,9 +1,9 @@
 disconf
 =======
 
-Distributed Configuration Management Tools
+Distributed Configuration Management Tools 
 
-百度联盟前端技术部内广泛使用的一款分布式的配置管理工具。
+分布式的配置管理工具客户端
 
 ## dependency ##
 
