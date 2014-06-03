@@ -10,4 +10,7 @@ package com.baidu.disconf2;
  */
 public class DisconfMgr {
 
+    public static void init() {
+
+    }
 }
