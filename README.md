@@ -5,6 +5,10 @@ Distributed Configuration Management Tools
 
 百度联盟前端技术部内广泛使用的一款分布式的配置管理工具。
 
+## dependency ##
+
+- disconf-core: https://github.com/knightliao/disconf-core
+
 ## 项目依赖 ##
 
 - Java项目(1.6+)
