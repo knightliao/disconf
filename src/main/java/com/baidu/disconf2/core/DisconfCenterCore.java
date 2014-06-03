@@ -3,8 +3,8 @@ package com.baidu.disconf2.core;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.disconf2.model.DisconfCenterFile;
-import com.baidu.disconf2.model.DisconfCenterItem;
+import com.baidu.disconf2.common.model.DisconfCenterFile;
+import com.baidu.disconf2.common.model.DisconfCenterItem;
 
 /**
  * 整体的配置服务中心
