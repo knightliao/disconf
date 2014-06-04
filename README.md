@@ -3,12 +3,20 @@ disconf
 
 Distributed Configuration Management Tools 
 
-分布式的配置管理工具客户端
+分布式的配置管理工具
 
 ## 项目说明 ##
 
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
+
+## 模块说明 ##
+
+- disconf-client: 分布式配置管理客户端
+- disconf-core: 分布式配置基础包
+- disconf-web: 分布式配置管理平台Web
+- disconf-demo: 使用disconf的standalone demo程序
+- disconf-springdemo: 使用disconf的spring mvc demo程序
 
 ## 核心功能点 ##
 
