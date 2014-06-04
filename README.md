@@ -5,10 +5,6 @@ Distributed Configuration Management Tools
 
 分布式的配置管理工具客户端
 
-## dependency ##
-
-- disconf-core: https://github.com/knightliao/disconf-core
-
 ## 项目说明 ##
 
 - Java项目(1.6+)
