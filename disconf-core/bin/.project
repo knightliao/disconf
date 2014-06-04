@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>disconf-client</name>
+	<name>disconf-core</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -19,6 +19,5 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
-		<nature>com.aptana.projects.webnature</nature>
 	</natures>
 </projectDescription>
