@@ -1,24 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.baidu</groupId>
-    <artifactId>disconf</artifactId>
+    <artifactId>disconf-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-    <properties>
-        <source.version>1.6</source.version>
-        <target.version>1.6</target.version>
-        <cglib.version>2.2.2</cglib.version>
-        <encoding>UTF-8</encoding>
-    </properties>
+    <parent>
+        <groupId>com.baidu</groupId>
+        <artifactId>disconf-base</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../disconf-base</relativePath>
+    </parent>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.9-RC1</version>
-        </dependency>
 
         <dependency>
             <groupId>commons-io</groupId>
@@ -76,7 +72,7 @@
         <defaultGoal>package</defaultGoal>
         <finalName>${project.artifactId}</finalName>
         <outputDirectory>target/classes</outputDirectory>
-        
+
         <resources>
             <resource>
                 <directory>${project.basedir}/src/main/java</directory>
@@ -169,5 +165,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

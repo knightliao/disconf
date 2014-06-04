@@ -1,0 +1,7 @@
+/bin
+/.classpath
+/.project
+/target
+/.settings
+/doc
+/disconf-client

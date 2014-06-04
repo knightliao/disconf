@@ -1,34 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.baidu</groupId>
     <artifactId>disconf-springdemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <properties>
-
-        <java.version>1.6</java.version>
-        <cglib.version>2.2.2</cglib.version>
-
-        <!-- jar's version -->
-        <spring.version>3.1.2.RELEASE</spring.version>
-
-        <junit.version>4.8.1</junit.version>
-        <jsp.version>2.0</jsp.version>
-        <servlet.version>2.4</servlet.version>
-
-        <source.version>1.6</source.version>
-        <target.version>1.6</target.version>
-        <encoding>UTF-8</encoding>
-
-        <!-- resource path -->
-        <project.build.online.sourceDir>${project.basedir}/src/main/online-resources</project.build.online.sourceDir>
-        <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-    </properties>
+    <parent>
+        <groupId>com.baidu</groupId>
+        <artifactId>disconf-base</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../disconf-base</relativePath>
+    </parent>
 
     <dependencies>
 
@@ -36,13 +20,11 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.0.9</version>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.0.9</version>
         </dependency>
 
         <dependency>
@@ -54,42 +36,35 @@
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2</version>
         </dependency>
 
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
         </dependency>
 
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.4</version>
         </dependency>
 
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.4</version>
         </dependency>
 
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.0.4</version>
         </dependency>
 
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
-            <version>1.4</version>
         </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
-            <version>1.2.15</version>
             <artifactId>log4j</artifactId>
             <exclusions>
                 <exclusion>
@@ -110,32 +85,27 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
-            <version>1.9.8</version>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.8</version>
         </dependency>
 
 
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.2.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjtools</artifactId>
-            <version>1.7.4</version>
         </dependency>
 
         <!-- test dependencies -->
@@ -143,7 +113,6 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.1</version>
         </dependency>
 
 
@@ -156,78 +125,71 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.aop</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.core</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.aspects</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.beans</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.context</artifactId>
-            <version>${spring.version}</version>
+  
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.context.support</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.web.servlet</artifactId>
-            <version>${spring.version}</version>
+  
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.expression</artifactId>
-            <version>${spring.version}</version>
+
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.instrument</artifactId>
-            <version>${spring.version}</version>
+ 
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.oxm</artifactId>
-            <version>${spring.version}</version>
+    
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.web</artifactId>
-            <version>${spring.version}</version>
+  
         </dependency>
-
-
-
 
         <dependency>
             <groupId>com.baidu</groupId>
             <artifactId>disconf-demo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        
         <dependency>
             <groupId>com.baidu</groupId>
             <artifactId>disconf-client</artifactId>
@@ -245,13 +207,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
                 <configuration>
                     <webResources>
                         <resource>
@@ -277,7 +237,6 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.10</version>
                 <configuration>
                     <!-- hot redeploy interval in seconds -->
                     <scanIntervalSeconds>10</scanIntervalSeconds>
