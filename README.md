@@ -16,7 +16,7 @@ Distributed Configuration Management Tools
 - 支持Web/Non-Web系统
 - 命名为Disconf
 
-http://ww1.sinaimg.cn/mw1024/005vnwcQgw1eh35pwqt2mj30pt0izwg6.jpg
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh35zjqpz3j20pt0iz75z.jpg)
 
 ## 功能特点 ##
 
@@ -35,13 +35,14 @@ http://ww1.sinaimg.cn/mw1024/005vnwcQgw1eh35pwqt2mj30pt0izwg6.jpg
 - 配置监控：可以实现线上机器的配置正确与否的监控报警。
 - 审核机制：提供了安全审核机制，更新配置时需要系统Owner的审核，审核通过后，配置更新操作才能正常实施。
 
-http://ww3.sinaimg.cn/mw1024/005vnwcQgw1eh35q5td4pj30nl0fxjt3.jpg
+![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1eh35wehylyj20pt0iz75z.jpg)
 
 ## 架构图  ##
 
-http://ww3.sinaimg.cn/mw1024/005vnwcQgw1eh35qfn6wej30b108dt9g.jpg
+![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1eh35wh9w55j20b108d0th.jpg)
 
 ## Modules Infos ##
+
 
 - disconf/disconf-core: 分布式配置基础包模块
 - disconf/disconf-client: 分布式配置管理客户端模块
