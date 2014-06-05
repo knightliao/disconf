@@ -6,12 +6,6 @@
     <artifactId>disconf-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <parent>
-        <groupId>com.baidu</groupId>
-        <artifactId>disconf</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../</relativePath>
-    </parent>
 
     <dependencies>
 
@@ -31,43 +25,44 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-
+            <version>1.4</version>
         </dependency>
 
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-
+            <version>2.4</version>
         </dependency>
 
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
+            <version>1.0.4</version>
 
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-
+            <version>1.7.6</version>
         </dependency>
 
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-
+            <version>1.3.1</version>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-
+            <version>1.0.9</version>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-
+            <version>1.0.9</version>
         </dependency>
 
         <dependency>
@@ -91,7 +86,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-
+            <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -111,7 +106,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>org.springframework.context</artifactId>
-
+            <version>3.1.2.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -147,6 +142,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.1</version>
                 <configuration>
                     <source>${source.version}</source>
                     <target>${target.version}</target>
@@ -172,6 +168,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
                     <excludes>
                         <exclude>*.properties</exclude>
