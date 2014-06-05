@@ -50,13 +50,13 @@ Distributed Configuration Management Tools
 - demo/disconf-springdemo: 使用disconf的spring mvc demo程序
 - demo/disconf-demo: 使用disconf的standalone demo程序
 
-## User Guide ##
+## 用户使用指南 ##
 
 使用手册
 
 配置说明
 
-## Development ##
+## 开发人员指南 ##
 
 [详细设计文档](https://github.com/knightliao/disconf/wiki/design)
 
