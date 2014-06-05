@@ -1,4 +1,4 @@
-disconf
+Disconf
 =======
 
 Distributed Configuration Management Tools 
