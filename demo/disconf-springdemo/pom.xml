@@ -9,9 +9,9 @@
 
     <parent>
         <groupId>com.baidu</groupId>
-        <artifactId>disconf-base</artifactId>
+        <artifactId>disconf</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../disconf-base</relativePath>
+        <relativePath>../../</relativePath>
     </parent>
 
     <dependencies>
