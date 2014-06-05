@@ -54,5 +54,7 @@ Distributed Configuration Management Tools
 
 [详细设计文档](https://github.com/knightliao/disconf/wiki/design)
 
+某些细节讨论
+
 性能测试
 
