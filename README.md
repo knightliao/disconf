@@ -35,7 +35,7 @@ Distributed Configuration Management Tools
 - 配置监控：可以实现线上机器的配置正确与否的监控报警。
 - 审核机制：提供了安全审核机制，更新配置时需要系统Owner的审核，审核通过后，配置更新操作才能正常实施。
 
-![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1eh35wehylyj20pt0iz75z.jpg)
+![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1eh3618p7a1j20nl0fx408.jpg)
 
 ## 架构图  ##
 
