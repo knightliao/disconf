@@ -14,11 +14,11 @@ Distributed Configuration Management Tools
 
 - 命名为Disconf
 - 专注于各种系统的配置管理的通用组件/通用平台
-- 支持Web/Non-Web系统
+- 支持Web/Non-Web/Spring系统
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh35zjqpz3j20pt0iz75z.jpg)
 
-## 功能特点 ##
+## 重要功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -31,6 +31,12 @@ Distributed Configuration Management Tools
 - **注解式客户端编程**：由于SpringMvc注解式编程方式的流行，使用注解式编程方式可以便捷化客户端的开发。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh36nk2hcqj20nl0fx408.jpg)
+
+
+## 其它功能特点 ##
+
+- 支持配置项多个项目共享，支持批量处理项目配置。
+- 配置监控：平台提供自校验功能（进一步提高稳定性），可以定时校验应用系统的配置是否正确。
 
 ## 架构图  ##
 
@@ -57,4 +63,8 @@ Distributed Configuration Management Tools
 [细节讨论](https://github.com/knightliao/disconf/wiki/detail-talk)
 
 性能测试
+
+## 其它 ##
+
+- 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。
 
