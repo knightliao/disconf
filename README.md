@@ -34,7 +34,7 @@ Distributed Configuration Management Tools
 
 ## 架构图  ##
 
-![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1eh3c4qnxkuj20b50863z7.jpg)
+![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1eh3c824p0aj20b50853z7.jpg)
 
 ## 模块信息##
 
