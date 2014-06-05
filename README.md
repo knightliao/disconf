@@ -40,7 +40,9 @@ Distributed Configuration Management Tools
 
 ## Development ##
 
-设计文档
+总体设计文档
+
+详细设计文档
 
 性能测试
 
