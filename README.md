@@ -41,8 +41,7 @@ Distributed Configuration Management Tools
 
 ![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1eh35wh9w55j20b108d0th.jpg)
 
-## Modules Infos ##
-
+## 模块信息##
 
 - disconf/disconf-core: 分布式配置基础包模块
 - disconf/disconf-client: 分布式配置管理客户端模块
