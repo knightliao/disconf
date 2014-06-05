@@ -7,6 +7,16 @@
     <artifactId>disconf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
+    
+    
+    <modules>
+        <module>disconf-client</module>
+        <module>disconf-core</module>
+        <module>demo/disconf-demo</module>
+        <module>demo/disconf-springdemob</module>
+        <module>disconf-web</module>
+    </modules>
+
 
     <properties>
         <!-- Spring項目配置 -->
