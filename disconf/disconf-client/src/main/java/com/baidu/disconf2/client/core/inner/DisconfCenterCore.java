@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.core;
+package com.baidu.disconf2.client.core.inner;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import com.baidu.disconf2.client.common.model.DisconfCenterFile;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 
 /**
- * 整体的配置服务中心
+ * 核心模块
  * 
  * @author liaoqiqi
  * @version 2014-5-16

@@ -20,7 +20,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
-import com.baidu.disconf2.demo.utils.ReflectionsUtils;
+import com.baidu.disconf2.utils.ReflectionsUtils;
 import com.google.common.base.Predicate;
 
 /**

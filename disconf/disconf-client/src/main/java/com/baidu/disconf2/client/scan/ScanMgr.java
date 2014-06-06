@@ -8,4 +8,13 @@ package com.baidu.disconf2.client.scan;
  */
 public class ScanMgr {
 
+    /**
+     * 
+     * 扫描包
+     * 
+     * @throws Exception
+     */
+    public static void scan(String packageName) throws Exception {
+
+    }
 }

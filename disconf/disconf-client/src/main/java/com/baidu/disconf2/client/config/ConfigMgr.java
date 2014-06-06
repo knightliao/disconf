@@ -8,7 +8,7 @@ import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.config.inner.DisInnerConfigHelper;
 
 /**
- * 管理配置
+ * 配置模块
  * 
  * @author liaoqiqi
  * @version 2014-6-6

@@ -7,8 +7,7 @@ import com.baidu.disconf2.client.config.ConfigMgr;
 
 /**
  * 
- * 
- * 配置服务统一管理器
+ * Disconf Client 总入口
  * 
  * @author liaoqiqi
  * @version 2014-5-23
@@ -33,6 +32,10 @@ public class DisconfMgr {
             return;
         }
 
+        //
+        //
+        //
+
         LOGGER.info("================================= DISCONF START ======================================");
 
         try {
@@ -40,11 +43,30 @@ public class DisconfMgr {
             // 导入配置
             ConfigMgr.init();
 
+            // 扫描
+
         } catch (Exception e) {
 
             LOGGER.error(e.toString());
         }
 
         LOGGER.info("================================= DISCONF END ======================================");
+    }
+
+    /**
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        try {
+
+            DisconfMgr.run("");
+
+        } catch (Exception e) {
+
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
