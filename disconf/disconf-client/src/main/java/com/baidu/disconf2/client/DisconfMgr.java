@@ -1,5 +1,8 @@
 package com.baidu.disconf2.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * 
@@ -10,7 +13,26 @@ package com.baidu.disconf2.client;
  */
 public class DisconfMgr {
 
-    public static void init() {
+    protected static final Logger LOGGER = LoggerFactory
+            .getLogger(DisconfMgr.class);
 
+    // 本实例不能初始化两次
+    private static boolean isInit = false;
+
+    /**
+     * 
+     * @param scanPackage
+     */
+    public static void run(String scanPackage) {
+
+        // 该函数不能调用两次
+        if (isInit == true) {
+            LOGGER.info("DisConfMgr has been init, ignore........");
+            return;
+        }
+
+        LOGGER.info("================================= DISCONF START ======================================");
+
+        LOGGER.info("================================= DISCONF END ======================================");
     }
 }

@@ -12,13 +12,20 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 配置导入工具
+ * 
+ * @author liaoqiqi
+ * @version 2014-6-6
+ */
 public class ConfigLoaderUtils {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ConfigLoaderUtils.class);
 
     // loader
-    private static ClassLoader loader = AutowareConfig.class.getClassLoader();
+    private static ClassLoader loader = ConfigLoaderUtils.class
+            .getClassLoader();
 
     public static String CLASS_PATH = "";
 
