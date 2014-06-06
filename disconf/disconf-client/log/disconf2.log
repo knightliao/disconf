@@ -1,0 +1,32 @@
+ 2014-06-06 16:02:06,490 [main] INFO  com.baidu.disconf2.client.config.ConfigMgr
+                - === LOAD CONFIG START ===
+ 2014-06-06 16:02:06,518 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER Action URL: /obj
+ 2014-06-06 16:02:06,519 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER CONF_SERVER_MASTER_NUM_ACTION Action URL: /getmasterinfo
+ 2014-06-06 16:02:06,519 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - classpath: /D:/10_software/github/disconf/disconf/disconf-client/target/classes/
+ 2014-06-06 16:02:06,519 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER LOCAL_DOWNLOAD_DIR: ./disconf/download
+ 2014-06-06 16:02:06,520 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER CONF_SERVER_URL_RETRY_TIMES: 3
+ 2014-06-06 16:02:06,520 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER CONF_SERVER_URL_RETRY_TIMES: 2
+ 2014-06-06 16:02:06,526 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - conf_server_host: http://10.36.147.38:8011
+ 2014-06-06 16:02:06,527 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - version: 1_0_0_0
+ 2014-06-06 16:02:06,527 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER APP: dsp_demo
+ 2014-06-06 16:02:06,527 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER ENV: online
+ 2014-06-06 16:02:06,527 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER ENABLE_DIS_AUTOCONF: false
+ 2014-06-06 16:02:06,527 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER ENABLE_REMOTE_CONF: true
+ 2014-06-06 16:02:06,527 [main] DEBUG com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER MAINTYPE_CHANGE_TIMEOUT: 120
+ 2014-06-06 16:02:06,528 [main] INFO  com.baidu.disconf2.client.config.inner.DisInnerConfigHelper
+                - SERVER ZOOKEEPER_HOST: 10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583
+ 2014-06-06 16:02:06,528 [main] INFO  com.baidu.disconf2.client.config.ConfigMgr
+                - === LOAD CONFIG END ===
