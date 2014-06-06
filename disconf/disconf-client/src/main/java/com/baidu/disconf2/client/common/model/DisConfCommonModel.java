@@ -1,4 +1,4 @@
-package com.baidu.disconf2.common.model;
+package com.baidu.disconf2.client.common.model;
 
 /**
  * 通用的模型数据，包括 APP，版本，环境

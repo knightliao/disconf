@@ -1,9 +1,9 @@
-package com.baidu.disconf2.common.callback;
+package com.baidu.disconf2.client.common.callback;
 
 import java.util.List;
 
-import com.baidu.disconf2.common.inter.IDisconfSysUpdate;
-import com.baidu.disconf2.common.model.DisconfCenterCallbackObject;
+import com.baidu.disconf2.client.common.inter.IDisconfSysUpdate;
+import com.baidu.disconf2.client.common.model.DisconfCenterCallbackObject;
 
 /**
  * 当配置更新时，系统会自动 调用此回调函数<br/>

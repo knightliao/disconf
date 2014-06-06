@@ -1,4 +1,4 @@
-package com.baidu.disconf2.common.inter;
+package com.baidu.disconf2.client.common.inter;
 
 /**
  * 配置更新 时 用户的回调函数来调用

@@ -1,8 +1,8 @@
-package com.baidu.disconf2.common.model;
+package com.baidu.disconf2.client.common.model;
 
 import java.util.List;
 
-import com.baidu.disconf2.common.inter.IDisconfUpdate;
+import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 
 /**
  * 记录配置更新时 或 主备切换时的回调函数

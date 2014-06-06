@@ -1,8 +1,8 @@
-package com.baidu.disconf2.common.inter;
+package com.baidu.disconf2.client.common.inter;
 
 import java.util.List;
 
-import com.baidu.disconf2.common.model.DisconfCenterCallbackObject;
+import com.baidu.disconf2.client.common.model.DisconfCenterCallbackObject;
 
 /**
  * 配置更新 时系统来调用

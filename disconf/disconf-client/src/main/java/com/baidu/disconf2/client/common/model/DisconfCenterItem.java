@@ -1,8 +1,8 @@
-package com.baidu.disconf2.common.model;
+package com.baidu.disconf2.client.common.model;
 
 import java.lang.reflect.Field;
 
-import com.baidu.disconf2.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf2.client.common.constants.DisConfigTypeEnum;
 
 /**
  * 配置项表示

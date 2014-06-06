@@ -1,4 +1,4 @@
-package com.baidu.disconf2.common.constants;
+package com.baidu.disconf2.client.common.constants;
 
 /**
  * 

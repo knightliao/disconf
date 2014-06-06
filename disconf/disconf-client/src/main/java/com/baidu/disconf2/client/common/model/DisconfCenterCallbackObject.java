@@ -1,6 +1,6 @@
-package com.baidu.disconf2.common.model;
+package com.baidu.disconf2.client.common.model;
 
-import com.baidu.disconf2.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf2.client.common.constants.DisConfigTypeEnum;
 
 /**
  * 收到消息时的回调数据

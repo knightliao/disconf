@@ -1,4 +1,4 @@
-package com.baidu.disconf2;
+package com.baidu.disconf2.client;
 
 /**
  * 

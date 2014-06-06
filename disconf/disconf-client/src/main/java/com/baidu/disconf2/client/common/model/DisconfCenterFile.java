@@ -1,4 +1,4 @@
-package com.baidu.disconf2.common.model;
+package com.baidu.disconf2.client.common.model;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.disconf2.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf2.client.common.constants.DisConfigTypeEnum;
 
 /**
  * 配置文件表示

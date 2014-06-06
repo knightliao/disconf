@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baidu.disconf2.common.annotations.DisconfActiveBackupService;
-import com.baidu.disconf2.common.annotations.DisconfUpdateService;
-import com.baidu.disconf2.common.inter.IDisconfUpdate;
+import com.baidu.disconf2.client.common.annotations.DisconfActiveBackupService;
+import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
+import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 
 /**
  * 分布式配置服务回调函数<br/>

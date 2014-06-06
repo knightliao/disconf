@@ -1,4 +1,4 @@
-package com.baidu.disconf2.common.annotations;
+package com.baidu.disconf2.client.common.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
