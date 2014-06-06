@@ -58,7 +58,7 @@ Distributed Configuration Management Tools
 
 ## 开发人员指南 ##
 
-[详细设计文档](https://github.com/knightliao/disconf/wiki/Disconf%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
+[详细设计文档](https://github.com/knightliao/disconf/wiki/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
 
 [细节讨论](https://github.com/knightliao/disconf/wiki/%E7%BB%86%E8%8A%82%E8%AE%A8%E8%AE%BA)
 
