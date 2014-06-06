@@ -3,6 +3,8 @@ package com.baidu.disconf2.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.client.config.ConfigMgr;
+
 /**
  * 
  * 
@@ -32,6 +34,16 @@ public class DisconfMgr {
         }
 
         LOGGER.info("================================= DISCONF START ======================================");
+
+        try {
+
+            // 导入配置
+            ConfigMgr.init();
+
+        } catch (Exception e) {
+
+            LOGGER.error(e.toString());
+        }
 
         LOGGER.info("================================= DISCONF END ======================================");
     }

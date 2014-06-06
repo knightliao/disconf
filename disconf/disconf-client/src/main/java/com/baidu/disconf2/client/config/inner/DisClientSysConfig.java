@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.config;
+package com.baidu.disconf2.client.config.inner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class DisClientSysConfig {
         return INSTANCE;
     }
 
-    protected static final String filename = "conf/disconf_sys.properties";
+    protected static final String filename = "disconf_sys.properties";
 
     private boolean isLoaded = false;
 

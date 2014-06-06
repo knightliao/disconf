@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.config;
+package com.baidu.disconf2.client.config.inner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public final class DisClientConfig {
         return INSTANCE;
     }
 
-    protected static final String filename = "conf/disconf.properties";
+    protected static final String filename = "disconf.properties";
 
     private boolean isLoaded = false;
 
@@ -63,7 +63,6 @@ public final class DisClientConfig {
      */
     @DisInnerConfigAnnotation(name = "conf_server_host")
     public String CONF_SERVER_HOST;
-    
 
     /**
      * zookeeper HOST

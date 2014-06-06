@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.config;
+package com.baidu.disconf2.client.config.inner;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -154,7 +154,7 @@ public final class AutowareConfig {
         // 读配置文件
         Properties prop = getProperties(propertyFilePath);
         if (null == prop || obj == null) {
-            throw new Exception("cannot autowareConfig" + propertyFilePath);
+            throw new Exception("cannot autowareConfig " + propertyFilePath);
         }
 
         autowareConfig(obj, prop);
