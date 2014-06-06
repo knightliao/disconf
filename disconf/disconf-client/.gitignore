@@ -3,5 +3,5 @@
 /.settings
 /.classpath
 /.project
-/.disconf
+/disconf
 /log
