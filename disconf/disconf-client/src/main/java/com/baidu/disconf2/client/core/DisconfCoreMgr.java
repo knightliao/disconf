@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
+import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.core.inner.DisconfCenterStore;
 
 /**
@@ -54,4 +55,24 @@ public class DisconfCoreMgr {
         return disconfCenterStore.getConfFileMap();
     }
 
+    /**
+     * 批量添加配置项
+     * 
+     * @return
+     */
+    public void transformScanItems(List<DisconfCenterItem> disconfCenterItems) {
+
+        for (DisconfCenterItem disconfCenterItem : disconfCenterItems) {
+            disconfCenterStore.storeOneItem(disconfCenterItem);
+        }
+    }
+
+    /**
+     * 获取配置项的数据
+     * 
+     * @return
+     */
+    public Map<String, DisconfCenterItem> getConfItemMap() {
+        return disconfCenterStore.getConfItemMap();
+    }
 }

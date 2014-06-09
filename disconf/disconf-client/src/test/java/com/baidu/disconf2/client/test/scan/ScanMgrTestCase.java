@@ -27,6 +27,10 @@ public class ScanMgrTestCase {
             LOGGER.info(DisconfCoreMgr.getInstance().getConfFileMap()
                     .toString());
 
+            //
+            LOGGER.info(DisconfCoreMgr.getInstance().getConfItemMap()
+                    .toString());
+
         } catch (Exception e) {
 
             // TODO Auto-generated catch block

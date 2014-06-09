@@ -64,4 +64,12 @@ public class DisconfCenterItem {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
     }
 
+    @Override
+    public String toString() {
+        return "DisconfCenterItem [key=" + key + ", value=" + value
+                + ", field=" + field + ", disConfCommonModel="
+                + disConfCommonModel + ", disconfCommonCallbackModel="
+                + disconfCommonCallbackModel + "]";
+    }
+
 }

@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
+import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.model.DisConfCommonModel;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
+import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
 
@@ -56,20 +58,8 @@ public class ScanCoreAdapter {
 
         //
         // disConfCommonModel
-        DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
-
-        disConfCommonModel.setApp(DisClientConfig.getInstance().APP);
-        if (!disconfFileAnnotation.env().isEmpty()) {
-            disConfCommonModel.setEnv(disconfFileAnnotation.env());
-        } else {
-            disConfCommonModel.setEnv(DisClientConfig.getInstance().ENV);
-        }
-        if (!disconfFileAnnotation.version().isEmpty()) {
-            disConfCommonModel.setVersion(disconfFileAnnotation.version());
-        } else {
-            disConfCommonModel
-                    .setVersion(DisClientConfig.getInstance().VERSION);
-        }
+        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
+                disconfFileAnnotation.env(), disconfFileAnnotation.version());
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
         //
@@ -86,6 +76,59 @@ public class ScanCoreAdapter {
         disconfCenterFile.setKeyMaps(keyMaps);
 
         return disconfCenterFile;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    private static DisConfCommonModel makeDisConfCommonModel(String env,
+            String version) {
+
+        DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
+
+        disConfCommonModel.setApp(DisClientConfig.getInstance().APP);
+        if (!env.isEmpty()) {
+            disConfCommonModel.setEnv(env);
+        } else {
+            disConfCommonModel.setEnv(DisClientConfig.getInstance().ENV);
+        }
+        if (!version.isEmpty()) {
+            disConfCommonModel.setVersion(version);
+        } else {
+            disConfCommonModel
+                    .setVersion(DisClientConfig.getInstance().VERSION);
+        }
+
+        return disConfCommonModel;
+    }
+
+    /**
+     * 转换配置项
+     * 
+     * @return
+     */
+    private static DisconfCenterItem transformScanFile(Field field) {
+
+        DisconfCenterItem disconfCenterItem = new DisconfCenterItem();
+
+        // field
+        disconfCenterItem.setField(field);
+
+        DisconfItem disconfItem = field.getAnnotation(DisconfItem.class);
+
+        // key
+        disconfCenterItem.setKey(disconfItem.key());
+        // value
+        disconfCenterItem.setValue(disconfItem.version());
+
+        //
+        // disConfCommonModel
+        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
+                disconfItem.env(), disconfItem.version());
+        disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
+
+        return disconfCenterItem;
     }
 
     /**
@@ -113,6 +156,26 @@ public class ScanCoreAdapter {
     }
 
     /**
+     * 转换配置项
+     * 
+     * @return
+     */
+    private static List<DisconfCenterItem> getDisconfItems(ScanModel scanModel) {
+
+        List<DisconfCenterItem> disconfCenterItems = new ArrayList<DisconfCenterItem>();
+
+        Set<Field> fields = scanModel.getDisconfItemFieldSet();
+        for (Field field : fields) {
+
+            DisconfCenterItem disconfCenterItem = transformScanFile(field);
+
+            disconfCenterItems.add(disconfCenterItem);
+        }
+
+        return disconfCenterItems;
+    }
+
+    /**
      * 
      * @return
      */
@@ -123,5 +186,8 @@ public class ScanCoreAdapter {
         DisconfCoreMgr.getInstance().transformScanFiles(disconfCenterFiles);
 
         // 转换配置项
+        List<DisconfCenterItem> disconfCenterItems = getDisconfItems(scanModel);
+        DisconfCoreMgr.getInstance().transformScanItems(disconfCenterItems);
+
     }
 }
