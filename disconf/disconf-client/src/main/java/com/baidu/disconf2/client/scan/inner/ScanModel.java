@@ -1,6 +1,7 @@
 package com.baidu.disconf2.client.scan.inner;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.Set;
 
 import org.reflections.Reflections;
@@ -15,47 +16,76 @@ public class ScanModel {
 
     private Reflections reflections;
 
-    private Set<Class<?>> disconfFileSet;
+    //
+    // 配置文件
+    private Set<Class<?>> disconfFileClassSet;
 
-    private Set<Field> disconfFileItemSet;
+    private Set<Field> disconfFileItemFieldSet;
 
-    private Set<Field> disconfItemSet;
+    //
+    // 配置文件MAP, KEY为配置文件
+    private Map<Class<?>, Set<Field>> disconfFileItemMap;
 
-    private Set<Class<?>> disconfActiveBackupServiceSet;
+    //
+    // 配置ITEM
+    private Set<Field> disconfItemFieldSet;
 
+    //
+    //
+    private Set<Class<?>> disconfActiveBackupServiceClassSet;
+
+    //
+    // 更新 回调函数
     private Set<Class<?>> disconfUpdateService;
 
-    public Set<Class<?>> getDisconfFileSet() {
-        return disconfFileSet;
+    public Reflections getReflections() {
+        return reflections;
     }
 
-    public void setDisconfFileSet(Set<Class<?>> disconfFileSet) {
-        this.disconfFileSet = disconfFileSet;
+    public void setReflections(Reflections reflections) {
+        this.reflections = reflections;
     }
 
-    public Set<Field> getDisconfFileItemSet() {
-        return disconfFileItemSet;
+    public Set<Class<?>> getDisconfFileClassSet() {
+        return disconfFileClassSet;
     }
 
-    public void setDisconfFileItemSet(Set<Field> disconfFileItemSet) {
-        this.disconfFileItemSet = disconfFileItemSet;
+    public void setDisconfFileClassSet(Set<Class<?>> disconfFileClassSet) {
+        this.disconfFileClassSet = disconfFileClassSet;
     }
 
-    public Set<Field> getDisconfItemSet() {
-        return disconfItemSet;
+    public Set<Field> getDisconfFileItemFieldSet() {
+        return disconfFileItemFieldSet;
     }
 
-    public void setDisconfItemSet(Set<Field> disconfItemSet) {
-        this.disconfItemSet = disconfItemSet;
+    public void setDisconfFileItemFieldSet(Set<Field> disconfFileItemFieldSet) {
+        this.disconfFileItemFieldSet = disconfFileItemFieldSet;
     }
 
-    public Set<Class<?>> getDisconfActiveBackupServiceSet() {
-        return disconfActiveBackupServiceSet;
+    public Map<Class<?>, Set<Field>> getDisconfFileItemMap() {
+        return disconfFileItemMap;
     }
 
-    public void setDisconfActiveBackupServiceSet(
-            Set<Class<?>> disconfActiveBackupServiceSet) {
-        this.disconfActiveBackupServiceSet = disconfActiveBackupServiceSet;
+    public void setDisconfFileItemMap(
+            Map<Class<?>, Set<Field>> disconfFileItemMap) {
+        this.disconfFileItemMap = disconfFileItemMap;
+    }
+
+    public Set<Field> getDisconfItemFieldSet() {
+        return disconfItemFieldSet;
+    }
+
+    public void setDisconfItemFieldSet(Set<Field> disconfItemFieldSet) {
+        this.disconfItemFieldSet = disconfItemFieldSet;
+    }
+
+    public Set<Class<?>> getDisconfActiveBackupServiceClassSet() {
+        return disconfActiveBackupServiceClassSet;
+    }
+
+    public void setDisconfActiveBackupServiceClassSet(
+            Set<Class<?>> disconfActiveBackupServiceClassSet) {
+        this.disconfActiveBackupServiceClassSet = disconfActiveBackupServiceClassSet;
     }
 
     public Set<Class<?>> getDisconfUpdateService() {
@@ -64,14 +94,6 @@ public class ScanModel {
 
     public void setDisconfUpdateService(Set<Class<?>> disconfUpdateService) {
         this.disconfUpdateService = disconfUpdateService;
-    }
-
-    public Reflections getReflections() {
-        return reflections;
-    }
-
-    public void setReflections(Reflections reflections) {
-        this.reflections = reflections;
     }
 
 }

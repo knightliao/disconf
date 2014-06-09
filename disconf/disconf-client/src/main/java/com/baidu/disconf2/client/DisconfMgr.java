@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.config.ConfigMgr;
+import com.baidu.disconf2.client.scan.ScanMgr;
 
 /**
  * 
@@ -43,7 +44,9 @@ public class DisconfMgr {
             // 导入配置
             ConfigMgr.init();
 
-            // 扫描
+            // 扫描并入库
+            LOGGER.info("start to scan package: " + scanPackage);
+            ScanMgr.scanAndStore(scanPackage);
 
         } catch (Exception e) {
 

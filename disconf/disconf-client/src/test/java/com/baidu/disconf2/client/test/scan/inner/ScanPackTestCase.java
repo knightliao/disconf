@@ -1,6 +1,7 @@
 package com.baidu.disconf2.client.test.scan.inner;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -31,22 +32,29 @@ public class ScanPackTestCase {
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE ITEM===================");
-            Set<Field> fields = scanModel.getDisconfFileItemSet();
+            Set<Field> fields = scanModel.getDisconfFileItemFieldSet();
             ScanPrinterUtils.printFileItem(fields);
             Assert.assertEquals(2, fields.size());
 
+            // disconf file item
+            LOGGER.info("=============DISCONF FILE===================");
+            Map<Class<?>, Set<Field>> fileMap = scanModel
+                    .getDisconfFileItemMap();
+            ScanPrinterUtils.printFileMap(fileMap);
+            Assert.assertEquals(2, fileMap.size());
+
             // disconf item
             LOGGER.info("=============DISCONF ITEM===================");
-            fields = scanModel.getDisconfItemSet();
-            ScanPrinterUtils.printItem(scanModel.getDisconfItemSet());
+            fields = scanModel.getDisconfItemFieldSet();
+            ScanPrinterUtils.printItem(scanModel.getDisconfItemFieldSet());
             Assert.assertEquals(1, fields.size());
 
             // Active backup
             LOGGER.info("=============DISCONF ACTIVE BACKUP===================");
             Set<Class<?>> classSet = scanModel
-                    .getDisconfActiveBackupServiceSet();
+                    .getDisconfActiveBackupServiceClassSet();
             ScanPrinterUtils.printActiveBackup(classSet);
-            Assert.assertEquals(1, classSet.size());
+            Assert.assertEquals(0, classSet.size());
 
             // Update service
             LOGGER.info("=============DISCONF Update service===================");

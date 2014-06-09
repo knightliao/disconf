@@ -71,7 +71,7 @@ public class ScanPrinterUtils {
     /**
      * 
      */
-    public void printFile(Set<Class<?>> classdata) {
+    public static void printFile(Set<Class<?>> classdata) {
 
         for (Class<?> item : classdata) {
 
@@ -80,6 +80,21 @@ public class ScanPrinterUtils {
             LOGGER.info("\tfile name: " + disconfFile.filename());
             LOGGER.info("\tenv: " + disconfFile.env());
             LOGGER.info("\tversion: " + disconfFile.env());
+        }
+    }
+
+    /**
+     * 
+     */
+    public static void printFileMap(Map<Class<?>, Set<Field>> disconfFileItemMap) {
+
+        for (Class<?> thisClass : disconfFileItemMap.keySet()) {
+
+            LOGGER.info(thisClass + " -> ");
+            Set<Field> fields = disconfFileItemMap.get(thisClass);
+            for (Field field : fields) {
+                LOGGER.info("\t\t" + field.toString());
+            }
         }
     }
 
@@ -103,7 +118,7 @@ public class ScanPrinterUtils {
     /**
      * 
      */
-    public  static void printActiveBackup(Set<Class<?>> classdata) {
+    public static void printActiveBackup(Set<Class<?>> classdata) {
 
         for (Class<?> item : classdata) {
 

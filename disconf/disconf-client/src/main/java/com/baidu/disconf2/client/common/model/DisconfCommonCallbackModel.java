@@ -35,4 +35,11 @@ public class DisconfCommonCallbackModel {
         this.disconfUpdatesActiveBackups = disconfUpdatesActiveBackups;
     }
 
+    @Override
+    public String toString() {
+        return "DisconfCommonCallbackModel [disconfConfUpdates="
+                + disconfConfUpdates + ", disconfUpdatesActiveBackups="
+                + disconfUpdatesActiveBackups + "]";
+    }
+
 }

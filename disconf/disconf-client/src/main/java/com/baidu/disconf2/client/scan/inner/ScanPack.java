@@ -1,6 +1,11 @@
 package com.baidu.disconf2.client.scan.inner;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.reflections.Reflections;
@@ -12,6 +17,8 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfActiveBackupService;
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
@@ -29,6 +36,9 @@ import com.google.common.base.Predicate;
  * @version 2014-6-6
  */
 public class ScanPack {
+
+    protected static final Logger LOGGER = LoggerFactory
+            .getLogger(ScanPack.class);
 
     /**
      * 通过扫描，获取反射对象
@@ -61,6 +71,95 @@ public class ScanPack {
      */
     public static ScanModel scan(String packName) {
 
+        // 基本信息
+        ScanModel scanModel = scanBasicInfo(packName);
+
+        // 分析
+        analysis(scanModel);
+
+        return scanModel;
+    }
+
+    /**
+     * 分析出一些关系 出来
+     * 
+     * @param scanModel
+     */
+    private static void analysis(ScanModel scanModel) {
+
+        //
+        // 分析出配置文件MAP
+        //
+        analysis4DisconfFile(scanModel);
+
+        //
+        // 分析出更新的回调关系
+        //
+
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        Set<Class<?>> disconfUpdateServiceSet = scanModel
+                .getDisconfUpdateService();
+        for (Class<?> disconfUpdateServiceClass : disconfUpdateServiceSet) {
+
+            DisconfUpdateService disconfUpdateService = disconfUpdateServiceClass
+                    .getAnnotation(DisconfUpdateService.class);
+            List<String> keysList = Arrays.asList(disconfUpdateService.keys());
+            // 这里先不校验KEY的有效性
+            map.put(disconfUpdateServiceClass.getName(), keysList);
+        }
+    }
+
+    /**
+     * 分析出配置文件MAP
+     * 
+     * @param scanModel
+     */
+    private static void analysis4DisconfFile(ScanModel scanModel) {
+
+        Map<Class<?>, Set<Field>> disconfFileItemMap = new HashMap<Class<?>, Set<Field>>();
+        Set<Class<?>> classdata = scanModel.getDisconfFileClassSet();
+        for (Class<?> classFile : classdata) {
+            disconfFileItemMap.put(classFile, new HashSet<Field>());
+        }
+
+        // 将配置文件与配置进行关联
+        Set<Field> af1 = scanModel.getDisconfFileItemFieldSet();
+        for (Field field : af1) {
+
+            Class<?> thisClass = field.getDeclaringClass();
+
+            if (disconfFileItemMap.containsKey(thisClass)) {
+                Set<Field> fieldSet = disconfFileItemMap.get(thisClass);
+                fieldSet.add(field);
+                disconfFileItemMap.put(thisClass, fieldSet);
+
+            } else {
+
+                LOGGER.error("cannot find CLASS ANNOTATION "
+                        + DisconfFile.class.getName()
+                        + " for disconf file item: " + field.toString());
+            }
+        }
+
+        // 校验是否所有配置文件都含有配置
+        for (Class<?> classFile : disconfFileItemMap.keySet()) {
+            if (disconfFileItemMap.get(classFile).isEmpty()) {
+                LOGGER.warn("disconf file hasn't any items: "
+                        + classFile.toString());
+                disconfFileItemMap.remove(classFile);
+            }
+        }
+
+        scanModel.setDisconfFileItemMap(disconfFileItemMap);
+    }
+
+    /**
+     * 扫描基本信息
+     * 
+     * @return
+     */
+    private static ScanModel scanBasicInfo(String packName) {
+
         ScanModel scanModel = new ScanModel();
 
         // 扫描对象
@@ -72,27 +171,27 @@ public class ScanPack {
         //
         Set<Class<?>> classdata = reflections
                 .getTypesAnnotatedWith(DisconfFile.class);
-        scanModel.setDisconfFileSet(classdata);
+        scanModel.setDisconfFileClassSet(classdata);
 
         //
         // 获取DisconfFileItem
         //
         Set<Field> af1 = reflections
                 .getFieldsAnnotatedWith(DisconfFileItem.class);
-        scanModel.setDisconfFileItemSet(af1);
+        scanModel.setDisconfFileItemFieldSet(af1);
 
         //
         // 获取DisconfItem
         //
         af1 = reflections.getFieldsAnnotatedWith(DisconfItem.class);
-        scanModel.setDisconfItemSet(af1);
+        scanModel.setDisconfItemFieldSet(af1);
 
         //
         // 获取DisconfActiveBackupService
         //
         classdata = reflections
                 .getTypesAnnotatedWith(DisconfActiveBackupService.class);
-        scanModel.setDisconfActiveBackupServiceSet(classdata);
+        scanModel.setDisconfActiveBackupServiceClassSet(classdata);
 
         //
         // 获取DisconfActiveBackupService

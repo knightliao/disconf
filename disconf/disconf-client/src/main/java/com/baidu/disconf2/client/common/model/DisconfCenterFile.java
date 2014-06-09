@@ -1,12 +1,10 @@
 package com.baidu.disconf2.client.common.model;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-
-import com.baidu.disconf2.client.common.constants.DisConfigTypeEnum;
+import java.util.Set;
 
 /**
  * 配置文件表示
@@ -21,10 +19,10 @@ public class DisconfCenterFile {
     private Map<String, String> keyMaps = new HashMap<String, String>();
 
     // 配置文件类
-    private Class<Object> cls;
+    private Class<?> cls;
 
     // 域列表
-    private List<Field> fields = new ArrayList<Field>();
+    private Set<Field> fields = new HashSet<Field>();
 
     // 文件名
     private String fileName;
@@ -35,9 +33,6 @@ public class DisconfCenterFile {
     // 回调函数
     private DisconfCommonCallbackModel disconfCommonCallbackModel;
 
-    // 配置占用类型
-    private DisConfigTypeEnum disConfigTypeEnum;
-
     public Map<String, String> getKeyMaps() {
         return keyMaps;
     }
@@ -46,11 +41,11 @@ public class DisconfCenterFile {
         this.keyMaps = keyMaps;
     }
 
-    public List<Field> getFields() {
+    public Set<Field> getFields() {
         return fields;
     }
 
-    public void setFields(List<Field> fields) {
+    public void setFields(Set<Field> fields) {
         this.fields = fields;
     }
 
@@ -62,11 +57,11 @@ public class DisconfCenterFile {
         this.disConfCommonModel = disConfCommonModel;
     }
 
-    public Class<Object> getCls() {
+    public Class<?> getCls() {
         return cls;
     }
 
-    public void setCls(Class<Object> cls) {
+    public void setCls(Class<?> cls) {
         this.cls = cls;
     }
 
@@ -78,14 +73,6 @@ public class DisconfCenterFile {
         this.fileName = fileName;
     }
 
-    public DisConfigTypeEnum getDisConfigTypeEnum() {
-        return disConfigTypeEnum;
-    }
-
-    public void setDisConfigTypeEnum(DisConfigTypeEnum disConfigTypeEnum) {
-        this.disConfigTypeEnum = disConfigTypeEnum;
-    }
-
     public DisconfCommonCallbackModel getDisconfCommonCallbackModel() {
         return disconfCommonCallbackModel;
     }
@@ -93,6 +80,15 @@ public class DisconfCenterFile {
     public void setDisconfCommonCallbackModel(
             DisconfCommonCallbackModel disconfCommonCallbackModel) {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
+    }
+
+    @Override
+    public String toString() {
+        return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
+                + ", fields=" + fields + ", fileName=" + fileName
+                + ", disConfCommonModel=" + disConfCommonModel
+                + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
+                + "]";
     }
 
 }

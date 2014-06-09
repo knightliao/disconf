@@ -41,4 +41,10 @@ public class DisConfCommonModel {
         this.env = env;
     }
 
+    @Override
+    public String toString() {
+        return "DisConfCommonModel [app=" + app + ", version=" + version
+                + ", env=" + env + "]";
+    }
+
 }
