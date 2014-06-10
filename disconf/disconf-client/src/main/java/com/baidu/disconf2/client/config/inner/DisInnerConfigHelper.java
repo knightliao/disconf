@@ -40,8 +40,11 @@ public class DisInnerConfigHelper {
 
             throw new Exception("settings: CONF_SERVER_HOST cannot find");
         }
+        DisClientConfig.getInstance().setHostList(
+                StringNUtils.parseStringToStringList(
+                        DisClientConfig.getInstance().CONF_SERVER_HOST, ","));
         LOGGER.info("conf_server_host: "
-                + DisClientConfig.getInstance().CONF_SERVER_HOST);
+                + DisClientConfig.getInstance().getHostList());
 
         //
         // version

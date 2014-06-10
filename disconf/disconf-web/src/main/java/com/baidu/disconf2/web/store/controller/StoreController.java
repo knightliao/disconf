@@ -16,14 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baidu.disconf2.core.common.json.ConfItemVo;
 import com.baidu.disconf2.web.store.form.ConfForm;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
-import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.utils.FileUtils;
 
 /**
+ * 
+ * STORE API需要特殊处理一下, 返回要是完整的可读性强的JSON
  * 
  * @author liaoqiqi
  * @version 2014-1-20
@@ -39,7 +41,7 @@ public class StoreController extends BaseController {
 
     /**
      * 
-     * 获取文件
+     * 获取配置文件
      * 
      * @return
      */
@@ -52,18 +54,20 @@ public class StoreController extends BaseController {
     }
 
     /**
-     * 获取Item
+     * 获取配置项 Item
      * 
      * @param demoUserId
      * @return
      */
     @RequestMapping(value = "/item", method = RequestMethod.GET)
     @ResponseBody
-    public JsonObjectBase getItem() {
+    public ConfItemVo getItem() {
 
-        int aaa = 10;
+        ConfItemVo confItemVo = new ConfItemVo();
+        confItemVo.setStatus(ConfItemVo.OK);
+        confItemVo.setValue("88888");
 
-        return buildSuccess(aaa);
+        return confItemVo;
     }
 
     /**

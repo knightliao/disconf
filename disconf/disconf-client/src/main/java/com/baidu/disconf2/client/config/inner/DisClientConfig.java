@@ -1,5 +1,7 @@
 package com.baidu.disconf2.client.config.inner;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +65,7 @@ public final class DisClientConfig {
      */
     @DisInnerConfigAnnotation(name = "conf_server_host")
     public String CONF_SERVER_HOST;
+    private List<String> hostList;
 
     /**
      * zookeeper HOST
@@ -135,5 +138,13 @@ public final class DisClientConfig {
      */
     @DisInnerConfigAnnotation(name = "maintype.change.timeout", defaultValue = "120")
     public int MAINTYPE_CHANGE_TIMEOUT = 120;
+
+    public List<String> getHostList() {
+        return hostList;
+    }
+
+    public void setHostList(List<String> hostList) {
+        this.hostList = hostList;
+    }
 
 }

@@ -39,11 +39,9 @@ public class RetryProxy {
             }
         }
 
-        if (cur_time >= retryTimes) {
-
-            LOGGER.error("finally failed....");
-        }
+        LOGGER.warn("finally failed....");
 
         return null;
     }
+
 }

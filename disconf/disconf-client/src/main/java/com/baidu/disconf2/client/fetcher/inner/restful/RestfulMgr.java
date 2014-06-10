@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
+import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
 import com.baidu.disconf2.client.fetcher.inner.restful.file.FetchConfFile;
 import com.baidu.disconf2.client.fetcher.inner.restful.http.RestfulGet;
@@ -147,9 +148,12 @@ public class RestfulMgr {
      * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
      * @throws Exception
      */
-    public String downloadFromServer(URL remoteUrl, String fileName,
-            String localTmpFilePath, String localFilePath,
+    public String downloadFromServer(RemoteUrl remoteUrl, String fileName,
+            String localTmpFileDir, String localFileDir,
             boolean isTransfer2Classpath) throws Exception {
+
+        String localTmpFilePath = OsUtil.pathJoin(localTmpFileDir, fileName);
+        String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
 
         File localTmpFile = new File(localTmpFilePath);
         File localFile = new File(localFilePath);
@@ -163,13 +167,16 @@ public class RestfulMgr {
                 localTmpFile.delete();
             }
 
-            // 可重试的下载
-            UnreliableInterface unreliableImpl = new FetchConfFile(remoteUrl,
-                    localTmpFile);
-            RetryProxy
-                    .retry(unreliableImpl,
-                            DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
-                            DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
+            for (URL url : remoteUrl.getUrls()) {
+
+                // 可重试的下载
+                UnreliableInterface unreliableImpl = new FetchConfFile(url,
+                        localTmpFile);
+                RetryProxy
+                        .retry(unreliableImpl,
+                                DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
+                                DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
+            }
 
             // 从临时文件夹迁移到下载文件夹
             OsUtil.transferFile(localTmpFile, localFile);
@@ -197,9 +204,16 @@ public class RestfulMgr {
             LOGGER.warn("download file failed, using previous download file.");
         }
 
+        //
+        // 下载失败
+        //
         if (!localFile.exists()) {
             throw new Exception("targe file cannot be found! " + fileName);
         }
+
+        //
+        // 下面为下载成功
+        //
 
         // 如果是使用CLASS路径的，则返回相对classpath的路径
         if (!ConfigLoaderUtils.CLASS_PATH.isEmpty()) {
