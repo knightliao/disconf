@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
+import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf2.client.common.model.DisConfCommonModel;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
@@ -176,6 +177,35 @@ public class ScanCoreAdapter {
     }
 
     /**
+     * 转换 更新 回调函数
+     * 
+     * @return
+     */
+    private static void transformUpdateService(
+            Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
+
+        for (String key : disconfUpdateServiceInverseIndexMap.keySet()) {
+
+            // 找不到回调对应的配置，这是用户配置 错误了
+            if (!DisconfCoreMgr.getInstance().hasThisConf(key)) {
+
+                StringBuffer sb = new StringBuffer();
+                sb.append("cannot find " + key + "for: ");
+                for (IDisconfUpdate serClass : disconfUpdateServiceInverseIndexMap
+                        .get(key)) {
+                    sb.append(serClass.toString() + "\t");
+                }
+                LOGGER.error(sb.toString());
+            } else {
+
+                // 配置正常
+                DisconfCoreMgr.getInstance().addUpdateCallbackList(key,
+                        disconfUpdateServiceInverseIndexMap.get(key));
+            }
+        }
+    }
+
+    /**
      * 
      * @return
      */
@@ -189,5 +219,8 @@ public class ScanCoreAdapter {
         List<DisconfCenterItem> disconfCenterItems = getDisconfItems(scanModel);
         DisconfCoreMgr.getInstance().transformScanItems(disconfCenterItems);
 
+        //
+        transformUpdateService(scanModel
+                .getDisconfUpdateServiceInverseIndexMap());
     }
 }

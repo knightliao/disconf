@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.core.inner.DisconfCenterStore;
@@ -74,5 +75,61 @@ public class DisconfCoreMgr {
      */
     public Map<String, DisconfCenterItem> getConfItemMap() {
         return disconfCenterStore.getConfItemMap();
+    }
+
+    /**
+     * 是否有这个配置
+     * 
+     * @return
+     */
+    public boolean hasThisConf(String key) {
+
+        // 配置文件
+        if (disconfCenterStore.getConfFileMap().containsKey(key)) {
+            return true;
+        }
+
+        // 配置项
+        if (disconfCenterStore.getConfItemMap().containsKey(key)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 添加一个更新 的回调函数
+     */
+    public void addUpdateCallback(String key, IDisconfUpdate iDisconfUpdate) {
+
+        if (disconfCenterStore.getConfFileMap().containsKey(key)) {
+
+            disconfCenterStore.getConfFileMap().get(key)
+                    .getDisconfCommonCallbackModel().getDisconfConfUpdates()
+                    .add(iDisconfUpdate);
+        }
+    }
+
+    /**
+     * 添加一个更新 的回调函数
+     */
+    public void addUpdateCallbackList(String key,
+            List<IDisconfUpdate> iDisconfUpdateList) {
+
+        if (disconfCenterStore.getConfFileMap().containsKey(key)) {
+
+            disconfCenterStore.getConfFileMap().get(key)
+                    .getDisconfCommonCallbackModel().getDisconfConfUpdates()
+                    .addAll(iDisconfUpdateList);
+
+        } else {
+
+            if (disconfCenterStore.getConfItemMap().containsKey(key)) {
+
+                disconfCenterStore.getConfItemMap().get(key)
+                        .getDisconfCommonCallbackModel()
+                        .getDisconfConfUpdates().addAll(iDisconfUpdateList);
+            }
+        }
     }
 }

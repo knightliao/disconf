@@ -1,6 +1,5 @@
 package com.baidu.disconf2.client.test.model;
 
-import org.springframework.stereotype.Service;
 
 
 /**
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
  * @author liaoqiqi
  * @version 2014-5-16
  */
-@Service
 public class ServiceA {
 
     public int calcMoney() {

@@ -1,10 +1,13 @@
 package com.baidu.disconf2.client.scan.inner;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.reflections.Reflections;
+
+import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 
 /**
  * 扫描存储的对象
@@ -37,6 +40,8 @@ public class ScanModel {
     //
     // 更新 回调函数
     private Set<Class<?>> disconfUpdateService;
+    // 配置及它影响的回调函数
+    private Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap;
 
     public Reflections getReflections() {
         return reflections;
@@ -94,6 +99,15 @@ public class ScanModel {
 
     public void setDisconfUpdateService(Set<Class<?>> disconfUpdateService) {
         this.disconfUpdateService = disconfUpdateService;
+    }
+
+    public Map<String, List<IDisconfUpdate>> getDisconfUpdateServiceInverseIndexMap() {
+        return disconfUpdateServiceInverseIndexMap;
+    }
+
+    public void setDisconfUpdateServiceInverseIndexMap(
+            Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
+        this.disconfUpdateServiceInverseIndexMap = disconfUpdateServiceInverseIndexMap;
     }
 
 }

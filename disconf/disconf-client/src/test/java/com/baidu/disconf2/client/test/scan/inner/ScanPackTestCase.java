@@ -28,7 +28,7 @@ public class ScanPackTestCase {
             ScanModel scanModel = ScanPack.scan(packName);
 
             // PRINT SCAN STORE
-            // ScanPrinterUtils.printSotreMap(scanModel.getReflections());
+            ScanPrinterUtils.printSotreMap(scanModel.getReflections());
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE ITEM===================");

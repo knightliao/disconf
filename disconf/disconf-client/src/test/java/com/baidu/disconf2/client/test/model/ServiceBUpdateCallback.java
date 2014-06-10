@@ -3,7 +3,6 @@ package com.baidu.disconf2.client.test.model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
@@ -17,7 +16,6 @@ import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
  * @author liaoqiqi
  * @version 2014-5-22
  */
-@Service
 @DisconfUpdateService(keys = { ConfA.filename, ConfA.keyA })
 public class ServiceBUpdateCallback implements IDisconfUpdate {
 

@@ -1,6 +1,5 @@
 package com.baidu.disconf2.client.test.model;
 
-import org.springframework.stereotype.Service;
 
 
 /**
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
  * 2. 该服务需要使用主备切换
  * 
  **/
-@Service
 public class ServiceB {
 
     private ModelB modelB = null;

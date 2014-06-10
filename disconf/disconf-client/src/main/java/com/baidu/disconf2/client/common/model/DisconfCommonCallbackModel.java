@@ -1,5 +1,6 @@
 package com.baidu.disconf2.client.common.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
@@ -13,10 +14,10 @@ import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 public class DisconfCommonCallbackModel {
 
     // 所有用户自己的回调函数(配置更新时)
-    private List<IDisconfUpdate> disconfConfUpdates;
+    private List<IDisconfUpdate> disconfConfUpdates = new ArrayList<IDisconfUpdate>();
 
     // 所有用户自己的回调函数(主备切换时)
-    private List<IDisconfUpdate> disconfUpdatesActiveBackups;
+    private List<IDisconfUpdate> disconfUpdatesActiveBackups = new ArrayList<IDisconfUpdate>();
 
     public List<IDisconfUpdate> getDisconfConfUpdates() {
         return disconfConfUpdates;

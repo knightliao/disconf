@@ -18,10 +18,10 @@ public class DisconfCenterItem {
     private Field field;
 
     // 通用配置
-    private DisConfCommonModel disConfCommonModel;
+    private DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
     // 回调函数
-    private DisconfCommonCallbackModel disconfCommonCallbackModel;
+    private DisconfCommonCallbackModel disconfCommonCallbackModel = new DisconfCommonCallbackModel();
 
     public Field getField() {
         return field;

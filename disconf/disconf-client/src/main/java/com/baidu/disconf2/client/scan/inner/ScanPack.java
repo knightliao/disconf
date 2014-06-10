@@ -1,6 +1,7 @@
 package com.baidu.disconf2.client.scan.inner;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.constants.Constants;
+import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.google.common.base.Predicate;
 
 /**
@@ -93,10 +95,17 @@ public class ScanPack {
         analysis4DisconfFile(scanModel);
 
         //
-        // 分析出更新的回调关系
+        // 分析出更新操作的相关配置文件内容
         //
+        analysis4DisconfUpdate(scanModel);
+    }
 
-        Map<String, List<String>> map = new HashMap<String, List<String>>();
+    /**
+     * 分析出更新操作的相关配置文件内容
+     */
+    private static void analysis4DisconfUpdate(ScanModel scanModel) {
+
+        Map<String, List<IDisconfUpdate>> inverseMap = new HashMap<String, List<IDisconfUpdate>>();
         Set<Class<?>> disconfUpdateServiceSet = scanModel
                 .getDisconfUpdateService();
         for (Class<?> disconfUpdateServiceClass : disconfUpdateServiceSet) {
@@ -104,9 +113,52 @@ public class ScanPack {
             DisconfUpdateService disconfUpdateService = disconfUpdateServiceClass
                     .getAnnotation(DisconfUpdateService.class);
             List<String> keysList = Arrays.asList(disconfUpdateService.keys());
-            // 这里先不校验KEY的有效性
-            map.put(disconfUpdateServiceClass.getName(), keysList);
+
+            // 校验是否有继承正确
+            Class<?>[] interfaceClasses = disconfUpdateServiceClass
+                    .getInterfaces();
+            boolean hasInterface = false;
+            for (Class<?> infClass : interfaceClasses) {
+                if (infClass.equals(IDisconfUpdate.class)) {
+                    hasInterface = true;
+                }
+            }
+            if (!hasInterface) {
+                LOGGER.error("Your class "
+                        + disconfUpdateServiceClass.toString()
+                        + " should implement interface: "
+                        + IDisconfUpdate.class.toString());
+                continue;
+            }
+
+            // 实例化出来，这里
+            // 非Spring直接New
+            // Spring要GetBean
+
+            IDisconfUpdate iDisconfUpdate;
+            try {
+                iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass
+                        .newInstance();
+            } catch (Exception e) {
+                LOGGER.error("Your class "
+                        + disconfUpdateServiceClass.toString()
+                        + " cannot new instance. " + e.toString());
+                continue;
+            }
+
+            // 反索引
+            for (String key : keysList) {
+                List<IDisconfUpdate> serviceList = null;
+                if (inverseMap.containsKey(key)) {
+                    inverseMap.get(key).add(iDisconfUpdate);
+                } else {
+                    serviceList = new ArrayList<IDisconfUpdate>();
+                    serviceList.add(iDisconfUpdate);
+                    inverseMap.put(key, serviceList);
+                }
+            }
         }
+        scanModel.setDisconfUpdateServiceInverseIndexMap(inverseMap);
     }
 
     /**
