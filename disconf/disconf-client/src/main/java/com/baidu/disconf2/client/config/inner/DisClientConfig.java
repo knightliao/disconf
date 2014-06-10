@@ -3,7 +3,7 @@ package com.baidu.disconf2.client.config.inner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.core.common.Constants;
+import com.baidu.disconf2.core.common.constants.Constants;
 
 /**
  * Disconf Client的用户配置文件
