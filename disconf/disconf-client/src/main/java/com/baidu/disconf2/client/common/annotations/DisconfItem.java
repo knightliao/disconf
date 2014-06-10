@@ -18,28 +18,22 @@ import java.lang.annotation.Target;
 public @interface DisconfItem {
 
     /**
-     * 配置项的KEY
+     * 配置项的KEY，不能为空
      * 
      * @return
      */
-    String key() default "";;
+    String key();
 
     /**
-     * 配置项的Value
-     * 
-     * @return
-     */
-    String defaultValue() default "";
-
-    /**
-     * 环境
+     * 环境,,默认为用户指定的环境
      * 
      * @return
      */
     String env() default "";
 
     /**
-     * 版本
+     * 版本,默认为用户指定的版本
+     * 
      * 
      * @return
      */

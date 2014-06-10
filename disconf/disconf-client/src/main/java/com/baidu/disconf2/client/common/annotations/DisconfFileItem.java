@@ -17,17 +17,4 @@ import java.lang.annotation.Target;
 @Documented
 public @interface DisconfFileItem {
 
-    /**
-     * 配置文件中某Item的名字
-     * 
-     * @return
-     */
-    String key() default "";
-
-    /**
-     * Item项的值
-     * 
-     * @return
-     */
-    String defaultValue() default "";
 }

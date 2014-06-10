@@ -5,8 +5,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 
 /**
  * 1. 分布式配置文件，fileName 是配置文件名<br/>
- * 2. static变量的示例
- * 
+ * 2. 必须是static变量
  * 
  **/
 @DisconfFile(filename = ConfB.filename)
@@ -18,8 +17,8 @@ public class ConfB {
     /**
      * 配置文件中的某Item
      */
-    @DisconfFileItem(key = "varA", defaultValue = "5")
-    private static int varA;
+    @DisconfFileItem
+    private static int varA = 5;
 
     public static int getVarA() {
         return varA;

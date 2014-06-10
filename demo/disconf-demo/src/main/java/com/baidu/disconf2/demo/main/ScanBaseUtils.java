@@ -101,8 +101,6 @@ public class ScanBaseUtils {
             LOGGER.info(item.toString());
             DisconfFileItem disconfFileItem = item
                     .getAnnotation(DisconfFileItem.class);
-            LOGGER.info("\tkey: " + disconfFileItem.key());
-            LOGGER.info("\tvalue: " + disconfFileItem.defaultValue());
         }
     }
 
@@ -139,7 +137,6 @@ public class ScanBaseUtils {
             LOGGER.info(item.toString());
             DisconfItem disconfItem = item.getAnnotation(DisconfItem.class);
             LOGGER.info("\tkey: " + disconfItem.key());
-            LOGGER.info("\tvalue: " + disconfItem.defaultValue());
             LOGGER.info("\tenv: " + disconfItem.env());
             LOGGER.info("\tversion: " + disconfItem.version());
 

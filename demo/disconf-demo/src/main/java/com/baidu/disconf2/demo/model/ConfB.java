@@ -18,7 +18,7 @@ public class ConfB {
     /**
      * 配置文件中的某Item
      */
-    @DisconfFileItem(key = "varA", defaultValue = "5")
+    @DisconfFileItem
     private static int varA;
 
     public static int getVarA() {

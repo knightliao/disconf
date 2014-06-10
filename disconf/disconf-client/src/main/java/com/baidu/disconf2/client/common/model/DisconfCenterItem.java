@@ -12,11 +12,11 @@ public class DisconfCenterItem {
 
     // 文件项的KEY
     private String key;
-    private String value;
+    private Object value;
 
     // 域
-    private Field field;    
-    
+    private Field field;
+
     // 远程配置服务的URL路径,不包含IP和PORT的
     private String remoteServerUrl;
 
@@ -50,11 +50,11 @@ public class DisconfCenterItem {
         this.key = key;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 
@@ -83,7 +83,5 @@ public class DisconfCenterItem {
                 + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
                 + "]";
     }
-
-  
 
 }

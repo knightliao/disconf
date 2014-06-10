@@ -59,6 +59,8 @@ public final class AutowareConfig {
 
     /**
      * 
+     * 自动导入配置数据
+     * 
      * @Description: auto ware
      * 
      * @param

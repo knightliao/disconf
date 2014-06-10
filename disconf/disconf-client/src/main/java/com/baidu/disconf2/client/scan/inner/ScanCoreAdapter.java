@@ -1,6 +1,7 @@
 package com.baidu.disconf2.client.scan.inner;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
-import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf2.client.common.model.DisConfCommonModel;
@@ -77,13 +77,22 @@ public class ScanCoreAdapter {
         //
         // KEY & VALUE
         //
-        Map<String, String> keyMaps = new HashMap<String, String>();
+        Map<String, Object> keyMaps = new HashMap<String, Object>();
         for (Field field : disconfFileItemFields) {
 
-            DisconfFileItem disconfFileItem = field
-                    .getAnnotation(DisconfFileItem.class);
+            if (!Modifier.isStatic(field.getModifiers())) {
+                LOGGER.error("field: " + field.getName() + " in "
+                        + disconfFileClass.getCanonicalName()
+                        + " should be static!!!");
+                continue;
+            }
 
-            keyMaps.put(disconfFileItem.key(), disconfFileItem.defaultValue());
+            try {
+                field.setAccessible(true);
+                keyMaps.put(field.getName(), field.get(null));
+            } catch (Exception e) {
+                LOGGER.error(e.toString());
+            }
         }
         disconfCenterFile.setKeyMaps(keyMaps);
 
@@ -124,6 +133,11 @@ public class ScanCoreAdapter {
      */
     private static DisconfCenterItem transformScanFile(Field field) {
 
+        if (!Modifier.isStatic(field.getModifiers())) {
+            LOGGER.error("field: " + field.getName() + " should be static!!!");
+            return null;
+        }
+
         DisconfCenterItem disconfCenterItem = new DisconfCenterItem();
 
         // field
@@ -134,7 +148,13 @@ public class ScanCoreAdapter {
         // key
         disconfCenterItem.setKey(disconfItem.key());
         // value
-        disconfCenterItem.setValue(disconfItem.version());
+        try {
+            field.setAccessible(true);
+            disconfCenterItem.setValue(field.get(null));
+        } catch (Exception e) {
+            LOGGER.error(e.toString());
+            return null;
+        }
 
         //
         // disConfCommonModel
@@ -191,7 +211,9 @@ public class ScanCoreAdapter {
 
             DisconfCenterItem disconfCenterItem = transformScanFile(field);
 
-            disconfCenterItems.add(disconfCenterItem);
+            if (disconfCenterItem != null) {
+                disconfCenterItems.add(disconfCenterItem);
+            }
         }
 
         return disconfCenterItems;

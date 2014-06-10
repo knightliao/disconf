@@ -16,7 +16,7 @@ public class DisconfCenterFile {
 
     // -----key: 配置文件中的项名
     // -----value: 默认值
-    private Map<String, String> keyMaps = new HashMap<String, String>();
+    private Map<String, Object> keyMaps = new HashMap<String, Object>();
 
     // 配置文件类
     private Class<?> cls;
@@ -36,11 +36,11 @@ public class DisconfCenterFile {
     // 回调函数
     private DisconfCommonCallbackModel disconfCommonCallbackModel = new DisconfCommonCallbackModel();
 
-    public Map<String, String> getKeyMaps() {
+    public Map<String, Object> getKeyMaps() {
         return keyMaps;
     }
 
-    public void setKeyMaps(Map<String, String> keyMaps) {
+    public void setKeyMaps(Map<String, Object> keyMaps) {
         this.keyMaps = keyMaps;
     }
 
@@ -84,8 +84,6 @@ public class DisconfCenterFile {
             DisconfCommonCallbackModel disconfCommonCallbackModel) {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
     }
-
-    
 
     @Override
     public String toString() {
