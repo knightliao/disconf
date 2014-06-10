@@ -52,6 +52,10 @@ public class DisconfMgr {
             LOGGER.info("start to scan package: " + scanPackage);
             ScanMgr.scanAndStore(scanPackage);
 
+            // 获取数据并注入
+
+            // Watch模块
+
         } catch (Exception e) {
 
             LOGGER.error(e.toString());
