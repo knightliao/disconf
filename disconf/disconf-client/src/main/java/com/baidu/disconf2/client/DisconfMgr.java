@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.config.ConfigMgr;
+import com.baidu.disconf2.client.fether.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.scan.ScanMgr;
 
 /**
@@ -44,6 +45,9 @@ public class DisconfMgr {
             // 导入配置
             ConfigMgr.init();
 
+            // 初始化下载器
+            RestfulMgr.getInstance().init();
+
             // 扫描并入库
             LOGGER.info("start to scan package: " + scanPackage);
             ScanMgr.scanAndStore(scanPackage);
@@ -58,18 +62,28 @@ public class DisconfMgr {
 
     /**
      * 
-     * @param args
+     * @Description: 总关闭
+     * 
+     * @return void
+     * @author liaoqiqi
+     * @date 2013-6-14
      */
-    public static void main(String[] args) {
+    public static void close() throws Exception {
 
         try {
 
-            DisconfMgr.run("");
+            // RestfulMgr
+            LOGGER.info("=============== RestfulMgr close =================");
+            RestfulMgr.getInstance().close();
+
+            // close, 必须将其设置为False,以便重新更新
+            isInit = false;
 
         } catch (Exception e) {
 
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.error("DisConfMgr close Failed.", e);
+            throw new Exception("DisConfMgr close Failed.", e);
         }
     }
+
 }
