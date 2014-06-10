@@ -16,7 +16,7 @@ public class Constants {
      */
     public final static String VERSION = "version";
     public final static String APP = "app";
-    public final static String MAIN = "main";
+    public final static String MAINTYPE = "maintype";
     public final static String ENV = "env";
     public final static String KEY = "key";
     public final static String TYPE = "type";
