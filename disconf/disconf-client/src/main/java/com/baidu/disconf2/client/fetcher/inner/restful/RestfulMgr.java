@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.fether.inner.restful;
+package com.baidu.disconf2.client.fetcher.inner.restful;
 
 import java.io.File;
 import java.net.URL;
@@ -16,10 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
-import com.baidu.disconf2.client.fether.inner.restful.core.UnreliableInterface;
-import com.baidu.disconf2.client.fether.inner.restful.file.FetchConfFile;
-import com.baidu.disconf2.client.fether.inner.restful.http.RestfulGet;
-import com.baidu.disconf2.client.fether.inner.restful.retry.RetryProxy;
+import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
+import com.baidu.disconf2.client.fetcher.inner.restful.file.FetchConfFile;
+import com.baidu.disconf2.client.fetcher.inner.restful.http.RestfulGet;
+import com.baidu.disconf2.client.fetcher.inner.restful.retry.RetryProxy;
 import com.baidu.utils.ConfigLoaderUtils;
 import com.baidu.utils.OsUtil;
 
@@ -147,9 +147,12 @@ public class RestfulMgr {
      * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
      * @throws Exception
      */
-    public static String downloadFromServer(URL remoteUrl, String fileName,
-            File localTmpFile, File localFile, boolean isTransfer2Classpath)
-            throws Exception {
+    public String downloadFromServer(URL remoteUrl, String fileName,
+            String localTmpFilePath, String localFilePath,
+            boolean isTransfer2Classpath) throws Exception {
+
+        File localTmpFile = new File(localTmpFilePath);
+        File localFile = new File(localFilePath);
 
         try {
 

@@ -1,9 +1,9 @@
-package com.baidu.disconf2.client.fether.inner.restful.retry;
+package com.baidu.disconf2.client.fetcher.inner.restful.retry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.client.fether.inner.restful.core.UnreliableInterface;
+import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
 
 /**
  * 重试的策略

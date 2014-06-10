@@ -1,5 +1,7 @@
 package com.baidu.dsp.common.handler;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.baidu.dsp.common.constant.ErrorCode;
+import com.baidu.dsp.common.exception.DocumentNotFoundException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.dsp.common.vo.JsonObjectError;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
+import com.baidu.ub.common.utils.FileUtils;
 
 /**
  * 
@@ -40,6 +44,18 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
         LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t"
                 + e.getCause());
+
+        // 下载文件不存在
+        if (e instanceof DocumentNotFoundException) {
+
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            try {
+                FileUtils.closeWriter(response.getWriter());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return null;
+        }
 
         return buildError("syserror.inner", ErrorCode.GLOBAL_ERROR);
 

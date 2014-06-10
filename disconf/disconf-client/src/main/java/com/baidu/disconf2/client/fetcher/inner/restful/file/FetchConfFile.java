@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.fether.inner.restful.file;
+package com.baidu.disconf2.client.fetcher.inner.restful.file;
 
 import java.io.File;
 import java.net.URL;
@@ -7,7 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.client.fether.inner.restful.core.UnreliableInterface;
+import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
 import com.baidu.utils.OsUtil;
 
 /**

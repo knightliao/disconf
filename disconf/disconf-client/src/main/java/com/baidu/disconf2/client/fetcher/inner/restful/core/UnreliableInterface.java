@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.fether.inner.restful.core;
+package com.baidu.disconf2.client.fetcher.inner.restful.core;
 
 /**
  * 

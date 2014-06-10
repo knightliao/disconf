@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.fether.inner.restful.http;
+package com.baidu.disconf2.client.fetcher.inner.restful.http;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;
@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.client.fether.inner.restful.core.UnreliableInterface;
+import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
 
 /**
  * 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.web.store.form.ConfForm;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
@@ -40,33 +39,31 @@ public class StoreController extends BaseController {
 
     /**
      * 
+     * 获取文件
+     * 
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/file", method = RequestMethod.GET)
     @ResponseBody
-    public Object get(ConfForm confForm) {
+    public HttpEntity<byte[]> getFile(ConfForm confForm) {
 
-        int aaa = 10;
+        return downloadDspBill(confForm.getKey());
 
-        // 文件
-        if (confForm.getType().equals(DisConfigTypeEnum.FILE.getType())) {
-            return downloadDspBill(confForm.getKey());
-        } else {
-            return buildSuccess(aaa);
-        }
     }
 
     /**
-     * 更新Conf值
+     * 获取Item
      * 
      * @param demoUserId
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/item", method = RequestMethod.GET)
     @ResponseBody
-    public JsonObjectBase updateValue() {
+    public JsonObjectBase getItem() {
 
-        return buildSuccess("");
+        int aaa = 10;
+
+        return buildSuccess(aaa);
     }
 
     /**

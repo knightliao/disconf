@@ -24,8 +24,8 @@ public class PathMgr {
      * 
      * @return
      */
-    public String getRemoteUrlParameter(String app, String version, String env,
-            String key, DisConfigTypeEnum disConfigTypeEnum) {
+    public static String getRemoteUrlParameter(String app, String version,
+            String env, String key, DisConfigTypeEnum disConfigTypeEnum) {
 
         Map<String, String> parameterMap = getConfServerBasePathMap(app,
                 version, env, key);
@@ -35,6 +35,13 @@ public class PathMgr {
                 String.valueOf(disConfigTypeEnum.getType()));
 
         StringBuffer sb = new StringBuffer();
+
+        if (disConfigTypeEnum.getType() == DisConfigTypeEnum.FILE.getType()) {
+            sb.append("/file");
+        } else {
+            sb.append("/item");
+        }
+
         sb.append("?");
         for (String thisKey : parameterMap.keySet()) {
 
