@@ -18,7 +18,10 @@ import com.baidu.disconf2.client.common.model.DisConfCommonModel;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
+import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf2.core.common.path.PathMgr;
 
 /**
  * 
@@ -63,6 +66,14 @@ public class ScanCoreAdapter {
                 disconfFileAnnotation.env(), disconfFileAnnotation.version());
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
+        // Remote URL
+        String url = PathMgr.getRemoteUrlParameter(
+                DisClientSysConfig.getInstance().CONF_SERVER_ACTION,
+                disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
+                disConfCommonModel.getEnv(), disconfCenterFile.getFileName(),
+                DisConfigTypeEnum.FILE);
+        disconfCenterFile.setRemoteServerUrl(url);
+
         //
         // KEY & VALUE
         //
@@ -89,11 +100,13 @@ public class ScanCoreAdapter {
         DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
         disConfCommonModel.setApp(DisClientConfig.getInstance().APP);
+
         if (!env.isEmpty()) {
             disConfCommonModel.setEnv(env);
         } else {
             disConfCommonModel.setEnv(DisClientConfig.getInstance().ENV);
         }
+
         if (!version.isEmpty()) {
             disConfCommonModel.setVersion(version);
         } else {
@@ -128,6 +141,14 @@ public class ScanCoreAdapter {
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
                 disconfItem.env(), disconfItem.version());
         disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
+
+        // Remote URL
+        String url = PathMgr.getRemoteUrlParameter(
+                DisClientSysConfig.getInstance().CONF_SERVER_ACTION,
+                disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
+                disConfCommonModel.getEnv(), disconfCenterItem.getKey(),
+                DisConfigTypeEnum.ITEM);
+        disconfCenterItem.setRemoteServerUrl(url);
 
         return disconfCenterItem;
     }

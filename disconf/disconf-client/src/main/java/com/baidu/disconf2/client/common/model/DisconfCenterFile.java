@@ -27,6 +27,9 @@ public class DisconfCenterFile {
     // 文件名
     private String fileName;
 
+    // 远程配置服务的URL路径,不包含IP和PORT的
+    private String remoteServerUrl;
+
     // 通用配置
     private DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
@@ -82,13 +85,24 @@ public class DisconfCenterFile {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
     }
 
+    
+
     @Override
     public String toString() {
         return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
                 + ", fields=" + fields + ", fileName=" + fileName
+                + ", remoteServerUrl=" + remoteServerUrl
                 + ", disConfCommonModel=" + disConfCommonModel
                 + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
                 + "]";
+    }
+
+    public String getRemoteServerUrl() {
+        return remoteServerUrl;
+    }
+
+    public void setRemoteServerUrl(String remoteServerUrl) {
+        this.remoteServerUrl = remoteServerUrl;
     }
 
 }

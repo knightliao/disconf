@@ -15,7 +15,10 @@ public class DisconfCenterItem {
     private String value;
 
     // 域
-    private Field field;
+    private Field field;    
+    
+    // 远程配置服务的URL路径,不包含IP和PORT的
+    private String remoteServerUrl;
 
     // 通用配置
     private DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
@@ -64,12 +67,23 @@ public class DisconfCenterItem {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
     }
 
+    public String getRemoteServerUrl() {
+        return remoteServerUrl;
+    }
+
+    public void setRemoteServerUrl(String remoteServerUrl) {
+        this.remoteServerUrl = remoteServerUrl;
+    }
+
     @Override
     public String toString() {
         return "DisconfCenterItem [key=" + key + ", value=" + value
-                + ", field=" + field + ", disConfCommonModel="
-                + disConfCommonModel + ", disconfCommonCallbackModel="
-                + disconfCommonCallbackModel + "]";
+                + ", field=" + field + ", remoteServerUrl=" + remoteServerUrl
+                + ", disConfCommonModel=" + disConfCommonModel
+                + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
+                + "]";
     }
+
+  
 
 }
