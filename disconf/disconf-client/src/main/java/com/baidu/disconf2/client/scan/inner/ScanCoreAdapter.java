@@ -73,14 +73,10 @@ public class ScanCoreAdapter {
         disconfCenterFile.setRemoteServerUrl(url);
 
         //
-        // fields
-        disconfCenterFile.setFields(getFieldsFromMethods(methods));
-
-        //
         // KEY & VALUE
         //
         Map<String, Object> keyMaps = new HashMap<String, Object>();
-        for (Field field : disconfCenterFile.getFields()) {
+        for (Field field : getFieldsFromMethods(methods)) {
 
             field.setAccessible(true);
 
@@ -142,7 +138,6 @@ public class ScanCoreAdapter {
         if (field == null) {
             return null;
         }
-        disconfCenterItem.setField(field);
 
         // 获取标注
         DisconfItem disconfItem = method.getAnnotation(DisconfItem.class);

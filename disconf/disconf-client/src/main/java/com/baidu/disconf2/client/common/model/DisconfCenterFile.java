@@ -1,10 +1,7 @@
 package com.baidu.disconf2.client.common.model;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 配置文件表示
@@ -20,9 +17,6 @@ public class DisconfCenterFile {
 
     // 配置文件类
     private Class<?> cls;
-
-    // 域列表
-    private Set<Field> fields = new HashSet<Field>();
 
     // 文件名
     private String fileName;
@@ -42,14 +36,6 @@ public class DisconfCenterFile {
 
     public void setKeyMaps(Map<String, Object> keyMaps) {
         this.keyMaps = keyMaps;
-    }
-
-    public Set<Field> getFields() {
-        return fields;
-    }
-
-    public void setFields(Set<Field> fields) {
-        this.fields = fields;
     }
 
     public DisConfCommonModel getDisConfCommonModel() {
@@ -85,22 +71,21 @@ public class DisconfCenterFile {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
     }
 
-    @Override
-    public String toString() {
-        return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
-                + ", fields=" + fields + ", fileName=" + fileName
-                + ", remoteServerUrl=" + remoteServerUrl
-                + ", disConfCommonModel=" + disConfCommonModel
-                + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
-                + "]";
-    }
-
     public String getRemoteServerUrl() {
         return remoteServerUrl;
     }
 
     public void setRemoteServerUrl(String remoteServerUrl) {
         this.remoteServerUrl = remoteServerUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
+                + ", fileName=" + fileName + ", remoteServerUrl="
+                + remoteServerUrl + ", disConfCommonModel="
+                + disConfCommonModel + ", disconfCommonCallbackModel="
+                + disconfCommonCallbackModel + "]";
     }
 
 }

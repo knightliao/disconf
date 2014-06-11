@@ -29,7 +29,6 @@ public class BaseTestCase {
             //
             DisconfAutowareConfig.autowareConfig(ConfB.getInstance(),
                     ConfB.filename);
-
             LOGGER.info("ConfB-VarB: "
                     + String.valueOf(ConfB.getInstance().getVarB()));
 
@@ -38,7 +37,6 @@ public class BaseTestCase {
             //
             DisconfAutowareConfig.autowareStatucConfig(ConfA.class,
                     ConfA.filename);
-
             LOGGER.info("ConfA-varA: " + String.valueOf(ConfA.getVarA()));
 
         } catch (Exception e) {

@@ -1,7 +1,5 @@
 package com.baidu.disconf2.client.common.model;
 
-import java.lang.reflect.Field;
-
 /**
  * 配置项表示
  * 
@@ -14,9 +12,6 @@ public class DisconfCenterItem {
     private String key;
     private Object value;
 
-    // 域
-    private Field field;
-
     // 远程配置服务的URL路径,不包含IP和PORT的
     private String remoteServerUrl;
 
@@ -25,14 +20,6 @@ public class DisconfCenterItem {
 
     // 回调函数
     private DisconfCommonCallbackModel disconfCommonCallbackModel = new DisconfCommonCallbackModel();
-
-    public Field getField() {
-        return field;
-    }
-
-    public void setField(Field field) {
-        this.field = field;
-    }
 
     public DisConfCommonModel getDisConfCommonModel() {
         return disConfCommonModel;
@@ -78,7 +65,7 @@ public class DisconfCenterItem {
     @Override
     public String toString() {
         return "DisconfCenterItem [key=" + key + ", value=" + value
-                + ", field=" + field + ", remoteServerUrl=" + remoteServerUrl
+                + ", remoteServerUrl=" + remoteServerUrl
                 + ", disConfCommonModel=" + disConfCommonModel
                 + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
                 + "]";
