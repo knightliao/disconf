@@ -1,6 +1,6 @@
 package com.baidu.disconf2.client.scan.inner;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -168,28 +168,28 @@ public class ScanPack {
      */
     private static void analysis4DisconfFile(ScanModel scanModel) {
 
-        Map<Class<?>, Set<Field>> disconfFileItemMap = new HashMap<Class<?>, Set<Field>>();
+        Map<Class<?>, Set<Method>> disconfFileItemMap = new HashMap<Class<?>, Set<Method>>();
         Set<Class<?>> classdata = scanModel.getDisconfFileClassSet();
         for (Class<?> classFile : classdata) {
-            disconfFileItemMap.put(classFile, new HashSet<Field>());
+            disconfFileItemMap.put(classFile, new HashSet<Method>());
         }
 
         // 将配置文件与配置进行关联
-        Set<Field> af1 = scanModel.getDisconfFileItemFieldSet();
-        for (Field field : af1) {
+        Set<Method> af1 = scanModel.getDisconfFileItemMethodSet();
+        for (Method method : af1) {
 
-            Class<?> thisClass = field.getDeclaringClass();
+            Class<?> thisClass = method.getDeclaringClass();
 
             if (disconfFileItemMap.containsKey(thisClass)) {
-                Set<Field> fieldSet = disconfFileItemMap.get(thisClass);
-                fieldSet.add(field);
+                Set<Method> fieldSet = disconfFileItemMap.get(thisClass);
+                fieldSet.add(method);
                 disconfFileItemMap.put(thisClass, fieldSet);
 
             } else {
 
                 LOGGER.error("cannot find CLASS ANNOTATION "
                         + DisconfFile.class.getName()
-                        + " for disconf file item: " + field.toString());
+                        + " for disconf file item: " + method.toString());
             }
         }
 
@@ -228,15 +228,15 @@ public class ScanPack {
         //
         // 获取DisconfFileItem
         //
-        Set<Field> af1 = reflections
-                .getFieldsAnnotatedWith(DisconfFileItem.class);
-        scanModel.setDisconfFileItemFieldSet(af1);
+        Set<Method> af1 = reflections
+                .getMethodsAnnotatedWith(DisconfFileItem.class);
+        scanModel.setDisconfFileItemMethodSet(af1);
 
         //
         // 获取DisconfItem
         //
-        af1 = reflections.getFieldsAnnotatedWith(DisconfItem.class);
-        scanModel.setDisconfItemFieldSet(af1);
+        af1 = reflections.getMethodsAnnotatedWith(DisconfItem.class);
+        scanModel.setDisconfItemMethodSet(af1);
 
         //
         // 获取DisconfActiveBackupService

@@ -19,15 +19,14 @@ public class ConfA {
     /**
      * 配置文件中的某Item
      */
-    @DisconfFileItem
     private static int varA = 15;
 
     /**
      * 1. 分布式配置项，keyB是其全局Key名<br/>
      */
-    @DisconfItem(key = ConfA.keyA)
     private static int varAA = 10;
 
+    @DisconfFileItem
     public static int getVarA() {
         return varA;
     }
@@ -36,6 +35,7 @@ public class ConfA {
         ConfA.varA = varA;
     }
 
+    @DisconfItem(key = ConfA.keyA)
     public static int getVarAA() {
         return varAA;
     }

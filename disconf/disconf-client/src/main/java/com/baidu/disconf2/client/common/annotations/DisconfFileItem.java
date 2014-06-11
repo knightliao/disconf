@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * @author liaoqiqi
  * @version 2014-5-16
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DisconfFileItem {

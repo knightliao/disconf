@@ -34,12 +34,12 @@ public class ConfB {
         return SingletonHolder.instance;
     }
 
+    private int varB = 5;
+
     /**
      * 配置文件中的某Item
      */
     @DisconfFileItem
-    private int varB = 5;
-
     public int getVarB() {
         return varB;
     }

@@ -1,6 +1,7 @@
 package com.baidu.disconf2.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
-import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.google.common.collect.Multimap;
 
@@ -61,8 +61,17 @@ public class ScanPrinterUtils {
         for (Field item : disconfFileItemSet) {
 
             LOGGER.info(item.toString());
-            DisconfFileItem disconfFileItem = item
-                    .getAnnotation(DisconfFileItem.class);
+        }
+    }
+
+    /**
+     * 
+     */
+    public static void printFileItemMethod(Set<Method> disconfFileItemSet) {
+
+        for (Method item : disconfFileItemSet) {
+
+            LOGGER.info(item.toString());
         }
     }
 

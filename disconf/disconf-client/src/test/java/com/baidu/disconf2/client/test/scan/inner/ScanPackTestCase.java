@@ -1,6 +1,6 @@
 package com.baidu.disconf2.client.test.scan.inner;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,22 +33,21 @@ public class ScanPackTestCase extends BaseTestCase {
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE ITEM===================");
-            Set<Field> fields = scanModel.getDisconfFileItemFieldSet();
-            ScanPrinterUtils.printFileItem(fields);
-            Assert.assertEquals(2, fields.size());
+            Set<Method> methods = scanModel.getDisconfFileItemMethodSet();
+            ScanPrinterUtils.printFileItemMethod(methods);
+            Assert.assertEquals(2, methods.size());
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE===================");
-            Map<Class<?>, Set<Field>> fileMap = scanModel
+            Map<Class<?>, Set<Method>> fileMap = scanModel
                     .getDisconfFileItemMap();
-            ScanPrinterUtils.printFileMap(fileMap);
             Assert.assertEquals(2, fileMap.size());
 
             // disconf item
             LOGGER.info("=============DISCONF ITEM===================");
-            fields = scanModel.getDisconfItemFieldSet();
-            ScanPrinterUtils.printItem(scanModel.getDisconfItemFieldSet());
-            Assert.assertEquals(1, fields.size());
+            methods = scanModel.getDisconfItemMethodSet();
+            ScanPrinterUtils.printFileItemMethod(methods);
+            Assert.assertEquals(1, methods.size());
 
             // Active backup
             LOGGER.info("=============DISCONF ACTIVE BACKUP===================");

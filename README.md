@@ -9,12 +9,12 @@ Distributed Configuration Management Tools
 
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
+- Spring
 
 ## 它是什么 ##
 
 - 命名为Disconf
 - 专注于各种系统的配置管理的通用组件/通用平台
-- 支持Web/Non-Web/Spring系统
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh35zjqpz3j20pt0iz75z.jpg)
 
@@ -51,6 +51,8 @@ Distributed Configuration Management Tools
 - demo/disconf-demo: 使用disconf的standalone demo程序
 
 ## 用户使用指南 ##
+
+使用示例
 
 使用手册
 

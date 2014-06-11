@@ -1,9 +1,11 @@
 package com.baidu.disconf2.client.scan.inner;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,13 +43,9 @@ public class ScanCoreAdapter {
      * @return
      */
     private static DisconfCenterFile transformScanFile(
-            Class<?> disconfFileClass, Set<Field> disconfFileItemFields) {
+            Class<?> disconfFileClass, Set<Method> methods) {
 
         DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
-
-        //
-        // fields
-        disconfCenterFile.setFields(disconfFileItemFields);
 
         //
         // class
@@ -75,10 +73,14 @@ public class ScanCoreAdapter {
         disconfCenterFile.setRemoteServerUrl(url);
 
         //
+        // fields
+        disconfCenterFile.setFields(getFieldsFromMethods(methods));
+
+        //
         // KEY & VALUE
         //
         Map<String, Object> keyMaps = new HashMap<String, Object>();
-        for (Field field : disconfFileItemFields) {
+        for (Field field : disconfCenterFile.getFields()) {
 
             field.setAccessible(true);
 
@@ -131,14 +133,19 @@ public class ScanCoreAdapter {
      * 
      * @return
      */
-    private static DisconfCenterItem transformScanFile(Field field) {
+    private static DisconfCenterItem transformScanFile(Method method) {
 
         DisconfCenterItem disconfCenterItem = new DisconfCenterItem();
 
         // field
+        Field field = getFieldFromMethod(method);
+        if (field == null) {
+            return null;
+        }
         disconfCenterItem.setField(field);
 
-        DisconfItem disconfItem = field.getAnnotation(DisconfItem.class);
+        // 获取标注
+        DisconfItem disconfItem = method.getAnnotation(DisconfItem.class);
 
         // key
         disconfCenterItem.setKey(disconfItem.key());
@@ -184,7 +191,7 @@ public class ScanCoreAdapter {
         Set<Class<?>> classSet = scanModel.getDisconfFileClassSet();
         for (Class<?> disconfFile : classSet) {
 
-            Set<Field> fieldSet = scanModel.getDisconfFileItemMap().get(
+            Set<Method> fieldSet = scanModel.getDisconfFileItemMap().get(
                     disconfFile);
 
             DisconfCenterFile disconfCenterFile = transformScanFile(
@@ -205,10 +212,10 @@ public class ScanCoreAdapter {
 
         List<DisconfCenterItem> disconfCenterItems = new ArrayList<DisconfCenterItem>();
 
-        Set<Field> fields = scanModel.getDisconfItemFieldSet();
-        for (Field field : fields) {
+        Set<Method> methods = scanModel.getDisconfItemMethodSet();
+        for (Method method : methods) {
 
-            DisconfCenterItem disconfCenterItem = transformScanFile(field);
+            DisconfCenterItem disconfCenterItem = transformScanFile(method);
 
             if (disconfCenterItem != null) {
                 disconfCenterItems.add(disconfCenterItem);
@@ -264,5 +271,64 @@ public class ScanCoreAdapter {
         //
         transformUpdateService(scanModel
                 .getDisconfUpdateServiceInverseIndexMap());
+    }
+
+    /**
+     * 
+     * @return
+     */
+    private static Set<Field> getFieldsFromMethods(Set<Method> methods) {
+
+        Set<Field> fields = new HashSet<Field>();
+
+        for (Method method : methods) {
+
+            Field field = getFieldFromMethod(method);
+            if (field != null) {
+                fields.add(field);
+            }
+        }
+
+        return fields;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    private static Field getFieldFromMethod(Method method) {
+
+        String methodName = method.getName();
+
+        // 必须以get开始的
+        if (!methodName.startsWith("get")) {
+            LOGGER.error(method.toString() + " not start with get****");
+            return null;
+        }
+
+        String fieldName = methodName.substring(3);
+        if (fieldName.length() >= 1) {
+            String firstCharStr = String.valueOf(fieldName.charAt(0))
+                    .toLowerCase();
+            if (fieldName.length() > 1) {
+                fieldName = firstCharStr + fieldName.substring(1);
+            } else {
+                fieldName = firstCharStr.toLowerCase();
+            }
+        }
+
+        Class<?> cls = method.getDeclaringClass();
+
+        try {
+
+            Field field = cls.getDeclaredField(fieldName);
+            return field;
+
+        } catch (Exception e) {
+            LOGGER.error(method.toString()
+                    + " cannot get its related field name " + fieldName);
+        }
+
+        return null;
     }
 }

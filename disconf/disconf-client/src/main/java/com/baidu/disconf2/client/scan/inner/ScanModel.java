@@ -1,6 +1,6 @@
 package com.baidu.disconf2.client.scan.inner;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,15 +23,15 @@ public class ScanModel {
     // 配置文件
     private Set<Class<?>> disconfFileClassSet;
 
-    private Set<Field> disconfFileItemFieldSet;
+    private Set<Method> disconfFileItemMethodSet;
 
     //
     // 配置文件MAP, KEY为配置文件
-    private Map<Class<?>, Set<Field>> disconfFileItemMap;
+    private Map<Class<?>, Set<Method>> disconfFileItemMap;
 
     //
     // 配置ITEM
-    private Set<Field> disconfItemFieldSet;
+    private Set<Method> disconfItemMethodSet;
 
     //
     //
@@ -59,29 +59,21 @@ public class ScanModel {
         this.disconfFileClassSet = disconfFileClassSet;
     }
 
-    public Set<Field> getDisconfFileItemFieldSet() {
-        return disconfFileItemFieldSet;
-    }
-
-    public void setDisconfFileItemFieldSet(Set<Field> disconfFileItemFieldSet) {
-        this.disconfFileItemFieldSet = disconfFileItemFieldSet;
-    }
-
-    public Map<Class<?>, Set<Field>> getDisconfFileItemMap() {
+    public Map<Class<?>, Set<Method>> getDisconfFileItemMap() {
         return disconfFileItemMap;
     }
 
     public void setDisconfFileItemMap(
-            Map<Class<?>, Set<Field>> disconfFileItemMap) {
+            Map<Class<?>, Set<Method>> disconfFileItemMap) {
         this.disconfFileItemMap = disconfFileItemMap;
     }
 
-    public Set<Field> getDisconfItemFieldSet() {
-        return disconfItemFieldSet;
+    public Set<Method> getDisconfItemMethodSet() {
+        return disconfItemMethodSet;
     }
 
-    public void setDisconfItemFieldSet(Set<Field> disconfItemFieldSet) {
-        this.disconfItemFieldSet = disconfItemFieldSet;
+    public void setDisconfItemMethodSet(Set<Method> disconfItemMethodSet) {
+        this.disconfItemMethodSet = disconfItemMethodSet;
     }
 
     public Set<Class<?>> getDisconfActiveBackupServiceClassSet() {
@@ -108,6 +100,14 @@ public class ScanModel {
     public void setDisconfUpdateServiceInverseIndexMap(
             Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
         this.disconfUpdateServiceInverseIndexMap = disconfUpdateServiceInverseIndexMap;
+    }
+
+    public Set<Method> getDisconfFileItemMethodSet() {
+        return disconfFileItemMethodSet;
+    }
+
+    public void setDisconfFileItemMethodSet(Set<Method> disconfFileItemMethodSet) {
+        this.disconfFileItemMethodSet = disconfFileItemMethodSet;
     }
 
 }
