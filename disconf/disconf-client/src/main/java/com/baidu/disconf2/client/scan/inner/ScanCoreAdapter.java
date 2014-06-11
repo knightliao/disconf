@@ -24,6 +24,7 @@ import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.PathMgr;
+import com.baidu.disconf2.utils.ClassUtils;
 
 /**
  * 
@@ -301,16 +302,7 @@ public class ScanCoreAdapter {
             return null;
         }
 
-        String fieldName = methodName.substring(3);
-        if (fieldName.length() >= 1) {
-            String firstCharStr = String.valueOf(fieldName.charAt(0))
-                    .toLowerCase();
-            if (fieldName.length() > 1) {
-                fieldName = firstCharStr + fieldName.substring(1);
-            } else {
-                fieldName = firstCharStr.toLowerCase();
-            }
-        }
+        String fieldName = ClassUtils.getFieldNameByGetMethodName(methodName);
 
         Class<?> cls = method.getDeclaringClass();
 

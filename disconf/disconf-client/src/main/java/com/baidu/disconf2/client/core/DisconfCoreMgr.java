@@ -12,7 +12,7 @@ import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.core.inner.DisconfCenterStore;
 
 /**
- * 仓库模块
+ * 仓库模块统一对外接口
  * 
  * @author liaoqiqi
  * @version 2014-6-6
@@ -139,5 +139,28 @@ public class DisconfCoreMgr {
                         .getDisconfConfUpdates().addAll(iDisconfUpdateList);
             }
         }
+    }
+
+    /**
+     * 获取配置文件数据，根据文件名及Key名获取数据
+     * 
+     * @param fileName
+     * @param keyName
+     * @return
+     */
+    public Object getConfigFile(String fileName, String keyName) {
+
+        return null;
+    }
+
+    /**
+     * 获取配置项数据, 根据 KEy获取
+     * 
+     * @param keyName
+     * @return
+     */
+    public Object getConfigItem(String keyName) {
+
+        return null;
     }
 }
