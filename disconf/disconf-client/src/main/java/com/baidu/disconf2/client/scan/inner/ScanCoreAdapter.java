@@ -80,19 +80,19 @@ public class ScanCoreAdapter {
         Map<String, Object> keyMaps = new HashMap<String, Object>();
         for (Field field : disconfFileItemFields) {
 
-            if (!Modifier.isStatic(field.getModifiers())) {
-                LOGGER.error("field: " + field.getName() + " in "
-                        + disconfFileClass.getCanonicalName()
-                        + " should be static!!!");
-                continue;
+            field.setAccessible(true);
+
+            if (Modifier.isStatic(field.getModifiers())) {
+                try {
+
+                    keyMaps.put(field.getName(), field.get(null));
+                } catch (Exception e) {
+                    LOGGER.error(e.toString());
+                }
+            } else {
+                keyMaps.put(field.getName(), null);
             }
 
-            try {
-                field.setAccessible(true);
-                keyMaps.put(field.getName(), field.get(null));
-            } catch (Exception e) {
-                LOGGER.error(e.toString());
-            }
         }
         disconfCenterFile.setKeyMaps(keyMaps);
 
@@ -133,11 +133,6 @@ public class ScanCoreAdapter {
      */
     private static DisconfCenterItem transformScanFile(Field field) {
 
-        if (!Modifier.isStatic(field.getModifiers())) {
-            LOGGER.error("field: " + field.getName() + " should be static!!!");
-            return null;
-        }
-
         DisconfCenterItem disconfCenterItem = new DisconfCenterItem();
 
         // field
@@ -148,12 +143,16 @@ public class ScanCoreAdapter {
         // key
         disconfCenterItem.setKey(disconfItem.key());
         // value
-        try {
-            field.setAccessible(true);
-            disconfCenterItem.setValue(field.get(null));
-        } catch (Exception e) {
-            LOGGER.error(e.toString());
-            return null;
+        field.setAccessible(true);
+        if (Modifier.isStatic(field.getModifiers())) {
+            try {
+                disconfCenterItem.setValue(field.get(null));
+            } catch (Exception e) {
+                LOGGER.error(e.toString());
+                return null;
+            }
+        } else {
+            disconfCenterItem.setValue(null);
         }
 
         //

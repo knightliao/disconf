@@ -7,8 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
 import com.baidu.disconf2.client.scan.ScanMgr;
+import com.baidu.disconf2.client.test.common.BaseTestCase;
 
-public class ScanMgrTestCase {
+public class ScanMgrTestCase extends BaseTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ScanMgrTestCase.class);

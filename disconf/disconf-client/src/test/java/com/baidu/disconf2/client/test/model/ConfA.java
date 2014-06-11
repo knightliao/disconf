@@ -6,7 +6,8 @@ import com.baidu.disconf2.client.common.annotations.DisconfItem;
 
 /**
  * 1. 分布式配置文件，fileName 是配置文件名<br/>
- * 2. 必须是static变量
+ * 2. static变量示例 <br/>
+ * 3. 使用自动注入方式
  * 
  **/
 @DisconfFile(filename = ConfA.filename)
@@ -25,7 +26,7 @@ public class ConfA {
      * 1. 分布式配置项，keyB是其全局Key名<br/>
      */
     @DisconfItem(key = ConfA.keyA)
-    private static int varB = 10;
+    private static int varAA = 10;
 
     public static int getVarA() {
         return varA;
@@ -35,12 +36,12 @@ public class ConfA {
         ConfA.varA = varA;
     }
 
-    public static int getVarB() {
-        return varB;
+    public static int getVarAA() {
+        return varAA;
     }
 
-    public static void setVarB(int varB) {
-        ConfA.varB = varB;
+    public static void setVarAA(int varAA) {
+        ConfA.varAA = varAA;
     }
 
 }

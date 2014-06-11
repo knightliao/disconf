@@ -11,9 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.scan.inner.ScanModel;
 import com.baidu.disconf2.client.scan.inner.ScanPack;
+import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.utils.ScanPrinterUtils;
 
-public class ScanPackTestCase {
+public class ScanPackTestCase extends BaseTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ScanPackTestCase.class);

@@ -7,13 +7,14 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.DisconfMgr;
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.client.test.common.BaseTestCase;
 
 /**
  * 
  * @author liaoqiqi
  * @version 2014-6-10
  */
-public class DisconfMgrTestCase {
+public class DisconfMgrTestCase extends BaseTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(DisconfMgrTestCase.class);

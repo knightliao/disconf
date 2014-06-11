@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.core.common.constants.Constants;
+import com.baidu.utils.DisconfAutowareConfig;
 
 /**
  * Disconf Client的用户配置文件
@@ -55,7 +56,7 @@ public final class DisClientConfig {
             filePathInternal = filePath;
         }
 
-        AutowareConfig.autowareConfig(INSTANCE, filePathInternal);
+        DisconfAutowareConfig.autowareConfig(INSTANCE, filePathInternal);
 
         isLoaded = true;
     }

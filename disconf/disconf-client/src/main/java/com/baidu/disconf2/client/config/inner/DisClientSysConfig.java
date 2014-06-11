@@ -3,6 +3,7 @@ package com.baidu.disconf2.client.config.inner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.utils.DisconfAutowareConfig;
 import com.baidu.utils.OsUtil;
 
 /**
@@ -52,7 +53,7 @@ public class DisClientSysConfig {
             filePathInternal = filePath;
         }
 
-        AutowareConfig.autowareConfig(INSTANCE, filePathInternal);
+        DisconfAutowareConfig.autowareConfig(INSTANCE, filePathInternal);
 
         isLoaded = true;
     }

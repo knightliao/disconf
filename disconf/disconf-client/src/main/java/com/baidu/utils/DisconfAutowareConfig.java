@@ -1,0 +1,252 @@
+package com.baidu.utils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Properties;
+
+import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
+import com.baidu.disconf2.client.config.inner.DisInnerConfigAnnotation;
+
+/**
+ * 配置导入工具
+ * 
+ * @author liaoqiqi
+ * @version 2014-6-6
+ */
+public final class DisconfAutowareConfig {
+
+    private DisconfAutowareConfig() {
+
+    }
+
+    protected static final Logger LOGGER = LoggerFactory
+            .getLogger(DisconfAutowareConfig.class);
+
+    /**
+     * 先用TOMCAT模式进行导入配置文件，若找不到，则用项目目录模式进行导入
+     * 
+     * @param filename
+     * @return
+     */
+    private static Properties getProperties(final String propertyFilePath) {
+
+        try {
+
+            // 使用全路径的配置文件载入器
+            return ConfigLoaderUtils.loadConfig(propertyFilePath);
+        }
+
+        catch (Exception e) {
+
+            try {
+
+                // 只用文件名 来载入试试
+                String filename = FilenameUtils.getName(propertyFilePath);
+                return ConfigLoaderUtils.loadConfig(filename);
+
+            } catch (Exception e1) {
+
+                LOGGER.error(String.format("read properties file %s error",
+                        propertyFilePath), e1);
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * 自动导入配置数据,能识别 DisconfFileItem 或 DisInnerConfigAnnotation 的标识
+     * 
+     * @Description: auto ware
+     * 
+     * @param
+     * 
+     * @param propertyFilePath
+     */
+    private static void autowareConfig(final Object obj, Properties prop)
+            throws Exception {
+
+        if (null == prop || obj == null) {
+            throw new Exception("cannot autowareConfig null");
+        }
+
+        try {
+
+            Field[] fields = obj.getClass().getDeclaredFields();
+
+            for (Field field : fields) {
+
+                if (field.isAnnotationPresent(DisconfFileItem.class)
+                        || field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
+
+                    if (Modifier.isStatic(field.getModifiers())) {
+                        continue;
+                    }
+
+                    String name = "";
+                    String value = "";
+
+                    if (field.isAnnotationPresent(DisconfFileItem.class)) {
+
+                        name = field.getName();
+                        value = prop.getProperty(name, null);
+
+                    } else {
+
+                        DisInnerConfigAnnotation config = field
+                                .getAnnotation(DisInnerConfigAnnotation.class);
+                        name = config.name();
+                        String defaultValue = config.defaultValue();
+                        value = prop.getProperty(name, defaultValue);
+                    }
+
+                    field.setAccessible(true);
+
+                    if (null == value) {
+
+                        continue;
+                    } else {
+
+                        try {
+
+                            setFieldValeByType(field, obj, value);
+
+                        } catch (Exception e) {
+
+                            LOGGER.error(String.format("invalid config: %s@%s",
+                                    name), e);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+            throw new Exception("error while autowire config file", e);
+        }
+    }
+
+    /**
+     * 
+     * @param field
+     */
+    private static void setFieldValeByType(Field field, Object obj, String value)
+            throws Exception {
+
+        Class<?> type = field.getType();
+
+        String typeName = type.getName();
+
+        if (typeName.equals("int")) {
+            if (value.equals("")) {
+                value = "0";
+            }
+            field.set(obj, Integer.valueOf(value));
+        } else if (typeName.equals("long")) {
+            if (value.equals("")) {
+                value = "0";
+            }
+            field.set(obj, Long.valueOf(value));
+        } else if (typeName.equals("boolean")) {
+            if (value.equals("")) {
+                value = "false";
+            }
+            field.set(obj, Boolean.valueOf(value));
+        } else if (typeName.equals("double")) {
+            if (value.equals("")) {
+                value = "0.0";
+            }
+            field.set(obj, Double.valueOf(value));
+        } else {
+            field.set(obj, value);
+        }
+    }
+
+    /**
+     * 
+     * 自动导入Static配置数据,能识别 DisconfFileItem 或 DisconfFileItem 的标识
+     * 
+     * @Description: auto ware
+     * 
+     * @param
+     * 
+     * @param propertyFilePath
+     */
+    private static void autowareStaticConfig(Class<?> cls, Properties prop)
+            throws Exception {
+
+        if (null == prop) {
+            throw new Exception("cannot autowareConfig null");
+        }
+
+        try {
+
+            Field[] fields = cls.getDeclaredFields();
+
+            for (Field field : fields) {
+
+                if (field.isAnnotationPresent(DisconfFileItem.class)) {
+
+                    if (!Modifier.isStatic(field.getModifiers())) {
+                        continue;
+                    }
+
+                    field.setAccessible(true);
+
+                    String name = field.getName();
+                    Object value = prop.getProperty(name, null);
+                    if (value != null) {
+                        setFieldValeByType(field, null, String.valueOf(value));
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+            throw new Exception("error while autowire config file", e);
+        }
+    }
+
+    /**
+     * 
+     * @Description: auto ware
+     * 
+     * @param
+     * 
+     * @param propertyFilePath
+     */
+    public static void autowareStatucConfig(Class<?> cls,
+            final String propertyFilePath) throws Exception {
+
+        // 读配置文件
+        Properties prop = getProperties(propertyFilePath);
+        if (null == prop) {
+            throw new Exception("cannot autowareConfig " + propertyFilePath);
+        }
+
+        autowareStaticConfig(cls, prop);
+    }
+
+    /**
+     * 
+     * @Description: auto ware
+     * 
+     * @param
+     * 
+     * @param propertyFilePath
+     */
+    public static void autowareConfig(final Object obj,
+            final String propertyFilePath) throws Exception {
+
+        // 读配置文件
+        Properties prop = getProperties(propertyFilePath);
+        if (null == prop || obj == null) {
+            throw new Exception("cannot autowareConfig " + propertyFilePath);
+        }
+
+        autowareConfig(obj, prop);
+    }
+}

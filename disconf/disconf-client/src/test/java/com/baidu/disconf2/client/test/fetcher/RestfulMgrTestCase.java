@@ -11,10 +11,11 @@ import org.junit.Test;
 import com.baidu.disconf2.client.DisconfMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
+import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.PathMgr;
 
-public class RestfulMgrTestCase {
+public class RestfulMgrTestCase extends BaseTestCase {
 
     @BeforeClass
     public static void beforeAllClass() throws Exception {
