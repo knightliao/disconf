@@ -29,6 +29,7 @@ Distributed Configuration Management Tools
     - 异构主备自动切换：如果一个异构系统存在主备机，主机发生挂机时，备机可以自动获取主机配置从而变成主机。
     - 异构主备机Context共享工具：异构系统下，主备机切换时可能需要共享Context。可以使用Context共享工具来共享主备的Context。
 - **注解式客户端编程**：由于SpringMvc注解式编程方式的流行，使用注解式编程方式可以便捷化客户端的开发。
+- **支持Spring方式和非Spring方式编程**：用户可以自行选择编程习惯，是否引入Spring包。推荐Spring编程方式。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh36nk2hcqj20nl0fx408.jpg)
 
