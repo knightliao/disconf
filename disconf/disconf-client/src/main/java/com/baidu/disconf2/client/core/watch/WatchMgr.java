@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.watch;
+package com.baidu.disconf2.client.core.watch;
 
 /**
  * Watch ZOO 模块

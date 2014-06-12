@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.disconf2.client.DisconfMgr;
-import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.client.test.model.ConfA;
 
@@ -34,14 +34,15 @@ public class DisconfMgrTestCase extends BaseTestCase {
             DisconfMgr.run(packName);
 
             //
-            LOGGER.info(DisconfCoreMgr.getInstance().getConfFileMap()
+            LOGGER.info(DisconfStoreMgr.getInstance().getConfFileMap()
                     .toString());
 
             //
-            LOGGER.info(DisconfCoreMgr.getInstance().getConfItemMap()
+            LOGGER.info(DisconfStoreMgr.getInstance().getConfItemMap()
                     .toString());
 
-            LOGGER.info(String.valueOf(confA.getVarA()));
+            LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
+            LOGGER.info(String.valueOf("varAA: " + confA.getVarAA()));
 
         } catch (Exception e) {
 

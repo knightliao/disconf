@@ -21,7 +21,7 @@ import com.baidu.disconf2.client.common.model.DisconfCenterFile;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
-import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.PathMgr;
 import com.baidu.disconf2.utils.ClassUtils;
@@ -232,7 +232,7 @@ public class ScanCoreAdapter {
         for (String key : disconfUpdateServiceInverseIndexMap.keySet()) {
 
             // 找不到回调对应的配置，这是用户配置 错误了
-            if (!DisconfCoreMgr.getInstance().hasThisConf(key)) {
+            if (!DisconfStoreMgr.getInstance().hasThisConf(key)) {
 
                 StringBuffer sb = new StringBuffer();
                 sb.append("cannot find " + key + "for: ");
@@ -244,7 +244,7 @@ public class ScanCoreAdapter {
             } else {
 
                 // 配置正常
-                DisconfCoreMgr.getInstance().addUpdateCallbackList(key,
+                DisconfStoreMgr.getInstance().addUpdateCallbackList(key,
                         disconfUpdateServiceInverseIndexMap.get(key));
             }
         }
@@ -258,11 +258,11 @@ public class ScanCoreAdapter {
 
         // 转换配置文件
         List<DisconfCenterFile> disconfCenterFiles = getDisconfFiles(scanModel);
-        DisconfCoreMgr.getInstance().transformScanFiles(disconfCenterFiles);
+        DisconfStoreMgr.getInstance().transformScanFiles(disconfCenterFiles);
 
         // 转换配置项
         List<DisconfCenterItem> disconfCenterItems = getDisconfItems(scanModel);
-        DisconfCoreMgr.getInstance().transformScanItems(disconfCenterItems);
+        DisconfStoreMgr.getInstance().transformScanItems(disconfCenterItems);
 
         //
         transformUpdateService(scanModel

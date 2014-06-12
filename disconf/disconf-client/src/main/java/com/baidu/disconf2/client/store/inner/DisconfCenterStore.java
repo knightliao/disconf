@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.core.inner;
+package com.baidu.disconf2.client.store.inner;
 
 import java.util.HashMap;
 import java.util.List;

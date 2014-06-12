@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.core.aspect;
+package com.baidu.disconf2.client.store.aspect;
 
 import java.lang.reflect.Method;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
-import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.utils.ClassUtils;
 
 /**
@@ -64,7 +64,7 @@ public class DisconfAspectJ {
         //
         // 请求仓库配置数据
         //
-        Object ret = DisconfCoreMgr.getInstance().getConfigFile(
+        Object ret = DisconfStoreMgr.getInstance().getConfigFile(
                 disconfFile.filename(), fieldName);
         if (ret != null) {
             return ret;
