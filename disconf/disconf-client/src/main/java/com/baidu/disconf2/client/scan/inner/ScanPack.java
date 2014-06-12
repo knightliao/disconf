@@ -20,6 +20,7 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.client.common.annotations.DisconfActiveBackupService;
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
@@ -28,6 +29,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.constants.Constants;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf2.utils.SpringContextUtil;
 import com.google.common.base.Predicate;
 
 /**
@@ -114,32 +116,41 @@ public class ScanPack {
                     .getAnnotation(DisconfUpdateService.class);
             List<String> keysList = Arrays.asList(disconfUpdateService.keys());
 
-            // 校验是否有继承正确
-            Class<?>[] interfaceClasses = disconfUpdateServiceClass
-                    .getInterfaces();
-            boolean hasInterface = false;
-            for (Class<?> infClass : interfaceClasses) {
-                if (infClass.equals(IDisconfUpdate.class)) {
-                    hasInterface = true;
-                }
-            }
-            if (!hasInterface) {
-                LOGGER.error("Your class "
-                        + disconfUpdateServiceClass.toString()
-                        + " should implement interface: "
-                        + IDisconfUpdate.class.toString());
+            //
+            // 校验是否有继承正确,是否继承IDisconfUpdate
+            //
+            if (!hasIDisconfUpdate(disconfUpdateServiceClass)) {
                 continue;
             }
 
-            // 实例化出来，这里
+            //
+            // 回调函数需要实例化出来,这里
             // 非Spring直接New
             // Spring要GetBean
+            //
+            String beanName = getSpringServiceName(disconfUpdateServiceClass);
 
             IDisconfUpdate iDisconfUpdate;
+
             try {
-                iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass
-                        .newInstance();
+
+                if (beanName != null) {
+
+                    // Spring方式
+                    iDisconfUpdate = getSpringBean(beanName);
+                    if (iDisconfUpdate == null) {
+                        continue;
+                    }
+
+                } else {
+
+                    // 非Spring方式
+                    iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass
+                            .newInstance();
+                }
+
             } catch (Exception e) {
+
                 LOGGER.error("Your class "
                         + disconfUpdateServiceClass.toString()
                         + " cannot new instance. " + e.toString());
@@ -162,7 +173,70 @@ public class ScanPack {
     }
 
     /**
-     * 分析出配置文件MAP
+     * 获取Spring Bean
+     * 
+     * @return
+     */
+    private static IDisconfUpdate getSpringBean(String beanName) {
+
+        if (SpringContextUtil.getApplicationContext() == null) {
+            LOGGER.error("Spring Context is null. Cannot autowire " + beanName);
+            return null;
+        }
+
+        // spring 方式
+        return (IDisconfUpdate) SpringContextUtil.getBean(beanName);
+    }
+
+    /**
+     * 获取Spring service bean name,如果是非Spring，则返回null
+     * 
+     * @return
+     */
+    private static String getSpringServiceName(
+            Class<?> disconfUpdateServiceClass) {
+
+        Service serviceAnnotation = disconfUpdateServiceClass
+                .getAnnotation(Service.class);
+        if (serviceAnnotation == null) {
+            return null;
+        }
+
+        String name = serviceAnnotation.value();
+        if (name.isEmpty()) {
+            name = disconfUpdateServiceClass.getSimpleName();
+            name = name.substring(0, 1).toLowerCase() + name.substring(1);
+        }
+
+        return name;
+    }
+
+    /**
+     * 判断是否含有接口
+     * 
+     * @return
+     */
+    private static boolean hasIDisconfUpdate(Class<?> disconfUpdateServiceClass) {
+
+        Class<?>[] interfaceClasses = disconfUpdateServiceClass.getInterfaces();
+        boolean hasInterface = false;
+        for (Class<?> infClass : interfaceClasses) {
+            if (infClass.equals(IDisconfUpdate.class)) {
+                hasInterface = true;
+            }
+        }
+        if (!hasInterface) {
+            LOGGER.error("Your class " + disconfUpdateServiceClass.toString()
+                    + " should implement interface: "
+                    + IDisconfUpdate.class.toString());
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 分析出配置文件与配置文件中的Field的MAP
      * 
      * @param scanModel
      */

@@ -8,7 +8,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfItem;
 
 /**
  * 1. 分布式配置文件，fileName 是配置文件名<br/>
- * 2. 使用Bean托管方式
+ * 2. 使用Spring Bean托管方式
  * 
  **/
 @Service

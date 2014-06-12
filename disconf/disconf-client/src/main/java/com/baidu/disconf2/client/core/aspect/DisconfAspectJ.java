@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
@@ -22,6 +23,7 @@ import com.baidu.disconf2.utils.ClassUtils;
  * @author liaoqiqi
  * @version 2014-6-11
  */
+@Service
 @Aspect
 public class DisconfAspectJ {
 

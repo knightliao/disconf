@@ -10,7 +10,6 @@ import com.baidu.disconf2.client.DisconfMgr;
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.client.test.model.ConfA;
-import com.baidu.disconf2.client.test.model.ConfB;
 
 /**
  * 
@@ -21,9 +20,6 @@ public class DisconfMgrTestCase extends BaseTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(DisconfMgrTestCase.class);
-
-    @Autowired
-    private ConfB confB;
 
     @Autowired
     private ConfA confA;
@@ -44,8 +40,6 @@ public class DisconfMgrTestCase extends BaseTestCase {
             //
             LOGGER.info(DisconfCoreMgr.getInstance().getConfItemMap()
                     .toString());
-
-            LOGGER.info(String.valueOf(confB.getVarB()));
 
             LOGGER.info(String.valueOf(confA.getVarA()));
 
