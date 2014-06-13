@@ -1,7 +1,6 @@
 package com.baidu.disconf2.client.fetcher.inner.restful;
 
 import java.io.File;
-import java.net.URL;
 import java.util.Map;
 
 import javax.ws.rs.client.Client;
@@ -18,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
-import com.baidu.disconf2.client.fetcher.inner.restful.file.FetchConfFile;
 import com.baidu.disconf2.client.fetcher.inner.restful.http.RestfulGet;
 import com.baidu.disconf2.client.fetcher.inner.restful.retry.RetryProxy;
 import com.baidu.utils.ConfigLoaderUtils;
@@ -161,22 +159,19 @@ public class RestfulMgr {
         try {
 
             // 删除临时文件
-            // LOGGER.info("start to remove tmp download file: " + ""
-            // + localTmpFile.getAbsolutePath());
+            LOGGER.info("start to remove tmp download file: " + ""
+                    + localTmpFile.getAbsolutePath());
             if (localTmpFile.exists()) {
                 localTmpFile.delete();
             }
 
-            for (URL url : remoteUrl.getUrls()) {
-
-                // 可重试的下载
-                UnreliableInterface unreliableImpl = new FetchConfFile(url,
-                        localTmpFile);
-                RetryProxy
-                        .retry(unreliableImpl,
-                                DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
-                                DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
-            }
+            // 可重试的下载
+            RetryProxy
+                    .retry4ConfDownload(
+                            remoteUrl,
+                            localTmpFile,
+                            DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
+                            DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
 
             // 从临时文件夹迁移到下载文件夹
             OsUtil.transferFile(localTmpFile, localFile);
@@ -201,7 +196,8 @@ public class RestfulMgr {
 
         } catch (Exception e) {
 
-            LOGGER.warn("download file failed, using previous download file.");
+            LOGGER.warn("download file failed, using previous download file.",
+                    e);
         }
 
         //

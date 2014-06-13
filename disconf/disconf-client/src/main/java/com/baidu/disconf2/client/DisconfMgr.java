@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.config.ConfigMgr;
+import com.baidu.disconf2.client.config.inner.DisClientConfig;
+import com.baidu.disconf2.client.core.DisconfCoreMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.scan.ScanMgr;
 
@@ -45,6 +47,12 @@ public class DisconfMgr {
             // 导入配置
             ConfigMgr.init();
 
+            // 是否开启远程配置
+            if (DisClientConfig.getInstance().ENABLE_REMOTE_CONF == false) {
+                LOGGER.info("Use Local Configuration.");
+                return;
+            }
+
             // 初始化下载器
             RestfulMgr.getInstance().init();
 
@@ -52,9 +60,8 @@ public class DisconfMgr {
             LOGGER.info("start to scan package: " + scanPackage);
             ScanMgr.scanAndStore(scanPackage);
 
-            // 获取数据并注入
-
-            // Watch模块
+            // 获取数据/注入/Watch
+            DisconfCoreMgr.run();
 
         } catch (Exception e) {
 

@@ -34,6 +34,10 @@ public class RemoteUrl {
 
             try {
 
+                if (!server.contains("http://")) {
+                    server = "http://" + server;
+                }
+
                 urls.add(new URL(server + url));
 
             } catch (MalformedURLException e) {
