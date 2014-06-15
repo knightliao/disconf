@@ -1,14 +1,9 @@
 package com.baidu.disconf2.client.fetcher.inner.restful.retry;
 
-import java.io.File;
-import java.net.URL;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
-import com.baidu.disconf2.client.fetcher.inner.restful.file.FetchConfFile;
 
 /**
  * 重试的策略
@@ -50,43 +45,6 @@ public class RetryProxy {
         }
 
         LOGGER.warn("finally failed....");
-
-        throw new Exception();
-    }
-
-    /**
-     * 
-     * Retry封装 RemoteUrl 支持多Server的下载
-     * 
-     * @param remoteUrl
-     * @param localTmpFile
-     * @param retryTimes
-     * @param sleepSeconds
-     * @return
-     */
-    public static Object retry4ConfDownload(RemoteUrl remoteUrl,
-            File localTmpFile, int retryTimes, int sleepSeconds)
-            throws Exception {
-
-        for (URL url : remoteUrl.getUrls()) {
-
-            // 可重试的下载
-            UnreliableInterface unreliableImpl = new FetchConfFile(url,
-                    localTmpFile);
-
-            try {
-
-                return RetryProxy.retry(unreliableImpl, retryTimes,
-                        sleepSeconds);
-
-            } catch (Exception e) {
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e1) {
-                }
-            }
-        }
 
         throw new Exception();
     }

@@ -1,7 +1,5 @@
 package com.baidu.disconf2.client.common.model;
 
-import java.lang.reflect.Type;
-
 /**
  * 配置项表示
  * 
@@ -15,7 +13,7 @@ public class DisconfCenterItem {
     private Object value;
 
     // KEY类型
-    private Type keyType;
+    private Class<?> keyType;
 
     // 远程配置服务的URL路径,不包含IP和PORT的
     private String remoteServerUrl;
@@ -67,12 +65,12 @@ public class DisconfCenterItem {
         this.remoteServerUrl = remoteServerUrl;
     }
 
-    public Type getKeyType() {
-        return keyType;
+    public void setKeyType(Class<?> keyType) {
+        this.keyType = keyType;
     }
 
-    public void setKeyType(Type keyType) {
-        this.keyType = keyType;
+    public Class<?> getKeyType() {
+        return keyType;
     }
 
     @Override

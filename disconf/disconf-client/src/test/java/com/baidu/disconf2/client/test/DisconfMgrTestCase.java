@@ -10,6 +10,7 @@ import com.baidu.disconf2.client.DisconfMgr;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.client.test.model.ConfA;
+import com.baidu.disconf2.client.test.model.ServiceA;
 
 /**
  * 
@@ -24,6 +25,9 @@ public class DisconfMgrTestCase extends BaseTestCase {
     @Autowired
     private ConfA confA;
 
+    @Autowired
+    private ServiceA serviceA;
+
     @Test
     public void scan() {
 
@@ -33,7 +37,7 @@ public class DisconfMgrTestCase extends BaseTestCase {
 
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
-            LOGGER.info(String.valueOf("varAA: " + confA.getVarAA()));
+            LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
 
             DisconfMgr.run(packName);
 
@@ -47,7 +51,7 @@ public class DisconfMgrTestCase extends BaseTestCase {
 
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
-            LOGGER.info(String.valueOf("varAA: " + confA.getVarAA()));
+            LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
 
         } catch (Exception e) {
 

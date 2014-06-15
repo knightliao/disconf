@@ -1,7 +1,7 @@
 package com.baidu.disconf2.client.fetcher.inner.restful;
 
 import java.io.File;
-import java.util.Map;
+import java.net.URL;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
+import com.baidu.disconf2.client.fetcher.inner.restful.file.FetchConfFile;
 import com.baidu.disconf2.client.fetcher.inner.restful.http.RestfulGet;
 import com.baidu.disconf2.client.fetcher.inner.restful.retry.RetryProxy;
 import com.baidu.utils.ConfigLoaderUtils;
@@ -89,31 +90,42 @@ public class RestfulMgr {
      * @author liaoqiqi
      * @date 2013-6-16
      */
-    public <T> T getJsonData(Class<T> clazz, String url,
-            Map<String, String> parameters) throws Exception {
+    public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl)
+            throws Exception {
 
-        WebTarget webtarget = client.target(url);
+        for (URL url : remoteUrl.getUrls()) {
 
-        for (String key : parameters.keySet()) {
+            WebTarget webtarget = client.target(url.toURI());
 
-            webtarget = webtarget.queryParam(key, parameters.get(key));
+            LOGGER.info("start to query url : " + webtarget.getUri().toString());
+
+            Invocation.Builder builder = webtarget
+                    .request(MediaType.APPLICATION_JSON_TYPE);
+
+            // 可重试的下载
+            UnreliableInterface unreliableImpl = new RestfulGet(builder);
+
+            try {
+
+                Response response = (Response) RetryProxy
+                        .retry(unreliableImpl,
+                                DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
+                                DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
+
+                T t = (T) response.readEntity(clazz);
+
+                return t;
+
+            } catch (Exception e) {
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                }
+            }
         }
 
-        LOGGER.info("start to query url : " + webtarget.getUri().toString());
-
-        Invocation.Builder builder = webtarget
-                .request(MediaType.APPLICATION_JSON_TYPE);
-
-        // 可重试的下载
-        UnreliableInterface unreliableImpl = new RestfulGet(builder);
-        Response response = (Response) RetryProxy
-                .retry(unreliableImpl,
-                        DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
-                        DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
-
-        T t = (T) response.readEntity(clazz);
-
-        return t;
+        throw new Exception();
     }
 
     /**
@@ -166,12 +178,11 @@ public class RestfulMgr {
             }
 
             // 可重试的下载
-            RetryProxy
-                    .retry4ConfDownload(
-                            remoteUrl,
-                            localTmpFile,
-                            DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
-                            DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
+            retry4ConfDownload(
+                    remoteUrl,
+                    localTmpFile,
+                    DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
+                    DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
 
             // 从临时文件夹迁移到下载文件夹
             OsUtil.transferFile(localTmpFile, localFile);
@@ -224,6 +235,43 @@ public class RestfulMgr {
 
         // 否则, 返回全路径
         return localFile.getAbsolutePath();
+    }
+
+    /**
+     * 
+     * Retry封装 RemoteUrl 支持多Server的下载
+     * 
+     * @param remoteUrl
+     * @param localTmpFile
+     * @param retryTimes
+     * @param sleepSeconds
+     * @return
+     */
+    private static Object retry4ConfDownload(RemoteUrl remoteUrl,
+            File localTmpFile, int retryTimes, int sleepSeconds)
+            throws Exception {
+
+        for (URL url : remoteUrl.getUrls()) {
+
+            // 可重试的下载
+            UnreliableInterface unreliableImpl = new FetchConfFile(url,
+                    localTmpFile);
+
+            try {
+
+                return RetryProxy.retry(unreliableImpl, retryTimes,
+                        sleepSeconds);
+
+            } catch (Exception e) {
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                }
+            }
+        }
+
+        throw new Exception();
     }
 
     /**

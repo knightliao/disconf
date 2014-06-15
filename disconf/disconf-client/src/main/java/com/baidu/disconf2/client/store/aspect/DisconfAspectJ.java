@@ -96,6 +96,37 @@ public class DisconfAspectJ {
     public Object decideAccess(ProceedingJoinPoint pjp, DisconfItem disconfItem)
             throws Throwable {
 
-        return null;
+        MethodSignature ms = (MethodSignature) pjp.getSignature();
+        Method method = ms.getMethod();
+
+        String methodName = method.getName();
+
+        //
+        // Field名
+        //
+        String fieldName = ClassUtils.getFieldNameByGetMethodName(methodName);
+
+        //
+        // 请求仓库配置数据
+        //
+        Object ret = DisconfStoreMgr.getInstance().getConfigItem(
+                disconfItem.key());
+        if (ret != null) {
+            LOGGER.info("using disconf store value: (" + fieldName + " , "
+                    + ret + ")");
+            return ret;
+        }
+
+        Object rtnOb = null;
+
+        try {
+            // 返回原值
+            rtnOb = pjp.proceed();
+        } catch (Throwable t) {
+            LOGGER.info(t.getMessage());
+            throw t;
+        }
+
+        return rtnOb;
     }
 }

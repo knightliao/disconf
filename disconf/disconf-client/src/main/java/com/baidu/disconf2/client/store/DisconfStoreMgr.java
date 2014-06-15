@@ -173,7 +173,16 @@ public class DisconfStoreMgr {
      */
     public Object getConfigItem(String keyName) {
 
-        return null;
+        DisconfCenterItem disconfCenterItem = disconfCenterStore
+                .getConfItemMap().get(keyName);
+
+        // 校验是否存在
+        if (disconfCenterItem == null) {
+            LOGGER.error("canot find " + keyName + " in store....");
+            return null;
+        }
+
+        return disconfCenterItem.getValue();
     }
 
     /**
@@ -204,5 +213,27 @@ public class DisconfStoreMgr {
                     .getType(), (String) object);
             keMap.get(fileItem).setValue(value);
         }
+    }
+
+    /**
+     * 将配置项数据注入到仓库
+     */
+    public void injectItem2Store(String key, String value) {
+
+        DisconfCenterItem disconfCenterItem = disconfCenterStore
+                .getConfItemMap().get(key);
+
+        // 校验是否存在
+        if (disconfCenterItem == null) {
+            LOGGER.error("canot find " + key + " in store....");
+            return;
+        }
+
+        // 存储
+        Class<?> typeClass = disconfCenterItem.getKeyType();
+
+        // 根据类型设置值
+        Object newValue = ClassUtils.getValeByType(typeClass, value);
+        disconfCenterItem.setValue(newValue);
     }
 }

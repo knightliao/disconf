@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
+import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.utils.ConfigLoaderUtils;
@@ -34,6 +35,59 @@ public class DisconfCoreMgr {
         // 处理配置文件
         //
         processConfFile();
+
+        //
+        // 处理配置项
+        //
+        processConfItem();
+    }
+
+    /**
+     * 处理配置
+     */
+    private static void processConfItem() {
+
+        Map<String, DisconfCenterItem> confItemMap = DisconfStoreMgr
+                .getInstance().getConfItemMap();
+
+        /**
+         * 配置ITEM列表处理
+         */
+        for (String key : confItemMap.keySet()) {
+
+            LOGGER.info("==============\tstart to process disconf item: " + key
+                    + "\t=============================");
+
+            DisconfCenterItem disconfCenterItem = confItemMap.get(key);
+
+            String url = disconfCenterItem.getRemoteServerUrl();
+
+            //
+            // 下载配置
+            //
+            String value = null;
+            try {
+                value = FetcherMgr.getItemFromServer(url);
+                if (value != null) {
+                    LOGGER.info("value: " + value);
+                }
+            } catch (Exception e) {
+                LOGGER.error("cannot use remote configuration: " + key, e);
+                continue;
+            }
+            LOGGER.info("download ok.");
+
+            //
+            // 注入到仓库中
+            //
+            DisconfStoreMgr.getInstance().injectItem2Store(key, value);
+            LOGGER.info("inject ok.");
+
+            //
+            // Watch
+            //
+            LOGGER.info("watch ok.");
+        }
     }
 
     /**
@@ -85,6 +139,12 @@ public class DisconfCoreMgr {
             DisconfStoreMgr.getInstance()
                     .injectFile2Store(fileName, properties);
             LOGGER.info("inject ok.");
+
+            //
+            // Watch
+            //
+
+            LOGGER.info("watch ok.");
         }
 
     }

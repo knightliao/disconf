@@ -9,6 +9,7 @@ import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
+import com.baidu.disconf2.core.common.json.ConfItemVo;
 
 /**
  * 下载模块
@@ -20,6 +21,30 @@ public class FetcherMgr {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(FetcherMgr.class);
+
+    /**
+     * 下载配置Key
+     * 
+     * @param url
+     * @return
+     */
+    public static String getItemFromServer(String url) throws Exception {
+
+        // 远程地址
+        RemoteUrl remoteUrl = new RemoteUrl(url, DisClientConfig.getInstance()
+                .getHostList());
+
+        ConfItemVo confItemVo = RestfulMgr.getInstance().getJsonData(
+                ConfItemVo.class, remoteUrl);
+        LOGGER.info("remote server return: " + confItemVo.toString());
+
+        if (confItemVo.getStatus().equals(ConfItemVo.NOTOK)) {
+            throw new Exception("remote server return " + confItemVo.toString()
+                    + ", status is not ok.");
+        }
+
+        return confItemVo.getValue();
+    }
 
     /*
      * 下载 fileName，remoteUrl是 url

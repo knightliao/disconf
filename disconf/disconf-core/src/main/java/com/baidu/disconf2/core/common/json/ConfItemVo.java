@@ -34,4 +34,9 @@ public class ConfItemVo {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "ConfItemVo [status=" + status + ", value=" + value + "]";
+    }
+
 }
