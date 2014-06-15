@@ -81,22 +81,31 @@ public class ZookeeperMgr {
         store = new ResilientActiveKeyValueStore();
         store.connect(hosts);
 
+        // 新建父目录
+        makeDir(defaultPrefixString);
+    }
+
+    /**
+     * 
+     * @param dir
+     */
+    public void makeDir(String dir) {
+
         try {
 
-            boolean deafult_path_exist = store.exists(defaultPrefixString);
+            boolean deafult_path_exist = store.exists(dir);
             if (!deafult_path_exist) {
-                LOGGER.info("create: " + defaultPrefixString);
-                this.writePersistentUrl(defaultPrefixString,
-                        ZooUtils.getZooDirValue());
+                LOGGER.info("create: " + dir);
+                this.writePersistentUrl(dir, ZooUtils.getZooDirValue());
             }
 
         } catch (KeeperException e) {
 
-            LOGGER.error("cannot create path: " + defaultPrefixString, e);
+            LOGGER.error("cannot create path: " + dir, e);
 
         } catch (Exception e) {
 
-            LOGGER.error("cannot create path: " + defaultPrefixString, e);
+            LOGGER.error("cannot create path: " + dir, e);
         }
     }
 

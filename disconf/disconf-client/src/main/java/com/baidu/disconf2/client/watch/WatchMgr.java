@@ -3,10 +3,10 @@ package com.baidu.disconf2.client.watch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.core.common.path.PathMgr;
-import com.baidu.disconf2.core.common.utils.ZooUtils;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
 /**
@@ -35,9 +35,19 @@ public class WatchMgr {
     }
 
     /**
-     * 父目录的路径
+     * 应用程序的Zoo根目录
      */
-    private String zkParentDirPath = "";
+    private String clientRootZooPath = "";
+
+    /**
+     * 应用程序的Zoo 配置文件 目录
+     */
+    private String clientDisconfFileZooPath = "";
+
+    /**
+     * 应用程序的Zoo 配置项 目录
+     */
+    private String clientDisconfItemZooPath = "";
 
     /**
      * Zoo hosts
@@ -64,18 +74,50 @@ public class WatchMgr {
                         .getInstance().CONF_SERVER_ZOO_ACTION));
 
         //
-        this.zkParentDirPath = DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX;
-
-        //
         // init zookeeper
         //
         LOGGER.info("init zookeeper......");
-        ZookeeperMgr.getInstance().init(hosts, zkParentDirPath);
+        ZookeeperMgr.getInstance().init(hosts,
+                DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX);
 
-        // 新建zookeeper的目录
-        ZookeeperMgr.getInstance().writePersistentUrl(zkParentDirPath,
-                ZooUtils.getZooDirValue());
-        LOGGER.info("make url: " + zkParentDirPath + " successful!");
+        // 新建初始化目录
+        setupPath();
     }
 
+    private void setupPath() throws Exception {
+
+        // 应用根目录
+        this.clientRootZooPath = PathMgr.getZooBaseUrl(
+                DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX,
+                DisClientConfig.getInstance().APP,
+                DisClientConfig.getInstance().ENV,
+                DisClientConfig.getInstance().VERSION);
+        ZookeeperMgr.getInstance().makeDir(clientRootZooPath);
+
+        // 新建Zoo Store目录
+        this.clientDisconfFileZooPath = PathMgr
+                .getFileZooPath(clientRootZooPath);
+        ZookeeperMgr.getInstance().makeDir(clientDisconfFileZooPath);
+
+        // 新建Zoo Store目录
+        this.clientDisconfItemZooPath = PathMgr
+                .getItemZooPath(clientRootZooPath);
+        ZookeeperMgr.getInstance().makeDir(clientDisconfItemZooPath);
+    }
+
+    public String getClientDisconfFileZooPath() {
+        return clientDisconfFileZooPath;
+    }
+
+    public void setClientDisconfFileZooPath(String clientDisconfFileZooPath) {
+        this.clientDisconfFileZooPath = clientDisconfFileZooPath;
+    }
+
+    public String getClientDisconfItemZooPath() {
+        return clientDisconfItemZooPath;
+    }
+
+    public void setClientDisconfItemZooPath(String clientDisconfItemZooPath) {
+        this.clientDisconfItemZooPath = clientDisconfItemZooPath;
+    }
 }

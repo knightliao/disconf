@@ -33,4 +33,6 @@ public class Constants {
     public final static String STORE_FILE_URL_KEY = "file";
     public final static String STORE_ITEM_URL_KEY = "item";
     public final static String ZOO_HOSTS_URL_KEY = "hosts";
+
+    public final static String SEP_STRING = "/";
 }

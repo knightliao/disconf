@@ -39,9 +39,9 @@ public class PathMgr {
         sb.append(urlPrefix);
 
         if (disConfigTypeEnum.getType() == DisConfigTypeEnum.FILE.getType()) {
-            sb.append("/" + Constants.STORE_FILE_URL_KEY);
+            sb.append(Constants.SEP_STRING + Constants.STORE_FILE_URL_KEY);
         } else {
-            sb.append("/" + Constants.STORE_ITEM_URL_KEY);
+            sb.append(Constants.SEP_STRING + Constants.STORE_ITEM_URL_KEY);
         }
 
         sb.append("?");
@@ -67,7 +67,62 @@ public class PathMgr {
      */
     public static String getZooHostsUrl(String urlPrefix) {
 
-        return urlPrefix + "/" + Constants.ZOO_HOSTS_URL_KEY;
+        return urlPrefix + Constants.SEP_STRING + Constants.ZOO_HOSTS_URL_KEY;
+    }
+
+    /**
+     * 
+     * @Description: 获取APP的Zookeeper的基本路径
+     * 
+     * @return
+     * @return String
+     * @author liaoqiqi
+     * @date 2013-6-17
+     */
+    public static String getZooBaseUrl(String urlPrefix, String app,
+            String env, String version) {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(urlPrefix);
+
+        sb.append(Constants.SEP_STRING);
+        sb.append(app);
+
+        sb.append("_");
+        sb.append(version);
+
+        sb.append("_");
+        sb.append(env);
+
+        return sb.toString();
+    }
+
+    /**
+     * 
+     * @Description: 获取 Disconf FILE ZOO Path
+     * 
+     * @return
+     * @return String
+     * @author liaoqiqi
+     * @date 2013-6-17
+     */
+    public static String getFileZooPath(String baseUrl) {
+
+        return baseUrl + Constants.SEP_STRING + Constants.STORE_FILE_URL_KEY;
+    }
+
+    /**
+     * 
+     * @Description: 获取 Disconf ITEM ZOO Path
+     * 
+     * @return
+     * @return String
+     * @author liaoqiqi
+     * @date 2013-6-17
+     */
+    public static String getItemZooPath(String baseUrl) {
+
+        return baseUrl + Constants.SEP_STRING + Constants.STORE_ITEM_URL_KEY;
     }
 
     /**
