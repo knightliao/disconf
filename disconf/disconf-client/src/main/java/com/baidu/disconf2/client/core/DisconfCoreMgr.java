@@ -67,7 +67,7 @@ public class DisconfCoreMgr {
             //
             String value = null;
             try {
-                value = FetcherMgr.getItemFromServer(url);
+                value = FetcherMgr.getValueFromServer(url);
                 if (value != null) {
                     LOGGER.info("value: " + value);
                 }

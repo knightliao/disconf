@@ -1,19 +1,19 @@
 package com.baidu.disconf2.core.common.json;
 
+import com.baidu.disconf2.core.common.constants.Constants;
+
 /**
  * 
- * ITEM数据获取的的接口格式
+ * 通用的Value Vo
+ * 
  * 
  * @author liaoqiqi
  * @version 2014-6-10
  */
-public class ConfItemVo {
-
-    public static final Integer OK = 1;
-    public static final Integer NOTOK = 0;
+public class ValueVo {
 
     // 是否存在此KEy
-    private Integer status = OK;
+    private Integer status = Constants.OK;
 
     //
     private String value = "";

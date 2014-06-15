@@ -67,7 +67,7 @@ public class ScanCoreAdapter {
 
         // Remote URL
         String url = PathMgr.getRemoteUrlParameter(
-                DisClientSysConfig.getInstance().CONF_SERVER_ACTION,
+                DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
                 disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
                 disConfCommonModel.getEnv(), disconfCenterFile.getFileName(),
                 DisConfigTypeEnum.FILE);
@@ -174,7 +174,7 @@ public class ScanCoreAdapter {
 
         // Remote URL
         String url = PathMgr.getRemoteUrlParameter(
-                DisClientSysConfig.getInstance().CONF_SERVER_ACTION,
+                DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
                 disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
                 disConfCommonModel.getEnv(), disconfCenterItem.getKey(),
                 DisConfigTypeEnum.ITEM);

@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.config.ConfigMgr;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.scan.ScanMgr;
+import com.baidu.disconf2.client.watch.WatchMgr;
 
 /**
  * 
@@ -54,7 +56,10 @@ public class DisconfMgr {
             }
 
             // 初始化下载器
-            RestfulMgr.getInstance().init();
+            FetcherMgr.init();
+
+            // Watch 模块
+            WatchMgr.getInstance().init();
 
             // 扫描并入库
             LOGGER.info("start to scan package: " + scanPackage);

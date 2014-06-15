@@ -39,9 +39,9 @@ public class PathMgr {
         sb.append(urlPrefix);
 
         if (disConfigTypeEnum.getType() == DisConfigTypeEnum.FILE.getType()) {
-            sb.append("/file");
+            sb.append("/" + Constants.STORE_FILE_URL_KEY);
         } else {
-            sb.append("/item");
+            sb.append("/" + Constants.STORE_ITEM_URL_KEY);
         }
 
         sb.append("?");
@@ -57,7 +57,17 @@ public class PathMgr {
         }
 
         return sb.toString();
+    }
 
+    /**
+     * 
+     * 获取Zookeeper地址URL
+     * 
+     * @return
+     */
+    public static String getZooHostsUrl(String urlPrefix) {
+
+        return urlPrefix + "/" + Constants.ZOO_HOSTS_URL_KEY;
     }
 
     /**

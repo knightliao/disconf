@@ -13,6 +13,7 @@ import com.baidu.utils.OsUtil;
  * @version 2014-6-6
  */
 public class DisClientSysConfig {
+
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(DisClientSysConfig.class);
 
@@ -59,13 +60,22 @@ public class DisClientSysConfig {
     }
 
     /**
-     * 远程配置管理服务的URL前缀
+     * STORE URL
      * 
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "conf_server_action")
-    public String CONF_SERVER_ACTION;
+    @DisInnerConfigAnnotation(name = "conf_server_store_action")
+    public String CONF_SERVER_STORE_ACTION;
+
+    /**
+     * STORE URL
+     * 
+     * @author
+     * @since 1.0.0
+     */
+    @DisInnerConfigAnnotation(name = "conf_server_zoo_action")
+    public String CONF_SERVER_ZOO_ACTION;
 
     /**
      * 获取远程主机个数的URL

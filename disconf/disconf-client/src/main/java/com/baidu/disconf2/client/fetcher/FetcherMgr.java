@@ -9,7 +9,8 @@ import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
-import com.baidu.disconf2.core.common.json.ConfItemVo;
+import com.baidu.disconf2.core.common.constants.Constants;
+import com.baidu.disconf2.core.common.json.ValueVo;
 
 /**
  * 下载模块
@@ -23,22 +24,39 @@ public class FetcherMgr {
             .getLogger(FetcherMgr.class);
 
     /**
-     * 下载配置Key
+     * 
+     * @throws Exception
+     */
+    public static void init() throws Exception {
+
+        RestfulMgr.getInstance().init();
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public static boolean isInit() {
+        return RestfulMgr.getInstance().isInit();
+    }
+
+    /**
+     * 获取Value值
      * 
      * @param url
      * @return
      */
-    public static String getItemFromServer(String url) throws Exception {
+    public static String getValueFromServer(String url) throws Exception {
 
         // 远程地址
         RemoteUrl remoteUrl = new RemoteUrl(url, DisClientConfig.getInstance()
                 .getHostList());
 
-        ConfItemVo confItemVo = RestfulMgr.getInstance().getJsonData(
-                ConfItemVo.class, remoteUrl);
+        ValueVo confItemVo = RestfulMgr.getInstance().getJsonData(
+                ValueVo.class, remoteUrl);
         LOGGER.info("remote server return: " + confItemVo.toString());
 
-        if (confItemVo.getStatus().equals(ConfItemVo.NOTOK)) {
+        if (confItemVo.getStatus().equals(Constants.NOTOK)) {
             throw new Exception("remote server return " + confItemVo.toString()
                     + ", status is not ok.");
         }

@@ -74,15 +74,6 @@ public class DisInnerConfigHelper {
         LOGGER.info("SERVER ENABLE_REMOTE_CONF: "
                 + DisClientConfig.getInstance().ENABLE_REMOTE_CONF);
 
-        //
-        // zookeeper相关
-        //
-
-        if (StringNUtils.isEmpty(DisClientConfig.getInstance().ZOOKEEPER_HOST)) {
-            throw new Exception("settings: ZOOKEEPER_HOST cannot find");
-        }
-        LOGGER.info("SERVER ZOOKEEPER_HOST: "
-                + DisClientConfig.getInstance().ZOOKEEPER_HOST);
     }
 
     /**
@@ -102,12 +93,22 @@ public class DisInnerConfigHelper {
 
         // conf_server_action
         if (StringNUtils
-                .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ACTION)) {
+                .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION)) {
 
-            throw new Exception("settings: CONF_SERVER_BASE_URL cannot find");
+            throw new Exception(
+                    "settings: CONF_SERVER_STORE_ACTION cannot find");
         }
-        LOGGER.debug("SERVER Action URL: "
-                + DisClientSysConfig.getInstance().CONF_SERVER_ACTION);
+        LOGGER.debug("CONF_SERVER_STORE_ACTION: "
+                + DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION);
+
+        // conf_server_action
+        if (StringNUtils
+                .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION)) {
+
+            throw new Exception("settings: CONF_SERVER_ZOO_ACTION cannot find");
+        }
+        LOGGER.debug("CONF_SERVER_ZOO_ACTION: "
+                + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
 
         // conf_server_master_num_action
         if (StringNUtils

@@ -69,15 +69,6 @@ public final class DisClientConfig {
     private List<String> hostList;
 
     /**
-     * zookeeper HOST
-     * 
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "zookeeper_host")
-    public String ZOOKEEPER_HOST;
-
-    /**
      * app
      * 
      * @author

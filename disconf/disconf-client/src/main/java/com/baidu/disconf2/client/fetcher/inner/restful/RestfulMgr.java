@@ -73,7 +73,17 @@ public class RestfulMgr {
         if (client == null) {
             throw new Exception("RestfulMgr init failed!");
         }
+    }
 
+    /**
+     * 
+     * @return
+     */
+    public boolean isInit() {
+        if (client == null) {
+            return false;
+        }
+        return true;
     }
 
     /**

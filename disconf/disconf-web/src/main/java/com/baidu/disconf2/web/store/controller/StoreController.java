@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baidu.disconf2.core.common.json.ConfItemVo;
+import com.baidu.disconf2.core.common.constants.Constants;
+import com.baidu.disconf2.core.common.json.ValueVo;
 import com.baidu.disconf2.web.store.form.ConfForm;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
@@ -61,10 +62,10 @@ public class StoreController extends BaseController {
      */
     @RequestMapping(value = "/item", method = RequestMethod.GET)
     @ResponseBody
-    public ConfItemVo getItem() {
+    public ValueVo getItem() {
 
-        ConfItemVo confItemVo = new ConfItemVo();
-        confItemVo.setStatus(ConfItemVo.OK);
+        ValueVo confItemVo = new ValueVo();
+        confItemVo.setStatus(Constants.OK);
         confItemVo.setValue("88888");
 
         return confItemVo;
