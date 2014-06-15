@@ -23,6 +23,7 @@ import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
+import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.PathMgr;
 
@@ -62,7 +63,10 @@ public class ScanCoreAdapter {
         //
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
-                disconfFileAnnotation.env(), disconfFileAnnotation.version());
+                disconfFileAnnotation.env(), disconfFileAnnotation.version(),
+                PathMgr.joinPath(WatchMgr.getInstance()
+                        .getClientDisconfFileZooPath(), disconfFileAnnotation
+                        .filename()));
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
         // Remote URL
@@ -108,7 +112,7 @@ public class ScanCoreAdapter {
      * @return
      */
     private static DisConfCommonModel makeDisConfCommonModel(String env,
-            String version) {
+            String version, String zookeeperUrl) {
 
         DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
@@ -126,6 +130,8 @@ public class ScanCoreAdapter {
             disConfCommonModel
                     .setVersion(DisClientConfig.getInstance().VERSION);
         }
+
+        disConfCommonModel.setZookeeperUrl(zookeeperUrl);
 
         return disConfCommonModel;
     }
@@ -148,8 +154,11 @@ public class ScanCoreAdapter {
         // 获取标注
         DisconfItem disconfItem = method.getAnnotation(DisconfItem.class);
 
+        // 去掉空格
+        String key = disconfItem.key().replace(" ", "");
+
         // key
-        disconfCenterItem.setKey(disconfItem.key());
+        disconfCenterItem.setKey(key);
         // value
         field.setAccessible(true);
         if (Modifier.isStatic(field.getModifiers())) {
@@ -169,15 +178,16 @@ public class ScanCoreAdapter {
         //
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
-                disconfItem.env(), disconfItem.version());
+                disconfItem.env(), disconfItem.version(), PathMgr.joinPath(
+                        WatchMgr.getInstance().getClientDisconfItemZooPath(),
+                        key));
         disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
 
         // Remote URL
         String url = PathMgr.getRemoteUrlParameter(
                 DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
                 disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
-                disConfCommonModel.getEnv(), disconfCenterItem.getKey(),
-                DisConfigTypeEnum.ITEM);
+                disConfCommonModel.getEnv(), key, DisConfigTypeEnum.ITEM);
         disconfCenterItem.setRemoteServerUrl(url);
 
         return disconfCenterItem;

@@ -17,6 +17,9 @@ public class DisConfCommonModel {
     // 环境
     private String env;
 
+    // zoo
+    private String zookeeperUrl;
+
     public String getApp() {
         return app;
     }
@@ -41,12 +44,18 @@ public class DisConfCommonModel {
         this.env = env;
     }
 
+    public String getZookeeperUrl() {
+        return zookeeperUrl;
+    }
+
+    public void setZookeeperUrl(String zookeeperUrl) {
+        this.zookeeperUrl = zookeeperUrl;
+    }
+
     @Override
     public String toString() {
         return "DisConfCommonModel [app=" + app + ", version=" + version
-                + ", env=" + env + "]";
+                + ", env=" + env + ", zookeeperUrl=" + zookeeperUrl + "]";
     }
-
-
 
 }

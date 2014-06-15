@@ -5,7 +5,7 @@ import com.baidu.disconf2.client.scan.inner.ScanModel;
 import com.baidu.disconf2.client.scan.inner.ScanPack;
 
 /**
- * 扫描模块
+ * 扫描模块, 依赖 WatchMgr 模块
  * 
  * @author liaoqiqi
  * @version 2014-6-6

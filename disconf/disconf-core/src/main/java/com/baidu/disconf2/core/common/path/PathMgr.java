@@ -113,6 +113,16 @@ public class PathMgr {
 
     /**
      * 
+     * @param path1
+     * @param path2
+     * @return
+     */
+    public static String joinPath(String path1, String path2) {
+        return path1 + Constants.SEP_STRING + path2;
+    }
+
+    /**
+     * 
      * @Description: 获取 Disconf ITEM ZOO Path
      * 
      * @return
