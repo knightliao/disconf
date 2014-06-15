@@ -31,4 +31,19 @@ public final class ZooUtils {
         }
     }
 
+    /**
+     * 一个可读性良好的路径Value
+     * 
+     * @return
+     */
+    public static String getZooDirValueByDate() {
+
+        try {
+            return DateUtils.formatDate(new Date(), "yyyyMMddHHmmss");
+        } catch (Exception e) {
+            LOGGER.error("cannot get host info", e);
+            return "";
+        }
+    }
+
 }

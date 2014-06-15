@@ -10,6 +10,7 @@ import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.scan.ScanMgr;
 import com.baidu.disconf2.client.watch.WatchMgr;
+import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
 /**
  * 
@@ -91,6 +92,10 @@ public class DisconfMgr {
             // RestfulMgr
             LOGGER.info("=============== RestfulMgr close =================");
             RestfulMgr.getInstance().close();
+
+            // ZOOKEEPER
+            LOGGER.info("=============== ZookeeperMgr close =================");
+            ZookeeperMgr.getInstance().release();
 
             // close, 必须将其设置为False,以便重新更新
             isInit = false;

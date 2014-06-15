@@ -82,21 +82,21 @@ public class ZookeeperMgr {
         store.connect(hosts);
 
         // 新建父目录
-        makeDir(defaultPrefixString);
+        makeDir(defaultPrefixString, ZooUtils.getZooDirValue());
     }
 
     /**
      * 
      * @param dir
      */
-    public void makeDir(String dir) {
+    public void makeDir(String dir, String data) {
 
         try {
 
             boolean deafult_path_exist = store.exists(dir);
             if (!deafult_path_exist) {
                 LOGGER.info("create: " + dir);
-                this.writePersistentUrl(dir, ZooUtils.getZooDirValue());
+                this.writePersistentUrl(dir, data);
             }
 
         } catch (KeeperException e) {

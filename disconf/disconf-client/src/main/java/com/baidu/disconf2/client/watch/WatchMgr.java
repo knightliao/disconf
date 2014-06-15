@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
+import com.baidu.disconf2.client.watch.inner.NodeWatcher;
 import com.baidu.disconf2.core.common.path.PathMgr;
+import com.baidu.disconf2.core.common.utils.ZooUtils;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
 /**
@@ -84,6 +86,10 @@ public class WatchMgr {
         setupPath();
     }
 
+    /**
+     * 
+     * @throws Exception
+     */
     private void setupPath() throws Exception {
 
         // 应用根目录
@@ -92,17 +98,42 @@ public class WatchMgr {
                 DisClientConfig.getInstance().APP,
                 DisClientConfig.getInstance().ENV,
                 DisClientConfig.getInstance().VERSION);
-        ZookeeperMgr.getInstance().makeDir(clientRootZooPath);
+        ZookeeperMgr.getInstance().makeDir(clientRootZooPath,
+                ZooUtils.getZooDirValue());
 
         // 新建Zoo Store目录
         this.clientDisconfFileZooPath = PathMgr
                 .getFileZooPath(clientRootZooPath);
-        ZookeeperMgr.getInstance().makeDir(clientDisconfFileZooPath);
+        ZookeeperMgr.getInstance().makeDir(clientDisconfFileZooPath,
+                ZooUtils.getZooDirValue());
 
         // 新建Zoo Store目录
         this.clientDisconfItemZooPath = PathMgr
                 .getItemZooPath(clientRootZooPath);
-        ZookeeperMgr.getInstance().makeDir(clientDisconfItemZooPath);
+        ZookeeperMgr.getInstance().makeDir(clientDisconfItemZooPath,
+                ZooUtils.getZooDirValue());
+    }
+
+    /**
+     * 创建路径
+     * 
+     * @param path
+     */
+    public void makePath(String path) {
+
+        ZookeeperMgr.getInstance().makeDir(path,
+                ZooUtils.getZooDirValueByDate());
+    }
+
+    /**
+     * 监控路径,监控前会事先创建路径
+     */
+    public void watchPath(String monitorPath) {
+
+        makePath(monitorPath);
+
+        NodeWatcher nodeWatcher = new NodeWatcher();
+        nodeWatcher.monitorMaster(monitorPath);
     }
 
     public String getClientDisconfFileZooPath() {

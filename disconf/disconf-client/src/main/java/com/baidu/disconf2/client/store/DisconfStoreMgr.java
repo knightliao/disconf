@@ -236,4 +236,42 @@ public class DisconfStoreMgr {
         Object newValue = ClassUtils.getValeByType(typeClass, value);
         disconfCenterItem.setValue(newValue);
     }
+
+    /**
+     * 
+     * @param fileName
+     * @return
+     */
+    public String getFileZooPath(String fileName) {
+
+        DisconfCenterFile disconfCenterFile = disconfCenterStore
+                .getConfFileMap().get(fileName);
+
+        // 校验是否存在
+        if (disconfCenterFile == null) {
+            LOGGER.error("canot find " + fileName + " in store....");
+            return null;
+        }
+
+        return disconfCenterFile.getDisConfCommonModel().getZookeeperUrl();
+    }
+
+    /**
+     * 
+     * @param fileName
+     * @return
+     */
+    public String getItemZooPath(String key) {
+
+        DisconfCenterItem disconfCenterItem = disconfCenterStore
+                .getConfItemMap().get(key);
+
+        // 校验是否存在
+        if (disconfCenterItem == null) {
+            LOGGER.error("canot find " + key + " in store....");
+            return null;
+        }
+
+        return disconfCenterItem.getDisConfCommonModel().getZookeeperUrl();
+    }
 }

@@ -12,6 +12,7 @@ import com.baidu.disconf2.client.common.model.DisconfCenterFile;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
+import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.utils.ConfigLoaderUtils;
 
 /**
@@ -86,6 +87,8 @@ public class DisconfCoreMgr {
             //
             // Watch
             //
+            String zooUrl = DisconfStoreMgr.getInstance().getItemZooPath(key);
+            WatchMgr.getInstance().watchPath(zooUrl);
             LOGGER.info("watch ok.");
         }
     }
@@ -143,7 +146,9 @@ public class DisconfCoreMgr {
             //
             // Watch
             //
-
+            String zooUrl = DisconfStoreMgr.getInstance().getFileZooPath(
+                    fileName);
+            WatchMgr.getInstance().watchPath(zooUrl);
             LOGGER.info("watch ok.");
         }
 
