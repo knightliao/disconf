@@ -114,15 +114,6 @@ public final class DisClientConfig {
     public String ENV = Constants.DEFAULT_ENV;
 
     /**
-     * 是否开启分布式配置文件自动配置
-     * 
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "enable.dis.autoconf", defaultValue = "false")
-    public boolean ENABLE_DIS_AUTOCONF = false;
-
-    /**
      * 是否从云端下载配置
      * 
      * @author
@@ -130,15 +121,6 @@ public final class DisClientConfig {
      */
     @DisInnerConfigAnnotation(name = "enable.remote.conf", defaultValue = "false")
     public boolean ENABLE_REMOTE_CONF = false;
-
-    /**
-     * 主备切换时的休眠时间
-     * 
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "maintype.change.timeout", defaultValue = "120")
-    public int MAINTYPE_CHANGE_TIMEOUT = 120;
 
     public List<String> getHostList() {
         return hostList;

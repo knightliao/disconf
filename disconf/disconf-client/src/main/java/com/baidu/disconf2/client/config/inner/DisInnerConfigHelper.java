@@ -70,26 +70,9 @@ public class DisInnerConfigHelper {
         }
         LOGGER.info("SERVER ENV: " + DisClientConfig.getInstance().ENV);
 
-        // auto dis conf & maintype
-        LOGGER.info("SERVER ENABLE_DIS_AUTOCONF: "
-                + DisClientConfig.getInstance().ENABLE_DIS_AUTOCONF);
-        if (DisClientConfig.getInstance().ENABLE_DIS_AUTOCONF) {
-            // main
-            if (StringNUtils.isEmpty(DisClientConfig.getInstance().MAIN_TYPE)) {
-
-                throw new Exception("settings: MAIN_TYPE cannot find");
-            }
-            LOGGER.info("SERVER MAIN_TYPE: "
-                    + DisClientConfig.getInstance().MAIN_TYPE);
-        }
-
         // enable.remote.conf
         LOGGER.info("SERVER ENABLE_REMOTE_CONF: "
                 + DisClientConfig.getInstance().ENABLE_REMOTE_CONF);
-
-        // maintype.change.timeout
-        LOGGER.debug("SERVER MAINTYPE_CHANGE_TIMEOUT: "
-                + DisClientConfig.getInstance().MAINTYPE_CHANGE_TIMEOUT);
 
         //
         // zookeeper相关
