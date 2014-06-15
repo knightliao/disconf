@@ -39,6 +39,10 @@ Distributed Configuration Management Tools
 - 支持配置项多个项目共享，支持批量处理项目配置。
 - 配置监控：平台提供自校验功能（进一步提高稳定性），可以定时校验应用系统的配置是否正确。
 
+## 局限性 ##
+
+- 仅支持.properties配置文件
+
 ## 架构图  ##
 
 ![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1eh3c824p0aj20b50853z7.jpg)

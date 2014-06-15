@@ -18,6 +18,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf2.client.common.model.DisConfCommonModel;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
+import com.baidu.disconf2.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
@@ -76,7 +77,7 @@ public class ScanCoreAdapter {
         //
         // KEY & VALUE
         //
-        Map<String, Object> keyMaps = new HashMap<String, Object>();
+        Map<String, FileItemValue> keyMaps = new HashMap<String, FileItemValue>();
         for (Field field : getFieldsFromMethods(methods)) {
 
             field.setAccessible(true);
@@ -84,12 +85,17 @@ public class ScanCoreAdapter {
             if (Modifier.isStatic(field.getModifiers())) {
                 try {
 
-                    keyMaps.put(field.getName(), field.get(null));
+                    FileItemValue fileItemValue = new FileItemValue(
+                            field.get(null), field.getType());
+                    keyMaps.put(field.getName(), fileItemValue);
+
                 } catch (Exception e) {
                     LOGGER.error(e.toString());
                 }
             } else {
-                keyMaps.put(field.getName(), null);
+                FileItemValue fileItemValue = new FileItemValue(null,
+                        field.getType());
+                keyMaps.put(field.getName(), fileItemValue);
             }
 
         }
@@ -157,6 +163,9 @@ public class ScanCoreAdapter {
         } else {
             disconfCenterItem.setValue(null);
         }
+
+        // key type
+        disconfCenterItem.setKeyType(field.getType());
 
         //
         // disConfCommonModel

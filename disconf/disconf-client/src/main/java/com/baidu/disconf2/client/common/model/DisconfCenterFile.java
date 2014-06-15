@@ -1,5 +1,6 @@
 package com.baidu.disconf2.client.common.model;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class DisconfCenterFile {
 
     // -----key: 配置文件中的项名
     // -----value: 默认值
-    private Map<String, Object> keyMaps = new HashMap<String, Object>();
+    private Map<String, FileItemValue> keyMaps = new HashMap<String, FileItemValue>();
 
     // 配置文件类
     private Class<?> cls;
@@ -29,14 +30,6 @@ public class DisconfCenterFile {
 
     // 回调函数
     private DisconfCommonCallbackModel disconfCommonCallbackModel = new DisconfCommonCallbackModel();
-
-    public Map<String, Object> getKeyMaps() {
-        return keyMaps;
-    }
-
-    public void setKeyMaps(Map<String, Object> keyMaps) {
-        this.keyMaps = keyMaps;
-    }
 
     public DisConfCommonModel getDisConfCommonModel() {
         return disConfCommonModel;
@@ -79,6 +72,10 @@ public class DisconfCenterFile {
         this.remoteServerUrl = remoteServerUrl;
     }
 
+    public Map<String, FileItemValue> getKeyMaps() {
+        return keyMaps;
+    }
+
     @Override
     public String toString() {
         return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
@@ -88,4 +85,40 @@ public class DisconfCenterFile {
                 + disconfCommonCallbackModel + "]";
     }
 
+    public void setKeyMaps(Map<String, FileItemValue> keyMaps) {
+        this.keyMaps = keyMaps;
+    }
+
+    public static class FileItemValue {
+        private Object value;
+        private Type type;
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
+
+        public Type getType() {
+            return type;
+        }
+
+        public void setType(Type type) {
+            this.type = type;
+        }
+
+        @Override
+        public String toString() {
+            return "FileItemValue [value=" + value + ", type=" + type + "]";
+        }
+
+        public FileItemValue(Object value, Type type) {
+            super();
+            this.value = value;
+            this.type = type;
+        }
+
+    }
 }
