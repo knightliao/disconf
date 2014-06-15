@@ -119,7 +119,7 @@ public class ScanPack {
             //
             // 校验是否有继承正确,是否继承IDisconfUpdate
             //
-            if (!hasIDisconfUpdate(disconfUpdateServiceClass)) {
+            if (!ScanVerify.hasIDisconfUpdate(disconfUpdateServiceClass)) {
                 continue;
             }
 
@@ -212,30 +212,6 @@ public class ScanPack {
     }
 
     /**
-     * 判断是否含有接口
-     * 
-     * @return
-     */
-    private static boolean hasIDisconfUpdate(Class<?> disconfUpdateServiceClass) {
-
-        Class<?>[] interfaceClasses = disconfUpdateServiceClass.getInterfaces();
-        boolean hasInterface = false;
-        for (Class<?> infClass : interfaceClasses) {
-            if (infClass.equals(IDisconfUpdate.class)) {
-                hasInterface = true;
-            }
-        }
-        if (!hasInterface) {
-            LOGGER.error("Your class " + disconfUpdateServiceClass.toString()
-                    + " should implement interface: "
-                    + IDisconfUpdate.class.toString());
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * 分析出配置文件与配置文件中的Field的MAP
      * 
      * @param scanModel
@@ -243,8 +219,13 @@ public class ScanPack {
     private static void analysis4DisconfFile(ScanModel scanModel) {
 
         Map<Class<?>, Set<Method>> disconfFileItemMap = new HashMap<Class<?>, Set<Method>>();
+
+        //
+        // 配置文件
+        //
         Set<Class<?>> classdata = scanModel.getDisconfFileClassSet();
         for (Class<?> classFile : classdata) {
+
             disconfFileItemMap.put(classFile, new HashSet<Method>());
         }
 
@@ -267,11 +248,24 @@ public class ScanPack {
             }
         }
 
-        // 校验是否所有配置文件都含有配置
+        //
+        // 最后的校验
+        //
         for (Class<?> classFile : disconfFileItemMap.keySet()) {
+
+            // 校验是否所有配置文件都含有配置
             if (disconfFileItemMap.get(classFile).isEmpty()) {
                 LOGGER.warn("disconf file hasn't any items: "
                         + classFile.toString());
+                disconfFileItemMap.remove(classFile);
+            }
+
+            // 校验配置文件类型是否合适
+            DisconfFile disconfFile = (DisconfFile) classFile
+                    .getAnnotation(DisconfFile.class);
+            boolean fileTypeRight = ScanVerify
+                    .isDisconfFileTypeRight(disconfFile);
+            if (!fileTypeRight) {
                 disconfFileItemMap.remove(classFile);
             }
         }

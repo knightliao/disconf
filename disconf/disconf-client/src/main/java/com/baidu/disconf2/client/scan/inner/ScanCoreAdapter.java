@@ -25,7 +25,6 @@ import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.PathMgr;
-import com.baidu.disconf2.utils.ClassUtils;
 
 /**
  * 
@@ -141,7 +140,7 @@ public class ScanCoreAdapter {
         DisconfCenterItem disconfCenterItem = new DisconfCenterItem();
 
         // field
-        Field field = getFieldFromMethod(method);
+        Field field = ScanVerify.getFieldFromMethod(method);
         if (field == null) {
             return null;
         }
@@ -288,7 +287,7 @@ public class ScanCoreAdapter {
 
         for (Method method : methods) {
 
-            Field field = getFieldFromMethod(method);
+            Field field = ScanVerify.getFieldFromMethod(method);
             if (field != null) {
                 fields.add(field);
             }
@@ -297,34 +296,4 @@ public class ScanCoreAdapter {
         return fields;
     }
 
-    /**
-     * 
-     * @return
-     */
-    private static Field getFieldFromMethod(Method method) {
-
-        String methodName = method.getName();
-
-        // 必须以get开始的
-        if (!methodName.startsWith("get")) {
-            LOGGER.error(method.toString() + " not start with get****");
-            return null;
-        }
-
-        String fieldName = ClassUtils.getFieldNameByGetMethodName(methodName);
-
-        Class<?> cls = method.getDeclaringClass();
-
-        try {
-
-            Field field = cls.getDeclaredField(fieldName);
-            return field;
-
-        } catch (Exception e) {
-            LOGGER.error(method.toString()
-                    + " cannot get its related field name " + fieldName);
-        }
-
-        return null;
-    }
 }
