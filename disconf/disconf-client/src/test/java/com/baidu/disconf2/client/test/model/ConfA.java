@@ -22,6 +22,11 @@ public class ConfA {
      * 配置文件中的某Item
      */
     private int varA = 15;
+    
+    /**
+     * 配置文件中的某Item
+     */
+    private int varA2 = 25;
 
     /**
      * 1. 分布式配置项，keyB是其全局Key名<br/>
@@ -44,6 +49,15 @@ public class ConfA {
 
     public void setVarAA(int varAA) {
         this.varAA = varAA;
+    }
+    
+    @DisconfFileItem
+    public int getVarA2() {
+        return varA2;
+    }
+
+    public void setVarA2(int varA2) {
+        this.varA2 = varA2;
     }
 
 }

@@ -31,6 +31,10 @@ public class DisconfMgrTestCase extends BaseTestCase {
 
         try {
 
+            LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
+            LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
+            LOGGER.info(String.valueOf("varAA: " + confA.getVarAA()));
+
             DisconfMgr.run(packName);
 
             //
@@ -42,6 +46,7 @@ public class DisconfMgrTestCase extends BaseTestCase {
                     .toString());
 
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
+            LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
             LOGGER.info(String.valueOf("varAA: " + confA.getVarAA()));
 
         } catch (Exception e) {

@@ -2,14 +2,17 @@ package com.baidu.disconf2.client.store;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
+import com.baidu.disconf2.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.store.inner.DisconfCenterStore;
+import com.baidu.utils.ClassUtils;
 
 /**
  * 仓库模块
@@ -150,7 +153,16 @@ public class DisconfStoreMgr {
      */
     public Object getConfigFile(String fileName, String keyName) {
 
-        return null;
+        DisconfCenterFile disconfCenterFile = disconfCenterStore
+                .getConfFileMap().get(fileName);
+
+        // 校验是否存在
+        if (disconfCenterFile == null) {
+            LOGGER.error("canot find " + fileName + " in store....");
+            return null;
+        }
+
+        return disconfCenterFile.getKeyMaps().get(keyName).getValue();
     }
 
     /**
@@ -162,5 +174,35 @@ public class DisconfStoreMgr {
     public Object getConfigItem(String keyName) {
 
         return null;
+    }
+
+    /**
+     * 将配置文件数据注入到仓库
+     */
+    public void injectFile2Store(String fileName, Properties properties) {
+
+        DisconfCenterFile disconfCenterFile = disconfCenterStore
+                .getConfFileMap().get(fileName);
+
+        // 校验是否存在
+        if (disconfCenterFile == null) {
+            LOGGER.error("canot find " + fileName + " in store....");
+            return;
+        }
+
+        // 存储
+        Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
+        for (String fileItem : keMap.keySet()) {
+
+            Object object = properties.get(fileItem);
+            if (object == null) {
+                continue;
+            }
+
+            // 根据类型设置值
+            Object value = ClassUtils.getValeByType(keMap.get(fileItem)
+                    .getType(), (String) object);
+            keMap.get(fileItem).setValue(value);
+        }
     }
 }

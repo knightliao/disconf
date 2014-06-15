@@ -28,7 +28,7 @@ import com.baidu.disconf2.core.common.path.PathMgr;
 
 /**
  * 
- * Scan模块与Core模块的转换
+ * Scan模块与Store模块的数据转换
  * 
  * @author liaoqiqi
  * @version 2014-6-9

@@ -1,6 +1,5 @@
 package com.baidu.disconf2.client.common.model;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,7 +90,7 @@ public class DisconfCenterFile {
 
     public static class FileItemValue {
         private Object value;
-        private Type type;
+        private Class<?> type;
 
         public Object getValue() {
             return value;
@@ -101,11 +100,11 @@ public class DisconfCenterFile {
             this.value = value;
         }
 
-        public Type getType() {
+        public Class<?> getType() {
             return type;
         }
 
-        public void setType(Type type) {
+        public void setType(Class<?> type) {
             this.type = type;
         }
 
@@ -114,7 +113,7 @@ public class DisconfCenterFile {
             return "FileItemValue [value=" + value + ", type=" + type + "]";
         }
 
-        public FileItemValue(Object value, Type type) {
+        public FileItemValue(Object value, Class<?> type) {
             super();
             this.value = value;
             this.type = type;

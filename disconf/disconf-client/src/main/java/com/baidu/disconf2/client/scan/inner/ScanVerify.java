@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
-import com.baidu.disconf2.utils.ClassUtils;
+import com.baidu.utils.ClassUtils;
 
 /**
  * 扫描校验模块

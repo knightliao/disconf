@@ -114,7 +114,7 @@ public final class DisconfAutowareConfig {
 
                         try {
 
-                            setFieldValeByType(field, obj, value);
+                            ClassUtils.setFieldValeByType(field, obj, value);
 
                         } catch (Exception e) {
 
@@ -127,42 +127,6 @@ public final class DisconfAutowareConfig {
         } catch (Exception e) {
 
             throw new Exception("error while autowire config file", e);
-        }
-    }
-
-    /**
-     * 
-     * @param field
-     */
-    private static void setFieldValeByType(Field field, Object obj, String value)
-            throws Exception {
-
-        Class<?> type = field.getType();
-
-        String typeName = type.getName();
-
-        if (typeName.equals("int")) {
-            if (value.equals("")) {
-                value = "0";
-            }
-            field.set(obj, Integer.valueOf(value));
-        } else if (typeName.equals("long")) {
-            if (value.equals("")) {
-                value = "0";
-            }
-            field.set(obj, Long.valueOf(value));
-        } else if (typeName.equals("boolean")) {
-            if (value.equals("")) {
-                value = "false";
-            }
-            field.set(obj, Boolean.valueOf(value));
-        } else if (typeName.equals("double")) {
-            if (value.equals("")) {
-                value = "0.0";
-            }
-            field.set(obj, Double.valueOf(value));
-        } else {
-            field.set(obj, value);
         }
     }
 
@@ -200,7 +164,8 @@ public final class DisconfAutowareConfig {
                     String name = field.getName();
                     Object value = prop.getProperty(name, null);
                     if (value != null) {
-                        setFieldValeByType(field, null, String.valueOf(value));
+                        ClassUtils.setFieldValeByType(field, null,
+                                String.valueOf(value));
                     }
                 }
             }

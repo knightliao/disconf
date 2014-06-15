@@ -15,7 +15,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
-import com.baidu.disconf2.utils.ClassUtils;
+import com.baidu.utils.ClassUtils;
 
 /**
  * 配置拦截
@@ -67,6 +67,8 @@ public class DisconfAspectJ {
         Object ret = DisconfStoreMgr.getInstance().getConfigFile(
                 disconfFile.filename(), fieldName);
         if (ret != null) {
+            LOGGER.info("using disconf store value: (" + fieldName + " , "
+                    + ret + ")");
             return ret;
         }
 
