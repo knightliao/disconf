@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.common.callback;
+package com.baidu.disconf2.client.watch.inner;
 
 import java.util.List;
 
