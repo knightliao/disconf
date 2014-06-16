@@ -18,8 +18,8 @@ public class UpdateNode {
 
     public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
 
-    public static String disconfFileNode = "/disconf/dsp_demo_1_0_0_0_online/file/confA.properties";
-    public static String disconfFileNode2 = "/disconf/dsp_demo_1_0_0_0_online/item/keyA";
+    public static String disconfFileNode = "/disconf/disconf_demo_1_0_0_0_rd/file/confA.properties";
+    public static String disconfFileNode2 = "/disconf/disconf_demo_1_0_0_0_rd/item/keyA";
 
     private ResilientActiveKeyValueStore store;
     private Random random = new Random();

@@ -25,11 +25,11 @@ public class ServiceA {
     private ConfA confA;
 
     public long calcMoneyA() {
-        return confA.getVarA() * 10;
+        return confA.getVarA();
     }
 
     public long calcMoneyA2() {
-        return confA.getVarA() * 20;
+        return confA.getVarA2();
     }
 
     @DisconfItem(key = ServiceA.keyA)
