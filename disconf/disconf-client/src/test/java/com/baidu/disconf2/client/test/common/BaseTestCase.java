@@ -1,6 +1,7 @@
 package com.baidu.disconf2.client.test.common;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,11 @@ public class BaseTestCase {
 
     @Before
     public void init() {
+
+    }
+
+    @Test
+    public void pass() {
 
     }
 }

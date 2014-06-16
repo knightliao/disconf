@@ -34,7 +34,6 @@ public class RestfulMgrTestCase extends BaseTestCase {
 
     }
 
-    @Test
     public void testDownloadFromServer() {
 
         List<String> hostList = new ArrayList<String>();

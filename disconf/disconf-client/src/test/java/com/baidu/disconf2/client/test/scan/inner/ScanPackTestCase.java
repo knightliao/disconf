@@ -14,6 +14,11 @@ import com.baidu.disconf2.client.scan.inner.ScanPack;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.utils.ScanPrinterUtils;
 
+/**
+ * 
+ * @author liaoqiqi
+ * @version 2014-6-16
+ */
 public class ScanPackTestCase extends BaseTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
@@ -41,7 +46,7 @@ public class ScanPackTestCase extends BaseTestCase {
             LOGGER.info("=============DISCONF FILE===================");
             Map<Class<?>, Set<Method>> fileMap = scanModel
                     .getDisconfFileItemMap();
-            Assert.assertEquals(2, fileMap.size());
+            Assert.assertEquals(1, fileMap.size());
 
             // disconf item
             LOGGER.info("=============DISCONF ITEM===================");
@@ -60,12 +65,10 @@ public class ScanPackTestCase extends BaseTestCase {
             LOGGER.info("=============DISCONF Update service===================");
             classSet = scanModel.getDisconfUpdateService();
             ScanPrinterUtils.printUpdateFile(classSet);
-            Assert.assertEquals(1, classSet.size());
+            Assert.assertEquals(2, classSet.size());
 
         } catch (Exception e) {
 
-            // TODO Auto-generated catch block
-            e.printStackTrace();
             Assert.assertTrue(false);
         }
     }

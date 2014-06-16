@@ -1,4 +1,4 @@
-package com.baidu.disconf2.client.test.common.json;
+package com.baidu.disconf2.client.test.json;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

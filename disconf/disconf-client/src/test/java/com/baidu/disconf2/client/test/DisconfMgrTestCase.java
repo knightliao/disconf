@@ -1,8 +1,6 @@
 package com.baidu.disconf2.client.test;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +29,6 @@ public class DisconfMgrTestCase extends BaseTestCase {
     @Autowired
     private ServiceA serviceA;
 
-    @AfterClass
-    public static void destory() throws Exception {
-
-        DisconfMgr.close();
-    }
-
-    @Test
     public void demo() {
 
         String packName = "com.baidu.disconf2.client";
