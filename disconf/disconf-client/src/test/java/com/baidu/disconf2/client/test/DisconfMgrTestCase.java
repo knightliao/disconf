@@ -14,6 +14,8 @@ import com.baidu.disconf2.client.test.model.ServiceA;
 
 /**
  * 
+ * 一个Demo示例
+ * 
  * @author liaoqiqi
  * @version 2014-6-10
  */
@@ -29,19 +31,24 @@ public class DisconfMgrTestCase extends BaseTestCase {
     private ServiceA serviceA;
 
     @Test
-    public void scan() {
+    public void demo() {
 
         String packName = "com.baidu.disconf2.client";
 
         try {
 
-            LOGGER.info("==============================================");
-            LOGGER.info("==============================================");
+            LOGGER.info("================ BEFORE DISCONF ==============================");
 
+            LOGGER.info("before disconf values:");
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
 
+            LOGGER.info("================ BEFORE DISCONF ==============================");
+
+            //
+            //
+            //
             DisconfMgr.start(packName);
 
             //
@@ -52,18 +59,18 @@ public class DisconfMgrTestCase extends BaseTestCase {
             LOGGER.info(DisconfStoreMgr.getInstance().getConfItemMap()
                     .toString());
 
+            LOGGER.info("================ AFTER DISCONF ==============================");
+
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
 
-            LOGGER.info("==============================================");
-            LOGGER.info("==============================================");
+            LOGGER.info("================ AFTER DISCONF ==============================");
 
             Thread.sleep(10000000);
 
         } catch (Exception e) {
 
-            // TODO Auto-generated catch block
             e.printStackTrace();
             Assert.assertTrue(false);
         }

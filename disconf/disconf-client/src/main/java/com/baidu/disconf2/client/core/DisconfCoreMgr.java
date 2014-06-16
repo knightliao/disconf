@@ -111,13 +111,13 @@ public class DisconfCoreMgr {
             throw new Exception("cannot use remote configuration: " + keyName,
                     e);
         }
-        LOGGER.info("download ok.");
+        LOGGER.debug("download ok.");
 
         //
         // 注入到仓库中
         //
         DisconfStoreMgr.getInstance().injectItem2Store(keyName, value);
-        LOGGER.info("inject ok.");
+        LOGGER.debug("inject ok.");
 
         //
         // Watch
@@ -125,7 +125,7 @@ public class DisconfCoreMgr {
         String zooUrl = DisconfStoreMgr.getInstance().getItemZooPath(keyName);
         WatchMgr.getInstance().watchPath(zooUrl, keyName,
                 DisConfigTypeEnum.ITEM);
-        LOGGER.info("watch ok.");
+        LOGGER.debug("watch ok.");
     }
 
     /**
@@ -204,7 +204,7 @@ public class DisconfCoreMgr {
             throw new Exception("cannot use remote configuration: " + fileName,
                     e);
         }
-        LOGGER.info("download ok.");
+        LOGGER.debug("download ok.");
 
         //
         // 注入到仓库中
@@ -214,7 +214,7 @@ public class DisconfCoreMgr {
             LOGGER.info(entry.toString());
         }
         DisconfStoreMgr.getInstance().injectFile2Store(fileName, properties);
-        LOGGER.info("inject ok.");
+        LOGGER.debug("inject ok.");
 
         //
         // Watch
@@ -222,7 +222,7 @@ public class DisconfCoreMgr {
         String zooUrl = DisconfStoreMgr.getInstance().getFileZooPath(fileName);
         WatchMgr.getInstance().watchPath(zooUrl, fileName,
                 DisConfigTypeEnum.FILE);
-        LOGGER.info("watch ok.");
+        LOGGER.debug("watch ok.");
     }
 
     /**

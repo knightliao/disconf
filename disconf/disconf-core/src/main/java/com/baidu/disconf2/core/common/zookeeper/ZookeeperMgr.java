@@ -36,7 +36,7 @@ public class ZookeeperMgr {
 
             initInternal(host, defaultPrefixString);
 
-            LOGGER.info("ZookeeperMgr init.");
+            LOGGER.debug("ZookeeperMgr init.");
 
         } catch (Exception e) {
 

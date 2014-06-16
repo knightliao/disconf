@@ -32,7 +32,7 @@ public class ScanMgr {
             throw new Exception("WatchMgr should be init before ScanMgr");
         }
 
-        LOGGER.info("start to scan package: " + packageName);
+        LOGGER.debug("start to scan package: " + packageName);
 
         // 获取扫描对象并分析整合
         ScanModel scanModel = ScanPack.scan(packageName);

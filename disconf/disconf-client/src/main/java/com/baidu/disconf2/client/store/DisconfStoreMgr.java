@@ -158,7 +158,7 @@ public class DisconfStoreMgr {
 
         // 校验是否存在
         if (disconfCenterFile == null) {
-            LOGGER.error("canot find " + fileName + " in store....");
+            LOGGER.info("canot find " + fileName + " in store....");
             return null;
         }
 
@@ -178,7 +178,7 @@ public class DisconfStoreMgr {
 
         // 校验是否存在
         if (disconfCenterItem == null) {
-            LOGGER.error("canot find " + keyName + " in store....");
+            LOGGER.info("canot find " + keyName + " in store....");
             return null;
         }
 

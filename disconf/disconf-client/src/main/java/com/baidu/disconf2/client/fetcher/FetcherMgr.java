@@ -31,7 +31,7 @@ public class FetcherMgr {
      */
     public static void init() throws Exception {
 
-        if (ConfigMgr.isInit()) {
+        if (!ConfigMgr.isInit()) {
             throw new Exception("ConfigMgr should be init before FetcherMgr");
         }
 
