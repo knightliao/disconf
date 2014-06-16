@@ -15,20 +15,20 @@ ENGINE=InnoDB;
 
 
 CREATE TABLE `config` (
-    `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
+    `config_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
     `type` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '配置文件/配置项',
     `name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '配置文件名/配置项KeY名',
-    `value` TEXT NOT NULL COMMENT '配置文件：文件的内容，配置项：配置值',
+    `value` TEXT NOT NULL COMMENT '0 配置文件：文件的内容，1 配置项：配置值',
     `app_id` BIGINT(20) NOT NULL COMMENT 'appid',
     `version` VARCHAR(255) NOT NULL DEFAULT 'DEFAULT_VERSION' COMMENT '版本',
     `env_id` BIGINT(20) NOT NULL COMMENT 'envid',
     `create_time` VARCHAR(14) NOT NULL DEFAULT '99991231235959' COMMENT '生成时间',
     `update_time` VARCHAR(14) NOT NULL DEFAULT '99991231235959' COMMENT '修改时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`config_id`)
 )
 COMMENT='配置'
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB;
+ENGINE=InnoDB
 
 
 CREATE TABLE `env` (
