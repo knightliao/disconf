@@ -67,7 +67,7 @@ public class DisconfMgr {
             ScanMgr.scanAndStore(scanPackage);
 
             // 获取数据/注入/Watch
-            DisconfCoreMgr.run();
+            DisconfCoreMgr.updateConf();
 
         } catch (Exception e) {
 

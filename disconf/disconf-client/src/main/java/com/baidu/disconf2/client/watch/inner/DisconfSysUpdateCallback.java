@@ -1,9 +1,8 @@
 package com.baidu.disconf2.client.watch.inner;
 
-import java.util.List;
-
 import com.baidu.disconf2.client.common.inter.IDisconfSysUpdate;
-import com.baidu.disconf2.client.common.model.DisconfCenterCallbackObject;
+import com.baidu.disconf2.client.core.DisconfCoreMgr;
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 
 /**
  * 当配置更新时，系统会自动 调用此回调函数<br/>
@@ -15,12 +14,35 @@ import com.baidu.disconf2.client.common.model.DisconfCenterCallbackObject;
 public class DisconfSysUpdateCallback implements IDisconfSysUpdate {
 
     /**
-     * 这里要根据配置信息
+     * 
      */
-    public void reload(
-            List<DisconfCenterCallbackObject> disconfCenterCallbackObjects)
+    @Override
+    public void reload(DisConfigTypeEnum disConfigTypeEnum, String keyName)
             throws Exception {
 
-    }
+        //
+        // 配置文件更新
+        //
+        if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 
+            // 更新配置数据仓库
+            DisconfCoreMgr.updateOneConfFile(keyName);
+
+            // 调用用户的回调函数列表
+            DisconfCoreMgr.callOneConfFile(keyName);
+
+        } else {
+
+            //
+            // 配置项更新
+            //
+
+            // 更新配置数据仓库
+            DisconfCoreMgr.updateOneConfItem(keyName);
+
+            // 调用用户的回调函数列表
+            DisconfCoreMgr.callOneConfItem(keyName);
+        }
+
+    }
 }

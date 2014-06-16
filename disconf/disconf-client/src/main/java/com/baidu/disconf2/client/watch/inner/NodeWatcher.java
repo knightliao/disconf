@@ -8,6 +8,7 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
 /**
@@ -22,15 +23,29 @@ public class NodeWatcher implements Watcher {
             .getLogger(NodeWatcher.class);
 
     private String monitorPath = "";
+    private String keyName = "";
+    private DisConfigTypeEnum disConfigTypeEnum;
+    private DisconfSysUpdateCallback disconfSysUpdateCallback;
+
+    public NodeWatcher(String monitorPath, String keyName,
+            DisConfigTypeEnum disConfigTypeEnum,
+            DisconfSysUpdateCallback disconfSysUpdateCallback) {
+        super();
+        this.monitorPath = monitorPath;
+        this.keyName = keyName;
+        this.disConfigTypeEnum = disConfigTypeEnum;
+        this.disconfSysUpdateCallback = disconfSysUpdateCallback;
+    }
 
     /**
      * 
      * @param monitorPath
      */
-    public void monitorMaster(String monitorPath) {
+    public void monitorMaster() {
 
-        this.monitorPath = monitorPath;
-
+        //
+        // 监控
+        //
         Stat stat = new Stat();
         try {
             ZookeeperMgr.getInstance().read(monitorPath, this, stat);
@@ -40,7 +55,8 @@ public class NodeWatcher implements Watcher {
             LOGGER.error("cannot monitor " + monitorPath, e);
         }
 
-        LOGGER.info("monitor path: " + monitorPath + " has been added!");
+        LOGGER.info("monitor path: (" + monitorPath + "," + keyName + ","
+                + disConfigTypeEnum.getModelName() + ") has been added!");
     }
 
     @Override
@@ -50,7 +66,18 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                monitorMaster(monitorPath);
+                LOGGER.info("GOT UPDATE EVENT: (" + monitorPath + "," + keyName
+                        + "," + disConfigTypeEnum.getModelName() + ")");
+
+                // 调用回调函数
+                try {
+                    disconfSysUpdateCallback.reload(disConfigTypeEnum, keyName);
+                } catch (Exception e) {
+                    LOGGER.error(e.toString(), e);
+                }
+
+                // 重新监控
+                monitorMaster();
 
             } catch (Exception e) {
 

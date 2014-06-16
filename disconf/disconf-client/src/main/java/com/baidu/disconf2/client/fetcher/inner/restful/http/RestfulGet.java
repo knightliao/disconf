@@ -27,21 +27,19 @@ public class RestfulGet implements UnreliableInterface {
 
     public RestfulGet(Invocation.Builder builder) {
 
-		this.builder = builder;
-	}
+        this.builder = builder;
+    }
 
-	@Override
-	public Object call() throws Exception {
+    @Override
+    public Object call() throws Exception {
 
-		LOGGER.info("start to get...." );
+        Response response = builder.get();
 
-		Response response = builder.get();
+        if (response.getStatus() != 200) {
+            throw new Exception("query is not ok, response "
+                    + response.getStatus());
+        }
 
-		if (response.getStatus() != 200) {
-			throw new Exception("query is not ok, response "
-					+ response.getStatus());
-		}
-
-		return response;
-	}
+        return response;
+    }
 }

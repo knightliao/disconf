@@ -17,9 +17,9 @@ import com.baidu.disconf2.core.common.zookeeper.inner.ResilientActiveKeyValueSto
 public class UpdateNode {
 
     public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
-    public static String disconfFileNode = "/disconf/dsp_demo_1_0_0_0_online/file/confA.properties";
 
-    public static final String PATH = disconfFileNode;
+    public static String disconfFileNode = "/disconf/dsp_demo_1_0_0_0_online/file/confA.properties";
+    public static String disconfFileNode2 = "/disconf/dsp_demo_1_0_0_0_online/item/keyA";
 
     private ResilientActiveKeyValueStore store;
     private Random random = new Random();
@@ -32,9 +32,14 @@ public class UpdateNode {
     public void run() throws InterruptedException, KeeperException {
 
         String value = random.nextInt(100) + "";
-        store.write(PATH, value);
-        System.out.printf("Set %s to %s\n", PATH, value);
-        TimeUnit.SECONDS.sleep(random.nextInt(10));
+        store.write(disconfFileNode, value);
+        System.out.printf("Set %s to %s\n", disconfFileNode, value);
+        TimeUnit.SECONDS.sleep(random.nextInt(5));
+
+        value = random.nextInt(100) + "";
+        store.write(disconfFileNode2, value);
+        System.out.printf("Set %s to %s\n", disconfFileNode2, value);
+        TimeUnit.SECONDS.sleep(random.nextInt(5));
     }
 
     public static void main(String[] args) throws Exception {

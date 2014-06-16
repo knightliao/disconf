@@ -1,8 +1,6 @@
 package com.baidu.disconf2.client.common.inter;
 
-import java.util.List;
-
-import com.baidu.disconf2.client.common.model.DisconfCenterCallbackObject;
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 
 /**
  * 配置更新 时系统来调用
@@ -13,13 +11,11 @@ import com.baidu.disconf2.client.common.model.DisconfCenterCallbackObject;
 public interface IDisconfSysUpdate {
 
     /**
-     * 回调函数
      * 
-     * @param disConfNodeModel
-     *            一个完整的配置表示
+     * @param disConfigTypeEnum
+     * @param keyName
      * @throws Exception
      */
-    public void reload(
-            List<DisconfCenterCallbackObject> disconfCenterCallbackObjects)
+    public void reload(DisConfigTypeEnum disConfigTypeEnum, String keyName)
             throws Exception;
 }

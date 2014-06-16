@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
+import com.baidu.disconf2.client.watch.inner.DisconfSysUpdateCallback;
 import com.baidu.disconf2.client.watch.inner.NodeWatcher;
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.PathMgr;
 import com.baidu.disconf2.core.common.utils.ZooUtils;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
@@ -128,12 +130,14 @@ public class WatchMgr {
     /**
      * 监控路径,监控前会事先创建路径
      */
-    public void watchPath(String monitorPath) {
+    public void watchPath(String monitorPath, String keyName,
+            DisConfigTypeEnum disConfigTypeEnum) {
 
         makePath(monitorPath);
 
-        NodeWatcher nodeWatcher = new NodeWatcher();
-        nodeWatcher.monitorMaster(monitorPath);
+        NodeWatcher nodeWatcher = new NodeWatcher(monitorPath, keyName,
+                disConfigTypeEnum, new DisconfSysUpdateCallback());
+        nodeWatcher.monitorMaster();
     }
 
     public String getClientDisconfFileZooPath() {
