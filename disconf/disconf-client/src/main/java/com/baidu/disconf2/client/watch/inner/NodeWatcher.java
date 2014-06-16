@@ -66,8 +66,8 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("GOT UPDATE EVENT: (" + monitorPath + "," + keyName
-                        + "," + disConfigTypeEnum.getModelName() + ")");
+                LOGGER.info("============GOT UPDATE EVENT: (" + monitorPath + "," + keyName
+                        + "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 调用回调函数
                 try {

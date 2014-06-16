@@ -34,6 +34,9 @@ public class DisconfMgrTestCase extends BaseTestCase {
         String packName = "com.baidu.disconf2.client";
 
         try {
+            
+            LOGGER.info("==============================================");
+            LOGGER.info("==============================================");
 
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
@@ -52,6 +55,9 @@ public class DisconfMgrTestCase extends BaseTestCase {
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
+
+            LOGGER.info("==============================================");
+            LOGGER.info("==============================================");
 
             Thread.sleep(10000000);
 

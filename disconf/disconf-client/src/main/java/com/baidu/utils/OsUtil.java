@@ -127,6 +127,6 @@ public final class OsUtil {
         }
 
         // 转移临时下载文件至下载文件夹
-        FileUtils.moveFile(src, dest);
+        FileUtils.copyFile(src, dest);
     }
 }
