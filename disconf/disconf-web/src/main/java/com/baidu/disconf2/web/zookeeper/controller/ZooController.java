@@ -2,6 +2,7 @@ package com.baidu.disconf2.web.zookeeper.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.json.ValueVo;
+import com.baidu.disconf2.service.zookeeper.service.ZooMgr;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 
@@ -26,6 +28,9 @@ public class ZooController extends BaseController {
     protected static final Logger LOG = LoggerFactory
             .getLogger(ZooController.class);
 
+    @Autowired
+    private ZooMgr zooMgr;
+
     /**
      * 获取Zookeeper地址
      * 
@@ -38,7 +43,7 @@ public class ZooController extends BaseController {
 
         ValueVo confItemVo = new ValueVo();
         confItemVo.setStatus(Constants.OK);
-        confItemVo.setValue("10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583");
+        confItemVo.setValue(zooMgr.getHosts());
 
         return confItemVo;
     }

@@ -58,7 +58,6 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
         }
 
         return buildError("syserror.inner", ErrorCode.GLOBAL_ERROR);
-
     }
 
     /**

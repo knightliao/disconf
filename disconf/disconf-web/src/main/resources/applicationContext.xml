@@ -27,9 +27,13 @@
         <property name="validationMessageSource" ref="messageSource" />
     </bean>
 
-
     <context:component-scan base-package="com.baidu" />
 
     <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <bean id="zooMgrImpl"
+        class="com.baidu.disconf2.service.zookeeper.service.impl.ZooMgrImpl">
+        <property name="zooHosts" value="${hosts}" />
+    </bean>
 
 </beans>
