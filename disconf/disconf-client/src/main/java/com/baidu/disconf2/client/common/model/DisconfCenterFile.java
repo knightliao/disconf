@@ -89,6 +89,22 @@ public class DisconfCenterFile {
     }
 
     /**
+     * 
+     * 获取可以表示的KeyMap对
+     * 
+     * @return
+     */
+    public Map<String, Object> getKV() {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (String key : keyMaps.keySet()) {
+            map.put(key, keyMaps.get(key).getValue());
+        }
+
+        return map;
+    }
+
+    /**
      * 配置文件Item项表示，包括了值，还有其类型
      * 
      * @author liaoqiqi

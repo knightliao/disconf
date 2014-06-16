@@ -111,20 +111,19 @@ public class WatchMgr {
                 DisClientConfig.getInstance().APP,
                 DisClientConfig.getInstance().ENV,
                 DisClientConfig.getInstance().VERSION);
-        ZookeeperMgr.getInstance().makeDir(clientRootZooPath,
-                ZooUtils.getZooDirValue());
+        ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
 
         // 新建Zoo Store目录
         this.clientDisconfFileZooPath = ZooPathMgr
                 .getFileZooPath(clientRootZooPath);
         ZookeeperMgr.getInstance().makeDir(clientDisconfFileZooPath,
-                ZooUtils.getZooDirValue());
+                ZooUtils.getIp());
 
         // 新建Zoo Store目录
         this.clientDisconfItemZooPath = ZooPathMgr
                 .getItemZooPath(clientRootZooPath);
         ZookeeperMgr.getInstance().makeDir(clientDisconfItemZooPath,
-                ZooUtils.getZooDirValue());
+                ZooUtils.getIp());
     }
 
     /**
@@ -141,10 +140,10 @@ public class WatchMgr {
      * 监控路径,监控前会事先创建路径
      */
     public void watchPath(String monitorPath, String keyName,
-            DisConfigTypeEnum disConfigTypeEnum) {
+            DisConfigTypeEnum disConfigTypeEnum, String value) {
 
         // 先新建路径
-        makePath(monitorPath, ZooUtils.getZooDirValueByDate());
+        makePath(monitorPath, value);
 
         // 进行监控
         NodeWatcher nodeWatcher = new NodeWatcher(monitorPath, keyName,

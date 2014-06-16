@@ -18,6 +18,7 @@ import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.utils.ConfigLoaderUtils;
+import com.baidu.utils.GsonUtils;
 
 /**
  * 管理 下载、注入、Watch三模块
@@ -124,7 +125,7 @@ public class DisconfCoreMgr {
         //
         String zooUrl = DisconfStoreMgr.getInstance().getItemZooPath(keyName);
         WatchMgr.getInstance().watchPath(zooUrl, keyName,
-                DisConfigTypeEnum.ITEM);
+                DisConfigTypeEnum.ITEM, value);
         LOGGER.debug("watch ok.");
     }
 
@@ -221,7 +222,8 @@ public class DisconfCoreMgr {
         //
         String zooUrl = DisconfStoreMgr.getInstance().getFileZooPath(fileName);
         WatchMgr.getInstance().watchPath(zooUrl, fileName,
-                DisConfigTypeEnum.FILE);
+                DisConfigTypeEnum.FILE,
+                GsonUtils.toJson(disconfCenterFile.getKV()));
         LOGGER.debug("watch ok.");
     }
 

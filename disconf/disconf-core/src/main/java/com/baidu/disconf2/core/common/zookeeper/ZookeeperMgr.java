@@ -82,7 +82,7 @@ public class ZookeeperMgr {
         store.connect(hosts);
 
         // 新建父目录
-        makeDir(defaultPrefixString, ZooUtils.getZooDirValue());
+        makeDir(defaultPrefixString, ZooUtils.getIp());
     }
 
     /**
