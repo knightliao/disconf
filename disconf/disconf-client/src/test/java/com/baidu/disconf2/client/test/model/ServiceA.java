@@ -19,6 +19,8 @@ public class ServiceA {
      */
     private int varAA = 10;
 
+    public static final String keyA = "keyA";
+
     @Autowired
     private ConfA confA;
 
@@ -30,7 +32,7 @@ public class ServiceA {
         return confA.getVarA() * 20;
     }
 
-    @DisconfItem(key = ConfA.keyA)
+    @DisconfItem(key = ServiceA.keyA)
     public int getVarAA() {
         return varAA;
     }

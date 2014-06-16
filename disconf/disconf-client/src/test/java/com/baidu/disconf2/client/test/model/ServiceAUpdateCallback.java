@@ -17,7 +17,7 @@ import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
  * @version 2014-5-22
  */
 @Service("serviceAUpdateCallback")
-@DisconfUpdateService(keys = { ConfA.filename, ConfA.keyA })
+@DisconfUpdateService(keys = { ConfA.filename, ServiceA.keyA })
 public class ServiceAUpdateCallback implements IDisconfUpdate {
 
     protected static final Logger LOGGER = LoggerFactory

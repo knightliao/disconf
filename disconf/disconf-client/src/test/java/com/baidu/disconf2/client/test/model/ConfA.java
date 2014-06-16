@@ -15,7 +15,6 @@ import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 public class ConfA {
 
     public static final String filename = "confA.properties";
-    public static final String keyA = "keyA";
 
     /**
      * 配置文件中的某Item
