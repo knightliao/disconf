@@ -1,7 +1,7 @@
 package com.baidu.disconf2.client.common.model;
 
 /**
- * 通用的模型数据，包括 APP，版本，环境
+ * 通用的模型数据，包括 APP，版本，环境，Zookeeper上的URL表示
  * 
  * @author liaoqiqi
  * @version 2014-5-20

@@ -30,6 +30,7 @@ public class NodeWatcher implements Watcher {
     public NodeWatcher(String monitorPath, String keyName,
             DisConfigTypeEnum disConfigTypeEnum,
             DisconfSysUpdateCallback disconfSysUpdateCallback) {
+
         super();
         this.monitorPath = monitorPath;
         this.keyName = keyName;
@@ -48,7 +49,9 @@ public class NodeWatcher implements Watcher {
         //
         Stat stat = new Stat();
         try {
+
             ZookeeperMgr.getInstance().read(monitorPath, this, stat);
+
         } catch (InterruptedException e) {
 
         } catch (KeeperException e) {
@@ -59,6 +62,9 @@ public class NodeWatcher implements Watcher {
                 + disConfigTypeEnum.getModelName() + ") has been added!");
     }
 
+    /**
+     * 回调函数
+     */
     @Override
     public void process(WatchedEvent event) {
 
@@ -66,8 +72,10 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("============GOT UPDATE EVENT: (" + monitorPath + "," + keyName
-                        + "," + disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.info("============GOT UPDATE EVENT: (" + monitorPath
+                        + "," + keyName + ","
+                        + disConfigTypeEnum.getModelName()
+                        + ")======================");
 
                 // 调用回调函数
                 try {

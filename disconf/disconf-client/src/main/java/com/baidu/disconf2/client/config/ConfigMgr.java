@@ -18,6 +18,8 @@ public class ConfigMgr {
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ConfigMgr.class);
 
+    private static boolean isInit = false;
+
     /**
      * 初始化配置
      * 
@@ -25,7 +27,7 @@ public class ConfigMgr {
      */
     public static void init() throws Exception {
 
-        LOGGER.info("=== LOAD CONFIG START ===");
+        LOGGER.info("--------------- LOAD CONFIG START ---------------");
 
         // 导入系统配置
         DisClientSysConfig.getInstance().loadConfig(null);
@@ -39,7 +41,17 @@ public class ConfigMgr {
         // 校验
         DisInnerConfigHelper.verifyUserConfig();
 
-        LOGGER.info("=== LOAD CONFIG END ===");
+        isInit = true;
+
+        LOGGER.info("--------------- LOAD CONFIG END ---------------");
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public static boolean isInit() {
+        return isInit;
     }
 
     /**
@@ -54,8 +66,9 @@ public class ConfigMgr {
 
         } catch (Exception e) {
 
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+
+
 }

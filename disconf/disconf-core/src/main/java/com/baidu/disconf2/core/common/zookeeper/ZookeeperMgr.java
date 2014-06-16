@@ -86,6 +86,7 @@ public class ZookeeperMgr {
     }
 
     /**
+     * Zoo的新建目录
      * 
      * @param dir
      */

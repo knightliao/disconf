@@ -13,14 +13,14 @@ import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.RemoteUrl;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf2.core.common.path.PathMgr;
+import com.baidu.disconf2.core.common.path.DisconfWebPathMgr;
 
 public class RestfulMgrTestCase extends BaseTestCase {
 
     @BeforeClass
     public static void beforeAllClass() throws Exception {
 
-        DisconfMgr.run("");
+        DisconfMgr.start("");
     }
 
     @AfterClass
@@ -43,8 +43,9 @@ public class RestfulMgrTestCase extends BaseTestCase {
 
         try {
 
-            String curUrl = PathMgr.getRemoteUrlParameter("/api/store", "app",
-                    "version", "env", "a.conf", DisConfigTypeEnum.FILE);
+            String curUrl = DisconfWebPathMgr.getRemoteUrlParameter(
+                    "/api/store", "app", "version", "env", "a.conf",
+                    DisConfigTypeEnum.FILE);
 
             RemoteUrl remoteUrl = new RemoteUrl(curUrl, hostList);
 

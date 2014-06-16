@@ -31,7 +31,7 @@ public class DisconfMgr {
      * 
      * @param scanPackage
      */
-    public static void run(String scanPackage) {
+    public static void start(String scanPackage) {
 
         // 该函数不能调用两次
         if (isInit == true) {
@@ -43,7 +43,7 @@ public class DisconfMgr {
         //
         //
 
-        LOGGER.info("================================= DISCONF START ======================================");
+        LOGGER.info("******************************* DISCONF START *******************************");
 
         try {
 
@@ -52,7 +52,7 @@ public class DisconfMgr {
 
             // 是否开启远程配置
             if (DisClientConfig.getInstance().ENABLE_REMOTE_CONF == false) {
-                LOGGER.info("Use Local Configuration.");
+                LOGGER.info("ENABLE_REMOTE_CONF==0, we use Local Configuration.");
                 return;
             }
 
@@ -63,18 +63,17 @@ public class DisconfMgr {
             WatchMgr.getInstance().init();
 
             // 扫描并入库
-            LOGGER.info("start to scan package: " + scanPackage);
-            ScanMgr.scanAndStore(scanPackage);
+            ScanMgr.init(scanPackage);
 
             // 获取数据/注入/Watch
-            DisconfCoreMgr.updateConf();
+            DisconfCoreMgr.init();
 
         } catch (Exception e) {
 
             LOGGER.error(e.toString());
         }
 
-        LOGGER.info("================================= DISCONF END ======================================");
+        LOGGER.info("******************************* DISCONF END *******************************");
     }
 
     /**

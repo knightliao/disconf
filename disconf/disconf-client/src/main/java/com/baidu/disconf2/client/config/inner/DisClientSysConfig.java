@@ -133,7 +133,7 @@ public class DisClientSysConfig {
 
     /**
      * 
-     * @Description: 下载的临时文件夹
+     * @Description: 获取下载的临时文件夹
      * 
      * @return
      * @return String
@@ -144,5 +144,4 @@ public class DisClientSysConfig {
 
         return OsUtil.pathJoin(getInstance().LOCAL_DOWNLOAD_DIR, "tmp");
     }
-
 }

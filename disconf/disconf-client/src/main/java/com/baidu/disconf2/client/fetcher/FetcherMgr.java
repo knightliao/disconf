@@ -5,6 +5,7 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.client.config.ConfigMgr;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
@@ -13,7 +14,7 @@ import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.json.ValueVo;
 
 /**
- * 下载模块
+ * 下载模块, 依赖Config模块
  * 
  * @author liaoqiqi
  * @version 2014-6-12
@@ -24,15 +25,21 @@ public class FetcherMgr {
             .getLogger(FetcherMgr.class);
 
     /**
+     * 初始化
      * 
      * @throws Exception
      */
     public static void init() throws Exception {
 
+        if (ConfigMgr.isInit()) {
+            throw new Exception("ConfigMgr should be init before FetcherMgr");
+        }
+
         RestfulMgr.getInstance().init();
     }
 
     /**
+     * 是否初始化
      * 
      * @return
      */
@@ -41,7 +48,7 @@ public class FetcherMgr {
     }
 
     /**
-     * 获取Value值
+     * 根据 URL 从远程 获取Value值
      * 
      * @param url
      * @return
@@ -57,24 +64,30 @@ public class FetcherMgr {
         LOGGER.info("remote server return: " + confItemVo.toString());
 
         if (confItemVo.getStatus().equals(Constants.NOTOK)) {
-            throw new Exception("remote server return " + confItemVo.toString()
-                    + ", status is not ok.");
+            throw new Exception("status is not ok.");
         }
 
         return confItemVo.getValue();
     }
 
-    /*
-     * 下载 fileName，remoteUrl是 url
+    /**
+     * 
+     * 下载配置文件, remoteUrl是 url
+     * 
+     * @param url
+     * @param fileName
+     * @return
+     * @throws Exception
      */
     public static String downloadFileFromServer(String url, String fileName)
             throws Exception {
 
-        // 获本地的地址
+        // 临时下载路径
         String localTmpDir = getLocalDownloadDirPath(true);
+        // 下载的路径
         String localDir = getLocalDownloadDirPath(false);
 
-        // 远程地址
+        // 设置远程地址
         RemoteUrl remoteUrl = new RemoteUrl(url, DisClientConfig.getInstance()
                 .getHostList());
 
@@ -90,7 +103,7 @@ public class FetcherMgr {
     }
 
     /**
-     * 获取本地下载的临时路径DIR
+     * 获取本地下载的路径DIR, 通过参数判断是否是临时路径
      * 
      * @param isTmp
      * @return

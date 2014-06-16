@@ -34,7 +34,7 @@ import com.google.common.base.Predicate;
 
 /**
  * 
- * 一个专门处理扫描的类
+ * 扫描注解，并且进行分析整合数据
  * 
  * @author liaoqiqi
  * @version 2014-6-6
@@ -212,7 +212,7 @@ public class ScanPack {
     }
 
     /**
-     * 分析出配置文件与配置文件中的Field的MAP
+     * 分析出配置文件与配置文件中的Field的Method的MAP
      * 
      * @param scanModel
      */
@@ -221,15 +221,16 @@ public class ScanPack {
         Map<Class<?>, Set<Method>> disconfFileItemMap = new HashMap<Class<?>, Set<Method>>();
 
         //
-        // 配置文件
+        // 配置文件MAP
         //
         Set<Class<?>> classdata = scanModel.getDisconfFileClassSet();
         for (Class<?> classFile : classdata) {
-
             disconfFileItemMap.put(classFile, new HashSet<Method>());
         }
 
-        // 将配置文件与配置进行关联
+        //
+        // 将配置文件与配置文件中的配置项进行关联
+        //
         Set<Method> af1 = scanModel.getDisconfFileItemMethodSet();
         for (Method method : af1) {
 
@@ -256,11 +257,11 @@ public class ScanPack {
             // 校验是否所有配置文件都含有配置
             if (disconfFileItemMap.get(classFile).isEmpty()) {
                 LOGGER.warn("disconf file hasn't any items: "
-                        + classFile.toString());
+                        + classFile.getName());
                 disconfFileItemMap.remove(classFile);
             }
 
-            // 校验配置文件类型是否合适
+            // 校验配置文件类型是否合适(目前只支持.properties类型)
             DisconfFile disconfFile = (DisconfFile) classFile
                     .getAnnotation(DisconfFile.class);
             boolean fileTypeRight = ScanVerify
@@ -270,6 +271,7 @@ public class ScanPack {
             }
         }
 
+        // 设置
         scanModel.setDisconfFileItemMap(disconfFileItemMap);
     }
 
@@ -282,7 +284,9 @@ public class ScanPack {
 
         ScanModel scanModel = new ScanModel();
 
+        //
         // 扫描对象
+        //
         Reflections reflections = getReflection(packName);
         scanModel.setReflections(reflections);
 

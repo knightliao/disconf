@@ -88,6 +88,12 @@ public class DisconfCenterFile {
         this.keyMaps = keyMaps;
     }
 
+    /**
+     * 配置文件Item项表示，包括了值，还有其类型
+     * 
+     * @author liaoqiqi
+     * @version 2014-6-16
+     */
     public static class FileItemValue {
         private Object value;
         private Class<?> type;

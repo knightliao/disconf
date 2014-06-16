@@ -8,7 +8,7 @@ import com.baidu.utils.OsUtil;
 import com.baidu.utils.StringNUtils;
 
 /**
- * 配置的校验
+ * 用户配置、系统配置 的校验
  * 
  * @author liaoqiqi
  * @version 2014-6-6
@@ -34,7 +34,7 @@ public class DisInnerConfigHelper {
         //
 
         //
-        // host
+        // 服务器地址
         if (StringNUtils
                 .isEmpty(DisClientConfig.getInstance().CONF_SERVER_HOST)) {
 
@@ -43,19 +43,19 @@ public class DisInnerConfigHelper {
         DisClientConfig.getInstance().setHostList(
                 StringNUtils.parseStringToStringList(
                         DisClientConfig.getInstance().CONF_SERVER_HOST, ","));
-        LOGGER.info("conf_server_host: "
+        LOGGER.info("SERVER conf_server_host: "
                 + DisClientConfig.getInstance().getHostList());
 
         //
-        // version
+        // 版本
         if (StringNUtils.isEmpty(DisClientConfig.getInstance().VERSION)) {
 
             throw new Exception("settings: VERSION cannot find");
         }
-        LOGGER.info("version: " + DisClientConfig.getInstance().VERSION);
+        LOGGER.info("SERVER version: " + DisClientConfig.getInstance().VERSION);
 
         //
-        // app
+        // APP名
         if (StringNUtils.isEmpty(DisClientConfig.getInstance().APP)) {
 
             throw new Exception("settings: APP cannot find");
@@ -63,14 +63,15 @@ public class DisInnerConfigHelper {
         LOGGER.info("SERVER APP: " + DisClientConfig.getInstance().APP);
 
         //
-        // env
+        // 环境
         if (StringNUtils.isEmpty(DisClientConfig.getInstance().ENV)) {
 
             throw new Exception("settings: ENV cannot find");
         }
         LOGGER.info("SERVER ENV: " + DisClientConfig.getInstance().ENV);
 
-        // enable.remote.conf
+        //
+        // 是否使用远程的配置
         LOGGER.info("SERVER ENABLE_REMOTE_CONF: "
                 + DisClientConfig.getInstance().ENABLE_REMOTE_CONF);
 
@@ -91,26 +92,26 @@ public class DisInnerConfigHelper {
         // 服务器相关
         //
 
-        // conf_server_action
+        // CONF_SERVER_STORE_ACTION
         if (StringNUtils
                 .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION)) {
 
             throw new Exception(
                     "settings: CONF_SERVER_STORE_ACTION cannot find");
         }
-        LOGGER.debug("CONF_SERVER_STORE_ACTION: "
+        LOGGER.debug("SERVER CONF_SERVER_STORE_ACTION: "
                 + DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION);
 
-        // conf_server_action
+        // CONF_SERVER_ZOO_ACTION
         if (StringNUtils
                 .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION)) {
 
             throw new Exception("settings: CONF_SERVER_ZOO_ACTION cannot find");
         }
-        LOGGER.debug("CONF_SERVER_ZOO_ACTION: "
+        LOGGER.debug("SERVER CONF_SERVER_ZOO_ACTION: "
                 + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
 
-        // conf_server_master_num_action
+        // CONF_SERVER_MASTER_NUM_ACTION
         if (StringNUtils
                 .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION)) {
 
@@ -142,7 +143,7 @@ public class DisInnerConfigHelper {
             }
         }
 
-        // local_dowload_dir
+        // LOCAL_DOWNLOAD_DIR
         LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: "
                 + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
         OsUtil.makeDirs(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
@@ -160,4 +161,5 @@ public class DisInnerConfigHelper {
                 + DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
 
     }
+
 }

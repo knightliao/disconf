@@ -9,12 +9,13 @@ import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.watch.inner.DisconfSysUpdateCallback;
 import com.baidu.disconf2.client.watch.inner.NodeWatcher;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf2.core.common.path.PathMgr;
+import com.baidu.disconf2.core.common.path.DisconfWebPathMgr;
+import com.baidu.disconf2.core.common.path.ZooPathMgr;
 import com.baidu.disconf2.core.common.utils.ZooUtils;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
 /**
- * Watch ZOO 模块, 依赖 FetcherMgr模块, 必须先初始化FetcherMgr模块
+ * Watch ZOO 模块, 依赖 FetcherMgr模块
  * 
  * @author liaoqiqi
  * @version 2014-6-10
@@ -38,8 +39,12 @@ public class WatchMgr {
         return SingletonHolder.instance;
     }
 
+    private WatchMgr() {
+
+    }
+
     /**
-     * 应用程序的Zoo根目录
+     * 应用程序的 Zoo 根目录
      */
     private String clientRootZooPath = "";
 
@@ -58,6 +63,8 @@ public class WatchMgr {
      */
     private String hosts = "";
 
+    private boolean isInit = false;
+
     /**
      * 
      * @Description: 获取自己的主备类型
@@ -68,24 +75,28 @@ public class WatchMgr {
      */
     public void init() throws Exception {
 
+        // 下载模块必须先初始化
         if (!FetcherMgr.isInit()) {
             throw new Exception("FetcherMgr should be init before WatchMgr");
         }
 
-        // Zoo 地址
-        hosts = FetcherMgr
-                .getValueFromServer(PathMgr.getZooHostsUrl(DisClientSysConfig
-                        .getInstance().CONF_SERVER_ZOO_ACTION));
+        // 获取 Zoo Hosts
+        try {
+            hosts = FetcherMgr
+                    .getValueFromServer(DisconfWebPathMgr
+                            .getZooHostsUrl(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION));
+        } catch (Exception e) {
+            throw new Exception("cannot get zoo hosts", e);
+        }
 
-        //
         // init zookeeper
-        //
-        LOGGER.info("init zookeeper......");
         ZookeeperMgr.getInstance().init(hosts,
                 DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX);
 
         // 新建初始化目录
         setupPath();
+
+        this.isInit = true;
     }
 
     /**
@@ -95,7 +106,7 @@ public class WatchMgr {
     private void setupPath() throws Exception {
 
         // 应用根目录
-        this.clientRootZooPath = PathMgr.getZooBaseUrl(
+        this.clientRootZooPath = ZooPathMgr.getZooBaseUrl(
                 DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX,
                 DisClientConfig.getInstance().APP,
                 DisClientConfig.getInstance().ENV,
@@ -104,13 +115,13 @@ public class WatchMgr {
                 ZooUtils.getZooDirValue());
 
         // 新建Zoo Store目录
-        this.clientDisconfFileZooPath = PathMgr
+        this.clientDisconfFileZooPath = ZooPathMgr
                 .getFileZooPath(clientRootZooPath);
         ZookeeperMgr.getInstance().makeDir(clientDisconfFileZooPath,
                 ZooUtils.getZooDirValue());
 
         // 新建Zoo Store目录
-        this.clientDisconfItemZooPath = PathMgr
+        this.clientDisconfItemZooPath = ZooPathMgr
                 .getItemZooPath(clientRootZooPath);
         ZookeeperMgr.getInstance().makeDir(clientDisconfItemZooPath,
                 ZooUtils.getZooDirValue());
@@ -121,10 +132,9 @@ public class WatchMgr {
      * 
      * @param path
      */
-    public void makePath(String path) {
+    public void makePath(String path, String data) {
 
-        ZookeeperMgr.getInstance().makeDir(path,
-                ZooUtils.getZooDirValueByDate());
+        ZookeeperMgr.getInstance().makeDir(path, data);
     }
 
     /**
@@ -133,12 +143,26 @@ public class WatchMgr {
     public void watchPath(String monitorPath, String keyName,
             DisConfigTypeEnum disConfigTypeEnum) {
 
-        makePath(monitorPath);
+        // 先新建路径
+        makePath(monitorPath, ZooUtils.getZooDirValueByDate());
 
+        // 进行监控
         NodeWatcher nodeWatcher = new NodeWatcher(monitorPath, keyName,
                 disConfigTypeEnum, new DisconfSysUpdateCallback());
         nodeWatcher.monitorMaster();
     }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isInit() {
+        return isInit;
+    }
+
+    //
+    //
+    //
 
     public String getClientDisconfFileZooPath() {
         return clientDisconfFileZooPath;

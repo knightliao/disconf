@@ -18,6 +18,7 @@ public final class OsUtil {
     }
 
     /**
+     * 建多层目录
      * 
      * @Description: make directory
      * @param filePath
@@ -93,6 +94,8 @@ public final class OsUtil {
     }
 
     /**
+     * 获取File相对于Folder的相对路径
+     * 
      * returns null if file isn't relative to folder
      */
     public static String getRelativePath(File file, File folder) {

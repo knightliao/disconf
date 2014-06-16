@@ -24,6 +24,7 @@ import com.baidu.utils.ConfigLoaderUtils;
 import com.baidu.utils.OsUtil;
 
 /**
+ * RestFul的一个实现,单例实现
  * 
  * @author liaoqiqi
  * @version 2014-6-10
@@ -87,18 +88,12 @@ public class RestfulMgr {
     }
 
     /**
+     * 获取JSON数据
      * 
-     * @Description: 获取JSON数据
-     * 
-     * @param <T>
      * @param clazz
-     * @param url
-     * @param parameters
+     * @param remoteUrl
      * @return
      * @throws Exception
-     * @return T
-     * @author liaoqiqi
-     * @date 2013-6-16
      */
     public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl)
             throws Exception {
@@ -155,13 +150,14 @@ public class RestfulMgr {
 
     /**
      * 
+     * 
      * @param remoteUrl
      *            远程地址
      * @param fileName
      *            文件名
-     * @param localTmpFile
+     * @param localTmpFileDir
      *            本地临时 文件地址
-     * @param localFile
+     * @param localFileDir
      *            本地文件地址
      * @param isTransfer2Classpath
      *            是否将下载的文件放到Classpath目录下
@@ -172,20 +168,16 @@ public class RestfulMgr {
             String localTmpFileDir, String localFileDir,
             boolean isTransfer2Classpath) throws Exception {
 
+        // 本地临时全路径
         String localTmpFilePath = OsUtil.pathJoin(localTmpFileDir, fileName);
+        // 本地路径
         String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
 
+        // 相应的File对象
         File localTmpFile = new File(localTmpFilePath);
         File localFile = new File(localFilePath);
 
         try {
-
-            // 删除临时文件
-            LOGGER.info("start to remove tmp download file: " + ""
-                    + localTmpFile.getAbsolutePath());
-            if (localTmpFile.exists()) {
-                localTmpFile.delete();
-            }
 
             // 可重试的下载
             retry4ConfDownload(

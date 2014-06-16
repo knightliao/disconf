@@ -23,10 +23,11 @@ public class ScanModel {
     // 配置文件
     private Set<Class<?>> disconfFileClassSet;
 
+    // 配置文件中的函数
     private Set<Method> disconfFileItemMethodSet;
 
     //
-    // 配置文件MAP, KEY为配置文件
+    // 配置文件及其函数的MAP, KEY为配置文件类
     private Map<Class<?>, Set<Method>> disconfFileItemMap;
 
     //
@@ -34,13 +35,13 @@ public class ScanModel {
     private Set<Method> disconfItemMethodSet;
 
     //
-    //
+    // 主从切换的回调函数类
     private Set<Class<?>> disconfActiveBackupServiceClassSet;
 
     //
-    // 更新 回调函数
+    // 更新 回调函数类
     private Set<Class<?>> disconfUpdateService;
-    // 配置及它影响的回调函数
+    // 配置及影响的回调函数, Key为配置文件Key或配置项Key
     private Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap;
 
     public Reflections getReflections() {
@@ -108,6 +109,20 @@ public class ScanModel {
 
     public void setDisconfFileItemMethodSet(Set<Method> disconfFileItemMethodSet) {
         this.disconfFileItemMethodSet = disconfFileItemMethodSet;
+    }
+
+    @Override
+    public String toString() {
+        return "ScanModel [reflections=" + reflections
+                + ", disconfFileClassSet=" + disconfFileClassSet
+                + ", disconfFileItemMethodSet=" + disconfFileItemMethodSet
+                + ", disconfFileItemMap=" + disconfFileItemMap
+                + ", disconfItemMethodSet=" + disconfItemMethodSet
+                + ", disconfActiveBackupServiceClassSet="
+                + disconfActiveBackupServiceClassSet
+                + ", disconfUpdateService=" + disconfUpdateService
+                + ", disconfUpdateServiceInverseIndexMap="
+                + disconfUpdateServiceInverseIndexMap + "]";
     }
 
 }

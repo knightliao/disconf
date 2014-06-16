@@ -15,13 +15,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-
+/**
+ * 
+ * @author liaoqiqi
+ * @version 2014-6-16
+ */
 public final class StringNUtils extends org.apache.commons.lang.StringUtils {
-
-    // private static final Logger logger =
-    // LoggerFactory.getLogger(StringUtils.class);
 
     private static char[] hex = "0123456789ABCDEF".toCharArray();
 

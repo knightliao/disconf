@@ -32,9 +32,10 @@ public class DisconfCoreMgr {
 
     /**
      * 1. 获取远程的所有配置数据<br/>
-     * 2. 注入到仓库中，并注入到CONF实体中
+     * 2. 注入到仓库中<br/>
+     * 3. Watch
      */
-    public static void updateConf() {
+    public static void init() {
 
         //
         // 处理配置文件
@@ -48,7 +49,7 @@ public class DisconfCoreMgr {
     }
 
     /**
-     * 处理配置
+     * 更新 配置
      */
     private static void updateConfItem() {
 
@@ -96,13 +97,12 @@ public class DisconfCoreMgr {
             throw new Exception("cannot find disconfCenterItem " + keyName);
         }
 
-        String url = disconfCenterItem.getRemoteServerUrl();
-
         //
         // 下载配置
         //
         String value = null;
         try {
+            String url = disconfCenterItem.getRemoteServerUrl();
             value = FetcherMgr.getValueFromServer(url);
             if (value != null) {
                 LOGGER.info("value: " + value);
@@ -187,8 +187,6 @@ public class DisconfCoreMgr {
             throw new Exception("cannot find disconfCenterFile " + fileName);
         }
 
-        String url = disconfCenterFile.getRemoteServerUrl();
-
         //
         // 下载配置
         //
@@ -196,6 +194,7 @@ public class DisconfCoreMgr {
         Properties properties = null;
         try {
 
+            String url = disconfCenterFile.getRemoteServerUrl();
             filePath = FetcherMgr.downloadFileFromServer(url, fileName);
 
             // 读取配置
@@ -263,6 +262,7 @@ public class DisconfCoreMgr {
     }
 
     /**
+     * 进行回调
      * 
      * @param disconfCommonCallbackModel
      */

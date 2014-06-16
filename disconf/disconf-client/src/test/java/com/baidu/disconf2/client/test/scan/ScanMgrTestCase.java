@@ -22,7 +22,7 @@ public class ScanMgrTestCase extends BaseTestCase {
         try {
 
             //
-            ScanMgr.scanAndStore(packName);
+            ScanMgr.init(packName);
 
             //
             LOGGER.info(DisconfStoreMgr.getInstance().getConfFileMap()

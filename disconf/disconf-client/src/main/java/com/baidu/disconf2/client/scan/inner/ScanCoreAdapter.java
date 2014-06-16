@@ -25,7 +25,8 @@ import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf2.core.common.path.PathMgr;
+import com.baidu.disconf2.core.common.path.DisconfWebPathMgr;
+import com.baidu.disconf2.core.common.path.ZooPathMgr;
 
 /**
  * 
@@ -64,13 +65,13 @@ public class ScanCoreAdapter {
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
                 disconfFileAnnotation.env(), disconfFileAnnotation.version(),
-                PathMgr.joinPath(WatchMgr.getInstance()
+                ZooPathMgr.joinPath(WatchMgr.getInstance()
                         .getClientDisconfFileZooPath(), disconfFileAnnotation
                         .filename()));
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
         // Remote URL
-        String url = PathMgr.getRemoteUrlParameter(
+        String url = DisconfWebPathMgr.getRemoteUrlParameter(
                 DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
                 disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
                 disConfCommonModel.getEnv(), disconfCenterFile.getFileName(),
@@ -85,6 +86,7 @@ public class ScanCoreAdapter {
 
             field.setAccessible(true);
 
+            // static 则直接获取其值
             if (Modifier.isStatic(field.getModifiers())) {
                 try {
 
@@ -96,18 +98,22 @@ public class ScanCoreAdapter {
                     LOGGER.error(e.toString());
                 }
             } else {
+
+                // 非static则为Null, 这里我们没有必要获取其Bean的值
                 FileItemValue fileItemValue = new FileItemValue(null,
                         field.getType());
                 keyMaps.put(field.getName(), fileItemValue);
             }
-
         }
+
+        // 设置
         disconfCenterFile.setKeyMaps(keyMaps);
 
         return disconfCenterFile;
     }
 
     /**
+     * env/version 默认是应用整合设置的，但用户可以在配置中更改它
      * 
      * @return
      */
@@ -116,14 +122,17 @@ public class ScanCoreAdapter {
 
         DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
+        // app
         disConfCommonModel.setApp(DisClientConfig.getInstance().APP);
 
+        // env
         if (!env.isEmpty()) {
             disConfCommonModel.setEnv(env);
         } else {
             disConfCommonModel.setEnv(DisClientConfig.getInstance().ENV);
         }
 
+        // version
         if (!version.isEmpty()) {
             disConfCommonModel.setVersion(version);
         } else {
@@ -131,6 +140,7 @@ public class ScanCoreAdapter {
                     .setVersion(DisClientConfig.getInstance().VERSION);
         }
 
+        // 设置Zookeeper的URL
         disConfCommonModel.setZookeeperUrl(zookeeperUrl);
 
         return disConfCommonModel;
@@ -178,13 +188,13 @@ public class ScanCoreAdapter {
         //
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
-                disconfItem.env(), disconfItem.version(), PathMgr.joinPath(
+                disconfItem.env(), disconfItem.version(), ZooPathMgr.joinPath(
                         WatchMgr.getInstance().getClientDisconfItemZooPath(),
                         key));
         disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
 
-        // Remote URL
-        String url = PathMgr.getRemoteUrlParameter(
+        // Disconf-web url
+        String url = DisconfWebPathMgr.getRemoteUrlParameter(
                 DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
                 disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
                 disConfCommonModel.getEnv(), key, DisConfigTypeEnum.ITEM);
@@ -194,7 +204,7 @@ public class ScanCoreAdapter {
     }
 
     /**
-     * 转换配置文件
+     * 获取配置文件数据
      * 
      * @return
      */
@@ -205,11 +215,11 @@ public class ScanCoreAdapter {
         Set<Class<?>> classSet = scanModel.getDisconfFileClassSet();
         for (Class<?> disconfFile : classSet) {
 
-            Set<Method> fieldSet = scanModel.getDisconfFileItemMap().get(
+            Set<Method> methods = scanModel.getDisconfFileItemMap().get(
                     disconfFile);
 
             DisconfCenterFile disconfCenterFile = transformScanFile(
-                    disconfFile, fieldSet);
+                    disconfFile, methods);
 
             disconfCenterFiles.add(disconfCenterFile);
         }
@@ -269,6 +279,7 @@ public class ScanCoreAdapter {
     }
 
     /**
+     * 将数据放入到仓库中
      * 
      * @return
      */

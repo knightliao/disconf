@@ -9,14 +9,10 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf2.client.fetcher.inner.restful.core.UnreliableInterface;
 
 /**
+ * RestFul get
  * 
  * @author liaoqiqi
- * @email liaoqiqi@baidu.com
- *
- */
-
-/**
- * Restful get
+ * @version 2014-6-16
  */
 public class RestfulGet implements UnreliableInterface {
 
@@ -30,6 +26,9 @@ public class RestfulGet implements UnreliableInterface {
         this.builder = builder;
     }
 
+    /**
+     * Get数据
+     */
     @Override
     public Object call() throws Exception {
 

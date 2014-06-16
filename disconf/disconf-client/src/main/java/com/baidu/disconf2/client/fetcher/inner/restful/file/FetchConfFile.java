@@ -37,8 +37,18 @@ public class FetchConfFile implements UnreliableInterface {
         this.localTmpFile = localTmpFile;
     }
 
+    /**
+     * 进行下载
+     */
     @Override
     public Object call() throws Exception {
+
+        // 删除临时文件
+        // LOGGER.info("start to remove tmp download file: " + ""
+        // + localTmpFile.getAbsolutePath());
+        if (localTmpFile.exists()) {
+            localTmpFile.delete();
+        }
 
         // start tp download
         LOGGER.info("start to download. From: " + remoteUrl + " , TO: "
