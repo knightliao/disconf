@@ -86,11 +86,13 @@ public class ClassUtils {
      * 
      * @param field
      */
-    public static Object getValeByType(Class<?> type, String value) {
+    public static Object getValeByType(Class<?> type, String value)
+            throws Exception {
 
         String typeName = type.getName();
+        typeName = typeName.toLowerCase();
 
-        if (typeName.equals("int")) {
+        if (typeName.equals("int") || typeName.equals("java.lang.int")) {
 
             if (value.equals("")) {
                 value = "0";
@@ -98,7 +100,7 @@ public class ClassUtils {
 
             return Integer.valueOf(value);
 
-        } else if (typeName.equals("long")) {
+        } else if (typeName.equals("long") || typeName.equals("java.lang.long")) {
 
             if (value.equals("")) {
                 value = "0";
@@ -106,7 +108,8 @@ public class ClassUtils {
 
             return Long.valueOf(value);
 
-        } else if (typeName.equals("boolean")) {
+        } else if (typeName.equals("boolean")
+                || typeName.equals("java.lang.boolean")) {
 
             if (value.equals("")) {
                 value = "false";
@@ -114,7 +117,8 @@ public class ClassUtils {
 
             return Boolean.valueOf(value);
 
-        } else if (typeName.equals("double")) {
+        } else if (typeName.equals("double")
+                || typeName.equals("java.lang.double")) {
 
             if (value.equals("")) {
                 value = "0.0";

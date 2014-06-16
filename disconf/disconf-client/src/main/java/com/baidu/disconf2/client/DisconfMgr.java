@@ -70,7 +70,7 @@ public class DisconfMgr {
 
         } catch (Exception e) {
 
-            LOGGER.error(e.toString());
+            LOGGER.error(e.toString(), e);
         }
 
         LOGGER.info("******************************* DISCONF END *******************************");

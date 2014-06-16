@@ -209,9 +209,13 @@ public class DisconfStoreMgr {
             }
 
             // 根据类型设置值
-            Object value = ClassUtils.getValeByType(keMap.get(fileItem)
-                    .getType(), (String) object);
-            keMap.get(fileItem).setValue(value);
+            try {
+                Object value = ClassUtils.getValeByType(keMap.get(fileItem)
+                        .getType(), (String) object);
+                keMap.get(fileItem).setValue(value);
+            } catch (Exception e) {
+                LOGGER.error(e.toString(), e);
+            }
         }
     }
 
@@ -233,8 +237,13 @@ public class DisconfStoreMgr {
         Class<?> typeClass = disconfCenterItem.getKeyType();
 
         // 根据类型设置值
-        Object newValue = ClassUtils.getValeByType(typeClass, value);
-        disconfCenterItem.setValue(newValue);
+        try {
+            Object newValue = ClassUtils.getValeByType(typeClass, value);
+            disconfCenterItem.setValue(newValue);
+        } catch (Exception e) {
+            LOGGER.error(e.toString(), e);
+            return;
+        }
     }
 
     /**
