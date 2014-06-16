@@ -53,6 +53,8 @@ public class DisconfMgrTestCase extends BaseTestCase {
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
 
+            Thread.sleep(10000000);
+
         } catch (Exception e) {
 
             // TODO Auto-generated catch block

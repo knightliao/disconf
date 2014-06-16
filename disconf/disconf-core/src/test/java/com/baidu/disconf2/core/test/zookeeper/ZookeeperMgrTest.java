@@ -10,14 +10,19 @@ import org.junit.Test;
 
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
+/**
+ * 
+ * @author liaoqiqi
+ * @version 2014-6-16
+ */
 public class ZookeeperMgrTest {
+
+    public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
 
     @BeforeClass
     public static void beforeAllClass() throws Exception {
 
-        ZookeeperMgr.getInstance()
-                .init("10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583",
-                        "disconf");
+        ZookeeperMgr.getInstance().init(hosts, "disconf");
     }
 
     @AfterClass

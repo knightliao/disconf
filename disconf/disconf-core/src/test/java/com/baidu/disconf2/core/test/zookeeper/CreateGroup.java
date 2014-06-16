@@ -1,7 +1,5 @@
 package com.baidu.disconf2.core.test.zookeeper;
 
-//cc CreateGroup A program to create a znode representing a group in ZooKeeper
-
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
@@ -13,10 +11,16 @@ import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 
-// vv CreateGroup
+/**
+ * 
+ * @author liaoqiqi
+ * @version 2014-6-16
+ */
 public class CreateGroup implements Watcher {
 
     private static final int SESSION_TIMEOUT = 5000;
+
+    public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
 
     private ZooKeeper zk;
     private CountDownLatch connectedSignal = new CountDownLatch(1);
@@ -29,6 +33,7 @@ public class CreateGroup implements Watcher {
 
     @Override
     public void process(WatchedEvent event) { // Watcher interface
+
         if (event.getState() == KeeperState.SyncConnected) {
             connectedSignal.countDown();
         }
@@ -36,6 +41,7 @@ public class CreateGroup implements Watcher {
 
     public void create(String groupName) throws KeeperException,
             InterruptedException {
+
         String path = "/" + groupName;
         String createdPath = zk.create(path, null/* data */,
                 Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
@@ -49,9 +55,9 @@ public class CreateGroup implements Watcher {
     public static void main(String[] args) throws Exception {
 
         CreateGroup createGroup = new CreateGroup();
-        createGroup.connect("yx-sdcrd-dan00.vm.baidu.com:8581");
+        createGroup.connect(hosts);
         createGroup.create("disconfserver_test");
         createGroup.close();
     }
 }
-// ^^ CreateGroup
+
