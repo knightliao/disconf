@@ -1,7 +1,5 @@
 package com.baidu.disconf2.client.test.model;
 
-import org.springframework.stereotype.Service;
-
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 
@@ -10,7 +8,6 @@ import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
  * 2. 使用Spring Bean托管方式
  * 
  **/
-@Service
 @DisconfFile(filename = ConfA.filename)
 public class ConfA {
 
@@ -19,28 +16,28 @@ public class ConfA {
     /**
      * 配置文件中的某Item
      */
-    private int varA = 15;
+    private Long varA = 15L;
 
     /**
      * 配置文件中的某Item
      */
-    private int varA2 = 25;
+    private Long varA2 = 25L;
 
     @DisconfFileItem
-    public int getVarA() {
+    public Long getVarA() {
         return varA;
     }
 
-    public void setVarA(int varA) {
+    public void setVarA(Long varA) {
         this.varA = varA;
     }
 
     @DisconfFileItem
-    public int getVarA2() {
+    public Long getVarA2() {
         return varA2;
     }
 
-    public void setVarA2(int varA2) {
+    public void setVarA2(Long varA2) {
         this.varA2 = varA2;
     }
 

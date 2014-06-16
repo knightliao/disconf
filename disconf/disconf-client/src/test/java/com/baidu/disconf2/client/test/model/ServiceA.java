@@ -24,11 +24,11 @@ public class ServiceA {
     @Autowired
     private ConfA confA;
 
-    public int calcMoneyA() {
+    public long calcMoneyA() {
         return confA.getVarA() * 10;
     }
 
-    public int calcMoneyA2() {
+    public long calcMoneyA2() {
         return confA.getVarA() * 20;
     }
 

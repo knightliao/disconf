@@ -6,11 +6,14 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baidu.disconf2.service.config.bo.Config;
 import com.baidu.disconf2.service.config.dao.ConfigDao;
 import com.baidu.disconf2.test.common.BaseTestCase;
 import com.baidu.ub.common.utils.FileUtils;
@@ -37,12 +40,20 @@ public class ConfigDaoTestCase extends BaseTestCase {
 
         try {
 
+            // read data
             String str = new String(btyes, "UTF-8");
-            LOG.info(str);
+
+            // save to db
+            Config config = configDao.get(1L);
+            config.setValue(str);
+            configDao.update(config);
+
+            // read
+            LOG.info(configDao.get(1L).getValue());
 
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+
+            Assert.assertTrue(false);
         }
     }
 

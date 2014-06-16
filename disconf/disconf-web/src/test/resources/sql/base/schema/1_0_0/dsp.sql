@@ -2,7 +2,7 @@
 CREATE SCHEMA IF NOT EXISTS "disconf" /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 DROP TABLE  IF EXISTS disconf."app";
-CREATE TABLE `app` (
+CREATE TABLE disconf.`app` (
     `app_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
     `name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'APP名(一般是产品线+服务名)',
     `description` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '介绍',
@@ -13,7 +13,7 @@ CREATE TABLE `app` (
 
 
 DROP TABLE  IF EXISTS disconf."config";
-CREATE TABLE `config` (
+CREATE TABLE disconf.`config` (
     `config_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
     `type` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '配置文件/配置项',
     `name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '配置文件名/配置项KeY名',
@@ -28,7 +28,7 @@ CREATE TABLE `config` (
 
 
 DROP TABLE  IF EXISTS disconf."env";
-CREATE TABLE `env` (
+CREATE TABLE disconf.`env` (
     `env_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '环境ID（主键，自增长）',
     `name` VARCHAR(255) NOT NULL DEFAULT 'DEFAULT_ENV' COMMENT '环境名字',
     PRIMARY KEY (`env_id`)
