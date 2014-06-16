@@ -31,6 +31,22 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
+    <bean id="propertyConfigurerForProject1"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath*:/jdbc-mysql.properties</value>
+                <value>classpath*:/zoo.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath*:/applicationContext-dbconfig.xml" />
+
     <bean id="zooMgrImpl"
         class="com.baidu.disconf2.service.zookeeper.service.impl.ZooMgrImpl">
         <property name="zooHosts" value="${hosts}" />

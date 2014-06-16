@@ -16,6 +16,9 @@ public class ValueVo {
     private Integer status = Constants.OK;
 
     //
+    private String message = "";
+
+    //
     private String value = "";
 
     public Integer getStatus() {
@@ -34,9 +37,18 @@ public class ValueVo {
         this.value = value;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
-        return "ConfItemVo [status=" + status + ", value=" + value + "]";
+        return "ValueVo [status=" + status + ", message=" + message
+                + ", value=" + value + "]";
     }
 
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf2.service.env.bo.Env;
 import com.baidu.disconf2.service.env.dao.EnvDao;
 import com.baidu.dsp.common.dao.AbstractDao;
+import com.baidu.dsp.common.dao.Columns;
+import com.baidu.ub.common.generic.dao.operator.Match;
 
 /**
  * 
@@ -13,5 +15,11 @@ import com.baidu.dsp.common.dao.AbstractDao;
  */
 @Service
 public class EnvDaoImpl extends AbstractDao<Long, Env> implements EnvDao {
+
+    @Override
+    public Env getByName(String name) {
+
+        return findOne(new Match(Columns.NAME, name));
+    }
 
 }

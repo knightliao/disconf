@@ -1,5 +1,7 @@
 package com.baidu.disconf2.service.app.service;
 
+import com.baidu.disconf2.service.app.bo.App;
+
 /**
  * 
  * @author liaoqiqi
@@ -7,4 +9,9 @@ package com.baidu.disconf2.service.app.service;
  */
 public interface AppMgr {
 
+    /**
+     * 
+     * @param name
+     */
+    public App getByName(String name);
 }

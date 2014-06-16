@@ -1,4 +1,4 @@
-package com.baidu.disconf2.web.store.form;
+package com.baidu.disconf2.service.config.form;
 
 import com.baidu.dsp.common.form.RequestFormBase;
 
@@ -17,6 +17,8 @@ public class ConfForm extends RequestFormBase {
     private String app;
 
     private String maintype;
+
+    private String version;
 
     private String env;
 
@@ -52,6 +54,20 @@ public class ConfForm extends RequestFormBase {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfForm [app=" + app + ", maintype=" + maintype + ", version="
+                + version + ", env=" + env + ", key=" + key + "]";
     }
 
 }

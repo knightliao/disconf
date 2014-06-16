@@ -14,7 +14,7 @@ public class Columns {
 
     public final static String VERSION = "version";
 
-    public final static String DESC = "desc";
+    public final static String DESC = "description";
 
     public final static String VALUE = "value";
 
