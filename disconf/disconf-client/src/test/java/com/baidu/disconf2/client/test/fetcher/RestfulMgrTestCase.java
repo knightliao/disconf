@@ -3,9 +3,7 @@ package com.baidu.disconf2.client.test.fetcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.baidu.disconf2.client.DisconfMgr;
@@ -17,13 +15,11 @@ import com.baidu.disconf2.core.common.path.DisconfWebPathMgr;
 
 public class RestfulMgrTestCase extends BaseTestCase {
 
-    @BeforeClass
     public static void beforeAllClass() throws Exception {
 
         DisconfMgr.start("");
     }
 
-    @AfterClass
     public static void destory() throws Exception {
 
         RestfulMgr.getInstance().close();

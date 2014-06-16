@@ -7,8 +7,8 @@
     <artifactId>disconf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    
-    
+
+
     <modules>
         <module>disconf-client</module>
         <module>disconf-core</module>
@@ -42,7 +42,6 @@
         <dependencies>
 
             <!-- common dependencies -->
-
             <dependency>
                 <groupId>org.aopalliance</groupId>
                 <artifactId>com.springsource.org.aopalliance</artifactId>
@@ -623,7 +622,6 @@
                             <exclude>**/*Controller.class</exclude>
                             <exclude>**/*Vo.class</exclude>
                             <exclude>**/*Form.class</exclude>
-                            <exclude>**/baidu/ub/**/*.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
@@ -641,9 +639,5 @@
             </plugin>
         </plugins>
     </reporting>
-
-
-</project>
-
 
 </project>
