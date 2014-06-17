@@ -1,4 +1,4 @@
-package com.baidu.disconf2.demo.model;
+package com.baidu.disconf2.demo.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.Jedis;
 
+import com.baidu.disconf2.demo.config.JedisConfig;
 import com.baidu.disconf2.demo.utils.JedisUtil;
+
 
 /**
  * 一个简单的Redis服务

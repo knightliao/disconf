@@ -1,9 +1,10 @@
-package com.baidu.disconf2.demo.model;
+package com.baidu.disconf2.demo.config;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 
 /**
+ * Redis配置文件
  * 
  * @author liaoqiqi
  * @version 2014-6-17
@@ -19,6 +20,11 @@ public class JedisConfig {
     // 代表连接port
     private int port;
 
+    /**
+     * 地址, 分布式文件配置
+     * 
+     * @return
+     */
     @DisconfFileItem
     public String getHost() {
         return host;
@@ -28,6 +34,11 @@ public class JedisConfig {
         this.host = host;
     }
 
+    /**
+     * 端口, 分布式文件配置
+     * 
+     * @return
+     */
     @DisconfFileItem
     public int getPort() {
         return port;

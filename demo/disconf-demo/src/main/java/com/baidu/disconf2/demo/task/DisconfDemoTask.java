@@ -5,11 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baidu.disconf2.demo.model.BaoBaoService;
-import com.baidu.disconf2.demo.model.JedisConfig;
-import com.baidu.disconf2.demo.model.SimpleRedisService;
+import com.baidu.disconf2.demo.config.JedisConfig;
+import com.baidu.disconf2.demo.service.BaoBaoService;
+import com.baidu.disconf2.demo.service.SimpleRedisService;
 
 /**
+ * 演示分布式配置文件、分布式配置的更新Demo
  * 
  * @author liaoqiqi
  * @version 2014-6-17
@@ -37,7 +38,7 @@ public class DisconfDemoTask {
     public int run() {
 
         LOGGER.info(baoBaoService.toString());
-        
+
         try {
 
             while (true) {
@@ -50,8 +51,7 @@ public class DisconfDemoTask {
                 LOGGER.info("redis( " + jedisConfig.getHost() + ","
                         + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
                         + " , " + simpleRedisService.getKey(REDIS_KEY));
-          
-                
+
             }
 
         } catch (Exception e) {

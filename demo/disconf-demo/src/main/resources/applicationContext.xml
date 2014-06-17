@@ -25,6 +25,7 @@
             <list>
                 <value>classpath*:/coefficients.properties</value>
                 <value>classpath*:/redis.properties</value>
+                <value>classpath*:/remote.properties</value>
             </list>
         </property>
     </bean>
@@ -34,14 +35,26 @@
         <property name="scanPackage" value="com.baidu.disconf2.demo" />
     </bean>
 
-    <bean id="coefficients" class="com.baidu.disconf2.demo.model.Coefficients">
+    <bean id="coefficients" class="com.baidu.disconf2.demo.config.Coefficients">
         <property name="baiFaCoe" value="${baiFaCoe}" />
         <property name="yuErBaoCoe" value="${yuErBaoCoe}" />
     </bean>
 
-    <bean id="jedisConfig" class="com.baidu.disconf2.demo.model.JedisConfig">
+    <bean id="jedisConfig" class="com.baidu.disconf2.demo.config.JedisConfig">
         <property name="host" value="${host}" />
         <property name="port" value="${port}" />
+    </bean>
+
+    <bean id="remoteServerConfig" class="com.baidu.disconf2.demo.config.RemoteServerConfig">
+        <property name="remoteHost" value="${remoteHost}" />
+        <property name="remotePort" value="${remotePort}" />
+    </bean>
+
+    <bean id="remoteServiceUpdateCallback"
+        class="com.baidu.disconf2.demo.service.RemoteServiceUpdateCallback">
+    </bean>
+
+    <bean id="remoteService" class="com.baidu.disconf2.demo.service.RemoteService">
     </bean>
 
 </beans>

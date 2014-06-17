@@ -28,7 +28,6 @@ import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.constants.Constants;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
-import com.baidu.disconf2.utils.MyBeanUtils;
 import com.baidu.disconf2.utils.SpringContextUtil;
 import com.google.common.base.Predicate;
 
@@ -128,34 +127,34 @@ public class ScanPack {
             // 非Spring直接New
             // Spring要GetBean
             //
-            String beanName = MyBeanUtils
-                    .getSpringServiceName(disconfUpdateServiceClass);
 
-            IDisconfUpdate iDisconfUpdate;
+            IDisconfUpdate iDisconfUpdate = null;
 
+            //
+            // Spring方式
             try {
 
-                if (beanName != null) {
-
-                    // Spring方式
-                    iDisconfUpdate = getSpringBean(beanName);
-                    if (iDisconfUpdate == null) {
-                        continue;
-                    }
-
-                } else {
-
-                    // 非Spring方式
-                    iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass
-                            .newInstance();
-                }
+                iDisconfUpdate = getSpringBean(disconfUpdateServiceClass);
 
             } catch (Exception e) {
+                LOGGER.warn(e.toString());
+            }
 
-                LOGGER.error("Your class "
-                        + disconfUpdateServiceClass.toString()
-                        + " cannot new instance. " + e.toString());
-                continue;
+            //
+            // 非Spring方式
+            if (iDisconfUpdate == null) {
+                try {
+
+                    iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass
+                            .newInstance();
+
+                } catch (Exception e) {
+
+                    LOGGER.error("Your class "
+                            + disconfUpdateServiceClass.toString()
+                            + " cannot new instance. " + e.toString());
+                    continue;
+                }
             }
 
             // 反索引
@@ -178,15 +177,16 @@ public class ScanPack {
      * 
      * @return
      */
-    private static IDisconfUpdate getSpringBean(String beanName) {
+    private static IDisconfUpdate getSpringBean(Class<?> cls) throws Exception {
 
         if (SpringContextUtil.getApplicationContext() == null) {
-            LOGGER.error("Spring Context is null. Cannot autowire " + beanName);
+            LOGGER.error("Spring Context is null. Cannot autowire "
+                    + cls.getCanonicalName());
             return null;
         }
 
         // spring 方式
-        return (IDisconfUpdate) SpringContextUtil.getBean(beanName);
+        return (IDisconfUpdate) SpringContextUtil.getBean(cls);
     }
 
     /**

@@ -18,7 +18,7 @@ public class UpdateNode {
 
     public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
 
-    public static String disconfFileNode = "/disconf/disconf_demo_1_0_0_0_rd/file/coefficients.properties";
+    public static String disconfFileNode = "/disconf/disconf_demo_1_0_0_0_rd/file/redis.properties";
 
     private ResilientActiveKeyValueStore store;
     private Random random = new Random();

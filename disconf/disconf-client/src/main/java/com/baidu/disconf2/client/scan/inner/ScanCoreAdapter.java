@@ -176,36 +176,27 @@ public class ScanCoreAdapter {
         // key
         disconfCenterItem.setKey(key);
 
-        // beanName
-        String beanName = MyBeanUtils.getSpringServiceName(field
-                .getDeclaringClass());
-
         // value
         field.setAccessible(true);
 
         //
         // Spring方式
         //
-        boolean isSpringMode = false;
-        if (beanName != null) {
+        Object object = null;
+        try {
 
-            try {
-
-                Object object = getSpringBean(beanName,
-                        field.getDeclaringClass());
-                if (object != null) {
-                    isSpringMode = true;
-                    disconfCenterItem.setObject(object);
-                }
-            } catch (Exception e) {
-                LOGGER.warn(e.toString());
+            object = getSpringBean(field.getDeclaringClass());
+            if (object != null) {
+                disconfCenterItem.setObject(object);
             }
+        } catch (Exception e) {
+            LOGGER.warn(e.toString());
         }
 
         //
         // 非Spring方式
         //
-        if (!isSpringMode) {
+        if (object == null) {
 
             if (Modifier.isStatic(field.getModifiers())) {
                 disconfCenterItem.setObject(null);
@@ -243,16 +234,16 @@ public class ScanCoreAdapter {
      * 
      * @return
      */
-    private static Object getSpringBean(String beanName, Class<?> cls)
-            throws Exception {
+    private static Object getSpringBean(Class<?> cls) throws Exception {
 
         if (SpringContextUtil.getApplicationContext() == null) {
-            LOGGER.error("Spring Context is null. Cannot autowire " + beanName);
+            LOGGER.error("Spring Context is null. Cannot autowire "
+                    + cls.getCanonicalName());
             return null;
         }
 
         // spring 方式
-        Object object = SpringContextUtil.getBean(beanName);
+        Object object = SpringContextUtil.getBean(cls);
 
         return MyBeanUtils.getTargetObject(object, cls);
     }
