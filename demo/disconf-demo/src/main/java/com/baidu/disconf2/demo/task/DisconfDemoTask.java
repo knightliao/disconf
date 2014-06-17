@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.demo.model.BaoBaoService;
+import com.baidu.disconf2.demo.model.JedisConfig;
 import com.baidu.disconf2.demo.model.SimpleRedisService;
 
 /**
@@ -25,6 +26,9 @@ public class DisconfDemoTask {
     @Autowired
     private SimpleRedisService simpleRedisService;
 
+    @Autowired
+    private JedisConfig jedisConfig;
+
     private static final String REDIS_KEY = "disconf_key";
 
     /**
@@ -41,8 +45,9 @@ public class DisconfDemoTask {
 
                 Thread.sleep(5000);
 
-                LOGGER.info("redis get key: " + REDIS_KEY + " , "
-                        + simpleRedisService.getKey(REDIS_KEY));
+                LOGGER.info("redis( " + jedisConfig.getHost() + ","
+                        + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
+                        + " , " + simpleRedisService.getKey(REDIS_KEY));
             }
 
         } catch (Exception e) {

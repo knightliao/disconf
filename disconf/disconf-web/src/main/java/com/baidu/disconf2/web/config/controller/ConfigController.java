@@ -86,11 +86,11 @@ public class ConfigController {
         try {
             configModel = configValidator.verifyConfForm(confForm);
         } catch (Exception e) {
-            LOG.error(e.toString(), e);
+            LOG.error(e.toString());
             hasError = true;
         }
 
-        if (hasError != false) {
+        if (hasError == false) {
             try {
                 //
                 Config config = configMgr.getConfByParameter(
@@ -104,7 +104,7 @@ public class ConfigController {
                 return downloadDspBill(configModel.getKey(), config.getValue());
 
             } catch (Exception e) {
-                LOG.error(e.toString(), e);
+                LOG.error(e.toString());
             }
         }
 
