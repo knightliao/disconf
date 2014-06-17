@@ -18,8 +18,7 @@ public class UpdateNode {
 
     public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
 
-    public static String disconfFileNode = "/disconf/disconf_demo_1_0_0_0_rd/file/confA.properties";
-    public static String disconfFileNode2 = "/disconf/disconf_demo_1_0_0_0_rd/item/keyA";
+    public static String disconfFileNode = "/disconf/disconf_demo_1_0_0_0_rd/file/coefficients.properties";
 
     private ResilientActiveKeyValueStore store;
     private Random random = new Random();
@@ -34,11 +33,6 @@ public class UpdateNode {
         String value = random.nextInt(100) + "";
         store.write(disconfFileNode, value);
         System.out.printf("Set %s to %s\n", disconfFileNode, value);
-        TimeUnit.SECONDS.sleep(random.nextInt(5));
-
-        value = random.nextInt(100) + "";
-        store.write(disconfFileNode2, value);
-        System.out.printf("Set %s to %s\n", disconfFileNode2, value);
         TimeUnit.SECONDS.sleep(random.nextInt(5));
     }
 
