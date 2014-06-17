@@ -23,24 +23,19 @@
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="locations">
             <list>
-                <value>classpath*:/confA.properties</value>
-                <value>classpath*:/confB.properties</value>
+                <value>classpath*:/coefficients.properties</value>
             </list>
         </property>
     </bean>
-    
+
     <bean id="disconfMgrBean" class="com.baidu.disconf2.client.DisconfMgrBean"
         init-method="init" destroy-method="destory">
         <property name="scanPackage" value="com.baidu.disconf2.client.test" />
     </bean>
 
-    <bean id="confA" class="com.baidu.disconf2.demo.model.ConfA">
-        <property name="varA" value="${varA}" />
-        <property name="varA2" value="${varA2}" />
-    </bean>
-
-    <bean id="confB" class="com.baidu.disconf2.demo.model.ConfB">
-        <property name="varB" value="${varB}" />
+    <bean id="coefficients" class="com.baidu.disconf2.demo.model.Coefficients">
+        <property name="baiFaCoe" value="${baiFaCoe}" />
+        <property name="yuErBaoCoe" value="${yuErBaoCoe}" />
     </bean>
 
 </beans>

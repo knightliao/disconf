@@ -9,29 +9,28 @@ import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 
 /**
- * 分布式配置服务回调函数<br/>
- * 
- * 1. 使用了分布式配置文件 @DisconfUpdateService <br/>
+ * 更新Redis配置时的回调函数
  * 
  * @author liaoqiqi
- * @version 2014-5-22
+ * @version 2014-6-17
  */
 @Service
-@DisconfUpdateService(keys = { ConfA.filename })
-public class ServiceBUpdateCallback implements IDisconfUpdate {
+@DisconfUpdateService(keys = { JedisConfig.filename })
+public class SimpleRedisServiceUpdateCallback implements IDisconfUpdate {
 
     protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ServiceBUpdateCallback.class);
+            .getLogger(SimpleRedisServiceUpdateCallback.class);
 
     @Autowired
-    private ServiceB serviceB;
+    private SimpleRedisService simpleRedisService;
 
     /**
      * 
      */
     public void reload() throws Exception {
 
-        LOGGER.info(String.valueOf(serviceB.getAValue()));
+        simpleRedisService.changeJedis();
+
     }
 
 }

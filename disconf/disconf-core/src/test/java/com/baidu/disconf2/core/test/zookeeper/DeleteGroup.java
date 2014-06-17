@@ -8,6 +8,8 @@ import com.baidu.disconf2.core.common.zookeeper.inner.ConnectionWatcher;
 
 /**
  * 
+ * 递归进行删除
+ * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -18,14 +20,20 @@ public class DeleteGroup extends ConnectionWatcher {
     public void delete(String groupName) throws KeeperException,
             InterruptedException {
 
-        String path = "/" + groupName;
+        String path = groupName;
 
         try {
             List<String> children = zk.getChildren(path, false);
-            for (String child : children) {
-                zk.delete(path + "/" + child, -1);
+            if (children.size() == 0) {
+                System.out.println("delete: " + path);
+                zk.delete(path, -1);
+                return;
             }
-            zk.delete(path, -1);
+
+            for (String child : children) {
+                delete(path + "/" + child);
+            }
+
         } catch (KeeperException.NoNodeException e) {
             System.out.printf("Group %s does not exist\n", groupName);
             System.exit(1);
@@ -36,8 +44,7 @@ public class DeleteGroup extends ConnectionWatcher {
 
         DeleteGroup deleteGroup = new DeleteGroup();
         deleteGroup.connect(hosts);
-        deleteGroup.delete("disconf/dsp_demo_1_0_0_0_online/file");
-        deleteGroup.delete("disconf/dsp_demo_1_0_0_0_online/item");
+        deleteGroup.delete("/disconf");
         deleteGroup.close();
     }
 }

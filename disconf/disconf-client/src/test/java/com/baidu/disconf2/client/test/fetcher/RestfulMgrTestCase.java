@@ -50,7 +50,7 @@ public class RestfulMgrTestCase extends BaseTestCase {
         try {
 
             String curUrl = DisconfWebPathMgr.getRemoteUrlParameter(
-                    "/api/config", "disconf_demo", "1_0_0_0", "rd",
+                    "/api/config", "disconf_testcase", "1_0_0_0", "rd",
                     "confA.properties", DisConfigTypeEnum.FILE);
 
             RemoteUrl remoteUrl = new RemoteUrl(curUrl, hostList);
