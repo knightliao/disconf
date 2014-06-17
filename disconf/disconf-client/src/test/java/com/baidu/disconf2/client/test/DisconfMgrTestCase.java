@@ -7,15 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.disconf2.client.DisconfMgr;
-import com.baidu.disconf2.client.config.ConfigMgr;
-import com.baidu.disconf2.client.config.inner.DisClientConfig;
-import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.client.test.model.ConfA;
 import com.baidu.disconf2.client.test.model.ServiceA;
-import com.baidu.disconf2.core.common.path.DisconfWebPathMgr;
-import com.baidu.utils.NetUtils;
 
 /**
  * 
@@ -38,24 +33,14 @@ public class DisconfMgrTestCase extends BaseTestCase {
     @Test
     public void demo() {
 
-        String packName = "com.baidu.disconf2.client";
+        String packName = "com.baidu.disconf2.client.test";
 
         try {
 
             //
-            // 如果网络不通则认为测试通过
-            //
-            ConfigMgr.init();
-            if (!NetUtils.pingUrl(DisClientConfig.getInstance().getHostList()
-                    .get(0)
-                    + DisconfWebPathMgr.getZooHostsUrl(DisClientSysConfig
-                            .getInstance().CONF_SERVER_ZOO_ACTION))) {
+            if (!checkNetWork()) {
                 return;
             }
-
-            //
-            //
-            //
 
             LOGGER.info("================ BEFORE DISCONF ==============================");
 
@@ -87,7 +72,7 @@ public class DisconfMgrTestCase extends BaseTestCase {
 
             LOGGER.info("================ AFTER DISCONF ==============================");
 
-            Thread.sleep(10000000);
+            Thread.sleep(10000);
 
         } catch (Exception e) {
 

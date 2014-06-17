@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baidu.disconf2.client.common.annotations.DisconfActiveBackupService;
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 
@@ -13,13 +12,11 @@ import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
  * 分布式配置服务回调函数<br/>
  * 
  * 1. 使用了分布式配置文件 @DisconfUpdateService <br/>
- * 2. 主备切换分布式服务 @DisconfUpdateService
  * 
  * @author liaoqiqi
  * @version 2014-5-22
  */
 @Service
-@DisconfActiveBackupService(keys = { ConfA.filename })
 @DisconfUpdateService(keys = { ConfA.filename })
 public class ServiceBUpdateCallback implements IDisconfUpdate {
 

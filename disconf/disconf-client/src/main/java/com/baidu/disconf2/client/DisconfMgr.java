@@ -84,7 +84,7 @@ public class DisconfMgr {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public static void close() throws Exception {
+    public static void close() {
 
         try {
 
@@ -102,7 +102,6 @@ public class DisconfMgr {
         } catch (Exception e) {
 
             LOGGER.error("DisConfMgr close Failed.", e);
-            throw new Exception("DisConfMgr close Failed.", e);
         }
     }
 

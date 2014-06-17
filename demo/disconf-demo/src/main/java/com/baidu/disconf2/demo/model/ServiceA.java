@@ -1,5 +1,6 @@
 package com.baidu.disconf2.demo.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceA {
 
+    @Autowired
+    private ConfA confA;
+
     public int calcMoney() {
-        return ConfA.getVarA() * 10;
+        return confA.getVarA() * 10;
     }
 
 }

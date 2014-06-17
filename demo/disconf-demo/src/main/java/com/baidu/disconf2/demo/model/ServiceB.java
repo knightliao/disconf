@@ -1,5 +1,6 @@
 package com.baidu.disconf2.demo.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,11 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceB {
 
-    private ModelB modelB = null;
-
-    public ServiceB() {
-        modelB = new ModelB(ConfA.getVarA());
-    }
+    @Autowired
+    private ConfA confA;
+    
+    pri
 
     public int getAValue() {
 
