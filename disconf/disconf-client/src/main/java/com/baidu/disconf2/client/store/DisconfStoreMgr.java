@@ -220,7 +220,7 @@ public class DisconfStoreMgr {
     }
 
     /**
-     * 将配置项数据注入到仓库
+     * 将配置项数据注入到仓库, 并注入实体
      */
     public void injectItem2Store(String key, String value) {
 
@@ -234,12 +234,17 @@ public class DisconfStoreMgr {
         }
 
         // 存储
-        Class<?> typeClass = disconfCenterItem.getKeyType();
+        Class<?> typeClass = disconfCenterItem.getField().getType();
 
         // 根据类型设置值
+        //
+        // 注入仓库和实体
+        //
         try {
             Object newValue = ClassUtils.getValeByType(typeClass, value);
             disconfCenterItem.setValue(newValue);
+            disconfCenterItem.getField().set(disconfCenterItem.getObject(),
+                    newValue);
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
             return;

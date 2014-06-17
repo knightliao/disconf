@@ -98,6 +98,8 @@ public class ZookeeperMgr {
             if (!deafult_path_exist) {
                 LOGGER.info("create: " + dir);
                 this.writePersistentUrl(dir, data);
+            } else {
+                this.writePersistentUrl(dir, data);
             }
 
         } catch (KeeperException e) {

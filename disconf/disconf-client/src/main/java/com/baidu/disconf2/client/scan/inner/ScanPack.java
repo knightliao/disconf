@@ -20,7 +20,6 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.client.common.annotations.DisconfActiveBackupService;
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
@@ -29,6 +28,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.constants.Constants;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf2.utils.MyBeanUtils;
 import com.baidu.disconf2.utils.SpringContextUtil;
 import com.google.common.base.Predicate;
 
@@ -128,7 +128,8 @@ public class ScanPack {
             // 非Spring直接New
             // Spring要GetBean
             //
-            String beanName = getSpringServiceName(disconfUpdateServiceClass);
+            String beanName = MyBeanUtils
+                    .getSpringServiceName(disconfUpdateServiceClass);
 
             IDisconfUpdate iDisconfUpdate;
 
@@ -186,29 +187,6 @@ public class ScanPack {
 
         // spring 方式
         return (IDisconfUpdate) SpringContextUtil.getBean(beanName);
-    }
-
-    /**
-     * 获取Spring service bean name,如果是非Spring，则返回null
-     * 
-     * @return
-     */
-    private static String getSpringServiceName(
-            Class<?> disconfUpdateServiceClass) {
-
-        Service serviceAnnotation = disconfUpdateServiceClass
-                .getAnnotation(Service.class);
-        if (serviceAnnotation == null) {
-            return null;
-        }
-
-        String name = serviceAnnotation.value();
-        if (name.isEmpty()) {
-            name = disconfUpdateServiceClass.getSimpleName();
-            name = name.substring(0, 1).toLowerCase() + name.substring(1);
-        }
-
-        return name;
     }
 
     /**

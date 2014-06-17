@@ -77,15 +77,12 @@ public class NodeWatcher implements Watcher {
                         + disConfigTypeEnum.getModelName()
                         + ")======================");
 
-                // 调用回调函数
+                // 调用回调函数, 回调函数里会重新进行监控
                 try {
                     disconfSysUpdateCallback.reload(disConfigTypeEnum, keyName);
                 } catch (Exception e) {
                     LOGGER.error(e.toString(), e);
                 }
-
-                // 重新监控
-                monitorMaster();
 
             } catch (Exception e) {
 

@@ -36,6 +36,8 @@ public class DisconfDemoTask {
      */
     public int run() {
 
+        LOGGER.info(baoBaoService.toString());
+        
         try {
 
             while (true) {
@@ -48,6 +50,8 @@ public class DisconfDemoTask {
                 LOGGER.info("redis( " + jedisConfig.getHost() + ","
                         + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
                         + " , " + simpleRedisService.getKey(REDIS_KEY));
+          
+                
             }
 
         } catch (Exception e) {

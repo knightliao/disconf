@@ -27,6 +27,8 @@ import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.DisconfWebPathMgr;
 import com.baidu.disconf2.core.common.path.ZooPathMgr;
+import com.baidu.disconf2.utils.MyBeanUtils;
+import com.baidu.disconf2.utils.SpringContextUtil;
 
 /**
  * 
@@ -157,6 +159,7 @@ public class ScanCoreAdapter {
 
         // field
         Field field = ScanVerify.getFieldFromMethod(method);
+
         if (field == null) {
             return null;
         }
@@ -167,23 +170,55 @@ public class ScanCoreAdapter {
         // 去掉空格
         String key = disconfItem.key().replace(" ", "");
 
+        // field
+        disconfCenterItem.setField(field);
+
         // key
         disconfCenterItem.setKey(key);
+
+        // beanName
+        String beanName = MyBeanUtils.getSpringServiceName(field
+                .getDeclaringClass());
+
         // value
         field.setAccessible(true);
-        if (Modifier.isStatic(field.getModifiers())) {
+
+        //
+        // Spring方式
+        //
+        boolean isSpringMode = false;
+        if (beanName != null) {
+
             try {
-                disconfCenterItem.setValue(field.get(null));
+
+                Object object = getSpringBean(beanName,
+                        field.getDeclaringClass());
+                if (object != null) {
+                    isSpringMode = true;
+                    disconfCenterItem.setObject(object);
+                }
             } catch (Exception e) {
-                LOGGER.error(e.toString());
-                return null;
+                LOGGER.warn(e.toString());
             }
-        } else {
-            disconfCenterItem.setValue(null);
         }
 
-        // key type
-        disconfCenterItem.setKeyType(field.getType());
+        //
+        // 非Spring方式
+        //
+        if (!isSpringMode) {
+
+            if (Modifier.isStatic(field.getModifiers())) {
+                disconfCenterItem.setObject(null);
+                try {
+                    disconfCenterItem.setValue(field.get(null));
+                } catch (Exception e) {
+                    LOGGER.error(e.toString());
+                    disconfCenterItem.setValue(null);
+                }
+            } else {
+                disconfCenterItem.setValue(null);
+            }
+        }
 
         //
         // disConfCommonModel
@@ -201,6 +236,25 @@ public class ScanCoreAdapter {
         disconfCenterItem.setRemoteServerUrl(url);
 
         return disconfCenterItem;
+    }
+
+    /**
+     * 获取Spring Bean
+     * 
+     * @return
+     */
+    private static Object getSpringBean(String beanName, Class<?> cls)
+            throws Exception {
+
+        if (SpringContextUtil.getApplicationContext() == null) {
+            LOGGER.error("Spring Context is null. Cannot autowire " + beanName);
+            return null;
+        }
+
+        // spring 方式
+        Object object = SpringContextUtil.getBean(beanName);
+
+        return MyBeanUtils.getTargetObject(object, cls);
     }
 
     /**

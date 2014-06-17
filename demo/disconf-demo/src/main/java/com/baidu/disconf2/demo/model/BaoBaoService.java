@@ -36,7 +36,7 @@ public class BaoBaoService {
     }
 
     /**
-     * 计算余额宝一天赚多少钱
+     * k 计算余额宝一天赚多少钱
      * 
      * @return
      */
