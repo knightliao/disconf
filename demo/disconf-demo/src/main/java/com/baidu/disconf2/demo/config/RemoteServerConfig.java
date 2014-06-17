@@ -8,7 +8,7 @@ import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
  * @author liaoqiqi
  * @version 2014-6-17
  */
-@DisconfFile(filename = JedisConfig.filename)
+@DisconfFile(filename = RemoteServerConfig.filename)
 public class RemoteServerConfig {
 
     public static final String filename = "remote.properties";
