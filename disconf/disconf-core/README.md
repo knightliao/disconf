@@ -1,4 +1,4 @@
 disconf-core
 ============
 
-Core Dependency Library for Disconf Project (https://github.com/knightliao/disconf)
+分布式配置基础包模块
