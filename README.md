@@ -52,9 +52,9 @@ Distributed Configuration Management Tools
 
 - disconf/disconf-core: 分布式配置基础包模块
 - disconf/disconf-client: 分布式配置管理客户端模块
-- disconf/disconf-web: 分布式配置管理平台Web模块
-- demo/disconf-springdemo: 使用disconf的spring mvc demo程序
-- demo/disconf-demo: 使用disconf的standalone demo程序
+- disconf/disconf-web: 分布式配置平台服务模块
+- demo/disconf-springdemo: 使用disconf的spring mvc web demo程序
+- demo/disconf-demo: 使用disconf的standalone demo程序(基于spring)
 
 ## 用户使用指南 ##
 
