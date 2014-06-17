@@ -4,3 +4,5 @@
 /.classpath
 /.project
 /target
+/disconf
+/log

@@ -77,6 +77,8 @@ public class ConfigController {
     @ResponseBody
     public HttpEntity<byte[]> getFile(ConfForm confForm) {
 
+        boolean hasError = false;
+
         //
         // 校验
         //
@@ -84,23 +86,33 @@ public class ConfigController {
         try {
             configModel = configValidator.verifyConfForm(confForm);
         } catch (Exception e) {
-            LOG.warn(e.toString());
-            if (confForm.getKey() != null) {
-                throw new DocumentNotFoundException(confForm.getKey());
-            } else {
-                throw new DocumentNotFoundException("");
+            LOG.error(e.toString(), e);
+            hasError = true;
+        }
+
+        if (hasError != false) {
+            try {
+                //
+                Config config = configMgr.getConfByParameter(
+                        configModel.getAppId(), configModel.getEnvId(),
+                        configModel.getVersion(), configModel.getKey());
+                if (config == null) {
+                    hasError = true;
+                    throw new DocumentNotFoundException(configModel.getKey());
+                }
+
+                return downloadDspBill(configModel.getKey(), config.getValue());
+
+            } catch (Exception e) {
+                LOG.error(e.toString(), e);
             }
         }
 
-        //
-        Config config = configMgr.getConfByParameter(configModel.getAppId(),
-                configModel.getEnvId(), configModel.getVersion(),
-                configModel.getKey());
-
-        //
-        //
-        //
-        return downloadDspBill(configModel.getKey(), config.getValue());
+        if (confForm.getKey() != null) {
+            throw new DocumentNotFoundException(confForm.getKey());
+        } else {
+            throw new DocumentNotFoundException("");
+        }
     }
 
     /**
@@ -113,10 +125,6 @@ public class ConfigController {
 
         HttpHeaders header = new HttpHeaders();
         byte[] res = value.getBytes();
-
-        if (res == null) {
-            throw new DocumentNotFoundException(fileName);
-        }
 
         String name = null;
 

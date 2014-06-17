@@ -9,6 +9,7 @@ import com.baidu.disconf2.client.core.DisconfCoreMgr;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.fetcher.inner.restful.RestfulMgr;
 import com.baidu.disconf2.client.scan.ScanMgr;
+import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 
@@ -67,6 +68,13 @@ public class DisconfMgr {
 
             // 获取数据/注入/Watch
             DisconfCoreMgr.init();
+
+            //
+            LOGGER.info("Conf File Map: "
+                    + DisconfStoreMgr.getInstance().getConfFileMap().toString());
+            //
+            LOGGER.info("Conf Item Map: "
+                    + DisconfStoreMgr.getInstance().getConfItemMap().toString());
 
         } catch (Exception e) {
 

@@ -21,7 +21,7 @@ public class BaoBaoService {
 
     public static final String key = "moneyInvest";
 
-    private Double moneyInvest;
+    private Double moneyInvest = 1000d;
 
     @Autowired
     private Coefficients coefficients;

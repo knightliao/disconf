@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import redis.clients.jedis.Jedis;
 
@@ -16,6 +17,7 @@ import com.baidu.disconf2.demo.utils.JedisUtil;
  * @author liaoqiqi
  * @version 2014-6-17
  */
+@Service
 public class SimpleRedisService implements InitializingBean, DisposableBean {
 
     protected static final Logger LOGGER = LoggerFactory

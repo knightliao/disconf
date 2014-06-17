@@ -27,7 +27,8 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements
 
         return findOne(new Match(Columns.APP_ID, appId), new Match(
                 Columns.ENV_ID, envId), new Match(Columns.VERSION, version),
-                new Match(Columns.TYPE, disConfigTypeEnum.getType()));
+                new Match(Columns.TYPE, disConfigTypeEnum.getType()),
+                new Match(Columns.NAME, key));
     }
 
 }

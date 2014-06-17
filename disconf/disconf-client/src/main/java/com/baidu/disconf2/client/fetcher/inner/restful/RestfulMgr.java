@@ -176,6 +176,9 @@ public class RestfulMgr {
         // 相应的File对象
         File localTmpFile = new File(localTmpFilePath);
         File localFile = new File(localFilePath);
+        if (localFile.exists()) {
+            localFile.delete();
+        }
 
         try {
 

@@ -24,18 +24,24 @@
         <property name="locations">
             <list>
                 <value>classpath*:/coefficients.properties</value>
+                <value>classpath*:/redis.properties</value>
             </list>
         </property>
     </bean>
 
     <bean id="disconfMgrBean" class="com.baidu.disconf2.client.DisconfMgrBean"
         init-method="init" destroy-method="destory">
-        <property name="scanPackage" value="com.baidu.disconf2.client.test" />
+        <property name="scanPackage" value="com.baidu.disconf2.demo" />
     </bean>
 
     <bean id="coefficients" class="com.baidu.disconf2.demo.model.Coefficients">
         <property name="baiFaCoe" value="${baiFaCoe}" />
         <property name="yuErBaoCoe" value="${yuErBaoCoe}" />
+    </bean>
+
+    <bean id="jedisConfig" class="com.baidu.disconf2.demo.model.JedisConfig">
+        <property name="host" value="${host}" />
+        <property name="port" value="${port}" />
     </bean>
 
 </beans>
