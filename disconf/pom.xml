@@ -536,16 +536,6 @@
         </pluginManagement>
     </build>
 
-
-    <!-- deploy to Baidu Maven repository -->
-    <distributionManagement>
-        <repository>
-            <id>${baidu.deploy.repository.id}</id>
-            <name>scm's Releases</name>
-            <url>${baidu.deploy.repository.url}</url>
-        </repository>
-    </distributionManagement>
-
     <!-- TEST 報告 mvn site -->
     <reporting>
         <plugins>
