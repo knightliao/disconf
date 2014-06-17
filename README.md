@@ -9,7 +9,7 @@ Distributed Configuration Management Tools
 
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
-- Spring
+- Spring(3.1.2+)
 
 ## 它是什么 ##
 
