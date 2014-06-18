@@ -2,7 +2,7 @@
 
 <configuration>
 
-    <property name="log.base" value="./log/disconf" />
+    <property name="log.base" value="./log/disconf-demo" />
 
     <jmxConfigurator />
 

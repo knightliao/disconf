@@ -19,8 +19,6 @@
 
     <import resource="classpath:applicationContext.xml" />
 
-    <context:property-placeholder location="classpath:application.properties" />
-
     <bean id="handlerAdapter"
         class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
