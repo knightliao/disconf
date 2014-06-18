@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf2.demo.config.Coefficients;
 import com.baidu.disconf2.demo.config.JedisConfig;
 
 /**
@@ -16,7 +17,7 @@ import com.baidu.disconf2.demo.config.JedisConfig;
  * @version 2014-6-17
  */
 @Service
-@DisconfUpdateService(keys = { JedisConfig.filename })
+@DisconfUpdateService(keys = { JedisConfig.filename, Coefficients.key })
 public class SimpleRedisServiceUpdateCallback implements IDisconfUpdate {
 
     protected static final Logger LOGGER = LoggerFactory
