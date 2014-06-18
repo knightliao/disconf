@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.client.scan.inner.ScanModel;
-import com.baidu.disconf2.client.scan.inner.ScanPack;
+import com.baidu.disconf2.client.scan.inner.ScanStatic;
+import com.baidu.disconf2.client.scan.inner.model.ScanStaticModel;
 import com.baidu.disconf2.client.test.common.BaseTestCase;
 import com.baidu.disconf2.utils.ScanPrinterUtils;
 
@@ -31,7 +31,7 @@ public class ScanPackTestCase extends BaseTestCase {
 
         try {
 
-            ScanModel scanModel = ScanPack.scan(packName);
+            ScanStaticModel scanModel = ScanStatic.scan(packName);
 
             // PRINT SCAN STORE
             ScanPrinterUtils.printSotreMap(scanModel.getReflections());

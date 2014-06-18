@@ -220,7 +220,7 @@ public class DisconfStoreMgr {
     }
 
     /**
-     * 将配置项数据注入到仓库, 并注入实体
+     * 将配置项数据注入到仓库
      */
     public void injectItem2Store(String key, String value) {
 
@@ -238,13 +238,46 @@ public class DisconfStoreMgr {
 
         // 根据类型设置值
         //
-        // 注入仓库和实体
+        // 注入仓库
         //
         try {
             Object newValue = ClassUtils.getValeByType(typeClass, value);
             disconfCenterItem.setValue(newValue);
+        } catch (Exception e) {
+            LOGGER.error(e.toString(), e);
+            return;
+        }
+    }
+
+    /**
+     * 将配置项数据注入实体
+     */
+    public void injectItem2Instance(String key) {
+
+        DisconfCenterItem disconfCenterItem = disconfCenterStore
+                .getConfItemMap().get(key);
+
+        // 校验是否存在
+        if (disconfCenterItem == null) {
+            LOGGER.error("canot find " + key + " in store....");
+            return;
+        }
+
+        // 无实例无值则 无法注入
+        if (disconfCenterItem.getObject() == null) {
+            LOGGER.warn(key + " 's oboject is null");
+            return;
+        }
+
+        // 根据类型设置值
+        //
+        // 注入实体
+        //
+        try {
+
             disconfCenterItem.getField().set(disconfCenterItem.getObject(),
-                    newValue);
+                    disconfCenterItem.getValue());
+
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
             return;

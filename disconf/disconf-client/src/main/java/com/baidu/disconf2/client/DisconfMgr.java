@@ -29,10 +29,23 @@ public class DisconfMgr {
     private static boolean isInit = false;
 
     /**
+     * 总入口
      * 
      * @param scanPackage
      */
     public static void start(String scanPackage) {
+
+        firstScan(scanPackage);
+
+        secondScan();
+    }
+
+    /**
+     * 第一次扫描，静态扫描
+     * 
+     * @param scanPackage
+     */
+    public static void firstScan(String scanPackage) {
 
         // 该函数不能调用两次
         if (isInit == true) {
@@ -44,7 +57,7 @@ public class DisconfMgr {
         //
         //
 
-        LOGGER.info("******************************* DISCONF START *******************************");
+        LOGGER.info("******************************* DISCONF START FIRST SCAN *******************************");
 
         try {
 
@@ -63,23 +76,54 @@ public class DisconfMgr {
             // Watch 模块
             WatchMgr.getInstance().init();
 
-            // 扫描并入库
-            ScanMgr.init(scanPackage);
+            // 第一次扫描并入库
+            ScanMgr.firstScan(scanPackage);
 
             // 获取数据/注入/Watch
             DisconfCoreMgr.init();
 
             //
-            LOGGER.info("Conf File Map: "
-                    + DisconfStoreMgr.getInstance().getConfFileMap().toString());
-            //
-            LOGGER.info("Conf Item Map: "
-                    + DisconfStoreMgr.getInstance().getConfItemMap().toString());
+            isInit = true;
 
         } catch (Exception e) {
 
             LOGGER.error(e.toString(), e);
         }
+    }
+
+    /**
+     * 第二次扫描, 动态扫描
+     * 
+     * @param scanPackage
+     */
+    public static void secondScan() {
+
+        // 该函数不能调用两次
+        if (isInit == false) {
+            LOGGER.info("should run First Scan before Second Scan.");
+            return;
+        }
+
+        LOGGER.info("******************************* DISCONF START SECOND SCAN *******************************");
+
+        try {
+
+            // 扫描回调函数
+            ScanMgr.secondScan();
+
+            // 注入数据至配置项
+            DisconfCoreMgr.inject2DisconfItmes();
+
+        } catch (Exception e) {
+            LOGGER.error(e.toString(), e);
+        }
+
+        //
+        LOGGER.info("Conf File Map: "
+                + DisconfStoreMgr.getInstance().getConfFileMap().toString());
+        //
+        LOGGER.info("Conf Item Map: "
+                + DisconfStoreMgr.getInstance().getConfItemMap().toString());
 
         LOGGER.info("******************************* DISCONF END *******************************");
     }

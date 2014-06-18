@@ -37,8 +37,6 @@ public class DisconfDemoTask {
      */
     public int run() {
 
-        LOGGER.info(baoBaoService.toString());
-
         try {
 
             while (true) {

@@ -1,5 +1,6 @@
 package com.baidu.disconf2.client.core;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -17,6 +18,8 @@ import com.baidu.disconf2.client.fetcher.FetcherMgr;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
 import com.baidu.disconf2.client.watch.WatchMgr;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf2.utils.MyBeanUtils;
+import com.baidu.disconf2.utils.SpringContextUtil;
 import com.baidu.utils.ConfigLoaderUtils;
 import com.baidu.utils.GsonUtils;
 
@@ -34,7 +37,7 @@ public class DisconfCoreMgr {
     /**
      * 1. 获取远程的所有配置数据<br/>
      * 2. 注入到仓库中<br/>
-     * 3. Watch
+     * 3. Watch 配置
      */
     public static void init() {
 
@@ -47,6 +50,42 @@ public class DisconfCoreMgr {
         // 处理配置项
         //
         updateConfItem();
+    }
+
+    /**
+     * 特殊的，将数据注入到配置项中
+     */
+    public static void inject2DisconfItmes() {
+
+        Map<String, DisconfCenterItem> confItemMap = DisconfStoreMgr
+                .getInstance().getConfItemMap();
+
+        /**
+         * 配置ITEM列表处理
+         */
+        for (String key : confItemMap.keySet()) {
+
+            LOGGER.info("==============\tstart to inject value to disconf item instance: "
+                    + key + "\t=============================");
+
+            DisconfCenterItem disconfCenterItem = confItemMap.get(key);
+
+            try {
+
+                Object object = null;
+
+                Field field = disconfCenterItem.getField();
+
+                object = getSpringBean(field.getDeclaringClass());
+                if (object != null) {
+                    disconfCenterItem.setObject(object);
+                    DisconfStoreMgr.getInstance().injectItem2Instance(key);
+                }
+
+            } catch (Exception e) {
+                LOGGER.warn(e.toString(), e);
+            }
+        }
     }
 
     /**
@@ -293,4 +332,22 @@ public class DisconfCoreMgr {
         }
     }
 
+    /**
+     * 获取Spring Bean
+     * 
+     * @return
+     */
+    private static Object getSpringBean(Class<?> cls) throws Exception {
+
+        if (SpringContextUtil.getApplicationContext() == null) {
+            LOGGER.error("Spring Context is null. Cannot autowire "
+                    + cls.getCanonicalName());
+            return null;
+        }
+
+        // spring 方式
+        Object object = SpringContextUtil.getBean(cls);
+
+        return MyBeanUtils.getTargetObject(object, cls);
+    }
 }
