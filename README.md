@@ -10,15 +10,29 @@ Distributed Configuration Management Tools
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
 - Spring(3.1.2+)
+- 当前版本：2.0
 
-## 它是什么 ##
+## 它是什么? ##
 
 - 命名为Disconf
 - 专注于各种系统的配置管理的通用组件/通用平台
 
-![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh35zjqpz3j20pt0iz75z.jpg)
+Disconf与其它平台的关系：
 
-## 重要功能特点 ##
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ehi7wwkedaj20pr0jqmyu.jpg)
+
+## 当前版本（2.0）功能特点 ##
+
+- 支持配置（配置项+配置文件）的分布式化管理
+- 配置发布统一化
+    - 配置发布、更新统一化（云端存储、发布）
+    - 配置更新自动化
+- 注解式客户端编程
+- 支持Spring方式编程
+
+## 未来版本（完全版）功能特点 ##
+
+### 重要功能特点 ###
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -29,32 +43,31 @@ Distributed Configuration Management Tools
     - 异构主备自动切换：如果一个异构系统存在主备机，主机发生挂机时，备机可以自动获取主机配置从而变成主机。
     - 异构主备机Context共享工具：异构系统下，主备机切换时可能需要共享Context。可以使用Context共享工具来共享主备的Context。
 - **注解式客户端编程**：由于SpringMvc注解式编程方式的流行，使用注解式编程方式可以便捷化客户端的开发。
-- **支持Spring方式和非Spring方式编程**：用户可以自行选择编程习惯，是否引入Spring包。推荐Spring编程方式。
+- **支持Spring方式和非Spring方式编程**：用户可以自行选择编程习惯，是否采用Spring方式进行编程。推荐Spring编程方式。
 
-![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eh36nk2hcqj20nl0fx408.jpg)
+Disconf的功能特点描述图：
+
+![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1ehi7wwkdtoj20nw0fz0uh.jpg)
 
 
-## 其它功能特点 ##
+### 其它功能特点 ###
 
 - 支持配置项多个项目共享，支持批量处理项目配置。
 - 配置监控：平台提供自校验功能（进一步提高稳定性），可以定时校验应用系统的配置是否正确。
 
-## 当前版本的局限性 ##
+## 模块架构图  ##
 
-- 仅支持.properties配置文件
-- 仅支持Spring方式的编程
-
-## 架构图  ##
-
-![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1eh3c824p0aj20b50853z7.jpg)
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ehi7wwhj6uj20iq0b2t9y.jpg)
 
 ## 模块信息##
 
-- disconf/disconf-core: 分布式配置基础包模块
-- disconf/disconf-client: 分布式配置管理客户端模块
-- disconf/disconf-web: 分布式配置平台服务模块
-- demo/disconf-springdemo: 使用disconf的spring mvc web demo程序
-- demo/disconf-demo: 使用disconf的standalone demo程序(基于spring)
+- **disconf**
+	- disconf-core: 分布式配置基础包模块
+	- disconf-client: 分布式配置客户端模块
+	- disconf-web: 分布式配置平台服务模块
+- **demo**
+	- disconf-springdemo: 使用disconf的spring mvc web demo程序
+	- disconf-demo: 使用disconf的standalone demo程序(基于spring)
 
 ## 用户使用指南 ##
 
