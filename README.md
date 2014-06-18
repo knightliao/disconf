@@ -71,7 +71,7 @@ Disconf的功能特点描述图：
 
 ## 用户使用指南 ##
 
-使用示例
+[使用示例](https://github.com/knightliao/disconf/wiki/%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B)
 
 使用手册
 
