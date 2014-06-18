@@ -241,8 +241,16 @@ public class DisconfStoreMgr {
         // 注入仓库
         //
         try {
+
             Object newValue = ClassUtils.getValeByType(typeClass, value);
             disconfCenterItem.setValue(newValue);
+
+            // 如果Object非null,则顺便也注入
+            if (disconfCenterItem.getObject() != null) {
+                disconfCenterItem.getField().set(disconfCenterItem.getObject(),
+                        disconfCenterItem.getValue());
+            }
+
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
             return;
