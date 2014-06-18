@@ -69,11 +69,9 @@ Disconf的功能特点描述图：
 	- disconf-springdemo: 使用disconf的spring mvc web demo程序
 	- disconf-demo: 使用disconf的standalone demo程序(基于spring)
 
-## 用户使用指南 ##
+## 用户教程 ##
 
-[使用示例](https://github.com/knightliao/disconf/wiki/%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B)
-
-使用手册
+[Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
 
 [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 
