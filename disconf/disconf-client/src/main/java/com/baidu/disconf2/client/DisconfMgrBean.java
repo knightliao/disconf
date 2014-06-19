@@ -23,13 +23,6 @@ public class DisconfMgrBean implements BeanFactoryPostProcessor,
     /**
      * 
      */
-    public void init() {
-
-    }
-
-    /**
-     * 
-     */
     public void destory() {
 
         DisconfMgr.close();
