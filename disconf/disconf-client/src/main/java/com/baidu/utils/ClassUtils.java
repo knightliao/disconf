@@ -16,12 +16,22 @@ public class ClassUtils {
      */
     public static String getFieldNameByGetMethodName(String methodName) {
 
-        // 必须以get开始的
-        if (!methodName.startsWith("get")) {
+        int prefixIndex = 0;
+
+        // 必须以get或is开始的
+        if (methodName.startsWith("get")) {
+            prefixIndex = 3;
+
+        } else if (methodName.startsWith("is")) {
+
+            prefixIndex = 2;
+
+        } else {
+
             return null;
         }
 
-        String fieldName = methodName.substring(3);
+        String fieldName = methodName.substring(prefixIndex);
         if (fieldName.length() >= 1) {
             String firstCharStr = String.valueOf(fieldName.charAt(0))
                     .toLowerCase();
