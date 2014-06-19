@@ -68,8 +68,8 @@ Disconf的功能特点描述图：
 	- disconf-client: 分布式配置客户端模块
 	- disconf-web: 分布式配置平台服务模块
 - **demo**
-	- disconf-springdemo: 使用disconf的spring mvc web demo程序
-	- disconf-demo: 使用disconf的standalone demo程序(基于spring)
+	- disconf-springdemo: 使用disconf的SpringMvc Web demo程序
+	- disconf-demo: 使用disconf的基于Spring的standalone demo程序
 
 ## 用户教程 ##
 
