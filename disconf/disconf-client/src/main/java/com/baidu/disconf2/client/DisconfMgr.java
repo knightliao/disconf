@@ -111,8 +111,8 @@ public class DisconfMgr {
             // 扫描回调函数
             ScanMgr.secondScan();
 
-            // 注入数据至配置项
-            DisconfCoreMgr.inject2DisconfItmes();
+            // 注入数据至配置实体中
+            DisconfCoreMgr.inject2DisconfInstance();
 
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);

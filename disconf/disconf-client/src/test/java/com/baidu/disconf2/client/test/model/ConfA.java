@@ -23,7 +23,12 @@ public class ConfA {
      */
     private Long varA2 = 25L;
 
-    @DisconfFileItem
+    /**
+     * name是配置文件中名字; associateField是此get方法相对应的Field名
+     * 
+     * @return
+     */
+    @DisconfFileItem(name = "confa.varA", associateField = "varA")
     public Long getVarA() {
         return varA;
     }
@@ -32,7 +37,7 @@ public class ConfA {
         this.varA = varA;
     }
 
-    @DisconfFileItem
+    @DisconfFileItem(name = "confa.varA2")
     public Long getVarA2() {
         return varA2;
     }

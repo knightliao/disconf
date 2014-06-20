@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
+import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.model.DisConfCommonModel;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
@@ -78,12 +78,29 @@ public class ScanStaticStoreAdapter {
                 DisConfigTypeEnum.FILE);
         disconfCenterFile.setRemoteServerUrl(url);
 
+        // fields
+        Field[] expectedFields = disconfFileClass.getDeclaredFields();
+
         //
         // KEY & VALUE
         //
         Map<String, FileItemValue> keyMaps = new HashMap<String, FileItemValue>();
-        for (Field field : getFieldsFromMethods(methods)) {
 
+        for (Method method : methods) {
+
+            // 获取指定的域
+            Field field = ScanVerify.getFieldFromMethod(method, expectedFields,
+                    DisConfigTypeEnum.FILE);
+            if (field == null) {
+                continue;
+            }
+
+            //
+            DisconfFileItem disconfFileItem = method
+                    .getAnnotation(DisconfFileItem.class);
+            String keyName = disconfFileItem.name();
+
+            // access
             field.setAccessible(true);
 
             // static 则直接获取其值
@@ -91,18 +108,18 @@ public class ScanStaticStoreAdapter {
                 try {
 
                     FileItemValue fileItemValue = new FileItemValue(
-                            field.get(null), field.getType());
-                    keyMaps.put(field.getName(), fileItemValue);
+                            field.get(null), field);
+                    keyMaps.put(keyName, fileItemValue);
 
                 } catch (Exception e) {
                     LOGGER.error(e.toString());
                 }
+
             } else {
 
                 // 非static则为Null, 这里我们没有必要获取其Bean的值
-                FileItemValue fileItemValue = new FileItemValue(null,
-                        field.getType());
-                keyMaps.put(field.getName(), fileItemValue);
+                FileItemValue fileItemValue = new FileItemValue(null, field);
+                keyMaps.put(keyName, fileItemValue);
             }
         }
 
@@ -155,8 +172,15 @@ public class ScanStaticStoreAdapter {
 
         DisconfCenterItem disconfCenterItem = new DisconfCenterItem();
 
+        // class
+        Class<?> cls = method.getDeclaringClass();
+
+        // fields
+        Field[] expectedFields = cls.getDeclaredFields();
+
         // field
-        Field field = ScanVerify.getFieldFromMethod(method);
+        Field field = ScanVerify.getFieldFromMethod(method, expectedFields,
+                DisConfigTypeEnum.ITEM);
 
         if (field == null) {
             return null;
@@ -272,25 +296,6 @@ public class ScanStaticStoreAdapter {
         // 转换配置项
         List<DisconfCenterItem> disconfCenterItems = getDisconfItems(scanModel);
         DisconfStoreMgr.getInstance().transformScanItems(disconfCenterItems);
-    }
-
-    /**
-     * 
-     * @return
-     */
-    private static Set<Field> getFieldsFromMethods(Set<Method> methods) {
-
-        Set<Field> fields = new HashSet<Field>();
-
-        for (Method method : methods) {
-
-            Field field = ScanVerify.getFieldFromMethod(method);
-            if (field != null) {
-                fields.add(field);
-            }
-        }
-
-        return fields;
     }
 
 }

@@ -141,6 +141,7 @@ public class ScanDynamicStoreAdapter {
                     sb.append(serClass.toString() + "\t");
                 }
                 LOGGER.error(sb.toString());
+
             } else {
 
                 // 配置正常

@@ -1,5 +1,6 @@
 package com.baidu.disconf2.client.store.aspect;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
 import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf2.client.common.annotations.DisconfItem;
+import com.baidu.disconf2.client.scan.inner.ScanVerify;
 import com.baidu.disconf2.client.store.DisconfStoreMgr;
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.utils.ClassUtils;
 
 /**
@@ -48,13 +51,6 @@ public class DisconfAspectJ {
         MethodSignature ms = (MethodSignature) pjp.getSignature();
         Method method = ms.getMethod();
 
-        String methodName = method.getName();
-
-        //
-        // Field名
-        //
-        String fieldName = ClassUtils.getFieldNameByGetMethodName(methodName);
-
         //
         // 文件名
         //
@@ -62,14 +58,22 @@ public class DisconfAspectJ {
         DisconfFile disconfFile = cls.getAnnotation(DisconfFile.class);
 
         //
-        // 请求仓库配置数据
+        // Field名
         //
-        Object ret = DisconfStoreMgr.getInstance().getConfigFile(
-                disconfFile.filename(), fieldName);
-        if (ret != null) {
-            LOGGER.info("using disconf store value: (" + fieldName + " , "
-                    + ret + ")");
-            return ret;
+        Field field = ScanVerify.getFieldFromMethod(method,
+                cls.getDeclaredFields(), DisConfigTypeEnum.FILE);
+        if (field != null) {
+
+            //
+            // 请求仓库配置数据
+            //
+            Object ret = DisconfStoreMgr.getInstance().getConfigFile(
+                    disconfFile.filename(), disconfFileItem.name());
+            if (ret != null) {
+                LOGGER.info("using disconf store value: (" + field.getName()
+                        + " , " + ret + ")");
+                return ret;
+            }
         }
 
         Object rtnOb = null;

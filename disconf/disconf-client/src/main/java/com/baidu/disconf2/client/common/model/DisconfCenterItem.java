@@ -17,7 +17,7 @@ public class DisconfCenterItem {
     // Field
     private Field field;
 
-    // 所在类实体(配置文件会采用注入方案,两手准备)
+    // 所在类实体
     private Object object;
 
     // 远程配置服务的URL路径,不包含IP和PORT的

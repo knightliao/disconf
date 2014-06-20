@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf2.client.common.model.DisconfCenterFile;
+import com.baidu.disconf2.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf2.client.common.model.DisconfCenterItem;
 import com.baidu.disconf2.client.common.model.DisconfCommonCallbackModel;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
@@ -53,9 +54,21 @@ public class DisconfCoreMgr {
     }
 
     /**
-     * 特殊的，将数据注入到配置项中
+     * 特殊的，将数据注入到 配置项、配置文件 的实体中
      */
-    public static void inject2DisconfItmes() {
+    public static void inject2DisconfInstance() {
+
+        // 配置项
+        inject2DisconfItmes();
+
+        // 配置文件
+        inject2DisconfFileItmes();
+    }
+
+    /**
+     * 特殊的，将数据注入到配置项实体中
+     */
+    private static void inject2DisconfItmes() {
 
         Map<String, DisconfCenterItem> confItemMap = DisconfStoreMgr
                 .getInstance().getConfItemMap();
@@ -84,6 +97,54 @@ public class DisconfCoreMgr {
 
             } catch (Exception e) {
                 LOGGER.warn(e.toString(), e);
+            }
+        }
+    }
+
+    /**
+     * 特殊的，将数据注入到配置文件实体中
+     */
+    private static void inject2DisconfFileItmes() {
+
+        Map<String, DisconfCenterFile> confFileMap = DisconfStoreMgr
+                .getInstance().getConfFileMap();
+
+        /**
+         * 配置ITEM列表处理
+         */
+        for (String key : confFileMap.keySet()) {
+
+            LOGGER.info("==============\tstart to inject value to disconf file item instance: "
+                    + key + "\t=============================");
+
+            DisconfCenterFile disconfCenterFile = confFileMap.get(key);
+
+            Map<String, FileItemValue> fileItemValueMap = disconfCenterFile
+                    .getKeyMaps();
+
+            for (String itemKey : fileItemValueMap.keySet()) {
+
+                try {
+
+                    FileItemValue fileItemValue = fileItemValueMap.get(itemKey);
+
+                    // 设置Object实体(只注入一次哦)
+                    Object object = disconfCenterFile.getObject();
+                    if (object == null) {
+                        object = getSpringBean(fileItemValue.getField()
+                                .getDeclaringClass());
+                        disconfCenterFile.setObject(object);
+                    }
+
+                    // 注入实体中
+                    if (object != null) {
+                        DisconfStoreMgr.getInstance().injectFileItem2Instance(
+                                key);
+                    }
+
+                } catch (Exception e) {
+                    LOGGER.warn(e.toString(), e);
+                }
             }
         }
     }

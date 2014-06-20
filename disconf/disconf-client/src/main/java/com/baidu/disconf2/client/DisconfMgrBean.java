@@ -44,7 +44,7 @@ public class DisconfMgrBean implements BeanFactoryPostProcessor,
     @Override
     public void postProcessBeanFactory(
             ConfigurableListableBeanFactory beanFactory) throws BeansException {
+
         DisconfMgr.firstScan(scanPackage);
     }
-
 }

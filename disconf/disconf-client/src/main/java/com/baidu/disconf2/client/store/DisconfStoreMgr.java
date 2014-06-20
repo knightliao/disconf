@@ -162,6 +162,12 @@ public class DisconfStoreMgr {
             return null;
         }
 
+        if (disconfCenterFile.getKeyMaps().get(keyName) == null) {
+            LOGGER.info("canot find " + fileName + ", " + keyName
+                    + " in store....");
+            return null;
+        }
+
         return disconfCenterFile.getKeyMaps().get(keyName).getValue();
     }
 
@@ -210,9 +216,19 @@ public class DisconfStoreMgr {
 
             // 根据类型设置值
             try {
+
                 Object value = ClassUtils.getValeByType(keMap.get(fileItem)
-                        .getType(), (String) object);
+                        .getField().getType(), (String) object);
                 keMap.get(fileItem).setValue(value);
+
+                // 如果Object非null,则顺便也注入
+                if (disconfCenterFile.getObject() != null) {
+                    keMap.get(fileItem)
+                            .getField()
+                            .set(disconfCenterFile.getObject(),
+                                    keMap.get(fileItem).getValue());
+                }
+
             } catch (Exception e) {
                 LOGGER.error(e.toString(), e);
             }
@@ -289,6 +305,46 @@ public class DisconfStoreMgr {
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
             return;
+        }
+    }
+
+    /*
+     * 将配置文件数据注入实体
+     */
+    public void injectFileItem2Instance(String fileName) {
+
+        DisconfCenterFile disconfCenterFile = disconfCenterStore
+                .getConfFileMap().get(fileName);
+
+        // 校验是否存在
+        if (disconfCenterFile == null) {
+            LOGGER.error("canot find " + fileName + " in store....");
+            return;
+        }
+
+        // 无实例无值则 无法注入
+        if (disconfCenterFile.getObject() == null) {
+            LOGGER.warn(fileName + " 's oboject is null");
+            return;
+        }
+
+        // 根据类型设置值
+        //
+        // 注入实体
+        //
+        Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
+        for (String fileItem : keMap.keySet()) {
+
+            // 根据类型设置值
+            try {
+
+                keMap.get(fileItem)
+                        .getField()
+                        .set(disconfCenterFile.getObject(),
+                                keMap.get(fileItem).getValue());
+            } catch (Exception e) {
+                LOGGER.error(e.toString(), e);
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.baidu.disconf2.client.common.model;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +18,9 @@ public class DisconfCenterFile {
 
     // 配置文件类
     private Class<?> cls;
+
+    // 所在类实体
+    private Object object;
 
     // 文件名
     private String fileName;
@@ -75,17 +79,18 @@ public class DisconfCenterFile {
         return keyMaps;
     }
 
+    public void setKeyMaps(Map<String, FileItemValue> keyMaps) {
+        this.keyMaps = keyMaps;
+    }
+
     @Override
     public String toString() {
         return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
-                + ", fileName=" + fileName + ", remoteServerUrl="
-                + remoteServerUrl + ", disConfCommonModel="
-                + disConfCommonModel + ", disconfCommonCallbackModel="
-                + disconfCommonCallbackModel + "]";
-    }
-
-    public void setKeyMaps(Map<String, FileItemValue> keyMaps) {
-        this.keyMaps = keyMaps;
+                + ", object=" + object + ", fileName=" + fileName
+                + ", remoteServerUrl=" + remoteServerUrl
+                + ", disConfCommonModel=" + disConfCommonModel
+                + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
+                + "]";
     }
 
     /**
@@ -104,6 +109,14 @@ public class DisconfCenterFile {
         return map;
     }
 
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
     /**
      * 配置文件Item项表示，包括了值，还有其类型
      * 
@@ -111,8 +124,9 @@ public class DisconfCenterFile {
      * @version 2014-6-16
      */
     public static class FileItemValue {
+
         private Object value;
-        private Class<?> type;
+        private Field field;
 
         public Object getValue() {
             return value;
@@ -122,23 +136,23 @@ public class DisconfCenterFile {
             this.value = value;
         }
 
-        public Class<?> getType() {
-            return type;
+        public Field getField() {
+            return field;
         }
 
-        public void setType(Class<?> type) {
-            this.type = type;
+        public void setField(Field field) {
+            this.field = field;
         }
 
         @Override
         public String toString() {
-            return "FileItemValue [value=" + value + ", type=" + type + "]";
+            return "FileItemValue [value=" + value + ", field=" + field + "]";
         }
 
-        public FileItemValue(Object value, Class<?> type) {
+        public FileItemValue(Object value, Field field) {
             super();
             this.value = value;
-            this.type = type;
+            this.field = field;
         }
 
     }

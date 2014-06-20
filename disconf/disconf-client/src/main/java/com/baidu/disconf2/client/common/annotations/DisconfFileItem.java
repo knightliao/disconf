@@ -17,4 +17,17 @@ import java.lang.annotation.Target;
 @Documented
 public @interface DisconfFileItem {
 
+    /**
+     * 配置文件里的KEY的名字
+     * 
+     * @return
+     */
+    String name() ;
+
+    /**
+     * 所关联的域
+     * 
+     * @return
+     */
+    String associateField() default "";
 }

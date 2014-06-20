@@ -3,11 +3,15 @@ package com.baidu.disconf2.client.scan.inner;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf2.client.common.annotations.DisconfFile;
+import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
+import com.baidu.disconf2.client.common.annotations.DisconfItem;
 import com.baidu.disconf2.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.utils.ClassUtils;
 
 /**
@@ -65,33 +69,44 @@ public class ScanVerify {
     }
 
     /**
-     * 对于一个get***方法，返回其相对应的Field
+     * 对于一个 get/is 方法，返回其相对应的Field
      * 
      * @return
      */
-    public static Field getFieldFromMethod(Method method) {
+    public static Field getFieldFromMethod(Method method,
+            Field[] expectedFields, DisConfigTypeEnum disConfigTypeEnum) {
 
-        String methodName = method.getName();
+        String fieldName = null;
 
-        // 必须以get开始的
-        if (!methodName.startsWith("get")) {
-            LOGGER.error(method.toString() + " not start with get****");
-            return null;
+        if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
+
+            DisconfFileItem disconfFileItem = method
+                    .getAnnotation(DisconfFileItem.class);
+
+            // 根据用户设定的注解来获取
+            fieldName = disconfFileItem.associateField();
+        } else {
+            DisconfItem disItem = method.getAnnotation(DisconfItem.class);
+
+            // 根据用户设定的注解来获取
+            fieldName = disItem.associateField();
         }
 
-        String fieldName = ClassUtils.getFieldNameByGetMethodName(methodName);
-
-        Class<?> cls = method.getDeclaringClass();
-
-        try {
-
-            Field field = cls.getDeclaredField(fieldName);
-            return field;
-
-        } catch (Exception e) {
-            LOGGER.error(method.toString()
-                    + " cannot get its related field name " + fieldName);
+        if (StringUtils.isEmpty(fieldName)) {
+            // 从方法名 获取其 Field 名
+            fieldName = ClassUtils
+                    .getFieldNameByGetMethodName(method.getName());
         }
+
+        // 确认此Field名是正确的
+        for (Field field : expectedFields) {
+
+            if (field.getName().equals(fieldName)) {
+                return field;
+            }
+        }
+
+        LOGGER.error(method.toString() + " cannot get its related field name. ");
 
         return null;
     }

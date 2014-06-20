@@ -25,6 +25,13 @@ public @interface DisconfItem {
     String key();
 
     /**
+     * 所关联的域
+     * 
+     * @return
+     */
+    String associateField() default "";
+
+    /**
      * 环境,,默认为用户指定的环境
      * 
      * @return
