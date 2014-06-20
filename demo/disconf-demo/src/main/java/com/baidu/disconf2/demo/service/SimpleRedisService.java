@@ -12,7 +12,6 @@ import redis.clients.jedis.Jedis;
 import com.baidu.disconf2.demo.config.JedisConfig;
 import com.baidu.disconf2.demo.utils.JedisUtil;
 
-
 /**
  * 一个简单的Redis服务
  * 

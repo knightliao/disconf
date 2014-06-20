@@ -44,8 +44,8 @@
     </bean>
 
     <bean id="jedisConfig" class="com.baidu.disconf2.demo.config.JedisConfig">
-        <property name="host" value="${host}" />
-        <property name="port" value="${port}" />
+        <property name="host" value="${redis.host}" />
+        <property name="port" value="${redis.port}" />
     </bean>
 
     <bean id="remoteServerConfig" class="com.baidu.disconf2.demo.config.RemoteServerConfig">
