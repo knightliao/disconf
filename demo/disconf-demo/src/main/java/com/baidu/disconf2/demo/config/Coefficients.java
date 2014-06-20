@@ -25,7 +25,7 @@ public class Coefficients {
      * 
      * @return
      */
-    @DisconfFileItem
+    @DisconfFileItem(name = "coe.baiFaCoe")
     public double getBaiFaCoe() {
         return baiFaCoe;
     }
@@ -39,7 +39,7 @@ public class Coefficients {
      * 
      * @return
      */
-    @DisconfFileItem
+    @DisconfFileItem(name = "coe.yuErBaoCoe")
     public double getYuErBaoCoe() {
         return yuErBaoCoe;
     }

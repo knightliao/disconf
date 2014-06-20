@@ -24,7 +24,7 @@ public class RemoteServerConfig {
      * 
      * @return
      */
-    @DisconfFileItem
+    @DisconfFileItem(name = "remoteHost")
     public String getRemoteHost() {
         return remoteHost;
     }
@@ -38,7 +38,7 @@ public class RemoteServerConfig {
      * 
      * @return
      */
-    @DisconfFileItem
+    @DisconfFileItem(name = "remotePort")
     public int getRemotePort() {
         return remotePort;
     }

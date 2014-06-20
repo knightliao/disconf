@@ -25,7 +25,7 @@ public class JedisConfig {
      * 
      * @return
      */
-    @DisconfFileItem
+    @DisconfFileItem(name = "host")
     public String getHost() {
         return host;
     }
@@ -39,7 +39,7 @@ public class JedisConfig {
      * 
      * @return
      */
-    @DisconfFileItem
+    @DisconfFileItem(name = "port")
     public int getPort() {
         return port;
     }

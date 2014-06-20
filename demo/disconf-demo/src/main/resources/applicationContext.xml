@@ -39,8 +39,8 @@
     </bean>
 
     <bean id="coefficients" class="com.baidu.disconf2.demo.config.Coefficients">
-        <property name="baiFaCoe" value="${baiFaCoe}" />
-        <property name="yuErBaoCoe" value="${yuErBaoCoe}" />
+        <property name="baiFaCoe" value="${coe.baiFaCoe}" />
+        <property name="yuErBaoCoe" value="${coe.yuErBaoCoe}" />
     </bean>
 
     <bean id="jedisConfig" class="com.baidu.disconf2.demo.config.JedisConfig">
