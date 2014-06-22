@@ -112,7 +112,6 @@ a {
 }
 
 .contentWrap {
-    margin-top: 20px;
     position: relative;
 }
 .navSub {
@@ -710,7 +709,8 @@ input.autoPush-detail-item-input {
 /* 账户列表 */
 .account-tableWrap {
     border: 1px solid #E8E8E8;
-    margin: 50px 0;
+    margin: 10px;
+    margin-left:30px;
     background: white;
 }
 .account-tableWrap th {
@@ -860,3 +860,4 @@ input.autoPush-detail-item-input {
   padding-bottom: 40px;
   min-height: 80%;
 }
+

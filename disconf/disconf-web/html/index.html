@@ -1,11 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Disconf - 分布式配置管理平台</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Disconf - 分布式配置管理平台</title>
 
-    <link rel="stylesheet" type="text/css" href="dep/bootstrap/css/bootstrap.css" />
+            <link rel="stylesheet" type="text/css" href="dep/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="dep/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/project.css" />
 </head>
@@ -42,24 +42,56 @@
     
     
 
+        <div id="mainwrap">
+            <div class="main container">
+                <div class="row-fluid">
 
-    <div id="mainwrap">
-        <div class="main container">
-            <div class="row-fluid">
-                <ul id="myTab" class="nav nav-tabs">
-                    <li class=""><a href="/" data-toggle="tab">首页</a></li>
-                </ul>
+                    <div class="contentWrap clearfix">
+                        <table class="account-tableWrap">
+                            <thead>
+                                <tr>
+                                    <td class="account-table-title-companyName">APP名/Id</td>
+                                    <td class="account-table-title-companyName">版本</td>
+                                    <td class="account-table-title-companyName">环境</td>
+                                    <td class="account-table-title-companyName">配置类型</td>
+                                    <td class="account-table-title-companyType">配置文件名或配置KEY</td>
+                                    <td class="account-table-title-email">创建/修改时间</td>
+                                    <td class="account-table-title-phone">值</td>
+                                    <td class="account-table-title-activate">操作</td>
+                                </tr>
+                            </thead>
+                            <tbody id="accountBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-            
 
+ <!-- 详细信息单行模板-->
+ <div id="tbodyTpl" class="hide">
+     <table>
+     <tr>
+         <td class="account-table-companyName">{1}</td>
+         <td class="account-table-companyType">{2}</td>
+         <td class="account-table-email">{3}</td>
+         <td class="account-table-phone">{4}</td>
+         <td class="account-table-city">{5}</td>
+         <td class="account-table-applyinfo">{6}</td>
+         <td class="account-table-registerTimeString">{7}</td>
+         <td id="activate{0}" class="account-table-activate" rel="{0}">激活</td>
+     </tr>
+     </table>
+ </div>
+
+        
 <div id="footer">
     <div class="container clearfix">
         <div class="muted links pull-left">
-            <a href="">关于</a>
+            <a href="#">关于</a>
             <span class="sep">·</span>
-            <a href="">帮助</a>
+            <a href="#">帮助</a>
         </div>
 
         <p class="muted credit pull-right">
@@ -75,7 +107,7 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/common.js"></script>
 
-<script src="assets/js/index.js"></script>
-</body>
+        <script src="assets/js/mainList.js"></script>
+        </body>
 </html>
 

@@ -2,9 +2,9 @@
 <div id="footer">
     <div class="container clearfix">
         <div class="muted links pull-left">
-            <a href="">关于</a>
+            <a href="#">关于</a>
             <span class="sep">·</span>
-            <a href="">帮助</a>
+            <a href="#">帮助</a>
         </div>
 
         <p class="muted credit pull-right">
