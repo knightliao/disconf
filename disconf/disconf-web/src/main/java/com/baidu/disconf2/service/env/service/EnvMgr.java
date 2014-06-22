@@ -1,6 +1,9 @@
 package com.baidu.disconf2.service.env.service;
 
+import java.util.List;
+
 import com.baidu.disconf2.service.env.bo.Env;
+import com.baidu.disconf2.service.env.vo.EnvListVo;
 
 /**
  * 
@@ -13,4 +16,10 @@ public interface EnvMgr {
      * @param name
      */
     public Env getByName(String name);
+
+    /**
+     * 
+     * @return
+     */
+    public List<EnvListVo> getList();
 }

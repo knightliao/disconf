@@ -21,9 +21,12 @@ public class ContextReaderImpl implements ApplicationContextAware,
     }
 
     public String getMessage(String resourceMessage) {
-
-        String message = context.getMessage(resourceMessage, null,
-                Locale.SIMPLIFIED_CHINESE);
-        return message;
+        try {
+            String message = context.getMessage(resourceMessage, null,
+                    Locale.SIMPLIFIED_CHINESE);
+            return message;
+        } catch (Exception e) {
+            return resourceMessage;
+        }
     }
 }

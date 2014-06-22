@@ -16,32 +16,39 @@ public enum ErrorCode {
     /**
      * 框架带的
      */
-    // 请求方法不支持
-    HttpRequestMethodNotSupportedException(1000),
-    // 参数不匹配
-    TYPE_MIS_MATCH(1001),
-    // 缺少参数
-    MissingServletRequestParameterException(1002),
+    HttpRequestMethodNotSupportedException(1000), TYPE_MIS_MATCH(1001), MissingServletRequestParameterException(
+            1002),
 
     /**
      * 自定义的
      */
+
     // 域错误
     FIELD_ERROR(2000),
-    // 全局错误，严重的错误,一般要退出的
-    GLOBAL_ERROR(2002),
-    // 只读错误
-    READ_ONLY_ERROR(2004),
-    // 登录出错
-    LOGIN_ERROR(2006),
-    // 远程的错误
+
+    // 全局式的，一般不会抛出
+    GLOBAL_ERROR(2002), READ_ONLY_ERROR(2004),
+
+    // 远程访问错误
     REMOTE_ERROR(2008),
+
+    //
+    // 权限问题
+    //
+    ACCESS_NOAUTH_ERROR(2010),
+
+    // Mcpack Login error
+    LOGIN_ERROR_MCPACK(21005), LOGIN_ERROR(2006),
+
     // 数据库保存的错误
-    DAO_ERROR(2010),
-    // 没有权限
-    ACCESS_NOAUTH_ERROR(2012),
-    // 文件上传错误
-    FILEUPLOAD_ERROR(2014);
+    DAO_ERROR(2012),
+
+    // 非预期错误
+    UN_EXPECTED(2014),
+    
+    // 资源更新冲突错误
+    // 由同时修改同一资源引起
+    CONCURRENT_MODIFY_ERROR(2046);
 
     private int code = 0;
 

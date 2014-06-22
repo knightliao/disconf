@@ -1,11 +1,16 @@
 package com.baidu.disconf2.service.config.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.json.ValueVo;
+import com.baidu.disconf2.service.app.bo.App;
+import com.baidu.disconf2.service.app.service.AppMgr;
 import com.baidu.disconf2.service.config.bo.Config;
 import com.baidu.disconf2.service.config.dao.ConfigDao;
 import com.baidu.disconf2.service.config.service.ConfigMgr;
@@ -21,6 +26,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private ConfigDao configDao;
+
+    @Autowired
+    private AppMgr appMgr;
 
     /**
      * 获取配置
@@ -51,5 +59,28 @@ public class ConfigMgrImpl implements ConfigMgr {
         Config config = configDao.getByParameter(appId, envId, env, key,
                 DisConfigTypeEnum.FILE);
         return config;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public List<String> getConfByAppname(String appName) {
+
+        List<String> versionList = new ArrayList<String>();
+
+        App app = appMgr.getByName(appName);
+        if (app == null) {
+            return versionList;
+        }
+
+        List<Config> configs = configDao.getConfByAppname(app.getId());
+
+        for (Config config : configs) {
+
+            versionList.add(config.getVersion());
+        }
+
+        return versionList;
     }
 }

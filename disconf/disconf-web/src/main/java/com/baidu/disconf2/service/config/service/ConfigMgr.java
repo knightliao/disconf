@@ -1,5 +1,7 @@
 package com.baidu.disconf2.service.config.service;
 
+import java.util.List;
+
 import com.baidu.disconf2.core.common.json.ValueVo;
 import com.baidu.disconf2.service.config.bo.Config;
 
@@ -33,4 +35,11 @@ public interface ConfigMgr {
      */
     public Config getConfByParameter(Long appId, Long envId, String env,
             String key);
+
+    /**
+     * 
+     * @param appName
+     * @return
+     */
+    public List<String> getConfByAppname(String appName);
 }

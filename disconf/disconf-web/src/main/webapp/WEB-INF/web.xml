@@ -19,6 +19,10 @@
     </context-param>
 
     <listener>
+        <listener-class>com.baidu.dsp.common.listener.StartupListener</listener-class>
+    </listener>
+
+    <listener>
         <listener-class>com.baidu.dsp.common.listener.ContextListener</listener-class>
     </listener>
 

@@ -1,5 +1,7 @@
 package com.baidu.disconf2.service.config.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
@@ -31,4 +33,10 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements
                 new Match(Columns.NAME, key));
     }
 
+    @Override
+    public List<Config> getConfByAppname(Long appId) {
+
+        return find(new Match(Columns.APP_ID, appId));
+
+    }
 }

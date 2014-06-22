@@ -11,4 +11,6 @@ import com.baidu.ub.common.generic.dao.BaseDao;
 public interface AppDao extends BaseDao<Long, App> {
 
     public App getByName(String name);
+
+
 }

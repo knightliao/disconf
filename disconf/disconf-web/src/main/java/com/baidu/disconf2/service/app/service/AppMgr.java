@@ -23,4 +23,5 @@ public interface AppMgr {
      * @return
      */
     public List<AppListVo> getList();
+
 }
