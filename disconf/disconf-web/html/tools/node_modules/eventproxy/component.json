@@ -1,0 +1,22 @@
+{
+  "name": "eventproxy",
+  "repo": "JacksonTian/eventproxy",
+  "description": "An implementation of task/event based asynchronous pattern.",
+  "version": "0.2.5",
+  "keywords": [
+    "event",
+    "task-base",
+    "event machine",
+    "nested callback terminator"
+  ],
+  "dependencies": {
+    "visionmedia/debug": "*"
+  },
+  "development": {
+    "chaijs/chai": "*",
+    "fengmk2/pedding": "*"
+  },
+  "main": "index.js",
+  "scripts": ["index.js", "lib/eventproxy.js"],
+  "license": "MIT"
+}
