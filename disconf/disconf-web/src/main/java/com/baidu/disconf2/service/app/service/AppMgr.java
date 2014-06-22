@@ -1,6 +1,9 @@
 package com.baidu.disconf2.service.app.service;
 
+import java.util.List;
+
 import com.baidu.disconf2.service.app.bo.App;
+import com.baidu.disconf2.service.app.vo.AppListVo;
 
 /**
  * 
@@ -14,4 +17,10 @@ public interface AppMgr {
      * @param name
      */
     public App getByName(String name);
+
+    /**
+     * 
+     * @return
+     */
+    public List<AppListVo> getList();
 }

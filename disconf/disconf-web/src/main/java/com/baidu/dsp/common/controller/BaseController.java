@@ -3,10 +3,9 @@ package com.baidu.dsp.common.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
@@ -20,6 +19,7 @@ import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
+import com.baidu.ub.common.generic.vo.DaoPageResult;
 
 /**
  * 
@@ -27,9 +27,6 @@ import com.baidu.dsp.common.vo.JsonObjectUtils;
  * @version 2013-11-26
  */
 public class BaseController implements ApplicationContextAware {
-
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(BaseController.class);
 
     protected ApplicationContext context;
 
@@ -58,6 +55,36 @@ public class BaseController implements ApplicationContextAware {
      */
     protected <T> JsonObjectBase buildSuccess(T value) {
         return JsonObjectUtils.buildSimpleObjectSuccess(value);
+    }
+
+    /**
+     * OK: 列表数据
+     * 
+     * @param key
+     * @param value
+     * @param totalCnt
+     * @param pageSize
+     * @return
+     */
+    protected <T> JsonObjectBase buildListSuccess(List<?> value, int totalCount) {
+
+        return JsonObjectUtils.buildListSuccess(value, totalCount, null);
+    }
+
+    /**
+     * OK: 列表数据
+     * 
+     * @param key
+     * @param value
+     * @param totalCnt
+     * @param pageSize
+     * @return
+     */
+
+    protected <T> JsonObjectBase buildListSuccess(DaoPageResult<T> data) {
+
+        return JsonObjectUtils.buildListSuccess(data.getResult(),
+                data.getTotalCount(), data.getFootResult());
     }
 
     /**

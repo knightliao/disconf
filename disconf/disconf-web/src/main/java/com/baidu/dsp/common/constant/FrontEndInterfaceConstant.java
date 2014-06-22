@@ -15,6 +15,7 @@ public class FrontEndInterfaceConstant {
     public final static String SESSION_ID = "sessionId";
 
     public static final String RESULT = "result";
+    public static final String FOOTR_RESULT = "footResult";
 
     public static final String PAGE_NO = "pageNo";
     public static final String PAGE_SIZE = "pageSize";
@@ -32,12 +33,6 @@ public class FrontEndInterfaceConstant {
      * 与FE通信多项值分隔符
      */
     public static final String FE_LIST_SPLITOR = ",";
-
-    /**
-     * 与FE通信多项值分隔符
-     */
-    public static final String FE_LIST_SEC_SPLITOR = "\\|";
-    public static final String FE_LIST_SEC_SPLITOR2 = "|";
 
     /**
      * URL最大长度

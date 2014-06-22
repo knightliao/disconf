@@ -1,9 +1,9 @@
 package com.baidu.dsp.common.vo;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.FrontEndInterfaceConstant;
 import com.baidu.dsp.common.context.ContextReader;
+import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 通用的JSON返回器
@@ -23,7 +24,7 @@ import com.baidu.dsp.common.context.ContextReader;
 @Component
 public class JsonObjectUtils {
 
-    protected static final Logger LOG = LoggerFactory
+    private final static Logger LOG = AopLogFactory
             .getLogger(JsonObjectUtils.class);
 
     private static ContextReader contextReader;
@@ -60,6 +61,25 @@ public class JsonObjectUtils {
 
         JsonSimpleObject json = new JsonSimpleObject();
         json.setResult(value);
+
+        return json;
+    }
+
+    /**
+     * 返回正确, 列表请求
+     * 
+     * @param key
+     * @param value
+     * @return
+     */
+    public static <T> JsonObjectBase buildListSuccess(List<?> value,
+            int totalCount, T footResult) {
+
+        JsonObjectList json = new JsonObjectList();
+
+        json.setPage(totalCount);
+        json.addData(value);
+        json.addFootData(footResult);
 
         return json;
     }
