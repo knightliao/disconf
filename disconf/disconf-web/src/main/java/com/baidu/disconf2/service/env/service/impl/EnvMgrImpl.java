@@ -1,7 +1,10 @@
 package com.baidu.disconf2.service.env.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +49,19 @@ public class EnvMgrImpl implements EnvMgr {
         }
 
         return envListVos;
+    }
+
+    @Override
+    public Map<Long, Env> getByIds(Set<Long> ids) {
+
+        List<Env> envs = envDao.get(ids);
+
+        Map<Long, Env> map = new HashMap<Long, Env>();
+        for (Env env : envs) {
+            map.put(env.getId(), env);
+        }
+
+        return map;
     }
 
 }

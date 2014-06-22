@@ -1,7 +1,10 @@
 package com.baidu.disconf2.service.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +51,19 @@ public class AppMgrImpl implements AppMgr {
         }
 
         return appListVos;
+    }
+
+    @Override
+    public Map<Long, App> getByIds(Set<Long> ids) {
+
+        List<App> apps = appDao.get(ids);
+
+        Map<Long, App> map = new HashMap<Long, App>();
+        for (App app : apps) {
+            map.put(app.getId(), app);
+        }
+
+        return map;
     }
 
 }

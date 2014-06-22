@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baidu.disconf2.service.config.form.ConfListForm;
 import com.baidu.disconf2.service.config.form.VersionListForm;
 import com.baidu.disconf2.service.config.service.ConfigMgr;
+import com.baidu.disconf2.service.config.vo.ConfListVo;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
+import com.baidu.ub.common.generic.vo.DaoPageResult;
 
 /**
  * 
@@ -48,5 +51,20 @@ public class ConfigReadController extends BaseController {
                 .getAppId());
 
         return buildListSuccess(versionList, versionList.size());
+    }
+
+    /**
+     * 
+     * @param confListForm
+     * @return
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase getConfigList(ConfListForm confListForm) {
+
+        DaoPageResult<ConfListVo> configs = configMgr
+                .getConfigList(confListForm);
+
+        return buildListSuccess(configs);
     }
 }

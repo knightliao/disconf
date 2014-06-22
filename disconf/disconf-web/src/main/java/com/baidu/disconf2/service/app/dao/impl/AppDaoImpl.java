@@ -1,5 +1,8 @@
 package com.baidu.disconf2.service.app.dao.impl;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.service.app.bo.App;
@@ -20,6 +23,12 @@ public class AppDaoImpl extends AbstractDao<Long, App> implements AppDao {
     public App getByName(String name) {
 
         return findOne(new Match(Columns.NAME, name));
+    }
+
+    @Override
+    public List<App> getByIds(Set<Long> ids) {
+
+        return find(match(Columns.APP_ID, ids));
     }
 
 }

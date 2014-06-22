@@ -9,7 +9,7 @@ package com.baidu.disconf2.core.common.constants;
  */
 public enum DisConfigTypeEnum {
 
-    FILE(0, "FILE"), ITEM(1, "ITEM");
+    FILE(0, "配置文件"), ITEM(1, "配置项");
 
     private int type = 0;
     private String modelName = null;
@@ -17,6 +17,20 @@ public enum DisConfigTypeEnum {
     private DisConfigTypeEnum(int type, String modelName) {
         this.type = type;
         this.modelName = modelName;
+    }
+
+    public static DisConfigTypeEnum getByType(int type) {
+
+        if (type == 0) {
+            return DisConfigTypeEnum.FILE;
+        }
+
+        if (type == 1) {
+            return DisConfigTypeEnum.ITEM;
+
+        }
+
+        return null;
     }
 
     public int getType() {

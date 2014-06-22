@@ -65,9 +65,9 @@ a {
     cursor: pointer;
 }
 .navBlock, .contentWrap {
-    width: 980px;
-    margin: 10px;
-    margin-left:30px;
+    width: 970px;
+    margin: 5px;
+    margin-top: 5px;
 }
 .logo {
     position: relative;
@@ -712,7 +712,7 @@ input.autoPush-detail-item-input {
     border: 1px solid #E8E8E8;
     background: white;
 }
-.account-tableWrap th {
+.account-tableWrap thead tr td {
     text-align: center;
     border: 1px solid #E8E8E8;
     padding: 5px;
@@ -720,7 +720,7 @@ input.autoPush-detail-item-input {
     font-weight: bold;
 }
 .account-tableWrap td {
-    padding: 10px 22px;
+    padding: 5px 11px;
     border: 1px solid #E8E8E8;
 }
 .account-table-activate {
@@ -851,7 +851,7 @@ input.autoPush-detail-item-input {
 
 #headwrap {
   padding-top: 60px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   min-height: 80%;
 }
 

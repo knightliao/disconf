@@ -1,6 +1,8 @@
 package com.baidu.disconf2.service.env.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.baidu.disconf2.service.env.bo.Env;
 import com.baidu.disconf2.service.env.vo.EnvListVo;
@@ -22,4 +24,6 @@ public interface EnvMgr {
      * @return
      */
     public List<EnvListVo> getList();
+
+    public Map<Long, Env> getByIds(Set<Long> ids);
 }

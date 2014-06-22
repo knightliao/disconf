@@ -1,6 +1,8 @@
 package com.baidu.disconf2.service.app.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.baidu.disconf2.service.app.bo.App;
 import com.baidu.disconf2.service.app.vo.AppListVo;
@@ -23,5 +25,7 @@ public interface AppMgr {
      * @return
      */
     public List<AppListVo> getList();
+
+    public Map<Long, App> getByIds(Set<Long> ids);
 
 }
