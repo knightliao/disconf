@@ -1,6 +1,17 @@
-<div class="foot clearfix">
-    <p>邮箱：liaoqiqi@baidu.com</p>
-    <p>Copyright baidu.com  All Rights Reserved</p>
+
+<div id="footer">
+    <div class="container clearfix">
+        <div class="muted links pull-left">
+            <a href="">关于</a>
+            <span class="sep">·</span>
+            <a href="">帮助</a>
+        </div>
+
+        <p class="muted credit pull-right">
+            © baidu.com  All Rights Reserved.
+        </p>
+
+    </div>
 </div>
 
 <script src="assets/js/jquery-1.11.0.js"></script>

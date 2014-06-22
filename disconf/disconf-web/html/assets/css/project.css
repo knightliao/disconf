@@ -45,7 +45,6 @@ label {
 }
 a {
     text-decoration: none;
-    color: black;
 }
 .clearfix:after {
     clear: both;
@@ -182,7 +181,6 @@ th {
 
 /* 首页  */
 .index-bigImg-wrap {
-    background: #04437b;
     height: 356px;
 }
 .index-bigImg {
@@ -810,3 +808,55 @@ input.autoPush-detail-item-input {
     margin: 20px auto;
 }
 
+
+
+
+
+
+
+.zu-top-nav-link, .zu-top-nav-link:visited, .zu-top-nav-link:active {
+    color: #EEEEEE;
+}
+.zu-top-nav-link:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.zu-top-nav-link {
+    color: #EEEEEE;
+    font-weight: 700;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-inner{
+  background: url("../img/header-bg.png") repeat-x scroll 0 0 transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  background-attachment: fixed;
+}
+
+#footer {
+  border-top: 1px solid #ddd;
+  height: 60px;
+}
+#footer .credit, #footer .links {
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.container {
+  max-width: 980px;
+}
+.main{
+  font-family: arial, sans-serif;
+  width: 980px;
+}
+
+#headwrap {
+  padding-top: 60px;
+  padding-bottom: 10px;
+  min-height: 80%;
+}
+
+#mainwrap {
+  padding-bottom: 40px;
+  min-height: 80%;
+}
