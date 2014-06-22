@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.json.ValueVo;
-import com.baidu.disconf2.service.app.bo.App;
 import com.baidu.disconf2.service.app.service.AppMgr;
 import com.baidu.disconf2.service.config.bo.Config;
 import com.baidu.disconf2.service.config.dao.ConfigDao;
@@ -65,20 +64,17 @@ public class ConfigMgrImpl implements ConfigMgr {
      * 
      */
     @Override
-    public List<String> getConfByAppname(String appName) {
+    public List<String> getConfByAppId(Long appId) {
 
         List<String> versionList = new ArrayList<String>();
 
-        App app = appMgr.getByName(appName);
-        if (app == null) {
-            return versionList;
-        }
-
-        List<Config> configs = configDao.getConfByAppname(app.getId());
+        List<Config> configs = configDao.getConfByAppId(appId);
 
         for (Config config : configs) {
 
-            versionList.add(config.getVersion());
+            if (!versionList.contains(config.getVersion())) {
+                versionList.add(config.getVersion());
+            }
         }
 
         return versionList;

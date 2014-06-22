@@ -41,5 +41,5 @@ public interface ConfigMgr {
      * @param appName
      * @return
      */
-    public List<String> getConfByAppname(String appName);
+    public List<String> getConfByAppId(Long appId);
 }

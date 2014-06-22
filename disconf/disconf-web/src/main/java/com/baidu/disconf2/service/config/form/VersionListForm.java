@@ -10,14 +10,14 @@ import javax.validation.constraints.NotNull;
 public class VersionListForm {
 
     @NotNull
-    private String app;
+    private Long appId;
 
-    public String getApp() {
-        return app;
+    public Long getAppId() {
+        return appId;
     }
 
-    public void setApp(String app) {
-        this.app = app;
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
 }
