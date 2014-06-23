@@ -34,4 +34,16 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      */
     public DaoPageResult<Config> getConfigList(Long appId, Long envId,
             String version, Page page);
+
+    /**
+     * 
+     * @param configId
+     * @return
+     */
+    public void updateValue(Long configId, String value);
+
+    /**
+     * 
+     */
+    public String getValue(Long configId);
 }

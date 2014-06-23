@@ -52,8 +52,8 @@ public class ConfigReadController extends BaseController {
     @ResponseBody
     public JsonObjectBase getVersionList(@Valid VersionListForm versionListForm) {
 
-        List<String> versionList = configMgr.getConfByAppId(versionListForm
-                .getAppId());
+        List<String> versionList = configMgr
+                .getVersionListByAppId(versionListForm.getAppId());
 
         return buildListSuccess(versionList, versionList.size());
     }

@@ -66,4 +66,19 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements
 
         return page2(matchs, daoPage);
     }
+
+    /**
+     * 
+     */
+    @Override
+    public void updateValue(Long configId, String value) {
+
+        update(modify(Columns.VALUE, value), match(Columns.CONFIG_ID, configId));
+    }
+
+    @Override
+    public String getValue(Long configId) {
+        Config config = get(configId);
+        return config.getValue();
+    }
 }

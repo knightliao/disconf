@@ -155,4 +155,49 @@ public class ConfigValidator {
         }
     }
 
+    /**
+     * 校验更新 配置值
+     * 
+     * @param userId
+     */
+    public void validateUpdateItem(Long configId, String value) {
+
+        //
+        // config
+        //
+        valideConfigExist(configId);
+
+        //
+        // value
+        //
+        try {
+
+            if (StringUtils.isEmpty(value)) {
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+
+            throw new FieldException("value", "value.null", e);
+        }
+
+    }
+
+    /**
+     * 判断配置是否更新
+     * 
+     * @return
+     */
+    public boolean isValueUpdate(Long configId, String newValue) {
+
+        //
+        // 判断值有没有更新
+        //
+        String oldValue = configMgr.getValue(configId);
+
+        if (newValue.equals(oldValue)) {
+            return false;
+        }
+        return true;
+    }
 }

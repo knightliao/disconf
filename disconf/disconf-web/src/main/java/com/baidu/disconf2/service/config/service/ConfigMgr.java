@@ -44,7 +44,7 @@ public interface ConfigMgr {
      * @param appName
      * @return
      */
-    public List<String> getConfByAppId(Long appId);
+    public List<String> getVersionListByAppId(Long appId);
 
     /**
      * 
@@ -68,4 +68,18 @@ public interface ConfigMgr {
      * @return
      */
     public Config getConfigById(Long configId);
+
+    /**
+     * 
+     * @param configId
+     * @return
+     */
+    public void updateItemValue(Long configId, String value);
+
+    /**
+     * 
+     * @param configId
+     * @return
+     */
+    public String getValue(Long configId);
 }

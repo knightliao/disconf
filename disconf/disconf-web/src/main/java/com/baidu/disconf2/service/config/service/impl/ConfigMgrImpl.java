@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
@@ -44,7 +46,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     private EnvMgr envMgr;
 
     /**
-     * 获取配置
+     * 根据详细参数获取配置返回
      */
     public ValueVo getConfItemByParameter(Long appId, Long envId, String env,
             String key) {
@@ -63,7 +65,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 
+     * 根据详细参数获取配置
      */
     @Override
     public Config getConfByParameter(Long appId, Long envId, String env,
@@ -75,10 +77,10 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 
+     * 根据APPid获取其版本列表
      */
     @Override
-    public List<String> getConfByAppId(Long appId) {
+    public List<String> getVersionListByAppId(Long appId) {
 
         List<String> versionList = new ArrayList<String>();
 
@@ -95,7 +97,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 
+     * 配置列表
      */
     @Override
     public DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm) {
@@ -144,6 +146,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
+     * 转换成配置返回
      * 
      * @param config
      * @return
@@ -170,7 +173,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 
+     * 根据 配置ID获取配置返回
      */
     @Override
     public ConfListVo getConfVo(Long configId) {
@@ -183,11 +186,29 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 
+     * 根据配置ID获取配置
      */
     @Override
     public Config getConfigById(Long configId) {
 
         return configDao.get(configId);
+    }
+
+    /**
+     * 更新 配置项的值
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
+    public void updateItemValue(Long configId, String value) {
+
+        configDao.updateValue(configId, value);
+    }
+
+    /**
+     * 获取配置值
+     */
+    @Override
+    public String getValue(Long configId) {
+        return configDao.getValue(configId);
     }
 }
