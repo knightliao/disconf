@@ -1,8 +1,8 @@
 (function($) {
 
-	var appId = null;
-	var envId = null;
-	var version = null;
+	var appId = -1;
+	var envId = -1;
+	var version = "所有版本";
 
 	//
 	// 获取APP信息
@@ -19,6 +19,7 @@
 						html += '<li><a rel=' + item.id + ' href="#">APP: '
 								+ item.name + '</a></li>';
 					});
+					html += '<li><a rel=' + -1 + ' href="#">所有APP</a></li>';
 					$("#appChoice").html(html);
 				}
 			});
@@ -35,7 +36,7 @@
 	function fetchVersion(appId) {
 
 		$("#versionChoiceA span:first-child").text("选择版本");
-		version = null;
+		version = "所有版本";
 
 		$.ajax({
 			type : "GET",
@@ -47,6 +48,7 @@
 				$.each(result, function(index, item) {
 					html += '<li><a href="#">' + item + '</a></li>';
 				});
+				html += '<li><a href="#">' + "所有版本" + '</a></li>';
 				$("#versionChoice").html(html);
 			}
 		});
@@ -72,6 +74,7 @@
 						html += '<li><a rel=' + item.id + ' href="#">环境:'
 								+ item.name + '</a></li>';
 					});
+					html += '<li><a rel=' + -1 + ' href="#">所有环境:</a></li>';
 					$("#envChoice").html(html);
 				}
 			});
@@ -95,13 +98,13 @@
 
 		} else {
 			url += "?";
-			if (appId != null) {
+			if (appId != -1) {
 				url += "appId=" + appId + "&";
 			}
-			if (envId != null) {
+			if (envId != -1) {
 				url += "envId=" + envId + "&";
 			}
-			if (version != null) {
+			if (version != "所有版本") {
 				url += "version=" + version + "&";
 			}
 		}
