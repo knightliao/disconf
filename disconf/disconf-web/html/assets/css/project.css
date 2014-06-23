@@ -1,58 +1,14 @@
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
-    padding: 0;
-    margin: 0;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
 fieldset, img {
     border: 0;
 }
-address, caption, cite, code, dfn, em, strong, th, var {
-    font-weight: normal;
-    font-style: normal;
-}
-ol, ul {
-    list-style: none;
-}
-caption, th {
-    text-align: left;
-}
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    font-size: 100%;
-}
-h3 {
-    height: 20px;
-    line-height: 20px;
-}
-q:before, q:after {
-    content: '';
-}
+
 abbr, acronym {
     border: 0;
 }
 /*---end reset*/
-body {
-    font-family: Arial, Helvetica, sans-serif, 宋体;
-    background: #f9f9f9;
-}
-label {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 0;
-}
-a {
-    text-decoration: none;
-}
-.clearfix:after {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
+
+
+
 .head {
     background: white;
 }
@@ -64,11 +20,7 @@ a {
 .signBlock-index {
     cursor: pointer;
 }
-.navBlock, .contentWrap {
-    width: 970px;
-    margin: 5px;
-    margin-top: 5px;
-}
+
 .logo {
     position: relative;
     top: -10px;
@@ -86,7 +38,6 @@ a {
 }
 .menu li a {
     display: block;
-    font-family: 微软雅黑,黑体;
     height: 30px;
     margin: 10px 0px 0px;
     padding: 10px 10px;
@@ -143,9 +94,7 @@ a {
     color: black;
     cursor: pointer;
 }
-.hide {
-    display: none;
-}
+
 button {
     background: #52bad5;
     border: none;
@@ -254,12 +203,7 @@ th {
     color: white;
     background: #52bad5;
 }
-.content {
-    width: 700px;
-    border: 1px solid #E8E8E8;
-    background: white;
-    padding-bottom: 50px;
-}
+
 .startActivity-form {
     margin: 30px 0px;
 }
@@ -548,11 +492,7 @@ input.question-form-value {
 .autoPush-detail {
     margin: 30px 50px;
 }
-.autoPush-detail-title {
-    font-size: 18px;
-    margin: 20px 0;
-    text-align: center;
-}
+
 .autoPush-detail-item {
     background: #F9F9F9;
     border: 1px solid #E8E8E8;
@@ -759,34 +699,6 @@ input.autoPush-detail-item-input {
     margin: 10px 0;
 }
 
-/* 个人信息 */
-.private-form {
-    width: 500px;
-    margin: 30px 100px;
-}
-.private-item {
-    position: relative;
-    margin-bottom: 20px;
-}
-.private-item-key {
-    display: inline-block;
-    width: 120px;
-    overflow: right;
-    line-height: 30px;
-    font-family: 微软雅黑,黑体;
-    text-align: right;
-    padding-right: 20px;
-    vertical-align: middle;
-}
-.private-item-value {
-    width: 300px;
-    height: 30px;
-    border: 1px solid #D6D6D6 border-radius :5px;
-    text-align: left;
-    overflow: left;
-    font-family: 微软雅黑,黑体;
-    vertical-align: middle;
-}
 .private-item-lastValue {
     width: 314px;
 }
@@ -810,6 +722,50 @@ input.autoPush-detail-item-input {
     margin: 20px auto;
 }
 
+
+
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif, 宋体;
+    background: #f9f9f9;
+}
+label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+a {
+    text-decoration: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-weight: normal;
+    font-style: normal;
+}
+ol, ul {
+    list-style: none;
+}
+caption, th {
+    text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+h3 {
+    height: 20px;
+    line-height: 20px;
+}
+q:before, q:after {
+    content: '';
+}
 .zu-top-nav-link, .zu-top-nav-link:visited, .zu-top-nav-link:active {
     color: #EEEEEE;
 }
@@ -857,3 +813,59 @@ input.autoPush-detail-item-input {
     min-height: 80%;
 }
 
+.content {
+    width: 700px;
+    border: 1px solid #E8E8E8;
+    background: white;
+    padding-bottom: 10px;
+}
+
+.navBlock, .contentWrap {
+    width: 970px;
+    margin: 5px;
+    margin-top: 5px;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.private-form {
+    width: 500px;
+    margin: 30px 100px;
+}
+
+.autoPush-detail-title {
+    font-size: 18px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.private-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+.private-item-key {
+    display: inline-block;
+    width: 120px;
+    overflow: right;
+    line-height: 30px;
+    text-align: right;
+    padding-right: 20px;
+    vertical-align: middle;
+}
+.private-item-value {
+    width: 300px;
+    height: 30px;
+    border: 1px solid #D6D6D6 border-radius :5px;
+    text-align: left;
+    overflow: left;
+    vertical-align: middle;
+}
+.hide {
+    display: none;
+}
