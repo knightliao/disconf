@@ -66,4 +66,10 @@ public class AppMgrImpl implements AppMgr {
         return map;
     }
 
+    @Override
+    public App getById(Long id) {
+
+        return appDao.get(id);
+    }
+
 }

@@ -26,4 +26,6 @@ public interface EnvMgr {
     public List<EnvListVo> getList();
 
     public Map<Long, Env> getByIds(Set<Long> ids);
+
+    public Env getById(Long id);
 }

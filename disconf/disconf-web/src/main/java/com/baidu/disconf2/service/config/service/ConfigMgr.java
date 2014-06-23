@@ -54,4 +54,18 @@ public interface ConfigMgr {
      * @return
      */
     public DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm);
+
+    /**
+     * 
+     * @param configId
+     * @return
+     */
+    public ConfListVo getConfVo(Long configId);
+
+    /**
+     * 
+     * @param configId
+     * @return
+     */
+    public Config getConfigById(Long configId);
 }

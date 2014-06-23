@@ -129,28 +129,65 @@ public class ConfigMgrImpl implements ConfigMgr {
                     @Override
                     public ConfListVo transfer(Config input) {
 
-                        ConfListVo confListVo = new ConfListVo();
-
                         String appNameString = appMap.get(input.getAppId())
                                 .getName();
                         String envName = envMap.get(input.getEnvId()).getName();
 
-                        confListVo.setAppId(input.getAppId());
-                        confListVo.setAppName(appNameString);
-                        confListVo.setEnvName(envName);
-                        confListVo.setEnvId(input.getEnvId());
-                        confListVo.setCreateTime(input.getCreateTime());
-                        confListVo.setModifyTime(input.getUpdateTime());
-                        confListVo.setKey(input.getName());
-                        confListVo.setValue(input.getValue());
-                        confListVo.setVersion(input.getVersion());
-                        confListVo.setType(DisConfigTypeEnum.getByType(
-                                input.getType()).getModelName());
+                        ConfListVo configListVo = convert(input, appNameString,
+                                envName);
 
-                        return confListVo;
+                        return configListVo;
                     }
                 });
 
         return configListVo;
+    }
+
+    /**
+     * 
+     * @param config
+     * @return
+     */
+    private ConfListVo convert(Config config, String appNameString,
+            String envName) {
+
+        ConfListVo confListVo = new ConfListVo();
+
+        confListVo.setConfigId(config.getId());
+        confListVo.setAppId(config.getAppId());
+        confListVo.setAppName(appNameString);
+        confListVo.setEnvName(envName);
+        confListVo.setEnvId(config.getEnvId());
+        confListVo.setCreateTime(config.getCreateTime());
+        confListVo.setModifyTime(config.getUpdateTime());
+        confListVo.setKey(config.getName());
+        confListVo.setValue(config.getValue());
+        confListVo.setVersion(config.getVersion());
+        confListVo.setType(DisConfigTypeEnum.getByType(config.getType())
+                .getModelName());
+
+        return confListVo;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public ConfListVo getConfVo(Long configId) {
+        Config config = configDao.get(configId);
+
+        App app = appMgr.getById(config.getAppId());
+        Env env = envMgr.getById(config.getEnvId());
+
+        return convert(config, app.getName(), env.getName());
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public Config getConfigById(Long configId) {
+
+        return configDao.get(configId);
     }
 }

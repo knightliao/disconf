@@ -64,4 +64,9 @@ public class EnvMgrImpl implements EnvMgr {
         return map;
     }
 
+    @Override
+    public Env getById(Long id) {
+        return envDao.get(id);
+    }
+
 }

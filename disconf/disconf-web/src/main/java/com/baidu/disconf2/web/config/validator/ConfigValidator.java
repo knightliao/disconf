@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.service.app.bo.App;
 import com.baidu.disconf2.service.app.service.AppMgr;
+import com.baidu.disconf2.service.config.bo.Config;
 import com.baidu.disconf2.service.config.form.ConfForm;
+import com.baidu.disconf2.service.config.service.ConfigMgr;
 import com.baidu.disconf2.service.env.bo.Env;
 import com.baidu.disconf2.service.env.service.EnvMgr;
+import com.baidu.dsp.common.exception.FieldException;
 import com.baidu.ub.common.utils.StringUtils;
 
 /**
@@ -23,6 +26,9 @@ public class ConfigValidator {
 
     @Autowired
     private EnvMgr envMgr;
+
+    @Autowired
+    private ConfigMgr configMgr;
 
     public static class ConfigModel {
 
@@ -127,4 +133,26 @@ public class ConfigValidator {
         return new ConfigModel(app.getId(), env.getId(), confForm.getVersion(),
                 confForm.getKey());
     }
+
+    /**
+     * 校验
+     * 
+     * @param userId
+     */
+    public void valideConfigExist(Long id) {
+
+        try {
+
+            Config config = configMgr.getConfigById(id);
+
+            if (config == null) {
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+
+            throw new FieldException("configId", "userid.not.exist", e);
+        }
+    }
+
 }

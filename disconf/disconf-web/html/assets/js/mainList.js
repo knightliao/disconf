@@ -125,9 +125,18 @@
 		var mainTpl = $("#tbodyTpl").html();
 		// 渲染主列表
 		function renderItem(item) {
+
+			var link = "";
+			if (item.type == "配置文件") {
+				link = '<a href="modifyFile.html?configId=' + item.configId + '">修改</a>';
+			} else {
+				link = '<a href="modifyItem.html?configId=' + item.configId + '">修改</a>';
+			}
+
 			return Util.string.format(mainTpl, item.appName, item.appId,
 					item.version, item.envId, item.envName, item.type,
-					item.key, item.createTime, item.modifyTime, item.value);
+					item.key, item.createTime, item.modifyTime, item.value,
+					link);
 		}
 	}
 

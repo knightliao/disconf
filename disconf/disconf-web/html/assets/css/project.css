@@ -255,11 +255,10 @@ th {
     background: #52bad5;
 }
 .content {
-    float: right;
-    width: 818px;
+    width: 700px;
     border: 1px solid #E8E8E8;
     background: white;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
 }
 .startActivity-form {
     margin: 30px 0px;
@@ -552,6 +551,7 @@ input.question-form-value {
 .autoPush-detail-title {
     font-size: 18px;
     margin: 20px 0;
+    text-align: center;
 }
 .autoPush-detail-item {
     background: #F9F9F9;
@@ -720,7 +720,7 @@ input.autoPush-detail-item-input {
     font-weight: bold;
 }
 .account-tableWrap td {
-    padding: 5px 11px;
+    padding: 5px 8px;
     border: 1px solid #E8E8E8;
 }
 .account-table-activate {
@@ -771,6 +771,7 @@ input.autoPush-detail-item-input {
 .private-item-key {
     display: inline-block;
     width: 120px;
+    overflow: right;
     line-height: 30px;
     font-family: 微软雅黑,黑体;
     text-align: right;
@@ -781,7 +782,9 @@ input.autoPush-detail-item-input {
     width: 300px;
     height: 30px;
     border: 1px solid #D6D6D6 border-radius :5px;
-    font-size: 12px;
+    text-align: left;
+    overflow: left;
+    font-family: 微软雅黑,黑体;
     vertical-align: middle;
 }
 .private-item-lastValue {
@@ -807,12 +810,6 @@ input.autoPush-detail-item-input {
     margin: 20px auto;
 }
 
-
-
-
-
-
-
 .zu-top-nav-link, .zu-top-nav-link:visited, .zu-top-nav-link:active {
     color: #EEEEEE;
 }
@@ -826,37 +823,37 @@ input.autoPush-detail-item-input {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.navbar-inner{
-  background: url("../img/header-bg.png") repeat-x scroll 0 0 transparent;
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-  background-attachment: fixed;
+.navbar-inner {
+    background: url("../img/header-bg.png") repeat-x scroll 0 0 transparent;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-attachment: fixed;
 }
 
 #footer {
-  border-top: 1px solid #ddd;
-  height: 60px;
+    border-top: 1px solid #ddd;
+    height: 60px;
 }
 #footer .credit, #footer .links {
-  font-size: 13px;
-  margin-top: 20px;
+    font-size: 13px;
+    margin-top: 20px;
 }
 
 .container {
-  max-width: 980px;
+    max-width: 980px;
 }
-.main{
-  font-family: arial, sans-serif;
-  width: 980px;
+.main {
+    font-family: arial, sans-serif;
+    width: 980px;
 }
 
 #headwrap {
-  padding-top: 60px;
-  padding-bottom: 0px;
-  min-height: 80%;
+    padding-top: 60px;
+    padding-bottom: 0px;
+    min-height: 80%;
 }
 
 #mainwrap {
-  padding-bottom: 40px;
-  min-height: 80%;
+    padding-bottom: 40px;
+    min-height: 80%;
 }
 

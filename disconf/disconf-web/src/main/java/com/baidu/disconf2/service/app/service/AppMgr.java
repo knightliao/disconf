@@ -28,4 +28,11 @@ public interface AppMgr {
 
     public Map<Long, App> getByIds(Set<Long> ids);
 
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    public App getById(Long id);
+
 }

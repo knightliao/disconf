@@ -7,6 +7,8 @@ package com.baidu.disconf2.service.config.vo;
  */
 public class ConfListVo {
 
+    private Long configId;
+
     private String appName;
     private Long appId;
     private String version;
@@ -101,6 +103,14 @@ public class ConfListVo {
 
     public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public Long getConfigId() {
+        return configId;
+    }
+
+    public void setConfigId(Long configId) {
+        this.configId = configId;
     }
 
 }

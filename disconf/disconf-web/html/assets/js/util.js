@@ -430,6 +430,15 @@ Util.param.getActivityId = function() {
 };
 
 /*
+ * 获取location中search的值 @return {string} value 返回configId
+ */
+Util.param.getConfigId = function() {
+	var ids = /configId=(\d+)&?/.exec(location.search);
+	var id = ids ? ids[1] : '';
+	return id;
+};
+
+/*
  * 获取location中path的值 @return {string} value 返回pageName
  */
 Util.param.getPageName = function() {
