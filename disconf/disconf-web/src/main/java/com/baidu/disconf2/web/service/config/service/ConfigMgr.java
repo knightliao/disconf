@@ -82,4 +82,6 @@ public interface ConfigMgr {
      * @return
      */
     public String getValue(Long configId);
+
+    void notifyZookeeper(Long configId);
 }

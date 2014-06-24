@@ -210,19 +210,26 @@ public class ConfigMgrImpl implements ConfigMgr {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     public void updateItemValue(Long configId, String value) {
 
-        ConfListVo confListVo = getConfVo(configId);
-
         //
         // 配置数据库的值
         //
         configDao.updateValue(configId, value);
+    }
+
+    /**
+     * 通知Zookeeper, 失败时不回滚数据库
+     */
+    @Override
+    public void notifyZookeeper(Long configId) {
+
+        ConfListVo confListVo = getConfVo(configId);
 
         //
-        // 通知ZK,如果ZK更新失败，则整个事务回滚
+        // 通知ZK,
         //
         zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(),
                 confListVo.getEnvName(), confListVo.getVersion(),
-                DisConfigTypeEnum.ITEM);
+                confListVo.getKey(), DisConfigTypeEnum.ITEM);
     }
 
     /**

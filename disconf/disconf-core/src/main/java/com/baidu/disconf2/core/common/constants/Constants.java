@@ -34,8 +34,8 @@ public class Constants {
     public final static String STORE_ITEM_URL_KEY = "item";
     public final static String ZOO_HOSTS_URL_KEY = "hosts";
 
-    // 通知Zookeeper更新配置的消息 
-    public final static String ZOO_UPDATE_STRING = "NOTIFYING";
+    // 通知Zookeeper更新配置的消息
+    public final static String ZOO_UPDATE_STRING = "UPDATE-NOTIFYING";
 
     public final static String SEP_STRING = "/";
 }

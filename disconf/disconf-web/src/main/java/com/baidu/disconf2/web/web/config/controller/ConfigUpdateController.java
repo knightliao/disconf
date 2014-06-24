@@ -47,19 +47,18 @@ public class ConfigUpdateController extends BaseController {
         // 业务校验
         configValidator.validateUpdateItem(configId, value);
 
-        // 配置是否更新
-        boolean isUpdate = configValidator.isValueUpdate(configId, value);
+        LOG.info("start to update config: " + configId);
 
-        if (isUpdate == true) {
+        //
+        // 更新, 并写入数据库
+        //
+        configMgr.updateItemValue(configId, value);
 
-            LOG.info("start to update config: " + configId);
+        //
+        // 通知ZK
+        //
+        configMgr.notifyZookeeper(configId);
 
-            configMgr.updateItemValue(configId, value);
-            return buildSuccess("修改成功");
-
-        } else {
-            LOG.info("config :" + configId + " 's value not change, ignore.");
-            return buildSuccess("配置值未改变，未修改。");
-        }
+        return buildSuccess("修改成功");
     }
 }

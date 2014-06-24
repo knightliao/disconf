@@ -37,7 +37,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
      * @param disConfigTypeEnum
      */
     public void notifyNodeUpdate(String app, String env, String version,
-            DisConfigTypeEnum disConfigTypeEnum) {
+            String key, DisConfigTypeEnum disConfigTypeEnum) {
 
         //
         // 获取路径
@@ -54,6 +54,8 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
         }
 
         try {
+
+            path = ZooPathMgr.joinPath(path, key);
 
             boolean isExist = ZookeeperMgr.getInstance().exists(path);
             if (!isExist) {
