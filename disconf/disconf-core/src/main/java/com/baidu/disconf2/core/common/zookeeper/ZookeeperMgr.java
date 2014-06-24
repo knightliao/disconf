@@ -141,7 +141,7 @@ public class ZookeeperMgr {
 
     /**
      * 
-     * @Description: 写持久化结点,没有则新建
+     * @Description: 写持久化结点,没有则新建,存在则进行更新
      * 
      * @return
      * @return List<String>
