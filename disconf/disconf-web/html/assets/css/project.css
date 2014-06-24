@@ -846,7 +846,6 @@ q:before, q:after {
 }
 
 .private-item {
-    position: relative;
     margin-bottom: 20px;
 }
 .private-item-key {
@@ -861,6 +860,12 @@ q:before, q:after {
 .private-item-value {
     width: 300px;
     height: 30px;
+    border: 1px solid #D6D6D6 border-radius :5px;
+    text-align: left;
+    overflow: left;
+    vertical-align: middle;
+}
+.private-item-value-pre {
     border: 1px solid #D6D6D6 border-radius :5px;
     text-align: left;
     overflow: left;

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Disconf - 分布式配置管理平台</title>
+
+    <link rel="stylesheet" type="text/css" href="dep/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="dep/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/project.css" />
+</head>
+
+<body>
+
+    <div class="navbar navbar-fixed-top ">
+        <div class="navbar-inner zu-top">
+            <div class="container">
+                <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="nav-collapse collapse">
+
+                    <a href="/" class="brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
+                    <span class="span7"> </span>
+                    <form class="navbar-form pull-left">
+                        <button class="btn btn-warning" title="GitHub" type="button" style=""  onclick="window.open('https://github.com/knightliao/disconf', '_blank');">
+                            <i class="icon-circle-arrow-up  icon-white"></i> <b>GitHub</b>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+
+<div id="headwrap">
+    <div class="main container">
+        <div class="row-fluid">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="/" >配置</a>
+                </li>
+                <li class="">
+                    <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="mainwrap">
+    <div class="main container">
+
+        <div class="row-fluid">
+
+            <div class="contentWrap clearfix">
+                <div class="content">
+
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/">配置</a><span class="divider">/</span>
+                        </li>
+                        <li class="active">
+                            配置文件修改
+                        </li>
+                    </ul>
+
+                    <form id="form" class="private-form clearfix">
+                        <h2 class="autoPush-detail-title">配置文件修改</h2>
+                        <p class="private-item">
+                            <span class="private-item-key">APP id & 名称：</span>
+                            <span id="app" class="private-item-value">FFFF</span>
+                        </p>
+                        <p class="private-item">
+                            <span class="private-item-key">版本：</span>
+                            <span id="version"  class="private-item-value">FFFF</span>
+                        </p>
+                        <p class="private-item">
+                            <span class="private-item-key">环境：</span>
+                            <span id="env" class="private-item-value">FFFF</span>
+                        </p>
+                        <p class="private-item">
+                            <span class="private-item-key">配置文件名：</span>
+                            <span id="key" class="private-item-value">FFFF</span>
+                        </p>
+                        <div class="private-item clearfix">
+                            <span style="float:left" class="private-item-key">原配置文件内容：</span>
+                            <pre style="float:left" id="oldvalue" class="private-item-value-pre">FFFF</pre>
+                        </div>
+                        <p class="private-item">
+                            <span class="private-item-key">上传配置：</span>
+                            <input id="value" type="text"   class="private-item-value"/>
+                        </p>
+                        <div id="error" class="error hide">
+                            表单选项不能为空或填写格式错误！
+                        </div>
+                        <div>
+                            <button id="submit" class="private-submit" onclick="return false;">
+                                保存
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="footer">
+    <div class="container clearfix">
+        <div class="muted links pull-left">
+            <a href="about.html">关于</a>
+            <span class="sep">·</span>
+            <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
+        </div>
+
+        <p class="muted credit pull-right">
+            © baidu.com  All Rights Reserved.
+        </p>
+
+    </div>
+</div>
+
+<script src="assets/js/jquery-1.11.0.js"></script>
+<script src="dep/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="dep/bootstrap/js/bootstrap.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script src="assets/js/modifyFile.js"></script>
+
+        
+    </body>
+</html>
+

@@ -498,3 +498,10 @@ Util.input.whiteError = function($elm, data) {
 	});
 	$elm.html(html);
 };
+
+//
+// 回车转为br标签
+//
+Util.input.return2Br = function(str) {
+	return str.replace(/\r?\n/g, "<br />");
+}
