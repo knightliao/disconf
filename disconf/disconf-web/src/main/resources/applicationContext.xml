@@ -46,9 +46,10 @@
         </property>
     </bean>
 
-    <bean id="zooMgrImpl"
-        class="com.baidu.disconf2.service.zookeeper.service.impl.ZooMgrImpl">
+    <bean id="zooConfig"
+        class="com.baidu.disconf2.web.service.zookeeper.config.ZooConfig">
         <property name="zooHosts" value="${hosts}" />
+        <property name="zookeeperUrlPrefix" value="${zookeeper_url_prefix}" />
     </bean>
 
     <beans profile="db-test">

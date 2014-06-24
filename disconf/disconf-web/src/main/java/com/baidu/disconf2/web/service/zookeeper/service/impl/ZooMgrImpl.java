@@ -1,5 +1,9 @@
 package com.baidu.disconf2.web.service.zookeeper.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baidu.disconf2.web.service.zookeeper.config.ZooConfig;
 import com.baidu.disconf2.web.service.zookeeper.service.ZooMgr;
 
 /**
@@ -7,21 +11,15 @@ import com.baidu.disconf2.web.service.zookeeper.service.ZooMgr;
  * @author liaoqiqi
  * @version 2014-6-16
  */
+@Service
 public class ZooMgrImpl implements ZooMgr {
 
-    private String zooHosts = "";
-
-    public String getZooHosts() {
-        return zooHosts;
-    }
-
-    public void setZooHosts(String zooHosts) {
-        this.zooHosts = zooHosts;
-    }
+    @Autowired
+    private ZooConfig zooConfig;
 
     @Override
     public String getHosts() {
 
-        return zooHosts;
+        return zooConfig.getZooHosts();
     }
 }
