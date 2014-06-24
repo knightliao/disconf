@@ -1,13 +1,18 @@
 package com.baidu.disconf2.web.innerapi.zookeeper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf2.core.common.path.ZooPathMgr;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
 import com.baidu.disconf2.web.service.zookeeper.config.ZooConfig;
+import com.baidu.dsp.common.exception.RemoteException;
 
 /**
  * 
@@ -16,6 +21,9 @@ import com.baidu.disconf2.web.service.zookeeper.config.ZooConfig;
  */
 @Service
 public class ZooKeeperDriver implements InitializingBean, DisposableBean {
+
+    protected static final Logger LOG = LoggerFactory
+            .getLogger(ZooKeeperDriver.class);
 
     @Autowired
     private ZooConfig zooConfig;
@@ -31,6 +39,39 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
     public void notifyNodeUpdate(String app, String env, String version,
             DisConfigTypeEnum disConfigTypeEnum) {
 
+        //
+        // 获取路径
+        //
+        String baseUrlString = ZooPathMgr.getZooBaseUrl(
+                zooConfig.getZookeeperUrlPrefix(), app, env, version);
+
+        String path = "";
+        if (disConfigTypeEnum.equals(DisConfigTypeEnum.ITEM)) {
+
+            path = ZooPathMgr.getItemZooPath(baseUrlString);
+        } else {
+            path = ZooPathMgr.getFileZooPath(baseUrlString);
+        }
+
+        try {
+
+            boolean isExist = ZookeeperMgr.getInstance().exists(path);
+            if (!isExist) {
+                LOG.error(path + " not exist.");
+                throw new RemoteException("zk.notify.error");
+            }
+
+            //
+            // 通知
+            //
+            ZookeeperMgr.getInstance().writePersistentUrl(path,
+                    Constants.ZOO_UPDATE_STRING);
+
+        } catch (Exception e) {
+
+            LOG.error(e.toString(), e);
+            throw new RemoteException("zk.notify.error", e);
+        }
     }
 
     @Override

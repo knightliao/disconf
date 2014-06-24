@@ -31,7 +31,7 @@
 		}
 		$.ajax({
 			type : "PUT",
-			url : "/api/item/config/" + configId,
+			url : "/api/config/item/" + configId,
 			data : {
 				"value" : value
 			}

@@ -151,7 +151,7 @@ public class ConfigValidator {
 
         } catch (Exception e) {
 
-            throw new FieldException("configId", "userid.not.exist", e);
+            throw new FieldException("configId", "config.id.not.exist", e);
         }
     }
 
@@ -178,7 +178,7 @@ public class ConfigValidator {
 
         } catch (Exception e) {
 
-            throw new FieldException("value", "value.null", e);
+            throw new FieldException("value", "conf.item.value.null", e);
         }
 
     }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.json.ValueVo;
+import com.baidu.disconf2.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf2.web.service.app.bo.App;
 import com.baidu.disconf2.web.service.app.service.AppMgr;
 import com.baidu.disconf2.web.service.config.bo.Config;
@@ -36,6 +39,9 @@ import com.baidu.ub.common.generic.vo.DaoPageResult;
 @Service
 public class ConfigMgrImpl implements ConfigMgr {
 
+    protected static final Logger LOG = LoggerFactory
+            .getLogger(ConfigMgrImpl.class);
+
     @Autowired
     private ConfigDao configDao;
 
@@ -44,6 +50,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private EnvMgr envMgr;
+
+    @Autowired
+    private ZooKeeperDriver zooKeeperDriver;
 
     /**
      * 根据详细参数获取配置返回
@@ -201,7 +210,19 @@ public class ConfigMgrImpl implements ConfigMgr {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     public void updateItemValue(Long configId, String value) {
 
+        ConfListVo confListVo = getConfVo(configId);
+
+        //
+        // 配置数据库的值
+        //
         configDao.updateValue(configId, value);
+
+        //
+        // 通知ZK,如果ZK更新失败，则整个事务回滚
+        //
+        zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(),
+                confListVo.getEnvName(), confListVo.getVersion(),
+                DisConfigTypeEnum.ITEM);
     }
 
     /**

@@ -7,13 +7,7 @@ package com.baidu.dsp.common.constant;
  */
 public enum ModuleCode {
 
-    OTHER(0, "Other"), 
-    DEMO_FANTUAN(1, "FANTUAN"),
-    AD(2, "Ad"), 
-    REMOTE(3,"Remote"),
-    CREATIVITY(4, "Creativity"),
-    EXCEPTION(5, "EXCEPTION"),
-    DAS(6, "DAS");
+    OTHER(0, "Other"), REMOTE(3, "Remote"), EXCEPTION(5, "EXCEPTION");
 
     private int code = 0;
     private String modelName = null;

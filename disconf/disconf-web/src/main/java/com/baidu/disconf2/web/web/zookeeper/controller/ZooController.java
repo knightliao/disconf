@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.json.ValueVo;
-import com.baidu.disconf2.web.service.zookeeper.service.ZooMgr;
+import com.baidu.disconf2.web.service.zookeeper.config.ZooConfig;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 
@@ -29,7 +29,7 @@ public class ZooController extends BaseController {
             .getLogger(ZooController.class);
 
     @Autowired
-    private ZooMgr zooMgr;
+    private ZooConfig zooConfig;
 
     /**
      * 获取Zookeeper地址
@@ -43,7 +43,7 @@ public class ZooController extends BaseController {
 
         ValueVo confItemVo = new ValueVo();
         confItemVo.setStatus(Constants.OK);
-        confItemVo.setValue(zooMgr.getHosts());
+        confItemVo.setValue(zooConfig.getZooHosts());
 
         return confItemVo;
     }

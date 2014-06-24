@@ -89,21 +89,15 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
 
-           
-
             return buildError("syserror.httpmethod",
                     ErrorCode.HttpRequestMethodNotSupportedException);
 
         } else if (e instanceof MissingServletRequestParameterException) {
 
-        
-
             return buildError("syserror.param.miss",
                     ErrorCode.MissingServletRequestParameterException);
 
         } else if (e instanceof GlobalExceptionAware) {
-
-         
 
             LOG.warn("details: ", e);
             GlobalExceptionAware g = (GlobalExceptionAware) e;
