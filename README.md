@@ -62,7 +62,7 @@ Disconf的功能特点描述图：
 
 ## 模块架构图  ##
 
-![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ehictqxgsaj20in0b0dh0.jpg)
+![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1ehqlp58zqej20iq0bdq46.jpg)
 
 ## 模块信息##
 
