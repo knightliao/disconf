@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 网络工具
  * 
  * @author liaoqiqi
  * @version 2014-6-17
@@ -19,6 +20,7 @@ public class NetUtils {
             .getLogger(NetUtils.class);
 
     /**
+     * PING指定URL是否可用
      * 
      * @param address
      * @return

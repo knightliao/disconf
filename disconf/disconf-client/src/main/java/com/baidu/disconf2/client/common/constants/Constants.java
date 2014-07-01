@@ -12,4 +12,10 @@ public class Constants {
      * Disconf本身Package
      */
     public static final String DISCONF_PACK_NAME = "com.baidu.disconf2";
+
+    /**
+     * 百度Jpass相关变量
+     */
+    public static final String HOST_PROPERTIES_KEY = "VCAP_APP_HOST";
+    public static final String PORT_PROPERTIES_KEY = "VCAP_APP_PORT";
 }

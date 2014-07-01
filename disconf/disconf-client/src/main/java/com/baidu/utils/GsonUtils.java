@@ -3,6 +3,7 @@ package com.baidu.utils;
 import com.google.gson.Gson;
 
 /**
+ * Google Json工具
  * 
  * @author liaoqiqi
  * @version 2014-6-16

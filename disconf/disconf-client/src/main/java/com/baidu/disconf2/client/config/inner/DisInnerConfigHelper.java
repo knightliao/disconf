@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.utils.ConfigLoaderUtils;
 import com.baidu.utils.OsUtil;
-import com.baidu.utils.StringNUtils;
+import com.baidu.utils.StringUtils;
 
 /**
  * 用户配置、系统配置 的校验
@@ -35,20 +35,19 @@ public class DisInnerConfigHelper {
 
         //
         // 服务器地址
-        if (StringNUtils
-                .isEmpty(DisClientConfig.getInstance().CONF_SERVER_HOST)) {
+        if (StringUtils.isEmpty(DisClientConfig.getInstance().CONF_SERVER_HOST)) {
 
             throw new Exception("settings: CONF_SERVER_HOST cannot find");
         }
         DisClientConfig.getInstance().setHostList(
-                StringNUtils.parseStringToStringList(
+                StringUtils.parseStringToStringList(
                         DisClientConfig.getInstance().CONF_SERVER_HOST, ","));
         LOGGER.info("SERVER conf_server_host: "
                 + DisClientConfig.getInstance().getHostList());
 
         //
         // 版本
-        if (StringNUtils.isEmpty(DisClientConfig.getInstance().VERSION)) {
+        if (StringUtils.isEmpty(DisClientConfig.getInstance().VERSION)) {
 
             throw new Exception("settings: VERSION cannot find");
         }
@@ -56,7 +55,7 @@ public class DisInnerConfigHelper {
 
         //
         // APP名
-        if (StringNUtils.isEmpty(DisClientConfig.getInstance().APP)) {
+        if (StringUtils.isEmpty(DisClientConfig.getInstance().APP)) {
 
             throw new Exception("settings: APP cannot find");
         }
@@ -64,7 +63,7 @@ public class DisInnerConfigHelper {
 
         //
         // 环境
-        if (StringNUtils.isEmpty(DisClientConfig.getInstance().ENV)) {
+        if (StringUtils.isEmpty(DisClientConfig.getInstance().ENV)) {
 
             throw new Exception("settings: ENV cannot find");
         }
@@ -93,7 +92,7 @@ public class DisInnerConfigHelper {
         //
 
         // CONF_SERVER_STORE_ACTION
-        if (StringNUtils
+        if (StringUtils
                 .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION)) {
 
             throw new Exception(
@@ -103,7 +102,7 @@ public class DisInnerConfigHelper {
                 + DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION);
 
         // CONF_SERVER_ZOO_ACTION
-        if (StringNUtils
+        if (StringUtils
                 .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION)) {
 
             throw new Exception("settings: CONF_SERVER_ZOO_ACTION cannot find");
@@ -112,7 +111,7 @@ public class DisInnerConfigHelper {
                 + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
 
         // CONF_SERVER_MASTER_NUM_ACTION
-        if (StringNUtils
+        if (StringUtils
                 .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION)) {
 
             throw new Exception(
@@ -125,7 +124,7 @@ public class DisInnerConfigHelper {
         // 本地相关
         //
 
-        if (StringNUtils
+        if (StringUtils
                 .isEmpty(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR)) {
 
             throw new Exception("settings: LOCAL_TMP_DIR cannot find");

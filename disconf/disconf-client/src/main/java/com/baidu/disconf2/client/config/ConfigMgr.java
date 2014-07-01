@@ -3,6 +3,7 @@ package com.baidu.disconf2.client.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.client.config.inner.DisClientComConfig;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.config.inner.DisInnerConfigHelper;
@@ -28,6 +29,10 @@ public class ConfigMgr {
     public static void init() throws Exception {
 
         LOGGER.info("--------------- LOAD CONFIG START ---------------");
+
+        //
+        LOGGER.info("Finer print: "
+                + DisClientComConfig.getInstance().getInstanceFingerprint());
 
         // 导入系统配置
         DisClientSysConfig.getInstance().loadConfig(null);
@@ -69,6 +74,5 @@ public class ConfigMgr {
             e.printStackTrace();
         }
     }
-
 
 }

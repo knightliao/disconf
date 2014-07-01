@@ -35,6 +35,9 @@ public class DisconfCenterStore {
     // 主备切换时的Key列表
     private List<String> activeBackupKeyList;
 
+    // 标识本机器名
+    private String machineName;
+
     /**
      * 存储 一个配置文件
      */
@@ -78,5 +81,13 @@ public class DisconfCenterStore {
 
     public List<String> getActiveBackupKeyList() {
         return activeBackupKeyList;
+    }
+
+    public String getMachineName() {
+        return machineName;
+    }
+
+    public void setMachineName(String machineName) {
+        this.machineName = machineName;
     }
 }

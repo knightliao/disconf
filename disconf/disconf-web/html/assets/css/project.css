@@ -7,8 +7,6 @@ abbr, acronym {
 }
 /*---end reset*/
 
-
-
 .head {
     background: white;
 }
@@ -722,8 +720,16 @@ input.autoPush-detail-item-input {
     margin: 20px auto;
 }
 
-
-
+/***
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
     padding: 0;
@@ -873,4 +879,44 @@ q:before, q:after {
 }
 .hide {
     display: none;
+}
+.sl-custom-file {
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.sl-custom-file .ui-input-file {
+    position: absolute;
+    right: 0;
+    top: 0;
+    _zoom: 30;
+    font-size: 300px\9;
+    height: 100%;
+    _height: auto;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    ms-filter: "alpha(opacity=0)";
+    cursor: pointer;
+    width: 100px;
+}
+.bar_rar {
+    background-color: #B4F5B4;
+    width: 0%;
+    height: 20px;
+    border-radius: 3px;
+}
+.percent_rar {
+    position: absolute;
+    display: inline-block;
+    top: 3px;
+    left: 48%;
+}
+.progress_rar {
+    display: none
+}
+.visibility {
+    display: none
 }

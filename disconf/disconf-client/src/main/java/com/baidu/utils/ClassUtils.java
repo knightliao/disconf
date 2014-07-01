@@ -2,15 +2,8 @@ package com.baidu.utils;
 
 import java.lang.reflect.Field;
 
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtMethod;
-import javassist.bytecode.AnnotationsAttribute;
-import javassist.bytecode.ClassFile;
-import javassist.bytecode.ConstPool;
-import javassist.bytecode.annotation.Annotation;
-
 /**
+ * 类工具
  * 
  * @author liaoqiqi
  * @version 2014-6-11
@@ -150,37 +143,4 @@ public class ClassUtils {
         }
     }
 
-    /**
-     * 
-     * @param className
-     * @param methodName
-     * @throws Exception
-     */
-    public static void addAnotation4Method(Annotation anntation,
-            String className, String methodName) throws Exception {
-
-        // pool creation
-        ClassPool pool = ClassPool.getDefault();
-
-        // extracting the class
-        CtClass cc = pool.getCtClass(className);
-
-        // looking for the method to apply the annotation on
-        CtMethod sayHelloMethodDescriptor = cc.getDeclaredMethod(methodName);
-
-        // create the annotation
-        ClassFile ccFile = cc.getClassFile();
-        ConstPool constpool = ccFile.getConstPool();
-        AnnotationsAttribute attr = new AnnotationsAttribute(constpool,
-                AnnotationsAttribute.visibleTag);
-
-        //
-        attr.addAnnotation(anntation);
-        // add the annotation to the method descriptor
-        sayHelloMethodDescriptor.getMethodInfo().addAttribute(attr);
-
-        // transform the ctClass to java class
-        Class dynamiqueBeanClass = cc.toClass();
-
-    }
 }

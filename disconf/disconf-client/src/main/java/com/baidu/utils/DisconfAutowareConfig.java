@@ -176,12 +176,11 @@ public final class DisconfAutowareConfig {
     }
 
     /**
+     * 自动导入配置文件至 static变量
      * 
-     * @Description: auto ware
-     * 
-     * @param
-     * 
+     * @param cls
      * @param propertyFilePath
+     * @throws Exception
      */
     public static void autowareStatucConfig(Class<?> cls,
             final String propertyFilePath) throws Exception {
@@ -196,12 +195,11 @@ public final class DisconfAutowareConfig {
     }
 
     /**
+     * 自动导入某个配置文件
      * 
-     * @Description: auto ware
-     * 
-     * @param
-     * 
+     * @param obj
      * @param propertyFilePath
+     * @throws Exception
      */
     public static void autowareConfig(final Object obj,
             final String propertyFilePath) throws Exception {

@@ -19,6 +19,27 @@
 		}
 	});
 
+	//
+	// 上传按钮
+	//
+	var bar = $('.bar_rar');
+	var percent = $('.percent_rar');
+	var progress_rar = $('.progress_rar');
+	var myfilerar = $('#myfilerar');
+	var errorrar = $('#error_rar');
+	var add_file_but = $('#open_dialog_rar')
+	$('#myfilerar').change(function(evt) {
+		errorrar.empty();
+		upload_status = 0;
+		add_file_but.html("添加资源文件...")
+		var ret = validate(null, null, null);
+		if (ret == false) {
+		} else {
+			$('#form_rar').submit();
+		}
+		$('#myfilerar').val("");
+	});
+
 	// 提交
 	$("#submit").on("click", function(e) {
 		var me = this;

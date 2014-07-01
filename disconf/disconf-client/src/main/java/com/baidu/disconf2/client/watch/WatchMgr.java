@@ -1,8 +1,10 @@
 package com.baidu.disconf2.client.watch;
 
+import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf2.client.config.inner.DisClientComConfig;
 import com.baidu.disconf2.client.config.inner.DisClientConfig;
 import com.baidu.disconf2.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf2.client.fetcher.FetcherMgr;
@@ -131,19 +133,40 @@ public class WatchMgr {
      * 
      * @param path
      */
-    public void makePath(String path, String data) {
+    private void makePath(String path, String data) {
 
         ZookeeperMgr.getInstance().makeDir(path, data);
     }
 
     /**
-     * 监控路径,监控前会事先创建路径
+     * 在指定路径下创建一个临时结点
+     */
+    private void makeTempChildPath(String path, String data) {
+
+        String finterPrint = DisClientComConfig.getInstance()
+                .getInstanceFingerprint();
+
+        String mainTypeFullStr = path + "/" + finterPrint;
+        try {
+            ZookeeperMgr.getInstance().createEphemeralNode(mainTypeFullStr,
+                    data, CreateMode.EPHEMERAL);
+        } catch (Exception e) {
+            LOGGER.error("cannot create: " + mainTypeFullStr + "\t"
+                    + e.toString());
+        }
+    }
+
+    /**
+     * 监控路径,监控前会事先创建路径,并且会新建一个自己的Temp子结点
      */
     public void watchPath(String monitorPath, String keyName,
             DisConfigTypeEnum disConfigTypeEnum, String value) {
 
         // 先新建路径
-        makePath(monitorPath, value);
+        makePath(monitorPath, "");
+
+        // 新建一个代表自己的临时结点
+        makeTempChildPath(monitorPath, value);
 
         // 进行监控
         NodeWatcher nodeWatcher = new NodeWatcher(monitorPath, keyName,

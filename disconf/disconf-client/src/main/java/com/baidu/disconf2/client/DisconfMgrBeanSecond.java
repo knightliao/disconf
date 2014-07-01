@@ -1,7 +1,7 @@
 package com.baidu.disconf2.client;
 
-
 /**
+ * 第二次扫描，动态扫描
  * 
  * @author liaoqiqi
  * @version 2014-6-18

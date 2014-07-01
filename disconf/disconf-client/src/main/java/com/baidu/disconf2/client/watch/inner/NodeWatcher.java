@@ -68,6 +68,9 @@ public class NodeWatcher implements Watcher {
     @Override
     public void process(WatchedEvent event) {
 
+        //
+        // 结点更新时
+        //
         if (event.getType() == EventType.NodeDataChanged) {
 
             try {

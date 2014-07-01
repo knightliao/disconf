@@ -38,6 +38,7 @@ public class DisconfAspectJ {
     }
 
     /**
+     * 获取配置文件数据
      * 
      * @param pjp
      * @param disconfFileItem
@@ -90,6 +91,7 @@ public class DisconfAspectJ {
     }
 
     /**
+     * 获取配置项数据
      * 
      * @param pjp
      * @param disconfFileItem

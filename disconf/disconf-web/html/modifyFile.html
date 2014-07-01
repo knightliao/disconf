@@ -96,10 +96,29 @@
                             <span style="float:left" class="private-item-key">原配置文件内容：</span>
                             <pre style="float:left" id="oldvalue" class="private-item-value-pre">FFFF</pre>
                         </div>
-                        <p class="private-item">
-                            <span class="private-item-key">上传配置：</span>
-                            <input id="value" type="text"   class="private-item-value"/>
-                        </p>
+                        <div class="private-item clearfix">
+                            <span style="float:left" class="private-item-key">上传配置：</span>
+                            <div style="float:left" class="private-item-value-pre">
+                                <span class="sl-custom-file btn btn-success fileinput-button" style="overflow: hidden;cursor: pointer;">
+                                    <div id="open_dialog_rar">
+                                        添加资源文件...
+                                    </div>
+                                    <input class="ui-input-file" type="file" name="myfilerar" id="myfilerar" style="width:120px;height:30px;" >
+                                </span>
+                                <span id="error_rar" class="text-error error_rar"></span>
+                                <div style="color: #999;">
+                                    只允许.properties格式的文件
+                                    <span id="status_rar" class="text-success"></span>
+                                </div>
+                                <div class="progress_rar">
+                                    <div class="bar_rar"></div >
+                                    <div class="percent_rar">
+                                        0%
+                                    </div >
+                                </div>
+                                <div class="loading_rar" ></div>
+                            </div>
+                        </div>
                         <div id="error" class="error hide">
                             表单选项不能为空或填写格式错误！
                         </div>
@@ -139,6 +158,7 @@
 <script src="assets/js/common.js"></script>
 
 <script src="assets/js/modifyFile.js"></script>
+<script src="assets/js/jquery.uploadify.js"></script>
 
         
     </body>

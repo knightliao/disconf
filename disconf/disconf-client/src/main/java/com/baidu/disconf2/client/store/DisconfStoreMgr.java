@@ -349,6 +349,7 @@ public class DisconfStoreMgr {
     }
 
     /**
+     * 获取配置文件在Zookeeper上的路径
      * 
      * @param fileName
      * @return
@@ -368,6 +369,7 @@ public class DisconfStoreMgr {
     }
 
     /**
+     * 获取配置项在ZK上的路径
      * 
      * @param fileName
      * @return

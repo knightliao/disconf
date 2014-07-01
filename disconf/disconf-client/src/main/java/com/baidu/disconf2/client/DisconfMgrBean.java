@@ -7,7 +7,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
 /**
- * 可用于Spring的配置
+ * 第一次扫描，静态扫描
  * 
  * @author liaoqiqi
  * @version 2014-6-17
@@ -21,7 +21,7 @@ public class DisconfMgrBean implements BeanFactoryPostProcessor,
     private String scanPackage = null;
 
     /**
-     * 
+     * 关闭
      */
     public void destory() {
 
@@ -41,6 +41,9 @@ public class DisconfMgrBean implements BeanFactoryPostProcessor,
         return Ordered.HIGHEST_PRECEDENCE;
     }
 
+    /**
+     * 第一次扫描
+     */
     @Override
     public void postProcessBeanFactory(
             ConfigurableListableBeanFactory beanFactory) throws BeansException {
