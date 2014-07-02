@@ -1,7 +1,7 @@
 (function($) {
 
 	var configId = Util.param.getConfigId();
-	
+
 	fetchFileData();
 
 	//
@@ -25,6 +25,12 @@
 						$("#env").text(result.envName);
 						$("#key").text(result.key);
 						$("#oldvalue").text(result.value);
+						$("#currentData").text(
+								result.appName + " * " + result.version + " * "
+										+ result.envName);
+						// 获取APP下的配置数据
+						fetchItems(result.appId, result.envId, result.version,
+								configId);
 					}
 				});
 	}

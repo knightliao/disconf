@@ -61,18 +61,31 @@
     <div class="main container">
 
         <div class="row-fluid">
+            <ul class="breadcrumb" style="background-color:#fff;">
+                <li>
+                    <a href="/">配置</a><span class="divider">/</span>
+                </li>
+                <li>
+                    <span id="currentData"></span>
+                    <span class="divider">/</span>
+                </li>
+                <li class="active">
+                    配置文件修改
+                </li>
+            </ul>
+        </div>
 
-            <div class="contentWrap clearfix">
-                <div class="content">
+        <div class="row-fluid">
 
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="/">配置</a><span class="divider">/</span>
-                        </li>
-                        <li class="active">
-                            配置文件修改
-                        </li>
-                    </ul>
+            <div class="span3">
+                <div class="well sidebar-nav" style="padding:10px;background-color:#fff">
+                    <ul id="sidebarcur" class="nav nav-list"></ul>
+                </div><!--/.well -->
+            </div>
+
+            <div class="span9">
+
+                <div class="content oz">
 
                     <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
                         <h2 class="autoPush-detail-title">配置文件修改</h2>
@@ -132,6 +145,13 @@
     </div>
 </div>
 
+<!-- 详细信息单行模板-->
+<div id="tItemTpl" class="hide">
+    <li style="font-size:13px;" class="{2}">
+        <a href="{1}">{0}</a>
+    </li>
+</div>
+
 
 <div id="footer">
     <div class="container clearfix">
@@ -154,6 +174,7 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/common.js"></script>
 
+<script src="assets/js/modifycommon.js"></script>
 <script src="assets/js/jquery.form.js"></script>
 <script src="assets/js/modifyFile.js"></script>
 
