@@ -15,7 +15,6 @@ public class LoginConstant {
 
     public static final String XONE_COOKIE_NAME_STRING = "DISCONF";
 
-    public static final String XONE_COOKIE_DOMAIN_STRING = "disconf.com";
 
     /**
      * 在Cookie的时间，一年

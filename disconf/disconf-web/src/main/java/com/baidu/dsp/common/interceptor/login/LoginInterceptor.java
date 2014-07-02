@@ -43,6 +43,9 @@ public class LoginInterceptor extends WebCommonInterceptor {
 
     private List<String> notInterceptPathList;
 
+    // Cookie域
+    private String XONE_COOKIE_DOMAIN_STRING = "127.0.0.1";
+
     @Override
     public void afterCompletion(HttpServletRequest arg0,
             HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -151,8 +154,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
 
             CookieUtils.setCookie(response,
                     LoginConstant.XONE_COOKIE_NAME_STRING, cookieString,
-                    LoginConstant.XONE_COOKIE_DOMAIN_STRING,
-                    LoginConstant.XONE_COOKIE_AGE);
+                    XONE_COOKIE_DOMAIN_STRING, LoginConstant.XONE_COOKIE_AGE);
         } else {
         }
     }
@@ -185,6 +187,14 @@ public class LoginInterceptor extends WebCommonInterceptor {
      */
     public void setNotInterceptPathList(List<String> notInterceptPathList) {
         this.notInterceptPathList = notInterceptPathList;
+    }
+
+    public String getXONE_COOKIE_DOMAIN_STRING() {
+        return XONE_COOKIE_DOMAIN_STRING;
+    }
+
+    public void setXONE_COOKIE_DOMAIN_STRING(String xONE_COOKIE_DOMAIN_STRING) {
+        XONE_COOKIE_DOMAIN_STRING = xONE_COOKIE_DOMAIN_STRING;
     }
 
 }
