@@ -74,7 +74,7 @@
 						html += '<li><a rel=' + item.id + ' href="#">环境:'
 								+ item.name + '</a></li>';
 					});
-					html += '<li><a rel=' + -1 + ' href="#">所有环境:</a></li>';
+					html += '<li><a rel=' + -1 + ' href="#">所有环境</a></li>';
 					$("#envChoice").html(html);
 				}
 			});

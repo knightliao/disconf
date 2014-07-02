@@ -61,9 +61,6 @@ abbr, acronym {
     border-width: 0px 20px 20px;
 }
 
-.contentWrap {
-    position: relative;
-}
 .navSub {
     height: 50px;
     background: url("../img/nav-bg.png") repeat-x;
@@ -137,7 +134,7 @@ th {
 }
 .index-contentWrap {
     margin-top: 50px;
-    width: 680px;
+    width: 970px;
 }
 .index-item {
     float: left;
@@ -649,6 +646,7 @@ input.autoPush-detail-item-input {
 .account-tableWrap {
     border: 1px solid #E8E8E8;
     background: white;
+    width: 100%;
 }
 .account-tableWrap thead tr td {
     text-align: center;
@@ -827,9 +825,8 @@ q:before, q:after {
 }
 
 .navBlock, .contentWrap {
-    width: 970px;
-    margin: 5px;
-    margin-top: 5px;
+    width: 100%;
+    margin-top: 15px;
 }
 
 .clearfix:after {

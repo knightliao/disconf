@@ -45,10 +45,13 @@ public enum ErrorCode {
 
     // 非预期错误
     UN_EXPECTED(2014),
-    
+
     // 资源更新冲突错误
     // 由同时修改同一资源引起
-    CONCURRENT_MODIFY_ERROR(2046);
+    CONCURRENT_MODIFY_ERROR(2046),
+
+    // 文件上传错误
+    FILEUPLOAD_ERROR(2014);
 
     private int code = 0;
 

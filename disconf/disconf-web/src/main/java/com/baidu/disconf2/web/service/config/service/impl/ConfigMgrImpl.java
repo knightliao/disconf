@@ -204,7 +204,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 更新 配置项的值
+     * 更新 配置项/配置文件 的值
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)

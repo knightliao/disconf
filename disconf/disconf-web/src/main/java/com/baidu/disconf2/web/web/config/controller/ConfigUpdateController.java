@@ -1,5 +1,7 @@
 package com.baidu.disconf2.web.web.config.controller;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.baidu.disconf2.web.service.config.service.ConfigMgr;
 import com.baidu.disconf2.web.web.config.validator.ConfigValidator;
+import com.baidu.disconf2.web.web.config.validator.FileUploadValidator;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.exception.FileUploadException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
@@ -33,6 +39,9 @@ public class ConfigUpdateController extends BaseController {
 
     @Autowired
     private ConfigValidator configValidator;
+
+    @Autowired
+    private FileUploadValidator fileUploadValidator;
 
     /**
      * 配置项的更新
@@ -60,5 +69,46 @@ public class ConfigUpdateController extends BaseController {
         configMgr.notifyZookeeper(configId);
 
         return buildSuccess("修改成功");
+    }
+
+    /**
+     * 配置文件的更新
+     * 
+     * @param desc
+     * @param file
+     * @return
+     * @throws IllegalStateException
+     * @throws IOException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/file/{configId}", method = RequestMethod.POST)
+    public JsonObjectBase updateFile(@PathVariable long configId,
+            @RequestParam("myfilerar") MultipartFile file) {
+
+        //
+        // 校验
+        //
+        int fileSize = 1024 * 1024 * 4;
+        String[] allowExtName = { ".properties" };
+        fileUploadValidator.validateFile(file, fileSize, allowExtName);
+
+        //
+        // 更新
+        //
+        try {
+
+            String str = new String(file.getBytes(), "UTF-8");
+            LOG.info("receive file: " + str);
+
+            configMgr.updateItemValue(configId, str);
+            LOG.info("update " + configId + " ok");
+
+        } catch (Exception e) {
+
+            LOG.error(e.toString());
+            throw new FileUploadException("upload file error", e);
+        }
+
+        return buildSuccess("ok");
     }
 }

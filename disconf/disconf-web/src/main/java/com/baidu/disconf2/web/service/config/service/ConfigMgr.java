@@ -70,6 +70,7 @@ public interface ConfigMgr {
     public Config getConfigById(Long configId);
 
     /**
+     * 更新 配置项/配置文件
      * 
      * @param configId
      * @return

@@ -1,23 +1,53 @@
 (function($) {
 
 	var configId = Util.param.getConfigId();
+	
+	fetchFileData();
 
 	//
-	// 获取APP信息
+	// 渲染主列表
 	//
-	$.ajax({
-		type : "GET",
-		url : "/api/config/" + configId
-	}).done(function(data) {
-		if (data.success === "true") {
-			var result = data.result;
-			$("#app").text(result.appName + ' (appid=' + result.appId + ')');
-			$("#version").text(result.version);
-			$("#env").text(result.envName);
-			$("#key").text(result.key);
-			$("#oldvalue").text(result.value);
+	function fetchFileData() {
+		//
+		// 获取APP信息
+		//
+		$.ajax({
+			type : "GET",
+			url : "/api/config/" + configId
+		}).done(
+				function(data) {
+					if (data.success === "true") {
+						var result = data.result;
+						$("#app").text(
+								result.appName + ' (appid=' + result.appId
+										+ ')');
+						$("#version").text(result.version);
+						$("#env").text(result.envName);
+						$("#key").text(result.key);
+						$("#oldvalue").text(result.value);
+					}
+				});
+	}
+
+	var upload_status = 0;
+	//
+	// 校验
+	//
+	function validate(formData, jqForm, options) {
+
+		var myfilerar = $('input[name=myfilerar]')
+
+		var val = myfilerar.val();
+		switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+		case 'properties':
+			break;
+		default:
+			errorrar.html("错误: " + "文件类型必须是properties");
+			return false;
 		}
-	});
+
+		return true;
+	}
 
 	//
 	// 上传按钮
@@ -31,39 +61,78 @@
 	$('#myfilerar').change(function(evt) {
 		errorrar.empty();
 		upload_status = 0;
-		add_file_but.html("添加资源文件...")
+		add_file_but.html("上传配置文件...")
 		var ret = validate(null, null, null);
-		if (ret == false) {
-		} else {
-			$('#form_rar').submit();
+		if (ret == true) {
+			upload_status = 1;
+			var myfilerar = $('input[name=myfilerar]')
+			var val = myfilerar.val();
+			errorrar.html("&nbsp;&nbsp;准备上传: " + val);
 		}
-		$('#myfilerar').val("");
 	});
 
 	// 提交
-	$("#submit").on("click", function(e) {
-		var me = this;
-		var value = $("#value").val();
-		// 验证
-		if (!value) {
-			$("#error").show();
-			$("#error").html("表单不能为空或填写格式错误！");
-			return;
-		}
-		$.ajax({
-			type : "PUT",
-			url : "/api/config/item/" + configId,
-			data : {
-				"value" : value
-			}
-		}).done(function(data) {
-			$("#error").show();
-			if (data.success === "true") {
-				$("#error").html(data.result);
+	$('#form').ajaxForm({
+
+		url : '/api/config/file/' + configId,
+		beforeSubmit : validate,
+		beforeSend : function(xhr) {
+			$("#myfilerar").bind("updatecomplete", function() {
+				xhr.abort();
+			});
+			var percentVal = '0%';
+			progress_rar.show();
+			bar.width(percentVal)
+			percent.html(percentVal);
+			errorrar.html("&nbsp;&nbsp;正在上传....请稍候...");
+		},
+		uploadProgress : function(event, position, total, percentComplete) {
+			var percentVal = percentComplete + '%';
+			upload_status = 1;
+			bar.width(percentVal)
+			percent.html(percentVal);
+			errorrar.html("&nbsp;&nbsp;正在上传....请稍候...");
+		},
+		success : function() {
+			var percentVal = '100%';
+			bar.width(percentVal)
+			percent.html(percentVal);
+			progress_rar.hide();
+		},
+		complete : function(xhr) {
+			var is_ok = true;
+			if (xhr.status != 200 && xhr.status != 0) {
+				errorrar.html("上传失败，请重新上传. 状态码：" + xhr.status);
+				is_ok = false;
+			} else if (xhr.aborted == 1) {
+				is_ok = false;
+			} else if (xhr.statusText == "abort") {
+				is_ok = false;
 			} else {
-				Util.input.whiteError($("#error"), data);
+				xhr.responseText = xhr.responseText.replace("<PRE>", "");
+				xhr.responseText = xhr.responseText.replace("</PRE>", "");
+				data = $.parseJSON(xhr.responseText);
+				if (data.success === "true") {
+					$("#error").html(data.result);
+				} else {
+					add_file_but.html("添加资源文件...")
+					errorrar.html("错误：" + data.result);
+					is_ok = false;
+				}
 			}
-		});
+			if (is_ok == true) {
+				add_file_but.html("重新上传")
+				errorrar.html("&nbsp;&nbsp;上传成功！");
+				status.html("已上传:" + data.file_name);
+				upload_status = 2;
+				// 重新刷新
+				fetchFileData();
+			} else {
+				upload_status = 3;
+				bar.width(0)
+				percent.html(0);
+			}
+		}
 	});
 
 })(jQuery);

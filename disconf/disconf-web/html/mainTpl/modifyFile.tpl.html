@@ -36,7 +36,7 @@
                         </li>
                     </ul>
 
-                    <form id="form" class="private-form clearfix">
+                    <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
                         <h2 class="autoPush-detail-title">配置文件修改</h2>
                         <p class="private-item">
                             <span class="private-item-key">APP id & 名称：</span>
@@ -63,7 +63,7 @@
                             <div style="float:left" class="private-item-value-pre">
                                 <span class="sl-custom-file btn btn-success fileinput-button" style="overflow: hidden;cursor: pointer;">
                                     <div id="open_dialog_rar">
-                                        添加资源文件...
+                                        上传配置文件...
                                     </div>
                                     <input class="ui-input-file" type="file" name="myfilerar" id="myfilerar" style="width:120px;height:30px;" >
                                 </span>
@@ -81,11 +81,8 @@
                                 <div class="loading_rar" ></div>
                             </div>
                         </div>
-                        <div id="error" class="error hide">
-                            表单选项不能为空或填写格式错误！
-                        </div>
                         <div>
-                            <button id="submit" class="private-submit" onclick="return false;">
+                            <button id="submit" class="private-submit" >
                                 上传
                             </button>
                         </div>
@@ -99,7 +96,7 @@
 
 <%= page.foot %>
 
+<script src="assets/js/jquery.form.js"></script>
 <script src="assets/js/modifyFile.js"></script>
-<script src="assets/js/jquery.uploadify.js"></script>
 
 <%= page.basefoot %>
