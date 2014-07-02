@@ -160,7 +160,7 @@ th {
 .foot {
     margin-top: 30px;
     height: 50px;
-    background: #52bad5;
+
     padding-top: 70px;
 }
 .foot p {
@@ -738,7 +738,6 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 }
 body {
     font-family: Arial, Helvetica, sans-serif, 宋体;
-    background: #f9f9f9;
 }
 label {
     display: inline-block;
@@ -795,6 +794,7 @@ q:before, q:after {
 #footer {
     border-top: 1px solid #ddd;
     height: 60px;
+    background: #fff;
 }
 #footer .credit, #footer .links {
     font-size: 13px;
@@ -813,18 +813,19 @@ q:before, q:after {
     padding-top: 60px;
     padding-bottom: 0px;
     min-height: 80%;
+    background: #e9e9e9;
 }
 
 #mainwrap {
     padding-bottom: 40px;
     min-height: 80%;
+    background: #e9e9e9;
 }
 
 .content {
-    width: 700px;
+    width: 100%;
     border: 1px solid #E8E8E8;
     background: white;
-    padding-bottom: 10px;
 }
 
 .navBlock, .contentWrap {
@@ -841,8 +842,7 @@ q:before, q:after {
 }
 
 .private-form {
-    width: 500px;
-    margin: 30px 100px;
+    margin: 30px 80px;
 }
 
 .autoPush-detail-title {
@@ -919,4 +919,11 @@ q:before, q:after {
 }
 .visibility {
     display: none
+}
+/*为了方便使用，可以将其做成一个“类”，这样可以直接挂
+在父元素上，而不用为每一个父元素添加以下CSS属性*/
+.oz{
+    overflow: hidden; /*为父元素添加overflow属性，至于它的值可
+                      以是auto,hidden,scroll三者选一*/
+    zoom: 1; /*在 IE6 中还需要添加zoom属性*/
 }

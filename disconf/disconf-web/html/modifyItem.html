@@ -61,52 +61,77 @@
     <div class="main container">
 
         <div class="row-fluid">
+            <ul class="breadcrumb" style="background-color:#fff">
+                <li>
+                    <a href="/">配置</a><span class="divider">/</span>
+                </li>
+                <li class="active">
+                    配置项修改
+                </li>
+            </ul>
+        </div>
 
-            <div class="contentWrap clearfix">
-                <div class="content">
-
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="/">配置</a><span class="divider">/</span>
-                        </li>
-                        <li class="active">
-                            配置项修改
-                        </li>
-                    </ul>
-
-                    <form id="form" class="private-form clearfix">
-                        <h2 class="autoPush-detail-title">配置项修改</h2>
-                        <p class="private-item">
-                            <span class="private-item-key">APP id & 名称：</span>
-                            <span id="app" class="private-item-value">FFFF</span>
-                        </p>
-                        <p class="private-item">
-                            <span class="private-item-key">版本：</span>
-                            <span id="version"  class="private-item-value">FFFF</span>
-                        </p>
-                        <p class="private-item">
-                            <span class="private-item-key">环境：</span>
-                            <span id="env" class="private-item-value">FFFF</span>
-                        </p>
-                        <p class="private-item">
-                            <span class="private-item-key">配置KEY：</span>
-                            <span id="key" class="private-item-value">FFFF</span>
-                        </p>
-                        <p class="private-item">
-                            <span class="private-item-key">配置值：</span>
-                            <input id="value" type="text"   class="private-item-value"/>
-                        </p>
-                        <div id="error" class="error hide">
-                            表单选项不能为空或填写格式错误！
-                        </div>
-                        <div>
-                            <button id="submit" class="private-submit" onclick="return false;">
-                                保存
-                            </button>
-                        </div>
-
-                    </form>
+        <div class="row-fluid" >
+            
+                <div class="span2">
+                    <div class="well sidebar-nav" style="background-color:#fff">
+                        <ul class="nav nav-list">
+                            <li style="margin-bottom:10px">
+                                配置
+                            </li>
+                            <li class="active">
+                                <a href="#">Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Link</a>
+                            </li>
+                        </ul>
+                    </div><!--/.well -->
                 </div>
+
+                <div class="span10">
+                        
+                    <div class="content oz">
+
+                        <form id="form" class="private-form clearfix">
+                            <h2 class="autoPush-detail-title">配置项修改</h2>
+                            <p class="private-item">
+                                <span class="private-item-key">APP id & 名称：</span>
+                                <span id="app" class="private-item-value">FFFF</span>
+                            </p>
+                            <p class="private-item">
+                                <span class="private-item-key">版本：</span>
+                                <span id="version"  class="private-item-value">FFFF</span>
+                            </p>
+                            <p class="private-item">
+                                <span class="private-item-key">环境：</span>
+                                <span id="env" class="private-item-value">FFFF</span>
+                            </p>
+                            <p class="private-item">
+                                <span class="private-item-key">配置KEY：</span>
+                                <span id="key" class="private-item-value">FFFF</span>
+                            </p>
+                            <p class="private-item">
+                                <span class="private-item-key">配置值：</span>
+                                <input id="value" type="text"   class="private-item-value"/>
+                            </p>
+                            <div id="error" class="error hide">
+                                表单选项不能为空或填写格式错误！
+                            </div>
+                            <div>
+                                <button id="submit" class="private-submit" onclick="return false;">
+                                    保存
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
             </div>
         </div>
     </div>
