@@ -21,7 +21,10 @@ public class Columns {
     public final static String APP_ID = "app_id";
     public final static String ENV_ID = "env_id";
     public final static String CONFIG_ID = "config_id";
+    public final static String USER_ID = "user_id";
 
     public final static String TYPE = "type";
 
+    public final static String TOKEN = "token";
+    public final static String PASSWORD = "password";
 }

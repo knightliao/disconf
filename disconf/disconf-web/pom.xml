@@ -269,6 +269,10 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.3.0.CR1</version>
         </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- build -->

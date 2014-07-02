@@ -42,15 +42,22 @@
             <list>
                 <value>classpath*:/jdbc-mysql.properties</value>
                 <value>classpath*:/zoo.properties</value>
+                <value>classpath*:/redis-config.properties</value>
             </list>
         </property>
     </bean>
+
+    <bean id="loginRedisLogin"
+        class="com.baidu.disconf2.web.web.auth.login.impl.RedisLoginImplMock" />
 
     <bean id="zooConfig"
         class="com.baidu.disconf2.web.service.zookeeper.config.ZooConfig">
         <property name="zooHosts" value="${hosts}" />
         <property name="zookeeperUrlPrefix" value="${zookeeper_url_prefix}" />
     </bean>
+
+
+    <import resource="classpath*:/applicationContext-cache.xml" />
 
     <beans profile="db-test">
         <import resource="classpath*:applicationContext-dbconfig-test.xml" />
@@ -62,6 +69,16 @@
 
     <beans profile="production">
         <import resource="classpath*:/applicationContext-dbconfig.xml" />
+        <bean id="loginRedisLogin"
+            class="com.baidu.disconf2.web.web.auth.login.impl.RedisLoginImpl" />
     </beans>
+
+    <beans profile="rd">
+        <import resource="classpath*:/applicationContext-dbconfig.xml" />
+        <bean id="loginRedisLogin"
+            class="com.baidu.disconf2.web.web.auth.login.RedisLoginImplMock" />
+    </beans>
+
+
 
 </beans>

@@ -1,0 +1,73 @@
+package com.baidu.disconf2.web.service.sign.form;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
+import com.baidu.dsp.common.form.RequestFormBase;
+
+/**
+ * 登录
+ * 
+ * @author liaoqiqi
+ * @version 2014-2-5
+ */
+public class SigninForm extends RequestFormBase {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 565717265045704403L;
+
+    /**
+     * 电话
+     */
+    @Pattern(regexp = "(^$|[0-9]{11})", message = "phone.not.right")
+    @NotNull(message = "phone.empty")
+    @NotEmpty(message = "phone.empty")
+    private String phone;
+    public static final String PHONE = "phone";
+
+    /**
+     * 密码
+     */
+    @NotEmpty(message = "password.empty")
+    @NotNull(message = "password.empty")
+    private String password;
+    public static final String PASSWORD = "password";
+
+    /**
+     * 记住自己 0：不记住 1记住
+     */
+    @NotNull
+    @Range(min = 0, max = 1)
+    private Integer remember;
+    public static final String REMEMBER = "remember";
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getRemember() {
+        return remember;
+    }
+
+    public void setRemember(Integer remember) {
+        this.remember = remember;
+    }
+
+}
