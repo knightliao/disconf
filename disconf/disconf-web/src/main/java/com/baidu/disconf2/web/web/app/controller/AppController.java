@@ -57,7 +57,7 @@ public class AppController extends BaseController {
      * 
      * @return
      */
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/{configId}", method = RequestMethod.POST)
     @ResponseBody
     public JsonObjectBase create(@Valid AppNewForm appNewForm) {
 
@@ -67,4 +67,6 @@ public class AppController extends BaseController {
 
         return buildSuccess("创建成功");
     }
+
+
 }

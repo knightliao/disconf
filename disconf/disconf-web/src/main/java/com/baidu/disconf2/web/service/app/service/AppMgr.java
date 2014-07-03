@@ -37,4 +37,6 @@ public interface AppMgr {
     public App getById(Long id);
 
     App create(AppNewForm appNew);
+
+    void delete(Long appId);
 }

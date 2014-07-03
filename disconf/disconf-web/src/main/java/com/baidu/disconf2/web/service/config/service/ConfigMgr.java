@@ -95,4 +95,6 @@ public interface ConfigMgr {
      */
     void newConfig(ConfNewItemForm confNewForm,
             DisConfigTypeEnum disConfigTypeEnum);
+
+    void delete(Long configId);
 }

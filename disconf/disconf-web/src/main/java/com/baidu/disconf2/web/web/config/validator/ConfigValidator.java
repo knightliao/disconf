@@ -240,4 +240,15 @@ public class ConfigValidator {
 
     }
 
+    /**
+     * 验证删除
+     */
+    public void validateDelete(Long configId) {
+
+        Config config = configMgr.getConfigById(configId);
+        if (config == null) {
+            throw new FieldException("configId", "config.not.exist", null);
+        }
+    }
+
 }

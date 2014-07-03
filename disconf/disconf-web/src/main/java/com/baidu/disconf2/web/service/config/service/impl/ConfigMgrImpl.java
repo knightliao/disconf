@@ -269,4 +269,10 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         configDao.create(config);
     }
+
+    @Override
+    public void delete(Long configId) {
+
+        configDao.delete(configId);
+    }
 }

@@ -91,4 +91,9 @@ public class AppMgrImpl implements AppMgr {
 
         return appDao.create(app);
     }
+
+    @Override
+    public void delete(Long appId) {
+        appDao.delete(appId);
+    }
 }

@@ -22,7 +22,7 @@ import com.baidu.dsp.common.exception.FileUploadException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
- * 专用于配置更新
+ * 专用于配置更新、删除
  * 
  * @author liaoqiqi
  * @version 2014-6-24
@@ -110,5 +110,21 @@ public class ConfigUpdateController extends BaseController {
         }
 
         return buildSuccess("修改成功");
+    }
+
+    /**
+     * delete
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/{configId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public JsonObjectBase delete(@PathVariable long configId) {
+
+        configValidator.validateDelete(configId);
+
+        configMgr.delete(configId);
+
+        return buildSuccess("删除成功");
     }
 }

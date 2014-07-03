@@ -21,7 +21,7 @@ public class AppValidator {
     private AppMgr appMgr;
 
     /**
-     * 验证登录
+     * 验证创建
      */
     public void validateCreate(AppNewForm appNewForm) {
 
@@ -30,4 +30,5 @@ public class AppValidator {
             throw new FieldException(AppNewForm.APP, "app.exist", null);
         }
     }
+
 }
