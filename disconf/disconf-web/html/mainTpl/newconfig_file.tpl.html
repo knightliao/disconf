@@ -1,0 +1,122 @@
+<%= page.basehead %>
+
+<title>Disconf - 分布式配置管理平台</title>
+
+<%= page.head %>
+
+<div id="headwrap">
+    <div class="main container">
+        <div class="row-fluid">
+            <ul id="myTab" class="nav nav-tabs">
+                <li>
+                    <a href="/main.html" >配置</a>
+                </li>
+                <li class="active">
+                    <a href="/newconfig_item.html" >新建配置</a>
+                </li>
+                <li class="">
+                    <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="mainwrap">
+    <div class="main container">
+
+        <div class="row-fluid">
+            <ul class="breadcrumb" style="background-color:#fff;">
+                <li>
+                    <a href="/main.html">配置</a><span class="divider">/</span>
+                </li>
+                <li class="active">
+                    新建配置文件
+                </li>
+            </ul>
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="span3">
+                <div class="well sidebar-nav" style="padding:10px;background-color:#fff">
+                    <ul id="sidebarcur" class="nav nav-list">
+                        <li style="font-size:13px;" >
+                            <a href="/newconfig_item.html">新建配置项</a>
+                        </li>
+                        <li style="font-size:13px;" class="active">
+                            <a href="/newconfig_file.html">新建配置文件</a>
+                        </li>
+                    </ul>
+                </div><!--/.well -->
+            </div>
+
+            <div class="span9">
+
+                <div class="content oz">
+
+                    <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
+                        <h2 class="autoPush-detail-title">新建配置文件</h2>
+                        <div class="private-item">
+                            <span class="private-item-key" >APP选择:</span>
+                            <div class="btn-group" >
+                                <a id="appChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择APP</span> </span></span><span class="caret"></span> </a>
+                                <ul class="dropdown-menu" id="appChoice"></ul>
+                            </div>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">版本：</span>
+                            <div class="btn-group">
+                                <a id="versionChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择版本 </span><span class="caret"></span> </a>
+                                <ul class="dropdown-menu" id="versionChoice" ></ul>
+                            </div>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">环境：</span>
+                            <div class="btn-group">
+                                <a id="envChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择环境 </span><span class="caret"></span> </a>
+                                <ul class="dropdown-menu" id="envChoice" ></ul>
+                            </div>
+                        </div>
+                        <div class="private-item clearfix">
+                            <span style="float:left" class="private-item-key">上传配置：</span>
+                            <div style="float:left" class="private-item-value-pre">
+                                <span class="sl-custom-file btn btn-success fileinput-button" style="overflow: hidden;cursor: pointer;">
+                                    <div id="open_dialog_rar">
+                                        上传配置文件...
+                                    </div>
+                                    <input class="ui-input-file" type="file" name="myfilerar" id="myfilerar" style="width:120px;height:30px;" >
+                                </span>
+                                <span id="error_rar" class="text-error error_rar"></span>
+                                <div style="color: #999;">
+                                    只允许.properties格式的文件
+                                    <span id="status_rar" class="text-success"></span>
+                                </div>
+                                <div class="progress_rar">
+                                    <div class="bar_rar"></div >
+                                    <div class="percent_rar">
+                                        0%
+                                    </div >
+                                </div>
+                                <div class="loading_rar" ></div>
+                            </div>
+                        </div>
+                        <div style="text-align:center">
+                            <button id="submit" class="btn btn-primary" >
+                                新建
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= page.foot %>
+
+<script src="assets/js/config_common.js"></script>
+<script src="assets/js/newconfig.js"></script>
+
+<%= page.basefoot %>

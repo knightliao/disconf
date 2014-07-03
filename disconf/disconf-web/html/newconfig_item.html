@@ -73,10 +73,10 @@
     <div class="main container">
         <div class="row-fluid">
             <ul id="myTab" class="nav nav-tabs">
-                <li class="active">
+                <li>
                     <a href="/main.html" >配置</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/newconfig_item.html" >新建配置</a>
                 </li>
                 <li class="">
@@ -91,61 +91,77 @@
     <div class="main container">
 
         <div class="row-fluid">
-            <div class="contentWrap clearfix">
-                <div class="btn-group">
-                    <a id="appChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择APP</span> </span></span><span class="caret"></span> </a>
-                    <ul class="dropdown-menu" id="appChoice"></ul>
-                </div>
-
-                <div class="btn-group">
-                    <a id="versionChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择版本 </span><span class="caret"></span> </a>
-                    <ul class="dropdown-menu" id="versionChoice" ></ul>
-                </div>
-
-                <div class="btn-group">
-                    <a id="envChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择环境 </span><span class="caret"></span> </a>
-                    <ul class="dropdown-menu" id="envChoice" ></ul>
-                </div>
-            </div>
+            <ul class="breadcrumb" style="background-color:#fff;">
+                <li>
+                    <a href="/main.html">配置</a><span class="divider">/</span>
+                </li>
+                <li class="active">
+                    新建配置项
+                </li>
+            </ul>
         </div>
 
         <div class="row-fluid">
 
-            <div class="contentWrap clearfix">
-                <table class="account-tableWrap">
-                    <thead>
-                        <tr>
-                            <td >名称(appid)</td>
-                            <td >版本</td>
-                            <td >环境</td>
-                            <td >类型</td>
-                            <td >文件名或KEY</td>
-                            <td >最近修改时间</td>
-                            <td >操作</td>
-                        </tr>
-                    </thead>
-                    <tbody id="accountBody" class="account-tableWrap">
+            <div class="span3">
+                <div class="well sidebar-nav" style="padding:10px;background-color:#fff">
+                    <ul id="sidebarcur" class="nav nav-list">
+                        <li style="font-size:13px;" class="active">
+                            <a href="/newconfig_item.html">新建配置项</a>
+                        </li>
+                        <li style="font-size:13px;">
+                            <a href="/newconfig_file.html">新建配置文件</a>
+                        </li>
+                    </ul>
+                </div><!--/.well -->
+            </div>
 
-                    </tbody>
-                </table>
+            <div class="span9">
+
+                <div class="content oz">
+
+                    <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
+                        <h2 class="autoPush-detail-title">新件配置项</h2>
+                        <div class="private-item">
+                            <span class="private-item-key" >APP选择:</span>
+                            <div class="btn-group" >
+                                <a id="appChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择APP</span> </span></span><span class="caret"></span> </a>
+                                <ul class="dropdown-menu" id="appChoice"></ul>
+                            </div>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">版本：</span>
+                            <div class="btn-group">
+                                <a id="versionChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择版本 </span><span class="caret"></span> </a>
+                                <ul class="dropdown-menu" id="versionChoice" ></ul>
+                            </div>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">环境：</span>
+                            <div class="btn-group">
+                                <a id="envChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择环境 </span><span class="caret"></span> </a>
+                                <ul class="dropdown-menu" id="envChoice" ></ul>
+                            </div>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">配置项名：</span>
+                            <input id="key" type="text"   class="private-item-value"/>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">配置值：</span>
+                            <input id="value" type="text"   class="private-item-value"/>
+                        </div>
+                        <div class="private-item" style="text-align:center">
+                            <button id="submit" class="btn btn-primary" >
+                                新建
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- 详细信息单行模板-->
-<div id="tbodyTpl" class="hide">
-    <table>
-        <tr>
-            <td>{0}({1})</td>
-            <td>{2}</td>
-            <td>{4}</td>
-            <td>{5}</td>
-            <td>{6}</td>
-            <td>{8}</td>
-            <td>{10}</td>
-        </tr>
-    </table>
 </div>
 
 
@@ -171,7 +187,8 @@
 <script src="assets/js/common.js"></script>
 
 
-<script src="assets/js/mainList.js"></script>
+<script src="assets/js/config_common.js"></script>
+<script src="assets/js/newconfig.js"></script>
 
         
         
