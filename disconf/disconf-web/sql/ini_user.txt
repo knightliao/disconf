@@ -1,0 +1,21 @@
+
+2014-07-03 13:40:48,881 [main] INFO  com.baidu.disconf2.web.tools.UserCreateTools
+                - create 1  User [name=testUser1, token=ccd8c930902f440042c075e8a724f99ca7a61ec5, password=8eb0fa9b0bc21485297bb38011306bd9b9553b31]    MhxzKhl9471
+2014-07-03 13:40:48,881 [main] INFO  com.baidu.ub.common.generic.dao.impl.GenericDao
+                - insert into disconf.user(token,name,user_id,password) values (?,?,?,?)[ ('ccd8c930902f440042c075e8a724f99ca7a61ec5','testUser1','1','8eb0fa9b0bc21485297bb38011306bd9b9553b31')]
+2014-07-03 13:40:48,902 [main] INFO  com.baidu.disconf2.web.tools.UserCreateTools
+                - create 2  User [name=testUser2, token=577885a05cd08ab6cae1c69b90587ee92a4f541d, password=b7e89304a23f5578ec0a4d50a23dc95f7c339a9f]    MhxzKhl3093
+2014-07-03 13:40:48,902 [main] INFO  com.baidu.ub.common.generic.dao.impl.GenericDao
+                - insert into disconf.user(token,name,user_id,password) values (?,?,?,?)[ ('577885a05cd08ab6cae1c69b90587ee92a4f541d','testUser2','2','b7e89304a23f5578ec0a4d50a23dc95f7c339a9f')]
+2014-07-03 13:40:48,912 [main] INFO  com.baidu.disconf2.web.tools.UserCreateTools
+                - create 3  User [name=testUser3, token=91787bd4c1a48458789131b590b0e1f6bb30fbfe, password=9009a027ff857cb6650d9912116cc5d0a009620d]    MhxzKhl741
+2014-07-03 13:40:48,912 [main] INFO  com.baidu.ub.common.generic.dao.impl.GenericDao
+                - insert into disconf.user(token,name,user_id,password) values (?,?,?,?)[ ('91787bd4c1a48458789131b590b0e1f6bb30fbfe','testUser3','3','9009a027ff857cb6650d9912116cc5d0a009620d')]
+2014-07-03 13:40:48,924 [main] INFO  com.baidu.disconf2.web.tools.UserCreateTools
+                - create 4  User [name=testUser4, token=955495f9ff0a46654e71eb101c74e55fe46ef892, password=4f776c6dcda13895b1163ca16bcaa06a5f5d0787]    MhxzKhl4325
+2014-07-03 13:40:48,925 [main] INFO  com.baidu.ub.common.generic.dao.impl.GenericDao
+                - insert into disconf.user(token,name,user_id,password) values (?,?,?,?)[ ('955495f9ff0a46654e71eb101c74e55fe46ef892','testUser4','4','4f776c6dcda13895b1163ca16bcaa06a5f5d0787')]
+2014-07-03 13:40:48,937 [main] INFO  com.baidu.disconf2.web.tools.UserCreateTools
+                - create 5  User [name=testUser5, token=8f958aef6df90420aec0744f374dfd1c5523829f, password=7c2bfadff2c4dd35e8acff06fae666428055e730]    MhxzKhl7821
+2014-07-03 13:40:48,938 [main] INFO  com.baidu.ub.common.generic.dao.impl.GenericDao
+                - insert into disconf.user(token,name,user_id,password) values (?,?,?,?)[ ('8f958aef6df90420aec0744f374dfd1c5523829f','testUser5','5','7c2bfadff2c4dd35e8acff06fae666428055e730')]

@@ -3,6 +3,20 @@
 	window.VISITOR = {};
 })();
 
+// 头部显示初始化
+function headShowInit() {
+	if (VISITOR.id) {
+		$(".login-no").hide();
+		$(".login-yes").show();
+		$("#username").show();
+		$("#username").html(VISITOR.name);
+	} else {
+		$(".login-no").show();
+		$(".login-yes").hide();
+		$("#username").hide();
+	}
+}
+
 // 获取Session信息
 function getSession() {
 	$.ajax({
@@ -11,8 +25,9 @@ function getSession() {
 	}).done(function(data) {
 		if (data.success === "true") {
 			window.VISITOR = data.result.visitor;
+			headShowInit();
 		} else {
-			window.location.href = "/about.html";
+			window.location.href = "/login.html";
 		}
 	});
 }

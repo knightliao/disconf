@@ -35,10 +35,11 @@
                 </property>
                 <property name="notInterceptPathList">
                     <list>
-                        <value>/api/auth/signin</value>
+                        <value>/api/account/signin</value>
                     </list>
                 </property>
-                <property name="XONE_COOKIE_DOMAIN_STRING"><value>disconf.com</value>
+                <property name="XONE_COOKIE_DOMAIN_STRING">
+                    <value>disconf.com</value>
                 </property>
             </bean>
         </mvc:interceptor>

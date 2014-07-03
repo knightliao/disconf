@@ -2,7 +2,7 @@
 <div id="footer">
     <div class="container clearfix">
         <div class="muted links pull-left">
-            <a href="about.html">关于</a>
+            <a href="#">关于</a>
             <span class="sep">·</span>
             <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
         </div>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.baidu.disconf2.web.service.user.bo.User;
 import com.baidu.disconf2.web.service.user.dao.UserDao;
 import com.baidu.dsp.common.dao.AbstractDao;
+import com.baidu.dsp.common.dao.Columns;
 
 /**
  * 
@@ -22,4 +23,11 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         executeSQL(sql, null);
     }
 
+    /**
+     */
+    @Override
+    public User getUserByName(String name) {
+
+        return findOne(match(Columns.NAME, name));
+    }
 }

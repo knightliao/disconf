@@ -106,10 +106,6 @@ button.whiteSkin {
 button.small {
     padding: 0px;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 微软雅黑,黑体;
-    font-weight: bold;
-}
 th {
     background: #F9F9F9;
 }
@@ -160,7 +156,6 @@ th {
 .foot {
     margin-top: 30px;
     height: 50px;
-
     padding-top: 70px;
 }
 .foot p {
@@ -761,10 +756,6 @@ ol, ul {
 caption, th {
     text-align: left;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    font-size: 100%;
-}
 h3 {
     height: 20px;
     line-height: 20px;
@@ -921,9 +912,35 @@ q:before, q:after {
     display: none
 }
 /*为了方便使用，可以将其做成一个“类”，这样可以直接挂
-在父元素上，而不用为每一个父元素添加以下CSS属性*/
-.oz{
+ 在父元素上，而不用为每一个父元素添加以下CSS属性*/
+.oz {
     overflow: hidden; /*为父元素添加overflow属性，至于它的值可
-                      以是auto,hidden,scroll三者选一*/
+     以是auto,hidden,scroll三者选一*/
     zoom: 1; /*在 IE6 中还需要添加zoom属性*/
+}
+/* form */
+.required label {
+    font-weight: bold;
+}
+.form-single {
+    background-color: #fff;
+    max-width: 340px;
+    width: 340px;
+    padding: 10px;
+    margin: 20px auto;
+    border: 1px solid #909090;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+.form-single h2 {
+    padding: 0 0 10px;
+    margin: 0 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.form-single .form-submit {
+    margin-top: 20px;
+}
+.form-single .form-submit a {
+    font-size: 13px;
+    margin-left: 14px;
 }

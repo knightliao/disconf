@@ -20,6 +20,10 @@
         <property name="basenames">
             <list>
                 <value>classpath:message-info</value>
+                <value>classpath:com/baidu/disconf2/web/web/auth/resource/sign-controller-info
+                </value>
+                <value>classpath:com/baidu/disconf2/web/service/sign/resource/sign-service-info
+                </value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="false" />

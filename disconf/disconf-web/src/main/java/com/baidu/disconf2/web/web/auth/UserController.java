@@ -1,5 +1,8 @@
 package com.baidu.disconf2.web.web.auth;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baidu.disconf2.web.service.sign.form.SigninForm;
+import com.baidu.disconf2.web.service.sign.service.SignMgr;
+import com.baidu.disconf2.web.service.user.bo.User;
 import com.baidu.disconf2.web.service.user.service.UserMgr;
 import com.baidu.disconf2.web.service.user.vo.VisitorVo;
+import com.baidu.disconf2.web.web.auth.constant.LoginConstant;
+import com.baidu.disconf2.web.web.auth.login.RedisLogin;
+import com.baidu.disconf2.web.web.auth.validator.AuthValidator;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
@@ -29,6 +38,15 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserMgr userMgr;
+
+    @Autowired
+    private AuthValidator authValidator;
+
+    @Autowired
+    private SignMgr signMgr;
+
+    @Autowired
+    private RedisLogin redisLogin;
 
     /**
      * GET 获取
@@ -52,4 +70,49 @@ public class UserController extends BaseController {
         }
     }
 
+    /**
+     * 登录
+     * 
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonObjectBase signin(@Valid SigninForm signin,
+            HttpServletRequest request) {
+
+        // 验证
+        authValidator.validateLogin(signin);
+
+        // 数据库登录
+        User user = signMgr.signin(signin.getName());
+
+        // 过期时间
+        int expireTime = LoginConstant.SESSION_EXPIRE_TIME;
+        if (signin.getRemember().equals(1)) {
+            expireTime = LoginConstant.SESSION_EXPIRE_TIME2;
+        }
+
+        // redis login
+        redisLogin.login(request, user, expireTime);
+
+        VisitorVo visitorVo = userMgr.getCurVisitor();
+
+        return buildSuccess("visitor", visitorVo);
+    }
+
+    /**
+     * 登出
+     * 
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/signout", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase signout(HttpServletRequest request) {
+
+        redisLogin.logout(request);
+
+        return buildSuccess("ok", "ok");
+    }
 }

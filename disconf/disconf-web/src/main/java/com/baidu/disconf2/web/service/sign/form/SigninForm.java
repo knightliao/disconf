@@ -1,7 +1,6 @@
 package com.baidu.disconf2.web.service.sign.form;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
@@ -22,13 +21,12 @@ public class SigninForm extends RequestFormBase {
     private static final long serialVersionUID = 565717265045704403L;
 
     /**
-     * 电话
+     * 姓名
      */
-    @Pattern(regexp = "(^$|[0-9]{11})", message = "phone.not.right")
-    @NotNull(message = "phone.empty")
-    @NotEmpty(message = "phone.empty")
-    private String phone;
-    public static final String PHONE = "phone";
+    @NotNull(message = "name.empty")
+    @NotEmpty(message = "name.empty")
+    private String name;
+    public static final String Name = "name";
 
     /**
      * 密码
@@ -54,20 +52,20 @@ public class SigninForm extends RequestFormBase {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public Integer getRemember() {
         return remember;
     }
 
     public void setRemember(Integer remember) {
         this.remember = remember;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
