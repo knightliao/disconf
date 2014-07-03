@@ -46,4 +46,5 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      * 
      */
     public String getValue(Long configId);
+
 }

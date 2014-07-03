@@ -2,9 +2,11 @@ package com.baidu.disconf2.web.service.config.service;
 
 import java.util.List;
 
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.json.ValueVo;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.form.ConfListForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewForm;
 import com.baidu.disconf2.web.service.config.vo.ConfListVo;
 import com.baidu.ub.common.generic.vo.DaoPageResult;
 
@@ -24,8 +26,8 @@ public interface ConfigMgr {
      * @param disConfigTypeEnum
      * @return
      */
-    public ValueVo getConfItemByParameter(Long appId, Long envId, String env,
-            String key);
+    public ValueVo getConfItemByParameter(Long appId, Long envId,
+            String version, String key);
 
     /**
      * 
@@ -37,7 +39,7 @@ public interface ConfigMgr {
      * @return
      */
     public Config getConfByParameter(Long appId, Long envId, String env,
-            String key);
+            String key, DisConfigTypeEnum disConfigTypeEnum);
 
     /**
      * 
@@ -85,4 +87,11 @@ public interface ConfigMgr {
     public String getValue(Long configId);
 
     void notifyZookeeper(Long configId);
+
+    /**
+     * 
+     * @param confNewForm
+     * @param disConfigTypeEnum
+     */
+    void newConfig(ConfNewForm confNewForm, DisConfigTypeEnum disConfigTypeEnum);
 }

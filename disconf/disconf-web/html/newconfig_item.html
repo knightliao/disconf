@@ -112,6 +112,12 @@
                         <li style="font-size:13px;">
                             <a href="/newconfig_file.html">新建配置文件</a>
                         </li>
+                        <li style="font-size:13px;" >
+                            <a href="/newconfig_item.html">新建APP</a>
+                        </li>
+                        <li style="font-size:13px;" >
+                            <a href="/newconfig_item.html">新建版本</a>
+                        </li>
                     </ul>
                 </div><!--/.well -->
             </div>
@@ -121,7 +127,7 @@
                 <div class="content oz">
 
                     <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
-                        <h2 class="autoPush-detail-title">新件配置项</h2>
+                        <h2 class="autoPush-detail-title"> 新建配置项</h2>
                         <div class="private-item">
                             <span class="private-item-key" >APP选择:</span>
                             <div class="btn-group" >
@@ -151,10 +157,11 @@
                             <span class="private-item-key">配置值：</span>
                             <input id="value" type="text"   class="private-item-value"/>
                         </div>
+                        <div id="error" class="error hide">
+                            表单选项不能为空或填写格式错误！
+                        </div>
                         <div class="private-item" style="text-align:center">
-                            <button id="submit" class="btn btn-primary" >
-                                新建
-                            </button>
+                            <a id="item_submit" class="btn btn-primary" > 新建 </a>
                         </div>
 
                     </form>

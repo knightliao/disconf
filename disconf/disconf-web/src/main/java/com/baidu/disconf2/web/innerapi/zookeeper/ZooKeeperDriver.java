@@ -7,7 +7,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baidu.disconf2.core.common.constants.Constants;
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.path.ZooPathMgr;
 import com.baidu.disconf2.core.common.zookeeper.ZookeeperMgr;
@@ -37,7 +36,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
      * @param disConfigTypeEnum
      */
     public void notifyNodeUpdate(String app, String env, String version,
-            String key, DisConfigTypeEnum disConfigTypeEnum) {
+            String key, String value, DisConfigTypeEnum disConfigTypeEnum) {
 
         //
         // 获取路径
@@ -66,8 +65,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
             //
             // 通知
             //
-            ZookeeperMgr.getInstance().writePersistentUrl(path,
-                    Constants.ZOO_UPDATE_STRING);
+            ZookeeperMgr.getInstance().writePersistentUrl(path, value);
 
         } catch (Exception e) {
 

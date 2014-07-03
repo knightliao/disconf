@@ -24,6 +24,8 @@
                 </value>
                 <value>classpath:com/baidu/disconf2/web/service/sign/resource/sign-service-info
                 </value>
+                <value>classpath:com/baidu/disconf2/web/web/config/resource/config-controller-info
+                </value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="false" />

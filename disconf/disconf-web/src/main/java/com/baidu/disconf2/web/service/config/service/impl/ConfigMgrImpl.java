@@ -1,6 +1,7 @@
 package com.baidu.disconf2.web.service.config.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +23,17 @@ import com.baidu.disconf2.web.service.app.service.AppMgr;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.dao.ConfigDao;
 import com.baidu.disconf2.web.service.config.form.ConfListForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewForm;
 import com.baidu.disconf2.web.service.config.service.ConfigMgr;
 import com.baidu.disconf2.web.service.config.utils.ConfigUtils;
 import com.baidu.disconf2.web.service.config.vo.ConfListVo;
 import com.baidu.disconf2.web.service.env.bo.Env;
 import com.baidu.disconf2.web.service.env.service.EnvMgr;
+import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
 import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.utils.DateUtils;
 
 /**
  * 
@@ -57,10 +61,10 @@ public class ConfigMgrImpl implements ConfigMgr {
     /**
      * 根据详细参数获取配置返回
      */
-    public ValueVo getConfItemByParameter(Long appId, Long envId, String env,
-            String key) {
+    public ValueVo getConfItemByParameter(Long appId, Long envId,
+            String version, String key) {
 
-        Config config = configDao.getByParameter(appId, envId, env, key,
+        Config config = configDao.getByParameter(appId, envId, version, key,
                 DisConfigTypeEnum.ITEM);
         if (config == null) {
             return ConfigUtils.getErrorVo("cannot find this config");
@@ -78,10 +82,10 @@ public class ConfigMgrImpl implements ConfigMgr {
      */
     @Override
     public Config getConfByParameter(Long appId, Long envId, String env,
-            String key) {
+            String key, DisConfigTypeEnum disConfigTypeEnum) {
 
         Config config = configDao.getByParameter(appId, envId, env, key,
-                DisConfigTypeEnum.FILE);
+                disConfigTypeEnum);
         return config;
     }
 
@@ -229,7 +233,8 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(),
                 confListVo.getEnvName(), confListVo.getVersion(),
-                confListVo.getKey(), DisConfigTypeEnum.ITEM);
+                confListVo.getKey(), confListVo.getValue(),
+                DisConfigTypeEnum.ITEM);
     }
 
     /**
@@ -238,5 +243,30 @@ public class ConfigMgrImpl implements ConfigMgr {
     @Override
     public String getValue(Long configId) {
         return configDao.getValue(configId);
+    }
+
+    /**
+     * 新建配置
+     */
+    @Override
+    public void newConfig(ConfNewForm confNewForm,
+            DisConfigTypeEnum disConfigTypeEnum) {
+
+        Config config = new Config();
+
+        config.setAppId(confNewForm.getAppId());
+        config.setEnvId(confNewForm.getEnvId());
+        config.setName(confNewForm.getKey());
+        config.setType(disConfigTypeEnum.getType());
+        config.setVersion(confNewForm.getVersion());
+        config.setValue(confNewForm.getValue());
+
+        // 时间
+        String curTime = DateUtils.format(new Date(),
+                DataFormatConstants.COMMON_TIME_FORMAT);
+        config.setCreateTime(curTime);
+        config.setUpdateTime(curTime);
+
+        configDao.create(config);
     }
 }

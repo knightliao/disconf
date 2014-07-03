@@ -3,10 +3,12 @@ package com.baidu.disconf2.web.web.config.validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.web.service.app.bo.App;
 import com.baidu.disconf2.web.service.app.service.AppMgr;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.form.ConfForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewForm;
 import com.baidu.disconf2.web.service.config.service.ConfigMgr;
 import com.baidu.disconf2.web.service.env.bo.Env;
 import com.baidu.disconf2.web.service.env.service.EnvMgr;
@@ -199,5 +201,41 @@ public class ConfigValidator {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 校验新建 配置值
+     * 
+     * @param userId
+     */
+    public void validateNewItem(ConfNewForm confNewForm,
+            DisConfigTypeEnum disConfigTypeEnum) {
+
+        //
+        // app
+        //
+        App app = appMgr.getById(confNewForm.getAppId());
+        if (app == null) {
+            throw new FieldException(ConfNewForm.APPID, "app.not.exist", null);
+        }
+
+        //
+        // env
+        //
+        Env env = envMgr.getById(confNewForm.getEnvId());
+        if (env == null) {
+            throw new FieldException(ConfNewForm.ENVID, "env.not.exist", null);
+        }
+
+        //
+        // key
+        //
+        Config config = configMgr.getConfByParameter(app.getId(), env.getId(),
+                confNewForm.getVersion(), confNewForm.getKey(),
+                disConfigTypeEnum);
+        if (config != null) {
+            throw new FieldException(ConfNewForm.KEY, "key.exist", null);
+        }
+
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.json.ValueVo;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.form.ConfForm;
@@ -96,7 +97,8 @@ public class ConfigFetcherController {
                 //
                 Config config = configMgr.getConfByParameter(
                         configModel.getAppId(), configModel.getEnvId(),
-                        configModel.getVersion(), configModel.getKey());
+                        configModel.getVersion(), configModel.getKey(),
+                        DisConfigTypeEnum.FILE);
                 if (config == null) {
                     hasError = true;
                     throw new DocumentNotFoundException(configModel.getKey());
