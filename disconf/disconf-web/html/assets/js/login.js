@@ -1,6 +1,8 @@
 (function($) {
 
 	$("#indexMain").attr("href", "/");
+	
+	getSession2Redirect();
 
 	// 发送登录请求
 	$(".form-submit").on("click", function() {

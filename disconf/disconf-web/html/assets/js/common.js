@@ -31,3 +31,16 @@ function getSession() {
 		}
 	});
 }
+
+// 获取是否登录并且进行跳转
+function getSession2Redirect() {
+	$.ajax({
+		type : "GET",
+		url : "/api/account/session"
+	}).done(function(data) {
+		if (data.success === "true") {
+			window.location.href = "/main.html";
+		} else {
+		}
+	});
+}
