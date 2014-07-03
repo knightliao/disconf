@@ -1,4 +1,6 @@
 (function($) {
+	
+	getSession();
 
 	var configId = Util.param.getConfigId();
 

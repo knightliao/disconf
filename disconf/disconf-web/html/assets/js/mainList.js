@@ -1,5 +1,7 @@
 (function($) {
 
+	getSession();
+
 	var appId = -1;
 	var envId = -1;
 	var version = "所有版本";
@@ -128,9 +130,11 @@
 
 			var link = "";
 			if (item.type == "配置文件") {
-				link = '<a href="modifyFile.html?configId=' + item.configId + '">修改</a>';
+				link = '<a href="modifyFile.html?configId=' + item.configId
+						+ '">修改</a>';
 			} else {
-				link = '<a href="modifyItem.html?configId=' + item.configId + '">修改</a>';
+				link = '<a href="modifyItem.html?configId=' + item.configId
+						+ '">修改</a>';
 			}
 
 			return Util.string.format(mainTpl, item.appName, item.appId,

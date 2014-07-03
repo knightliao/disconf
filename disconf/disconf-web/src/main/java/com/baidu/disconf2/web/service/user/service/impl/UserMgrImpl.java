@@ -13,6 +13,8 @@ import com.baidu.disconf2.web.service.user.dao.UserDao;
 import com.baidu.disconf2.web.service.user.dto.Visitor;
 import com.baidu.disconf2.web.service.user.service.UserInnerMgr;
 import com.baidu.disconf2.web.service.user.service.UserMgr;
+import com.baidu.disconf2.web.service.user.vo.VisitorVo;
+import com.baidu.ub.common.commons.ThreadContext;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
@@ -37,6 +39,21 @@ public class UserMgrImpl implements UserMgr {
     public Visitor getVisitor(Integer userId) {
 
         return userInnerMgr.getVisitor(userId);
+    }
+
+    @Override
+    public VisitorVo getCurVisitor() {
+
+        Visitor visitor = ThreadContext.getSessionVisitor();
+        if (visitor == null) {
+            return null;
+        }
+
+        VisitorVo visitorVo = new VisitorVo();
+        visitorVo.setId(visitor.getId());
+        visitorVo.setName(visitor.getLoginUserName());
+
+        return visitorVo;
     }
 
     /**

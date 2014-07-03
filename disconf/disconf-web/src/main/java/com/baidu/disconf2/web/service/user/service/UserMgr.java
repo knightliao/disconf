@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baidu.disconf2.web.service.user.bo.User;
 import com.baidu.disconf2.web.service.user.dto.Visitor;
+import com.baidu.disconf2.web.service.user.vo.VisitorVo;
 
 /**
  * 
@@ -18,6 +19,8 @@ public interface UserMgr {
      * @return
      */
     Visitor getVisitor(Integer userId);
+
+    VisitorVo getCurVisitor();
 
     User getUser(Integer userId);
 
