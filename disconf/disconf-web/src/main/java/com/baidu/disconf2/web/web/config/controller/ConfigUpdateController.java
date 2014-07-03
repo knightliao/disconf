@@ -109,6 +109,6 @@ public class ConfigUpdateController extends BaseController {
             throw new FileUploadException("upload file error", e);
         }
 
-        return buildSuccess("ok");
+        return buildSuccess("修改成功");
     }
 }

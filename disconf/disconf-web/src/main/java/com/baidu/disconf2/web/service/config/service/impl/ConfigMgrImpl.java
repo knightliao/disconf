@@ -23,7 +23,7 @@ import com.baidu.disconf2.web.service.app.service.AppMgr;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.dao.ConfigDao;
 import com.baidu.disconf2.web.service.config.form.ConfListForm;
-import com.baidu.disconf2.web.service.config.form.ConfNewForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf2.web.service.config.service.ConfigMgr;
 import com.baidu.disconf2.web.service.config.utils.ConfigUtils;
 import com.baidu.disconf2.web.service.config.vo.ConfListVo;
@@ -249,7 +249,7 @@ public class ConfigMgrImpl implements ConfigMgr {
      * 新建配置
      */
     @Override
-    public void newConfig(ConfNewForm confNewForm,
+    public void newConfig(ConfNewItemForm confNewForm,
             DisConfigTypeEnum disConfigTypeEnum) {
 
         Config config = new Config();

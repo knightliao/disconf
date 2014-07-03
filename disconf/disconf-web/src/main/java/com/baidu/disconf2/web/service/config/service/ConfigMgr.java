@@ -6,7 +6,7 @@ import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.core.common.json.ValueVo;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.form.ConfListForm;
-import com.baidu.disconf2.web.service.config.form.ConfNewForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf2.web.service.config.vo.ConfListVo;
 import com.baidu.ub.common.generic.vo.DaoPageResult;
 
@@ -93,5 +93,6 @@ public interface ConfigMgr {
      * @param confNewForm
      * @param disConfigTypeEnum
      */
-    void newConfig(ConfNewForm confNewForm, DisConfigTypeEnum disConfigTypeEnum);
+    void newConfig(ConfNewItemForm confNewForm,
+            DisConfigTypeEnum disConfigTypeEnum);
 }

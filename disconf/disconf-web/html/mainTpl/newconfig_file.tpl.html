@@ -48,10 +48,7 @@
                             <a href="/newconfig_file.html">新建配置文件</a>
                         </li>
                         <li style="font-size:13px;" >
-                            <a href="/newconfig_item.html">新建APP</a>
-                        </li>
-                        <li style="font-size:13px;" >
-                            <a href="/newconfig_item.html">新建版本</a>
+                            <a href="/newapp.html">新建APP</a>
                         </li>
                     </ul>
                 </div><!--/.well -->
@@ -76,6 +73,10 @@
                                 <a id="versionChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择版本 </span><span class="caret"></span> </a>
                                 <ul class="dropdown-menu" id="versionChoice" ></ul>
                             </div>
+                        </div>
+                        <div class="private-item" id="selfversion" style="display:none">
+                            <span class="private-item-key">自定义版本：</span>
+                            <input id="selfversion_value" type="text"   class="private-item-value"/>
                         </div>
                         <div class="private-item">
                             <span class="private-item-key">环境：</span>
@@ -126,6 +127,7 @@
 <%= page.foot %>
 
 <script src="assets/js/config_common.js"></script>
-<script src="assets/js/newconfig.js"></script>
+<script src="assets/js/jquery.form.js"></script>
+<script src="assets/js/newconfigfile.js"></script>
 
 <%= page.basefoot %>

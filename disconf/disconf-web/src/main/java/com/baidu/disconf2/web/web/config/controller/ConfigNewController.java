@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.baidu.disconf2.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf2.web.service.config.form.ConfNewForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf2.web.service.config.service.ConfigMgr;
 import com.baidu.disconf2.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf2.web.web.config.validator.FileUploadValidator;
@@ -55,13 +55,11 @@ public class ConfigNewController extends BaseController {
      */
     @RequestMapping(value = "/item", method = RequestMethod.POST)
     @ResponseBody
-    public JsonObjectBase newItem(@Valid ConfNewForm confNewForm) {
+    public JsonObjectBase newItem(@Valid ConfNewItemForm confNewForm) {
 
         // 业务校验
-        configValidator.validateNewItem(confNewForm, DisConfigTypeEnum.ITEM);
+        configValidator.validateNew(confNewForm, DisConfigTypeEnum.ITEM);
 
-        //
-        // 更新, 并写入数据库
         //
         configMgr.newConfig(confNewForm, DisConfigTypeEnum.ITEM);
 
@@ -79,7 +77,7 @@ public class ConfigNewController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public JsonObjectBase updateFile(@PathVariable long configId,
+    public JsonObjectBase updateFile(@Valid ConfNewForm confNewForm,
             @RequestParam("myfilerar") MultipartFile file) {
 
         //
@@ -92,13 +90,11 @@ public class ConfigNewController extends BaseController {
         //
         // 更新
         //
+        String fileContent = "";
         try {
 
-            String str = new String(file.getBytes(), "UTF-8");
-            LOG.info("receive file: " + str);
-
-            configMgr.updateItemValue(configId, str);
-            LOG.info("update " + configId + " ok");
+            fileContent = new String(file.getBytes(), "UTF-8");
+            LOG.info("receive file: " + fileContent);
 
         } catch (Exception e) {
 
@@ -106,6 +102,17 @@ public class ConfigNewController extends BaseController {
             throw new FileUploadException("upload file error", e);
         }
 
-        return buildSuccess("ok");
+        // 创建配置文件表格
+        ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);
+        confNewItemForm.setKey(file.getOriginalFilename());
+        confNewItemForm.setValue(fileContent);
+
+        // 业务校验
+        configValidator.validateNew(confNewItemForm, DisConfigTypeEnum.FILE);
+
+        //
+        configMgr.newConfig(confNewItemForm, DisConfigTypeEnum.FILE);
+
+        return buildSuccess("创建成功");
     }
 }

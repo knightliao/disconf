@@ -41,6 +41,7 @@ function fetchVersion(appId) {
 			$.each(result, function(index, item) {
 				html += '<li><a href="#">' + item + '</a></li>';
 			});
+			html += '<li><a href="#">' + "自定义版本" + '</a></li>';
 			$("#versionChoice").html(html);
 		}
 	});
@@ -48,6 +49,11 @@ function fetchVersion(appId) {
 	$("#versionChoice").on('click', 'li a', function() {
 		$("#versionChoiceA span:first-child").text($(this).text());
 		version = $(this).text();
+		if (version == '自定义版本') {
+			$("#selfversion").show();
+		} else {
+			$("#selfversion").hide();
+		}
 	});
 }
 

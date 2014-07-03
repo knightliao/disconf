@@ -9,6 +9,7 @@ import com.baidu.disconf2.web.service.app.service.AppMgr;
 import com.baidu.disconf2.web.service.config.bo.Config;
 import com.baidu.disconf2.web.service.config.form.ConfForm;
 import com.baidu.disconf2.web.service.config.form.ConfNewForm;
+import com.baidu.disconf2.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf2.web.service.config.service.ConfigMgr;
 import com.baidu.disconf2.web.service.env.bo.Env;
 import com.baidu.disconf2.web.service.env.service.EnvMgr;
@@ -204,11 +205,11 @@ public class ConfigValidator {
     }
 
     /**
-     * 校验新建 配置值
+     * 校验新建 配置
      * 
      * @param userId
      */
-    public void validateNewItem(ConfNewForm confNewForm,
+    public void validateNew(ConfNewItemForm confNewForm,
             DisConfigTypeEnum disConfigTypeEnum) {
 
         //
@@ -234,8 +235,9 @@ public class ConfigValidator {
                 confNewForm.getVersion(), confNewForm.getKey(),
                 disConfigTypeEnum);
         if (config != null) {
-            throw new FieldException(ConfNewForm.KEY, "key.exist", null);
+            throw new FieldException(ConfNewItemForm.KEY, "key.exist", null);
         }
 
     }
+
 }

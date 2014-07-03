@@ -26,6 +26,10 @@
                 </value>
                 <value>classpath:com/baidu/disconf2/web/web/config/resource/config-controller-info
                 </value>
+                <value>classpath:com/baidu/disconf2/web/service/app/resource/app-service-info
+                </value>
+                <value>classpath:com/baidu/disconf2/web/web/app/resource/app-controller-info
+                </value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="false" />

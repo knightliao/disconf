@@ -124,7 +124,7 @@
 					$("#error").html(data.result);
 				} else {
 					add_file_but.html("添加资源文件...")
-					errorrar.html("错误：" + data.result);
+					errorrar.html("错误：" + data.message);
 					is_ok = false;
 				}
 			}

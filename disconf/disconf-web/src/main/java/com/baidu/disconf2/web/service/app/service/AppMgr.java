@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.baidu.disconf2.web.service.app.bo.App;
+import com.baidu.disconf2.web.service.app.form.AppNewForm;
 import com.baidu.disconf2.web.service.app.vo.AppListVo;
 
 /**
@@ -35,4 +36,5 @@ public interface AppMgr {
      */
     public App getById(Long id);
 
+    App create(AppNewForm appNew);
 }

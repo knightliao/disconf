@@ -1,6 +1,7 @@
 package com.baidu.disconf2.web.service.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.baidu.disconf2.web.service.app.bo.App;
 import com.baidu.disconf2.web.service.app.dao.AppDao;
+import com.baidu.disconf2.web.service.app.form.AppNewForm;
 import com.baidu.disconf2.web.service.app.service.AppMgr;
 import com.baidu.disconf2.web.service.app.vo.AppListVo;
+import com.baidu.dsp.common.constant.DataFormatConstants;
+import com.baidu.ub.common.utils.DateUtils;
 
 /**
  * 
@@ -72,4 +76,19 @@ public class AppMgrImpl implements AppMgr {
         return appDao.get(id);
     }
 
+    @Override
+    public App create(AppNewForm appNew) {
+
+        App app = new App();
+        app.setName(appNew.getApp());
+        app.setDesc(appNew.getDesc());
+
+        // 时间
+        String curTime = DateUtils.format(new Date(),
+                DataFormatConstants.COMMON_TIME_FORMAT);
+        app.setCreateTime(curTime);
+        app.setUpdateTime(curTime);
+
+        return appDao.create(app);
+    }
 }
