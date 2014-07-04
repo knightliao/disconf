@@ -6,9 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.ContextLoaderListener;
 
-import com.baidu.disconf2.demo.main.AnnotationScan;
-import com.baidu.disconf2.demo.main.Inject;
-
 public class ContextListener extends ContextLoaderListener {
 
     private static final Logger logger = LoggerFactory
@@ -29,10 +26,6 @@ public class ContextListener extends ContextLoaderListener {
         //
         // 测试Annotation
         //
-
-        AnnotationScan.printAnnotation();
-
-        Inject.inject2ConfClass(10);
 
         isInitialized = true;
         logger.info("end of ContextListener");

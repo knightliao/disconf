@@ -2,7 +2,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.baidu</groupId>
+    <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-springdemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -130,12 +130,12 @@
         </dependency>
 
         <dependency>
-            <groupId>com.baidu</groupId>
+            <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-client</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.baidu</groupId>
+            <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-demo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -151,7 +151,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.1</version>
             </plugin>
 
             <plugin>

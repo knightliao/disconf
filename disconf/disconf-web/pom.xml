@@ -6,8 +6,8 @@
     <packaging>war</packaging>
 
     <parent>
-        <groupId>com.baidu</groupId>
-        <artifactId>disconf</artifactId>
+        <groupId>com.baidu.disconf</groupId>
+        <artifactId>disconf-base</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
@@ -239,7 +239,7 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baidu</groupId>
+            <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
