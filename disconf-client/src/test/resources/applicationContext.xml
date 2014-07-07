@@ -29,7 +29,7 @@
     </bean>
 
 
-    <bean id="confA" class="com.baidu.disconf2.client.test.model.ConfA">
+    <bean id="confA" class="com.baidu.disconf.client.test.model.ConfA">
         <property name="varA" value="${confa.varA}" />
         <property name="varA2" value="${confa.varA2}" />
     </bean>

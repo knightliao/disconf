@@ -11,7 +11,7 @@ public class Constants {
     /**
      * Disconf本身Package
      */
-    public static final String DISCONF_PACK_NAME = "com.baidu.disconf2";
+    public static final String DISCONF_PACK_NAME = "com.baidu.disconf";
 
     /**
      * 百度Jpass相关变量
