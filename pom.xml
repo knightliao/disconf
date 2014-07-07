@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.baidu.disconf</groupId>
+    <groupId>com.baidu</groupId>
     <artifactId>disconf-base</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -521,7 +521,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.5</version>
                     <configuration>
-                        <argLine>-Xms512m -Xmx1048m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8</argLine>
+                        <argLine>-Xms512m -Xmx1048m -XX:MaxPermSize=1024m -Dfile.encoding=UTF-8</argLine>
                         <includes>
                             <include>**/*TestCase.java</include>
                         </includes>
