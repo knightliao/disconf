@@ -8,8 +8,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf2.client.common.annotations.DisconfFileItem;
-import com.baidu.disconf2.client.config.inner.DisInnerConfigAnnotation;
+import com.baidu.disconf.client.common.annotations.DisconfFileItem;
+import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
 
 /**
  * 配置导入工具
