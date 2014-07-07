@@ -30,34 +30,34 @@
         </property>
     </bean>
 
-    <bean id="disconfMgrBean" class="com.baidu.disconf2.client.DisconfMgrBean"
+    <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
         destroy-method="destory">
-        <property name="scanPackage" value="com.baidu.disconf2.demo" />
+        <property name="scanPackage" value="com.baidu.disconf.demo" />
     </bean>
-    <bean id="disconfMgrBean2" class="com.baidu.disconf2.client.DisconfMgrBeanSecond"
+    <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
         init-method="init" destroy-method="destory">
     </bean>
 
-    <bean id="coefficients" class="com.baidu.disconf2.demo.config.Coefficients">
+    <bean id="coefficients" class="com.baidu.disconf.demo.config.Coefficients">
         <property name="baiFaCoe" value="${coe.baiFaCoe}" />
         <property name="yuErBaoCoe" value="${coe.yuErBaoCoe}" />
     </bean>
 
-    <bean id="jedisConfig" class="com.baidu.disconf2.demo.config.JedisConfig">
+    <bean id="jedisConfig" class="com.baidu.disconf.demo.config.JedisConfig">
         <property name="host" value="${redis.host}" />
         <property name="port" value="${redis.port}" />
     </bean>
 
-    <bean id="remoteServerConfig" class="com.baidu.disconf2.demo.config.RemoteServerConfig">
+    <bean id="remoteServerConfig" class="com.baidu.disconf.demo.config.RemoteServerConfig">
         <property name="remoteHost" value="${remoteHost}" />
         <property name="remotePort" value="${remotePort}" />
     </bean>
 
     <bean id="remoteServiceUpdateCallback"
-        class="com.baidu.disconf2.demo.service.RemoteServiceUpdateCallback">
+        class="com.baidu.disconf.demo.service.RemoteServiceUpdateCallback">
     </bean>
 
-    <bean id="remoteService" class="com.baidu.disconf2.demo.service.RemoteService">
+    <bean id="remoteService" class="com.baidu.disconf.demo.service.RemoteService">
     </bean>
 
 </beans>
