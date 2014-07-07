@@ -1,9 +1,9 @@
 Disconf
 =======
 
-Distributed Configuration Management Tools 
+Distributed Configuration Management Platform 
 
-分布式的配置管理工具
+分布式配置管理平台
 
 ## 项目信息 ##
 
@@ -49,7 +49,7 @@ Disconf与其它平台的关系：
 - **注解式编程**：我们追求的是极简的、用户编程体验良好的编程方式。通过简单的标注+极简单的代码撰写，即可完成复杂的配置分布式化。
 - **支持Spring方式和非Spring方式编程**：用户可以自行选择编程习惯，是否采用Spring方式进行编程。推荐Spring编程方式。
 
-Disconf的功能特点描述图：
+**Disconf的功能特点描述图：**
 
 ![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1ehi7wwkdtoj20nw0fz0uh.jpg)
 
