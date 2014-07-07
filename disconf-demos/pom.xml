@@ -4,15 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.baidu.disconf</groupId>
-    <artifactId>disconf-base</artifactId>
+    <artifactId>disconf-demos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
 
     <modules>
-        <module>disconf-client</module>
-        <module>disconf-core</module>
-        <module>disconf-web</module>
+        <module>disconf-standalone-demo</module>
+        <module>disconf-spring-demo</module>
     </modules>
 
 
