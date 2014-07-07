@@ -27,7 +27,7 @@ public class ScanPackTestCase extends BaseTestCase {
     @Test
     public void scan() {
 
-        String packName = "com.baidu.disconf2.client.test";
+        String packName = "com.baidu.disconf.client.test";
 
         try {
 

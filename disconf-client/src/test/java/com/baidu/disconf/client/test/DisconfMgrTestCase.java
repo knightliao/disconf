@@ -33,7 +33,7 @@ public class DisconfMgrTestCase extends BaseTestCase {
     @Test
     public void demo() {
 
-        String packName = "com.baidu.disconf2.client.test";
+        String packName = "com.baidu.disconf.client.test";
 
         try {
 

@@ -48,10 +48,10 @@
     </bean>
 
     <bean id="loginRedisLogin"
-        class="com.baidu.disconf2.web.web.auth.login.impl.RedisLoginImplMock" />
+        class="com.baidu.disconf.web.web.auth.login.impl.RedisLoginImplMock" />
 
     <bean id="zooConfig"
-        class="com.baidu.disconf2.web.service.zookeeper.config.ZooConfig">
+        class="com.baidu.disconf.web.service.zookeeper.config.ZooConfig">
         <property name="zooHosts" value="${hosts}" />
         <property name="zookeeperUrlPrefix" value="${zookeeper_url_prefix}" />
     </bean>
@@ -70,13 +70,13 @@
     <beans profile="production">
         <import resource="classpath*:/applicationContext-dbconfig.xml" />
         <bean id="loginRedisLogin"
-            class="com.baidu.disconf2.web.web.auth.login.impl.RedisLoginImpl" />
+            class="com.baidu.disconf.web.web.auth.login.impl.RedisLoginImpl" />
     </beans>
 
     <beans profile="rd">
         <import resource="classpath*:/applicationContext-dbconfig.xml" />
         <bean id="loginRedisLogin"
-            class="com.baidu.disconf2.web.web.auth.login.RedisLoginImplMock" />
+            class="com.baidu.disconf.web.web.auth.login.RedisLoginImplMock" />
     </beans>
 
 

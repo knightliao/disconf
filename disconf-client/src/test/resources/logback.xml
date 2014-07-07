@@ -29,7 +29,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.baidu.disconf2">
+    <logger name="com.baidu.disconf">
         <level value="INFO" />
     </logger>
 
