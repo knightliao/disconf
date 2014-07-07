@@ -73,8 +73,8 @@ Disconf与其它平台的关系：
 	- [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web): 分布式配置平台服务模块, 依赖disconf-core包。采用SpringMvc+纯HTML方式实现。
 	用户使用它来进行日常的分布式配置管理。
 - **demo**
-	- [disconf-springdemo](https://github.com/knightliao/disconf/tree/master/demos/disconf-springdemo): 使用disconf的SpringMvc Web demo程序
-	- [disconf-demo](https://github.com/knightliao/disconf/tree/master/demos/disconf-demo): 使用disconf的基于Spring的standalone demo程序
+	- [disconf-spring-demo](https://github.com/knightliao/disconf/tree/master/demos/disconf-springdemo): 使用disconf的SpringMvc Web demo程序
+	- [disconf-standalone-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-demo): 使用disconf的基于Spring的standalone demo程序
 
 ## 用户教程 ##
 
