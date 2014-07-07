@@ -27,12 +27,10 @@ public class RemoteService implements InitializingBean, DisposableBean {
     @Autowired
     private RemoteServerConfig remoteServerConfig;
 
-    @Override
     public void destroy() throws Exception {
 
     }
 
-    @Override
     public void afterPropertiesSet() throws Exception {
 
         list.add(remoteServerConfig.getRemoteHost());

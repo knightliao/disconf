@@ -33,7 +33,6 @@ public class SimpleRedisService implements InitializingBean, DisposableBean {
     /**
      * 关闭
      */
-    @Override
     public void destroy() throws Exception {
 
         if (jedis != null) {
@@ -44,7 +43,6 @@ public class SimpleRedisService implements InitializingBean, DisposableBean {
     /**
      * 进行连接
      */
-    @Override
     public void afterPropertiesSet() throws Exception {
 
         jedis = JedisUtil.createJedis(jedisConfig.getHost(),
