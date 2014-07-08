@@ -521,7 +521,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.5</version>
                     <configuration>
-                        <argLine>-Xms512m -Xmx1048m -XX:MaxPermSize=2048m -Dfile.encoding=UTF-8</argLine>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
                         <includes>
                             <include>**/*TestCase.java</include>
                         </includes>
