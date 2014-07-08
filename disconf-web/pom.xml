@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>disconf-web</artifactId>
@@ -241,7 +240,7 @@
         <dependency>
             <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -333,8 +332,7 @@
 
                     <!-- specify run port, default is 8080 -->
                     <connectors>
-                        <connector
-                            implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <port>8085</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
@@ -346,8 +344,7 @@
 
                     <!-- deploy multiple projects -->
                     <contextHandlers>
-                        <contextHandler
-                            implementation="org.mortbay.jetty.webapp.WebAppContext">
+                        <contextHandler implementation="org.mortbay.jetty.webapp.WebAppContext">
                             <resourceBase>../dsp-static-demo</resourceBase>
                             <contextPath>/static</contextPath>
                         </contextHandler>
