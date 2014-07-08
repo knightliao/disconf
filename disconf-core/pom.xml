@@ -6,7 +6,7 @@
     <artifactId>disconf-core</artifactId>
     <packaging>jar</packaging>
 
-    <version>2.2-SNAPSHOT</version>
+    <version>2.2</version>
     <name>disconf-core</name>
 
     <parent>
