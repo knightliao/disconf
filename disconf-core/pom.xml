@@ -181,6 +181,7 @@
     <scm>
         <url>scm:git:git@github.com:knightliao/disconf</url>
         <connection>scm:git:git@github.com:knightliao/disconf</connection>
+        <tag>disconf-core</tag>
     </scm>
 
 </project>
