@@ -437,7 +437,7 @@
             </resource>
         </resources>
 
-        <finalName>dsp-base</finalName>
+        <finalName>disconf-base</finalName>
 
         <pluginManagement>
             <!-- 覆盖率 mvn test -->
