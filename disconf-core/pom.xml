@@ -6,7 +6,7 @@
     <artifactId>disconf-core</artifactId>
     <packaging>jar</packaging>
 
-    <version>2.3-SNAPSHOT</version>
+    <version>2.3</version>
     <name>disconf-core</name>
 
     <parent>
@@ -154,7 +154,7 @@
     <scm>
         <url>scm:git:git@github.com:knightliao/disconf</url>
         <connection>scm:git:git@github.com:knightliao/disconf</connection>
-        <tag>disconf-core</tag>
+        <tag>disconf-core-2.3-0</tag>
     </scm>
 
     <profiles>
