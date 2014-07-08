@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
-        <version>2.0.0</version>
+        <version>${disconf-base.version}</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -202,4 +202,5 @@
         </profile>
     </profiles>
 
+    <version>${disconf-core.version}</version>
 </project>

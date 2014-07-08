@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
-        <version>2.0.0</version>
+        <version>${disconf-base.version}</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -59,7 +59,7 @@
         <dependency>
             <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-core</artifactId>
-            <version>2.0.0</version>
+            <version>${disconf-core.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -201,4 +201,5 @@
         </plugins>
     </build>
 
+    <version>${disconf-client.version}</version>
 </project>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.0.0</version>
+    <version>${disconf-base.version}</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -48,6 +49,12 @@
         <!-- resource path -->
         <project.build.online.sourceDir>${project.basedir}/src/main/online-resources</project.build.online.sourceDir>
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
+
+        <!-- 模块版本号 -->
+        <disconf-base.version>2.0.0</disconf-base.version>
+        <disconf-core.version>2.0.0</disconf-core.version>
+        <disconf-client.version>2.0.0</disconf-client.version>
+        <disconf-web.version>2.0.0</disconf-web.version>
     </properties>
 
 
