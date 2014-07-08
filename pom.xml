@@ -50,10 +50,10 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-base.version>2.1</disconf-base.version>
-        <disconf-core.version>2.1</disconf-core.version>
-        <disconf-client.version>2.1</disconf-client.version>
-        <disconf-web.version>2.1</disconf-web.version>
+        <disconf-base.version>2.1-SNAPSHOT</disconf-base.version>
+        <disconf-core.version>2.1-SNAPSHOT</disconf-core.version>
+        <disconf-client.version>2.1-SNAPSHOT</disconf-client.version>
+        <disconf-web.version>2.1-SNAPSHOT</disconf-web.version>
     </properties>
 
 
