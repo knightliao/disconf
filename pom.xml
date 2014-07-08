@@ -8,13 +8,27 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-
     <modules>
         <module>disconf-client</module>
         <module>disconf-core</module>
         <module>disconf-web</module>
         <module>disconf-demos</module>
     </modules>
+
+    <inceptionYear>2014</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Baidu</name>
+        <url>http://www.baidu.com</url>
+    </organization>
 
     <properties>
         <!-- Spring項目配置 -->
@@ -629,5 +643,26 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <developers>
+        <developer>
+            <name>Liao Qiqi</name>
+            <id>knightliao</id>
+            <email>liaoqiqi (AT) baidu.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        <developer>
+            <name>Wu Ning</name>
+            <id>wu.ning</id>
+            <email>wuning01 (AT) baidu.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 
 </project>
