@@ -18,11 +18,6 @@
         </license>
     </licenses>
 
-    <organization>
-        <name>Baidu</name>
-        <url>http://www.baidu.com</url>
-    </organization>
-
     <properties>
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
@@ -44,9 +39,9 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-core.version>2.2</disconf-core.version>
-        <disconf-client.version>2.1-SNAPSHOT</disconf-client.version>
-        <disconf-web.version>2.1-SNAPSHOT</disconf-web.version>
+        <disconf-core.version>2.5</disconf-core.version>
+        <disconf-client.version>2.5</disconf-client.version>
+        <disconf-web.version>2.5</disconf-web.version>
     </properties>
 
 
@@ -702,6 +697,17 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
+
+    <organization>
+        <name>Baidu</name>
+        <url>http://www.baidu.com</url>
+    </organization>
+
+    <scm>
+        <url>scm:git:git@github.com:knightliao/disconf</url>
+        <connection>scm:git:git@github.com:knightliao/disconf</connection>
+        <tag>disconf-core</tag>
+    </scm>
 
     <url>https://github.com/knightliao/disconf</url>
     <name>disconf</name>
