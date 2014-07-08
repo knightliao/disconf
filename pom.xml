@@ -12,7 +12,6 @@
         <module>disconf-client</module>
         <module>disconf-core</module>
         <module>disconf-web</module>
-        <module>disconf-demos</module>
     </modules>
 
     <inceptionYear>2014</inceptionYear>
@@ -51,10 +50,10 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-base.version>2.0.0</disconf-base.version>
-        <disconf-core.version>2.0.0</disconf-core.version>
-        <disconf-client.version>2.0.0</disconf-client.version>
-        <disconf-web.version>2.0.0</disconf-web.version>
+        <disconf-base.version>2.0.1</disconf-base.version>
+        <disconf-core.version>2.0.1</disconf-core.version>
+        <disconf-client.version>2.0.1</disconf-client.version>
+        <disconf-web.version>2.0.1</disconf-web.version>
     </properties>
 
 
