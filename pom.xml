@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.1-SNAPSHOT</version>
+    <version>2.1</version>
     <packaging>pom</packaging>
 
     <inceptionYear>2014</inceptionYear>
@@ -44,10 +44,10 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-base.version>2.1-SNAPSHOT</disconf-base.version>
-        <disconf-core.version>2.1-SNAPSHOT</disconf-core.version>
-        <disconf-client.version>2.1-SNAPSHOT</disconf-client.version>
-        <disconf-web.version>2.1-SNAPSHOT</disconf-web.version>
+        <disconf-base.version>2.1</disconf-base.version>
+        <disconf-core.version>2.1</disconf-core.version>
+        <disconf-client.version>2.1</disconf-client.version>
+        <disconf-web.version>2.1</disconf-web.version>
     </properties>
 
 
@@ -658,20 +658,6 @@
         </plugins>
     </reporting>
 
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Repository</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshot</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
-
     <developers>
         <developer>
             <name>Liao Qiqi</name>
@@ -684,7 +670,7 @@
         </developer>
         <developer>
             <name>Wu Ning</name>
-            <id>wu.ning</id>
+            <id>wuning</id>
             <email>wuning01 (AT) baidu.com</email>
             <roles>
                 <role>Developer</role>
@@ -696,8 +682,5 @@
     <url>https://github.com/knightliao/disconf</url>
     <name>disconf</name>
     <description>Distributed Configuration Management Platform.</description>
-    <scm>
-        <url>scm:git:git@github.com:knightliao/disconf</url>
-        <connection>scm:git:git@github.com:knightliao/disconf</connection>
-    </scm>
+
 </project>
