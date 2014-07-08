@@ -163,11 +163,11 @@
             <id>release</id>
             <distributionManagement>
                 <snapshotRepository>
-                    <id>nexus-releases</id>
+                    <id>nexus-release</id>
                     <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
                 </snapshotRepository>
                 <repository>
-                    <id>nexus-releases</id>
+                    <id>nexus-release</id>
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
