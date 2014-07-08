@@ -716,7 +716,7 @@
             <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
+            <id>nexus-releases</id>
             <name>Snapshot</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <uniqueVersion>false</uniqueVersion>
