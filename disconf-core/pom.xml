@@ -7,6 +7,9 @@
     <artifactId>disconf-core</artifactId>
     <packaging>jar</packaging>
 
+    <version>${disconf-core.version}</version>
+    <name>disconf-core</name>
+
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
@@ -137,10 +140,48 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+
         </plugins>
     </build>
 
+    <url>https://github.com/knightliao/disconf/tree/master/disconf-core</url>
+    <description>https://github.com/knightliao/disconf/tree/master/disconf-core</description>
 
+    <organization>
+        <name>Baidu</name>
+        <url>http://www.baidu.com</url>
+    </organization>
 
-    <version>${disconf-core.version}</version>
+    <scm>
+        <url>scm:git:git@github.com:knightliao/disconf</url>
+        <connection>scm:git:git@github.com:knightliao/disconf</connection>
+    </scm>
+
 </project>

@@ -202,4 +202,7 @@
     </build>
 
     <version>${disconf-client.version}</version>
+    <name>disconf-client</name>
+    <url>https://github.com/knightliao/disconf/tree/master/disconf-client</url>
+    <description>https://github.com/knightliao/disconf/tree/master/disconf-client</description>
 </project>

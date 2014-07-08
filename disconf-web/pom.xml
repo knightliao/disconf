@@ -415,4 +415,7 @@
 
     <version>${disconf-web.version}</version>
 
+    <url>https://github.com/knightliao/disconf/tree/master/disconf-web</url>
+    <description>https://github.com/knightliao/disconf/tree/master/disconf-web</description>
+    <name>disconf-web</name>
 </project>
