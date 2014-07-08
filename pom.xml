@@ -8,12 +8,6 @@
     <version>2.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>disconf-client</module>
-        <module>disconf-core</module>
-        <module>disconf-web</module>
-    </modules>
-
     <inceptionYear>2014</inceptionYear>
     <licenses>
         <license>
