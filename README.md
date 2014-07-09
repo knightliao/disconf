@@ -107,9 +107,9 @@ Disconf为应用方提供了两个工具，
 
 ### disconf-web 使用 ###
 
-待补充。
+部署方法请参见：[https://github.com/knightliao/disconf/tree/master/disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)
 
-### Tutorials ###
+### disconf-client Tutorials ###
 
 - [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
 - [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
