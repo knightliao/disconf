@@ -12,7 +12,7 @@ Distributed Configuration Management Platform
 
 Disconf当前最新版本：
 
-- disconf-client 2.5.0 
+- disconf-client 2.6.0 
 
 在Maven Central Repository里查看[com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
@@ -27,7 +27,7 @@ Disconf与其它平台的关系：
 
 注:  DSP/DAN/秋实/Beidou/BES/Union/Munion/CLB 均是百度联盟前端技术部非常重要的业务平台。
 
-## 当前版本（2.5）功能特点 ##
+## 当前版本（2.6）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -97,7 +97,7 @@ Disconf为应用方提供了两个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.5.0</version>
+        <version>2.6.0</version>
     </dependency>
 
 主要依赖为：
