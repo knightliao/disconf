@@ -13,7 +13,8 @@ Distributed Configuration Management Platform
 Disconf当前最新版本：
 
 - disconf-client 2.5.0 
-- disconf-core 2.5.0
+
+在Maven Central Repository里查看[com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
 ## 它是什么? ##
 
@@ -91,17 +92,22 @@ Disconf为应用方提供了两个工具，
 
 ### disconf-client 使用 ###
 
-现
+在您的 Maven POM 文件里加入：
 
-        <dependency>
-            <groupId>com.baidu.disconf</groupId>
-            <artifactId>disconf-client</artifactId>
-            <version>2.5</version>
-        </dependency>
+    <dependency>
+        <groupId>com.baidu.disconf</groupId>
+        <artifactId>disconf-client</artifactId>
+        <version>2.5.0</version>
+    </dependency>
 
 主要依赖为：
 
+- Spring(3.1.2+)
+- Zookeeper(3.3.6)
 
+### disconf-web 使用 ###
+
+待补充。
 
 ### Tutorials ###
 
