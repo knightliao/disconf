@@ -7,11 +7,13 @@ Distributed Configuration Management Platform
 
 ## 项目信息 ##
 
-Disconf当前版本：2.0
-
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
-- Spring(3.2.6+)
+
+Disconf当前最新版本：
+
+- disconf-client 2.5 
+- disconf-core 2.5
 
 ## 它是什么? ##
 
@@ -24,7 +26,7 @@ Disconf与其它平台的关系：
 
 注:  DSP/DAN/秋实/Beidou/BES/Union/Munion/CLB 均是百度联盟前端技术部非常重要的业务平台。
 
-## 当前版本（2.0）功能特点 ##
+## 当前版本（2.5）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -75,8 +77,29 @@ Disconf与其它平台的关系：
 - **demo**
 	- [disconf-spring-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-spring-demo): 使用disconf的SpringMvc Web demo程序
 	- [disconf-standalone-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-demo): 使用disconf的基于Spring的standalone demo程序
+	
+## 用户指南 ##
 
-## 用户教程 ##
+用户请关注这里。
+
+### 概述 ###
+
+Disconf为应用方提供了两个工具，
+
+1. 一个是 [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client), 您可以在您的应用系统里加入此Jar包；
+2. 另一个是[disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)，它是一个Web平台，您可以此Web平台上管理您的配置。
+
+### disconf-client 使用 ###
+
+现
+
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-client</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+### Tutorials ###
 
 - [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
 - [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
