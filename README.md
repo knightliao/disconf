@@ -12,8 +12,8 @@ Distributed Configuration Management Platform
 
 Disconf当前最新版本：
 
-- disconf-client 2.5 
-- disconf-core 2.5
+- disconf-client 2.5.0 
+- disconf-core 2.5.0
 
 ## 它是什么? ##
 
@@ -98,6 +98,10 @@ Disconf为应用方提供了两个工具，
             <artifactId>disconf-client</artifactId>
             <version>2.5</version>
         </dependency>
+
+主要依赖为：
+
+
 
 ### Tutorials ###
 
