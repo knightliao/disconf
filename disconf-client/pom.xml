@@ -204,20 +204,6 @@
                             </descriptors>
                         </configuration>
                     </execution>
-
-                    <execution>
-                        <id>make-tar.gz</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>deploy/package-tar.gz.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
         </plugins>
