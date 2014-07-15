@@ -20,13 +20,10 @@ Disconf当前最新版本：
 
 - 命名为Disconf
 - 专注于各种系统的配置管理的通用组件/通用平台
-- 百度联盟前端技术部 孵化
 
-Disconf与其它平台的关系：
+Disconf可以为各种业务平台提供统一的配置管理服务。
 
-![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ehi7wwkedaj20pr0jqmyu.jpg)
-
-注:  DSP/DAN/秋实/Beidou/BES/Union/Munion/CLB 均是百度联盟前端技术部非常重要的业务平台。
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
 ## 当前版本（2.6.2）功能特点 ##
 
