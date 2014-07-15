@@ -378,7 +378,6 @@
                                         <include>**/*.ftl</include>
                                     </includes>
                                     <excludes>
-                                        <exclude>**/application.properties</exclude>
                                         <exclude>**/jdbc-mysql.properties</exclude>
                                         <exclude>**/zoo.properties</exclude>
                                     </excludes>
@@ -388,7 +387,6 @@
                                     <directory>${project.build.online.sourceDir}</directory>
                                     <targetPath>WEB-INF/classes</targetPath>
                                     <includes>
-                                        <include>**/application.properties</include>
                                         <include>**/jdbc-mysql.properties</include>
                                         <include>**/zoo.properties</include>
                                     </includes>
@@ -408,3 +406,4 @@
     <description>https://github.com/knightliao/disconf/tree/master/disconf-web</description>
     <name>disconf-web</name>
 </project>
+
