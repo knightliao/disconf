@@ -62,7 +62,7 @@ cp output/disconf-web.war  $WAR_ROOT_PATH  -rp
 
 echo "start to copy static"
 mkdir $WAR_ROOT_PATH/html
-cp html/output $WAR_ROOT_PATH/html
+cp html/output $WAR_ROOT_PATH/html -rp
 
 cd $WAR_ROOT_PATH 
 
