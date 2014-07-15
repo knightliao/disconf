@@ -1,15 +1,24 @@
 #!/bin/bash
 
 #
-# 一个简单的WAR部署脚本
+# 一个简单的WAR部署脚本, 执行时必须在disconf-web目录下执行本脚本
 #
 
+# 线上配置的路径 
+ONLINE_CONFIG_PATH=/home/work/dsp/disconf-rd/online-resources
+
 # WAR要放的路径 
-WAR_ROOT_PATH=/home/work/dsp/disconf-rd
+WAR_ROOT_PATH=/home/work/dsp/disconf-rd/war
 
 set -e
 
 export PATH
+
+echo "**********************************************"
+echo "copy online config"
+echo "**********************************************"
+cp $ONLINE_CONFIG_PATH src/main/java -rp
+
 echo "**********************************************"
 echo "It's going to Generate the output for war"
 echo "**********************************************"
@@ -23,7 +32,7 @@ echo "**********************************************"
 echo "It's going to got war package"
 echo "**********************************************"
 
-sh build.sh rd
+sh build.sh
 
 
 #
@@ -33,9 +42,10 @@ echo "**********************************************"
 echo "It's going to got fe package"
 echo "**********************************************"
 
-cd dsp-static
+cd html
 sh build.sh
 
+#
 cd $current_path
 
 
@@ -51,18 +61,15 @@ echo "start to copy war"
 cp output/dsp-web.war  $WAR_ROOT_PATH  -rp
 
 echo "start to copy static"
-mkdir $WAR_ROOT_PATH/dsp-static
-cp dsp-static/output/dsp-static.tar.gz $WAR_ROOT_PATH/dsp-static
+mkdir $WAR_ROOT_PATH/html
+cp html/output $WAR_ROOT_PATH/html
 
 cd $WAR_ROOT_PATH 
 
 echo "start to jar war"
 jar xvf dsp-web.war 
 
-echo "start to tar fe"
-cd dsp-static
-tar xzvf dsp-static.tar.gz 
-
 cd $current_path
 
 echo "deploy done" $WAR_ROOT_PATH
+

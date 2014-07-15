@@ -27,8 +27,6 @@ else
 	fi
 fi
 
-cd ..
-
 #
 #
 #
@@ -39,7 +37,6 @@ fi
 
 mkdir -p output
 
-cp dsp-web/target/dsp-web.war output
-cp dsp-cron/target/dsp-cron.tar.gz output
+cp target/dsp-web.war output
 
 
