@@ -32,7 +32,7 @@ echo "**********************************************"
 echo "It's going to got war package"
 echo "**********************************************"
 
-sh build.sh
+sh deploy/build.sh
 
 
 #
