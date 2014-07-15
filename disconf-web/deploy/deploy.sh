@@ -17,7 +17,7 @@ export PATH
 echo "**********************************************"
 echo "copy online config"
 echo "**********************************************"
-cp $ONLINE_CONFIG_PATH src/main/java -rp
+cp $ONLINE_CONFIG_PATH src/main -rp
 
 echo "**********************************************"
 echo "It's going to Generate the output for war"
