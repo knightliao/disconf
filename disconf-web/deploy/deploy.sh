@@ -15,7 +15,7 @@ set -e
 export PATH
 
 echo "**********************************************"
-echo "copy online config"
+echo "copy online config " $ONLINE_CONFIG_PATH
 echo "**********************************************"
 cp $ONLINE_CONFIG_PATH src/main -rp
 

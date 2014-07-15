@@ -39,6 +39,6 @@ fi
 
 mkdir -p output
 
-cp target/dsp-web.war output
+cp target/disconf-web.war output
 
 
