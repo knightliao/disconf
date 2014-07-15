@@ -58,7 +58,7 @@ if [ ${#WAR_ROOT_PATH} -gt 15 ]; then
 fi	
 
 echo "start to copy war"
-cp output/dsp-web.war  $WAR_ROOT_PATH  -rp
+cp output/disconf-web.war  $WAR_ROOT_PATH  -rp
 
 echo "start to copy static"
 mkdir $WAR_ROOT_PATH/html
@@ -67,7 +67,7 @@ cp html/output $WAR_ROOT_PATH/html
 cd $WAR_ROOT_PATH 
 
 echo "start to jar war"
-jar xvf dsp-web.war 
+jar xvf disconf-web.war
 
 cd $current_path
 
