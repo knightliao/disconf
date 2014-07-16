@@ -11,6 +11,8 @@ if [ -d "output" ]; then
     rm -rf output
 fi
 
+mkdir -p output
+
 cp assets output -rp
 cp dep output -rp
 cp *.html output -rp
