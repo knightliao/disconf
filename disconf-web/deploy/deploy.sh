@@ -4,6 +4,7 @@
 # 一个简单的 WAR&&静态代码 部署脚本, 执行时必须在disconf-web目录下执行本脚本
 #
 
+#
 # 线上配置的路径  ONLINE_CONFIG_PATH=/home/work/dsp/disconf-rd/online-resources
 # 需要预先设置在环境变量里
 if [ "$ONLINE_CONFIG_PATH" = "" ]; then	
@@ -11,8 +12,13 @@ if [ "$ONLINE_CONFIG_PATH" = "" ]; then
 	exit 1
 fi
 
-# WAR要放的路径 
-WAR_ROOT_PATH=/home/work/dsp/disconf-rd/war
+# 
+# WAR要放的路径   WAR_ROOT_PATH=/home/work/dsp/disconf-rd/war
+# 需要预先设置在环境变量里
+if [ "$WAR_ROOT_PATH" = "" ]; then	
+	echo "ONLINE_CONFIG_PATH is null, please set it in your env."
+	exit 1
+fi
 
 set -e
 
