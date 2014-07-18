@@ -6,7 +6,7 @@
 
 # 线上配置的路径  ONLINE_CONFIG_PATH=/home/work/dsp/disconf-rd/online-resources
 # 需要预先设置在环境变量里
-if [ ! -n $ONLINE_CONFIG_PATH ]; then	
+if [ -n $ONLINE_CONFIG_PATH ]; then	
 	echo "$ONLINE_CONFIG_PATH is null, please set it in your env."
 	exit 1
 fi
