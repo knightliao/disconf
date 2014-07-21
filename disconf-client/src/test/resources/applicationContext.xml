@@ -30,8 +30,8 @@
 
 
     <bean id="confA" class="com.baidu.disconf.client.test.model.ConfA">
-        <property name="varA" value="${confa.varA}" />
-        <property name="varA2" value="${confa.varA2}" />
+        <property name="varA" value="${varA}" />
+        <property name="varA2" value="${varA2}" />
     </bean>
 
 </beans>

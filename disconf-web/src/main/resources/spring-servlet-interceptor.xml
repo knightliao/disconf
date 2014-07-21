@@ -36,6 +36,9 @@
                 <property name="notInterceptPathList">
                     <list>
                         <value>/api/account/signin</value>
+                        <value>/api/zoo/hosts</value>
+                        <value>/api/config/item</value>
+                        <value>/api/config/file</value>
                     </list>
                 </property>
                 <property name="XONE_COOKIE_DOMAIN_STRING">
