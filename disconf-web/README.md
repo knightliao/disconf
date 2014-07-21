@@ -15,6 +15,14 @@ disconf-web
 
 ## How to deploy ##
 
+##安装依赖软件**
+
+- 安装Mysql（Ver 14.12 Distrib 5.0.45, for unknown-linux-gnu (x86_64) using  EditLine wrapper）
+- 安装Tomcat（apache-tomcat-7.0.50）
+- 安装Nginx（nginx/1.5.3）
+- 安装 zookeeeper （zookeeper-3.3.0）
+- 安装 Redis （2.4.5）
+
 ### 准备配置 ###
 	
 **将你的配置文件放到此地址目录下（以下地址可自行设定）：**
