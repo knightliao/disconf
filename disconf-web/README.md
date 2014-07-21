@@ -34,8 +34,9 @@ disconf-web
 	- jdbc-mysql.properties
 	- redis-config.properties  
 	- zoo.properties 
+	- application.properties
 
-分别是 数据库配置，Redis配置，Zookeeper配置
+分别是 数据库配置，Redis配置，Zookeeper配置，Cookie域设置
 
 **设置War包将要被部署的地址（以下地址可自行设定）：**
 
