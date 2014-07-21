@@ -56,7 +56,7 @@ public class UserCreateTools {
 
         int num = 5;
 
-        for (int i = 0; i < num; ++i) {
+        for (int i = 0; i < num + 1; ++i) {
 
             String userName = getUserName(i);
             LOG.info("delete " + userName);
@@ -78,6 +78,7 @@ public class UserCreateTools {
             // token
             user.setToken(SignUtils.createToken(user.getName()));
 
+            LOG.info(user.toString() + "\t" + password);
             userDao.create(user);
             userList.add(user);
         }

@@ -5,8 +5,13 @@ INSERT INTO `env` (`env_id`, `name`) VALUES (2, 'qa');
 INSERT INTO `env` (`env_id`, `name`) VALUES (3, 'local');
 
 
-INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (1, 'testUser1', 'c20f327928d0142c3253d585cf68460db7590b83', '59311b56b3a07eb20c9587de51aa04b78d55944c');
-INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (2, 'testUser2', 'e9f4148b4ac3fee71a7d409f41c9391c213a4dd3', '2bacc0d0f8714882773f28c37514c12817a4466c');
-INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (3, 'testUser3', '435a82d6c7077249cba339ace53320fe0af10ea8', '887687dfb655d39481680734ae300c5fda5753e6');
-INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (4, 'testUser4', '8779cff3ec2fee4302fbcb83ca6323600308f1aa', '3c9359d18a032dfb03ce4e79b2ed721fd11e9308');
-INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (5, 'testUser5', 'd9dd0fdaaee964982cf984fcd052b31db477ccee', 'deb17ce553d3cb10e56f038a2dea3dbe7f815ab5');
+/* 密码是 MhxzKhl5258 */
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (1, 'testUser1', 'd34a9fe14b5612cc2e700e557f0d8d0e751ba9ac', '34ab48843f1908cfeef15f459f6d1736362aa8e0');
+/*  密码是 MhxzKhl7011 */
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (2, 'testUser2', 'd5d5f4689232b7a6514f8d2700ba40d3a608f6d2', 'c59af6d187b423522fa15d2a97fd7c44ce98cc7a');
+/*  密码是 MhxzKhl9362 */
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (3, 'testUser3', 'fbd03108ecd54d77692e49a2b21a2ded6b0a166a', 'ec626ba96117299ca0524be9c56cc195e1784922');
+/*  密码是 MhxzKhl7603 */
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (4, 'testUser4', '59eb095e6f95c6b40fe3f049058387bd64e46809', '82fdf59318de643a5d7ceffa764c7e29cdd5a0e4');
+/*  密码是 MhxzKhl2077 */
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (5, 'testUser5', 'e435b4606e61a4b0d934c9d350ec27da3c0ddc4e', '90ac0c85a9581cb762461dcf35dca6f182dc1805');
