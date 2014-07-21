@@ -1,6 +1,7 @@
 
 CREATE SCHEMA IF NOT EXISTS "disconf" /*!40100 DEFAULT CHARACTER SET utf8 */;
 
+
 DROP TABLE  IF EXISTS disconf."app";
 CREATE TABLE disconf.`app` (
     `app_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
@@ -33,5 +34,16 @@ CREATE TABLE disconf.`env` (
     `name` VARCHAR(255) NOT NULL DEFAULT 'DEFAULT_ENV' COMMENT '环境名字',
     PRIMARY KEY (`env_id`)
 );
+
+
+DROP TABLE  IF EXISTS disconf."user";
+CREATE TABLE disconf.`user` (
+    `user_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `name` VARCHAR(50) NOT NULL COMMENT '姓名',
+    `password` VARCHAR(255) NOT NULL COMMENT '密码',
+    `token` VARCHAR(255) NOT NULL COMMENT 'token',
+    PRIMARY KEY (`user_id`)
+);
+
 
         

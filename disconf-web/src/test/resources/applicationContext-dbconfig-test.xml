@@ -30,8 +30,8 @@
     </bean>
 
     <jdbc:initialize-database data-source="dataSource2">
-        <jdbc:script location="classpath:sql/base/schema/1_0_0/dsp.sql" />
-        <jdbc:script location="classpath:sql/base/goldendata/1_0_0/dsp.sql" />
+        <jdbc:script location="classpath:sql/base/schema/1_0_0/disconf.sql" />
+        <jdbc:script location="classpath:sql/base/goldendata/1_0_0/disconf.sql" />
     </jdbc:initialize-database>
 
 
