@@ -18,6 +18,8 @@
     <mvc:annotation-driven />
 
     <import resource="classpath:applicationContext.xml" />
+    <context:property-placeholder location="classpath*:/application.properties"
+        ignore-unresolvable="true" />
 
     <bean id="handlerAdapter"
         class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

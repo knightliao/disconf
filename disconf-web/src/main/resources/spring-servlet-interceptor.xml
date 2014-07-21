@@ -42,7 +42,7 @@
                     </list>
                 </property>
                 <property name="XONE_COOKIE_DOMAIN_STRING">
-                    <value>disconf.com</value>
+                    <value>${cookie_domain}</value>
                 </property>
             </bean>
         </mvc:interceptor>
