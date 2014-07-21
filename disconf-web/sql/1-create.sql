@@ -42,14 +42,15 @@ ENGINE=InnoDB;
 
 
 CREATE TABLE `user` (
-    `user_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
-    `token` VARCHAR(255) NOT NULL,
+    `user_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `name` VARCHAR(50) NOT NULL COMMENT '姓名',
+    `password` VARCHAR(255) NOT NULL COMMENT '密码',
+    `token` VARCHAR(255) NOT NULL COMMENT 'token',
     PRIMARY KEY (`user_id`)
 )
 COMMENT='用户表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
 
 

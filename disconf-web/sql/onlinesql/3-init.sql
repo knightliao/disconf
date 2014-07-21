@@ -1,8 +1,8 @@
 USE `disconf`;
 
-INSERT INTO `env` VALUES (1, 'rd');
-INSERT INTO `env` VALUES (2, 'qa');
-INSERT INTO `env` VALUES (3, 'local');
+INSERT INTO `env` (`env_id`, `name`) VALUES (1, 'rd');
+INSERT INTO `env` (`env_id`, `name`) VALUES (2, 'qa');
+INSERT INTO `env` (`env_id`, `name`) VALUES (3, 'local');
 
 
 INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (1, 'testUser1', 'c20f327928d0142c3253d585cf68460db7590b83', '59311b56b3a07eb20c9587de51aa04b78d55944c');
