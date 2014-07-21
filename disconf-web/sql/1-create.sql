@@ -14,7 +14,6 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
 
-
 CREATE TABLE `config` (
     `config_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
     `type` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '配置文件/配置项',
@@ -30,7 +29,6 @@ CREATE TABLE `config` (
 COMMENT='配置'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
-
 
 
 CREATE TABLE `env` (
@@ -53,4 +51,5 @@ CREATE TABLE `user` (
 COMMENT='用户表'
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
 

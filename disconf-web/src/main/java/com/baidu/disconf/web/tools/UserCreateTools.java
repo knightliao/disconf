@@ -1,5 +1,8 @@
 package com.baidu.disconf.web.tools;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -60,6 +63,7 @@ public class UserCreateTools {
             userDao.delete(i);
         }
 
+        List<User> userList = new ArrayList<User>();
         for (int i = 1; i < num + 1; ++i) {
 
             User user = new User();
@@ -74,8 +78,19 @@ public class UserCreateTools {
             // token
             user.setToken(SignUtils.createToken(user.getName()));
 
-            LOG.info("create " + i + "\t" + user.toString() + "\t" + password);
             userDao.create(user);
+            userList.add(user);
+        }
+
+        //
+        //
+        //
+        for (User user : userList) {
+
+            System.out
+                    .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (%d, '%s', '%s', '%s');\n",
+                            user.getId(), user.getName(), user.getPassword(),
+                            user.getToken());
         }
     }
 }
