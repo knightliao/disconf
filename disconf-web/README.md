@@ -15,7 +15,7 @@ disconf-web
 
 ## How to deploy ##
 
-##安装依赖软件**
+###安装依赖软件###
 
 - 安装Mysql（Ver 14.12 Distrib 5.0.45, for unknown-linux-gnu (x86_64) using  EditLine wrapper）
 - 安装Tomcat（apache-tomcat-7.0.50）
