@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
 import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
@@ -299,8 +300,21 @@ public class DisconfStoreMgr {
         //
         try {
 
-            disconfCenterItem.getField().set(disconfCenterItem.getObject(),
-                    disconfCenterItem.getValue());
+            // 默认值
+            Object defaultValue = disconfCenterItem.getField().get(
+                    disconfCenterItem.getObject());
+
+            if (disconfCenterItem.getValue() == null) {
+
+                // 如果值为空，则直接使用默认值
+                disconfCenterItem.getField().set(disconfCenterItem.getObject(),
+                        defaultValue);
+
+            } else {
+
+                disconfCenterItem.getField().set(disconfCenterItem.getObject(),
+                        disconfCenterItem.getValue());
+            }
 
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
@@ -338,10 +352,23 @@ public class DisconfStoreMgr {
             // 根据类型设置值
             try {
 
-                keMap.get(fileItem)
-                        .getField()
-                        .set(disconfCenterFile.getObject(),
-                                keMap.get(fileItem).getValue());
+                // 默认值
+                Object defaultValue = keMap.get(fileItem).getField()
+                        .get(disconfCenterFile.getObject());
+
+                if (keMap.get(fileItem).getValue() == null) {
+
+                    // 如果值为空，则直接使用默认值
+                    keMap.get(fileItem).getField()
+                            .set(disconfCenterFile.getObject(), defaultValue);
+
+                } else {
+
+                    keMap.get(fileItem)
+                            .getField()
+                            .set(disconfCenterFile.getObject(),
+                                    keMap.get(fileItem).getValue());
+                }
             } catch (Exception e) {
                 LOGGER.error(e.toString(), e);
             }
@@ -349,12 +376,12 @@ public class DisconfStoreMgr {
     }
 
     /**
-     * 获取配置文件在Zookeeper上的路径
+     * 获取配置文件的通用数据结构
      * 
      * @param fileName
      * @return
      */
-    public String getFileZooPath(String fileName) {
+    public DisConfCommonModel getFileCommonModel(String fileName) {
 
         DisconfCenterFile disconfCenterFile = disconfCenterStore
                 .getConfFileMap().get(fileName);
@@ -365,16 +392,16 @@ public class DisconfStoreMgr {
             return null;
         }
 
-        return disconfCenterFile.getDisConfCommonModel().getZookeeperUrl();
+        return disconfCenterFile.getDisConfCommonModel();
     }
 
     /**
-     * 获取配置项在ZK上的路径
+     * 获取配置项的通用数据结构
      * 
      * @param fileName
      * @return
      */
-    public String getItemZooPath(String key) {
+    public DisConfCommonModel getItemCommonModel(String key) {
 
         DisconfCenterItem disconfCenterItem = disconfCenterStore
                 .getConfItemMap().get(key);
@@ -385,6 +412,6 @@ public class DisconfStoreMgr {
             return null;
         }
 
-        return disconfCenterItem.getDisConfCommonModel().getZookeeperUrl();
+        return disconfCenterItem.getDisConfCommonModel();
     }
 }

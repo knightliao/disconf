@@ -1,10 +1,10 @@
-package com.baidu.disconf.client.config.inner;
+package com.baidu.disconf.client.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
 import com.baidu.utils.DisconfAutowareConfig;
-import com.baidu.utils.OsUtil;
 
 /**
  * Disconf 系统自带的配置
@@ -131,17 +131,4 @@ public class DisClientSysConfig {
     @DisInnerConfigAnnotation(name = "conf_server_url_retry_sleep_seconds", defaultValue = "2")
     public int CONF_SERVER_URL_RETRY_SLEEP_SECONDS = 2;
 
-    /**
-     * 
-     * @Description: 获取下载的临时文件夹
-     * 
-     * @return
-     * @return String
-     * @author liaoqiqi
-     * @date 2013-6-14
-     */
-    public String getDownloadTmpDir() {
-
-        return OsUtil.pathJoin(getInstance().LOCAL_DOWNLOAD_DIR, "tmp");
-    }
 }

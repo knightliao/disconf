@@ -4,14 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.ConfigMgr;
-import com.baidu.disconf.client.config.inner.DisClientConfig;
+import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.core.DisconfCoreFactory;
 import com.baidu.disconf.client.core.DisconfCoreMgr;
-import com.baidu.disconf.client.fetcher.FetcherMgr;
-import com.baidu.disconf.client.fetcher.inner.restful.RestfulMgr;
+import com.baidu.disconf.client.scan.ScanFactory;
 import com.baidu.disconf.client.scan.ScanMgr;
 import com.baidu.disconf.client.store.DisconfStoreMgr;
-import com.baidu.disconf.client.watch.WatchMgr;
-import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
 
 /**
  * 
@@ -28,12 +26,18 @@ public class DisconfMgr {
     // 本实例不能初始化两次
     private static boolean isInit = false;
 
+    // 扫描器
+    private static ScanMgr scanMgr = null;
+
+    // 核心处理器
+    private static DisconfCoreMgr disconfCoreMgr = null;
+
     /**
      * 总入口
      * 
      * @param scanPackage
      */
-    public static void start(String scanPackage) {
+    public synchronized static void start(String scanPackage) {
 
         firstScan(scanPackage);
 
@@ -45,7 +49,7 @@ public class DisconfMgr {
      * 
      * @param scanPackage
      */
-    public static void firstScan(String scanPackage) {
+    public synchronized static void firstScan(String scanPackage) {
 
         // 该函数不能调用两次
         if (isInit == true) {
@@ -70,17 +74,15 @@ public class DisconfMgr {
                 return;
             }
 
-            // 初始化下载器
-            FetcherMgr.init();
-
-            // Watch 模块
-            WatchMgr.getInstance().init();
+            // 扫描器
+            scanMgr = ScanFactory.getScanMgr();
 
             // 第一次扫描并入库
-            ScanMgr.firstScan(scanPackage);
+            scanMgr.firstScan(scanPackage);
 
             // 获取数据/注入/Watch
-            DisconfCoreMgr.init();
+            disconfCoreMgr = DisconfCoreFactory.getDisconfCoreMgr();
+            disconfCoreMgr.process();
 
             //
             isInit = true;
@@ -96,7 +98,7 @@ public class DisconfMgr {
      * 
      * @param scanPackage
      */
-    public static void secondScan() {
+    public synchronized static void secondScan() {
 
         // 该函数不能调用两次
         if (isInit == false) {
@@ -109,10 +111,10 @@ public class DisconfMgr {
         try {
 
             // 扫描回调函数
-            ScanMgr.secondScan();
+            scanMgr.secondScan();
 
             // 注入数据至配置实体中
-            DisconfCoreMgr.inject2DisconfInstance();
+            disconfCoreMgr.inject2DisconfInstance();
 
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
@@ -136,17 +138,13 @@ public class DisconfMgr {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public static void close() {
+    public synchronized static void close() {
 
         try {
 
-            // RestfulMgr
-            LOGGER.info("=============== RestfulMgr close =================");
-            RestfulMgr.getInstance().close();
-
-            // ZOOKEEPER
-            LOGGER.info("=============== ZookeeperMgr close =================");
-            ZookeeperMgr.getInstance().release();
+            // disconfCoreMgr
+            LOGGER.info("=============== disconfCoreMgr close =================");
+            disconfCoreMgr.release();
 
             // close, 必须将其设置为False,以便重新更新
             isInit = false;

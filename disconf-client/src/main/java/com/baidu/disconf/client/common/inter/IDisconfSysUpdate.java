@@ -1,5 +1,6 @@
 package com.baidu.disconf.client.common.inter;
 
+import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
@@ -16,6 +17,7 @@ public interface IDisconfSysUpdate {
      * @param keyName
      * @throws Exception
      */
-    public void reload(DisConfigTypeEnum disConfigTypeEnum, String keyName)
+    public void reload(DisconfCoreMgr disconfCoreMgr,
+            DisConfigTypeEnum disConfigTypeEnum, String keyName)
             throws Exception;
 }

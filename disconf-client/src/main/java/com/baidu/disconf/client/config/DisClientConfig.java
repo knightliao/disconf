@@ -1,10 +1,11 @@
-package com.baidu.disconf.client.config.inner;
+package com.baidu.disconf.client.config;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.utils.DisconfAutowareConfig;
 

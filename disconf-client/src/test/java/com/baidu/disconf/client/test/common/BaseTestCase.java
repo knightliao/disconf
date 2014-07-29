@@ -11,8 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.baidu.disconf.client.config.ConfigMgr;
-import com.baidu.disconf.client.config.inner.DisClientConfig;
-import com.baidu.disconf.client.config.inner.DisClientSysConfig;
+import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 import com.baidu.utils.NetUtils;
 

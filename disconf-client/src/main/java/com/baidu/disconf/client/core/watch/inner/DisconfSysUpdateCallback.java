@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.watch.inner;
+package com.baidu.disconf.client.core.watch.inner;
 
 import com.baidu.disconf.client.common.inter.IDisconfSysUpdate;
 import com.baidu.disconf.client.core.DisconfCoreMgr;
@@ -17,7 +17,8 @@ public class DisconfSysUpdateCallback implements IDisconfSysUpdate {
      * 
      */
     @Override
-    public void reload(DisConfigTypeEnum disConfigTypeEnum, String keyName)
+    public void reload(DisconfCoreMgr disconfCoreMgr,
+            DisConfigTypeEnum disConfigTypeEnum, String keyName)
             throws Exception {
 
         //
@@ -25,11 +26,8 @@ public class DisconfSysUpdateCallback implements IDisconfSysUpdate {
         //
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 
-            // 更新配置数据仓库
-            DisconfCoreMgr.updateOneConfFile(keyName);
-
-            // 调用用户的回调函数列表
-            DisconfCoreMgr.callOneConfFile(keyName);
+            // 更新配置数据仓库 && 调用用户的回调函数列表
+            disconfCoreMgr.updateOneConfFile(keyName);
 
         } else {
 
@@ -37,11 +35,8 @@ public class DisconfSysUpdateCallback implements IDisconfSysUpdate {
             // 配置项更新
             //
 
-            // 更新配置数据仓库
-            DisconfCoreMgr.updateOneConfItem(keyName);
-
-            // 调用用户的回调函数列表
-            DisconfCoreMgr.callOneConfItem(keyName);
+            // 更新配置数据仓库 && 调用用户的回调函数列表
+            disconfCoreMgr.updateOneConfItem(keyName);
         }
 
     }

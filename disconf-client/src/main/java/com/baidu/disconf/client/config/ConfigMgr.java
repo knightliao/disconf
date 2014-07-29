@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.inner.DisClientComConfig;
-import com.baidu.disconf.client.config.inner.DisClientConfig;
-import com.baidu.disconf.client.config.inner.DisClientSysConfig;
 import com.baidu.disconf.client.config.inner.DisInnerConfigHelper;
 
 /**
@@ -26,7 +24,7 @@ public class ConfigMgr {
      * 
      * @throws Exception
      */
-    public static void init() throws Exception {
+    public synchronized static void init() throws Exception {
 
         LOGGER.info("--------------- LOAD CONFIG START ---------------");
 
@@ -37,13 +35,13 @@ public class ConfigMgr {
         // 导入系统配置
         DisClientSysConfig.getInstance().loadConfig(null);
 
-        // 校验
+        // 校验 系统配置
         DisInnerConfigHelper.verifySysConfig();
 
         // 导入用户配置
         DisClientConfig.getInstance().loadConfig(null);
 
-        // 校验
+        // 校验 用户配置
         DisInnerConfigHelper.verifyUserConfig();
 
         isInit = true;
@@ -55,7 +53,7 @@ public class ConfigMgr {
      * 
      * @return
      */
-    public static boolean isInit() {
+    public synchronized static boolean isInit() {
         return isInit;
     }
 

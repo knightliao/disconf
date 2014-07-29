@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.watch.inner;
+package com.baidu.disconf.client.core.watch.inner;
 
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -8,6 +8,7 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
 
@@ -27,11 +28,14 @@ public class NodeWatcher implements Watcher {
     private DisConfigTypeEnum disConfigTypeEnum;
     private DisconfSysUpdateCallback disconfSysUpdateCallback;
 
-    public NodeWatcher(String monitorPath, String keyName,
-            DisConfigTypeEnum disConfigTypeEnum,
+    private DisconfCoreMgr disconfCoreMgr;
+
+    public NodeWatcher(DisconfCoreMgr disconfCoreMgr, String monitorPath,
+            String keyName, DisConfigTypeEnum disConfigTypeEnum,
             DisconfSysUpdateCallback disconfSysUpdateCallback) {
 
         super();
+        this.disconfCoreMgr = disconfCoreMgr;
         this.monitorPath = monitorPath;
         this.keyName = keyName;
         this.disConfigTypeEnum = disConfigTypeEnum;
@@ -82,7 +86,8 @@ public class NodeWatcher implements Watcher {
 
                 // 调用回调函数, 回调函数里会重新进行监控
                 try {
-                    disconfSysUpdateCallback.reload(disConfigTypeEnum, keyName);
+                    disconfSysUpdateCallback.reload(disconfCoreMgr,
+                            disConfigTypeEnum, keyName);
                 } catch (Exception e) {
                     LOGGER.error(e.toString(), e);
                 }

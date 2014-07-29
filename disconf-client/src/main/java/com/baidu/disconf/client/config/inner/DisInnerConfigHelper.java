@@ -3,6 +3,8 @@ package com.baidu.disconf.client.config.inner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.utils.ConfigLoaderUtils;
 import com.baidu.utils.OsUtil;
 import com.baidu.utils.StringUtils;
@@ -146,7 +148,6 @@ public class DisInnerConfigHelper {
         LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: "
                 + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
         OsUtil.makeDirs(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
-        OsUtil.makeDirs(DisClientSysConfig.getInstance().getDownloadTmpDir());
 
         //
         // zookeeper相关

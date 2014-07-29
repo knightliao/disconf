@@ -19,14 +19,12 @@ import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
 import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
-import com.baidu.disconf.client.config.inner.DisClientConfig;
-import com.baidu.disconf.client.config.inner.DisClientSysConfig;
+import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreMgr;
-import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
-import com.baidu.disconf.core.common.path.ZooPathMgr;
 
 /**
  * 
@@ -65,9 +63,7 @@ public class ScanStaticStoreAdapter {
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
                 disconfFileAnnotation.env(), disconfFileAnnotation.version(),
-                ZooPathMgr.joinPath(WatchMgr.getInstance()
-                        .getClientDisconfFileZooPath(), disconfFileAnnotation
-                        .filename()));
+                disconfFileAnnotation.filename());
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
         // Remote URL
@@ -135,7 +131,7 @@ public class ScanStaticStoreAdapter {
      * @return
      */
     private static DisConfCommonModel makeDisConfCommonModel(String env,
-            String version, String zookeeperUrl) {
+            String version, String fileName) {
 
         DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
@@ -156,9 +152,6 @@ public class ScanStaticStoreAdapter {
             disConfCommonModel
                     .setVersion(DisClientConfig.getInstance().VERSION);
         }
-
-        // 设置Zookeeper的URL
-        disConfCommonModel.setZookeeperUrl(zookeeperUrl);
 
         return disConfCommonModel;
     }
@@ -219,9 +212,7 @@ public class ScanStaticStoreAdapter {
         //
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
-                disconfItem.env(), disconfItem.version(), ZooPathMgr.joinPath(
-                        WatchMgr.getInstance().getClientDisconfItemZooPath(),
-                        key));
+                disconfItem.env(), disconfItem.version(), key);
         disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
 
         // Disconf-web url
