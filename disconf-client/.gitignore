@@ -7,3 +7,5 @@
 /log
 /.pydevproject
 /pom.xml.releaseBackup
+/coverage-report
+/tmp
