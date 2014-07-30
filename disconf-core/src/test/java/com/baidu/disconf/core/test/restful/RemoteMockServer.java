@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 public class RemoteMockServer {
 
     // 远程PORT
-    public static final Integer PORT = 8089;
+    public static final Integer PORT = 9289;
 
     // 远程URL
     public static final List<String> LOCAL_HOST_LIST = Lists
