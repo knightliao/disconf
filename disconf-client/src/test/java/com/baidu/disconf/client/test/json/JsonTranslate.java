@@ -6,16 +6,17 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.baidu.disconf.client.test.common.BaseTestCase;
+import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
+ * Gson的测试
  * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
-public class JsonTranslate extends BaseTestCase {
+public class JsonTranslate extends BaseSpringTestCase {
 
     @Test
     public void test() {

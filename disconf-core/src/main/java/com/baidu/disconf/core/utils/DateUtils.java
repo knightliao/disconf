@@ -1,4 +1,4 @@
-package com.baidu.utils;
+package com.baidu.disconf.core.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

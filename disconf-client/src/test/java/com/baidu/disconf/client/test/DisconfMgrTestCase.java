@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.disconf.client.DisconfMgr;
 import com.baidu.disconf.client.store.DisconfStoreMgr;
-import com.baidu.disconf.client.test.common.BaseTestCase;
+import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.baidu.disconf.client.test.model.ConfA;
 import com.baidu.disconf.client.test.model.ServiceA;
 
@@ -19,7 +19,7 @@ import com.baidu.disconf.client.test.model.ServiceA;
  * @author liaoqiqi
  * @version 2014-6-10
  */
-public class DisconfMgrTestCase extends BaseTestCase {
+public class DisconfMgrTestCase extends BaseSpringTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(DisconfMgrTestCase.class);

@@ -1,8 +1,13 @@
-package com.baidu.disconf.core.common.utils;
+package com.baidu.disconf.core.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author liaoqiqi
+ * @version 2014-7-30
+ */
 public final class ZooUtils {
 
     protected static final Logger LOGGER = LoggerFactory

@@ -7,11 +7,11 @@ import mockit.MockUp;
 
 import org.apache.commons.io.FileUtils;
 
-import com.baidu.disconf.client.fetcher.inner.restful.RestfulMgr;
-import com.baidu.disconf.client.fetcher.inner.restful.core.RemoteUrl;
 import com.baidu.disconf.client.test.utils.DirUtils;
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.json.ValueVo;
+import com.baidu.disconf.core.common.restful.RestfulMgr;
+import com.baidu.disconf.core.common.restful.core.RemoteUrl;
 
 /**
  * 

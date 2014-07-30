@@ -4,8 +4,8 @@ import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.fetcher.impl.FetcherMgrImpl;
-import com.baidu.disconf.client.fetcher.inner.restful.RestfulMgr;
-import com.baidu.disconf.client.fetcher.inner.restful.impl.RestfulMgrImpl;
+import com.baidu.disconf.core.common.restful.RestfulMgr;
+import com.baidu.disconf.core.common.restful.impl.RestfulMgrImpl;
 
 /**
  * 

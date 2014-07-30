@@ -11,15 +11,16 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.scan.inner.ScanStatic;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
-import com.baidu.disconf.client.test.common.BaseTestCase;
+import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.baidu.disconf.utils.ScanPrinterUtils;
 
 /**
+ * 扫描测试
  * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
-public class ScanPackTestCase extends BaseTestCase {
+public class ScanPackTestCase extends BaseSpringTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ScanPackTestCase.class);
@@ -41,6 +42,7 @@ public class ScanPackTestCase extends BaseTestCase {
             Set<Method> methods = scanModel.getDisconfFileItemMethodSet();
             ScanPrinterUtils.printFileItemMethod(methods);
             Assert.assertEquals(2, methods.size());
+            Assert.assertEquals(1, scanModel.getDisconfFileClassSet().size());
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE===================");

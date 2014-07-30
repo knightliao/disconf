@@ -317,6 +317,19 @@
             </dependency>
 
             <dependency>
+                <groupId>com.googlecode.jmockit</groupId>
+                <artifactId>jmockit</artifactId>
+                <version>1.5</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.jmockit</groupId>
+                <artifactId>jmockit-coverage</artifactId>
+                <version>0.999.24</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
@@ -410,6 +423,17 @@
                 <artifactId>spring-instrument-tomcat</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.tomakehurst</groupId>
+                <artifactId>wiremock</artifactId>
+                <version>1.46</version>
+                <scope>test</scope>
+                <!-- Include this if you have dependency conflicts for Guava, 
+                    Jetty, Jackson or Apache HTTP Client -->
+                <classifier>standalone</classifier>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

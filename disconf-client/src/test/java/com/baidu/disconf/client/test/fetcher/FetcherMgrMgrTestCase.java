@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.fetcher.impl.FetcherMgrImpl;
-import com.baidu.disconf.client.fetcher.inner.restful.RestfulMgr;
-import com.baidu.disconf.client.test.common.BaseTestCase;
+import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.baidu.disconf.client.test.fetcher.inner.restful.RestfulMgrMock;
+import com.baidu.disconf.core.common.restful.RestfulMgr;
 
 /**
  * 
@@ -19,7 +19,7 @@ import com.baidu.disconf.client.test.fetcher.inner.restful.RestfulMgrMock;
  * @author liaoqiqi
  * @version 2014-6-17
  */
-public class FetcherMgrMgrTestCase extends BaseTestCase {
+public class FetcherMgrMgrTestCase extends BaseSpringTestCase {
 
     private static String requestUrl = "/url";
 
