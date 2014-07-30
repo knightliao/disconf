@@ -15,7 +15,7 @@ import com.baidu.disconf.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf.client.scan.inner.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreMgr;
-import com.baidu.disconf.utils.SpringContextUtil;
+import com.baidu.disconf.client.utils.SpringContextUtil;
 
 /**
  * 动态扫描 与 Store模块的转换器

@@ -20,11 +20,11 @@ import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.client.core.watch.WatchMgr;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreMgr;
+import com.baidu.disconf.client.utils.MyBeanUtils;
+import com.baidu.disconf.client.utils.SpringContextUtil;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf.utils.MyBeanUtils;
-import com.baidu.disconf.utils.SpringContextUtil;
-import com.baidu.utils.ConfigLoaderUtils;
-import com.baidu.utils.GsonUtils;
+import com.baidu.disconf.core.utils.ConfigLoaderUtils;
+import com.baidu.disconf.core.utils.GsonUtils;
 
 /**
  * 管理 下载、注入、Watch三模块

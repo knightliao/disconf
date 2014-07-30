@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.client.scan.inner.ScanStatic;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
 import com.baidu.disconf.client.test.common.BaseSpringTestCase;
-import com.baidu.disconf.utils.ScanPrinterUtils;
+import com.baidu.disconf.client.utils.ScanPrinterUtils;
 
 /**
  * 扫描测试

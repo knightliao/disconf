@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
-import com.baidu.utils.DisconfAutowareConfig;
+import com.baidu.disconf.client.utils.DisconfAutowareConfig;
 
 /**
  * Disconf 系统自带的配置

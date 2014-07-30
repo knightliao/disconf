@@ -12,8 +12,8 @@ import com.baidu.disconf.client.core.watch.inner.DisconfSysUpdateCallback;
 import com.baidu.disconf.client.core.watch.inner.NodeWatcher;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
-import com.baidu.disconf.core.common.utils.ZooUtils;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
+import com.baidu.disconf.core.utils.ZooUtils;
 
 /**
  * Watch 模块的一个实现

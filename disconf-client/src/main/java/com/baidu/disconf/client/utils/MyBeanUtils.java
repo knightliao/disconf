@@ -1,4 +1,4 @@
-package com.baidu.disconf.utils;
+package com.baidu.disconf.client.utils;
 
 import org.springframework.aop.framework.Advised;
 

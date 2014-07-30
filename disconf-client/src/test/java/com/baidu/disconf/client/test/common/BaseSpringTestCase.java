@@ -14,7 +14,7 @@ import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
-import com.baidu.utils.NetUtils;
+import com.baidu.disconf.core.utils.NetUtils;
 
 /**
  * 

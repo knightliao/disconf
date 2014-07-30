@@ -18,7 +18,7 @@ import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.client.scan.inner.ScanVerify;
 import com.baidu.disconf.client.store.DisconfStoreMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.utils.ClassUtils;
+import com.baidu.disconf.core.utils.ClassUtils;
 
 /**
  * 配置拦截

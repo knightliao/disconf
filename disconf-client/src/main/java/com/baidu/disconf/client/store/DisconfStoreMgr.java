@@ -13,7 +13,7 @@ import com.baidu.disconf.client.common.model.DisconfCenterFile;
 import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
 import com.baidu.disconf.client.store.inner.DisconfCenterStore;
-import com.baidu.utils.ClassUtils;
+import com.baidu.disconf.core.utils.ClassUtils;
 
 /**
  * 仓库模块
