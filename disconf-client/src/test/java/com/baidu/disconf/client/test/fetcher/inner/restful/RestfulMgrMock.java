@@ -15,7 +15,7 @@ import com.baidu.disconf.core.common.json.ValueVo;
 
 /**
  * 
- * Restful 的 Mock方法
+ * Jmockit法测试的MOck
  * 
  * @author liaoqiqi
  * @version 2014-7-29

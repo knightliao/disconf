@@ -9,16 +9,17 @@ import org.junit.Test;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.fetcher.impl.FetcherMgrImpl;
 import com.baidu.disconf.client.fetcher.inner.restful.RestfulMgr;
+import com.baidu.disconf.client.test.common.BaseTestCase;
 import com.baidu.disconf.client.test.fetcher.inner.restful.RestfulMgrMock;
 
 /**
  * 
- * FetcherMgrMgr测试
+ * FetcherMgrMgr测试 (采用Jmockit方法测试)
  * 
  * @author liaoqiqi
  * @version 2014-6-17
  */
-public class FetcherMgrMgrTestCase {
+public class FetcherMgrMgrTestCase extends BaseTestCase {
 
     private static String requestUrl = "/url";
 
