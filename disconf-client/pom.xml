@@ -23,10 +23,24 @@
     </licenses>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0-rc1</version>
         </dependency>
 
         <dependency>
@@ -60,14 +74,19 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-
-
         <dependency>
             <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-core</artifactId>
             <version>${disconf-core.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-core</artifactId>
+            <version>${disconf-core.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -81,7 +100,35 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>16.0</version>
+            <classifier>site</classifier>
+        </dependency>
+        <dependency>
+            <groupId>jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>com.googlecode.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.jmockit</groupId>
+            <artifactId>jmockit-coverage</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <scope>test</scope>
+            <!-- Include this if you have dependency conflicts for Guava, 
+                Jetty, Jackson or Apache HTTP Client -->
+            <classifier>standalone</classifier>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -99,14 +146,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode.jmockit</groupId>
-            <artifactId>jmockit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.jmockit</groupId>
-            <artifactId>jmockit-coverage</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>
@@ -114,6 +154,10 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

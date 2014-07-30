@@ -1,5 +1,8 @@
 package com.baidu.disconf.core.test.restful;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -76,7 +79,9 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
                     RemoteMockServer.FILE_NAME, "",
                     RemoteMockServer.LOCAL_DOWNLOAD_DIR, true, 3, 3);
 
-            System.out.println(downloadFilePath);
+            File file = new File(downloadFilePath);
+            String content = FileUtils.readFileToString(file);
+            Assert.assertEquals(RemoteMockServer.FILE_CONTENT, content);
 
         } catch (Exception e) {
             e.printStackTrace();

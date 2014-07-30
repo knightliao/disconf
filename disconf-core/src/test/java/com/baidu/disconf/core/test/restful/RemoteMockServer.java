@@ -20,16 +20,23 @@ public class RemoteMockServer {
     //
     // 配置文件
     //
-    public static final String FILE_URL = "/api/config/file?app=disconf_demo&env=rd&type=0&key=confA.properties&version=1_0_0_0";
+    public static final String FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=confA.properties&version=1_0_0_0";
     public static final String FILE_NAME = "confA.properties";
+    public static final String FILE_CONTENT = "varA=1000\r\nvarA2=2000";
 
     //
     // 配置项
     //
-    public static final String ITEM_URL = "/api/config/item?app=disconf_demo&env=rd&type=1&key=moneyInvest&version=1_0_0_0";
+    public static final String ITEM_URL = "/api/config/item?app=disconf_testcase&env=rd&type=1&key=keyA&version=1_0_0_0";
     public static final String CONTENT_TYPE = "application/json";
     public static final String DEFAULT_ITEM_VALUE = "1000";
 
     //
     public static final String LOCAL_DOWNLOAD_DIR = "./disconf/download";
+
+    //
+    // zoo
+    //
+    public static final String ZOO_URL = "/api/zoo/hosts";
+    public static final String ZOO_HOSTS = "127.0.0.1:8581,127.0.0.1:8582,127.0.0.1:8583";
 }

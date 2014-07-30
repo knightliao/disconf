@@ -13,18 +13,19 @@ import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
+import com.baidu.disconf.core.test.common.BaseCoreTestCase;
 import com.baidu.disconf.core.utils.NetUtils;
 
 /**
  * 
- * Spring的测试方法
+ * Spring的测试方法 + WireMock 方法
  * 
  * @author liaoqiqi
  * @version 2014-6-11
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class BaseSpringTestCase {
+public class BaseSpringMockTestCase extends BaseCoreTestCase {
 
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(BaseSpringTestCase.class);

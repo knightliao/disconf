@@ -74,7 +74,23 @@ public class BaseCoreTestCase {
                                 "Content-Disposition",
                                 "attachment; filename="
                                         + RemoteMockServer.FILE_NAME)
-                        .withStatus(200).withBody("".getBytes())));
+                        .withStatus(200)
+                        .withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
+
+        //
+        // ZOO
+        //
+        valueVo = new ValueVo();
+        valueVo.setMessage("");
+        valueVo.setStatus(Constants.OK);
+        valueVo.setValue(RemoteMockServer.ZOO_HOSTS);
+        // System.out.println(GsonUtils.toJson(valueVo));
+        stubFor(get(urlEqualTo(RemoteMockServer.ZOO_URL)).willReturn(
+                aResponse()
+                        .withHeader("Content-Type",
+                                RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVo))));
+
     }
 
     @Test

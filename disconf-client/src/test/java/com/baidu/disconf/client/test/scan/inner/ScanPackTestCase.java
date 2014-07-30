@@ -25,14 +25,14 @@ public class ScanPackTestCase extends BaseSpringTestCase {
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ScanPackTestCase.class);
 
+    public static final String SCAN_PACK_NAME = "com.baidu.disconf.client.test";
+
     @Test
     public void scan() {
 
-        String packName = "com.baidu.disconf.client.test";
-
         try {
 
-            ScanStaticModel scanModel = ScanStatic.scan(packName);
+            ScanStaticModel scanModel = ScanStatic.scan(SCAN_PACK_NAME);
 
             // PRINT SCAN STORE
             ScanPrinterUtils.printSotreMap(scanModel.getReflections());
