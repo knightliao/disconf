@@ -1,4 +1,4 @@
-package com.baidu.disconf.core.utils;
+package com.baidu.ub.common.utils;
 
 import java.lang.reflect.Field;
 

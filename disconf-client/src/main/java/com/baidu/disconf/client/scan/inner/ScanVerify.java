@@ -12,7 +12,7 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf.core.utils.ClassUtils;
+import com.baidu.ub.common.utils.ClassUtils;
 
 /**
  * 扫描校验模块

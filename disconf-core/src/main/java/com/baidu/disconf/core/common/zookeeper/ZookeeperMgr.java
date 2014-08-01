@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStore;
-import com.baidu.disconf.core.utils.ZooUtils;
+import com.baidu.ub.common.utils.ZooUtils;
 
 /**
  * ZK统一管理器

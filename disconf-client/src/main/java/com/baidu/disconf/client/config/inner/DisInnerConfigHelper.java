@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
-import com.baidu.disconf.core.utils.ConfigLoaderUtils;
-import com.baidu.disconf.core.utils.OsUtil;
-import com.baidu.disconf.core.utils.StringUtils;
+import com.baidu.ub.common.utils.ConfigLoaderUtils;
+import com.baidu.ub.common.utils.OsUtil;
+import com.baidu.ub.common.utils.StringUtils;
 
 /**
  * 用户配置、系统配置 的校验
