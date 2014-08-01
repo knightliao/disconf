@@ -11,8 +11,8 @@ import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.ser.StdSerializerProvider;
 import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 
@@ -23,7 +23,7 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 public class JsonUtils {
 
-    private static final Logger log = AopLogFactory.getLogger(JsonUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
     final static ObjectMapper objectMapper;
 

@@ -7,8 +7,8 @@
 package com.baidu.ub.common.redis.mock;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.baidu.ub.common.log.AopLogFactory;
 import com.baidu.ub.common.redis.RedisClient;
 
 
@@ -21,7 +21,7 @@ import com.baidu.ub.common.redis.RedisClient;
  */
 
 public class RedisClientMock extends RedisClient {
-    private static final Logger logger = AopLogFactory.getLogger(RedisClientMock.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisClientMock.class);
             
     /**
      * mock掉一些需要的函数

@@ -14,6 +14,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-core</artifactId>
+            <version>${disconf-core.version}</version>
+        </dependency>
+
         <!-- spring dependencies -->
 
 
@@ -211,11 +217,7 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.baidu.disconf</groupId>
-            <artifactId>disconf-core</artifactId>
-            <version>${disconf-core.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>

@@ -24,6 +24,7 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -32,7 +33,6 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Protocol;
 import redis.clients.util.SafeEncoder;
 
-import com.baidu.ub.common.log.AopLogFactory;
 import com.baidu.ub.common.utils.JsonUtils;
 import com.baidu.ub.common.utils.StringUtils;
 
@@ -46,7 +46,7 @@ import com.baidu.ub.common.utils.StringUtils;
 public class RedisClient implements RedisOperation, InitializingBean,
         DisposableBean {
 
-    protected final static Logger LOG = AopLogFactory
+    protected final static Logger LOG = LoggerFactory
             .getLogger(RedisClient.class);
 
     private String cacheName = "default";

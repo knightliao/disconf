@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
-
-import com.baidu.ub.common.log.AopLogFactory;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -15,7 +14,7 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 public class StringUtils extends org.apache.commons.lang.StringUtils {
 
-    private final static Logger LOG = AopLogFactory
+    private final static Logger LOG = LoggerFactory
             .getLogger(StringUtils.class);
 
     /**
