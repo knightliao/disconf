@@ -142,7 +142,7 @@ public class ConfigValidator {
      * 
      * @param userId
      */
-    public void valideConfigExist(Long id) {
+    public Config valideConfigExist(Long id) {
 
         try {
 
@@ -151,6 +151,8 @@ public class ConfigValidator {
             if (config == null) {
                 throw new Exception();
             }
+
+            return config;
 
         } catch (Exception e) {
 
@@ -182,6 +184,34 @@ public class ConfigValidator {
         } catch (Exception e) {
 
             throw new FieldException("value", "conf.item.value.null", e);
+        }
+
+    }
+
+    /**
+     * 校验更新 配置文件
+     * 
+     * @param userId
+     */
+    public void validateUpdateFile(Long configId, String fileName) {
+
+        //
+        // config
+        //
+        Config config = valideConfigExist(configId);
+
+        //
+        // value
+        //
+        try {
+
+            if (!config.getName().equals(fileName)) {
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+
+            throw new FieldException("value", "conf.file.name.not.equal", e);
         }
 
     }

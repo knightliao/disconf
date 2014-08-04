@@ -92,6 +92,10 @@ public class ConfigUpdateController extends BaseController {
         String[] allowExtName = { ".properties" };
         fileUploadValidator.validateFile(file, fileSize, allowExtName);
 
+        // 业务校验
+        configValidator
+                .validateUpdateFile(configId, file.getOriginalFilename());
+
         //
         // 更新
         //
@@ -108,6 +112,11 @@ public class ConfigUpdateController extends BaseController {
             LOG.error(e.toString());
             throw new FileUploadException("upload file error", e);
         }
+
+        //
+        // 通知ZK
+        //
+        configMgr.notifyZookeeper(configId);
 
         return buildSuccess("修改成功");
     }

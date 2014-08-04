@@ -199,6 +199,9 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
             Object object = disconfValue.getProperties().get(fileItem);
             if (object == null) {
+                LOGGER.error(
+                        "cannot find {} to be injectd. file content is: {}",
+                        fileItem, disconfValue.getProperties().toString());
                 continue;
             }
 

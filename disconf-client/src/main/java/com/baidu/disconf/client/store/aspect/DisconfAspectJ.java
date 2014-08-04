@@ -73,8 +73,9 @@ public class DisconfAspectJ {
             Object ret = disconfStoreProcessor.getConfig(
                     disconfFile.filename(), disconfFileItem.name());
             if (ret != null) {
-                LOGGER.info("using disconf store value: (" + field.getName()
-                        + " , " + ret + ")");
+                LOGGER.info("using disconf store value: "
+                        + disconfFile.filename() + " ("
+                        + disconfFileItem.name() + " , " + ret + ")");
                 return ret;
             }
         }

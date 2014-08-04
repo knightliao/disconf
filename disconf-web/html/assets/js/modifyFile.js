@@ -124,14 +124,13 @@
 					$("#error").html(data.result);
 				} else {
 					add_file_but.html("添加资源文件...")
-					errorrar.html("错误：" + data.message);
+					Util.input.whiteError(errorrar, data);
 					is_ok = false;
 				}
 			}
 			if (is_ok == true) {
 				add_file_but.html("重新上传")
 				errorrar.html("&nbsp;&nbsp;上传成功！");
-				status.html("已上传:" + data.file_name);
 				upload_status = 2;
 				// 重新刷新
 				fetchFileData();

@@ -34,6 +34,7 @@ import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
 import com.baidu.ub.common.generic.vo.DaoPageResult;
 import com.baidu.ub.common.utils.DateUtils;
+import com.baidu.ub.common.utils.GsonUtils;
 
 /**
  * 
@@ -181,6 +182,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         confListVo.setVersion(config.getVersion());
         confListVo.setType(DisConfigTypeEnum.getByType(config.getType())
                 .getModelName());
+        confListVo.setTypeId(config.getType());
 
         return confListVo;
     }
@@ -221,20 +223,29 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 通知Zookeeper, 失败时不回滚数据库
+     * 通知Zookeeper, 失败时不回滚数据库,通过监控来解决分布式不一致问题
      */
     @Override
     public void notifyZookeeper(Long configId) {
 
         ConfListVo confListVo = getConfVo(configId);
 
-        //
-        // 通知ZK,
-        //
-        zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(),
-                confListVo.getEnvName(), confListVo.getVersion(),
-                confListVo.getKey(), confListVo.getValue(),
-                DisConfigTypeEnum.ITEM);
+        if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
+
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(),
+                    confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(),
+                    GsonUtils.toJson(confListVo.getValue()),
+                    DisConfigTypeEnum.FILE);
+
+        } else {
+
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(),
+                    confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(), confListVo.getValue(),
+                    DisConfigTypeEnum.ITEM);
+        }
+
     }
 
     /**

@@ -16,6 +16,7 @@ public class ConfListVo {
     private String envName;
 
     private String type;
+    private Integer typeId;
 
     private String key;
 
@@ -111,6 +112,24 @@ public class ConfListVo {
 
     public void setConfigId(Long configId) {
         this.configId = configId;
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfListVo [configId=" + configId + ", appName=" + appName
+                + ", appId=" + appId + ", version=" + version + ", envId="
+                + envId + ", envName=" + envName + ", type=" + type
+                + ", typeId=" + typeId + ", key=" + key + ", value=" + value
+                + ", createTime=" + createTime + ", modifyTime=" + modifyTime
+                + "]";
     }
 
 }
