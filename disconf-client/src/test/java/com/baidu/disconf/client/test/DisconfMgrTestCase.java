@@ -13,15 +13,15 @@ import com.baidu.disconf.client.DisconfMgr;
 import com.baidu.disconf.client.core.DisconfCoreFactory;
 import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.client.core.impl.DisconfCoreMgrImpl;
-import com.baidu.disconf.client.core.watch.WatchMgr;
 import com.baidu.disconf.client.fetcher.FetcherFactory;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
-import com.baidu.disconf.client.store.DisconfStoreMgr;
+import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.test.common.BaseSpringMockTestCase;
 import com.baidu.disconf.client.test.model.ConfA;
 import com.baidu.disconf.client.test.model.ServiceA;
 import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.mock.WatchMgrMock;
+import com.baidu.disconf.client.watch.WatchMgr;
 
 /**
  * 
@@ -85,12 +85,12 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             DisconfMgr.start(ScanPackTestCase.SCAN_PACK_NAME);
 
             //
-            LOGGER.info(DisconfStoreMgr.getInstance().getConfFileMap()
-                    .toString());
+            LOGGER.info(DisconfStoreProcessorFactory
+                    .getDisconfStoreFileProcessor().confToString());
 
             //
-            LOGGER.info(DisconfStoreMgr.getInstance().getConfItemMap()
-                    .toString());
+            LOGGER.info(DisconfStoreProcessorFactory
+                    .getDisconfStoreItemProcessor().confToString());
 
             LOGGER.info("================ AFTER DISCONF ==============================");
 

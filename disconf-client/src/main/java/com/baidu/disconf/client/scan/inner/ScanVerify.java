@@ -92,6 +92,9 @@ public class ScanVerify {
             fieldName = disItem.associateField();
         }
 
+        //
+        // 如果用户未设定注解，则猜其名字
+        //
         if (StringUtils.isEmpty(fieldName)) {
             // 从方法名 获取其 Field 名
             fieldName = ClassUtils

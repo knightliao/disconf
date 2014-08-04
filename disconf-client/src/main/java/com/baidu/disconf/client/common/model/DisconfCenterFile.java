@@ -10,7 +10,7 @@ import java.util.Map;
  * @author liaoqiqi
  * @version 2014-5-20
  */
-public class DisconfCenterFile {
+public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     // -----key: 配置文件中的项名
     // -----value: 默认值
@@ -19,28 +19,8 @@ public class DisconfCenterFile {
     // 配置文件类
     private Class<?> cls;
 
-    // 所在类实体
-    private Object object;
-
     // 文件名
     private String fileName;
-
-    // 远程配置服务的URL路径,不包含IP和PORT的
-    private String remoteServerUrl;
-
-    // 通用配置
-    private DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
-
-    // 回调函数
-    private DisconfCommonCallbackModel disconfCommonCallbackModel = new DisconfCommonCallbackModel();
-
-    public DisConfCommonModel getDisConfCommonModel() {
-        return disConfCommonModel;
-    }
-
-    public void setDisConfCommonModel(DisConfCommonModel disConfCommonModel) {
-        this.disConfCommonModel = disConfCommonModel;
-    }
 
     public Class<?> getCls() {
         return cls;
@@ -58,23 +38,6 @@ public class DisconfCenterFile {
         this.fileName = fileName;
     }
 
-    public DisconfCommonCallbackModel getDisconfCommonCallbackModel() {
-        return disconfCommonCallbackModel;
-    }
-
-    public void setDisconfCommonCallbackModel(
-            DisconfCommonCallbackModel disconfCommonCallbackModel) {
-        this.disconfCommonCallbackModel = disconfCommonCallbackModel;
-    }
-
-    public String getRemoteServerUrl() {
-        return remoteServerUrl;
-    }
-
-    public void setRemoteServerUrl(String remoteServerUrl) {
-        this.remoteServerUrl = remoteServerUrl;
-    }
-
     public Map<String, FileItemValue> getKeyMaps() {
         return keyMaps;
     }
@@ -83,13 +46,11 @@ public class DisconfCenterFile {
         this.keyMaps = keyMaps;
     }
 
+
     @Override
     public String toString() {
         return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
-                + ", object=" + object + ", fileName=" + fileName
-                + ", remoteServerUrl=" + remoteServerUrl
-                + ", disConfCommonModel=" + disConfCommonModel
-                + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
+                + ", fileName=" + fileName + ", toString()=" + super.toString()
                 + "]";
     }
 
@@ -107,14 +68,6 @@ public class DisconfCenterFile {
         }
 
         return map;
-    }
-
-    public Object getObject() {
-        return object;
-    }
-
-    public void setObject(Object object) {
-        this.object = object;
     }
 
     /**

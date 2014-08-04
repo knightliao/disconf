@@ -16,13 +16,14 @@ import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
+import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
 import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
-import com.baidu.disconf.client.store.DisconfStoreMgr;
+import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 
@@ -230,10 +231,10 @@ public class ScanStaticStoreAdapter {
      * 
      * @return
      */
-    private static List<DisconfCenterFile> getDisconfFiles(
+    private static List<DisconfCenterBaseModel> getDisconfFiles(
             ScanStaticModel scanModel) {
 
-        List<DisconfCenterFile> disconfCenterFiles = new ArrayList<DisconfCenterFile>();
+        List<DisconfCenterBaseModel> disconfCenterFiles = new ArrayList<DisconfCenterBaseModel>();
 
         Set<Class<?>> classSet = scanModel.getDisconfFileClassSet();
         for (Class<?> disconfFile : classSet) {
@@ -255,10 +256,10 @@ public class ScanStaticStoreAdapter {
      * 
      * @return
      */
-    private static List<DisconfCenterItem> getDisconfItems(
+    private static List<DisconfCenterBaseModel> getDisconfItems(
             ScanStaticModel scanModel) {
 
-        List<DisconfCenterItem> disconfCenterItems = new ArrayList<DisconfCenterItem>();
+        List<DisconfCenterBaseModel> disconfCenterItems = new ArrayList<DisconfCenterBaseModel>();
 
         Set<Method> methods = scanModel.getDisconfItemMethodSet();
         for (Method method : methods) {
@@ -281,12 +282,14 @@ public class ScanStaticStoreAdapter {
     public static void put2Store(ScanStaticModel scanModel) {
 
         // 转换配置文件
-        List<DisconfCenterFile> disconfCenterFiles = getDisconfFiles(scanModel);
-        DisconfStoreMgr.getInstance().transformScanFiles(disconfCenterFiles);
+        List<DisconfCenterBaseModel> disconfCenterFiles = getDisconfFiles(scanModel);
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
+                .transformScanData(disconfCenterFiles);
 
         // 转换配置项
-        List<DisconfCenterItem> disconfCenterItems = getDisconfItems(scanModel);
-        DisconfStoreMgr.getInstance().transformScanItems(disconfCenterItems);
+        List<DisconfCenterBaseModel> disconfCenterItems = getDisconfItems(scanModel);
+        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
+                .transformScanData(disconfCenterItems);
     }
 
 }

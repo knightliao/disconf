@@ -1,4 +1,4 @@
-package com.baidu.disconf.core.common.restful.http;
+package com.baidu.disconf.core.common.restful.type;
 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.Response;

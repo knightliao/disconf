@@ -8,10 +8,8 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
  * 2. 使用Spring Bean托管方式
  * 
  **/
-@DisconfFile(filename = ConfA.filename)
+@DisconfFile(filename = "confA.properties")
 public class ConfA {
-
-    public static final String filename = "confA.properties";
 
     /**
      * 配置文件中的某Item

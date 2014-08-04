@@ -18,5 +18,17 @@ import java.lang.annotation.Target;
 @Documented
 public @interface DisconfUpdateService {
 
-    String[] keys() default "";
+    /**
+     * 配置文件
+     * 
+     * @return
+     */
+    Class<?>[] classes() default {};
+
+    /**
+     * 配置项
+     * 
+     * @return
+     */
+    String[] itemKeys() default {};
 }

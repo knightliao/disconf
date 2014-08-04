@@ -9,7 +9,7 @@ import com.baidu.disconf.client.core.DisconfCoreFactory;
 import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.client.scan.ScanFactory;
 import com.baidu.disconf.client.scan.ScanMgr;
-import com.baidu.disconf.client.store.DisconfStoreMgr;
+import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 
 /**
  * 
@@ -122,10 +122,12 @@ public class DisconfMgr {
 
         //
         LOGGER.info("Conf File Map: "
-                + DisconfStoreMgr.getInstance().getConfFileMap().toString());
+                + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
+                        .confToString());
         //
         LOGGER.info("Conf Item Map: "
-                + DisconfStoreMgr.getInstance().getConfItemMap().toString());
+                + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
+                        .confToString());
 
         LOGGER.info("******************************* DISCONF END *******************************");
     }

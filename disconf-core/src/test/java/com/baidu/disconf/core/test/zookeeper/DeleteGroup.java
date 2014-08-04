@@ -31,6 +31,7 @@ public class DeleteGroup extends ConnectionWatcher {
             }
 
             for (String child : children) {
+                System.out.println("delete: " + path + "/" + child);
                 delete(path + "/" + child);
             }
 

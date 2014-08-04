@@ -57,7 +57,7 @@ public class AppController extends BaseController {
      * 
      * @return
      */
-    @RequestMapping(value = "/{configId}", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     public JsonObjectBase create(@Valid AppNewForm appNewForm) {
 

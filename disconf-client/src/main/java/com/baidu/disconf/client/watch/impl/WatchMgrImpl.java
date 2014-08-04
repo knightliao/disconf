@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.core.watch.impl;
+package com.baidu.disconf.client.watch.impl;
 
 import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.config.inner.DisClientComConfig;
-import com.baidu.disconf.client.core.DisconfCoreMgr;
-import com.baidu.disconf.client.core.watch.WatchMgr;
-import com.baidu.disconf.client.core.watch.inner.DisconfSysUpdateCallback;
-import com.baidu.disconf.client.core.watch.inner.NodeWatcher;
+import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
+import com.baidu.disconf.client.watch.WatchMgr;
+import com.baidu.disconf.client.watch.inner.DisconfSysUpdateCallback;
+import com.baidu.disconf.client.watch.inner.NodeWatcher;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
@@ -73,8 +73,7 @@ public class WatchMgrImpl implements WatchMgr {
                     .getFileZooPath(clientRootZooPath);
             makePath(clientDisconfFileZooPath, ZooUtils.getIp());
 
-            monitorPath = ZooPathMgr.joinPath(clientDisconfFileZooPath,
-                    ZooPathMgr.getFileZooPath(key));
+            monitorPath = ZooPathMgr.joinPath(clientDisconfFileZooPath, key);
 
         } else {
 
@@ -82,8 +81,7 @@ public class WatchMgrImpl implements WatchMgr {
             String clientDisconfItemZooPath = ZooPathMgr
                     .getItemZooPath(clientRootZooPath);
             makePath(clientDisconfItemZooPath, ZooUtils.getIp());
-            monitorPath = ZooPathMgr.joinPath(clientDisconfItemZooPath,
-                    ZooPathMgr.getFileZooPath(key));
+            monitorPath = ZooPathMgr.joinPath(clientDisconfItemZooPath, key);
         }
 
         // 先新建路径
@@ -126,7 +124,7 @@ public class WatchMgrImpl implements WatchMgr {
     /**
      * 监控路径,监控前会事先创建路径,并且会新建一个自己的Temp子结点
      */
-    public void watchPath(DisconfCoreMgr disconfCoreMgr,
+    public void watchPath(DisconfCoreProcessor disconfCoreMgr,
             DisConfCommonModel disConfCommonModel, String keyName,
             DisConfigTypeEnum disConfigTypeEnum, String value) throws Exception {
 

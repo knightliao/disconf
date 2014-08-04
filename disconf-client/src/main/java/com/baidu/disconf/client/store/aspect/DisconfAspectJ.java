@@ -16,9 +16,9 @@ import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.client.scan.inner.ScanVerify;
-import com.baidu.disconf.client.store.DisconfStoreMgr;
+import com.baidu.disconf.client.store.DisconfStoreProcessor;
+import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.ub.common.utils.ClassUtils;
 
 /**
  * 配置拦截
@@ -68,7 +68,9 @@ public class DisconfAspectJ {
             //
             // 请求仓库配置数据
             //
-            Object ret = DisconfStoreMgr.getInstance().getConfigFile(
+            DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory
+                    .getDisconfStoreFileProcessor();
+            Object ret = disconfStoreProcessor.getConfig(
                     disconfFile.filename(), disconfFileItem.name());
             if (ret != null) {
                 LOGGER.info("using disconf store value: (" + field.getName()
@@ -102,24 +104,15 @@ public class DisconfAspectJ {
     public Object decideAccess(ProceedingJoinPoint pjp, DisconfItem disconfItem)
             throws Throwable {
 
-        MethodSignature ms = (MethodSignature) pjp.getSignature();
-        Method method = ms.getMethod();
-
-        String methodName = method.getName();
-
-        //
-        // Field名
-        //
-        String fieldName = ClassUtils.getFieldNameByGetMethodName(methodName);
-
         //
         // 请求仓库配置数据
         //
-        Object ret = DisconfStoreMgr.getInstance().getConfigItem(
-                disconfItem.key());
+        DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory
+                .getDisconfStoreItemProcessor();
+        Object ret = disconfStoreProcessor.getConfig(null, disconfItem.key());
         if (ret != null) {
-            LOGGER.info("using disconf store value: (" + fieldName + " , "
-                    + ret + ")");
+            LOGGER.info("using disconf store value: (" + disconfItem.key()
+                    + " , " + ret + ")");
             return ret;
         }
 

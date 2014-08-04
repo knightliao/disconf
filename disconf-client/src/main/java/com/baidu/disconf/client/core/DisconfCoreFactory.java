@@ -1,10 +1,10 @@
 package com.baidu.disconf.client.core;
 
 import com.baidu.disconf.client.core.impl.DisconfCoreMgrImpl;
-import com.baidu.disconf.client.core.watch.WatchFactory;
-import com.baidu.disconf.client.core.watch.WatchMgr;
 import com.baidu.disconf.client.fetcher.FetcherFactory;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
+import com.baidu.disconf.client.watch.WatchFactory;
+import com.baidu.disconf.client.watch.WatchMgr;
 
 /**
  * Core模块的工厂类

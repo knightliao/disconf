@@ -1,9 +1,9 @@
-package com.baidu.disconf.client.core.watch;
+package com.baidu.disconf.client.watch;
 
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientSysConfig;
-import com.baidu.disconf.client.core.watch.impl.WatchMgrImpl;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
+import com.baidu.disconf.client.watch.impl.WatchMgrImpl;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 
 /**

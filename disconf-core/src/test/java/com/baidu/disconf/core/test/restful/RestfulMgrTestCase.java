@@ -12,6 +12,7 @@ import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
 import com.baidu.disconf.core.common.restful.core.RemoteUrl;
 import com.baidu.disconf.core.common.restful.impl.RestfulMgrImpl;
+import com.baidu.disconf.core.common.restful.retry.impl.RetryStrategyRoundBin;
 import com.baidu.disconf.core.test.common.BaseCoreTestCase;
 
 /**
@@ -27,7 +28,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     @BeforeClass
     public static void myInit() {
 
-        restfulMgr = new RestfulMgrImpl();
+        restfulMgr = new RestfulMgrImpl(new RetryStrategyRoundBin());
         try {
             restfulMgr.init();
         } catch (Exception e) {

@@ -10,12 +10,16 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf.client.common.model.DisconfKey;
 import com.baidu.disconf.client.scan.inner.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
-import com.baidu.disconf.client.store.DisconfStoreMgr;
+import com.baidu.disconf.client.store.DisconfStoreProcessor;
+import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.utils.SpringContextUtil;
+import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
  * 动态扫描 与 Store模块的转换器
@@ -50,14 +54,18 @@ public class ScanDynamicStoreAdapter {
     private static ScanDynamicModel analysis4DisconfUpdate(
             ScanStaticModel scanModel) {
 
-        Map<String, List<IDisconfUpdate>> inverseMap = new HashMap<String, List<IDisconfUpdate>>();
+        // 配置项或文件
+        Map<DisconfKey, List<IDisconfUpdate>> inverseMap = new HashMap<DisconfKey, List<IDisconfUpdate>>();
+
+        //
+        //
+        //
         Set<Class<?>> disconfUpdateServiceSet = scanModel
                 .getDisconfUpdateService();
         for (Class<?> disconfUpdateServiceClass : disconfUpdateServiceSet) {
 
             DisconfUpdateService disconfUpdateService = disconfUpdateServiceClass
                     .getAnnotation(DisconfUpdateService.class);
-            List<String> keysList = Arrays.asList(disconfUpdateService.keys());
 
             //
             // 校验是否有继承正确,是否继承IDisconfUpdate
@@ -101,23 +109,69 @@ public class ScanDynamicStoreAdapter {
                 }
             }
 
+            //
+            // 配置项
+            //
+            List<String> itemKeys = Arrays.asList(disconfUpdateService
+                    .itemKeys());
+
             // 反索引
-            for (String key : keysList) {
-                List<IDisconfUpdate> serviceList = null;
-                if (inverseMap.containsKey(key)) {
-                    inverseMap.get(key).add(iDisconfUpdate);
-                } else {
-                    serviceList = new ArrayList<IDisconfUpdate>();
-                    serviceList.add(iDisconfUpdate);
-                    inverseMap.put(key, serviceList);
+            for (String key : itemKeys) {
+
+                DisconfKey disconfKey = new DisconfKey(DisConfigTypeEnum.ITEM,
+                        key);
+                addOne2InverseMap(disconfKey, inverseMap, iDisconfUpdate);
+            }
+
+            //
+            // 配置文件
+            //
+            List<Class<?>> classes = Arrays.asList(disconfUpdateService
+                    .classes());
+
+            // 反索引
+            for (Class<?> curClass : classes) {
+
+                // 获取其注解
+                DisconfFile disconfFile = curClass
+                        .getAnnotation(DisconfFile.class);
+                if (disconfFile == null) {
+
+                    LOGGER.error(
+                            "cannot find DisconfFile annotation for class when set callback: {} ",
+                            curClass.toString());
+                    continue;
                 }
+
+                DisconfKey disconfKey = new DisconfKey(DisConfigTypeEnum.FILE,
+                        disconfFile.filename());
+                addOne2InverseMap(disconfKey, inverseMap, iDisconfUpdate);
             }
         }
 
+        // set data
         ScanDynamicModel scanDynamicModel = new ScanDynamicModel();
         scanDynamicModel.setDisconfUpdateServiceInverseIndexMap(inverseMap);
 
         return scanDynamicModel;
+    }
+
+    /**
+     * 
+     */
+    private static void addOne2InverseMap(DisconfKey disconfKey,
+            Map<DisconfKey, List<IDisconfUpdate>> inverseMap,
+            IDisconfUpdate iDisconfUpdate) {
+
+        List<IDisconfUpdate> serviceList = null;
+
+        if (inverseMap.containsKey(disconfKey)) {
+            inverseMap.get(disconfKey).add(iDisconfUpdate);
+        } else {
+            serviceList = new ArrayList<IDisconfUpdate>();
+            serviceList.add(iDisconfUpdate);
+            inverseMap.put(disconfKey, serviceList);
+        }
     }
 
     /**
@@ -127,26 +181,57 @@ public class ScanDynamicStoreAdapter {
      * @return
      */
     private static void transformUpdateService(
-            Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
+            Map<DisconfKey, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
 
-        for (String key : disconfUpdateServiceInverseIndexMap.keySet()) {
+        DisconfStoreProcessor disconfStoreProcessorFile = DisconfStoreProcessorFactory
+                .getDisconfStoreFileProcessor();
+        DisconfStoreProcessor disconfStoreProcessorItem = DisconfStoreProcessorFactory
+                .getDisconfStoreItemProcessor();
 
-            // 找不到回调对应的配置，这是用户配置 错误了
-            if (!DisconfStoreMgr.getInstance().hasThisConf(key)) {
+        for (DisconfKey disconfKey : disconfUpdateServiceInverseIndexMap
+                .keySet()) {
 
+            //
+            //
+            //
+
+            try {
+                if (disconfKey.getDisConfigTypeEnum().equals(
+                        DisConfigTypeEnum.FILE)) {
+
+                    if (!disconfStoreProcessorFile.hasThisConf(disconfKey
+                            .getKey())) {
+                        throw new Exception();
+                    }
+
+                    disconfStoreProcessorFile
+                            .addUpdateCallbackList(disconfKey.getKey(),
+                                    disconfUpdateServiceInverseIndexMap
+                                            .get(disconfKey));
+
+                } else if (disconfKey.getDisConfigTypeEnum().equals(
+                        DisConfigTypeEnum.ITEM)) {
+
+                    if (!disconfStoreProcessorItem.hasThisConf(disconfKey
+                            .getKey())) {
+                        throw new Exception();
+                    }
+
+                    disconfStoreProcessorItem
+                            .addUpdateCallbackList(disconfKey.getKey(),
+                                    disconfUpdateServiceInverseIndexMap
+                                            .get(disconfKey));
+                }
+
+            } catch (Exception e) {
+                // 找不到回调对应的配置，这是用户配置 错误了
                 StringBuffer sb = new StringBuffer();
-                sb.append("cannot find " + key + "for: ");
+                sb.append("cannot find " + disconfKey + "for: ");
                 for (IDisconfUpdate serClass : disconfUpdateServiceInverseIndexMap
-                        .get(key)) {
+                        .get(disconfKey)) {
                     sb.append(serClass.toString() + "\t");
                 }
                 LOGGER.error(sb.toString());
-
-            } else {
-
-                // 配置正常
-                DisconfStoreMgr.getInstance().addUpdateCallbackList(key,
-                        disconfUpdateServiceInverseIndexMap.get(key));
             }
         }
     }

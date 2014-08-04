@@ -1,9 +1,11 @@
 package com.baidu.disconf.client.scan.inner.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.baidu.disconf.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf.client.common.model.DisconfKey;
 
 /**
  * 动态扫描对象
@@ -13,15 +15,15 @@ import com.baidu.disconf.client.common.inter.IDisconfUpdate;
  */
 public class ScanDynamicModel {
 
-    // 配置及影响的回调函数, Key为配置文件Key或配置项Key
-    private Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap;
+    // 配置及影响的回调函数, Key为配置项KEY 或 配置文件
+    private Map<DisconfKey, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap = new HashMap<DisconfKey, List<IDisconfUpdate>>();
 
-    public Map<String, List<IDisconfUpdate>> getDisconfUpdateServiceInverseIndexMap() {
+    public Map<DisconfKey, List<IDisconfUpdate>> getDisconfUpdateServiceInverseIndexMap() {
         return disconfUpdateServiceInverseIndexMap;
     }
 
     public void setDisconfUpdateServiceInverseIndexMap(
-            Map<String, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
+            Map<DisconfKey, List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
         this.disconfUpdateServiceInverseIndexMap = disconfUpdateServiceInverseIndexMap;
     }
 

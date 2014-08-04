@@ -1,4 +1,4 @@
-package com.baidu.disconf.core.common.restful.file;
+package com.baidu.disconf.core.common.restful.type;
 
 import java.io.File;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.core.watch.inner;
+package com.baidu.disconf.client.watch.inner;
 
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -8,7 +8,7 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf.client.core.DisconfCoreMgr;
+import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
 
@@ -28,9 +28,9 @@ public class NodeWatcher implements Watcher {
     private DisConfigTypeEnum disConfigTypeEnum;
     private DisconfSysUpdateCallback disconfSysUpdateCallback;
 
-    private DisconfCoreMgr disconfCoreMgr;
+    private DisconfCoreProcessor disconfCoreMgr;
 
-    public NodeWatcher(DisconfCoreMgr disconfCoreMgr, String monitorPath,
+    public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath,
             String keyName, DisConfigTypeEnum disConfigTypeEnum,
             DisconfSysUpdateCallback disconfSysUpdateCallback) {
 

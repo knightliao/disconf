@@ -17,7 +17,7 @@ import com.baidu.disconf.demo.config.JedisConfig;
  * @version 2014-6-17
  */
 @Service
-@DisconfUpdateService(keys = { JedisConfig.filename, Coefficients.key })
+@DisconfUpdateService(classes = { JedisConfig.class }, itemKeys = { Coefficients.key })
 public class SimpleRedisServiceUpdateCallback implements IDisconfUpdate {
 
     protected static final Logger LOGGER = LoggerFactory

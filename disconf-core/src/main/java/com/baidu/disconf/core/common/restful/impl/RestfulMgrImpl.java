@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
 import com.baidu.disconf.core.common.restful.core.RemoteUrl;
 import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
-import com.baidu.disconf.core.common.restful.file.FetchConfFile;
-import com.baidu.disconf.core.common.restful.http.RestfulGet;
-import com.baidu.disconf.core.common.restful.retry.RetryProxy;
+import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
+import com.baidu.disconf.core.common.restful.type.FetchConfFile;
+import com.baidu.disconf.core.common.restful.type.RestfulGet;
 import com.baidu.ub.common.utils.ConfigLoaderUtils;
 import com.baidu.ub.common.utils.OsUtil;
 
@@ -38,6 +38,16 @@ public class RestfulMgrImpl implements RestfulMgr {
      * 连接器
      */
     private Client client = null;
+
+    /**
+     * 重试策略
+     */
+    private RetryStrategy retryStrategy;
+
+    public RestfulMgrImpl(RetryStrategy retryStrategy) {
+
+        this.retryStrategy = retryStrategy;
+    }
 
     /**
      * 
@@ -83,8 +93,8 @@ public class RestfulMgrImpl implements RestfulMgr {
 
             try {
 
-                Response response = (Response) RetryProxy.retry(unreliableImpl,
-                        retryTimes, retyrSleepSeconds);
+                Response response = (Response) retryStrategy.retry(
+                        unreliableImpl, retryTimes, retyrSleepSeconds);
 
                 T t = (T) response.readEntity(clazz);
 
@@ -218,9 +228,8 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @param sleepSeconds
      * @return
      */
-    private static Object retry4ConfDownload(RemoteUrl remoteUrl,
-            File localTmpFile, int retryTimes, int sleepSeconds)
-            throws Exception {
+    private Object retry4ConfDownload(RemoteUrl remoteUrl, File localTmpFile,
+            int retryTimes, int sleepSeconds) throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
@@ -230,7 +239,7 @@ public class RestfulMgrImpl implements RestfulMgr {
 
             try {
 
-                return RetryProxy.retry(unreliableImpl, retryTimes,
+                return retryStrategy.retry(unreliableImpl, retryTimes,
                         sleepSeconds);
 
             } catch (Exception e) {

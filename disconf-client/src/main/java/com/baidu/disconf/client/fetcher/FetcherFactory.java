@@ -4,8 +4,8 @@ import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.fetcher.impl.FetcherMgrImpl;
+import com.baidu.disconf.core.common.restful.RestfulFactory;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
-import com.baidu.disconf.core.common.restful.impl.RestfulMgrImpl;
 
 /**
  * 
@@ -28,8 +28,8 @@ public class FetcherFactory {
                     "ConfigMgr should be init before FetcherFactory.getFetcherMgr");
         }
 
-        RestfulMgr restfulMgr = new RestfulMgrImpl();
-        restfulMgr.init();
+        // 获取一个默认的抓取器
+        RestfulMgr restfulMgr = RestfulFactory.getRestfulMgrNomal();
 
         FetcherMgr fetcherMgr = new FetcherMgrImpl(
                 restfulMgr,
