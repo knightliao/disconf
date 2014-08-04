@@ -76,7 +76,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
     /**
      * 
-     * @Description: 创建一个临时结点，如果原本存在，则不新建
+     * @Description: 创建一个临时结点，如果原本存在，则不新建, 如果存在，则更新值
      * 
      * @param path
      * @param value
@@ -100,6 +100,13 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
                     return zk.create(path, value.getBytes(CHARSET),
                             Ids.OPEN_ACL_UNSAFE, createMode);
+
+                } else {
+
+                    if (value != null) {
+                        zk.setData(path, value.getBytes(CHARSET),
+                                stat.getVersion());
+                    }
                 }
 
                 return path;

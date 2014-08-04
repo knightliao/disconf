@@ -53,7 +53,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfItemMap()
                 .containsKey(keyName)) {
 
-            return DisconfCenterStore.getInstance().getConfFileMap()
+            return DisconfCenterStore.getInstance().getConfItemMap()
                     .get(keyName).getDisconfCommonCallbackModel()
                     .getDisconfConfUpdates();
         }
