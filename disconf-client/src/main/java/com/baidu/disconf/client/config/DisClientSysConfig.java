@@ -113,22 +113,4 @@ public class DisClientSysConfig {
     @DisInnerConfigAnnotation(name = "zookeeper_url_prefix")
     public String ZOOKEEPER_URL_PREFIX;
 
-    /**
-     * 获取远程配置 重试次数，默认是3次
-     * 
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "conf_server_url_retry_times", defaultValue = "3")
-    public int CONF_SERVER_URL_RETRY_TIMES = 3;
-
-    /**
-     * 获取远程配置 重试时休眠时间，默认是2秒
-     * 
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "conf_server_url_retry_sleep_seconds", defaultValue = "2")
-    public int CONF_SERVER_URL_RETRY_SLEEP_SECONDS = 2;
-
 }

@@ -1,6 +1,7 @@
 package com.baidu.disconf.client.test.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.client.common.annotations.DisconfItem;
@@ -17,7 +18,8 @@ public class ServiceA {
     /**
      * 1. 分布式配置项，keyB是其全局Key名<br/>
      */
-    private int varAA = 10;
+    @Value(value = "10")
+    private int varAA;
 
     public static final String keyA = "keyA";
 

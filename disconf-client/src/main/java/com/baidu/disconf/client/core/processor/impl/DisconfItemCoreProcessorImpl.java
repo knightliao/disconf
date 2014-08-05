@@ -101,8 +101,8 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
                 LOGGER.info("value: " + value);
             }
         } catch (Exception e) {
-            throw new Exception("cannot use remote configuration: " + keyName,
-                    e);
+            LOGGER.error("cannot use remote configuration: " + keyName, e);
+            LOGGER.info("using local variable: " + keyName);
         }
         LOGGER.debug("download ok.");
 
@@ -116,11 +116,13 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
         //
         // Watch
         //
-        DisConfCommonModel disConfCommonModel = disconfStoreProcessor
-                .getCommonModel(keyName);
-        watchMgr.watchPath(this, disConfCommonModel, keyName,
-                DisConfigTypeEnum.ITEM, value);
-        LOGGER.debug("watch ok.");
+        if (watchMgr != null) {
+            DisConfCommonModel disConfCommonModel = disconfStoreProcessor
+                    .getCommonModel(keyName);
+            watchMgr.watchPath(this, disConfCommonModel, keyName,
+                    DisConfigTypeEnum.ITEM, value);
+            LOGGER.debug("watch ok.");
+        }
     }
 
     /**
@@ -170,8 +172,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
                 object = DisconfCoreProcessUtils.getSpringBean(field
                         .getDeclaringClass());
                 if (object != null) {
-                    disconfCenterItem.setObject(object);
-                    disconfStoreProcessor.inject2Instance(key);
+                    disconfStoreProcessor.inject2Instance(object, key);
                 }
 
             } catch (Exception e) {

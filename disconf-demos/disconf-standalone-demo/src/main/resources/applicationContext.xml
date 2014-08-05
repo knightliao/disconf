@@ -15,21 +15,6 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
-    <bean id="propertyConfigurerForProject1"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="1" />
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        <property name="ignoreResourceNotFound" value="true" />
-        <property name="ignoreUnresolvablePlaceholders" value="true" />
-        <property name="locations">
-            <list>
-                <value>classpath*:/coefficients.properties</value>
-                <value>classpath*:/redis.properties</value>
-                <value>classpath*:/remote.properties</value>
-            </list>
-        </property>
-    </bean>
-
     <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
         destroy-method="destory">
         <property name="scanPackage" value="com.baidu.disconf.demo" />
@@ -38,20 +23,6 @@
         init-method="init" destroy-method="destory">
     </bean>
 
-    <bean id="coefficients" class="com.baidu.disconf.demo.config.Coefficients">
-        <property name="baiFaCoe" value="${coe.baiFaCoe}" />
-        <property name="yuErBaoCoe" value="${coe.yuErBaoCoe}" />
-    </bean>
-
-    <bean id="jedisConfig" class="com.baidu.disconf.demo.config.JedisConfig">
-        <property name="host" value="${redis.host}" />
-        <property name="port" value="${redis.port}" />
-    </bean>
-
-    <bean id="remoteServerConfig" class="com.baidu.disconf.demo.config.RemoteServerConfig">
-        <property name="remoteHost" value="${remoteHost}" />
-        <property name="remotePort" value="${remotePort}" />
-    </bean>
 
     <bean id="remoteServiceUpdateCallback"
         class="com.baidu.disconf.demo.service.RemoteServiceUpdateCallback">

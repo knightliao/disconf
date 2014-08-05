@@ -63,11 +63,11 @@ public interface DisconfStoreProcessor {
     boolean hasThisConf(String keyName);
 
     /**
-     * 将数据注入实体
+     * 将对象object中的数据注入配置中
      * 
      * @param disconfKey
      */
-    void inject2Instance(String keyName);
+    void inject2Instance(Object object, String keyName);
 
     /**
      * 当是配置文件时，有两个参数<br/>

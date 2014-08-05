@@ -41,17 +41,15 @@ public class DisconfDemoTask {
 
             while (true) {
 
-                // LOGGER.info("baobao--baifa: " + baoBaoService.calcBaiFa());
-                // LOGGER.info("baobao--yuerbao: " +
-                // baoBaoService.calcYuErBao());
+                LOGGER.info("baobao--baifa: " + baoBaoService.calcBaiFa());
+                LOGGER.info("baobao--yuerbao: " + baoBaoService.calcYuErBao());
 
                 Thread.sleep(5000);
 
-                /*
-                 * LOGGER.info("redis( " + jedisConfig.getHost() + "," +
-                 * jedisConfig.getPort() + ")  get key: " + REDIS_KEY + " , " +
-                 * simpleRedisService.getKey(REDIS_KEY));
-                 */
+                LOGGER.info("redis( " + jedisConfig.getHost() + ","
+                        + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
+                        + " , " + simpleRedisService.getKey(REDIS_KEY));
+
             }
 
         } catch (Exception e) {

@@ -3,6 +3,7 @@ package com.baidu.disconf.demo.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.client.common.annotations.DisconfItem;
@@ -22,7 +23,8 @@ public class BaoBaoService {
 
     public static final String key = "moneyInvest";
 
-    private Double moneyInvest = 1000d;
+    @Value(value = "2000d")
+    private Double moneyInvest;
 
     @Autowired
     private Coefficients coefficients;

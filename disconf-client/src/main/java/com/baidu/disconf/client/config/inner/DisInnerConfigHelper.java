@@ -76,6 +76,12 @@ public class DisInnerConfigHelper {
         LOGGER.info("SERVER ENABLE_REMOTE_CONF: "
                 + DisClientConfig.getInstance().ENABLE_REMOTE_CONF);
 
+        // 重试
+        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_TIMES: "
+                + DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES);
+
+        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_SLEEP_SECONDS: "
+                + DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
     }
 
     /**
@@ -148,17 +154,6 @@ public class DisInnerConfigHelper {
         LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: "
                 + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
         OsUtil.makeDirs(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
-
-        //
-        // zookeeper相关
-        //
-
-        // 重试
-        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_TIMES: "
-                + DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES);
-
-        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_SLEEP_SECONDS: "
-                + DisClientSysConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
 
     }
 

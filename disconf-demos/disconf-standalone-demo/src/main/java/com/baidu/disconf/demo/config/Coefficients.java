@@ -1,5 +1,8 @@
 package com.baidu.disconf.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
@@ -8,13 +11,14 @@ import com.baidu.disconf.client.common.annotations.DisconfItem;
  * 金融系数文件
  * 
  **/
-@DisconfFile(filename = Coefficients.filename)
+@Service
+@DisconfFile(filename = "coefficients.properties")
 public class Coefficients {
 
-    public static final String filename = "coefficients.properties";
     public static final String key = "discountRate";
 
-    private Double discount = 1.0d;
+    @Value(value = "2.0d")
+    private Double discount;
 
     private double baiFaCoe;
 

@@ -98,7 +98,13 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
      * 
      */
     @Override
-    public void inject2Instance(String key) {
+    public void inject2Instance(Object object, String key) {
+
+        // 无实例无值则 无法注入
+        if (object == null) {
+            LOGGER.warn(key + " 's oboject is null");
+            return;
+        }
 
         DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance()
                 .getConfItemMap().get(key);
@@ -109,11 +115,8 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
             return;
         }
 
-        // 无实例无值则 无法注入
-        if (disconfCenterItem.getObject() == null) {
-            LOGGER.warn(key + " 's oboject is null");
-            return;
-        }
+        //
+        disconfCenterItem.setObject(object);
 
         // 根据类型设置值
         //
@@ -122,18 +125,20 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         try {
 
             // 默认值
-            Object defaultValue = disconfCenterItem.getField().get(
-                    disconfCenterItem.getObject());
+            Object defaultValue = disconfCenterItem.getField().get(object);
 
             if (disconfCenterItem.getValue() == null) {
 
-                // 如果值为空，则直接使用默认值
-                disconfCenterItem.getField().set(disconfCenterItem.getObject(),
-                        defaultValue);
+                // 如果仓库里的值为空，则实例直接使用默认值,
+                disconfCenterItem.getField().set(object, defaultValue);
+
+                // 仓库里也使用此值
+                disconfCenterItem.setValue(defaultValue);
 
             } else {
 
-                disconfCenterItem.getField().set(disconfCenterItem.getObject(),
+                // 如果仓库里的值为非空，则实例使用仓库里的值
+                disconfCenterItem.getField().set(object,
                         disconfCenterItem.getValue());
             }
 

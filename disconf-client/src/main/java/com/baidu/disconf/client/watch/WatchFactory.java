@@ -1,5 +1,8 @@
 package com.baidu.disconf.client.watch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
@@ -14,6 +17,9 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
  * @version 2014-7-29
  */
 public class WatchFactory {
+
+    protected static final Logger LOGGER = LoggerFactory
+            .getLogger(WatchFactory.class);
 
     private static String hosts = null;
     private static volatile Object hostsSync = new Object();
@@ -37,20 +43,27 @@ public class WatchFactory {
 
                     // 获取 Zoo Hosts
                     try {
+
                         hosts = fetcherMgr.getValueFromServer(DisconfWebPathMgr
                                 .getZooHostsUrl(DisClientSysConfig
                                         .getInstance().CONF_SERVER_ZOO_ACTION));
+
+                        WatchMgr watchMgr = new WatchMgrImpl();
+                        watchMgr.init(
+                                hosts,
+                                DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX);
+
+                        return watchMgr;
+
                     } catch (Exception e) {
-                        throw new Exception("cannot get zoo hosts", e);
+
+                        LOGGER.error("cannot get watch module", e);
+
                     }
                 }
             }
         }
 
-        WatchMgr watchMgr = new WatchMgrImpl();
-        watchMgr.init(hosts,
-                DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX);
-
-        return watchMgr;
+        return null;
     }
 }

@@ -94,8 +94,16 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             properties = ConfigLoaderUtils.loadConfig(filePath);
 
         } catch (Exception e) {
-            throw new Exception("cannot use remote configuration: " + fileName,
-                    e);
+
+            //
+            // 下载失败了, 尝试使用本地的配置
+            //
+
+            LOGGER.error(e.toString());
+            LOGGER.info("using local properties in class path: " + fileName);
+
+            // 读取配置
+            properties = ConfigLoaderUtils.loadConfig(fileName);
         }
         LOGGER.debug("download ok.");
 
@@ -115,10 +123,12 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         //
         DisConfCommonModel disConfCommonModel = disconfStoreProcessor
                 .getCommonModel(fileName);
-        watchMgr.watchPath(this, disConfCommonModel, fileName,
-                DisConfigTypeEnum.FILE,
-                GsonUtils.toJson(disconfCenterFile.getKV()));
-        LOGGER.debug("watch ok.");
+        if (watchMgr != null) {
+            watchMgr.watchPath(this, disConfCommonModel, fileName,
+                    DisConfigTypeEnum.FILE,
+                    GsonUtils.toJson(disconfCenterFile.getKV()));
+            LOGGER.debug("watch ok.");
+        }
     }
 
     /**
@@ -181,12 +191,11 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
                         object = DisconfCoreProcessUtils
                                 .getSpringBean(fileItemValue.getField()
                                         .getDeclaringClass());
-                        disconfCenterFile.setObject(object);
                     }
 
                     // 注入实体中
                     if (object != null) {
-                        disconfStoreProcessor.inject2Instance(key);
+                        disconfStoreProcessor.inject2Instance(object, key);
                     }
 
                 } catch (Exception e) {

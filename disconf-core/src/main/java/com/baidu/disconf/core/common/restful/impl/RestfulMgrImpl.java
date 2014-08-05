@@ -109,7 +109,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             }
         }
 
-        throw new Exception();
+        throw new Exception("cannot get: " + remoteUrl);
     }
 
     /**
@@ -251,7 +251,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             }
         }
 
-        throw new Exception();
+        throw new Exception("download failed.");
     }
 
     /**
