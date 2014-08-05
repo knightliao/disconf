@@ -20,8 +20,11 @@ Disconf当前最新版本：
 
 - 命名为Disconf
 - 专注于各种系统的配置管理的通用组件/通用平台
+- 百度研发
 
 Disconf可以为各种业务平台提供统一的配置管理服务。
+
+目前正在百度各大业务系统广泛推广。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
