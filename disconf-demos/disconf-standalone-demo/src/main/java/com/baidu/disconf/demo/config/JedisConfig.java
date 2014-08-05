@@ -12,10 +12,8 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
  * @version 2014-6-17
  */
 @Service
-@DisconfFile(filename = JedisConfig.filename)
+@DisconfFile(filename = "redis.properties")
 public class JedisConfig {
-
-    public static final String filename = "redis.properties";
 
     // 代表连接地址
     private String host;
