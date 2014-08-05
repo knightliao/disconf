@@ -122,6 +122,8 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             watchMgr.watchPath(this, disConfCommonModel, keyName,
                     DisConfigTypeEnum.ITEM, value);
             LOGGER.debug("watch ok.");
+        } else {
+            LOGGER.warn("cannot monitor {} because watch mgr is null", keyName);
         }
     }
 

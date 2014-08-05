@@ -128,6 +128,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
                     DisConfigTypeEnum.FILE,
                     GsonUtils.toJson(disconfCenterFile.getKV()));
             LOGGER.debug("watch ok.");
+        } else {
+            LOGGER.warn("cannot monitor {} because watch mgr is null", fileName);
         }
     }
 
@@ -162,7 +164,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     public void inject2Conf() {
 
         /**
-         * 配置ITEM列表处理
+         * 配置文件列表处理
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 

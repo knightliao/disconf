@@ -65,10 +65,10 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
      */
     public void inject2DisconfInstance() {
 
-        // 配置项
+        // 配置文件
         disconfCoreProcessorFile.inject2Conf();
 
-        // 配置文件
+        // 配置项
         disconfCoreProcessorItem.inject2Conf();
     }
 

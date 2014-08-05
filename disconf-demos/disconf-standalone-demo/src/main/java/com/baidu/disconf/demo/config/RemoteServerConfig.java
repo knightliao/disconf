@@ -20,7 +20,7 @@ public class RemoteServerConfig {
     private String remoteHost;
 
     // 代表连接port
-    private int remotePort;
+    private int remotePort = 8080;
 
     /**
      * 地址, 分布式文件配置
