@@ -32,6 +32,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 - **注解式编程，极简的使用方式**
 - **Spring方式编程**
 - **低侵入性**
+- **完全包容Spring配置**
 
 ## 未来版本（完全版）功能特点 ##
 
@@ -46,8 +47,8 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
     - 异构主备自动切换：如果一个异构系统存在主备机，主机发生挂机时，备机可以自动获取主机配置从而变成主机。
     - 异构主备机Context共享工具：异构系统下，主备机切换时可能需要共享Context。可以使用Context共享工具来共享主备的Context。
 - **注解式编程，极简的使用方式**：我们追求的是极简的、用户编程体验良好的编程方式。通过简单的标注+极简单的代码撰写，即可完成复杂的配置分布式化。
-- **低侵入性**：使用分布式配置，可以完全兼容Spring的配置使用方式，如果分布式配置服务器挂机，实例会使用本地配置，系统有较高的鲁棒性。
 - **支持Spring方式和非Spring方式编程**：用户可以自行选择编程习惯，是否采用Spring方式进行编程。推荐Spring编程方式。
+- **完全包容Spring配置**：使用分布式配置，可以完全兼容Spring的配置使用方式。使用Disconf，正常情况下，实例会使用分布式配置模式。如果Disconf远程服务挂机，则实例会退化成使用本地配置模式。
 
 **Disconf的功能特点描述图：**
 
@@ -111,6 +112,70 @@ Disconf为应用方提供了两个工具，
 ### disconf-web 使用 ###
 
 部署方法请参见：[https://github.com/knightliao/disconf/tree/master/disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)
+
+###  disconf-client 的极简使用方式 预览 ###
+
+**配置类：**
+
+	package com.baidu.disconf.demo.config;
+	
+	import org.springframework.stereotype.Service;
+	
+	import com.baidu.disconf.client.common.annotations.DisconfFile;
+	import com.baidu.disconf.client.common.annotations.DisconfFileItem;
+	
+	/**
+	 * Redis配置文件
+	 * 
+	 * @author liaoqiqi
+	 * @version 2014-6-17
+	 */
+	@Service
+	@DisconfFile(filename = "redis.properties")
+	public class JedisConfig {
+	
+	    // 代表连接地址
+	    private String host;
+	
+	    // 代表连接port
+	    private int port;
+	
+	    /**
+	     * 地址, 分布式文件配置
+	     * 
+	     * @return
+	     */
+	    @DisconfFileItem(name = "redis.host", associateField = "host")
+	    public String getHost() {
+	        return host;
+	    }
+	
+	    public void setHost(String host) {
+	        this.host = host;
+	    }
+	
+	    /**
+	     * 端口, 分布式文件配置
+	     * 
+	     * @return
+	     */
+	    @DisconfFileItem(name = "redis.port", associateField = "port")
+	    public int getPort() {
+	        return port;
+	    }
+	
+	    public void setPort(int port) {
+	        this.port = port;
+	    }
+	}
+
+**使用时：**
+
+	只需要 @Autowired JedisConfig，然后就可以使用 getHost getPort 获取分布式配置。
+
+无须其它额外配置，上面这段配置即可实现分布式配置。Disconf分布式配置包容了Spring配置方式。
+
+（注：这里说的不需要额外配置，指的是：不需要额外地使用Spring将配置项的值注入到类中）
 
 ### disconf-client Tutorials ###
 
