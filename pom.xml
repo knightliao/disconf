@@ -11,7 +11,6 @@
     <modules>
         <module>disconf-client</module>
         <module>disconf-core</module>
-        <module>?</module>
     </modules>
 
     <inceptionYear>2014</inceptionYear>
