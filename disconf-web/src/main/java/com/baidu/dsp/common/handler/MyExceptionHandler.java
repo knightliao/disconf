@@ -58,7 +58,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
             HttpServletResponse response, Object o, Exception e) {
 
         LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t"
-                + e.getCause());
+                + e.toString());
 
         // PathVariable 出错
         if (e instanceof TypeMismatchException) {
