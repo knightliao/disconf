@@ -24,9 +24,12 @@ public class SimpleRedisService implements InitializingBean, DisposableBean {
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(SimpleRedisService.class);
 
-    // 代表
+    // jedis 实例
     private Jedis jedis = null;
 
+    /**
+     * 分布式配置
+     */
     @Autowired
     private JedisConfig jedisConfig;
 
@@ -75,13 +78,5 @@ public class SimpleRedisService implements InitializingBean, DisposableBean {
                 jedisConfig.getPort());
 
         LOGGER.info("change ok.");
-    }
-
-    public Jedis getJedis() {
-        return jedis;
-    }
-
-    public void setJedis(Jedis jedis) {
-        this.jedis = jedis;
     }
 }

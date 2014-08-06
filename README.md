@@ -173,9 +173,9 @@ Disconf为应用方提供了两个工具，
 	}
 
 **使用时：**
-
-	package com.baidu.disconf.demo.service;
-
+    
+    package com.baidu.disconf.demo.service;
+    
     import org.slf4j.Logger;
     import org.slf4j.LoggerFactory;
     import org.springframework.beans.factory.DisposableBean;
@@ -200,9 +200,12 @@ Disconf为应用方提供了两个工具，
         protected static final Logger LOGGER = LoggerFactory
                 .getLogger(SimpleRedisService.class);
     
-        // 代表
+        // jedis 实例
         private Jedis jedis = null;
     
+        /**
+         * 分布式配置
+         */
         @Autowired
         private JedisConfig jedisConfig;
     
@@ -240,6 +243,7 @@ Disconf为应用方提供了两个工具，
         }
     }
 
+
 无须其它额外配置，上面这段配置即可实现分布式配置。Disconf分布式配置包容了Spring配置方式。
 
 （注：这里说的不需要额外配置，指的是：不需要额外地使用Spring将配置项的值注入到类中）
@@ -264,3 +268,7 @@ Disconf为应用方提供了两个工具，
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。
 
+## Authors ##
+
+- [Qiqi Liao](https://github.com/knightliao): knightliao AT gmail.com
+- [Ning Wu](https://github.com/ngloom): ngloom AT gmail.com
