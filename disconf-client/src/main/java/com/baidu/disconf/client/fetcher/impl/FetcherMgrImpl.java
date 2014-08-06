@@ -12,7 +12,7 @@ import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
 import com.baidu.disconf.core.common.restful.core.RemoteUrl;
-import com.baidu.ub.common.utils.OsUtil;
+import com.baidu.disconf.ub.common.utils.OsUtil;
 
 /**
  * 抓取器, 独立模块，不依赖外部模块, 由Factory来管理此实例

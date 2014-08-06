@@ -1,4 +1,4 @@
-package com.baidu.ub.common.utils;
+package com.baidu.disconf.ub.common.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -5,13 +5,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baidu.disconf.ub.common.redis.RedisCacheManager;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.constant.UserConstant;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.web.auth.constant.LoginConstant;
 import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.ub.common.commons.ThreadContext;
-import com.baidu.ub.common.redis.RedisCacheManager;
 import com.baidu.ub.common.utils.CookieUtils;
 
 /**

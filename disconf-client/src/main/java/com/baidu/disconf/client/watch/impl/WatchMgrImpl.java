@@ -13,7 +13,7 @@ import com.baidu.disconf.client.watch.inner.NodeWatcher;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
-import com.baidu.ub.common.utils.ZooUtils;
+import com.baidu.disconf.ub.common.utils.ZooUtils;
 
 /**
  * Watch 模块的一个实现

@@ -5,8 +5,8 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.baidu.disconf.ub.common.utils.StringUtils;
 import com.baidu.dsp.common.constraint.ListInConstraint;
-import com.baidu.ub.common.utils.StringUtils;
 
 public class ListInValidator implements
         ConstraintValidator<ListInConstraint, Integer> {

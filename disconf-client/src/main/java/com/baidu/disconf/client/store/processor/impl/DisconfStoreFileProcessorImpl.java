@@ -16,7 +16,7 @@ import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.inner.DisconfCenterStore;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
-import com.baidu.ub.common.utils.ClassUtils;
+import com.baidu.disconf.ub.common.utils.ClassUtils;
 
 /**
  * 配置文件仓库实现器

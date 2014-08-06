@@ -20,8 +20,8 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
 import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
 import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
-import com.baidu.ub.common.utils.ConfigLoaderUtils;
-import com.baidu.ub.common.utils.OsUtil;
+import com.baidu.disconf.ub.common.utils.ConfigLoaderUtils;
+import com.baidu.disconf.ub.common.utils.OsUtil;
 
 /**
  * RestFul的一个实现, 独立模块

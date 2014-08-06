@@ -7,10 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.MDC;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.baidu.disconf.ub.common.utils.TokenUtil;
 import com.baidu.dsp.common.interceptor.WebCommonInterceptor;
 import com.baidu.ub.common.commons.ThreadContext;
 import com.baidu.ub.common.log.AopLogFactory;
-import com.baidu.ub.common.utils.TokenUtil;
 
 /**
  * 全局的异常处理拦截器

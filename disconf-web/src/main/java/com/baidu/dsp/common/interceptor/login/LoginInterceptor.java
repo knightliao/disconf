@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.baidu.disconf.ub.common.utils.TokenUtil;
 import com.baidu.disconf.web.service.user.constant.UserConstant;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.service.UserMgr;
@@ -20,7 +21,6 @@ import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.interceptor.WebCommonInterceptor;
 import com.baidu.ub.common.log.AopLogFactory;
 import com.baidu.ub.common.utils.CookieUtils;
-import com.baidu.ub.common.utils.TokenUtil;
 
 /**
  * 所有请求（一个Session可能会有多个请求）均会通过此拦截器

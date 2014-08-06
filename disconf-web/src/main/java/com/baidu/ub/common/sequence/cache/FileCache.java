@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 
-import com.baidu.ub.common.utils.FileUtils;
+import com.baidu.disconf.ub.common.utils.FileUtils;
 
 /**
  * 序列化到本地文件的sequence缓存

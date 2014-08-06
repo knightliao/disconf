@@ -1,4 +1,4 @@
-package com.baidu.ub.common.utils;
+package com.baidu.disconf.ub.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -134,7 +134,7 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
             return fileName;
         }
     }
-    
+
     public static Long parse2Long(String s) {
         try {
             return Long.valueOf(s);
@@ -142,7 +142,7 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
             return null;
         }
     }
-    
+
     public static Integer parse2Integer(String s) {
         try {
             return Integer.valueOf(s);

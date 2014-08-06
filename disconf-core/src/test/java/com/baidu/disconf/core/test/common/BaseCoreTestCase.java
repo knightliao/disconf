@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.core.test.restful.RemoteMockServer;
-import com.baidu.ub.common.utils.GsonUtils;
+import com.baidu.disconf.ub.common.utils.GsonUtils;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 
 /**

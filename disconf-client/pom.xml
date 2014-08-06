@@ -78,6 +78,7 @@
             <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-core</artifactId>
             <version>${disconf-core.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

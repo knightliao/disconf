@@ -13,10 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baidu.disconf.ub.common.utils.FileUtils;
 import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.dao.ConfigDao;
 import com.baidu.disconf.web.test.common.BaseTestCase;
-import com.baidu.ub.common.utils.FileUtils;
 
 /**
  * 

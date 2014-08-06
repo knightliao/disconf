@@ -2,7 +2,7 @@
  * beidou-core#com.baidu.beidou.common.utils.FileUtils.java
  * 下午5:26:38 created by Darwin(Tianxin)
  */
-package com.baidu.ub.common.utils;
+package com.baidu.disconf.ub.common.utils;
 
 import java.io.InputStream;
 import java.io.OutputStream;

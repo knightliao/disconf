@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf.ub.common.utils.StringUtils;
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.config.bo.Config;
@@ -14,7 +15,6 @@ import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.dsp.common.exception.FieldException;
-import com.baidu.ub.common.utils.StringUtils;
 
 /**
  * 
