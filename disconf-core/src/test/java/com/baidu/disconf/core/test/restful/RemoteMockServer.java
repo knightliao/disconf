@@ -22,7 +22,7 @@ public class RemoteMockServer {
     //
     public static final String FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=confA.properties&version=1_0_0_0";
     public static final String FILE_NAME = "confA.properties";
-    public static final String FILE_CONTENT = "varA=1000\r\nvarA2=2000";
+    public static final String FILE_CONTENT = "confa.varA=1000\r\nconfa.varA2=2000";
 
     //
     // 配置项
