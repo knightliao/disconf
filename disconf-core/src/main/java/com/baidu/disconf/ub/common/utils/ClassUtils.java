@@ -103,7 +103,7 @@ public class ClassUtils {
         String typeName = type.getName();
         typeName = typeName.toLowerCase();
 
-        if (typeName.equals("int") || typeName.equals("java.lang.int")) {
+        if (typeName.equals("int") || typeName.equals("java.lang.integer")) {
 
             if (value.equals("")) {
                 value = "0";
