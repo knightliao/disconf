@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.tool.context.ContextMgr;
-import com.baidu.ub.common.redis.RedisClient;
+import com.baidu.disconf.ub.common.redis.RedisClient;
 
 /**
  * @description : ContextMgrTestCase

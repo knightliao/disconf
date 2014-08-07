@@ -5,9 +5,9 @@ var ep = new EventProxy();
 
 // 在所有指定的事件触发后，将会被调用执行
 // 参数对应各自的事件名的最新数据
-ep.tail('basehead', 'head', 'foot', 'basefoot', 'main', function(basehead,
-		head, foot, basefoot, mainArr) {
-	render(basehead, head, foot, basefoot, mainArr[0], mainArr[1]);
+ep.tail('basehead', 'head', 'nav', 'foot', 'basefoot', 'main', function(basehead,
+		head, nav, foot, basefoot, mainArr) {
+	render(basehead, head, nav,foot, basefoot, mainArr[0], mainArr[1]);
 });
 
 // 读取Base头部模板
@@ -21,6 +21,12 @@ fs.readFile('../unitTpl/head.html.tpl', 'utf8', function(err, head) {
 	if (err)
 		throw err;
 	ep.emit('head', head);
+});
+// 读取导航模板
+fs.readFile('../unitTpl/nav.html.tpl', 'utf8', function(err, nav) {
+    if (err)
+        throw err;
+    ep.emit('nav', nav);
 });
 // 读取尾部模板
 fs.readFile('../unitTpl/foot.html.tpl', 'utf8', function(err, foot) {
@@ -55,11 +61,12 @@ function decodeHtml(html) {
 			/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
 }
 // 拼接模板
-function render(basehead, head, foot, basefoot, main, name) {
+function render(basehead, head, nav, foot, basefoot, main, name) {
 	var html = ejs.render(main, {
 		"page" : {
 			"basehead" : basehead,
 			"head" : head,
+			"nav" : nav,
 			"foot" : foot,
 			"basefoot" : basefoot
 		}

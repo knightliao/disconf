@@ -9,8 +9,8 @@ package com.baidu.disconf.tool.context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.ub.common.redis.RedisClient;
-import com.baidu.ub.common.utils.JsonUtils;
+import com.baidu.disconf.ub.common.redis.RedisClient;
+import com.baidu.disconf.ub.common.utils.JsonUtils;
 
 /**
  * @description : ContextMgr

@@ -19,6 +19,7 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.ub.common.utils.DateUtils;
 import com.baidu.disconf.ub.common.utils.GsonUtils;
+import com.baidu.disconf.ub.common.utils.StringUtils;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
@@ -285,5 +286,12 @@ public class ConfigMgrImpl implements ConfigMgr {
     public void delete(Long configId) {
 
         configDao.delete(configId);
+    }
+    
+    private static final String DISCONF_GROUPNAME = "/disconf";
+    @Override
+    public String getUsageInfo() {
+        List<String> hostInfoList = zooKeeperDriver.getConf(DISCONF_GROUPNAME);
+        return StringUtils.join(hostInfoList, '\n');
     }
 }
