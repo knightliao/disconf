@@ -24,7 +24,8 @@ public class DisconfMgr {
             .getLogger(DisconfMgr.class);
 
     // 本实例不能初始化两次
-    private static boolean isInit = false;
+    private static boolean isFirstInit = false;
+    private static boolean isSecondeInit = false;
 
     // 扫描器
     private static ScanMgr scanMgr = null;
@@ -52,7 +53,7 @@ public class DisconfMgr {
     public synchronized static void firstScan(String scanPackage) {
 
         // 该函数不能调用两次
-        if (isInit == true) {
+        if (isFirstInit == true) {
             LOGGER.info("DisConfMgr has been init, ignore........");
             return;
         }
@@ -85,7 +86,7 @@ public class DisconfMgr {
             disconfCoreMgr.process();
 
             //
-            isInit = true;
+            isFirstInit = true;
 
         } catch (Exception e) {
 
@@ -100,9 +101,15 @@ public class DisconfMgr {
      */
     public synchronized static void secondScan() {
 
-        // 该函数不能调用两次
-        if (isInit == false) {
+        // 该函数必须第一次运行后才能运行
+        if (isFirstInit == false) {
             LOGGER.info("should run First Scan before Second Scan.");
+            return;
+        }
+
+        // 第二次扫描也只能做一次
+        if (isSecondeInit == true) {
+            LOGGER.info("should not run twice.");
             return;
         }
 
@@ -119,6 +126,8 @@ public class DisconfMgr {
         } catch (Exception e) {
             LOGGER.error(e.toString(), e);
         }
+
+        isSecondeInit = true;
 
         //
         LOGGER.info("Conf File Map: "
@@ -149,7 +158,8 @@ public class DisconfMgr {
             disconfCoreMgr.release();
 
             // close, 必须将其设置为False,以便重新更新
-            isInit = false;
+            isFirstInit = false;
+            isSecondeInit = false;
 
         } catch (Exception e) {
 
