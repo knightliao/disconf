@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
-        <version>2.6.5</version>
+        <version>2.6.6</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -247,7 +247,6 @@
         </plugins>
     </build>
 
-    <version>${disconf-client.version}</version>
     <name>disconf-client</name>
     <url>https://github.com/knightliao/disconf/tree/master/disconf-core</url>
     <description>https://github.com/knightliao/disconf/tree/master/disconf-core</description>
