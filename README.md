@@ -12,7 +12,7 @@ Distributed Configuration Management Platform
 
 Disconf当前最新版本：
 
-- disconf-client 2.6.6
+- disconf-client 2.6.7
 
 在Maven Central Repository里查看[com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
@@ -28,7 +28,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.6）功能特点 ##
+## 当前版本（2.6.7）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -98,7 +98,7 @@ Disconf为应用方提供了两个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.6</version>
+        <version>2.6.7</version>
     </dependency>
 
 主要依赖为：
@@ -267,15 +267,6 @@ Disconf为应用方提供了两个工具，
 
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。
-
-## jar下载 ##
-
-由于Maven中心库更新较慢，这里提供最新的版本库提供下载。
-
-- 2.6.6
-    - [disconf-client-2.6.6.jar](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-client-2.6.6.jar)
-    - [disconf-core-2.6.6.jar](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-core-2.6.6.jar)
-    - [disconf-base-2.6.6.pom](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-base-2.6.6.pom)
 
 ## Authors ##
 
