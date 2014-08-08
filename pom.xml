@@ -46,8 +46,8 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.6</disconf-core.version>
-        <disconf-client.version>2.6.6</disconf-client.version>
+        <disconf-core.version>2.6.7</disconf-core.version>
+        <disconf-client.version>2.6.7</disconf-client.version>
     </properties>
 
 
