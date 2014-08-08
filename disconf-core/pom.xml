@@ -13,8 +13,8 @@
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
-        <version>2.6.6</version>
         <relativePath>../</relativePath>
+        <version>2.6.6</version>
     </parent>
 
     <licenses>
@@ -298,4 +298,5 @@
         </profile>
     </profiles>
 
+    <version>${disconf-core.version}</version>
 </project>
