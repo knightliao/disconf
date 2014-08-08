@@ -323,4 +323,5 @@
             </build>
         </profile>
     </profiles>
+    <version>${disconf-client.version}</version>
 </project>
