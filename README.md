@@ -268,6 +268,15 @@ Disconf为应用方提供了两个工具，
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。
 
+## jar下载 ##
+
+由于Maven中心库更新较慢，这里提供最新的版本库提供下载。
+
+- 2.6.6
+    - [disconf-client-2.6.6.jar](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-client-2.6.6.jar)
+    - [disconf-core-2.6.6.jar](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-core-2.6.6.jar)
+    - [disconf-base-2.6.6.pom](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-base-2.6.6.jar)
+
 ## Authors ##
 
 - [Qiqi Liao](https://github.com/knightliao): knightliao AT gmail.com
