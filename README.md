@@ -275,7 +275,7 @@ Disconf为应用方提供了两个工具，
 - 2.6.6
     - [disconf-client-2.6.6.jar](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-client-2.6.6.jar)
     - [disconf-core-2.6.6.jar](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-core-2.6.6.jar)
-    - [disconf-base-2.6.6.pom](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-base-2.6.6.jar)
+    - [disconf-base-2.6.6.pom](https://github.com/knightliao/disconf/wiki/jar/2.6.6/disconf-base-2.6.6.pom)
 
 ## Authors ##
 
