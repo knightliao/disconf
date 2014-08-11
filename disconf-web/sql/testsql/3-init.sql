@@ -5,15 +5,13 @@ INSERT INTO `env` (`env_id`, `name`) VALUES (2, 'qa');
 INSERT INTO `env` (`env_id`, `name`) VALUES (3, 'local');
 
 
-INSERT INTO `app` (`app_id`, `name`, `description`, `create_time`, `update_time`) VALUES (1, 'disconf_testcase', 'disconf测试用例使用', '20140415155127', '20140415155127');
 INSERT INTO `app` (`app_id`, `name`, `description`, `create_time`, `update_time`) VALUES (2, 'disconf_demo', 'disconf demo', '99991231235959', '99991231235959');
 
 
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (1, 0, 'confA.properties', 'varA=400000\r\nvarA2=500000', 1, '1_0_0_0', 1, '20140415155127', '20140415155127');
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (2, 1, 'keyA', '8888', 1, '1_0_0_0', 1, '99991231235959', '99991231235959');
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (3, 0, 'redis.properties', 'host=127.0.0.1\r\nport=8080', 2, '1_0_0_0', 1, '99991231235959', '99991231235959');
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (4, 0, 'coefficients.properties', 'baiFaCoe=1.3\r\nyuErBaoCoe=1.2', 2, '1_0_0_0', 1, '99991231235959', '99991231235959');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (4, 0, 'coefficients.properties', 'coe.baiFaCoe=1.3\r\ncoe.yuErBaoCoe=1.2\r\n', 2, '1_0_0_0', 1, '99991231235959', '20140729194923');
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (5, 1, 'moneyInvest', '10000', 2, '1_0_0_0', 1, '99991231235959', '99991231235959');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (6, 0, 'remote.properties', 'remoteHost=127.0.0.1\r\nremotePort=8081', 2, '1_0_0_0', 1, '20140729174707', '20140804233309');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (7, 1, 'discountRate', '0.4', 2, '1_0_0_0', 1, '20140801142833', '20140805002445');
 
 
 /* 密码是 MhxzKhl5258 */
