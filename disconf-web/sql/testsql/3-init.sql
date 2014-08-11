@@ -12,6 +12,7 @@ INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`,
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (5, 1, 'moneyInvest', '10000', 2, '1_0_0_0', 1, '99991231235959', '99991231235959');
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (6, 0, 'remote.properties', 'remoteHost=127.0.0.1\r\nremotePort=8081', 2, '1_0_0_0', 1, '20140729174707', '20140804233309');
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (7, 1, 'discountRate', '0.4', 2, '1_0_0_0', 1, '20140801142833', '20140805002445');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (12, 0, 'redis.properties', 'redis.host=10.48.57.42\r\nredis.port=8310', 2, '1_0_0_0', 1, '20140811172327', '20140811172327');
 
 
 /* 密码是 MhxzKhl5258 */
