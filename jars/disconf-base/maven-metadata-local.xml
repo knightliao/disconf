@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.baidu.disconf</groupId>
+  <artifactId>disconf-base</artifactId>
+  <versioning>
+    <release>2.6.8</release>
+    <versions>
+      <version>2.6.8</version>
+    </versions>
+    <lastUpdated>20140814141158</lastUpdated>
+  </versioning>
+</metadata>

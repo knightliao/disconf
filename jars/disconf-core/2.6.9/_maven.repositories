@@ -1,0 +1,5 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Thu Aug 14 22:12:12 CST 2014
+disconf-core-2.6.9.jar>=
+disconf-core-2.6.9.pom>=
+disconf-core-2.6.9-tests.jar>=
