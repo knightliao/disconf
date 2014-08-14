@@ -1,5 +1,6 @@
 package com.baidu.disconf.client.store.processor.impl;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -100,12 +101,6 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     @Override
     public void inject2Instance(Object object, String key) {
 
-        // 无实例无值则 无法注入
-        if (object == null) {
-            LOGGER.warn(key + " 's oboject is null");
-            return;
-        }
-
         DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance()
                 .getConfItemMap().get(key);
 
@@ -116,7 +111,11 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         }
 
         //
-        disconfCenterItem.setObject(object);
+        // 非静态类
+        //
+        if (object != null) {
+            disconfCenterItem.setObject(object);
+        }
 
         // 根据类型设置值
         //
@@ -124,22 +123,36 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         //
         try {
 
-            // 默认值
-            Object defaultValue = disconfCenterItem.getField().get(object);
+            if (object != null) {
 
-            if (disconfCenterItem.getValue() == null) {
+                // 默认值
+                Object defaultValue = disconfCenterItem.getField().get(object);
 
-                // 如果仓库里的值为空，则实例直接使用默认值,
-                disconfCenterItem.getField().set(object, defaultValue);
+                if (disconfCenterItem.getValue() == null) {
 
-                // 仓库里也使用此值
-                disconfCenterItem.setValue(defaultValue);
+                    // 如果仓库里的值为空，则实例直接使用默认值,
+                    disconfCenterItem.getField().set(object, defaultValue);
+
+                    // 仓库里也使用此值
+                    disconfCenterItem.setValue(defaultValue);
+
+                } else {
+
+                    // 如果仓库里的值为非空，则实例使用仓库里的值
+                    disconfCenterItem.getField().set(object,
+                            disconfCenterItem.getValue());
+                }
 
             } else {
 
-                // 如果仓库里的值为非空，则实例使用仓库里的值
-                disconfCenterItem.getField().set(object,
-                        disconfCenterItem.getValue());
+                //
+                // 静态类
+                //
+                if (Modifier.isStatic(disconfCenterItem.getField()
+                        .getModifiers())) {
+                    disconfCenterItem.getField().set(null,
+                            disconfCenterItem.getValue());
+                }
             }
 
         } catch (Exception e) {

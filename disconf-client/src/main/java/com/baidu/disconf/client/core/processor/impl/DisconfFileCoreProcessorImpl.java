@@ -1,6 +1,5 @@
 package com.baidu.disconf.client.core.processor.impl;
 
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
-import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
@@ -178,32 +176,34 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
                 continue;
             }
 
-            Map<String, FileItemValue> fileItemValueMap = disconfCenterFile
-                    .getKeyMaps();
+            try {
 
-            for (String itemKey : fileItemValueMap.keySet()) {
+                //
+                // 获取实例
+                //
 
+                Object object = null;
                 try {
 
-                    FileItemValue fileItemValue = fileItemValueMap.get(itemKey);
-
-                    // 设置Object实体(只注入一次哦)
-                    Object object = disconfCenterFile.getObject();
+                    object = disconfCenterFile.getObject();
                     if (object == null) {
                         object = DisconfCoreProcessUtils
-                                .getSpringBean(fileItemValue.getField()
-                                        .getDeclaringClass());
-                    }
-
-                    // 注入实体中
-                    if (object != null) {
-                        disconfStoreProcessor.inject2Instance(object, key);
+                                .getSpringBean(disconfCenterFile.getCls());
                     }
 
                 } catch (Exception e) {
-                    LOGGER.warn(e.toString(), e);
+
+                    LOGGER.info(e.toString());
+                    object = null;
                 }
+
+                // 注入实体中
+                disconfStoreProcessor.inject2Instance(object, key);
+
+            } catch (Exception e) {
+                LOGGER.warn(e.toString(), e);
             }
+
         }
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf.demo.config.JedisConfig;
 import com.baidu.disconf.demo.service.BaoBaoService;
 import com.baidu.disconf.demo.service.SimpleRedisService;
+import com.baidu.disconf.demo.service.SimpleStaticService;
 
 /**
  * 演示分布式配置文件、分布式配置的更新Demo
@@ -49,6 +50,12 @@ public class DisconfDemoTask {
                 LOGGER.info("redis( " + jedisConfig.getHost() + ","
                         + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
                         + " , " + simpleRedisService.getKey(REDIS_KEY));
+
+                LOGGER.info("static file data:"
+                        + SimpleStaticService.getStaticFileData());
+
+                LOGGER.info("static item data:"
+                        + SimpleStaticService.getStaticItem());
 
             }
 

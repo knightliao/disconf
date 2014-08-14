@@ -1,5 +1,6 @@
 package com.baidu.disconf.client.store.processor.impl;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -101,12 +102,6 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public void inject2Instance(Object object, String fileName) {
 
-        // 无实例无值则 无法注入
-        if (object == null) {
-            LOGGER.warn(fileName + " 's oboject is null");
-            return;
-        }
-
         DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance()
                 .getConfFileMap().get(fileName);
 
@@ -116,8 +111,13 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             return;
         }
 
-        // 设置object
-        disconfCenterFile.setObject(object);
+        //
+        // 静态类
+        //
+        if (object != null) {
+            // 设置object
+            disconfCenterFile.setObject(object);
+        }
 
         // 根据类型设置值
         //
@@ -129,24 +129,43 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             // 根据类型设置值
             try {
 
-                // 默认值
-                Object defaultValue = keMap.get(fileItem).getField()
-                        .get(object);
+                //
+                // 静态类
+                //
+                if (object == null) {
 
-                if (keMap.get(fileItem).getValue() == null) {
+                    if (Modifier.isStatic(keMap.get(fileItem).getField()
+                            .getModifiers())) {
+                        keMap.get(fileItem).getField()
+                                .set(null, keMap.get(fileItem).getValue());
+                    }
 
-                    // 如果仓库值为空，则实例 直接使用默认值
-                    keMap.get(fileItem).getField().set(object, defaultValue);
-
-                    // 仓库里也使用此值
-                    keMap.get(fileItem).setValue(defaultValue);
-
+                    //
+                    // 非静态类
+                    //
                 } else {
 
-                    // 如果仓库里的值为非空，则实例使用仓库里的值
-                    keMap.get(fileItem).getField()
-                            .set(object, keMap.get(fileItem).getValue());
+                    // 默认值
+                    Object defaultValue = keMap.get(fileItem).getField()
+                            .get(object);
+
+                    if (keMap.get(fileItem).getValue() == null) {
+
+                        // 如果仓库值为空，则实例 直接使用默认值
+                        keMap.get(fileItem).getField()
+                                .set(object, defaultValue);
+
+                        // 仓库里也使用此值
+                        keMap.get(fileItem).setValue(defaultValue);
+
+                    } else {
+
+                        // 如果仓库里的值为非空，则实例使用仓库里的值
+                        keMap.get(fileItem).getField()
+                                .set(object, keMap.get(fileItem).getValue());
+                    }
                 }
+
             } catch (Exception e) {
                 LOGGER.error(e.toString(), e);
             }
