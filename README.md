@@ -12,7 +12,7 @@ Distributed Configuration Management Platform
 
 Disconf当前最新版本：
 
-- disconf-client 2.6.7
+- disconf-client 2.6.9
 
 在Maven Central Repository里查看[com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
@@ -28,7 +28,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.7）功能特点 ##
+## 当前版本（2.6.9）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -36,6 +36,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 - **Spring方式编程**
 - **低侵入性**
 - **完全包容Spring配置**
+- 支持配置文件/配置项为static
 
 ## 未来版本（完全版）功能特点 ##
 
@@ -101,7 +102,7 @@ Disconf为应用方提供了两个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.7</version>
+        <version>2.6.9</version>
     </dependency>
 
 主要依赖为：
@@ -256,6 +257,7 @@ Disconf为应用方提供了两个工具，
 - [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
 - [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
 - [Tutorial 3 分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
+- [Tutorial 4 分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
 - [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 - [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 - [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
