@@ -19,6 +19,7 @@ import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.test.common.BaseSpringMockTestCase;
 import com.baidu.disconf.client.test.model.ConfA;
 import com.baidu.disconf.client.test.model.ServiceA;
+import com.baidu.disconf.client.test.model.StaticConf;
 import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.mock.WatchMgrMock;
 import com.baidu.disconf.client.watch.WatchMgr;
@@ -103,6 +104,11 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
             Assert.assertEquals(new Integer(1000).intValue(),
                     serviceA.getVarAA());
+
+            LOGGER.info(String.valueOf("staticvar: "
+                    + StaticConf.getStaticvar()));
+            Assert.assertEquals(new Integer(50).intValue(),
+                    StaticConf.getStaticvar());
 
             LOGGER.info("================ AFTER DISCONF ==============================");
 

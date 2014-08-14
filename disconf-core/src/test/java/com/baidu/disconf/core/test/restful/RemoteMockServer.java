@@ -25,6 +25,13 @@ public class RemoteMockServer {
     public static final String FILE_CONTENT = "confa.varA=1000\r\nconfa.varA2=2000";
 
     //
+    // 静态配置文件
+    //
+    public static final String STATIC_FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=staticConf.properties&version=1_0_0_0";
+    public static final String STATIC_FILE_NAME = "staticConf.properties";
+    public static final String STATIC_FILE_CONTENT = "staticvar=50\r\nstaticvar2=100";
+
+    //
     // 配置项
     //
     public static final String ITEM_URL = "/api/config/item?app=disconf_testcase&env=rd&type=1&key=keyA&version=1_0_0_0";

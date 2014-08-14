@@ -78,6 +78,23 @@ public class BaseCoreTestCase {
                         .withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
 
         //
+        // 静态 配置文件
+        //
+        stubFor(get(urlEqualTo(RemoteMockServer.STATIC_FILE_URL))
+                .willReturn(
+                        aResponse()
+                                .withHeader("Content-Type",
+                                        "text/html;charset=UTF-8")
+                                .withHeader(
+                                        "Content-Disposition",
+                                        "attachment; filename="
+                                                + RemoteMockServer.STATIC_FILE_NAME)
+                                .withStatus(200)
+                                .withBody(
+                                        RemoteMockServer.STATIC_FILE_CONTENT
+                                                .getBytes())));
+
+        //
         // ZOO
         //
         valueVo = new ValueVo();
