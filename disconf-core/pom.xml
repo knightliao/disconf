@@ -128,6 +128,7 @@
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty-util</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
