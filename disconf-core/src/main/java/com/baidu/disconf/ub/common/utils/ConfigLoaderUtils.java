@@ -63,12 +63,20 @@ public class ConfigLoaderUtils {
 
         Properties props = new Properties();
 
-        // 先用TOMCAT模式进行导入
-        // http://blog.csdn.net/minfree/article/details/1800311
-        // http://stackoverflow.com/questions/3263560/sysloader-getresource-problem-in-java
-        URL url = loader.getResource(propertyFilePath);
-        URI uri = new URI(url.toString());
-        props.load(new FileInputStream(uri.getPath()));
+        try {
+
+            // 先用TOMCAT模式进行导入
+            // http://blog.csdn.net/minfree/article/details/1800311
+            // http://stackoverflow.com/questions/3263560/sysloader-getresource-problem-in-java
+            URL url = loader.getResource(propertyFilePath);
+            URI uri = new URI(url.toString());
+            props.load(new FileInputStream(uri.getPath()));
+
+        } catch (Exception e) {
+
+            // http://stackoverflow.com/questions/574809/load-a-resource-contained-in-a-jar
+            props.load(loader.getResourceAsStream(propertyFilePath));
+        }
         return props;
     }
 
