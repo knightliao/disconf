@@ -13,6 +13,7 @@ Distributed Configuration Management Platform
 Disconf当前最新版本：
 
 - disconf-client 2.6.9
+- [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看[com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
