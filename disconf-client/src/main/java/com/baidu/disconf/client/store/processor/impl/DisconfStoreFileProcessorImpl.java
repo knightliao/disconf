@@ -136,6 +136,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
                     if (Modifier.isStatic(keMap.get(fileItem).getField()
                             .getModifiers())) {
+                        LOGGER.debug(fileItem + " is a static field. ");
                         keMap.get(fileItem).getField()
                                 .set(null, keMap.get(fileItem).getValue());
                     }
@@ -144,6 +145,8 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                     // 非静态类
                     //
                 } else {
+
+                    LOGGER.debug(fileItem + " is a non-static field. ");
 
                     // 默认值
                     Object defaultValue = keMap.get(fileItem).getField()

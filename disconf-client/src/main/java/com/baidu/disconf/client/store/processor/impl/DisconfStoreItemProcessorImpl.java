@@ -128,6 +128,9 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
                 // 默认值
                 Object defaultValue = disconfCenterItem.getField().get(object);
 
+                LOGGER.debug(disconfCenterItem.getKey()
+                        + " is a non-static field. ");
+
                 if (disconfCenterItem.getValue() == null) {
 
                     // 如果仓库里的值为空，则实例直接使用默认值,
@@ -150,6 +153,8 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
                 //
                 if (Modifier.isStatic(disconfCenterItem.getField()
                         .getModifiers())) {
+                    LOGGER.debug(disconfCenterItem.getKey()
+                            + " is a static field. ");
                     disconfCenterItem.getField().set(null,
                             disconfCenterItem.getValue());
                 }

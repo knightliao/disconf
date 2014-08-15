@@ -193,7 +193,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
                 } catch (Exception e) {
 
-                    LOGGER.info(e.toString());
+                    LOGGER.debug(disconfCenterFile.getCls()
+                            + " may be a non-java-bean");
                     object = null;
                 }
 
