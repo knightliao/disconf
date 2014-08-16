@@ -47,9 +47,12 @@ public class DisconfDemoTask {
 
                 Thread.sleep(5000);
 
+//                LOGGER.info("redis( " + jedisConfig.getHost() + ","
+//                        + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
+//                        + " , " + simpleRedisService.getKey(REDIS_KEY));
                 LOGGER.info("redis( " + jedisConfig.getHost() + ","
-                        + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
-                        + " , " + simpleRedisService.getKey(REDIS_KEY));
+                        + jedisConfig.getPort() + ")");
+                
 
                 LOGGER.info("static file data:"
                         + SimpleStaticService.getStaticFileData());
