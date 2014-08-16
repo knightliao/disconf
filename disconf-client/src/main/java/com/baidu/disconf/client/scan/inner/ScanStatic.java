@@ -170,21 +170,21 @@ public class ScanStatic {
         scanModel.setReflections(reflections);
 
         //
-        // 获取DisconfFile
+        // 获取DisconfFile class
         //
         Set<Class<?>> classdata = reflections
                 .getTypesAnnotatedWith(DisconfFile.class);
         scanModel.setDisconfFileClassSet(classdata);
 
         //
-        // 获取DisconfFileItem
+        // 获取DisconfFileItem method
         //
         Set<Method> af1 = reflections
                 .getMethodsAnnotatedWith(DisconfFileItem.class);
         scanModel.setDisconfFileItemMethodSet(af1);
 
         //
-        // 获取DisconfItem
+        // 获取DisconfItem method
         //
         af1 = reflections.getMethodsAnnotatedWith(DisconfItem.class);
         scanModel.setDisconfItemMethodSet(af1);
@@ -197,7 +197,7 @@ public class ScanStatic {
         scanModel.setDisconfActiveBackupServiceClassSet(classdata);
 
         //
-        // 获取DisconfActiveBackupService
+        // 获取DisconfUpdateService
         //
         classdata = reflections
                 .getTypesAnnotatedWith(DisconfUpdateService.class);
