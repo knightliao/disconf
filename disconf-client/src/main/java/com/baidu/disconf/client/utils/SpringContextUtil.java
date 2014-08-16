@@ -1,5 +1,7 @@
 package com.baidu.disconf.client.utils;
 
+import java.lang.reflect.Field;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -36,4 +38,39 @@ public class SpringContextUtil implements ApplicationContextAware {
         return applicationContext.getBean(cls);
     }
 
+    /**
+     * 
+     * @param beanId
+     * @return
+     * @throws BeansException
+     */
+    public static Object getBeansOfType(Class<?> type) throws BeansException {
+        return applicationContext.getBeansOfType(type);
+    }
+
+    /**
+     * 
+     * @param beanId
+     * @return
+     * @throws BeansException
+     */
+    public static Object getBean(String name) throws BeansException {
+        return applicationContext.getBean(name);
+    }
+
+    /**
+     * 获取使用 Proxy.newProxyInstance 生成的代理对象
+     * 
+     * @param proxy
+     * @param thisClass
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings({ "unchecked" })
+    public static <T> T getProxyObject(Object proxy, Class<T> thisClass)
+            throws Exception {
+        Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
+        h.setAccessible(true);
+        return (T) h.get(proxy);
+    }
 }

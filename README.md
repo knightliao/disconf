@@ -69,9 +69,9 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ## 模块架构图  ##
 
-![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1ehqlp58zqej20iq0bdq46.jpg)
+![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1ejez1p2o3lj20iq0bd75j.jpg)
 
-[查看大图](http://ww2.sinaimg.cn/mw1024/60c9620fgw1ehqlp58zqej20iq0bdq46.jpg)
+[查看大图](http://ww2.sinaimg.cn/mw1024/60c9620fgw1ejez1p2o3lj20iq0bd75j.jpg)
 
 ## 模块信息##
 
