@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
-import com.baidu.disconf.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.demo.config.RemoteServerConfig;
 
 /**

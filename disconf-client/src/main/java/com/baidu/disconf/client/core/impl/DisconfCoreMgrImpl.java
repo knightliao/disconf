@@ -1,5 +1,8 @@
 package com.baidu.disconf.client.core.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,11 +23,7 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(DisconfCoreMgrImpl.class);
 
-    // file核心处理
-    private DisconfCoreProcessor disconfCoreProcessorFile = null;
-
-    // item核心 处理
-    private DisconfCoreProcessor disconfCoreProcessorItem = null;
+    private List<DisconfCoreProcessor> disconfCoreProcessorList = new ArrayList<DisconfCoreProcessor>();
 
     // 监控器
     private WatchMgr watchMgr = null;
@@ -34,10 +33,19 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
 
     public DisconfCoreMgrImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
 
-        this.disconfCoreProcessorFile = DisconfCoreProcessorFactory
+        this.watchMgr = watchMgr;
+        this.fetcherMgr = fetcherMgr;
+
+        //
+        // 在这里添加好配置项、配置文件的处理器
+        //
+        DisconfCoreProcessor disconfCoreProcessorFile = DisconfCoreProcessorFactory
                 .getDisconfCoreProcessorFile(watchMgr, fetcherMgr);
-        this.disconfCoreProcessorItem = DisconfCoreProcessorFactory
+        disconfCoreProcessorList.add(disconfCoreProcessorFile);
+
+        DisconfCoreProcessor disconfCoreProcessorItem = DisconfCoreProcessorFactory
                 .getDisconfCoreProcessorItem(watchMgr, fetcherMgr);
+        disconfCoreProcessorList.add(disconfCoreProcessorItem);
     }
 
     /**
@@ -50,14 +58,12 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
     public void process() {
 
         //
-        // 处理配置文件
+        // 处理
         //
-        disconfCoreProcessorFile.processAllItems();
+        for (DisconfCoreProcessor disconfCoreProcessor : disconfCoreProcessorList) {
 
-        //
-        // 处理配置项
-        //
-        disconfCoreProcessorItem.processAllItems();
+            disconfCoreProcessor.processAllItems();
+        }
     }
 
     /**
@@ -65,11 +71,13 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
      */
     public void inject2DisconfInstance() {
 
-        // 配置文件
-        disconfCoreProcessorFile.inject2Conf();
+        //
+        // 处理
+        //
+        for (DisconfCoreProcessor disconfCoreProcessor : disconfCoreProcessorList) {
 
-        // 配置项
-        disconfCoreProcessorItem.inject2Conf();
+            disconfCoreProcessor.inject2Conf();
+        }
     }
 
     @Override

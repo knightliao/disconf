@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.common.inter;
+package com.baidu.disconf.client.common.update;
 
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;

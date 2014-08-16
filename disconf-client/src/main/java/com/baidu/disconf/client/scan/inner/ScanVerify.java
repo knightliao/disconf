@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
-import com.baidu.disconf.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.ub.common.utils.ClassUtils;
 

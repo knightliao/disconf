@@ -3,7 +3,7 @@ package com.baidu.disconf.client.common.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.baidu.disconf.client.common.inter.IDisconfUpdate;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 
 /**
  * 记录配置更新时 或 主备切换时的回调函数

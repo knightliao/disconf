@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.disconf.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf.client.common.model.DisconfKey;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 
 /**
  * 动态扫描对象

@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
-import com.baidu.disconf.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf.client.common.model.DisconfKey;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.scan.inner.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;

@@ -1,6 +1,6 @@
 package com.baidu.disconf.client.watch.inner;
 
-import com.baidu.disconf.client.common.inter.IDisconfSysUpdate;
+import com.baidu.disconf.client.common.update.IDisconfSysUpdate;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 

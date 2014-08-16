@@ -3,9 +3,9 @@ package com.baidu.disconf.client.store;
 import java.util.List;
 import java.util.Set;
 
-import com.baidu.disconf.client.common.inter.IDisconfUpdate;
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
 
 /**
