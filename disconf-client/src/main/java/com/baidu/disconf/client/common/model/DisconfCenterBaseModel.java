@@ -56,10 +56,10 @@ public abstract class DisconfCenterBaseModel {
 
     @Override
     public String toString() {
-        return "DisconfCenterBaseModel [object=" + object
-                + ", remoteServerUrl=" + remoteServerUrl
-                + ", disConfCommonModel=" + disConfCommonModel
-                + ", disconfCommonCallbackModel=" + disconfCommonCallbackModel
-                + "]";
+        return "\n\tDisconfCenterBaseModel [\n\tobject=" + object
+                + "\n\tremoteServerUrl=" + remoteServerUrl
+                + "\n\tdisConfCommonModel=" + disConfCommonModel
+                + "\n\tdisconfCommonCallbackModel="
+                + disconfCommonCallbackModel + "]";
     }
 }

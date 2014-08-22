@@ -46,12 +46,10 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
         this.keyMaps = keyMaps;
     }
 
-
     @Override
     public String toString() {
-        return "DisconfCenterFile [keyMaps=" + keyMaps + ", cls=" + cls
-                + ", fileName=" + fileName + ", toString()=" + super.toString()
-                + "]";
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls
+                + "\n\tfileName=" + fileName + super.toString() + "]";
     }
 
     /**

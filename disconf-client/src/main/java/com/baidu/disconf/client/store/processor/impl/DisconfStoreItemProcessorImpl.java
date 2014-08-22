@@ -3,6 +3,7 @@ package com.baidu.disconf.client.store.processor.impl;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -271,7 +272,18 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
      */
     @Override
     public String confToString() {
-        return DisconfCenterStore.getInstance().getConfItemMap().toString();
+
+        StringBuffer sBuffer = new StringBuffer();
+        sBuffer.append("\n");
+        Map<String, DisconfCenterItem> disMap = DisconfCenterStore
+                .getInstance().getConfItemMap();
+        for (String file : disMap.keySet()) {
+            sBuffer.append("disItem:\t" + file + "\t"
+                    + disMap.get(file).toString());
+            sBuffer.append("\n");
+        }
+
+        return sBuffer.toString();
     }
 
 }
