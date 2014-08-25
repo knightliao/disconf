@@ -155,7 +155,9 @@ public class DisconfMgr {
 
             // disconfCoreMgr
             LOGGER.info("=============== disconfCoreMgr close =================");
-            disconfCoreMgr.release();
+            if (disconfCoreMgr != null) {
+                disconfCoreMgr.release();
+            }
 
             // close, 必须将其设置为False,以便重新更新
             isFirstInit = false;

@@ -186,12 +186,12 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
         // 校验是否存在
         if (disconfCenterFile == null) {
-            LOGGER.info("canot find " + fileName + " in store....");
+            LOGGER.debug("canot find " + fileName + " in store....");
             return null;
         }
 
         if (disconfCenterFile.getKeyMaps().get(keyName) == null) {
-            LOGGER.info("canot find " + fileName + ", " + keyName
+            LOGGER.debug("canot find " + fileName + ", " + keyName
                     + " in store....");
             return null;
         }
@@ -299,7 +299,8 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         Map<String, DisconfCenterFile> disMap = DisconfCenterStore
                 .getInstance().getConfFileMap();
         for (String file : disMap.keySet()) {
-            sBuffer.append("disfile:\t" + file + "\t" + disMap.get(file).toString());
+            sBuffer.append("disfile:\t" + file + "\t"
+                    + disMap.get(file).toString());
             sBuffer.append("\n");
         }
 
