@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.8</version>
+    <version>2.6.10</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -46,8 +46,8 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.9</disconf-core.version>
-        <disconf-client.version>2.6.9</disconf-client.version>
+        <disconf-core.version>2.6.10</disconf-core.version>
+        <disconf-client.version>2.6.10</disconf-client.version>
     </properties>
 
 
