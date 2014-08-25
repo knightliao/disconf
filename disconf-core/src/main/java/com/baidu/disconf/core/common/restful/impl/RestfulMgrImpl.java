@@ -185,7 +185,7 @@ public class RestfulMgrImpl implements RestfulMgr {
                 }
             }
 
-            LOGGER.info("Move to: " + localFile.getAbsolutePath());
+            LOGGER.debug("Move to: " + localFile.getAbsolutePath());
 
         } catch (Exception e) {
             LOGGER.warn("download file failed, using previous download file.",

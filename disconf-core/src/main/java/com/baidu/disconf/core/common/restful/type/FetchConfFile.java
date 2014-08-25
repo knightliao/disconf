@@ -51,7 +51,7 @@ public class FetchConfFile implements UnreliableInterface {
         }
 
         // start tp download
-        LOGGER.info("start to download. From: " + remoteUrl + " , TO: "
+        LOGGER.debug("start to download. From: " + remoteUrl + " , TO: "
                 + localTmpFile.getAbsolutePath());
 
         // 下载
@@ -65,7 +65,7 @@ public class FetchConfFile implements UnreliableInterface {
         }
 
         // download success
-        LOGGER.info("download success!  " + localTmpFile.getAbsolutePath());
+        LOGGER.debug("download success!  " + localTmpFile.getAbsolutePath());
 
         return null;
     }

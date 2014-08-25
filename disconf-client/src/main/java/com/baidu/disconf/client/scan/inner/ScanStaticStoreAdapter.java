@@ -241,6 +241,9 @@ public class ScanStaticStoreAdapter {
 
             Set<Method> methods = scanModel.getDisconfFileItemMap().get(
                     disconfFile);
+            if (methods == null) {
+                continue;
+            }
 
             DisconfCenterFile disconfCenterFile = transformScanFile(
                     disconfFile, methods);

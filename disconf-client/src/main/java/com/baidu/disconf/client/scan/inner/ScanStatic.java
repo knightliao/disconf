@@ -3,6 +3,7 @@ package com.baidu.disconf.client.scan.inner;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -131,13 +132,16 @@ public class ScanStatic {
         //
         // 最后的校验
         //
-        for (Class<?> classFile : disconfFileItemMap.keySet()) {
+        Iterator<Class<?>> iterator = disconfFileItemMap.keySet().iterator();
+        while (iterator.hasNext()) {
+
+            Class<?> classFile = iterator.next();
 
             // 校验是否所有配置文件都含有配置
             if (disconfFileItemMap.get(classFile).isEmpty()) {
                 LOGGER.warn("disconf file hasn't any items: "
                         + classFile.getName());
-                disconfFileItemMap.remove(classFile);
+                continue;
             }
 
             // 校验配置文件类型是否合适(目前只支持.properties类型)
@@ -146,7 +150,9 @@ public class ScanStatic {
             boolean fileTypeRight = ScanVerify
                     .isDisconfFileTypeRight(disconfFile);
             if (!fileTypeRight) {
-                disconfFileItemMap.remove(classFile);
+                LOGGER.warn("now do not support NOT .properties file"
+                        + disconfFile.toString());
+                continue;
             }
         }
 

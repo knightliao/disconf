@@ -78,6 +78,19 @@ public class BaseCoreTestCase {
                         .withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
 
         //
+        // 空配置文件
+        //
+        stubFor(get(urlEqualTo(RemoteMockServer.EMPTY_FILE_URL)).willReturn(
+                aResponse()
+                        .withHeader("Content-Type", "text/html;charset=UTF-8")
+                        .withHeader(
+                                "Content-Disposition",
+                                "attachment; filename="
+                                        + RemoteMockServer.EMPTY_FILE_URL)
+                        .withStatus(200)
+                        .withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
+
+        //
         // 静态 配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.STATIC_FILE_URL))
