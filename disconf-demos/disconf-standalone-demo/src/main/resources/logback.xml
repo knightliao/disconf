@@ -2,8 +2,6 @@
 
 <configuration>
 
-    <property name="log.base" value="./log/disconf-demo" />
-
     <jmxConfigurator />
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -14,6 +12,7 @@
         </encoder>
     </appender>
 
+    <property name="log.base" value="./log/disconf-demo" />
     <appender name="logfile"
         class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}.log</File>
@@ -30,7 +29,12 @@
     </appender>
 
     <logger name="com.baidu.disconf">
-        <level value="DEBUG" />
+        <level value="INFO" />
+    </logger>
+
+    <logger name="com.baidu.disconf.demo">
+        <level value="INFO" />
+        <appender-ref ref="logfile" />
     </logger>
 
     <logger name="org.springframework">
@@ -45,8 +49,7 @@
         <level value="ERROR" />
     </logger>
 
-    <root>
-        <level value="INFO" />
+    <root level="INFO">
         <appender-ref ref="stdout" />
         <appender-ref ref="logfile" />
     </root>

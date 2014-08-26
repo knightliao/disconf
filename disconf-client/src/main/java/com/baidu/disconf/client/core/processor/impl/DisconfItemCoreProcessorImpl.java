@@ -25,7 +25,7 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 
     protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfFileCoreProcessorImpl.class);
+            .getLogger(DisconfItemCoreProcessorImpl.class);
 
     // 监控器
     private WatchMgr watchMgr = null;
@@ -54,8 +54,8 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.info("==============\tstart to process disconf item: " + key
-                    + "\t=============================");
+            LOGGER.debug("==============\tstart to process disconf item: "
+                    + key + "\t=============================");
 
             DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor
                     .getConfData(key);
@@ -99,7 +99,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             String url = disconfCenterItem.getRemoteServerUrl();
             value = fetcherMgr.getValueFromServer(url);
             if (value != null) {
-                LOGGER.info("value: " + value);
+                LOGGER.debug("value: " + value);
             }
         } catch (Exception e) {
             LOGGER.error("cannot use remote configuration: " + keyName, e);
@@ -156,7 +156,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.info("==============\tstart to inject value to disconf item instance: "
+            LOGGER.debug("==============\tstart to inject value to disconf item instance: "
                     + key + "\t=============================");
 
             DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor

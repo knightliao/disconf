@@ -62,7 +62,7 @@ public class NodeWatcher implements Watcher {
             LOGGER.error("cannot monitor " + monitorPath, e);
         }
 
-        LOGGER.info("monitor path: (" + monitorPath + "," + keyName + ","
+        LOGGER.debug("monitor path: (" + monitorPath + "," + keyName + ","
                 + disConfigTypeEnum.getModelName() + ") has been added!");
     }
 

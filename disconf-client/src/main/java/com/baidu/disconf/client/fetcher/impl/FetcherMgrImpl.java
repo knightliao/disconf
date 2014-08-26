@@ -23,7 +23,7 @@ import com.baidu.disconf.ub.common.utils.OsUtil;
 public class FetcherMgrImpl implements FetcherMgr {
 
     protected static final Logger LOGGER = LoggerFactory
-            .getLogger(FetcherMgr.class);
+            .getLogger(FetcherMgrImpl.class);
 
     // 获取远程配置 重试次数
     private int retryTime = 3;
@@ -74,7 +74,7 @@ public class FetcherMgrImpl implements FetcherMgr {
 
         ValueVo confItemVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
                 retryTime, retrySleepSeconds);
-        LOGGER.info("remote server return: " + confItemVo.toString());
+        LOGGER.debug("remote server return: " + confItemVo.toString());
 
         if (confItemVo.getStatus().equals(Constants.NOTOK)) {
             throw new Exception("status is not ok.");

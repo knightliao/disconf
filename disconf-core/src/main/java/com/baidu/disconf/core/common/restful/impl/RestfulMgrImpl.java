@@ -83,7 +83,8 @@ public class RestfulMgrImpl implements RestfulMgr {
 
             WebTarget webtarget = client.target(url.toURI());
 
-            LOGGER.info("start to query url : " + webtarget.getUri().toString());
+            LOGGER.debug("start to query url : "
+                    + webtarget.getUri().toString());
 
             Invocation.Builder builder = webtarget
                     .request(MediaType.APPLICATION_JSON_TYPE);

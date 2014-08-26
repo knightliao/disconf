@@ -67,4 +67,10 @@ public class RemoteUrl {
         return urls;
     }
 
+    @Override
+    public String toString() {
+        return "RemoteUrl [url=" + url + ", serverList=" + serverList
+                + ", urls=" + urls + "]";
+    }
+
 }

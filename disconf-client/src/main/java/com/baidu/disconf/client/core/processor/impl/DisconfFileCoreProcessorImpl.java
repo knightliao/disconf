@@ -54,7 +54,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String fileName : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.info("==============\tstart to process disconf file: "
+            LOGGER.debug("==============\tstart to process disconf file: "
                     + fileName + "\t=============================");
 
             DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
@@ -98,7 +98,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             //
 
             LOGGER.error(e.toString());
-            LOGGER.info("using local properties in class path: " + fileName);
+            LOGGER.warn("using local properties in class path: " + fileName);
 
             // 读取配置
             properties = ConfigLoaderUtils.loadConfig(fileName);
@@ -110,7 +110,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         //
         Set<Entry<Object, Object>> set = properties.entrySet();
         for (Entry<Object, Object> entry : set) {
-            LOGGER.info(entry.toString());
+            LOGGER.debug(entry.toString());
         }
         disconfStoreProcessor.inject2Store(fileName, new DisconfValue(null,
                 properties));
@@ -166,7 +166,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.info("==============\tstart to inject value to disconf file item instance: "
+            LOGGER.debug("==============\tstart to inject value to disconf file item instance: "
                     + key + "\t=============================");
 
             DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
