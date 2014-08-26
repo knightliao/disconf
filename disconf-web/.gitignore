@@ -5,3 +5,5 @@
 /.project
 /log
 /pom.xml.releaseBackup
+/output
+/.pydevproject

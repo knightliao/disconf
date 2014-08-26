@@ -5,6 +5,22 @@
 #
 
 #
+# 执行前请确定环境变量里存在以下两个变量
+#	1. $ONLINE_CONFIG_PATH 	: java web 线上配置目录
+#	2. $WAR_ROOT_PATH 		: java web war 包
+#
+
+# 脚本执行后，将生成从下文件：
+#	$WAR_ROOT_PATH/						项目根目录(请将Tomcat指向此目录)
+#	$WAR_ROOT_PATH/disconf-web.war  	生成的War包
+#	$WAR_ROOT_PATH/html  				HTML前端代码(请将Nginx指向此目录)
+#	$WAR_ROOT_PATH/META-INF  			
+#	$WAR_ROOT_PATH/WEB-INF				Java Classes
+#		
+
+
+
+#
 # 线上配置的路径  ONLINE_CONFIG_PATH=/home/work/dsp/disconf-rd/online-resources
 # 需要预先设置在环境变量里
 if [ "$ONLINE_CONFIG_PATH" = "" ]; then	
@@ -36,17 +52,17 @@ echo "**********************************************"
 current_path=`pwd`
 
 #
-# 使用RD进行WAR打包
+# 进行WAR打包
 #
 echo "**********************************************"
 echo "It's going to got war package"
 echo "**********************************************"
 
-sh deploy/build.sh
+sh deploy/build_java.sh
 
 
 #
-# 使用RD进行FE打包
+# 进行FE打包
 #
 echo "**********************************************"
 echo "It's going to got fe package"
@@ -59,7 +75,9 @@ sh build.sh
 cd $current_path
 
 
+#
 # 清空原始目录 
+#
 mkdir -p $WAR_ROOT_PATH
 if [ ${#WAR_ROOT_PATH} -gt 15 ]; then 
 	echo "rm " $WAR_ROOT_PATH
@@ -67,12 +85,23 @@ if [ ${#WAR_ROOT_PATH} -gt 15 ]; then
     mkdir -p $WAR_ROOT_PATH
 fi	
 
+
+#
+#
+#
 echo "start to copy war"
 cp output/disconf-web.war  $WAR_ROOT_PATH  -rp
 
+#
+#
+#
 echo "start to copy static"
 mkdir $WAR_ROOT_PATH/html
 cp html/output/* $WAR_ROOT_PATH/html -rp
+
+#
+#
+#
 
 cd $WAR_ROOT_PATH 
 
