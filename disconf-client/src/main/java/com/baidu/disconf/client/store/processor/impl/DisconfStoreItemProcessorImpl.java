@@ -178,7 +178,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
 
         // 校验是否存在
         if (disconfCenterItem == null) {
-            LOGGER.info("canot find " + keyName + " in store....");
+            LOGGER.debug("canot find " + keyName + " in store....");
             return null;
         }
 

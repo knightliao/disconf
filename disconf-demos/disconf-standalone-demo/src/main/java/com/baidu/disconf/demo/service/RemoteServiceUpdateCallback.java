@@ -3,6 +3,7 @@ package com.baidu.disconf.demo.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
@@ -14,6 +15,7 @@ import com.baidu.disconf.demo.config.RemoteServerConfig;
  * @author liaoqiqi
  * @version 2014-6-17
  */
+@Service
 @DisconfUpdateService(classes = { RemoteServerConfig.class })
 public class RemoteServiceUpdateCallback implements IDisconfUpdate {
 

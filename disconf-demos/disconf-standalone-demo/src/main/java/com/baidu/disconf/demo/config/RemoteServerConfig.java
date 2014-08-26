@@ -11,10 +11,8 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
  * @version 2014-6-17
  */
 @Service
-@DisconfFile(filename = RemoteServerConfig.filename)
+@DisconfFile(filename = "remote.properties")
 public class RemoteServerConfig {
-
-    public static final String filename = "remote.properties";
 
     // 代表连接地址
     private String remoteHost;

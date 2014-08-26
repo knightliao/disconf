@@ -62,8 +62,6 @@ public class DisconfMgr {
         //
         //
 
-        LOGGER.info("******************************* DISCONF START FIRST SCAN *******************************");
-
         try {
 
             // 导入配置
@@ -71,9 +69,11 @@ public class DisconfMgr {
 
             // 是否开启远程配置
             if (DisClientConfig.getInstance().ENABLE_REMOTE_CONF == false) {
-                LOGGER.info("ENABLE_REMOTE_CONF==0, we use Local Configuration.");
+                LOGGER.info("FIRST_SCAN, ENABLE_REMOTE_CONF==0, we use Local Configuration.");
                 return;
             }
+
+            LOGGER.info("******************************* DISCONF START FIRST SCAN *******************************");
 
             // 扫描器
             scanMgr = ScanFactory.getScanMgr();
@@ -100,6 +100,12 @@ public class DisconfMgr {
      * @param scanPackage
      */
     public synchronized static void secondScan() {
+
+        // 是否开启远程配置
+        if (DisClientConfig.getInstance().ENABLE_REMOTE_CONF == false) {
+            LOGGER.info("SECOND_SCAN, ENABLE_REMOTE_CONF==0, we use Local Configuration.");
+            return;
+        }
 
         // 该函数必须第一次运行后才能运行
         if (isFirstInit == false) {
@@ -154,7 +160,7 @@ public class DisconfMgr {
         try {
 
             // disconfCoreMgr
-            LOGGER.info("=============== disconfCoreMgr close =================");
+            LOGGER.info("******************************* DISCONF CLOSE *******************************");
             if (disconfCoreMgr != null) {
                 disconfCoreMgr.release();
             }

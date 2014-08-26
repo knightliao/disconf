@@ -1,5 +1,6 @@
 package com.baidu.disconf.demo.config;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
@@ -12,6 +13,7 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
  * @version 2014-6-17
  */
 @Service
+@Scope("singleton")
 @DisconfFile(filename = "redis.properties")
 public class JedisConfig {
 
