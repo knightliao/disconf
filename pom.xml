@@ -12,7 +12,6 @@
         <module>disconf-client</module>
         <module>disconf-core</module>
         <module>disconf-tool</module>
-        <module>disconf-web</module>
     </modules>
 
     <inceptionYear>2014</inceptionYear>
