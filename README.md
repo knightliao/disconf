@@ -78,8 +78,8 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 - **disconf**
 	- [disconf-core](https://github.com/knightliao/disconf/tree/master/disconf-core): 分布式配置基础包模块
-	- [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client): 分布式配置客户端模块, 依赖disconf-core包。
-	用户程序使用它作为Jar包进行分布式配置编程。
+	- [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client): 分布式配置客户端模块, 依赖disconf-core包。 用户程序使用它作为Jar包进行分布式配置编程。
+	- [disconf-tool](https://github.com/knightliao/disconf/tree/master/disconf-tool): 分布式配置工具包，依赖disconf-core包。 Disconf-tool是disconf的辅助工具类。
 	- [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web): 分布式配置平台服务模块, 依赖disconf-core包。采用SpringMvc+纯HTML方式实现。
 	用户使用它来进行日常的分布式配置管理。
 - **demo**
@@ -92,10 +92,11 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ### 概述 ###
 
-Disconf为应用方提供了两个工具，
+Disconf为应用方提供了三个工具，
 
-1. 一个是 [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client), 您可以在您的应用系统里加入此Jar包；
-2. 另一个是 [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)，它是一个Web平台，您可以此Web平台上管理您的配置。
+1.  [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client), 您可以在您的应用系统里加入此Jar包；
+2.  [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web), 它是一个Web平台，您可以此Web平台上管理您的配置。
+3. [disconf-tool](https://github.com/knightliao/disconf/tree/master/disconf-tool),可选包。
 
 ### disconf-client 使用 ###
 
