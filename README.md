@@ -1,4 +1,4 @@
-Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf)[ ![Codeship Status for knightliao/disconf](https://www.codeship.io/projects/9f4bdaa0-0ff7-0132-516d-36b64cf27f03/status)](https://www.codeship.io/projects/32756)[![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png)](https://coveralls.io/r/knightliao/disconf)
+Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png)](https://coveralls.io/r/knightliao/disconf) [![Codeship Status for knightliao/disconf](https://www.codeship.io/projects/9f4bdaa0-0ff7-0132-516d-36b64cf27f03/status)](https://www.codeship.io/projects/32756) 
 =======
 
 Distributed Configuration Management Platform 
