@@ -1,4 +1,4 @@
 language: java
 
 after_success:
-- mvn clean test cobertura:cobertura coveralls:cobertura
+- mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura 
