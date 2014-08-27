@@ -1,4 +1,4 @@
-Disconf  ![](https://travis-ci.org/knightliao/disconf.svg?branch=master)
+Disconf  [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf)
 =======
 
 Distributed Configuration Management Platform 
