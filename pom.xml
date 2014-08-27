@@ -43,11 +43,11 @@
         <!-- resource path -->
         <project.build.online.sourceDir>${project.basedir}/src/main/online-resources</project.build.online.sourceDir>
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
-        
+
         <!-- 模块版本号 -->
         <disconf-core.version>2.6.11</disconf-core.version>
         <disconf-client.version>2.6.11</disconf-client.version>
-        
+
     </properties>
 
 
@@ -814,6 +814,25 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <configuration>
+                            <repoToken>yourcoverallsprojectrepositorytoken</repoToken>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <version>2.6</version>
+                        <configuration>
+                            <format>xml</format>
+                            <maxmem>256m</maxmem>
+                            <!-- aggregated reports for multi-module projects -->
+                            <aggregate>true</aggregate>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
