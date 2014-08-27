@@ -1,1 +1,4 @@
 language: java
+
+after_success:
+- mvn clean test cobertura:cobertura coveralls:cobertura
