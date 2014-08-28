@@ -12,7 +12,7 @@ Distributed Configuration Management Platform
 
 Disconf当前最新版本：
 
-- disconf-client 2.6.11
+- disconf-client 2.6.12
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
@@ -29,7 +29,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.11）功能特点 ##
+## 当前版本（2.6.12）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -105,7 +105,7 @@ Disconf为应用方提供了三个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.11</version>
+        <version>2.6.12</version>
     </dependency>
 
 主要依赖为：
