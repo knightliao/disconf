@@ -21,7 +21,7 @@ import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPageResult;
 
 /**
  * 

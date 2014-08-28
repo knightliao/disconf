@@ -5,8 +5,8 @@ import java.util.List;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.dsp.common.form.RequestListBase.Page;
-import com.baidu.ub.common.generic.dao.BaseDao;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPageResult;
+import com.baidu.unbiz.common.genericdao.dao.BaseDao;
 
 /**
  * 

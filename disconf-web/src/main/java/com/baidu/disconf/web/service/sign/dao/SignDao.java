@@ -1,13 +1,13 @@
 package com.baidu.disconf.web.service.sign.dao;
 
 import com.baidu.disconf.web.service.user.bo.User;
-import com.baidu.ub.common.generic.dao.BaseDao;
+import com.baidu.unbiz.common.genericdao.dao.BaseDao;
 
 /**
  * 
  * @author liaoqiqi
  * @version 2013-11-28
  */
-public interface SignDao extends BaseDao<Integer, User> {
+public interface SignDao extends BaseDao<Long, User> {
 
 }

@@ -35,7 +35,7 @@ import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPageResult;
 
 /**
  * 

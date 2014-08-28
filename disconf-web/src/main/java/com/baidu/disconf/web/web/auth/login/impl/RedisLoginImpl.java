@@ -12,7 +12,7 @@ import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.web.auth.constant.LoginConstant;
 import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.ub.common.commons.ThreadContext;
-import com.baidu.ub.common.utils.CookieUtils;
+import com.github.knightliao.apollo.utils.web.CookieUtils;
 
 /**
  * 

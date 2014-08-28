@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.baidu.ub.common.generic.bo.BaseObject;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPageResult;
+import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * Service层工具

@@ -36,7 +36,7 @@ public class UserMgrImpl implements UserMgr {
     private UserDao userDao;
 
     @Override
-    public Visitor getVisitor(Integer userId) {
+    public Visitor getVisitor(Long userId) {
 
         return userInnerMgr.getVisitor(userId);
     }
@@ -61,7 +61,7 @@ public class UserMgrImpl implements UserMgr {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public Integer create(User user) {
+    public Long create(User user) {
 
         user = userDao.create(user);
         return user.getId();
@@ -84,7 +84,7 @@ public class UserMgrImpl implements UserMgr {
     }
 
     @Override
-    public User getUser(Integer userId) {
+    public User getUser(Long userId) {
 
         return userDao.get(userId);
     }

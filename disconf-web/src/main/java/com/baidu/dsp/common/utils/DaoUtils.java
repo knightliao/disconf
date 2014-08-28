@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.baidu.dsp.common.form.RequestListBase.Page;
-import com.baidu.ub.common.generic.dao.operator.DaoPage;
-import com.baidu.ub.common.generic.dao.operator.Order;
+import com.baidu.ub.common.db.DaoPage;
+import com.baidu.unbiz.common.genericdao.operator.Order;
 
 /**
  * DAO有用的Utils

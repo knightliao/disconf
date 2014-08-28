@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.baidu.ub.common.generic.bo.BaseObject;
+import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 线程执行的上下文内容

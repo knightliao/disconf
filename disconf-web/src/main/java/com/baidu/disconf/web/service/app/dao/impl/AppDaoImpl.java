@@ -9,7 +9,7 @@ import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.dao.AppDao;
 import com.baidu.dsp.common.dao.AbstractDao;
 import com.baidu.dsp.common.dao.Columns;
-import com.baidu.ub.common.generic.dao.operator.Match;
+import com.baidu.unbiz.common.genericdao.operator.Match;
 
 /**
  * 

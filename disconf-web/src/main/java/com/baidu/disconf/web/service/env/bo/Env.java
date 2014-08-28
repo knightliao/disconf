@@ -2,9 +2,9 @@ package com.baidu.disconf.web.service.env.bo;
 
 import com.baidu.dsp.common.dao.Columns;
 import com.baidu.dsp.common.dao.DB;
-import com.baidu.ub.common.generic.annotation.Column;
-import com.baidu.ub.common.generic.annotation.Table;
-import com.baidu.ub.common.generic.bo.BaseObject;
+import com.baidu.unbiz.common.genericdao.annotation.Column;
+import com.baidu.unbiz.common.genericdao.annotation.Table;
+import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 

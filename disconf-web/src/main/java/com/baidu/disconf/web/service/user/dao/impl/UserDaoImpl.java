@@ -13,7 +13,7 @@ import com.baidu.dsp.common.dao.Columns;
  * @version 2013-11-28
  */
 @Repository
-public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
+public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 
     /**
      * 执行SQL
