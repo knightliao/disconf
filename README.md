@@ -25,7 +25,7 @@ Disconf当前最新版本：
 
 Disconf可以为各种业务平台提供统一的配置管理服务。
 
-目前正在百度各大业务系统广泛推广。
+目前正在百度各大业务系统广泛推广。 
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
