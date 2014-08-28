@@ -2,14 +2,14 @@ package com.baidu.disconf.web.service.user.dto;
 
 import java.io.Serializable;
 
-import com.baidu.ub.common.generic.bo.BaseObject;
+import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 
  * @author liaoqiqi
  * @version 2013-11-26
  */
-public class Visitor extends BaseObject<Integer> implements Serializable {
+public class Visitor extends BaseObject<Long> implements Serializable {
 
     private static final long serialVersionUID = 5621993194031128338L;
 
@@ -24,7 +24,7 @@ public class Visitor extends BaseObject<Integer> implements Serializable {
     /**
      * @return the loginUserId
      */
-    public Integer getLoginUserId() {
+    public Long getLoginUserId() {
         return getId();
     }
 
@@ -32,7 +32,7 @@ public class Visitor extends BaseObject<Integer> implements Serializable {
      * @param loginUserId
      *            the loginUserId to set
      */
-    public void setLoginUserId(Integer loginUserId) {
+    public void setLoginUserId(Long loginUserId) {
         setId(loginUserId);
     }
 

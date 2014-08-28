@@ -2,9 +2,9 @@ package com.baidu.disconf.web.service.user.bo;
 
 import com.baidu.dsp.common.dao.Columns;
 import com.baidu.dsp.common.dao.DB;
-import com.baidu.ub.common.generic.annotation.Column;
-import com.baidu.ub.common.generic.annotation.Table;
-import com.baidu.ub.common.generic.bo.BaseObject;
+import com.baidu.unbiz.common.genericdao.annotation.Column;
+import com.baidu.unbiz.common.genericdao.annotation.Table;
+import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 用户表
@@ -13,7 +13,7 @@ import com.baidu.ub.common.generic.bo.BaseObject;
  * @version 2013-11-28
  */
 @Table(db = DB.DB_NAME, name = "user", keyColumn = Columns.USER_ID)
-public class User extends BaseObject<Integer> {
+public class User extends BaseObject<Long> {
 
     private static final long serialVersionUID = 1L;
 

@@ -19,7 +19,7 @@ import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPageResult;
 
 /**
  * 

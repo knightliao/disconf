@@ -263,6 +263,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument-tomcat</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.knightliao.apollo</groupId>
+            <artifactId>apollo</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
 
     <!-- build -->

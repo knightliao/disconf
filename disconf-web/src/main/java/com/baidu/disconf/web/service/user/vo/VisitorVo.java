@@ -2,15 +2,15 @@ package com.baidu.disconf.web.service.user.vo;
 
 public class VisitorVo {
 
-    private int id;
+    private Long id;
     private String name;
     private String role;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,7 +40,7 @@ public class VisitorVo {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((role == null) ? 0 : role.hashCode());
         return result;
@@ -55,7 +55,10 @@ public class VisitorVo {
         if (getClass() != obj.getClass())
             return false;
         VisitorVo other = (VisitorVo) obj;
-        if (id != other.id)
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
             return false;
         if (name == null) {
             if (other.name != null)

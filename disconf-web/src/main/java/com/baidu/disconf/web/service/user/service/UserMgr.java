@@ -18,17 +18,17 @@ public interface UserMgr {
      * 
      * @return
      */
-    Visitor getVisitor(Integer userId);
+    Visitor getVisitor(Long userId);
 
     VisitorVo getCurVisitor();
 
-    User getUser(Integer userId);
+    User getUser(Long userId);
 
     /**
      * 
      * @return
      */
-    Integer create(User user);
+    Long create(User user);
 
     /**
      * 

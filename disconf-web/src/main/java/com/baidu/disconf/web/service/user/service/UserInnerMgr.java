@@ -9,5 +9,5 @@ public interface UserInnerMgr {
      * 
      * @return
      */
-    Visitor getVisitor(Integer userId);
+    Visitor getVisitor(Long userId);
 }

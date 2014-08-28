@@ -28,7 +28,7 @@ public class RedisLoginImplMock implements RedisLogin {
     @Override
     public Visitor isLogin(HttpServletRequest request) {
 
-        int userId = 1;
+        Long userId = 1L;
 
         User user = userMgr.getUser(userId);
 

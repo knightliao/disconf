@@ -44,7 +44,7 @@ public class UserCreateTools {
         createTestUser();
     }
 
-    private static String getUserName(int i) {
+    private static String getUserName(Long i) {
 
         return "testUser" + i;
     }
@@ -56,7 +56,7 @@ public class UserCreateTools {
 
         int num = 5;
 
-        for (int i = 0; i < num + 1; ++i) {
+        for (Long i = 0L; i < num + 1; ++i) {
 
             String userName = getUserName(i);
             LOG.info("delete " + userName);
@@ -64,7 +64,7 @@ public class UserCreateTools {
         }
 
         List<User> userList = new ArrayList<User>();
-        for (int i = 1; i < num + 1; ++i) {
+        for (Long i = 1L; i < num + 1; ++i) {
 
             User user = new User();
 

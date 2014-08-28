@@ -22,7 +22,7 @@ public class UserInnerMgrImpl implements UserInnerMgr {
     private UserDao userDao;
 
     @Override
-    public Visitor getVisitor(Integer userId) {
+    public Visitor getVisitor(Long userId) {
 
         if (userId == null || userId <= 0) {
             LOG.error("userId is null or <= 0, return null");

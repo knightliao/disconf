@@ -20,7 +20,7 @@ import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.interceptor.WebCommonInterceptor;
 import com.baidu.ub.common.log.AopLogFactory;
-import com.baidu.ub.common.utils.CookieUtils;
+import com.github.knightliao.apollo.utils.web.CookieUtils;
 
 /**
  * 所有请求（一个Session可能会有多个请求）均会通过此拦截器

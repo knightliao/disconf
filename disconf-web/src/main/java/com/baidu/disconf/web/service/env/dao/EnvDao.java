@@ -1,7 +1,7 @@
 package com.baidu.disconf.web.service.env.dao;
 
 import com.baidu.disconf.web.service.env.bo.Env;
-import com.baidu.ub.common.generic.dao.BaseDao;
+import com.baidu.unbiz.common.genericdao.dao.BaseDao;
 
 /**
  * 

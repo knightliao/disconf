@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.baidu.disconf.web.service.app.bo.App;
-import com.baidu.ub.common.generic.dao.BaseDao;
+import com.baidu.unbiz.common.genericdao.dao.BaseDao;
 
 /**
  * 

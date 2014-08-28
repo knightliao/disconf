@@ -12,6 +12,6 @@ import com.baidu.dsp.common.dao.AbstractDao;
  * @version 2013-11-28
  */
 @Repository
-public class SignDaoImpl extends AbstractDao<Integer, User> implements SignDao {
+public class SignDaoImpl extends AbstractDao<Long, User> implements SignDao {
 
 }

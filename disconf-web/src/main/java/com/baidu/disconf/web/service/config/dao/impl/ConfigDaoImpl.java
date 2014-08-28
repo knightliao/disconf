@@ -15,10 +15,10 @@ import com.baidu.dsp.common.dao.AbstractDao;
 import com.baidu.dsp.common.dao.Columns;
 import com.baidu.dsp.common.form.RequestListBase.Page;
 import com.baidu.dsp.common.utils.DaoUtils;
-import com.baidu.ub.common.generic.dao.operator.DaoPage;
-import com.baidu.ub.common.generic.dao.operator.Match;
-import com.baidu.ub.common.generic.dao.operator.Modify;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPage;
+import com.baidu.ub.common.db.DaoPageResult;
+import com.baidu.unbiz.common.genericdao.operator.Match;
+import com.baidu.unbiz.common.genericdao.operator.Modify;
 
 /**
  * 

@@ -8,7 +8,7 @@ import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
-import com.baidu.ub.common.generic.vo.DaoPageResult;
+import com.baidu.ub.common.db.DaoPageResult;
 
 /**
  * 
