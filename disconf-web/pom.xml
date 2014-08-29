@@ -387,6 +387,7 @@
                                         <exclude>**/jdbc-mysql.properties</exclude>
                                         <exclude>**/zoo.properties</exclude>
                                         <exclude>**/redis-config.properties</exclude>
+                                        <exclude>**/*.conf</exclude>
                                     </excludes>
                                 </resource>
 
@@ -397,6 +398,7 @@
                                         <include>**/jdbc-mysql.properties</include>
                                         <include>**/zoo.properties</include>
                                         <include>**/redis-config.properties</include>
+                                        <include>**/*.conf</include>
                                     </includes>
                                 </resource>
 
