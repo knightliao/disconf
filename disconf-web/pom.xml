@@ -355,6 +355,15 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <webResources>
+
+                                <resource>
+                                    <directory>${project.build.online.sourceDir}</directory>
+                                    <targetPath>WEB-INF/classes</targetPath>
+                                    <includes>
+                                        <include>**/*.*</include>
+                                    </includes>
+                                </resource>
+
                                 <resource>
                                     <directory>${project.build.online.sourceDir}</directory>
                                     <targetPath>/</targetPath>
@@ -362,6 +371,7 @@
                                         <include>**/logagent.conf</include>
                                     </includes>
                                 </resource>
+
                             </webResources>
                         </configuration>
                     </plugin>
