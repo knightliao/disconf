@@ -48,7 +48,37 @@
         <disconf-core.version>2.6.13-SNAPSHOT</disconf-core.version>
         <disconf-client.version>2.6.13-SNAPSHOT</disconf-client.version>
 
+        <!-- Baidu repositories -->
+        <baidu.local.repository>http://maven.scm.baidu.com:8081/nexus/content/groups/public</baidu.local.repository>
+        <baidu.deploy.repository.id>Baidu_Local</baidu.deploy.repository.id>
+        <baidu.deploy.repository.url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local/</baidu.deploy.repository.url>
+        <baidu.deploy.snapshotRepository.id>Baidu_Local_Snapshots</baidu.deploy.snapshotRepository.id>
+        <baidu.deploy.snapshotRepository.url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local_Snapshots/</baidu.deploy.snapshotRepository.url>
+
     </properties>
+
+
+    <repositories>
+        <repository>
+            <id>baidu_public_repo</id>
+            <name>Baidu's repository</name>
+            <url>${baidu.local.repository}</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>${baidu.deploy.repository.id}</id>
+            <url>${baidu.deploy.repository.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${baidu.deploy.snapshotRepository.id}</id>
+            <url>${baidu.deploy.snapshotRepository.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 
     <dependencyManagement>
