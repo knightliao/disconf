@@ -170,7 +170,9 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                 }
 
             } catch (Exception e) {
-                LOGGER.error(e.toString(), e);
+                LOGGER.error(
+                        "inject2Instance fileName " + fileName + " "
+                                + e.toString(), e);
             }
         }
     }
@@ -223,6 +225,10 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
         for (String fileItem : keMap.keySet()) {
 
+            if (fileItem.equals("UC_SFDRM2_READ_TIMEOUT")) {
+                System.out.print("");
+            }
+
             Object object = disconfValue.getProperties().get(fileItem);
             if (object == null) {
                 LOGGER.error(
@@ -235,7 +241,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             try {
 
                 Object value = ClassUtils.getValeByType(keMap.get(fileItem)
-                        .getField().getType(), (String) object);
+                        .getField().getType(),  object);
                 keMap.get(fileItem).setValue(value);
 
                 // 如果Object非null,则顺便也注入
@@ -247,7 +253,9 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                 }
 
             } catch (Exception e) {
-                LOGGER.error(e.toString(), e);
+                LOGGER.error(
+                        "inject2Store filename: " + fileName + " "
+                                + e.toString(), e);
             }
         }
     }

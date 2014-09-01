@@ -162,7 +162,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
             }
 
         } catch (Exception e) {
-            LOGGER.error(e.toString(), e);
+            LOGGER.error("inject2Instance key: " + key + " " + e.toString(), e);
             return;
         }
     }
@@ -225,7 +225,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
             }
 
         } catch (Exception e) {
-            LOGGER.error(e.toString(), e);
+            LOGGER.error("key: " + key + " " + e.toString(), e);
             return;
         }
 

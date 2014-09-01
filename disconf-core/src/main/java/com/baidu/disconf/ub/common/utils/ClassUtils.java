@@ -97,9 +97,19 @@ public class ClassUtils {
      * 
      * @param field
      */
-    public static Object getValeByType(Class<?> type, String value)
+    public static Object getValeByType(Class<?> type, Object value)
             throws Exception {
 
+        // 预处理
+        if (!(value instanceof String)) {
+            value = "";
+        }
+
+        // trim
+        String dataValue = (String) value;
+        dataValue = dataValue.trim();
+
+        // process
         String typeName = type.getName();
         typeName = typeName.toLowerCase();
 
@@ -109,7 +119,7 @@ public class ClassUtils {
                 value = "0";
             }
 
-            return Integer.valueOf(value);
+            return Integer.valueOf(dataValue);
 
         } else if (typeName.equals("long") || typeName.equals("java.lang.long")) {
 
@@ -117,7 +127,7 @@ public class ClassUtils {
                 value = "0";
             }
 
-            return Long.valueOf(value);
+            return Long.valueOf(dataValue);
 
         } else if (typeName.equals("boolean")
                 || typeName.equals("java.lang.boolean")) {
@@ -126,7 +136,7 @@ public class ClassUtils {
                 value = "false";
             }
 
-            return Boolean.valueOf(value);
+            return Boolean.valueOf(dataValue);
 
         } else if (typeName.equals("double")
                 || typeName.equals("java.lang.double")) {
@@ -135,12 +145,11 @@ public class ClassUtils {
                 value = "0.0";
             }
 
-            return Double.valueOf(value);
+            return Double.valueOf(dataValue);
 
         } else {
 
             return value;
         }
     }
-
 }
