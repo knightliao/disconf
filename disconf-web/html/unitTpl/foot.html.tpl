@@ -1,6 +1,6 @@
 
-<div id="footer">
-    <div class="container clearfix">
+<div id="footer" style="padding:10px;">
+    <div class="clearfix">
         <div class="muted links pull-left">
             <a href="#">关于</a>
             <span class="sep">·</span>

@@ -14,53 +14,56 @@
 
 <body>
 
-    <div class="navbar navbar-fixed-top ">
-        <div class="navbar-inner zu-top">
-            <div class="container">
-                <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="nav-collapse collapse">
-
-                    <a id="indexMain" href="/main.html" class="brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
-                    <span class="span7"> </span>
-                    <form class="navbar-form pull-left">
-                        <button class="btn btn-warning" title="GitHub" type="button" style=""  onclick="window.open('https://github.com/knightliao/disconf', '_blank');">
-                            <i class="icon-circle-arrow-up  icon-white"></i> <b>GitHub</b>
-                        </button>
-                    </form>
-                    
-                    
-                    <ul class="nav pull-right" >
-                        
-                        <div class="login-yes"  style="display:none;padding:10px;">
-                            <li style="display:inline;">
-                                <a href="#">
-                                    <span class="zu-top-nav-link loginName" id="username"></span>
-                                </a>
-                            </li>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <li style="display:inline;">
-                                <a href="#" id="signout">
-                                    <span class="zu-top-nav-link" >退出</span>
-                                </a>
-                            </li>
-                        </div>
-                        
-                        
-                        <div class="login-no"  style="padding:10px;">
-                            <li style="display:inline;">
-                                <a href="/login.html"><span class="zu-top-nav-link">登录</span></a>
-                            </li>   
-                        </div>
-                        
-                    </ul>
-                    
-                </div>
-            </div>
-        </div>
+    <div id="top_nav_bar" class="navbar navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+			<div class="navbar-header">
+				<a id="indexMain" href="/main.html" class="navbar-brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="login-yes nav navbar-nav navbar-right" style="display:none;">
+                    <li>
+                         <a href="#"><span class="zu-top-nav-link loginName" id="username"></span></a>
+                    </li>
+                    <li>
+                         <a href="#" id="signout">
+                            <span class="zu-top-nav-link" >退出</span>
+                         </a>
+                    </li>
+               </ul>
+               <ul class="login-no nav navbar-nav navbar-right">
+                    <li>
+                         <a href="/login.html"><span class="zu-top-nav-link">登录</span></a>
+                    </li>
+				</ul>
+				<ul class="navbar-form navbar-right">
+					<li>
+						<button class="btn btn-warning" title="GitHub" type="button" onclick="window.open('https://github.com/knightliao/disconf', '_blank');">
+	                    	<span class="glyphicon glyphicon-link icon-white"></span> <b>GitHub</b>
+	                	</button>
+                	</li>
+                </ul>
+                <ul id="main_menu" class="nav navbar-nav navbar-right">
+                	<li class="zu-top-nav-link">
+                    	<a href="/main.html" ><span class="zu-top-nav-link">配置</span></a>
+                	</li>
+                	<li class="zu-top-nav-link">
+                    	<a href="/configUsage.html" ><span class="zu-top-nav-link">部署</span></a>
+                	</li>
+                	<li class="dropdown" class="zu-top-nav-link">
+		            	<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><span class="zu-top-nav-link">新建<b class="caret"></b></span></a>
+		            	<ul class="dropdown-menu">
+		              		<li><a href="/newapp.html">新建APP</a></li>
+		                	<li><a href="/newconfig_item.html">新建配置项</a></li>
+		                	<li><a href="/newconfig_file.html">新建配置文件</a></li>
+		                </ul>
+		            </li>
+					<li class="zu-top-nav-link">
+						<a href="https://github.com/knightliao/disconf" target="_blank"><span class="zu-top-nav-link">帮助</span></a>
+                	</li>
+                </ul>
+                
+			</div>
+		</div>
     </div>
     
     
@@ -96,8 +99,8 @@
 </div>
 
 
-<div id="footer">
-    <div class="container clearfix">
+<div id="footer" style="padding:10px;">
+    <div class="clearfix">
         <div class="muted links pull-left">
             <a href="#">关于</a>
             <span class="sep">·</span>

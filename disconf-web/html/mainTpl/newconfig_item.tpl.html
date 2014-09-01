@@ -4,16 +4,13 @@
 
 <%= page.head %>
 
-<%= page.nav %>
-
-
 <div id="mainwrap">
     <div class="main container">
 
         <div class="row-fluid">
             <ul class="breadcrumb" style="background-color:#fff;">
                 <li>
-                    <a href="/main.html">配置</a><span class="divider">/</span>
+                    <a href="/main.html">配置</a>
                 </li>
                 <li class="active">
                     新建配置项
@@ -22,27 +19,9 @@
         </div>
 
         <div class="row-fluid">
-
-            <div class="span3">
-                <div class="well sidebar-nav" style="padding:10px;background-color:#fff">
-                    <ul id="sidebarcur" class="nav nav-list">
-                        <li style="font-size:13px;" class="active">
-                            <a href="/newconfig_item.html">新建配置项</a>
-                        </li>
-                        <li style="font-size:13px;">
-                            <a href="/newconfig_file.html">新建配置文件</a>
-                        </li>
-                        <li style="font-size:13px;" >
-                            <a href="/newapp.html">新建APP</a>
-                        </li>
-                    </ul>
-                </div><!--/.well -->
-            </div>
-
             <div class="span9">
 
                 <div class="content oz">
-
                     <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
                         <h2 class="autoPush-detail-title"> 新建配置项</h2>
                         <div class="private-item">
