@@ -89,4 +89,50 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
             Assert.assertTrue(false);
         }
     }
+
+    /**
+     * 
+     */
+    @Test
+    public void testZooPrefixUrl() {
+
+        try {
+            RemoteUrl remoteUrl = new RemoteUrl(
+                    RemoteMockServer.ZOO_PREFIX_URL,
+                    RemoteMockServer.LOCAL_HOST_LIST);
+
+            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
+                    3, 3);
+
+            Assert.assertEquals(
+                    String.valueOf(RemoteMockServer.ZOO_PREFIX_VALUE),
+                    valueVo.getValue());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.assertTrue(false);
+        }
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testZooHost() {
+
+        try {
+            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.ZOO_URL,
+                    RemoteMockServer.LOCAL_HOST_LIST);
+
+            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
+                    3, 3);
+
+            Assert.assertEquals(String.valueOf(RemoteMockServer.ZOO_HOSTS),
+                    valueVo.getValue());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.assertTrue(false);
+        }
+    }
 }

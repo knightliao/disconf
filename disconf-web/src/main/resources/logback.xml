@@ -19,7 +19,7 @@
         <File>${log.base}.log</File>
         <rollingPolicy
             class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${log.base}.%d{yyyy-MM-dd}.log
+            <FileNamePattern>${log.base}.log.%d{yyyy-MM-dd}
             </FileNamePattern>
         </rollingPolicy>
         <encoder>

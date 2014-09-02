@@ -3,6 +3,7 @@ USE `disconf`;
 INSERT INTO `env` (`env_id`, `name`) VALUES (1, 'rd');
 INSERT INTO `env` (`env_id`, `name`) VALUES (2, 'qa');
 INSERT INTO `env` (`env_id`, `name`) VALUES (3, 'local');
+INSERT INTO `env` (`env_id`, `name`) VALUES (4, 'online');
 
 
 /* 密码是 MhxzKhl5258 */

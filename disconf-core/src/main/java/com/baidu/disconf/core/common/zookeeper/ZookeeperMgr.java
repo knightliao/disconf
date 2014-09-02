@@ -87,6 +87,8 @@ public class ZookeeperMgr {
         store = new ResilientActiveKeyValueStore();
         store.connect(hosts);
 
+        LOGGER.info("zoo prefix: " + defaultPrefixString);
+
         // 新建父目录
         makeDir(defaultPrefixString, ZooUtils.getIp());
     }

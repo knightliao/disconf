@@ -5,10 +5,14 @@
     <artifactId>disconf-web</artifactId>
     <packaging>war</packaging>
 
+    <url>https://github.com/knightliao/disconf/tree/master/disconf-web</url>
+    <description>https://github.com/knightliao/disconf/tree/master/disconf-web</description>
+    <name>disconf-web</name>
+
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
-        <version>2.6.12</version>
+        <version>2.6.13-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -226,7 +230,7 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            </dependency>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -285,30 +289,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>${project.build.offline.sourceDir}</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
-                            <excludes>
-                                <exclude>**/*.*.properties</exclude>
-                            </excludes>
-
-                            <includes>
-                                <include>**/*.properties</include>
-                                <include>**/*.xml</include>
-                                <include>**/*.ftl</include>
-                            </includes>
-                        </resource>
-                        <resource>
-                            <directory>${project.build.offline.sourceDir}</directory>
-                            <targetPath>/</targetPath>
-                            <includes>
-                                <include>**/bigpipe.conf</include>
-                            </includes>
-                        </resource>
-                    </webResources>
-                </configuration>
             </plugin>
 
             <!-- embedded jetty web server for run beidou, beidou-report, 
@@ -375,28 +355,20 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <webResources>
-                                <resource>
-                                    <directory>${project.build.offline.sourceDir}</directory>
-                                    <targetPath>WEB-INF/classes</targetPath>
-                                    <includes>
-                                        <include>**/*.properties</include>
-                                        <include>**/*.xml</include>
-                                        <include>**/*.ftl</include>
-                                    </includes>
-                                    <excludes>
-                                        <exclude>**/jdbc-mysql.properties</exclude>
-                                        <exclude>**/zoo.properties</exclude>
-                                        <exclude>**/redis-config.properties</exclude>
-                                    </excludes>
-                                </resource>
 
                                 <resource>
                                     <directory>${project.build.online.sourceDir}</directory>
                                     <targetPath>WEB-INF/classes</targetPath>
                                     <includes>
-                                        <include>**/jdbc-mysql.properties</include>
-                                        <include>**/zoo.properties</include>
-                                        <include>**/redis-config.properties</include>
+                                        <include>**/*.*</include>
+                                    </includes>
+                                </resource>
+
+                                <resource>
+                                    <directory>${project.build.online.sourceDir}</directory>
+                                    <targetPath>/</targetPath>
+                                    <includes>
+                                        <include>**/logagent.conf</include>
                                     </includes>
                                 </resource>
 
@@ -408,9 +380,5 @@
         </profile>
     </profiles>
 
-
-    <url>https://github.com/knightliao/disconf/tree/master/disconf-web</url>
-    <description>https://github.com/knightliao/disconf/tree/master/disconf-web</description>
-    <name>disconf-web</name>
 </project>
 

@@ -3,6 +3,7 @@ USE `disconf`;
 INSERT INTO `env` (`env_id`, `name`) VALUES (1, 'rd');
 INSERT INTO `env` (`env_id`, `name`) VALUES (2, 'qa');
 INSERT INTO `env` (`env_id`, `name`) VALUES (3, 'local');
+INSERT INTO `env` (`env_id`, `name`) VALUES (4, 'online');
 
 
 INSERT INTO `app` (`app_id`, `name`, `description`, `create_time`, `update_time`) VALUES (2, 'disconf_demo', 'disconf demo', '99991231235959', '99991231235959');

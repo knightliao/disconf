@@ -164,11 +164,20 @@ th {
     font-size: 12px;
 }
 
-/* startActivity 发起活动 */
-.sidebar {
-    width: 160px;
-    float: left;
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+    padding:5px;
+    min-height:400px;
+    height:100%;
+  }
 }
+
 .sidebar-mask {
     position: absolute;
     width: 160px;
@@ -767,7 +776,7 @@ q:before, q:after {
     color: #EEEEEE;
 }
 .zu-top-nav-link:hover {
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: none;
 }
 .zu-top-nav-link {
@@ -776,7 +785,7 @@ q:before, q:after {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.navbar-inner {
+#top_nav_bar {
     background: url("../img/header-bg.png") repeat-x scroll 0 0 transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
     background-attachment: fixed;
@@ -793,11 +802,11 @@ q:before, q:after {
 }
 
 .container {
-    max-width: 980px;
+    /*max-width: 980px;/
 }
 .main {
     font-family: arial, sans-serif;
-    width: 980px;
+    /*width: 980px;*/
 }
 
 #headwrap {
@@ -808,9 +817,9 @@ q:before, q:after {
 }
 
 #mainwrap {
-    padding-bottom: 40px;
     min-height: 80%;
     background: #f9f9f9;
+    margin-top:55px;
 }
 
 .content {

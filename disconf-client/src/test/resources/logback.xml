@@ -30,7 +30,7 @@
     </appender>
 
     <logger name="com.baidu.disconf">
-        <level value="INFO" />
+        <level value="DEBUG" />
     </logger>
 
     <logger name="org.springframework">

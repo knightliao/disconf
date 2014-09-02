@@ -33,6 +33,7 @@ public class Constants {
     public final static String STORE_FILE_URL_KEY = "file";
     public final static String STORE_ITEM_URL_KEY = "item";
     public final static String ZOO_HOSTS_URL_KEY = "hosts";
+    public final static String ZOO_HOSTS_URL_PREFIX_KEY = "prefix";
 
     // 通知Zookeeper更新配置的消息
     public final static String ZOO_UPDATE_STRING = "UPDATE-NOTIFYING";

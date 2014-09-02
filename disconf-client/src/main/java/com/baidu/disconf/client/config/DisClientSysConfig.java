@@ -104,13 +104,4 @@ public class DisClientSysConfig {
     @DisInnerConfigAnnotation(name = "enable_local_download_dir_in_class_path", defaultValue = "true")
     public boolean ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH = true;
 
-    /**
-     * zookeeper的前缀路径名
-     * 
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "zookeeper_url_prefix")
-    public String ZOOKEEPER_URL_PREFIX;
-
 }

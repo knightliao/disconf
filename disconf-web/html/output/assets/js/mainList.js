@@ -18,28 +18,23 @@
 					var html = "";
 					var result = data.page.result;
 					$.each(result, function(index, item) {
-						html += '<li><a rel=' + item.id + ' href="#">APP: '
+						html += '<li role="presentation" role="menuitem" tabindex="-1"><a rel=' + item.id + ' href="#">APP: '
 								+ item.name + '</a></li>';
 					});
-					html += '<li><a rel=' + -1 + ' href="#">所有APP</a></li>';
-					$("#appChoice").html(html);
+					$("#applist").html(html);
 				}
 			});
-	$("#appChoice").on('click', 'li a', function() {
-		$("#appChoiceA span:first-child").text($(this).text());
+	$("#applist").on('click', 'li a', function() {
 		appId = $(this).attr('rel');
+		$("#appDropdownMenuTitle").text($(this).text());
 		fetchVersion(appId);
 		fetchMainList();
-	});
+	}); 
 
 	//
 	// 获取版本信息
 	//
 	function fetchVersion(appId) {
-
-		$("#versionChoiceA span:first-child").text("选择版本");
-		version = "所有版本";
-
 		$.ajax({
 			type : "GET",
 			url : "/api/config/versionlist?appId=" + appId
@@ -50,13 +45,16 @@
 				$.each(result, function(index, item) {
 					html += '<li><a href="#">' + item + '</a></li>';
 				});
-				html += '<li><a href="#">' + "所有版本" + '</a></li>';
 				$("#versionChoice").html(html);
+				
+				$("#versionChoice li:first").addClass("active");
+				version = $("#versionChoice li:first a").text();
 			}
 		});
 		$("#versionChoice").on('click', 'li a', function() {
-			$("#versionChoiceA span:first-child").text($(this).text());
 			version = $(this).text();
+			$("#versionChoice li").removeClass("active");
+			$(this).parent().addClass("active");
 			fetchMainList();
 		});
 	}
@@ -73,16 +71,16 @@
 					var html = "";
 					var result = data.page.result;
 					$.each(result, function(index, item) {
-						html += '<li><a rel=' + item.id + ' href="#">环境:'
-								+ item.name + '</a></li>';
+						html += '<li><a rel=' + item.id + ' href="#">'
+								+ item.name + ' 环境</a></li>';
 					});
-					html += '<li><a rel=' + -1 + ' href="#">所有环境</a></li>';
 					$("#envChoice").html(html);
 				}
 			});
 	$("#envChoice").on('click', 'li a', function() {
-		$("#envChoiceA span:first-child").text($(this).text());
 		envId = $(this).attr('rel');
+		$("#envChoice li").removeClass("active");
+		$(this).parent().addClass("active");
 		fetchMainList();
 	});
 
@@ -92,7 +90,15 @@
 	// 渲染主列表
 	//
 	function fetchMainList() {
-
+		
+		//参数不正确，清空列表
+		if (appId == -1 || envId == -1 || version == "所有版本"){
+			$("#mainlist_error").text("请选择" + getTips()).show();
+			$("#accountBody").html("");
+			$("#mainlist").hide();
+			return;
+		}
+		$("#mainlist_error").hide();
 		var parameter = ""
 
 		url = "/api/config/list";
@@ -121,7 +127,14 @@
 				$.each(result, function(index, item) {
 					html += renderItem(item);
 				});
-				$("#accountBody").html(html);
+				if(html != ""){
+					$("#mainlist").show();
+					$("#accountBody").html(html);
+				}
+				
+			} else {
+				$("#accountBody").html("");
+				$("#mainlist").hide();
 			}
 			bindDetailEvent(result);
 		});
@@ -149,6 +162,9 @@
 
 	// 详细列表绑定事件
 	function bindDetailEvent(result) {
+		if(result == null){
+			return;
+		}
 		$.each(result, function(index, item) {
 			var id = item.configId;
 			// 绑定删除事件
@@ -174,6 +190,19 @@
 				fetchMainList();
 			}
 		});
+	}
+	
+	function getTips(){
+		if (appId == -1) {
+			return "APP";
+		}
+		if (envId == -1) {
+			return "环境";
+		}
+		if (version == "所有版本") {
+			return "版本";
+		}
+		return "参数";
 	}
 
 })(jQuery);

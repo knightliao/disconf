@@ -39,11 +39,28 @@ public class ZooController extends BaseController {
      */
     @RequestMapping(value = "/hosts", method = RequestMethod.GET)
     @ResponseBody
-    public ValueVo getItem() {
+    public ValueVo getHosts() {
 
         ValueVo confItemVo = new ValueVo();
         confItemVo.setStatus(Constants.OK);
         confItemVo.setValue(zooConfig.getZooHosts());
+
+        return confItemVo;
+    }
+
+    /**
+     * 获取ZK prefix
+     * 
+     * @param demoUserId
+     * @return
+     */
+    @RequestMapping(value = "/prefix", method = RequestMethod.GET)
+    @ResponseBody
+    public ValueVo getPrefixUrl() {
+
+        ValueVo confItemVo = new ValueVo();
+        confItemVo.setStatus(Constants.OK);
+        confItemVo.setValue(zooConfig.getZookeeperUrlPrefix());
 
         return confItemVo;
     }
