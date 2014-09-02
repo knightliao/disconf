@@ -32,6 +32,7 @@ import com.baidu.disconf.web.service.config.utils.ConfigUtils;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
+import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
@@ -59,6 +60,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private ZooKeeperDriver zooKeeperDriver;
+
+    @Autowired
+    private ZooConfig zooConfig;
 
     /**
      * 根据详细参数获取配置返回
@@ -287,11 +291,11 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         configDao.delete(configId);
     }
-    
-    private static final String DISCONF_GROUPNAME = "/disconf";
+
     @Override
     public String getUsageInfo() {
-        List<String> hostInfoList = zooKeeperDriver.getConf(DISCONF_GROUPNAME);
+        List<String> hostInfoList = zooKeeperDriver.getConf(zooConfig
+                .getZookeeperUrlPrefix());
         return StringUtils.join(hostInfoList, '\n');
     }
 }
