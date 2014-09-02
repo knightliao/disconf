@@ -23,9 +23,14 @@
 				<a id="indexMain" href="/main.html" class="navbar-brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
 			</div>
 			<div class="navbar-collapse collapse">
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Regular link</a></li>
+  <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Disabled link</a></li>
+  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
+</ul>
 				<ul class="login-yes nav navbar-nav navbar-right" style="display:none;">
                     <li>
-                         <a href="#"><span class="zu-top-nav-link loginName" id="username"></span></a>
+                         <a href="#"><span class="glyphicon glyphicon-user zu-top-nav-link loginName" id="username"></span></a>
                     </li>
                     <li>
                          <a href="#" id="signout">
@@ -75,39 +80,16 @@
     
     
 
-
-<div id="headwrap">
-    <div class="main container">
-        <div class="row-fluid">
-            <ul id="myTab" class="nav nav-tabs">
-                <li class="active">
-                    <a href="/main.html" >配置</a>
-                </li>
-                <li>
-                    <a href="/newconfig_item.html" >新建配置</a>
-                </li>
-                <li>
-                    <a href="/configUsage.html" >配置部署详情</a>
-                </li><li class="">
-                    <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
 <div id="mainwrap">
     <div class="main container">
 
         <div class="row-fluid">
             <ul class="breadcrumb" style="background-color:#fff;">
                 <li>
-                    <a href="/main.html">配置</a><span class="divider">/</span>
+                    <a href="/main.html">配置</a>
                 </li>
                 <li>
                     <span id="currentData"></span>
-                    <span class="divider">/</span>
                 </li>
                 <li class="active">
                     配置项修改
@@ -115,15 +97,15 @@
             </ul>
         </div>
 
-        <div class="row-fluid" >
+        <div class="row" >
 
-            <div class="span3">
+            <div class="col-md-3">
                 <div class="well sidebar-nav" style="padding:10px;background-color:#fff">
                     <ul id="sidebarcur" class="nav nav-list"></ul>
                 </div><!--/.well -->
             </div>
 
-            <div class="span9">
+            <div class="col-md-9">
 
                 <div class="content oz">
 
@@ -149,7 +131,7 @@
                             <span class="private-item-key">配置值：</span>
                             <input id="value" type="text"   class="private-item-value"/>
                         </p>
-                        <div id="error" class="error hide">
+                        <div id="error" class="alert alert-warning hide" role="alert">
                             表单选项不能为空或填写格式错误！
                         </div>
                         <div>

@@ -49,6 +49,7 @@
 				
 				$("#versionChoice li:first").addClass("active");
 				version = $("#versionChoice li:first a").text();
+				fetchMainList();
 			}
 		});
 		$("#versionChoice").on('click', 'li a', function() {
