@@ -66,14 +66,15 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
             boolean isExist = ZookeeperMgr.getInstance().exists(path);
             if (!isExist) {
-                LOG.error(path + " not exist.");
-                throw new RemoteException("zk.notify.error");
-            }
 
-            //
-            // 通知
-            //
-            ZookeeperMgr.getInstance().writePersistentUrl(path, value);
+                LOG.info(path + " not exist. not update ZK.");
+
+            } else {
+                //
+                // 通知
+                //
+                ZookeeperMgr.getInstance().writePersistentUrl(path, value);
+            }
 
         } catch (Exception e) {
 
@@ -83,7 +84,8 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
     }
 
     /**
-     * 返回groupName结点向下的所有zookeeper信息 
+     * 返回groupName结点向下的所有zookeeper信息
+     * 
      * @param root
      */
     public List<String> getConf(String groupName) {
@@ -93,9 +95,9 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
         try {
             getConf(zooKeeper, groupName, retList);
         } catch (KeeperException e) {
-            LOG.error(e.getMessage(),e);
+            LOG.error(e.getMessage(), e);
         } catch (InterruptedException e) {
-            LOG.error(e.getMessage(),e);
+            LOG.error(e.getMessage(), e);
         }
         return retList;
     }
@@ -144,7 +146,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
         }
 
     }
-    
+
     @Override
     public void destroy() throws Exception {
 
