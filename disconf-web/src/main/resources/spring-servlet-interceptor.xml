@@ -37,6 +37,7 @@
                     <list>
                         <value>/api/account/signin</value>
                         <value>/api/zoo/hosts</value>
+                        <value>/api/zoo/prefix</value>
                         <value>/api/config/item</value>
                         <value>/api/config/file</value>
                     </list>

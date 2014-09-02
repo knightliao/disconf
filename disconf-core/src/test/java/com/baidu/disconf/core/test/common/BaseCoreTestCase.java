@@ -121,6 +121,17 @@ public class BaseCoreTestCase {
                                 RemoteMockServer.CONTENT_TYPE).withStatus(200)
                         .withBody(GsonUtils.toJson(valueVo))));
 
+        valueVo = new ValueVo();
+        valueVo.setMessage("");
+        valueVo.setStatus(Constants.OK);
+        valueVo.setValue(RemoteMockServer.ZOO_PREFIX_VALUE);
+        // System.out.println(GsonUtils.toJson(valueVo));
+        stubFor(get(urlEqualTo(RemoteMockServer.ZOO_PREFIX_URL)).willReturn(
+                aResponse()
+                        .withHeader("Content-Type",
+                                RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVo))));
+
     }
 
     @Test

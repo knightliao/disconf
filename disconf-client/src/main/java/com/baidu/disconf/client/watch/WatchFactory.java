@@ -22,6 +22,7 @@ public class WatchFactory {
             .getLogger(WatchFactory.class);
 
     private static String hosts = null;
+    private static String zooPrefix = null;
     private static volatile Object hostsSync = new Object();
 
     /**
@@ -37,9 +38,9 @@ public class WatchFactory {
                     "ConfigMgr should be init before WatchFactory.getWatchMgr");
         }
 
-        if (hosts == null) {
+        if (hosts == null || zooPrefix == null) {
             synchronized (hostsSync) {
-                if (hosts == null) {
+                if (hosts == null || zooPrefix == null) {
 
                     // 获取 Zoo Hosts
                     try {
@@ -48,10 +49,12 @@ public class WatchFactory {
                                 .getZooHostsUrl(DisClientSysConfig
                                         .getInstance().CONF_SERVER_ZOO_ACTION));
 
+                        zooPrefix = fetcherMgr
+                                .getValueFromServer(DisconfWebPathMgr.getZooPrefixUrl(DisClientSysConfig
+                                        .getInstance().CONF_SERVER_ZOO_ACTION));
+
                         WatchMgr watchMgr = new WatchMgrImpl();
-                        watchMgr.init(
-                                hosts,
-                                DisClientSysConfig.getInstance().ZOOKEEPER_URL_PREFIX);
+                        watchMgr.init(hosts, zooPrefix);
 
                         return watchMgr;
 

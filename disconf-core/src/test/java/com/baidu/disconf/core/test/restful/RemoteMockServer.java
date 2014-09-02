@@ -52,4 +52,6 @@ public class RemoteMockServer {
     //
     public static final String ZOO_URL = "/api/zoo/hosts";
     public static final String ZOO_HOSTS = "127.0.0.1:8581,127.0.0.1:8582,127.0.0.1:8583";
+    public static final String ZOO_PREFIX_URL = "/api/zoo/prefix";
+    public static final String ZOO_PREFIX_VALUE = "/disconf";
 }

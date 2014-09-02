@@ -129,7 +129,6 @@ $('#form').ajaxForm({
 		if (is_ok == true) {
 			add_file_but.html("重新上传")
 			errorrar.html("&nbsp;&nbsp;上传成功！");
-			status.html("已上传:" + data.file_name);
 			upload_status = 2;
 		} else {
 			upload_status = 3;

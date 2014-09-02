@@ -91,4 +91,16 @@ public class DisconfWebPathMgr {
 
         return urlPrefix + Constants.SEP_STRING + Constants.ZOO_HOSTS_URL_KEY;
     }
+
+    /**
+     * 
+     * 获取 Disconf-Web 上的ZOO PrefixURL
+     * 
+     * @return
+     */
+    public static String getZooPrefixUrl(String urlPrefix) {
+
+        return urlPrefix + Constants.SEP_STRING
+                + Constants.ZOO_HOSTS_URL_PREFIX_KEY;
+    }
 }
