@@ -76,8 +76,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
         String requestPath = request.getRequestURI();
 
         // 显示所有用户的请求
-        LOG.info(request.getRequestURI() + "\t"
-                + request.getParameterMap().toString());
+        LOG.info(request.getRequestURI());
 
         if (notInterceptPathList != null) {
 
