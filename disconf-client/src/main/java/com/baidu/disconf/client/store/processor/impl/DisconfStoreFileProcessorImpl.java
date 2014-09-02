@@ -17,7 +17,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.inner.DisconfCenterStore;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
-import com.baidu.disconf.ub.common.utils.ClassUtils;
+import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
  * 配置文件仓库实现器
@@ -241,7 +241,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             try {
 
                 Object value = ClassUtils.getValeByType(keMap.get(fileItem)
-                        .getField().getType(),  object);
+                        .getField().getType(), object);
                 keMap.get(fileItem).setValue(value);
 
                 // 如果Object非null,则顺便也注入

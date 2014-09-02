@@ -16,7 +16,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.inner.DisconfCenterStore;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
-import com.baidu.disconf.ub.common.utils.ClassUtils;
+import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
  * 配置项仓库算子实现器

@@ -141,6 +141,10 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.knightliao.apollo</groupId>
+            <artifactId>apollo</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

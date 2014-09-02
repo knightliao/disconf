@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.baidu.disconf.ub.common.utils.TokenUtil;
 import com.baidu.disconf.web.service.user.constant.UserConstant;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.service.UserMgr;
@@ -20,6 +19,7 @@ import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.interceptor.WebCommonInterceptor;
 import com.baidu.ub.common.log.AopLogFactory;
+import com.github.knightliao.apollo.utils.tool.TokenUtil;
 import com.github.knightliao.apollo.utils.web.CookieUtils;
 
 /**

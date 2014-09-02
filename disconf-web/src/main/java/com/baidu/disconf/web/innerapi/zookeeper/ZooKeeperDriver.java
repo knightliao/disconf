@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
-import com.baidu.disconf.ub.common.utils.StringUtils;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.dsp.common.exception.RemoteException;
 

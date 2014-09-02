@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.baidu.disconf.ub.common.utils.RandomUtil;
+import com.github.knightliao.apollo.utils.common.RandomUtil;
 
 /**
  * 提供HA特性的Redis客户端调用callback抽象类

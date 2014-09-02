@@ -1,10 +1,10 @@
 package com.baidu.disconf.web.web.config.validator;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf.ub.common.utils.StringUtils;
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.config.bo.Config;

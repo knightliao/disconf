@@ -5,8 +5,8 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.baidu.disconf.ub.common.utils.StringUtils;
 import com.baidu.dsp.common.constraint.ListInConstraint;
+import com.github.knightliao.apollo.utils.common.StringUtil;
 
 public class ListInValidator implements
         ConstraintValidator<ListInConstraint, Integer> {
@@ -21,7 +21,7 @@ public class ListInValidator implements
 
         this.allowIntegerListStr = constraintAnnotation.allowIntegerList();
 
-        allowIntegerList = StringUtils.parseStringToIntegerList(
+        allowIntegerList = StringUtil.parseStringToIntegerList(
                 allowIntegerListStr, SEP);
     }
 

@@ -6,11 +6,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.baidu.disconf.ub.common.utils.RandomUtil;
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
 import com.baidu.ub.common.log.AopLogFactory;
+import com.github.knightliao.apollo.utils.common.RandomUtil;
 
 /**
  * 

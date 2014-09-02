@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
-import com.baidu.disconf.ub.common.utils.ClassUtils;
-import com.baidu.disconf.ub.common.utils.ConfigLoaderUtils;
+import com.github.knightliao.apollo.utils.common.ClassUtils;
+import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 
 /**
  * 配置导入工具

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-import com.baidu.disconf.ub.common.utils.FileUtils;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 import com.baidu.dsp.common.exception.FieldException;
@@ -34,6 +33,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.dsp.common.vo.JsonObjectError;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
 import com.baidu.ub.common.log.AopLogFactory;
+import com.github.knightliao.apollo.utils.io.FileUtils;
 
 /**
  * 

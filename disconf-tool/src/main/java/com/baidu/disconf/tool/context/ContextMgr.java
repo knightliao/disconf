@@ -10,15 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.ub.common.redis.RedisClient;
-import com.baidu.disconf.ub.common.utils.JsonUtils;
+import com.github.knightliao.apollo.utils.data.JsonUtils;
 
 /**
- * @description : ContextMgr
- * 通过一个Redis服务器保存主机的Context信息
+ * @description : ContextMgr 通过一个Redis服务器保存主机的Context信息
  * 
- * @author      : WuNing
- * @email       : Wuning01@baidu.com
- * @date        : 2014年7月29日 下午3:56:11
+ * @author : WuNing
+ * @email : Wuning01@baidu.com
+ * @date : 2014年7月29日 下午3:56:11
  */
 
 public class ContextMgr {
@@ -30,7 +29,7 @@ public class ContextMgr {
     /**
      * 
      * @description: 通过一个Redis服务，初始化ContextMgr
-     *
+     * 
      * @param redisServer
      * @param port
      * @param authKey
@@ -59,18 +58,18 @@ public class ContextMgr {
         try {
             client.hput(key, field, str);
         } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
         }
-         logger.info("[Disconf Context Save]" + key + ":" + field + " : " + str);
+        logger.info("[Disconf Context Save]" + key + ":" + field + " : " + str);
     }
 
     /**
-     * 加载一个环境变量的值
-     * 当值加载失败后，返回默认值
+     * 加载一个环境变量的值 当值加载失败后，返回默认值
      * 
      * @param key
      * @param clz
-     * @param defaultVal 默认值，可以为空，要求类型就是clz，
+     * @param defaultVal
+     *            默认值，可以为空，要求类型就是clz，
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -78,10 +77,11 @@ public class ContextMgr {
 
         String jsonStr = (String) client.hget(key, field);
 
-        logger.info("[Disconf Context Load]" + key + ":" + field + " : " + jsonStr);
+        logger.info("[Disconf Context Load]" + key + ":" + field + " : "
+                + jsonStr);
 
         Object ret = JsonUtils.json2Object(jsonStr, clz);
-        
+
         // json2Object return "" when error happens
         if ("".equals(ret)) {
             ret = defaultVal;

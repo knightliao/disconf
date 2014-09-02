@@ -1,13 +1,14 @@
 package com.baidu.disconf.client.config.inner;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
-import com.baidu.disconf.ub.common.utils.ConfigLoaderUtils;
-import com.baidu.disconf.ub.common.utils.OsUtil;
-import com.baidu.disconf.ub.common.utils.StringUtils;
+import com.github.knightliao.apollo.utils.common.StringUtil;
+import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
+import com.github.knightliao.apollo.utils.io.OsUtil;
 
 /**
  * 用户配置、系统配置 的校验
@@ -42,7 +43,7 @@ public class DisInnerConfigHelper {
             throw new Exception("settings: CONF_SERVER_HOST cannot find");
         }
         DisClientConfig.getInstance().setHostList(
-                StringUtils.parseStringToStringList(
+                StringUtil.parseStringToStringList(
                         DisClientConfig.getInstance().CONF_SERVER_HOST, ","));
         LOGGER.info("SERVER conf_server_host: "
                 + DisClientConfig.getInstance().getHostList());

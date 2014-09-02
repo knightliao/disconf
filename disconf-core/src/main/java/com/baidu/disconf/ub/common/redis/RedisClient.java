@@ -22,6 +22,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +34,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Protocol;
 import redis.clients.util.SafeEncoder;
 
-import com.baidu.disconf.ub.common.utils.JsonUtils;
-import com.baidu.disconf.ub.common.utils.StringUtils;
+import com.github.knightliao.apollo.utils.data.JsonUtils;
 
 /**
  * ClassName: RedisConnection <br>
