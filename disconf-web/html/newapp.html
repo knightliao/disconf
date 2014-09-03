@@ -1,7 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="not-ie">
+<!--<![endif]-->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -20,9 +23,14 @@
 				<a id="indexMain" href="/main.html" class="navbar-brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
 			</div>
 			<div class="navbar-collapse collapse">
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Regular link</a></li>
+  <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Disabled link</a></li>
+  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another link</a></li>
+</ul>
 				<ul class="login-yes nav navbar-nav navbar-right" style="display:none;">
                     <li>
-                         <a href="#"><span class="zu-top-nav-link loginName" id="username"></span></a>
+                         <a href="#"><span class="glyphicon glyphicon-user zu-top-nav-link loginName" id="username"></span></a>
                     </li>
                     <li>
                          <a href="#" id="signout">
@@ -102,7 +110,7 @@
                             <span class="private-item-key">说明：</span>
                             <textarea id="desc" type="text" class="private-item-value" style="width:400px;height:200px;"></textarea>
                         </div>
-                        <div id="error" class="error hide">
+                        <div id="error" class="alert alert-warning hide" role="alert">
                             表单选项不能为空或填写格式错误！
                         </div>
                         <div class="private-item" style="text-align:center">

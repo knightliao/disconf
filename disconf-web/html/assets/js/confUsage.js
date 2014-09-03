@@ -19,7 +19,6 @@
 				var html = data.result.hostInfo;
 				$("#hostInfo").html(html);
 			}
-			bindDetailEvent(result);
 		});
 
 	}

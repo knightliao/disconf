@@ -40,11 +40,12 @@
 
 	// 提交
 	$("#submit").on("click", function(e) {
+		$("#error").addClass("hide");
 		var me = this;
 		var value = $("#value").val();
 		// 验证
 		if (!value) {
-			$("#error").show();
+			$("#error").removeClass("hide");
 			$("#error").html("表单不能为空或填写格式错误！");
 			return;
 		}
@@ -55,7 +56,7 @@
 				"value" : value
 			}
 		}).done(function(data) {
-			$("#error").show();
+			$("#error").removeClass("hide");
 			if (data.success === "true") {
 				$("#error").html(data.result);
 			} else {

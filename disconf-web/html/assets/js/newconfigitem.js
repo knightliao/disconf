@@ -5,6 +5,7 @@ getSession();
 
 // 提交
 $("#item_submit").on("click", function(e) {
+	$("#error").addClass("hide");
 
 	if (version == '自定义版本') {
 		version = $('#selfversion_value').val();
@@ -15,7 +16,7 @@ $("#item_submit").on("click", function(e) {
 
 	// 验证
 	if (appId < 1 || envId < 1 || version == "" || !value || !key) {
-		$("#error").show();
+		$("#error").removeClass("hide");
 		$("#error").html("表单不能为空或填写格式错误！");
 		return;
 	}
@@ -30,7 +31,7 @@ $("#item_submit").on("click", function(e) {
 			"value" : value
 		}
 	}).done(function(data) {
-		$("#error").show();
+		$("#error").removeClass("hide");
 		if (data.success === "true") {
 			$("#error").html(data.result);
 		} else {

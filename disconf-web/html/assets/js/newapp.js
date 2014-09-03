@@ -5,13 +5,13 @@ getSession();
 
 // 提交
 $("#item_submit").on("click", function(e) {
-
+	$("#error").addClass("hide");
 	var app = $("#app").val();
 	var desc = $("#desc").val();
 
 	// 验证
 	if (!desc || !app) {
-		$("#error").show();
+		$("#error").removeClass("hide");
 		$("#error").html("表单不能为空或填写格式错误！");
 		return;
 	}
@@ -23,7 +23,7 @@ $("#item_submit").on("click", function(e) {
 			"desc" : desc,
 		}
 	}).done(function(data) {
-		$("#error").show();
+		$("#error").removeClass("hide");
 		if (data.success === "true") {
 			$("#error").html(data.result);
 		} else {

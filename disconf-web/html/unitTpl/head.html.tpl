@@ -13,7 +13,7 @@
 			<div class="navbar-collapse collapse">
 				<ul class="login-yes nav navbar-nav navbar-right" style="display:none;">
                     <li>
-                         <a href="#"><span class="zu-top-nav-link loginName" id="username"></span></a>
+                         <a href="#"><span class="glyphicon glyphicon-user zu-top-nav-link loginName" id="username"></span></a>
                     </li>
                     <li>
                          <a href="#" id="signout">
