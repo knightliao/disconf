@@ -1,0 +1,10 @@
+/target
+/bin
+/.settings
+/.classpath
+/.project
+/pom.xml.releaseBackup
+/hs_err_pid1904.log
+/confA.properties
+/disconf
+/coverage-report

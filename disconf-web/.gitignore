@@ -1,0 +1,9 @@
+/target
+/bin
+/.settings
+/.classpath
+/.project
+/log
+/pom.xml.releaseBackup
+/output
+/.pydevproject

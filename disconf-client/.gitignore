@@ -1,0 +1,11 @@
+/target
+/bin
+/.settings
+/.classpath
+/.project
+/disconf
+/log
+/.pydevproject
+/pom.xml.releaseBackup
+/coverage-report
+/tmp
