@@ -98,14 +98,14 @@
             <version>2.1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>3.2.6.RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>com.baidu.disconf</groupId>
             <artifactId>disconf-client</artifactId>
             <version>2.6.13-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.1.2.RELEASE</version>
         </dependency>
     </dependencies>
 

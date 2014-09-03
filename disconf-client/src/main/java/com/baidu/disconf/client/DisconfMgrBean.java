@@ -1,8 +1,9 @@
 package com.baidu.disconf.client;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
@@ -12,7 +13,7 @@ import org.springframework.core.PriorityOrdered;
  * @author liaoqiqi
  * @version 2014-6-17
  */
-public class DisconfMgrBean implements BeanFactoryPostProcessor,
+public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor,
         PriorityOrdered {
 
     /**
@@ -42,12 +43,21 @@ public class DisconfMgrBean implements BeanFactoryPostProcessor,
     }
 
     /**
-     * 第一次扫描
+     * 这个函数无法达到最高优先级，例如PropertyPlaceholderConfigurer
      */
     @Override
     public void postProcessBeanFactory(
             ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
+    }
+
+    /**
+     * 第一次扫描<br/>
+     * 在Spring内部的Bean定义初始化后执行，这样是最高优先级的
+     */
+    @Override
+    public void postProcessBeanDefinitionRegistry(
+            BeanDefinitionRegistry registry) throws BeansException {
         DisconfMgr.firstScan(scanPackage);
     }
 }
