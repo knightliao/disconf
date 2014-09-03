@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="not-ie">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Disconf - 分布式配置管理平台</title>
+
+    <link rel="stylesheet" type="text/css" href="dep/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="dep/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/project.css" />
+</head>
+
+<body>
+
+    <div id="top_nav_bar" class="navbar navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+			<div class="navbar-header">
+				<a id="indexMain" href="/main.html" class="navbar-brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="login-yes nav navbar-nav navbar-right" style="display:none;">
+                    <li>
+                         <a href="#"><span class="glyphicon glyphicon-user zu-top-nav-link loginName" id="username"></span></a>
+                    </li>
+                    <li>
+                         <a href="#" id="signout">
+                            <span class="zu-top-nav-link" >退出</span>
+                         </a>
+                    </li>
+               </ul>
+               <ul class="login-no nav navbar-nav navbar-right">
+                    <li>
+                         <a href="/login.html"><span class="zu-top-nav-link">登录</span></a>
+                    </li>
+				</ul>
+				<ul class="navbar-form navbar-right">
+					<li>
+						<button class="btn btn-warning" title="GitHub" type="button" onclick="window.open('https://github.com/knightliao/disconf', '_blank');">
+	                    	<span class="glyphicon glyphicon-link icon-white"></span> <b>GitHub</b>
+	                	</button>
+                	</li>
+                </ul>
+                <ul id="main_menu" class="nav navbar-nav navbar-right">
+                	<li class="zu-top-nav-link">
+                    	<a href="/main.html" ><span class="zu-top-nav-link">配置</span></a>
+                	</li>
+                	<li class="zu-top-nav-link">
+                    	<a href="/configUsage.html" ><span class="zu-top-nav-link">部署</span></a>
+                	</li>
+                	<li class="dropdown" class="zu-top-nav-link">
+		            	<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><span class="zu-top-nav-link">新建<b class="caret"></b></span></a>
+		            	<ul class="dropdown-menu">
+		              		<li><a href="/newapp.html">新建APP</a></li>
+		                	<li><a href="/newconfig_item.html">新建配置项</a></li>
+		                	<li><a href="/newconfig_file.html">新建配置文件</a></li>
+		                </ul>
+		            </li>
+					<li class="zu-top-nav-link">
+						<a href="https://github.com/knightliao/disconf" target="_blank"><span class="zu-top-nav-link">帮助</span></a>
+                	</li>
+                </ul>
+                
+			</div>
+		</div>
+    </div>
+    
+    
+    
+    
+    
+    
+
+<div id="mainwrap" style="margin-top:50px;">
+	<div class="container-fluid">
+		<div class="row" style="min-height:400px;">
+			<div class="col-md-2 sidebar"><div class="dropdown" style="margin-top:20px;width:100%;">
+  <button class="btn btn-default dropdown-toggle" type="button" id="appDropdownMenu" data-toggle="dropdown" style="width:100%;">
+    <span id="appDropdownMenuTitle">Apps</span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" id ="applist"  role="menu" aria-labelledby="appDropdownMenu">
+  </ul>
+</div>
+
+<!--envroment list-->
+<ul id="envChoice" class="nav nav-pills nav-stacked" style="margin-top:20px;">
+
+</ul></div>
+			<div class="col-md-10">
+
+				<div class="container-fluid">
+
+					<div class="row-fluid">
+						<div class="contentWrap clearfix">
+							<ul id="versionChoice" class="nav nav-tabs" role="tablist">
+							</ul>
+						</div>
+					</div>
+
+					<div class="row-fluid">
+
+						<div class="contentWrap clearfix">
+							<div id="mainlist_error" class="alert alert-warning" role="alert"></div>
+							<table id="mainlist" class="account-tableWrap" style="display:none">
+								<thead>
+									<tr>
+										<td>名称(appid)</td>
+										<td>版本</td>
+										<td>环境</td>
+										<td>类型</td>
+										<td>文件名或KEY</td>
+										<td>最近修改时间</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody id="accountBody" class="account-tableWrap">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			<!-- 详细信息单行模板-->
+			<div id="tbodyTpl" class="hide">
+				<table>
+					<tr>
+						<td>{0}({1})</td>
+						<td>{2}</td>
+						<td>{4}</td>
+						<td>{5}</td>
+						<td>{6}</td>
+						<td>{8}</td>
+						<td>{10} &nbsp; {11}</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div id="footer" style="padding:10px;">
+    <div class="clearfix">
+        <div class="muted links pull-left">
+            <a href="#">关于</a>
+            <span class="sep">·</span>
+            <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
+        </div>
+
+        <p class="muted credit pull-right">
+            © baidu.com  All Rights Reserved.
+        </p>
+
+    </div>
+</div>
+
+<script src="assets/js/jquery-1.11.0.js"></script>
+<script src="dep/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="dep/bootstrap/js/bootstrap.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/common.js"></script>
+
+<script src="assets/js/mainList.js"></script>
+
+        
+        
+     <script src="assets/js/footer.js"></script>
+     
+    </body>
+</html>
+

@@ -1,0 +1,54 @@
+<%= page.basehead %>
+
+<title>Disconf - 分布式配置管理平台</title>
+
+<%= page.head %>
+
+<div id="mainwrap">
+    <div class="main container">
+
+        <div class="row-fluid">
+            <ul class="breadcrumb" style="background-color:#fff;">
+                <li>
+                    <a href="/main.html">配置</a>
+                </li>
+                <li class="active">
+                    新建APP
+                </li>
+            </ul>
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="span9">
+
+                <div class="content oz">
+
+                    <form id="form" class="private-form clearfix">
+                        <h2 class="autoPush-detail-title">新建APP</h2>
+                        <div class="private-item">
+                            <span class="private-item-key">APP：</span>
+                            <input id="app" type="text"   class="private-item-value"/>
+                        </div>
+                        <div class="private-item">
+                            <span class="private-item-key">说明：</span>
+                            <textarea id="desc" type="text" class="private-item-value" style="width:400px;height:200px;"></textarea>
+                        </div>
+                        <div id="error" class="alert alert-warning hide" role="alert">
+                            表单选项不能为空或填写格式错误！
+                        </div>
+                        <div class="private-item" style="text-align:center">
+                            <a id="item_submit" class="btn btn-primary" > 新建 </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= page.foot %>
+
+<script src="assets/js/newapp.js"></script>
+
+<%= page.basefoot %>
