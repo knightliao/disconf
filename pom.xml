@@ -47,6 +47,7 @@
         <!-- 模块版本号 -->
         <disconf-core.version>2.6.13</disconf-core.version>
         <disconf-client.version>2.6.13</disconf-client.version>
+        <disconf-tool.version>2.6.13</disconf-tool.version>
 
         <!-- Baidu repositories -->
         <baidu.local.repository>http://maven.scm.baidu.com:8081/nexus/content/groups/public</baidu.local.repository>
@@ -486,7 +487,7 @@
             <dependency>
                 <groupId>com.github.knightliao.apollo</groupId>
                 <artifactId>apollo</artifactId>
-                <version>1.0.2</version>
+                <version>1.0.3-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
