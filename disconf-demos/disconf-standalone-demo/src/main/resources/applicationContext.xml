@@ -46,11 +46,6 @@
         <property name="remotePort" value="${remotePort}" />
     </bean>
 
-    <bean id="staticConfig" class="com.baidu.disconf.demo.config.StaticConfig">
-        <property name="staticVar" value="${staticVar}" />
-    </bean>
-
-
     <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
         destroy-method="destory">
         <property name="scanPackage" value="com.baidu.disconf.demo" />

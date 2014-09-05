@@ -72,12 +72,17 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     /**
      * 更新 一个配置
      */
-    public void updateOneConf(String keyName) throws Exception {
+    private void updateOneConf(String keyName) throws Exception {
 
         DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor
                 .getConfData(keyName);
         if (disconfCenterItem != null) {
+
+            // 更新仓库
             updateOneConfItem(keyName, disconfCenterItem);
+
+            // 更新实例
+            inject2OneConf(keyName, disconfCenterItem);
         }
     }
 
@@ -129,7 +134,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     *
+     * 更新消息:
      */
     @Override
     public void updateOneConfAndCallback(String key) throws Exception {
@@ -142,8 +147,37 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     * 
+     * 某个配置项：注入到实例中
      */
+    private void inject2OneConf(String key, DisconfCenterItem disconfCenterItem) {
+
+        if (disconfCenterItem == null) {
+            return;
+        }
+
+        try {
+
+            Object object = null;
+
+            Field field = disconfCenterItem.getField();
+
+            //
+            // 静态
+            //
+            if (Modifier.isStatic(field.getModifiers())) {
+
+            } else {
+
+                object = DisconfCoreProcessUtils.getSpringBean(field
+                        .getDeclaringClass());
+            }
+
+            disconfStoreProcessor.inject2Instance(object, key);
+
+        } catch (Exception e) {
+            LOGGER.warn(e.toString(), e);
+        }
+    }
 
     /**
      * 
@@ -162,32 +196,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor
                     .getConfData(key);
 
-            if (disconfCenterItem == null) {
-                continue;
-            }
-
-            try {
-
-                Object object = null;
-
-                Field field = disconfCenterItem.getField();
-
-                //
-                // 静态
-                //
-                if (Modifier.isStatic(field.getModifiers())) {
-
-                } else {
-
-                    object = DisconfCoreProcessUtils.getSpringBean(field
-                            .getDeclaringClass());
-                }
-
-                disconfStoreProcessor.inject2Instance(object, key);
-
-            } catch (Exception e) {
-                LOGGER.warn(e.toString(), e);
-            }
+            inject2OneConf(key, disconfCenterItem);
         }
     }
 

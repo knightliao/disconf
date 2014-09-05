@@ -46,6 +46,9 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         this.watchMgr = watchMgr;
     }
 
+    /**
+    * 
+    */
     @Override
     public void processAllItems() {
 
@@ -69,7 +72,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     * 更新 一個配置文件
+     * 更新 一個配置文件, 下载、注入到仓库、Watch 三步骤
      */
     private void updateOneConfFile(String fileName,
             DisconfCenterFile disconfCenterFile) throws Exception {
@@ -132,7 +135,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     * 
+     * 更新消息: 某个配置文件 + 回调
      */
     @Override
     public void updateOneConfAndCallback(String key) throws Exception {
@@ -145,16 +148,62 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     * 
+     * 更新消息：某个配置文件
      */
-    @Override
-    public void updateOneConf(String fileName) throws Exception {
+    private void updateOneConf(String fileName) throws Exception {
 
         DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
                 .getConfData(fileName);
 
         if (disconfCenterFile != null) {
+
+            // 更新仓库
             updateOneConfFile(fileName, disconfCenterFile);
+
+            // 更新实例
+            inject2OneConf(fileName, disconfCenterFile);
+        }
+    }
+
+    /**
+     * 为某个配置文件进行注入实例中
+     * 
+     * @param fileName
+     */
+    private void inject2OneConf(String fileName,
+            DisconfCenterFile disconfCenterFile) {
+
+        if (disconfCenterFile == null) {
+            return;
+        }
+
+        try {
+
+            //
+            // 获取实例
+            //
+
+            Object object = null;
+            try {
+
+                object = disconfCenterFile.getObject();
+                if (object == null) {
+                    object = DisconfCoreProcessUtils
+                            .getSpringBean(disconfCenterFile.getCls());
+                }
+
+            } catch (Exception e) {
+
+                LOGGER.debug(disconfCenterFile.getCls()
+                        + " may be a non-java-bean");
+                object = null;
+            }
+
+            // 注入实体中
+            disconfStoreProcessor.inject2Instance(object, fileName);
+
+        } catch (Exception e) {
+            LOGGER.warn(e.toString(), e);
         }
     }
 
@@ -172,39 +221,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
                     .getConfData(key);
 
-            if (disconfCenterFile == null) {
-                continue;
-            }
-
-            try {
-
-                //
-                // 获取实例
-                //
-
-                Object object = null;
-                try {
-
-                    object = disconfCenterFile.getObject();
-                    if (object == null) {
-                        object = DisconfCoreProcessUtils
-                                .getSpringBean(disconfCenterFile.getCls());
-                    }
-
-                } catch (Exception e) {
-
-                    LOGGER.debug(disconfCenterFile.getCls()
-                            + " may be a non-java-bean");
-                    object = null;
-                }
-
-                // 注入实体中
-                disconfStoreProcessor.inject2Instance(object, key);
-
-            } catch (Exception e) {
-                LOGGER.warn(e.toString(), e);
-            }
-
+            inject2OneConf(key, disconfCenterFile);
         }
     }
 }

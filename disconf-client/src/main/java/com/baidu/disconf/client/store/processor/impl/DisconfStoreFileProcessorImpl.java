@@ -225,10 +225,6 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
         for (String fileItem : keMap.keySet()) {
 
-            if (fileItem.equals("UC_SFDRM2_READ_TIMEOUT")) {
-                System.out.print("");
-            }
-
             Object object = disconfValue.getProperties().get(fileItem);
             if (object == null) {
                 LOGGER.error(

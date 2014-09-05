@@ -19,11 +19,6 @@ public interface DisconfCoreProcessor {
     void updateOneConfAndCallback(String key) throws Exception;
 
     /**
-     * 更新 一个配置(没有回调)
-     */
-    void updateOneConf(String keyName) throws Exception;
-
-    /**
      * 特殊的，将数据注入到配置实体中
      */
     void inject2Conf();
