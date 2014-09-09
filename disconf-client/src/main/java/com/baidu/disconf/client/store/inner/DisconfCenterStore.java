@@ -69,8 +69,8 @@ public class DisconfCenterStore {
         if (confFileMap.containsKey(fileName)) {
 
             LOGGER.error("There are two same fileName!!!! " + "first: "
-                    + confFileMap.get(fileName).getCls().toString()
-                    + ", Second: " + disconfCenterFile.toString());
+                    + confFileMap.get(fileName).toString() + ", Second: "
+                    + disconfCenterFile.toString());
         } else {
             confFileMap.put(fileName, disconfCenterFile);
         }
