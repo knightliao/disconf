@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
-import com.baidu.disconf.client.scan.inner.ScanVerify;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
+import com.baidu.disconf.client.utils.MethodUtils;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
@@ -61,7 +61,7 @@ public class DisconfAspectJ {
         //
         // Field名
         //
-        Field field = ScanVerify.getFieldFromMethod(method,
+        Field field = MethodUtils.getFieldFromMethod(method,
                 cls.getDeclaredFields(), DisConfigTypeEnum.FILE);
         if (field != null) {
 

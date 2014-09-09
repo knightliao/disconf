@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.scan.inner;
+package com.baidu.disconf.client.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -7,66 +7,20 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
-import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
- * 扫描校验模块
  * 
  * @author liaoqiqi
- * @version 2014-6-15
+ * @version 2014-9-9
  */
-public class ScanVerify {
+public class MethodUtils {
 
     protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ScanVerify.class);
-
-    /**
-     * 判断回调函数实现的接口是否正确
-     * 
-     * @return
-     */
-    public static boolean hasIDisconfUpdate(Class<?> disconfUpdateServiceClass) {
-
-        Class<?>[] interfaceClasses = disconfUpdateServiceClass.getInterfaces();
-        boolean hasInterface = false;
-        for (Class<?> infClass : interfaceClasses) {
-            if (infClass.equals(IDisconfUpdate.class)) {
-                hasInterface = true;
-            }
-        }
-        if (!hasInterface) {
-            LOGGER.error("Your class " + disconfUpdateServiceClass.toString()
-                    + " should implement interface: "
-                    + IDisconfUpdate.class.toString());
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * 判断配置文件的类型是否正确
-     * 
-     * @return
-     */
-    public static boolean isDisconfFileTypeRight(DisconfFile disconfFile) {
-
-        String fileName = disconfFile.filename();
-
-        if (!fileName.endsWith(".properties")) {
-
-            LOGGER.error("now we only support .properites conf: "
-                    + disconfFile.toString());
-            return false;
-        }
-
-        return true;
-    }
+            .getLogger(MethodUtils.class);
 
     /**
      * 对于一个 get/is 方法，返回其相对应的Field

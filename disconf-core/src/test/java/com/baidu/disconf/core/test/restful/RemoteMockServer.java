@@ -38,6 +38,13 @@ public class RemoteMockServer {
     public static final String STATIC_FILE_CONTENT = "staticvar=50\r\nstaticvar2=100";
 
     //
+    // 非注解 方式
+    //
+    public static final String NON_ANOTATION_FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=atomserverl.properties&version=1_0_0_0";
+    public static final String NON_ANOTATION_FILE_NAME = "atomserverl.properties";
+    public static final String NON_ANOTATTION_FILE_CONTENT = "server=10.81.11.243:16600,10.81.11.243:16602,10.81.11.243:16603\r\nretry=3";
+
+    //
     // 配置项
     //
     public static final String ITEM_URL = "/api/config/item?app=disconf_testcase&env=rd&type=1&key=keyA&version=1_0_0_0";

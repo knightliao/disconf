@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.scan.inner;
+package com.baidu.disconf.client.scan.inner.statically;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -25,7 +25,8 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.constants.Constants;
-import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
+import com.baidu.disconf.client.scan.inner.common.ScanVerify;
+import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.google.common.base.Predicate;
 
 /**

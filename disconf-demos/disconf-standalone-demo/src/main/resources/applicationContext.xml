@@ -49,6 +49,11 @@
     <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
         destroy-method="destory">
         <property name="scanPackage" value="com.baidu.disconf.demo" />
+        <property name="fileList">
+            <list>
+                <value>atomserverl.properties</value>
+            </list>
+        </property>
     </bean>
     <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
         init-method="init" destroy-method="destory">

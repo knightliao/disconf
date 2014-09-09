@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.scan.inner;
+package com.baidu.disconf.client.scan.inner.dynamic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,8 +14,9 @@ import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.model.DisconfKey;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
-import com.baidu.disconf.client.scan.inner.model.ScanDynamicModel;
-import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
+import com.baidu.disconf.client.scan.inner.common.ScanVerify;
+import com.baidu.disconf.client.scan.inner.dynamic.model.ScanDynamicModel;
+import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.utils.SpringContextUtil;

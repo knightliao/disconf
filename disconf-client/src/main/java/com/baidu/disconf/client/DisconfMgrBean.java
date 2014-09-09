@@ -1,5 +1,8 @@
 package com.baidu.disconf.client;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -15,6 +18,8 @@ import org.springframework.core.PriorityOrdered;
  */
 public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor,
         PriorityOrdered {
+
+    private Set<String> fileList = new HashSet<String>();
 
     /**
      * 
@@ -58,6 +63,14 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor,
     @Override
     public void postProcessBeanDefinitionRegistry(
             BeanDefinitionRegistry registry) throws BeansException {
-        DisconfMgr.firstScan(scanPackage);
+        DisconfMgr.firstScan(scanPackage, fileList);
+    }
+
+    public Set<String> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(Set<String> fileList) {
+        this.fileList = fileList;
     }
 }

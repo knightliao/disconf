@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.scan.inner.model;
+package com.baidu.disconf.client.scan.inner.statically.model;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -38,6 +38,9 @@ public class ScanStaticModel {
     //
     // 更新 回调函数类
     private Set<Class<?>> disconfUpdateService;
+
+    // 非注解方式的配置文件
+    private Set<String> nonAnnotationFileSet;
 
     public Reflections getReflections() {
         return reflections;
@@ -106,7 +109,16 @@ public class ScanStaticModel {
                 + ", disconfItemMethodSet=" + disconfItemMethodSet
                 + ", disconfActiveBackupServiceClassSet="
                 + disconfActiveBackupServiceClassSet
-                + ", disconfUpdateService=" + disconfUpdateService + "]";
+                + ", disconfUpdateService=" + disconfUpdateService
+                + ", nonAnnotationFileSet=" + nonAnnotationFileSet + "]";
+    }
+
+    public Set<String> getNonAnnotationFileSet() {
+        return nonAnnotationFileSet;
+    }
+
+    public void setNonAnnotationFileSet(Set<String> nonAnnotationFileSet) {
+        this.nonAnnotationFileSet = nonAnnotationFileSet;
     }
 
 }

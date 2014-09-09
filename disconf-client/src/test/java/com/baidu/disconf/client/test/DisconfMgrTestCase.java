@@ -1,5 +1,8 @@
 package com.baidu.disconf.client.test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import mockit.Mock;
 import mockit.MockUp;
 
@@ -83,7 +86,9 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             //
             // start it
             //
-            DisconfMgr.start(ScanPackTestCase.SCAN_PACK_NAME);
+            Set<String> fileSet = new HashSet<String>();
+            fileSet.add("atomserverl.properties");
+            DisconfMgr.start(ScanPackTestCase.SCAN_PACK_NAME, fileSet);
 
             //
             LOGGER.info(DisconfStoreProcessorFactory

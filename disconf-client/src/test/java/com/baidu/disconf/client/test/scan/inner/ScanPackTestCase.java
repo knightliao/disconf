@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf.client.scan.inner.ScanStatic;
-import com.baidu.disconf.client.scan.inner.model.ScanStaticModel;
+import com.baidu.disconf.client.scan.inner.statically.ScanStatic;
+import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.baidu.disconf.client.utils.ScanPrinterUtils;
 

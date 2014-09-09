@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.scan.inner.model;
+package com.baidu.disconf.client.scan.inner.dynamic.model;
 
 import java.util.HashMap;
 import java.util.List;
