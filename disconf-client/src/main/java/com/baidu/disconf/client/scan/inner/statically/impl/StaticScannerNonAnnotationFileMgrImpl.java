@@ -44,6 +44,8 @@ public class StaticScannerNonAnnotationFileMgrImpl extends
 
         for (String fileName : scanModel.getNonAnnotationFileSet()) {
 
+            fileName = fileName.trim();
+
             DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
 
             //
