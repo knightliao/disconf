@@ -40,11 +40,11 @@ public class StaticScannerNonAnnotationFileMgrImpl extends
     private List<DisconfCenterBaseModel> getDisconfCenterFiles(
             ScanStaticModel scanModel) {
 
-        DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
-
         List<DisconfCenterBaseModel> disconfCenterFiles = new ArrayList<DisconfCenterBaseModel>();
 
         for (String fileName : scanModel.getNonAnnotationFileSet()) {
+
+            DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
 
             //
             // file name

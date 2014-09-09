@@ -125,6 +125,23 @@ public class BaseCoreTestCase {
                                                 .getBytes())));
 
         //
+        // 非注解 配置文件2
+        //
+        stubFor(get(urlEqualTo(RemoteMockServer.NON_ANOTATION_FILE_URL2))
+                .willReturn(
+                        aResponse()
+                                .withHeader("Content-Type",
+                                        "text/html;charset=UTF-8")
+                                .withHeader(
+                                        "Content-Disposition",
+                                        "attachment; filename="
+                                                + RemoteMockServer.NON_ANOTATION_FILE_NAME2)
+                                .withStatus(200)
+                                .withBody(
+                                        RemoteMockServer.NON_ANOTATTION_FILE_CONTENT2
+                                                .getBytes())));
+
+        //
         // ZOO
         //
         valueVo = new ValueVo();
