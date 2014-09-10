@@ -200,6 +200,7 @@ th {
     padding:5px;
     min-height:400px;
     height:100%;
+    margin-left:0px;
   }
 }
 
@@ -821,14 +822,6 @@ q:before, q:after {
     background-color: #f1f1f1;
 }
 
-.container {
-    /*max-width: 980px;/
-}
-.main {
-    font-family: arial, sans-serif;
-    /*width: 980px;*/
-}
-
 #headwrap {
     padding-top: 60px;
     padding-bottom: 0px;
@@ -986,7 +979,7 @@ q:before, q:after {
 #Main {
     width: 960px;
     margin: 0px auto 0px auto;
-    padding: 8px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
 }
 
 .sep10 {

@@ -1,4 +1,4 @@
-        <title>Disconf - 分布式配置管理平台</title>
+
         <link rel="stylesheet" href="dep/bootstrap/css/bootstrap.css" />
         <!--[if lte IE 6]>
         <link rel="stylesheet" href="dep/bootstrap/css/bootstrap-ie6.css" />

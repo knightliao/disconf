@@ -193,6 +193,7 @@
 		});
 	}
 	
+	//
 	function getTips(){
 		if (appId == -1) {
 			return "APP";
