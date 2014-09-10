@@ -22,7 +22,7 @@ public class ConnectionWatcher implements Watcher {
     protected static final Logger LOGGER = LoggerFactory
             .getLogger(ConnectionWatcher.class);
 
-    private static final int SESSION_TIMEOUT = 5000;
+    private static final int SESSION_TIMEOUT = 30000;
 
     protected ZooKeeper zk;
     private CountDownLatch connectedSignal = new CountDownLatch(1);

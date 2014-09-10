@@ -27,6 +27,8 @@ public class ZookeeperMgr {
 
     private ResilientActiveKeyValueStore store;
 
+    private String curHost = "";
+
     /**
      * 
      * @Description: 初始化
@@ -83,6 +85,8 @@ public class ZookeeperMgr {
      */
     private void initInternal(String hosts, String defaultPrefixString)
             throws IOException, InterruptedException {
+
+        curHost = hosts;
 
         store = new ResilientActiveKeyValueStore();
         store.connect(hosts);

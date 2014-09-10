@@ -54,6 +54,10 @@ public class EnvMgrImpl implements EnvMgr {
     @Override
     public Map<Long, Env> getByIds(Set<Long> ids) {
 
+        if (ids.size() == 0) {
+            return new HashMap<Long, Env>();
+        }
+
         List<Env> envs = envDao.get(ids);
 
         Map<Long, Env> map = new HashMap<Long, Env>();

@@ -179,9 +179,7 @@ th {
     color: #b3b3b3;
 }
 .foot {
-    margin-top: 30px;
-    height: 50px;
-    padding-top: 70px;
+
 }
 .foot p {
     color: white;
@@ -830,7 +828,6 @@ q:before, q:after {
 }
 
 #mainwrap {
-    min-height: 80%;
     background: #FFFFFF;
     margin-top:50px;
     padding-bottom:50px;
@@ -984,5 +981,11 @@ q:before, q:after {
 
 .sep10 {
     height: 10px;
+}
+
+.box {
+    border: 0 solid;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 

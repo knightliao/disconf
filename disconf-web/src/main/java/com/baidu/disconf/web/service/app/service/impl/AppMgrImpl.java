@@ -60,6 +60,10 @@ public class AppMgrImpl implements AppMgr {
     @Override
     public Map<Long, App> getByIds(Set<Long> ids) {
 
+        if (ids.size() == 0) {
+            return new HashMap<Long, App>();
+        }
+
         List<App> apps = appDao.get(ids);
 
         Map<Long, App> map = new HashMap<Long, App>();

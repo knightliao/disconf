@@ -92,10 +92,22 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
         ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstance();
         ZooKeeper zooKeeper = zooKeeperMgr.getZk();
         List<String> retList = new ArrayList<String>();
+
         try {
             getConf(zooKeeper, groupName, retList);
+
+        } catch (KeeperException.SessionExpiredException e) {
+
+            try {
+                reload();
+            } catch (Exception e1) {
+                LOG.error(e.toString());
+            }
+            LOG.error(e.toString());
+
         } catch (KeeperException e) {
             LOG.error(e.getMessage(), e);
+
         } catch (InterruptedException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -142,19 +154,32 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
             }
 
         } catch (KeeperException.NoNodeException e) {
+
             LOG.info("Group %s does not exist\n", groupName);
+
         }
 
     }
 
+    /**
+     * 重新连接Zookeeper
+     * 
+     * @throws Exception
+     */
+    private synchronized void reload() throws Exception {
+
+        destroy();
+        afterPropertiesSet();
+    }
+
     @Override
-    public void destroy() throws Exception {
+    public synchronized void destroy() throws Exception {
 
         ZookeeperMgr.getInstance().release();
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public synchronized void afterPropertiesSet() throws Exception {
 
         ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(),
                 zooConfig.getZookeeperUrlPrefix());
