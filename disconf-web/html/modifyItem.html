@@ -7,7 +7,6 @@
 <title>Disconf - 分布式配置管理平台</title>
 
         <title>Disconf - 分布式配置管理平台</title>
-    
         <link rel="stylesheet" href="dep/bootstrap/css/bootstrap.css" />
         <!--[if lte IE 6]>
         <link rel="stylesheet" href="dep/bootstrap/css/bootstrap-ie6.css" />
@@ -24,8 +23,8 @@
 
     <body>
         
-        <div class="navbar navbar-fixed-top clearfix myheight">
-            <div class="navbar-inner zu-top myheight">
+        <div class="navbar navbar-fixed-top clearfix">
+            <div class="navbar-inner zu-top">
                 <div class="container">
                     <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
@@ -36,14 +35,54 @@
 
                         <a href="/" class="brand" style="margin-left:0px;padding:8px;"> <span class="zu-top-nav-link">Disconf</span> </a>
 
-                        <div class="navbar-form pull-left"></div>
-
-                        <span class="span1"> </span>
+                        <span class="span2"> </span>
+                        <form class="navbar-form pull-left">
+                            <button class="btn btn-warning" title="GitHub" type="button" style=""  onclick="window.open('https://github.com/knightliao/disconf', '_blank');">
+                                <i class="icon-circle-arrow-up  icon-white"></i> <b>GitHub</b>
+                            </button>
+                        </form>
+                        
                         <ul class="nav pull-right" >
-
+                            
+                            <div class="login-yes"  style="display:none;padding:10px;">
+                                <li style="display:inline;">
+                                    <a href="#">
+                                        <span class="zu-top-nav-link loginName" id="username"></span>
+                                    </a>
+                                </li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <li style="display:inline;">
+                                    <a href="/configUsage.html" ><span class="zu-top-nav-link">部署</span></a>
+                                </li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <li style="display:inline;" class="dropdown">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="zu-top-nav-link">新建<b class="caret"></b></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/newapp.html">新建APP</a></li>
+                                        <li><a href="/newconfig_item.html">新建配置项</a></li>
+                                        <li><a href="/newconfig_file.html">新建配置文件</a></li>
+                                    </ul>
+                                </li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <li style="display:inline;">
+                                    <a href="#" id="signout">
+                                        <span class="zu-top-nav-link" >退出</span>
+                                    </a>
+                                </li>
+                            </div>
+                            
+                            <div class="login-no"  style="padding:10px;">
+                                <li style="display:inline;">
+                                    <a href="/login.html"><span class="zu-top-nav-link">登录</span></a>
+                                </li>   
+                            </div>
+                            
                         </ul>
                     </div>
                 </div>
+                
             </div>
         </div>
     
@@ -123,36 +162,37 @@
     </li>
 </div>
 
-
-<div id="footer">
-    <div id="BottomMain">
-        <div class="inner">
-            <strong>
-                <a href="#" class="dark">关于</a> &nbsp; 
-            </strong>
-            <strong>
-                <a href="#" class="dark">升级</a> &nbsp; 
-            </strong>
-            <div class="sep10"></div>
-            <span>分布式配置管理平台</span>
-            <div class="sep10"></div>
-            <span class="myfade">Power by Baidu.com
-            Copyright &copy; 2014 </span>
+        
+        <div id="footer">
+            <div id="BottomMain">
+                <div class="inner">
+                    <strong>
+                        <a href="#" class="dark">关于</a> &nbsp; 
+                    </strong>
+                    <strong>
+                        <a href="#" class="dark">升级</a> &nbsp; 
+                    </strong>
+                    <div class="sep10"></div>
+                    <span>分布式配置管理平台</span>
+                    <div class="sep10"></div>
+                    <span class="myfade">Theme by <a href="http://django-china.cn/" target="_blank">Django中国社区</a>， 
+                        Power by baidu.com
+                    Copyright &copy; 2014 </span>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-<script src="assets/js/jquery-1.11.0.js"></script>
-<script src="dep/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
-<script src="dep/bootstrap/js/bootstrap.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/common.js"></script>
+        
+        <script src="assets/js/jquery-1.11.0.js"></script>
+        <script src="dep/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+        <script src="dep/bootstrap/js/bootstrap.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/common.js"></script>
 
 
 <script src="assets/js/modifycommon.js"></script>
 <script src="assets/js/modifyItem.js"></script>
 
-    <script src="assets/js/footer.js"></script>
+        <script src="assets/js/footer.js"></script>
     
     </body>
 </html>

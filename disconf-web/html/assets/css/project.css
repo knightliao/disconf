@@ -115,12 +115,6 @@ abbr, acronym {
     text-align: left;
 }
 
-
-.myheight {
-    height: 35px;
-    min-height: 35px;
-}
-
 button {
     background: #52bad5;
     border: none;
@@ -808,7 +802,7 @@ q:before, q:after {
     color: #EEEEEE;
 }
 .zu-top-nav-link:hover {
-    color: #000000;
+    color: #EEEEEE;
     text-decoration: none;
 }
 .zu-top-nav-link {
@@ -998,3 +992,4 @@ q:before, q:after {
 .sep10 {
     height: 10px;
 }
+
