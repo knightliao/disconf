@@ -181,7 +181,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         confListVo.setEnvName(envName);
         confListVo.setEnvId(config.getEnvId());
         confListVo.setCreateTime(config.getCreateTime());
-        confListVo.setModifyTime(config.getUpdateTime());
+        confListVo.setModifyTime(config.getUpdateTime().substring(0, 12));
         confListVo.setKey(config.getName());
         confListVo.setValue(config.getValue());
         confListVo.setVersion(config.getVersion());
