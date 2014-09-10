@@ -1,3 +1,14 @@
+html,body {
+    font-family: "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB",
+        "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+    background-color: #fff;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    -webkit-text-size-adjust: none;
+    margin: 0px;
+}
+
 fieldset, img {
     border: 0;
 }
@@ -88,6 +99,26 @@ abbr, acronym {
     background: url("../img/nav-bg-focus.png") repeat-x;
     color: black;
     cursor: pointer;
+}
+
+.navbar-inner {
+    background: url("../img/header-bg.png") repeat-x scroll 0 0
+        transparent;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-attachment: fixed;
+}
+
+.inner {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 150%;
+    text-align: left;
+}
+
+
+.myheight {
+    height: 35px;
+    min-height: 35px;
 }
 
 button {
@@ -265,6 +296,13 @@ th {
 }
 .left {
     float: left;
+}
+
+#Wrapper {
+    background-color: #fff;
+    padding-top: 0px;
+    margin-bottom:0px;
+    padding-bottom: 15px;
 }
 
 /* ticketDiscount 票种折扣 */
@@ -740,9 +778,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
     padding: 0;
     margin: 0;
 }
-body {
-    font-family: Arial, Helvetica, sans-serif, 宋体;
-}
+
 label {
     display: inline-block;
     vertical-align: middle;
@@ -754,10 +790,6 @@ a {
 table {
     border-collapse: collapse;
     border-spacing: 0;
-}
-address, caption, cite, code, dfn, em, strong, th, var {
-    font-weight: normal;
-    font-style: normal;
 }
 ol, ul {
     list-style: none;
@@ -792,13 +824,7 @@ q:before, q:after {
 }
 
 #footer {
-    border-top: 1px solid #ddd;
-    height: 60px;
-    background: #fff;
-}
-#footer .credit, #footer .links {
-    font-size: 13px;
-    margin-top: 20px;
+    background-color: #f1f1f1;
 }
 
 .container {
@@ -953,4 +979,22 @@ q:before, q:after {
 .form-single .form-submit a {
     font-size: 13px;
     margin-left: 14px;
+}
+
+#BottomMain {
+    margin: 0px auto 0px auto;
+    padding: 5px 0px 5px 0px;
+    font-size: 12px;
+    color: #999;
+    width:920px;
+}
+
+#Main {
+    width: 960px;
+    margin: 0px auto 0px auto;
+    padding: 8px 0px 10px 0px;
+}
+
+.sep10 {
+    height: 10px;
 }

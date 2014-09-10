@@ -1,16 +1,19 @@
 
-<div id="footer" style="padding:10px;">
-    <div class="clearfix">
-        <div class="muted links pull-left">
-            <a href="#">关于</a>
-            <span class="sep">·</span>
-            <a href="https://github.com/knightliao/disconf" target="_blank">帮助</a>
+<div id="footer">
+    <div id="BottomMain">
+        <div class="inner">
+            <strong>
+                <a href="#" class="dark">关于</a> &nbsp; 
+            </strong>
+            <strong>
+                <a href="#" class="dark">升级</a> &nbsp; 
+            </strong>
+            <div class="sep10"></div>
+            <span>分布式配置管理平台</span>
+            <div class="sep10"></div>
+            <span class="myfade">Power by Baidu.com
+            Copyright &copy; 2014 </span>
         </div>
-
-        <p class="muted credit pull-right">
-            © baidu.com  All Rights Reserved.
-        </p>
-
     </div>
 </div>
 
