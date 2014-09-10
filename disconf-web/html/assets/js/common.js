@@ -3,7 +3,10 @@
 	window.VISITOR = {};
 })();
 
+
+//
 // 头部显示初始化
+//
 function headShowInit() {
 	if (VISITOR.id) {
 		$(".login-no").hide();
@@ -17,7 +20,22 @@ function headShowInit() {
 	}
 }
 
+
+//
+// 登录其它的控制
+//
+function loginActions() {
+	if (VISITOR.id) {
+		$("#brand_url").attr("href", "/main.html");
+	} else {
+		$("#brand_url").attr("href", "/");
+	}
+}
+
+
+//
 // 获取Session信息
+//
 function getSession() {
 	$.ajax({
 		type : "GET",
@@ -32,6 +50,7 @@ function getSession() {
 	});
 }
 
+
 // 获取是否登录并且进行跳转
 function getSession2Redirect() {
 	$.ajax({
@@ -43,4 +62,5 @@ function getSession2Redirect() {
 		} else {
 		}
 	});
+	loginActions();
 }

@@ -25,7 +25,7 @@
                     </button>
                     <div class="nav-collapse collapse">
 
-                        <a href="/" class="brand" style="margin-left:0px;padding:8px;"> <span class="zu-top-nav-link">Disconf</span> </a>
+                        <a id="brand_url" href="/main.html" class="brand" style="margin-left:0px;padding:8px;"> <span class="zu-top-nav-link">Disconf</span> </a>
 
                         <span class="span2"> </span>
                         <form class="navbar-form pull-left">
