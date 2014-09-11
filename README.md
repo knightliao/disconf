@@ -126,11 +126,7 @@ Disconf为应用方提供了三个工具，
 
 全新主页，高清大图：
 
-首页：
-
-![](http://ww4.sinaimg.cn/mw1024/60c9620fgw1ek914j9wgyj21ar0hf3zw.jpg)
-
-APP+环境+版本+ZK环境：
+APP+环境+版本+ZK查询：
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fgw1ek916ibw6hj20x20mgdkh.jpg)
 
