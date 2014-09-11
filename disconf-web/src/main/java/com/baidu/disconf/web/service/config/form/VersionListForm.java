@@ -12,12 +12,28 @@ public class VersionListForm {
     @NotNull
     private Long appId;
 
+    // 环境可以为空
+    private Long envId;
+
     public Long getAppId() {
         return appId;
     }
 
     public void setAppId(Long appId) {
         this.appId = appId;
+    }
+
+    public Long getEnvId() {
+        return envId;
+    }
+
+    public void setEnvId(Long envId) {
+        this.envId = envId;
+    }
+
+    @Override
+    public String toString() {
+        return "VersionListForm [appId=" + appId + ", envId=" + envId + "]";
     }
 
 }

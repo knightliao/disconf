@@ -99,11 +99,11 @@ public class ConfigMgrImpl implements ConfigMgr {
      * 根据APPid获取其版本列表
      */
     @Override
-    public List<String> getVersionListByAppId(Long appId) {
+    public List<String> getVersionListByAppEnv(Long appId, Long envId) {
 
         List<String> versionList = new ArrayList<String>();
 
-        List<Config> configs = configDao.getConfByAppId(appId);
+        List<Config> configs = configDao.getConfByAppEnv(appId, envId);
 
         for (Config config : configs) {
 

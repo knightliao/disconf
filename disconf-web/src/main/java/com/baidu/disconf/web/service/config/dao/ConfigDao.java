@@ -23,7 +23,7 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      * @param appName
      * @return
      */
-    public List<Config> getConfByAppId(Long appId);
+    public List<Config> getConfByAppEnv(Long appId, Long envId);
 
     /**
      * 

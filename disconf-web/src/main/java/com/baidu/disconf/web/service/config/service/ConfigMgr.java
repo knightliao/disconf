@@ -46,7 +46,7 @@ public interface ConfigMgr {
      * @param appName
      * @return
      */
-    public List<String> getVersionListByAppId(Long appId);
+    public List<String> getVersionListByAppEnv(Long appId, Long envId);
 
     /**
      * 
@@ -97,8 +97,7 @@ public interface ConfigMgr {
             DisConfigTypeEnum disConfigTypeEnum);
 
     void delete(Long configId);
-    
-    
+
     /**
      * 返回disconf中所有配置正在使用的服务器及服务器中配置的信息
      */

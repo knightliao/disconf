@@ -686,7 +686,7 @@ input.autoPush-detail-item-input {
 .account-tableWrap thead tr td {
     text-align: center;
     border: 1px solid #E8E8E8;
-    padding: 5px;
+    padding: 3px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -694,7 +694,7 @@ input.autoPush-detail-item-input {
     text-align: center;
 }
 .account-tableWrap td {
-    padding: 5px 8px;
+    padding: 5px 5px;
     border: 1px solid #E8E8E8;
 }
 .account-table-activate {

@@ -43,10 +43,16 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements
     }
 
     @Override
-    public List<Config> getConfByAppId(Long appId) {
+    public List<Config> getConfByAppEnv(Long appId, Long envId) {
 
-        return find(new Match(Columns.APP_ID, appId));
+        if (envId == null) {
+            return find(new Match(Columns.APP_ID, appId));
+        } else {
 
+            return find(new Match(Columns.APP_ID, appId), new Match(
+                    Columns.ENV_ID, envId));
+
+        }
     }
 
     /**

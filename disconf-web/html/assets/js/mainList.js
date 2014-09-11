@@ -4,7 +4,7 @@
 
 	var appId = -1;
 	var envId = -1;
-	var version = "所有版本";
+	var version = "#";
 
 	//
 	// 获取APP信息
@@ -32,20 +32,26 @@
 							$("#applist").html(html);
 						}
 					});
-	$("#applist").on('click', 'li a', function() {
+	$("#applist").on('click', 'li a', function(e) {
 		appId = $(this).attr('rel');
 		$("#appDropdownMenuTitle").text($(this).text());
-		fetchVersion(appId);
+		version = "#";
 		fetchMainList();
 	});
 
 	//
 	// 获取版本信息
 	//
-	function fetchVersion(appId) {
+	function fetchVersion(appId, envId) {
+
+		var base_url = "/api/config/versionlist?appId=" + appId;
+		if (envId != -1) {
+			url = base_url + "&envId=" + envId;
+		}
+
 		$.ajax({
 			type : "GET",
-			url : "/api/config/versionlist?appId=" + appId
+			url : url
 		}).done(function(data) {
 			if (data.success === "true") {
 				var html = "";
@@ -57,14 +63,14 @@
 
 				$("#versionChoice li:first").addClass("active");
 				version = $("#versionChoice li:first a").text();
-				fetchMainList();
 			}
 		});
-		$("#versionChoice").on('click', 'li a', function() {
+		$("#versionChoice").unbind('click').on('click', 'li a', function(e) {
 			version = $(this).text();
 			$("#versionChoice li").removeClass("active");
 			$(this).parent().addClass("active");
 			fetchMainList();
+			e.stopPropagation();
 		});
 	}
 
@@ -90,6 +96,7 @@
 		envId = $(this).attr('rel');
 		$("#envChoice li").removeClass("active");
 		$(this).parent().addClass("active");
+		version = "#";
 		fetchMainList();
 	});
 
@@ -101,12 +108,17 @@
 	function fetchMainList() {
 
 		// 参数不正确，清空列表
-		if (appId == -1 || envId == -1 || version == "所有版本") {
+		if (appId == -1 || envId == -1) {
 			$("#mainlist_error").text("请选择" + getTips()).show();
 			$("#accountBody").html("");
 			$("#mainlist").hide();
 			return;
 		}
+
+		if (version == "#") {
+			fetchVersion(appId, envId);
+		}
+
 		$("#mainlist_error").hide();
 		var parameter = ""
 
@@ -121,7 +133,7 @@
 			if (envId != -1) {
 				url += "envId=" + envId + "&";
 			}
-			if (version != "所有版本") {
+			if (version != "#") {
 				url += "version=" + version + "&";
 			}
 		}
@@ -167,7 +179,7 @@
 			return Util.string.format(mainTpl, item.appName, item.appId,
 					item.version, item.envId, item.envName, item.type,
 					item.key, item.createTime, item.modifyTime, item.value,
-					link, del_link, i);
+					link, del_link, i+1);
 		}
 	}
 
@@ -210,9 +222,6 @@
 		}
 		if (envId == -1) {
 			return "环境";
-		}
-		if (version == "所有版本") {
-			return "版本";
 		}
 		return "参数";
 	}
