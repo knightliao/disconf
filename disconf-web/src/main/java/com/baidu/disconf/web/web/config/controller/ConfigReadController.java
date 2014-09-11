@@ -1,5 +1,7 @@
 package com.baidu.disconf.web.web.config.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -7,6 +9,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +24,7 @@ import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.exception.DocumentNotFoundException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.db.DaoPageResult;
 
@@ -91,4 +96,38 @@ public class ConfigReadController extends BaseController {
 
         return buildSuccess(config);
     }
+
+    /**
+     * 下载
+     * 
+     * @param fileName
+     * @return
+     */
+    @RequestMapping(value = "/download/{configId}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> downloadDspBill(@PathVariable long configId) {
+
+        // 业务校验
+        configValidator.valideConfigExist(configId);
+
+        ConfListVo config = configMgr.getConfVo(configId);
+
+        HttpHeaders header = new HttpHeaders();
+        byte[] res = config.getValue().getBytes();
+        if (res == null) {
+            throw new DocumentNotFoundException(config.getKey());
+        }
+
+        String name = null;
+
+        try {
+            name = URLEncoder.encode(config.getKey(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        header.set("Content-Disposition", "attachment; filename=" + name);
+        header.setContentLength(res.length);
+        return new HttpEntity<byte[]>(res, header);
+    }
+
 }

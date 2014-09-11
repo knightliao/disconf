@@ -185,11 +185,13 @@
 				link = '<a href="modifyItem.html?configId=' + item.configId
 						+ '">修改</a>';
 			}
+			var downloadlink = '<a href="/api/config/download/'
+					+ +item.configId + '">下载</a>';
 
 			return Util.string.format(mainTpl, item.appName, item.appId,
 					item.version, item.envId, item.envName, item.type,
 					item.key, item.createTime, item.modifyTime, item.value,
-					link, del_link, i + 1);
+					link, del_link, i + 1, downloadlink);
 		}
 	}
 
