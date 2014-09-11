@@ -3,6 +3,7 @@ package com.baidu.disconf.web.web.config.controller;
 import java.io.IOException;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +68,7 @@ public class ConfigNewController extends BaseController {
     }
 
     /**
-     * 配置文件的新建
+     * 配置文件的新建(使用上传配置文件)
      * 
      * @param desc
      * @param file
@@ -105,6 +106,34 @@ public class ConfigNewController extends BaseController {
         // 创建配置文件表格
         ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);
         confNewItemForm.setKey(file.getOriginalFilename());
+        confNewItemForm.setValue(fileContent);
+
+        // 业务校验
+        configValidator.validateNew(confNewItemForm, DisConfigTypeEnum.FILE);
+
+        //
+        configMgr.newConfig(confNewItemForm, DisConfigTypeEnum.FILE);
+
+        return buildSuccess("创建成功");
+    }
+
+    /**
+     * 配置文件的新建(使用文本)
+     * 
+     * @param desc
+     * @param file
+     * @return
+     * @throws IllegalStateException
+     * @throws IOException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/filetext", method = RequestMethod.POST)
+    public JsonObjectBase updateFileWithText(@Valid ConfNewForm confNewForm,
+            @NotNull String fileContent, @NotNull String fileName) {
+
+        // 创建配置文件表格
+        ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);
+        confNewItemForm.setKey(fileName);
         confNewItemForm.setValue(fileContent);
 
         // 业务校验

@@ -3,6 +3,8 @@ var envId = -1;
 var version = "";
 getSession();
 
+var uploadWithFile = -1;
+
 var upload_status = 0;
 //
 // 校验
@@ -12,7 +14,19 @@ function validate(formData, jqForm, options) {
 	var myfilerar = $('input[name=myfilerar]')
 
 	var val = myfilerar.val();
-	switch (val.substring(val.lastIndexOf('.') + 1).toLowerCase()) {
+	if (validate_file_name(val)) {
+		return true;
+	}
+
+	return false;
+}
+
+//
+// 校验文件名
+//
+function validate_file_name(fileName) {
+
+	switch (fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()) {
 	case 'properties':
 		break;
 	default:
@@ -76,8 +90,7 @@ $('#myfilerar').change(function(evt) {
 	}
 });
 
-// 提交
-$('#form').ajaxForm({
+var options = {
 
 	url : '/api/config/file',
 	beforeSubmit : validate2,
@@ -109,6 +122,7 @@ $('#form').ajaxForm({
 		var is_ok = true;
 		if (xhr.status != 200 && xhr.status != 0) {
 			errorrar.html("上传失败，请重新上传. 状态码：" + xhr.status);
+			$("#error").html("上传失败，请重新上传. 状态码：" + xhr.status);
 			is_ok = false;
 		} else if (xhr.aborted == 1) {
 			is_ok = false;
@@ -136,4 +150,96 @@ $('#form').ajaxForm({
 			percent.html(0);
 		}
 	}
+};
+
+//
+//
+//
+$("#file_submit").unbind('click').on('click', function(e) {
+	if (uploadWithFile == -1) {
+		$("#error").show();
+		$("#error").html("请选择上传方式");
+	}
 });
+
+//
+// 上传方式
+//
+$("#uploadChoice").on(
+		'click',
+		'li a',
+		function() {
+
+			$("#uploadChoiceA span:first-child").text($(this).text());
+
+			if ($(this).text() == "上传配置文件") {
+
+				$("#file_upload_choice").show().children().show();
+				$("#text_upload_choice").hide();
+				uploadWithFile = 1;
+
+			} else if ($(this).text() == "输入文本") {
+
+				$("#file_upload_choice").hide();
+				$("#text_upload_choice").show().children().show();
+				uploadWithFile = 0;
+			}
+
+			//
+			// 事件绑定
+			//
+			if (uploadWithFile) {
+
+				$("#file_submit").unbind('click').on('click', function(e) {
+					// 提交
+					$('#form').ajaxSubmit(options);
+				});
+
+			} else {
+
+				$("#file_submit").unbind('click').on(
+						'click',
+						function(e) {
+
+							$("#error").addClass("hide");
+
+							var fileName = $("#fileName").val();
+							var fileContent = $("#fileContent").val();
+
+							// 验证
+							if (appId < 1 || envId < 1 || version == ""
+									|| fileName == "" || fileContent == "") {
+								$("#error").show();
+								$("#error").html("表单不能为空或填写格式错误！");
+								return false;
+							}
+
+							// 验证文件名
+							if (validate_file_name(fileName) == false) {
+								$("#error").html("仅支持.properties！");
+								return false;
+							}
+
+							$.ajax({
+								type : "POST",
+								url : "/api/config/filetext",
+								data : {
+									"appId" : appId,
+									"envId" : envId,
+									"version" : version,
+									"fileContent" : fileContent,
+									"fileName" : fileName,
+								}
+							}).done(function(data) {
+								$("#error").removeClass("hide");
+								if (data.success === "true") {
+									$("#error").html(data.result);
+								} else {
+									Util.input.whiteError($("#error"), data);
+								}
+							});
+
+						});
+
+			}
+		});

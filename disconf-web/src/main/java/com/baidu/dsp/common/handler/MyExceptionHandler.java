@@ -239,6 +239,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
         JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(
                 paramErrors, errorCode);
+        LOG.warn(jsonObject.toString());
         return JsonObjectUtils
                 .JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
