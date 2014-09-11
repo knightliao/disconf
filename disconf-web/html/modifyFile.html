@@ -112,7 +112,7 @@
     
                 <div class="span9">
     
-                    <div class="content oz">
+                    <div class="content oz" style="padding-bottom:15px;">
     
                         <form id="form" action="/config/" method="post" enctype="multipart/form-data" class="private-form clearfix">
                             <h2 class="autoPush-detail-title">配置文件修改</h2>
@@ -128,16 +128,34 @@
                                 <span class="private-item-key">环境：</span>
                                 <span id="env" class="private-item-value">FFFF</span>
                             </p>
+                            
                             <p class="private-item">
                                 <span class="private-item-key">配置文件名：</span>
                                 <span id="key" class="private-item-value">FFFF</span>
                             </p>
+                            
                             <div class="private-item clearfix">
                                 <span style="float:left" class="private-item-key">原配置文件内容：</span>
                                 <pre style="float:left" id="oldvalue" class="private-item-value-pre">FFFF</pre>
                             </div>
-                            <div class="private-item clearfix">
-                                <span style="float:left" class="private-item-key">上传配置：</span>
+                            
+                            <div class="private-item">
+                                <span class="private-item-key">修改方式：</span>
+                                <div class="btn-group">
+                                    <a id="uploadChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <span style="margin-right:2px;">选择上传方式</span><span class="caret"></span> </a>
+                                    <ul class="dropdown-menu" id="uploadChoice">
+                                        <li>
+                                            <a href="#">输入文本</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">上传配置文件</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div id="file_upload_choice" class="private-item clearfix hide">
+                                <span style="float:left" class="private-item-key">上传配置文件：</span>
                                 <div style="float:left" class="private-item-value-pre">
                                     <span class="sl-custom-file btn btn-success fileinput-button" style="overflow: hidden;cursor: pointer;">
                                         <div id="open_dialog_rar">
@@ -145,11 +163,12 @@
                                         </div>
                                         <input class="ui-input-file" type="file" name="myfilerar" id="myfilerar" style="width:120px;height:30px;" >
                                     </span>
+                                    <br/>
+                                    <span id="error_rar" class="text-error error_rar"></span>
                                     <div style="color: #999;">
                                         只允许.properties格式的文件
                                         <span id="status_rar" class="text-success"></span>
                                     </div>
-                                    <span id="error_rar" class="text-error error_rar"></span>
                                     <div class="progress_rar">
                                         <div class="bar_rar"></div >
                                         <div class="percent_rar">
@@ -159,13 +178,28 @@
                                     <div class="loading_rar" ></div>
                                 </div>
                             </div>
-                            <div>
-                                <button id="submit" class="private-submit" >
-                                    上传
-                                </button>
-                            </div>
+                            
+                            <div id="text_upload_choice" class="hide">
+
+                                <div class="private-item">
+                                    <span style="float:left" class="private-item-key">输入文本：</span>
+                                    <textarea id="fileContent" type="text" class="private-item-value" style="min-width:500px;height:200px;"></textarea>
+                                </div>
     
-                        </form>
+                            </div>
+                            
+                            <div id="error" class="error hide">
+                                表单选项不能为空或填写格式错误！
+                            </div>
+                            
+                       </form>
+                            
+                        <div>
+                            <button id="file_submit" class="private-submit" >
+                                上传
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@ package com.baidu.disconf.web.web.config.controller;
 
 import java.io.IOException;
 
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +104,45 @@ public class ConfigUpdateController extends BaseController {
         try {
 
             String str = new String(file.getBytes(), "UTF-8");
+            LOG.info("receive file: " + str);
+
+            configMgr.updateItemValue(configId, str);
+            LOG.info("update " + configId + " ok");
+
+        } catch (Exception e) {
+
+            LOG.error(e.toString());
+            throw new FileUploadException("upload file error", e);
+        }
+
+        //
+        // 通知ZK
+        //
+        configMgr.notifyZookeeper(configId);
+
+        return buildSuccess("修改成功");
+    }
+
+    /**
+     * 配置文件的更新(文本修改)
+     * 
+     * @param desc
+     * @param file
+     * @return
+     * @throws IllegalStateException
+     * @throws IOException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.POST)
+    public JsonObjectBase updateFileWithText(@PathVariable long configId,
+            @NotNull String fileContent) {
+
+        //
+        // 更新
+        //
+        try {
+
+            String str = new String(fileContent.getBytes(), "UTF-8");
             LOG.info("receive file: " + str);
 
             configMgr.updateItemValue(configId, str);
