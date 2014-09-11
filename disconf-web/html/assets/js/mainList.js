@@ -36,7 +36,7 @@
 		appId = $(this).attr('rel');
 		$("#appDropdownMenuTitle").text($(this).text());
 		version = "#";
-		fetchMainList();
+		fetchVersion(appId, envId);
 	});
 
 	//
@@ -45,6 +45,7 @@
 	function fetchVersion(appId, envId) {
 
 		var base_url = "/api/config/versionlist?appId=" + appId;
+		url = base_url;
 		if (envId != -1) {
 			url = base_url + "&envId=" + envId;
 		}
@@ -65,6 +66,7 @@
 					$("#versionChoice li:first").addClass("active");
 					version = $("#versionChoice li:first a").text();
 				}
+				fetchMainList();
 			}
 		});
 		$("#versionChoice").unbind('click').on('click', 'li a', function(e) {
@@ -99,7 +101,7 @@
 		$("#envChoice li").removeClass("active");
 		$(this).parent().addClass("active");
 		version = "#";
-		fetchMainList();
+		fetchVersion(appId, envId);
 	});
 
 	fetchMainList();
@@ -119,7 +121,6 @@
 		}
 
 		if (version == "#") {
-			fetchVersion(appId, envId);
 		}
 
 		$("#zk_deploy").show().children().show();
