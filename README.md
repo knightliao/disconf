@@ -124,6 +124,16 @@ Disconf为应用方提供了三个工具，
 
 部署方法请参见：[https://github.com/knightliao/disconf/tree/master/disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)
 
+全新主页，高清大图：
+
+首页：
+
+![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1ek914j9wgyj21ar0hf3zw.jpg)
+
+APP+环境+版本+ZK环境：
+
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ek916ibw6hj20x20mgdkh.jpg)
+
 ### disconf-client Tutorials ###
 
 - [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)

@@ -5,13 +5,19 @@ disconf-web
 
 ## 运行样式 ##
 
+首页：
+
+![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1ek914j9wgyj21ar0hf3zw.jpg)
+
 登录页面：
 
-![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1eikgstqq3fj20sl0grdgp.jpg)
+![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1ek915hlp6qj20v80i8ab1.jpg)
 
-配置首页：
+更多页面：
 
-![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1eikgob1f60j20st0d040t.jpg)
+![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1ek9165yvlpj20uh0lidjr.jpg)
+
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ek916ibw6hj20x20mgdkh.jpg)
 
 ## How to deploy ##
 
