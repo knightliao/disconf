@@ -23,7 +23,9 @@ import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.dsp.common.constant.WebConstants;
+import com.baidu.dsp.common.constraint.validation.PageOrderValidator;
 import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.dao.Columns;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.db.DaoPageResult;
@@ -72,6 +74,10 @@ public class ConfigReadController extends BaseController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public JsonObjectBase getConfigList(ConfListForm confListForm) {
+
+        // 设置排序方式
+        confListForm.getPage().setOrderBy(Columns.NAME);
+        confListForm.getPage().setOrder(PageOrderValidator.ASC);
 
         DaoPageResult<ConfListVo> configs = configMgr
                 .getConfigList(confListForm);
