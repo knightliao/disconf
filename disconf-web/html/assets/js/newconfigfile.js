@@ -159,6 +159,7 @@ $("#file_submit").unbind('click').on('click', function(e) {
 	if (uploadWithFile == -1) {
 		$("#error").show();
 		$("#error").html("请选择上传方式");
+		return false;
 	}
 });
 
@@ -237,6 +238,7 @@ $("#uploadChoice").on(
 								} else {
 									Util.input.whiteError($("#error"), data);
 								}
+								return true;
 							});
 
 						});
