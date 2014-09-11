@@ -128,11 +128,11 @@ Disconf为应用方提供了三个工具，
 
 首页：
 
-![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1ek914j9wgyj21ar0hf3zw.jpg)
+![](http://ww4.sinaimg.cn/mw1024/60c9620fgw1ek914j9wgyj21ar0hf3zw.jpg)
 
 APP+环境+版本+ZK环境：
 
-![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ek916ibw6hj20x20mgdkh.jpg)
+![](http://ww3.sinaimg.cn/mw1024/60c9620fgw1ek916ibw6hj20x20mgdkh.jpg)
 
 ### disconf-client Tutorials ###
 
