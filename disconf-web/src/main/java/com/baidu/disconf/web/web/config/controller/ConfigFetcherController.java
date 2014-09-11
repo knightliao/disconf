@@ -19,8 +19,8 @@ import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.config.utils.ConfigUtils;
+import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
-import com.baidu.disconf.web.web.config.validator.ConfigValidator.ConfigModel;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 
@@ -56,7 +56,7 @@ public class ConfigFetcherController {
         //
         // 校验
         //
-        ConfigModel configModel = null;
+        ConfigFullModel configModel = null;
         try {
             configModel = configValidator.verifyConfForm(confForm);
         } catch (Exception e) {
@@ -64,8 +64,8 @@ public class ConfigFetcherController {
             return ConfigUtils.getErrorVo(e.getMessage());
         }
 
-        return configMgr.getConfItemByParameter(configModel.getAppId(),
-                configModel.getEnvId(), configModel.getVersion(),
+        return configMgr.getConfItemByParameter(configModel.getApp().getId(),
+                configModel.getEnv().getId(), configModel.getVersion(),
                 configModel.getKey());
     }
 
@@ -84,7 +84,7 @@ public class ConfigFetcherController {
         //
         // 校验
         //
-        ConfigModel configModel = null;
+        ConfigFullModel configModel = null;
         try {
             configModel = configValidator.verifyConfForm(confForm);
         } catch (Exception e) {
@@ -95,8 +95,8 @@ public class ConfigFetcherController {
         if (hasError == false) {
             try {
                 //
-                Config config = configMgr.getConfByParameter(
-                        configModel.getAppId(), configModel.getEnvId(),
+                Config config = configMgr.getConfByParameter(configModel
+                        .getApp().getId(), configModel.getEnv().getId(),
                         configModel.getVersion(), configModel.getKey(),
                         DisConfigTypeEnum.FILE);
                 if (config == null) {

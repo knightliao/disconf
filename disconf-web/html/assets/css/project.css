@@ -154,7 +154,7 @@ th {
     margin: 0 auto;
 }
 .index-contentWrap {
-    margin-top: 50px;
+    margin-top: 20px;
     width: 970px;
 }
 .index-item {
@@ -178,9 +178,7 @@ th {
     margin: 5px;
     color: #b3b3b3;
 }
-.foot {
 
-}
 .foot p {
     color: white;
     text-align: center;
@@ -294,8 +292,6 @@ th {
 #Wrapper {
     background-color: #fff;
     padding-top: 0px;
-    margin-bottom:0px;
-    padding-bottom: 15px;
 }
 
 /* ticketDiscount 票种折扣 */
@@ -686,7 +682,7 @@ input.autoPush-detail-item-input {
 .account-tableWrap thead tr td {
     text-align: center;
     border: 1px solid #E8E8E8;
-    padding: 3px;
+    padding: 1px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -694,7 +690,7 @@ input.autoPush-detail-item-input {
     text-align: center;
 }
 .account-tableWrap td {
-    padding: 5px 5px;
+    padding: 3px 3px;
     border: 1px solid #E8E8E8;
 }
 .account-table-activate {
@@ -841,7 +837,7 @@ q:before, q:after {
 
 .navBlock, .contentWrap {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .clearfix:after {
@@ -976,7 +972,8 @@ q:before, q:after {
 #Main {
     width: 960px;
     margin: 0px auto 0px auto;
-    padding: 0px 0px 10px 0px;
+    padding: 0px 0px 50px 0px;
+    margin-top:100px;
 }
 
 .sep10 {

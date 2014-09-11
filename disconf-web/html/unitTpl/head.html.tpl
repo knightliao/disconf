@@ -43,10 +43,6 @@
                                     </a>
                                 </li>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <li style="display:inline;">
-                                    <a href="/configUsage.html" ><span class="zu-top-nav-link">部署</span></a>
-                                </li>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <li style="display:inline;" class="dropdown">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="zu-top-nav-link">新建<b class="caret"></b></span>

@@ -49,10 +49,6 @@
                                     </a>
                                 </li>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <li style="display:inline;">
-                                    <a href="/configUsage.html" ><span class="zu-top-nav-link">部署</span></a>
-                                </li>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <li style="display:inline;" class="dropdown">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="zu-top-nav-link">新建<b class="caret"></b></span>
@@ -86,8 +82,8 @@
     
 
             
-        <div id="Wrapper" class="clearfix" style="padding-top: 45px;">
-            <div id="Main">
+        <div id="Wrapper" class="clearfix">
+            <div id="Main" style="margin-top:50px;">
                 <div class="container-fluid">
                     <div class="row-fluid" style="min-height:400px;">
                         <div class="sidebar span2" style="float:left;overflow:visible;">
@@ -111,6 +107,17 @@
                                 <div class="contentWrap clearfix">
                                     <ul id="versionChoice" class="nav nav-tabs" role="tablist"></ul>
                                 </div>
+                            </div>
+                            
+                            <div id="zk_deploy" class="row-fluid" style="margin-bottom:5px">
+                                <a id="zk_deploy_button" href="#" class="btn-small btn-primary" style="float:right" title="GitHub" type="button">
+                                    <b>ZK部署情况</b>
+                                </a>
+                            </div>
+                            
+                            <div id="zk_deploy_info" class="hide" style="padding-bottom:20px;">
+                                <pre id = "zk_deploy_info_pre" style="min-height:200px">
+                                </pre>
                             </div>
         
                             <div class="row-fluid">

@@ -7,6 +7,7 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.ZooKeeper.States;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class ZookeeperMgr {
     private ResilientActiveKeyValueStore store;
 
     private String curHost = "";
+    private String curDefaultPrefixString = "";
 
     /**
      * 
@@ -75,6 +77,38 @@ public class ZookeeperMgr {
 
     /**
      * 
+     * @return
+     */
+    public static ZookeeperMgr getInstanceWithCheck() {
+
+        ZookeeperMgr zookeeperMgr = getInstance();
+
+        if (zookeeperMgr.getZk().getState().equals(States.CLOSED)) {
+
+            LOGGER.warn("zookeeper lost connection, reconnect");
+
+            try {
+                zookeeperMgr.release();
+                zookeeperMgr.init(zookeeperMgr.curHost,
+                        zookeeperMgr.curDefaultPrefixString);
+                return zookeeperMgr;
+
+            } catch (InterruptedException e) {
+
+                LOGGER.error(e.toString());
+
+            } catch (Exception e) {
+
+                LOGGER.error(e.toString());
+            }
+
+        }
+
+        return zookeeperMgr;
+    }
+
+    /**
+     * 
      * @Description: 初始化
      * 
      * @throws IOException
@@ -87,6 +121,7 @@ public class ZookeeperMgr {
             throws IOException, InterruptedException {
 
         curHost = hosts;
+        curDefaultPrefixString = defaultPrefixString;
 
         store = new ResilientActiveKeyValueStore();
         store.connect(hosts);

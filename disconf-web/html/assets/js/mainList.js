@@ -61,8 +61,10 @@
 				});
 				$("#versionChoice").html(html);
 
-				$("#versionChoice li:first").addClass("active");
-				version = $("#versionChoice li:first a").text();
+				if (html != "") {
+					$("#versionChoice li:first").addClass("active");
+					version = $("#versionChoice li:first a").text();
+				}
 			}
 		});
 		$("#versionChoice").unbind('click').on('click', 'li a', function(e) {
@@ -112,12 +114,15 @@
 			$("#mainlist_error").text("请选择" + getTips()).show();
 			$("#accountBody").html("");
 			$("#mainlist").hide();
+			$("#zk_deploy").hide();
 			return;
 		}
 
 		if (version == "#") {
 			fetchVersion(appId, envId);
 		}
+
+		$("#zk_deploy").show().children().show();
 
 		$("#mainlist_error").hide();
 		var parameter = ""
@@ -159,7 +164,11 @@
 				$("#accountBody").html("");
 				$("#mainlist").hide();
 			}
+
 			bindDetailEvent(result);
+
+			// ZK绑定情况
+			fetchZkDeploy();
 		});
 		var mainTpl = $("#tbodyTpl").html();
 		// 渲染主列表
@@ -179,7 +188,7 @@
 			return Util.string.format(mainTpl, item.appName, item.appId,
 					item.version, item.envId, item.envName, item.type,
 					item.key, item.createTime, item.modifyTime, item.value,
-					link, del_link, i+1);
+					link, del_link, i + 1);
 		}
 	}
 
@@ -225,5 +234,50 @@
 		}
 		return "参数";
 	}
+
+	//
+	function fetchZkDeploy() {
+		if ($("#zk_deploy_info").is(':hidden')) {
+			var cc = '';
+		} else {
+			fetchZkDeployInfo();
+		}
+	}
+
+	//
+	// 获取ZK数据信息
+	//
+	function fetchZkDeployInfo() {
+
+		$("#zk_deploy_info_pre").html("正在获取ZK信息，请稍等......");
+
+		// 参数不正确，清空列表
+		if (appId == -1 || envId == -1 || version == "#") {
+			$("#zk_deploy_info_pre").html("无ZK信息");
+			return;
+		}
+
+		var base_url = "/api/zoo/zkdeploy?appId=" + appId + "&envId=" + envId
+				+ "&version=" + version
+
+		$.ajax({
+			type : "GET",
+			url : base_url
+		}).done(function(data) {
+			if (data.success === "true") {
+				var html = data.result.hostInfo;
+				if (html == "") {
+					$("#zk_deploy_info_pre").html("无ZK信息");
+				} else {
+					$("#zk_deploy_info_pre").html(html);
+				}
+			}
+		});
+	}
+
+	$("#zk_deploy_button").on('click', function() {
+		$("#zk_deploy_info").toggle();
+		fetchZkDeploy();
+	});
 
 })(jQuery);

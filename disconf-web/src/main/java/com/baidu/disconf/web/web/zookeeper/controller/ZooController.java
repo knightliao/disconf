@@ -1,5 +1,7 @@
 package com.baidu.disconf.web.web.zookeeper.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
+import com.baidu.disconf.web.service.zookeeper.form.ZkDeployForm;
+import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
+import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
+import com.baidu.disconf.web.web.zookeeper.validator.ZkDeployValidator;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
  * 
@@ -30,6 +37,12 @@ public class ZooController extends BaseController {
 
     @Autowired
     private ZooConfig zooConfig;
+
+    @Autowired
+    private ZkDeployValidator zkDeployValidator;
+
+    @Autowired
+    private ZkDeployMgr zkDeployMgr;
 
     /**
      * 获取Zookeeper地址
@@ -65,4 +78,23 @@ public class ZooController extends BaseController {
         return confItemVo;
     }
 
+    /**
+     * 获取ZK 部署情况
+     * 
+     * @param demoUserId
+     * @return
+     */
+    @RequestMapping(value = "/zkdeploy", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase getZkDeployInfo(@Valid ZkDeployForm zkDeployForm) {
+
+        ConfigFullModel configFullModel = zkDeployValidator
+                .verify(zkDeployForm);
+
+        String data = zkDeployMgr.getDeployInfo(configFullModel.getApp()
+                .getName(), configFullModel.getEnv().getName(), zkDeployForm
+                .getVersion());
+
+        return buildSuccess("hostInfo", data);
+    }
 }

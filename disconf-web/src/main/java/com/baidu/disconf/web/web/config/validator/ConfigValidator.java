@@ -14,6 +14,7 @@ import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
+import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.dsp.common.exception.FieldException;
 
 /**
@@ -33,65 +34,11 @@ public class ConfigValidator {
     @Autowired
     private ConfigMgr configMgr;
 
-    public static class ConfigModel {
-
-        private Long appId;
-        private Long envId;
-        private String version;
-        private String key;
-
-        public ConfigModel(Long appId, Long envId, String version, String key) {
-            super();
-            this.appId = appId;
-            this.envId = envId;
-            this.version = version;
-            this.key = key;
-        }
-
-        public Long getAppId() {
-            return appId;
-        }
-
-        public void setAppId(Long appId) {
-            this.appId = appId;
-        }
-
-        public Long getEnvId() {
-            return envId;
-        }
-
-        public void setEnvId(Long envId) {
-            this.envId = envId;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-
-        public void setVersion(String version) {
-            this.version = version;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        @Override
-        public String toString() {
-            return "ConfigModel [appId=" + appId + ", envId=" + envId
-                    + ", version=" + version + ", key=" + key + "]";
-        }
-    }
-
     /**
      * 
      * @param confForm
      */
-    public ConfigModel verifyConfForm(ConfForm confForm) throws Exception {
+    public ConfigFullModel verifyConfForm(ConfForm confForm) throws Exception {
 
         //
         // app
@@ -133,7 +80,7 @@ public class ConfigValidator {
             throw new Exception("version is empty");
         }
 
-        return new ConfigModel(app.getId(), env.getId(), confForm.getVersion(),
+        return new ConfigFullModel(app, env, confForm.getVersion(),
                 confForm.getKey());
     }
 

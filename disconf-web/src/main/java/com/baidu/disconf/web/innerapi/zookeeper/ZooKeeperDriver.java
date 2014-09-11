@@ -73,7 +73,8 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
                 //
                 // 通知
                 //
-                ZookeeperMgr.getInstance().writePersistentUrl(path, value);
+                ZookeeperMgr.getInstanceWithCheck().writePersistentUrl(path,
+                        value);
             }
 
         } catch (Exception e) {
@@ -89,8 +90,10 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
      * @param root
      */
     public List<String> getConf(String groupName) {
-        ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstance();
+
+        ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstanceWithCheck();
         ZooKeeper zooKeeper = zooKeeperMgr.getZk();
+
         List<String> retList = new ArrayList<String>();
         try {
             getConf(zooKeeper, groupName, retList);
@@ -111,7 +114,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
             StringBuffer sb = new StringBuffer();
 
             int pathLength = StringUtils.countMatches(groupName, "/");
-            for (int i = 0; i < pathLength - 1; ++i) {
+            for (int i = 0; i < pathLength - 2; ++i) {
                 sb.append("\t");
             }
 

@@ -98,8 +98,4 @@ public interface ConfigMgr {
 
     void delete(Long configId);
 
-    /**
-     * 返回disconf中所有配置正在使用的服务器及服务器中配置的信息
-     */
-    String getUsageInfo();
 }
