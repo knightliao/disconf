@@ -28,3 +28,5 @@ INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (3, 'testUser
 INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (4, 'testUser4', '59eb095e6f95c6b40fe3f049058387bd64e46809', '82fdf59318de643a5d7ceffa764c7e29cdd5a0e4');
 /*  密码是 MhxzKhl2077 */
 INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (5, 'testUser5', 'e435b4606e61a4b0d934c9d350ec27da3c0ddc4e', '90ac0c85a9581cb762461dcf35dca6f182dc1805');
+/*  dancai   Asd123 */
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`) VALUES (8, 'dancai', '1fae3ce0905862435d03af3ce72aa80d4463f445', 'ce9c0985dfab066f1cf587ab8da3244e0c1158dd');

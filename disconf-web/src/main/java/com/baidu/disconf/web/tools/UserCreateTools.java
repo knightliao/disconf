@@ -42,6 +42,35 @@ public class UserCreateTools {
          * 生成测试用户
          */
         createTestUser();
+
+        /**
+         * 生成指定用户
+         */
+        createSpecifyUser("dancai", "Asd123");
+    }
+
+    /**
+     * 
+     * @param userName
+     * @param password
+     */
+    private static void createSpecifyUser(String userName, String password) {
+
+        User user = new User();
+
+        user.setName(userName);
+
+        user.setPassword(SignUtils.createPassword(password));
+        // token
+        user.setToken(SignUtils.createToken(userName));
+
+        LOG.info(user.toString() + "\t" + password);
+        userDao.create(user);
+
+        List<User> userList = new ArrayList<User>();
+        userList.add(user);
+
+        printUserList(userList);
     }
 
     private static String getUserName(Long i) {
@@ -82,6 +111,15 @@ public class UserCreateTools {
             userDao.create(user);
             userList.add(user);
         }
+
+        printUserList(userList);
+    }
+
+    /**
+     * 
+     * @param userList
+     */
+    private static void printUserList(List<User> userList) {
 
         //
         //
