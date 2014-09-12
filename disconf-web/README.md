@@ -3,6 +3,8 @@ disconf-web
 
 分布式配置Web平台服务 模块
 
+推荐使用最新的Chrome或Firefox浏览.
+
 ## 运行样式 ##
 
 首页：

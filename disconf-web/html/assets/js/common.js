@@ -37,7 +37,7 @@ function getSession() {
 	$.ajax({
 		type : "GET",
 		url : "/api/account/session",
-		timeout : 3000, // 3s timeout
+		timeout : 3000 // 3s timeout
 	}).done(function(data) {
 		if (data.success === "true") {
 			window.VISITOR = data.result.visitor;
