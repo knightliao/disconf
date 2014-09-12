@@ -1,7 +1,9 @@
 package com.baidu.disconf.web.innerapi.zookeeper;
 
 import java.nio.charset.Charset;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -96,7 +98,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
         List<String> retList = new ArrayList<String>();
         try {
-            getConf(zooKeeper, groupName, retList);
+            getConf(zooKeeper, groupName, groupName, retList);
         } catch (KeeperException e) {
             LOG.error(e.getMessage(), e);
         } catch (InterruptedException e) {
@@ -107,8 +109,8 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     private static final Charset CHARSET = Charset.forName("UTF-8");
 
-    private void getConf(ZooKeeper zk, String groupName, List<String> retList)
-            throws KeeperException, InterruptedException {
+    private void getConf(ZooKeeper zk, String groupName, String displayName,
+            List<String> retList) throws KeeperException, InterruptedException {
         try {
 
             StringBuffer sb = new StringBuffer();
@@ -118,30 +120,48 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
                 sb.append("\t");
             }
 
+            List<String> children = zk.getChildren(groupName, false);
+
             if (!"/".equals(groupName)) {
-                String node = StringUtils.substringAfterLast(groupName, "/");
-                sb.append("|----" + node);
+
+                sb.append("|----" + displayName);
                 Stat stat = new Stat();
                 byte[] data = zk.getData(groupName, null, stat);
 
-                if (data != null) {
+                if (data != null && children.size() == 0) {
                     sb.append("\t" + new String(data, CHARSET));
-                }
-                if (stat != null) {
-                    sb.append("\t" + stat.getEphemeralOwner());
                 }
             } else {
                 sb.append(groupName);
             }
             retList.add(sb.toString());
 
-            List<String> children = zk.getChildren(groupName, false);
+            //
+            //
+            //
+            Collections.sort(children,
+                    Collator.getInstance(java.util.Locale.CHINA));
+            int i = 1;
             for (String child : children) {
+
+                String nextName = "";
+
                 if (!"/".equals(groupName)) {
-                    getConf(zk, groupName + "/" + child, retList);
+
+                    nextName = groupName + "/" + child;
+
                 } else {
-                    getConf(zk, groupName + child, retList);
+                    nextName = groupName + "/" + child;
                 }
+
+                String node = StringUtils.substringAfterLast(nextName, "/");
+                if (node.contains(".properties")) {
+                    node = i + ": " + node;
+                }
+
+                getConf(zk, groupName + "/" + child, node, retList);
+
+                ++i;
             }
 
         } catch (KeeperException.NoNodeException e) {
