@@ -176,7 +176,8 @@
 		function renderItem(item, i) {
 
 			var link = "";
-			del_link = '<a id="itemDel' + item.configId
+			del_link = '<a id="itemDel'
+					+ item.configId
 					+ '" style="cursor: pointer; cursor: hand; " ><i title="删除" class="icon-remove"></i></a>';
 			if (item.type == "配置文件") {
 				link = '<a href="modifyFile.html?configId=' + item.configId
@@ -186,12 +187,18 @@
 						+ '"><i title="修改" class="icon-edit"></i></a>';
 			}
 			var downloadlink = '<a href="/api/config/download/'
-					+ +item.configId + '"><i title="下载" class="icon-download-alt"></i></a>';
+					+ +item.configId
+					+ '"><i title="下载" class="icon-download-alt"></i></a>';
+
+			var type = '<i title="配置项" class="icon-leaf"></i>';
+			if (item.type == "配置文件") {
+				type = '<i title="配置文件" class="icon-file"></i>';
+			}
 
 			return Util.string.format(mainTpl, item.appName, item.appId,
-					item.version, item.envId, item.envName, item.type,
-					item.key, item.createTime, item.modifyTime, item.value,
-					link, del_link, i + 1, downloadlink);
+					item.version, item.envId, item.envName, type, item.key,
+					item.createTime, item.modifyTime, item.value, link,
+					del_link, i + 1, downloadlink);
 		}
 	}
 
