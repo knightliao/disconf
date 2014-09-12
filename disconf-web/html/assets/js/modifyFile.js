@@ -181,6 +181,7 @@ $("#uploadChoice").on('click', 'li a', function() {
 
 		$("#file_upload_choice").hide();
 		$("#text_upload_choice").show().children().show();
+		$("#fileContent").text($("#oldvalue").text());
 		uploadWithFile = 0;
 	}
 
