@@ -2,6 +2,8 @@ package com.baidu.disconf.web.service.config.vo;
 
 import java.util.List;
 
+import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
+
 /**
  * 
  * @author liaoqiqi
@@ -31,8 +33,9 @@ public class ConfListVo {
     //
     // zk data
     //
-    private Long machineSize;
-    private List<String> machineList;
+    private int machineSize;
+    private List<ZkDisconfDataItem> machineList;
+    private int errorNum = 0;
 
     public String getAppName() {
         return appName;
@@ -72,6 +75,14 @@ public class ConfListVo {
 
     public String getEnvName() {
         return envName;
+    }
+
+    public int getErrorNum() {
+        return errorNum;
+    }
+
+    public void setErrorNum(int errorNum) {
+        this.errorNum = errorNum;
     }
 
     public void setEnvName(String envName) {
@@ -130,19 +141,19 @@ public class ConfListVo {
         this.typeId = typeId;
     }
 
-    public Long getMachineSize() {
+    public int getMachineSize() {
         return machineSize;
     }
 
-    public void setMachineSize(Long machineSize) {
+    public void setMachineSize(int machineSize) {
         this.machineSize = machineSize;
     }
 
-    public List<String> getMachineList() {
+    public List<ZkDisconfDataItem> getMachineList() {
         return machineList;
     }
 
-    public void setMachineList(List<String> machineList) {
+    public void setMachineList(List<ZkDisconfDataItem> machineList) {
         this.machineList = machineList;
     }
 

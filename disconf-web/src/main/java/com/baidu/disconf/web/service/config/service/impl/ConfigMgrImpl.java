@@ -1,10 +1,13 @@
 package com.baidu.disconf.web.service.config.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,7 @@ import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
+import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
@@ -191,7 +195,57 @@ public class ConfigMgrImpl implements ConfigMgr {
                 .getModelName());
         confListVo.setTypeId(config.getType());
 
+        //
+        //
+        //
+        if (zkDataMap != null) {
+
+            ZkDisconfData zkDisconfData = zkDataMap.get(config.getName());
+            if (zkDisconfData != null) {
+                confListVo.setMachineSize(zkDisconfData.getData().size());
+
+                List<ZkDisconfDataItem> datalist = zkDisconfData.getData();
+                int errorNum = 0;
+                for (ZkDisconfDataItem zkDisconfDataItem : datalist) {
+
+                    boolean ret = compareConifg(zkDisconfDataItem.getValue(),
+                            config.getValue());
+                    if (ret == false) {
+                        errorNum++;
+                    }
+                }
+
+                confListVo.setErrorNum(errorNum);
+                confListVo.setMachineList(datalist);
+            }
+        }
+
         return confListVo;
+    }
+
+    /**
+     * 
+     */
+    private boolean compareConifg(String zkData, String dbData) {
+
+        Properties prop = new Properties();
+        try {
+            prop.load(IOUtils.toInputStream(dbData, "UTF-8"));
+        } catch (IOException e) {
+            LOG.error(e.toString());
+            return false;
+        }
+
+        Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
+        for (String keyInZk : zkMap.keySet()) {
+
+            Object valueInDb = prop.get(keyInZk);
+            if (!zkMap.get(keyInZk).equals(valueInDb)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

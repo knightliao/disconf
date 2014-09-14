@@ -180,10 +180,10 @@
 					+ item.configId
 					+ '" style="cursor: pointer; cursor: hand; " ><i title="删除" class="icon-remove"></i></a>';
 			if (item.type == "配置文件") {
-				link = '<a href="modifyFile.html?configId=' + item.configId
+				link = '<a target="_blank" href="modifyFile.html?configId=' + item.configId
 						+ '"><i title="修改" class="icon-edit"></i></a>';
 			} else {
-				link = '<a href="modifyItem.html?configId=' + item.configId
+				link = '<a target="_blank" href="modifyItem.html?configId=' + item.configId
 						+ '"><i title="修改" class="icon-edit"></i></a>';
 			}
 			var downloadlink = '<a href="/api/config/download/'
@@ -198,11 +198,51 @@
 			var data_fetch_url = '<a href="javascript:void(0);" class="valuefetch'
 					+ item.configId + '" data-placement="left">点击</a>'
 
+			var isRight = "OK";
+			var style = "";
+			if (item.errorNum > 0) {
+				isRight = "; 其中" + item.errorNum + "台出现错误";
+				style = "text-error";
+			}
+			var machine_url = '<a href="javascript:void(0);" class="' + style
+					+ ' machineinfo' + item.configId
+					+ '" data-placement="left">' + item.machineSize + '台 '
+					+ isRight + '</a>'
+
 			return Util.string.format(mainTpl, item.appName, item.appId,
 					item.version, item.envId, item.envName, type, item.key,
 					item.createTime, item.modifyTime, item.value, link,
-					del_link, i + 1, downloadlink, data_fetch_url);
+					del_link, i + 1, downloadlink, data_fetch_url, machine_url);
 		}
+	}
+
+	/**
+	 * @param result
+	 * @returns {String}
+	 */
+	function getMachineList(machinelist) {
+		var tip;
+		if (machinelist.length == 0) {
+			tip = "";
+		} else {
+			tip = '<div style="overflow-y:scroll"><table class="table-bordered"><tr><th>机器</th><th>值</th><th>状态</th></tr>';
+			for ( var i = 0; i < machinelist.length; i++) {
+				var item = machinelist[i];
+
+				var flag = "正常";
+				var style = "";
+				if (item.right == false) {
+					flag = "错误";
+					style = "text-error";
+				}
+
+				tip += '<tr class="' + style + '"><td><pre>' + item.machine
+						+ " </pre></td><td><pre>" + item.value
+						+ "</pre></td><td>" + flag + "</td></tr>";
+			}
+			tip += '</table></div>';
+		}
+		return tip;
 	}
 
 	// 详细列表绑定事件
@@ -223,6 +263,15 @@
 				e.unbind('click');
 				e.popover({
 					content : "<pre>" + item.value + "</pre>",
+					html : true
+				}).popover('show');
+			});
+
+			$(".machineinfo" + id).on('click', function() {
+				var e = $(this);
+				e.unbind('click');
+				e.popover({
+					content : getMachineList(item.machineList),
 					html : true
 				}).popover('show');
 			});

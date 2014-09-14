@@ -106,10 +106,6 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
         Map<String, ZkDisconfData> fileMap = new HashMap<String, ZkDisconfData>();
 
-        if (true) {
-            return fileMap;
-        }
-
         try {
 
             fileMap = getDisconfData(ZooPathMgr.getFileZooPath(baseUrl));

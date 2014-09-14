@@ -26,7 +26,7 @@ public class ZkDisconfData {
         private String value = "";
 
         // 值是否正确
-        private boolean isRight = false;
+        private boolean isRight = true;
 
         public String getMachine() {
             return machine;
