@@ -1,6 +1,7 @@
 package com.baidu.disconf.web.service.zookeeper.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
+import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 
 /**
@@ -26,7 +28,7 @@ public class ZkDeployMgrImpl implements ZkDeployMgr {
     private ZooConfig zooConfig;
 
     /**
-     * 
+     * 获取ZK的详细部署信息
      */
     @Override
     public String getDeployInfo(String app, String env, String version) {
@@ -38,5 +40,17 @@ public class ZkDeployMgrImpl implements ZkDeployMgr {
         List<String> hostInfoList = zooKeeperDriver.getConf(url);
 
         return StringUtils.join(hostInfoList, '\n');
+    }
+
+    /**
+     * 
+     * 获取每个配置级别的Map数据, Key是配置, Value是ZK配置数据
+     * 
+     * @return
+     */
+    public Map<String, ZkDisconfData> getZkDisconfDataMap(String app,
+            String env, String version) {
+
+        return zooKeeperDriver.getDisconfData(app, env, version);
     }
 }

@@ -195,10 +195,13 @@
 				type = '<i title="配置文件" class="icon-file"></i>';
 			}
 
+			var data_fetch_url = '<a href="javascript:void(0);" class="valuefetch'
+					+ item.configId + '" data-placement="left">点击</a>'
+
 			return Util.string.format(mainTpl, item.appName, item.appId,
 					item.version, item.envId, item.envName, type, item.key,
 					item.createTime, item.modifyTime, item.value, link,
-					del_link, i + 1, downloadlink);
+					del_link, i + 1, downloadlink, data_fetch_url);
 		}
 	}
 
@@ -209,11 +212,23 @@
 		}
 		$.each(result, function(index, item) {
 			var id = item.configId;
+
 			// 绑定删除事件
 			$("#itemDel" + id).on("click", function(e) {
 				deleteDetailTable(id);
 			});
+
+			$(".valuefetch" + id).on('click', function() {
+				var e = $(this);
+				e.unbind('click');
+				e.popover({
+					content : "<pre>" + item.value + "</pre>",
+					html : true
+				}).popover('show');
+			});
+
 		});
+
 	}
 
 	// 删除

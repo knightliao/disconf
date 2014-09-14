@@ -64,15 +64,12 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements
 
         DaoPage daoPage = DaoUtils.daoPageAdapter(page);
         List<Match> matchs = new ArrayList<Match>();
-        if (appId != null) {
-            matchs.add(new Match(Columns.APP_ID, appId));
-        }
-        if (envId != null) {
-            matchs.add(new Match(Columns.ENV_ID, envId));
-        }
-        if (version != null) {
-            matchs.add(new Match(Columns.VERSION, version));
-        }
+
+        matchs.add(new Match(Columns.APP_ID, appId));
+
+        matchs.add(new Match(Columns.ENV_ID, envId));
+
+        matchs.add(new Match(Columns.VERSION, version));
 
         return page2(matchs, daoPage);
     }

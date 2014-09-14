@@ -1,5 +1,7 @@
 package com.baidu.disconf.web.service.config.vo;
 
+import java.util.List;
+
 /**
  * 
  * @author liaoqiqi
@@ -25,6 +27,12 @@ public class ConfListVo {
     private String createTime;
 
     private String modifyTime;
+
+    //
+    // zk data
+    //
+    private Long machineSize;
+    private List<String> machineList;
 
     public String getAppName() {
         return appName;
@@ -120,6 +128,22 @@ public class ConfListVo {
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
+    }
+
+    public Long getMachineSize() {
+        return machineSize;
+    }
+
+    public void setMachineSize(Long machineSize) {
+        this.machineSize = machineSize;
+    }
+
+    public List<String> getMachineList() {
+        return machineList;
+    }
+
+    public void setMachineList(List<String> machineList) {
+        this.machineList = machineList;
     }
 
     @Override

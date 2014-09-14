@@ -1,5 +1,9 @@
 package com.baidu.disconf.web.service.zookeeper.service;
 
+import java.util.Map;
+
+import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
+
 /**
  * 
  * 
@@ -16,4 +20,14 @@ public interface ZkDeployMgr {
      * @return
      */
     String getDeployInfo(String app, String env, String version);
+
+    /**
+     * 
+     * @param app
+     * @param env
+     * @param version
+     * @return
+     */
+    Map<String, ZkDisconfData> getZkDisconfDataMap(String app, String env,
+            String version);
 }

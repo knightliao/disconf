@@ -2,10 +2,8 @@ package com.baidu.disconf.web.service.config.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +28,8 @@ import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
+import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
+import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
@@ -62,6 +62,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private ZooConfig zooConfig;
+
+    @Autowired
+    private ZkDeployMgr zkDeployMgr;
 
     /**
      * 根据详细参数获取配置返回
@@ -127,18 +130,19 @@ public class ConfigMgrImpl implements ConfigMgr {
                 confListForm.getAppId(), confListForm.getEnvId(),
                 confListForm.getVersion(), confListForm.getPage());
 
-        Set<Long> appIdSet = new HashSet<Long>();
-        Set<Long> envIdSet = new HashSet<Long>();
-        for (Config config : configList.getResult()) {
-            appIdSet.add(config.getAppId());
-            envIdSet.add(config.getEnvId());
-        }
+        //
+        //
+        //
+
+        final App app = appMgr.getById(confListForm.getAppId());
+        final Env env = envMgr.getById(confListForm.getEnvId());
 
         //
-        // map
         //
-        final Map<Long, App> appMap = appMgr.getByIds(appIdSet);
-        final Map<Long, Env> envMap = envMgr.getByIds(envIdSet);
+        //
+        final Map<String, ZkDisconfData> zkDataMap = zkDeployMgr
+                .getZkDisconfDataMap(app.getName(), env.getName(),
+                        confListForm.getVersion());
 
         //
         // 进行转换
@@ -149,12 +153,11 @@ public class ConfigMgrImpl implements ConfigMgr {
                     @Override
                     public ConfListVo transfer(Config input) {
 
-                        String appNameString = appMap.get(input.getAppId())
-                                .getName();
-                        String envName = envMap.get(input.getEnvId()).getName();
+                        String appNameString = app.getName();
+                        String envName = env.getName();
 
                         ConfListVo configListVo = convert(input, appNameString,
-                                envName);
+                                envName, zkDataMap);
 
                         return configListVo;
                     }
@@ -170,7 +173,7 @@ public class ConfigMgrImpl implements ConfigMgr {
      * @return
      */
     private ConfListVo convert(Config config, String appNameString,
-            String envName) {
+            String envName, Map<String, ZkDisconfData> zkDataMap) {
 
         ConfListVo confListVo = new ConfListVo();
 
@@ -201,7 +204,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         App app = appMgr.getById(config.getAppId());
         Env env = envMgr.getById(config.getEnvId());
 
-        return convert(config, app.getName(), env.getName());
+        return convert(config, app.getName(), env.getName(), null);
     }
 
     /**
