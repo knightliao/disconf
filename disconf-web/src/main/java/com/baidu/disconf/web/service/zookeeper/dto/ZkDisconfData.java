@@ -25,8 +25,7 @@ public class ZkDisconfData {
         // 值
         private String value = "";
 
-        // 值是否正确
-        private boolean isRight = true;
+        private List<String> errorList = new ArrayList<String>();
 
         public String getMachine() {
             return machine;
@@ -44,13 +43,14 @@ public class ZkDisconfData {
             this.value = value;
         }
 
-        public boolean isRight() {
-            return isRight;
+        public List<String> getErrorList() {
+            return errorList;
         }
 
-        public void setRight(boolean isRight) {
-            this.isRight = isRight;
+        public void setErrorList(List<String> errorList) {
+            this.errorList = errorList;
         }
+
     }
 
     /*

@@ -234,20 +234,21 @@
 		if (machinelist.length == 0) {
 			tip = "";
 		} else {
-			tip = '<div style="overflow-y:scroll"><table class="table-bordered"><tr><th>机器</th><th>值</th><th>状态</th></tr>';
+			tip = '<div style="overflow-y:scroll;max-height:400px;"><table class="table-bordered"><tr><th>机器</th><th>值</th><th>状态</th></tr>';
 			for ( var i = 0; i < machinelist.length; i++) {
 				var item = machinelist[i];
 
 				var flag = "正常";
 				var style = "";
-				if (item.right == false) {
+				if (item.errorList.length != 0) {
 					flag = "错误";
 					style = "text-error";
 				}
 
-				tip += '<tr class="' + style + '"><td><pre>' + item.machine
-						+ " </pre></td><td><pre>" + item.value
-						+ "</pre></td><td>" + flag + "</td></tr>";
+				tip += '<tr><td><pre>' + item.machine + " </pre></td><td><pre>"
+						+ item.value + '</pre></td><td><pre class="' + style
+						+ '">' + flag + ": " + item.errorList.join(",")
+						+ "</pre></td></tr>";
 			}
 			tip += '</table></div>';
 		}

@@ -249,9 +249,11 @@ public class ConfigMgrImpl implements ConfigMgr {
                 int errorNum = 0;
                 for (ZkDisconfDataItem zkDisconfDataItem : datalist) {
 
-                    boolean ret = compareConifg(zkDisconfDataItem.getValue(),
-                            config.getValue());
-                    if (ret == false) {
+                    List<String> errorKeyList = compareConifg(
+                            zkDisconfDataItem.getValue(), config.getValue());
+
+                    if (errorKeyList.size() != 0) {
+                        zkDisconfDataItem.setErrorList(errorKeyList);
                         errorNum++;
                     }
                 }
@@ -267,14 +269,17 @@ public class ConfigMgrImpl implements ConfigMgr {
     /**
      * 
      */
-    private boolean compareConifg(String zkData, String dbData) {
+    private List<String> compareConifg(String zkData, String dbData) {
+
+        List<String> errorKeyList = new ArrayList<String>();
 
         Properties prop = new Properties();
         try {
             prop.load(IOUtils.toInputStream(dbData, "UTF-8"));
         } catch (IOException e) {
             LOG.error(e.toString());
-            return false;
+            errorKeyList.add(zkData);
+            return errorKeyList;
         }
 
         Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
@@ -282,11 +287,11 @@ public class ConfigMgrImpl implements ConfigMgr {
 
             Object valueInDb = prop.get(keyInZk);
             if (!zkMap.get(keyInZk).equals(valueInDb)) {
-                return false;
+                errorKeyList.add(keyInZk);
             }
         }
 
-        return true;
+        return errorKeyList;
     }
 
     /**
