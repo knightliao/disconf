@@ -113,7 +113,7 @@ public final class DisClientConfig {
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "enable", defaultValue = "false")
+    @DisInnerConfigAnnotation(name = "enable.remote.conf", defaultValue = "false")
     public boolean ENABLE_DISCONF = false;
 
     /**
