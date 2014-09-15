@@ -34,6 +34,7 @@
 					});
 	$("#applist").on('click', 'li a', function(e) {
 		appId = $(this).attr('rel');
+		$("#app_info").html(", " + $(this).text());
 		$("#appDropdownMenuTitle").text($(this).text());
 		version = "#";
 		fetchVersion(appId, envId);
@@ -98,6 +99,7 @@
 			});
 	$("#envChoice").on('click', 'li a', function() {
 		envId = $(this).attr('rel');
+		$("#env_info").html($(this).text());
 		$("#envChoice li").removeClass("active");
 		$(this).parent().addClass("active");
 		version = "#";
@@ -180,10 +182,12 @@
 					+ item.configId
 					+ '" style="cursor: pointer; cursor: hand; " ><i title="删除" class="icon-remove"></i></a>';
 			if (item.type == "配置文件") {
-				link = '<a target="_blank" href="modifyFile.html?configId=' + item.configId
+				link = '<a target="_blank" href="modifyFile.html?configId='
+						+ item.configId
 						+ '"><i title="修改" class="icon-edit"></i></a>';
 			} else {
-				link = '<a target="_blank" href="modifyItem.html?configId=' + item.configId
+				link = '<a target="_blank" href="modifyItem.html?configId='
+						+ item.configId
 						+ '"><i title="修改" class="icon-edit"></i></a>';
 			}
 			var downloadlink = '<a href="/api/config/download/'
