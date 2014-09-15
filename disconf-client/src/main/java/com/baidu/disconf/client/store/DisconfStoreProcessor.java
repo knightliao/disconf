@@ -100,4 +100,9 @@ public interface DisconfStoreProcessor {
      * @return
      */
     String confToString();
+
+    /**
+     * 排除某个配置
+     */
+    void exlucde(Set<String> keySet);
 }

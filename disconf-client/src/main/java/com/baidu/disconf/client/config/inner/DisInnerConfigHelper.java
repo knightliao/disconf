@@ -1,5 +1,9 @@
 package com.baidu.disconf.client.config.inner;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +79,22 @@ public class DisInnerConfigHelper {
         //
         // 是否使用远程的配置
         LOGGER.info("SERVER ENABLE_REMOTE_CONF: "
-                + DisClientConfig.getInstance().ENABLE_REMOTE_CONF);
+                + DisClientConfig.getInstance().ENABLE_DISCONF);
+
+        //
+        // 忽略哪些分布式配置
+        //
+        List<String> ignoreDisconfList = StringUtil.parseStringToStringList(
+                DisClientConfig.getInstance().IGNORE_DISCONF_LIST, ",");
+        Set<String> keySet = new HashSet<String>();
+        if (ignoreDisconfList != null) {
+            for (String ignoreData : ignoreDisconfList) {
+                keySet.add(ignoreData.trim());
+            }
+        }
+        DisClientConfig.getInstance().setIgnoreDisconfKeySet(keySet);
+        LOGGER.info("SERVER IGNORE_DISCONF_LIST: "
+                + DisClientConfig.getInstance().getIgnoreDisconfKeySet());
 
         // 重试
         LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_TIMES: "

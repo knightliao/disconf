@@ -286,4 +286,11 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         return sBuffer.toString();
     }
 
+    @Override
+    public void exlucde(Set<String> keySet) {
+        for (String key : keySet) {
+            DisconfCenterStore.getInstance().excludeOneItem(key);
+        }
+    }
+
 }

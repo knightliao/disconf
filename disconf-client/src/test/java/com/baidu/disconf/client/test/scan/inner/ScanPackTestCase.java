@@ -41,14 +41,14 @@ public class ScanPackTestCase extends BaseSpringTestCase {
             LOGGER.info("=============DISCONF FILE ITEM===================");
             Set<Method> methods = scanModel.getDisconfFileItemMethodSet();
             ScanPrinterUtils.printFileItemMethod(methods);
-            Assert.assertEquals(4, methods.size());
-            Assert.assertEquals(3, scanModel.getDisconfFileClassSet().size());
+            Assert.assertEquals(6, methods.size());
+            Assert.assertEquals(4, scanModel.getDisconfFileClassSet().size());
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE===================");
             Map<Class<?>, Set<Method>> fileMap = scanModel
                     .getDisconfFileItemMap();
-            Assert.assertEquals(3, fileMap.size());
+            Assert.assertEquals(4, fileMap.size());
 
             // disconf item
             LOGGER.info("=============DISCONF ITEM===================");

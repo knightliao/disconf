@@ -72,7 +72,7 @@ public class DisconfMgr {
             ConfigMgr.init();
 
             // 是否开启远程配置
-            if (DisClientConfig.getInstance().ENABLE_REMOTE_CONF == false) {
+            if (DisClientConfig.getInstance().ENABLE_DISCONF == false) {
                 LOGGER.info("FIRST_SCAN, ENABLE_REMOTE_CONF==0, we use Local Configuration.");
                 return;
             }
@@ -106,7 +106,7 @@ public class DisconfMgr {
     public synchronized static void secondScan() {
 
         // 是否开启远程配置
-        if (DisClientConfig.getInstance().ENABLE_REMOTE_CONF == false) {
+        if (DisClientConfig.getInstance().ENABLE_DISCONF == false) {
             LOGGER.info("SECOND_SCAN, ENABLE_REMOTE_CONF==0, we use Local Configuration.");
             return;
         }

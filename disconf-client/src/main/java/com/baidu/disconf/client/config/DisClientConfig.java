@@ -1,6 +1,8 @@
 package com.baidu.disconf.client.config;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,8 +113,18 @@ public final class DisClientConfig {
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "enable.remote.conf", defaultValue = "false")
-    public boolean ENABLE_REMOTE_CONF = false;
+    @DisInnerConfigAnnotation(name = "enable", defaultValue = "false")
+    public boolean ENABLE_DISCONF = false;
+
+    /**
+     * 忽略哪些分布式配置
+     * 
+     * @author
+     * @since 1.0.0
+     */
+    @DisInnerConfigAnnotation(name = "ignore", defaultValue = "")
+    public String IGNORE_DISCONF_LIST = "";
+    private Set<String> ignoreDisconfKeySet = new HashSet<String>();
 
     /**
      * 获取远程配置 重试次数，默认是3次
@@ -138,6 +150,14 @@ public final class DisClientConfig {
 
     public void setHostList(List<String> hostList) {
         this.hostList = hostList;
+    }
+
+    public Set<String> getIgnoreDisconfKeySet() {
+        return ignoreDisconfKeySet;
+    }
+
+    public void setIgnoreDisconfKeySet(Set<String> ignoreDisconfKeySet) {
+        this.ignoreDisconfKeySet = ignoreDisconfKeySet;
     }
 
 }

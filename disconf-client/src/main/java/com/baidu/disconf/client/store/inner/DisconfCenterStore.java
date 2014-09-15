@@ -95,6 +95,26 @@ public class DisconfCenterStore {
         }
     }
 
+    /**
+     * 删除一个配置项
+     */
+    public void excludeOneItem(String key) {
+
+        if (confItemMap.containsKey(key)) {
+            confItemMap.remove(key);
+        }
+    }
+
+    /**
+     * 删除一个配置文件
+     */
+    public void excludeOneFile(String key) {
+
+        if (confFileMap.containsKey(key)) {
+            confFileMap.remove(key);
+        }
+    }
+
     public Map<String, DisconfCenterFile> getConfFileMap() {
         return confFileMap;
     }

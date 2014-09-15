@@ -2,6 +2,7 @@ package com.baidu.disconf.client.scan.inner.statically.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
@@ -32,6 +33,15 @@ public class StaticScannerNonAnnotationFileMgrImpl extends
 
         DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
                 .transformScanData(disconfCenterBaseModels);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void exclude(Set<String> keySet) {
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(
+                keySet);
     }
 
     /**

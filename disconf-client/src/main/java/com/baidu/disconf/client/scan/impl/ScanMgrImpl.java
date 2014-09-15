@@ -7,6 +7,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.scan.ScanMgr;
 import com.baidu.disconf.client.scan.inner.dynamic.ScanDynamicStoreAdapter;
 import com.baidu.disconf.client.scan.inner.statically.ScanStatic;
@@ -63,6 +64,8 @@ public class ScanMgrImpl implements ScanMgr {
         // 放进仓库
         for (StaticScannerMgr scannerMgr : staticScannerMgrs) {
             scannerMgr.scanData2Store(scanModel);
+            scannerMgr.exclude(DisClientConfig.getInstance()
+                    .getIgnoreDisconfKeySet());
         }
     }
 
