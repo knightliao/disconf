@@ -44,7 +44,13 @@ public class DisconfCenterItem extends DisconfCenterBaseModel {
     @Override
     public String toString() {
         return "\n\tDisconfCenterItem [\n\tkey=" + key + "\n\tvalue=" + value
-                + "\n\tfield=" + field +  super.toString() + "]";
+                + "\n\tfield=" + field + super.toString() + "]";
+    }
+
+    @Override
+    public String infoString() {
+        return "\n\tDisconfCenterItem [\n\tvalue=" + value
+                + "\n\tfield=" + field + super.infoString() + "]";
     }
 
 }

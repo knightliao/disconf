@@ -62,4 +62,8 @@ public abstract class DisconfCenterBaseModel {
                 + "\n\tdisconfCommonCallbackModel="
                 + disconfCommonCallbackModel + "]";
     }
+
+    public String infoString() {
+        return "\n\tremoteServerUrl=" + remoteServerUrl;
+    }
 }

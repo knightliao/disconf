@@ -48,8 +48,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     @Override
     public String toString() {
-        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls
-                + "\n\tfileName=" + fileName + super.toString() + "]";
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls="
+                + cls + "\n\tfileName=" + fileName + super.toString() + "]";
+    }
+
+    @Override
+    public String infoString() {
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls="
+                + cls + super.infoString() + "]";
     }
 
     /**
