@@ -128,7 +128,7 @@ Disconf为应用方提供了三个工具，
 
 APP+环境+版本+ZK查询：
 
-![](http://ww2.sinaimg.cn/mw1024/60c9620fgw1ekdebjbemvj20ro0bpgnu.jpg)
+![](http://ww3.sinaimg.cn/mw1024/60c9620fgw1ekdeid28pmj20rc0fkdj9.jpg)
 
 ### disconf-client Tutorials ###
 
@@ -136,6 +136,7 @@ APP+环境+版本+ZK查询：
 - [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
 - [Tutorial 3 分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
 - [Tutorial 4 分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
+- Tutorial 5 非注解式的分布式配置文件管理
 - [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 - [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 - [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)

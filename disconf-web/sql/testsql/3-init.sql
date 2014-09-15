@@ -8,14 +8,15 @@ INSERT INTO `env` (`env_id`, `name`) VALUES (4, 'online');
 
 INSERT INTO `app` (`app_id`, `name`, `description`, `create_time`, `update_time`) VALUES (2, 'disconf_demo', 'disconf demo', '99991231235959', '99991231235959');
 
-
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (4, 0, 'coefficients.properties', 'coe.baiFaCoe=1.3\r\ncoe.yuErBaoCoe=1.2\r\n', 2, '1_0_0_0', 1, '99991231235959', '20140729194923');
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (5, 1, 'moneyInvest', '10000', 2, '1_0_0_0', 1, '99991231235959', '99991231235959');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (5, 1, 'moneyInvest', '10000', 2, '1_0_0_0', 1, '99991231235959', '20140902183514');
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (6, 0, 'remote.properties', 'remoteHost=127.0.0.1\r\nremotePort=8081', 2, '1_0_0_0', 1, '20140729174707', '20140804233309');
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (7, 1, 'discountRate', '0.4', 2, '1_0_0_0', 1, '20140801142833', '20140805002445');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (7, 1, 'discountRate', '0.5', 2, '1_0_0_0', 1, '20140801142833', '20140905130141');
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (12, 0, 'redis.properties', 'redis.host=10.48.57.42\r\nredis.port=8310', 2, '1_0_0_0', 1, '20140811172327', '20140811172327');
-INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (16, 0, 'static.properties', 'staticVar=54', 2, '1_0_0_0', 1, '20140814202654', '20140814211134');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (16, 0, 'static.properties', 'staticVar=147', 2, '1_0_0_0', 1, '20140814202654', '20140905145616');
 INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (17, 1, 'staticItem', '30', 2, '1_0_0_0', 1, '20140814210709', '20140814211054');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (29, 0, 'empty.properties', 'redis.host=10.48.57.42\r\nredis.port=8310', 2, '1_0_0_0', 1, '20140909164001', '20140909164125');
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`) VALUES (48, 0, 'atomserverl.properties', 'server=10.81.11.243:16600,10.81.11.243:16602,10.81.11.243:16603\nretry=4\n', 2, '1_0_0_0', 1, '20140911223117', '20140911223313');
 
 
 /* 密码是 MhxzKhl5258 */

@@ -249,12 +249,31 @@ public class ConfigMgrImpl implements ConfigMgr {
                 int errorNum = 0;
                 for (ZkDisconfDataItem zkDisconfDataItem : datalist) {
 
-                    List<String> errorKeyList = compareConifg(
-                            zkDisconfDataItem.getValue(), config.getValue());
+                    if (config.getType().equals(
+                            DisConfigTypeEnum.FILE.getType())) {
 
-                    if (errorKeyList.size() != 0) {
-                        zkDisconfDataItem.setErrorList(errorKeyList);
-                        errorNum++;
+                        List<String> errorKeyList = compareConifg(
+                                zkDisconfDataItem.getValue(), config.getValue());
+
+                        if (errorKeyList.size() != 0) {
+                            zkDisconfDataItem.setErrorList(errorKeyList);
+                            errorNum++;
+                        }
+                    } else {
+
+                        //
+                        // 配置项
+                        //
+
+                        if (zkDisconfDataItem.getValue().trim()
+                                .equals(config.getValue().trim())) {
+
+                        } else {
+                            List<String> errorKeyList = new ArrayList<String>();
+                            errorKeyList.add(config.getValue().trim());
+                            zkDisconfDataItem.setErrorList(errorKeyList);
+                            errorNum++;
+                        }
                     }
                 }
 
