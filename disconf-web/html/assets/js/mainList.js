@@ -127,6 +127,11 @@
 
 		$("#zk_deploy").show().children().show();
 
+		$("#batch_download").attr(
+				'href',
+				"/api/config/downloadfilebatch?appId=" + appId + "&envId="
+						+ envId + "&version=" + version);
+
 		$("#mainlist_error").hide();
 		var parameter = ""
 
@@ -200,7 +205,7 @@
 			}
 
 			var data_fetch_url = '<a href="javascript:void(0);" class="valuefetch'
-					+ item.configId + '" data-placement="left">点击</a>'
+					+ item.configId + '" data-placement="left">点击获取</a>'
 
 			var isRight = "OK";
 			var style = "";
