@@ -1,11 +1,14 @@
 package com.baidu.disconf.web.web.config.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.VersionListForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
+import com.baidu.disconf.web.utils.TarUtils;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.constraint.validation.PageOrderValidator;
@@ -73,7 +77,7 @@ public class ConfigReadController extends BaseController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public JsonObjectBase getConfigList(ConfListForm confListForm) {
+    public JsonObjectBase getConfigList(@Valid ConfListForm confListForm) {
 
         // 设置排序方式
         confListForm.getPage().setOrderBy(Columns.NAME);
@@ -136,4 +140,43 @@ public class ConfigReadController extends BaseController {
         return new HttpEntity<byte[]>(res, header);
     }
 
+    /**
+     * 批量下载配置文件
+     * 
+     * @param fileName
+     * @return
+     */
+    @RequestMapping(value = "/downloadfilebatch", method = RequestMethod.GET)
+    public HttpEntity<byte[]> download2(@Valid ConfListForm confListForm) {
+
+        //
+        // get files
+        //
+        List<File> fileList = configMgr.getDisonfFileList(confListForm);
+
+        //
+        // prefix
+        //
+        String prefixString = "APP" + confListForm.getAppId() + "_" + "ENV"
+                + confListForm.getEnvId() + "_" + "VERSION"
+                + confListForm.getVersion();
+
+        HttpHeaders header = new HttpHeaders();
+
+        String targetFileString = "";
+        File targetFile = null;
+        byte[] res = null;
+        try {
+            targetFileString = TarUtils.tarFiles("tmp", prefixString, fileList);
+            targetFile = new File(targetFileString);
+            res = IOUtils.toByteArray(new FileInputStream(targetFile));
+        } catch (Exception e) {
+            throw new DocumentNotFoundException("");
+        }
+
+        header.set("Content-Disposition",
+                "attachment; filename=" + targetFile.getName());
+        header.setContentLength(res.length);
+        return new HttpEntity<byte[]>(res, header);
+    }
 }

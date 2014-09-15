@@ -47,4 +47,13 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      */
     public String getValue(Long configId);
 
+    /**
+     * 
+     * @param appId
+     * @param envId
+     * @param version
+     * @return
+     */
+    List<Config> getConfigList(Long appId, Long envId, String version);
+
 }

@@ -18,6 +18,7 @@ import com.baidu.ub.common.db.DaoPage;
 import com.baidu.ub.common.db.DaoPageResult;
 import com.baidu.unbiz.common.genericdao.operator.Match;
 import com.baidu.unbiz.common.genericdao.operator.Modify;
+import com.baidu.unbiz.common.genericdao.operator.Order;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
 /**
@@ -72,6 +73,23 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements
         matchs.add(new Match(Columns.VERSION, version));
 
         return page2(matchs, daoPage);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public List<Config> getConfigList(Long appId, Long envId, String version) {
+
+        List<Match> matchs = new ArrayList<Match>();
+
+        matchs.add(new Match(Columns.APP_ID, appId));
+
+        matchs.add(new Match(Columns.ENV_ID, envId));
+
+        matchs.add(new Match(Columns.VERSION, version));
+
+        return find(matchs, new ArrayList<Order>());
     }
 
     /**

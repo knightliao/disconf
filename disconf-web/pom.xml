@@ -271,6 +271,11 @@
             <groupId>com.github.knightliao.apollo</groupId>
             <artifactId>apollo</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.7</version>
+        </dependency>
     </dependencies>
 
     <!-- build -->

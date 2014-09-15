@@ -1,5 +1,6 @@
 package com.baidu.disconf.web.service.config.service;
 
+import java.io.File;
 import java.util.List;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
@@ -97,5 +98,7 @@ public interface ConfigMgr {
             DisConfigTypeEnum disConfigTypeEnum);
 
     void delete(Long configId);
+
+    List<File> getDisonfFileList(ConfListForm confListForm);
 
 }
