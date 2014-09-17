@@ -44,10 +44,11 @@ echo "**********************************************"
 echo "copy online config " $ONLINE_CONFIG_PATH
 echo "**********************************************"
 if [ -d "src/main/online-resources" ]; then
-    printf '%s\n' "Removing src/main/online-resources"
-    rm -rf src/main/online-resources
+    printf '%s\n' "Removing src/main/online-resources/*"
+    rm src/main/online-resources/*
 fi
-cp $ONLINE_CONFIG_PATH src/main -rp
+mkdir -p src/main/online-resources
+cp "$ONLINE_CONFIG_PATH"/* src/main/online-resources -rp
 
 echo "**********************************************"
 echo "It's going to Generate the output for war"
