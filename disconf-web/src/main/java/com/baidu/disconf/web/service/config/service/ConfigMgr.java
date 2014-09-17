@@ -56,7 +56,9 @@ public interface ConfigMgr {
      * @param version
      * @return
      */
-    public DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm);
+    DaoPageResult<ConfListVo> getConfigListWithZk(ConfListForm confListForm);
+
+    DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm);
 
     /**
      * 
@@ -99,6 +101,11 @@ public interface ConfigMgr {
 
     void delete(Long configId);
 
+    /**
+     * 
+     * @param confListForm
+     * @return
+     */
     List<File> getDisonfFileList(ConfListForm confListForm);
 
 }

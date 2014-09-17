@@ -163,10 +163,11 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 配置列表
+     * 配置列表 含有ZK信息
      */
     @Override
-    public DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm) {
+    public DaoPageResult<ConfListVo> getConfigListWithZk(
+            ConfListForm confListForm) {
 
         //
         // 数据据结果
@@ -203,6 +204,48 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                         ConfListVo configListVo = convert(input, appNameString,
                                 envName, zkDataMap);
+
+                        return configListVo;
+                    }
+                });
+
+        return configListVo;
+    }
+
+    /**
+     * 配置列表
+     */
+    @Override
+    public DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm) {
+
+        //
+        // 数据据结果
+        //
+        DaoPageResult<Config> configList = configDao.getConfigList(
+                confListForm.getAppId(), confListForm.getEnvId(),
+                confListForm.getVersion(), confListForm.getPage());
+
+        //
+        //
+        //
+
+        final App app = appMgr.getById(confListForm.getAppId());
+        final Env env = envMgr.getById(confListForm.getEnvId());
+
+        //
+        // 进行转换
+        //
+        DaoPageResult<ConfListVo> configListVo = ServiceUtil.getResult(
+                configList, new DataTransfer<Config, ConfListVo>() {
+
+                    @Override
+                    public ConfListVo transfer(Config input) {
+
+                        String appNameString = app.getName();
+                        String envName = env.getName();
+
+                        ConfListVo configListVo = convert(input, appNameString,
+                                envName, null);
 
                         return configListVo;
                     }
@@ -305,7 +348,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         for (String keyInZk : zkMap.keySet()) {
 
             Object valueInDb = prop.get(keyInZk);
-            if (!zkMap.get(keyInZk).equals(valueInDb)) {
+            if (!zkMap.get(keyInZk).equals(valueInDb.toString().trim())) {
                 errorKeyList.add(keyInZk);
             }
         }

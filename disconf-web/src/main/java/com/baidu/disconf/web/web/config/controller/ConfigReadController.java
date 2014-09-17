@@ -84,6 +84,26 @@ public class ConfigReadController extends BaseController {
         confListForm.getPage().setOrder(PageOrderValidator.ASC);
 
         DaoPageResult<ConfListVo> configs = configMgr
+                .getConfigListWithZk(confListForm);
+
+        return buildListSuccess(configs);
+    }
+
+    /**
+     * 获取列表,有分页的, 没有ZK信息
+     * 
+     * @param confListForm
+     * @return
+     */
+    @RequestMapping(value = "/simple/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase getSimpleConfigList(@Valid ConfListForm confListForm) {
+
+        // 设置排序方式
+        confListForm.getPage().setOrderBy(Columns.NAME);
+        confListForm.getPage().setOrder(PageOrderValidator.ASC);
+
+        DaoPageResult<ConfListVo> configs = configMgr
                 .getConfigList(confListForm);
 
         return buildListSuccess(configs);
