@@ -43,6 +43,10 @@ export PATH
 echo "**********************************************"
 echo "copy online config " $ONLINE_CONFIG_PATH
 echo "**********************************************"
+if [ -d "src/main/online-resources" ]; then
+    printf '%s\n' "Removing src/main/online-resources"
+    rm -rf src/main/online-resources
+fi
 cp $ONLINE_CONFIG_PATH src/main -rp
 
 echo "**********************************************"
