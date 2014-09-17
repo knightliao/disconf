@@ -348,8 +348,16 @@ public class ConfigMgrImpl implements ConfigMgr {
         for (String keyInZk : zkMap.keySet()) {
 
             Object valueInDb = prop.get(keyInZk);
-            if (!zkMap.get(keyInZk).equals(valueInDb.toString().trim())) {
-                errorKeyList.add(keyInZk);
+            try {
+
+                if (!zkMap.get(keyInZk).equals(valueInDb.toString().trim())) {
+                    errorKeyList.add(keyInZk);
+                }
+
+            } catch (Exception e) {
+
+                LOG.warn(e.toString() + " " + zkMap.get(keyInZk) + " ; "
+                        + valueInDb);
             }
         }
 
