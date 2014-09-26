@@ -118,7 +118,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>16.0</version>
-            <classifier>site</classifier>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
