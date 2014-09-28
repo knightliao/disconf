@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>disconf-web</artifactId>
@@ -310,11 +310,13 @@
                         <contextPath>/</contextPath>
                     </webAppConfig>
 
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+
                     <!-- specify run port, default is 8080 -->
                     <connectors>
                         <connector
-                            implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8085</port>
+                                implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8089</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
@@ -326,7 +328,7 @@
                     <!-- deploy multiple projects -->
                     <contextHandlers>
                         <contextHandler
-                            implementation="org.mortbay.jetty.webapp.WebAppContext">
+                                implementation="org.mortbay.jetty.webapp.WebAppContext">
                             <resourceBase>../dsp-static-demo</resourceBase>
                             <contextPath>/static</contextPath>
                         </contextHandler>

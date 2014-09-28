@@ -28,7 +28,7 @@ import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataIt
 import com.baidu.dsp.common.exception.RemoteException;
 
 /**
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-24
  */
@@ -43,7 +43,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 通知某个Node更新
-     * 
+     *
      * @param app
      * @param env
      * @param version
@@ -92,7 +92,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 获取分布式配置 Map
-     * 
+     *
      * @param app
      * @param env
      * @param version
@@ -124,7 +124,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 广度搜索法：搜索分布式配置对应的两层数据
-     * 
+     *
      * @return
      * @throws InterruptedException
      * @throws KeeperException
@@ -181,7 +181,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 返回groupName结点向下的所有zookeeper信息
-     * 
+     *
      * @param root
      */
     public List<String> getConf(String groupName) {

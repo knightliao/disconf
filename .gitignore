@@ -8,3 +8,5 @@
 /.README.md.html
 /pom.xml.releaseBackup
 /.pydevproject
+/.idea
+/*.iml
