@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.baidu.disconf</groupId>
-    <artifactId>disconf-standalone-demo</artifactId>
+    <artifactId>disconf-standalone-dubbo-demo</artifactId>
     <version>2.0.0</version>
 
 
