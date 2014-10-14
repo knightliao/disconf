@@ -2,3 +2,5 @@
 /target
 /log
 /disconf
+/bin
+/.DS_Store
