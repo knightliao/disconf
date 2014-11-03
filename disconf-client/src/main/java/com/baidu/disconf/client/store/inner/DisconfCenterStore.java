@@ -20,8 +20,7 @@ import com.baidu.disconf.client.common.model.DisconfCenterItem;
  */
 public class DisconfCenterStore {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfCenterStore.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfCenterStore.class);
 
     private DisconfCenterStore() {
 
@@ -68,9 +67,8 @@ public class DisconfCenterStore {
 
         if (confFileMap.containsKey(fileName)) {
 
-            LOGGER.error("There are two same fileName!!!! " + "first: "
-                    + confFileMap.get(fileName).toString() + ", Second: "
-                    + disconfCenterFile.toString());
+            LOGGER.error("There are two same fileName!!!! " + "first: " + confFileMap.get(fileName).toString()
+                    + ", Second: " + disconfCenterFile.toString());
         } else {
             confFileMap.put(fileName, disconfCenterFile);
         }
@@ -87,9 +85,8 @@ public class DisconfCenterStore {
 
         if (confItemMap.containsKey(key)) {
 
-            LOGGER.error("There are two same fileName!!!! " + "first: "
-                    + confItemMap.get(key).getClass().toString() + ", Second: "
-                    + disconfCenterItem.getClass().toString());
+            LOGGER.error("There are two same fileName!!!! " + "first: " + confItemMap.get(key).getClass().toString()
+                    + ", Second: " + disconfCenterItem.getClass().toString());
         } else {
             confItemMap.put(key, disconfCenterItem);
         }
@@ -134,4 +131,5 @@ public class DisconfCenterStore {
     public void setMachineName(String machineName) {
         this.machineName = machineName;
     }
+
 }

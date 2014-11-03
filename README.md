@@ -1,4 +1,4 @@
-Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
+IDisconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
 =======
 
 Distributed Configuration Management Platform 
@@ -137,7 +137,7 @@ APP+环境+版本+ZK查询：
 - [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
 - [Tutorial 3 分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
 - [Tutorial 4 分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
-- [Tutorial 5 非注解式的分布式配置文件动态管理](https://github.com/knightliao/disconf/wiki/Tutorial5)
+- [Tutorial 5 非注解式(托管式)的分布式配置文件动态管理](https://github.com/knightliao/disconf/wiki/Tutorial5)
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
 - [Tutorial 8 disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/dev/disconf-demos/disconf-standalone-dubbo-demo)

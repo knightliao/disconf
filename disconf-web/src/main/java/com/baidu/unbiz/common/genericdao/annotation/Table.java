@@ -81,7 +81,7 @@ public @interface Table {
          * 
          */
         JAVA_TO_MYSQL {
-
+            @Override
             public String convert(String field) {
                 return StringUtil.toLowerCaseWithUnderscores(field);
             }
@@ -90,4 +90,9 @@ public @interface Table {
         public abstract String convert(String field);
 
     }
+
+    /**
+     * 是否为视图
+     */
+    boolean isView() default false;
 }

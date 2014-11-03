@@ -16,10 +16,10 @@
     <dubbo:protocol name="dubbo" port="20880" />  
   
     <!-- 声明需要暴露的服务接口 -->  
-    <dubbo:service interface="com.baidu.disconf.demo.dubbo.service.DubboService"  
+    <dubbo:service interface="com.example.disconf.demo.dubbo.service.DubboService"  
         ref="dubboService" />  
   
     <!-- 和本地bean一样实现服务 -->  
-    <bean id="dubboService" class="com.baidu.disconf.demo.dubbo.service.impl.DubboServiceImpl" />  
+    <bean id="dubboService" class="com.example.disconf.demo.dubbo.service.impl.DubboServiceImpl" />  
   
 </beans>  

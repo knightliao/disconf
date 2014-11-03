@@ -11,61 +11,62 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 可能发生修改行为的对象
+ * 
  * @author Darwin(Tianxin)
  */
 public abstract class MaybeModifyObject<KEY extends Serializable> extends BaseObject<KEY> {
 
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 创建的user
-	 */
-	protected int addUser;
-	
-	/**
-	 * 修改的user
-	 */
-	protected int modUser;
-	
-	/**
-	 * 创建时间
-	 */
-	protected Date addTime;
-	
-	/**
-	 * 修改时间
-	 */
-	protected Date modTime;
+    private static final long serialVersionUID = 1L;
 
-	public int getAddUser() {
-		return addUser;
-	}
+    /**
+     * 创建的user
+     */
+    protected int addUser;
 
-	public void setAddUser(int addUser) {
-		this.addUser = addUser;
-	}
+    /**
+     * 修改的user
+     */
+    protected int modUser;
 
-	public int getModUser() {
-		return modUser;
-	}
+    /**
+     * 创建时间
+     */
+    protected Date addTime;
 
-	public void setModUser(int modUser) {
-		this.modUser = modUser;
-	}
+    /**
+     * 修改时间
+     */
+    protected Date modTime;
 
-	public Date getAddTime() {
-		return addTime;
-	}
+    public int getAddUser() {
+        return addUser;
+    }
 
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
+    public void setAddUser(int addUser) {
+        this.addUser = addUser;
+    }
 
-	public Date getModTime() {
-		return modTime;
-	}
+    public int getModUser() {
+        return modUser;
+    }
 
-	public void setModTime(Date modTime) {
-		this.modTime = modTime;
-	}
+    public void setModUser(int modUser) {
+        this.modUser = modUser;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
+    public Date getModTime() {
+        return modTime;
+    }
+
+    public void setModTime(Date modTime) {
+        this.modTime = modTime;
+    }
 }

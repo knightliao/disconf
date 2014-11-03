@@ -17,8 +17,7 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 /**
  * 非注解配置文件的扫描器
  */
-public class StaticScannerNonAnnotationFileMgrImpl extends
-        StaticScannerMgrImplBase implements StaticScannerMgr {
+public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplBase implements StaticScannerMgr {
 
     /**
      * 
@@ -31,8 +30,7 @@ public class StaticScannerNonAnnotationFileMgrImpl extends
         //
         List<DisconfCenterBaseModel> disconfCenterBaseModels = getDisconfCenterFiles(scanModel);
 
-        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
-                .transformScanData(disconfCenterBaseModels);
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModels);
     }
 
     /**
@@ -40,19 +38,17 @@ public class StaticScannerNonAnnotationFileMgrImpl extends
      */
     @Override
     public void exclude(Set<String> keySet) {
-        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(
-                keySet);
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(keySet);
     }
 
     /**
      * 
      */
-    private List<DisconfCenterBaseModel> getDisconfCenterFiles(
-            ScanStaticModel scanModel) {
+    private List<DisconfCenterBaseModel> getDisconfCenterFiles(ScanStaticModel scanModel) {
 
         List<DisconfCenterBaseModel> disconfCenterFiles = new ArrayList<DisconfCenterBaseModel>();
 
-        for (String fileName : scanModel.getNonAnnotationFileSet()) {
+        for (String fileName : scanModel.getJustHostFiles()) {
 
             fileName = fileName.trim();
 
@@ -64,17 +60,14 @@ public class StaticScannerNonAnnotationFileMgrImpl extends
 
             //
             // disConfCommonModel
-            DisConfCommonModel disConfCommonModel = makeDisConfCommonModel("",
-                    "");
+            DisConfCommonModel disConfCommonModel = makeDisConfCommonModel("", "");
             disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
             // Remote URL
-            String url = DisconfWebPathMgr.getRemoteUrlParameter(
-                    DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
-                    disConfCommonModel.getApp(),
-                    disConfCommonModel.getVersion(),
-                    disConfCommonModel.getEnv(),
-                    disconfCenterFile.getFileName(), DisConfigTypeEnum.FILE);
+            String url =
+                    DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+                            disConfCommonModel.getApp(), disConfCommonModel.getVersion(), disConfCommonModel.getEnv(),
+                            disconfCenterFile.getFileName(), DisConfigTypeEnum.FILE);
             disconfCenterFile.setRemoteServerUrl(url);
 
             disconfCenterFiles.add(disconfCenterFile);

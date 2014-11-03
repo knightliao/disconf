@@ -18,6 +18,6 @@
 
  
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
-    <dubbo:reference id="dubboService" interface="com.baidu.disconf.demo.dubbo.service.DubboService" />
+    <dubbo:reference id="dubboService" interface="com.example.disconf.demo.dubbo.service.DubboService" />
 
 </beans>

@@ -15,33 +15,32 @@ import com.baidu.unbiz.common.genericdao.param.IncrParam;
 
 public class Operators {
 
-    public static Order order(final String column, final boolean asc){
-    	return new Order(column, asc);
+    public static Order order(final String column, final boolean asc) {
+        return new Order(column, asc);
     }
-    
-	public static Match match(final String column, final Object value){
-		return new Match(column, value);
-	}
-	
-	public static Modify modify(String column, Object value){
-		return new Modify(column, value);
-	}
-	
 
-	public static void analysisModify(List<Modify> modifies, StringBuilder sb, List<Object> params) {
-		for(Modify modify : modifies){
-			
-			String column = modify.getColumn();
-			Object value = modify.getValue();
-			if(value instanceof IncrParam){
-				sb.append(column).append("=(").append(column).append("+?),");
-				params.add(((IncrParam) value).getValue());
-			}else{
-				sb.append(column).append("=?,");
-				params.add(value);
-			}
-		}
-		sb.deleteCharAt(sb.length() - 1);
-	}
-	
+    public static Match match(final String column, final Object value) {
+        return new Match(column, value);
+    }
+
+    public static Modify modify(String column, Object value) {
+        return new Modify(column, value);
+    }
+
+    public static void analysisModify(List<Modify> modifies, StringBuilder sb, List<Object> params) {
+        for (Modify modify : modifies) {
+
+            String column = modify.getColumn();
+            Object value = modify.getValue();
+            if (value instanceof IncrParam) {
+                sb.append(column).append("=(").append(column).append("+?),");
+                params.add(((IncrParam) value).getValue());
+            } else {
+                sb.append(column).append("=?,");
+                params.add(value);
+            }
+        }
+        sb.deleteCharAt(sb.length() - 1);
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.baidu.disconf.client.scan;
 
-import java.util.Set;
 
 /**
  * 
@@ -9,7 +8,7 @@ import java.util.Set;
  */
 public interface ScanMgr {
 
-    void firstScan(String packageName, Set<String> fileSet) throws Exception;
+    void firstScan(String packageName) throws Exception;
 
     void secondScan() throws Exception;
 }
