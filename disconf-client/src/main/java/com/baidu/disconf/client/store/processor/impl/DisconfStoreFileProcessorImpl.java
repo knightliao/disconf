@@ -27,22 +27,18 @@ import com.github.knightliao.apollo.utils.common.ClassUtils;
  */
 public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfStoreFileProcessorImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfStoreFileProcessorImpl.class);
 
     /**
      * 
      */
     @Override
-    public void addUpdateCallbackList(String keyName,
-            List<IDisconfUpdate> iDisconfUpdateList) {
+    public void addUpdateCallbackList(String keyName, List<IDisconfUpdate> iDisconfUpdateList) {
 
-        if (DisconfCenterStore.getInstance().getConfFileMap()
-                .containsKey(keyName)) {
+        if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
 
-            DisconfCenterStore.getInstance().getConfFileMap().get(keyName)
-                    .getDisconfCommonCallbackModel().getDisconfConfUpdates()
-                    .addAll(iDisconfUpdateList);
+            DisconfCenterStore.getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel()
+                    .getDisconfConfUpdates().addAll(iDisconfUpdateList);
         }
     }
 
@@ -52,11 +48,9 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public List<IDisconfUpdate> getUpdateCallbackList(String keyName) {
 
-        if (DisconfCenterStore.getInstance().getConfFileMap()
-                .containsKey(keyName)) {
+        if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
 
-            return DisconfCenterStore.getInstance().getConfFileMap()
-                    .get(keyName).getDisconfCommonCallbackModel()
+            return DisconfCenterStore.getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel()
                     .getDisconfConfUpdates();
         }
 
@@ -69,8 +63,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public DisConfCommonModel getCommonModel(String keyName) {
 
-        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance()
-                .getConfFileMap().get(keyName);
+        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance().getConfFileMap().get(keyName);
 
         // 校验是否存在
         if (disconfCenterFile == null) {
@@ -88,8 +81,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     public boolean hasThisConf(String keyName) {
 
         // 配置文件
-        if (DisconfCenterStore.getInstance().getConfFileMap()
-                .containsKey(keyName)) {
+        if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
             return true;
         }
 
@@ -102,8 +94,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public void inject2Instance(Object object, String fileName) {
 
-        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance()
-                .getConfFileMap().get(fileName);
+        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance().getConfFileMap().get(fileName);
 
         // 校验是否存在
         if (disconfCenterFile == null) {
@@ -134,11 +125,9 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                 //
                 if (object == null) {
 
-                    if (Modifier.isStatic(keMap.get(fileItem).getField()
-                            .getModifiers())) {
+                    if (Modifier.isStatic(keMap.get(fileItem).getField().getModifiers())) {
                         LOGGER.debug(fileItem + " is a static field. ");
-                        keMap.get(fileItem).getField()
-                                .set(null, keMap.get(fileItem).getValue());
+                        keMap.get(fileItem).getField().set(null, keMap.get(fileItem).getValue());
                     }
 
                     //
@@ -149,14 +138,12 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                     LOGGER.debug(fileItem + " is a non-static field. ");
 
                     // 默认值
-                    Object defaultValue = keMap.get(fileItem).getField()
-                            .get(object);
+                    Object defaultValue = keMap.get(fileItem).getField().get(object);
 
                     if (keMap.get(fileItem).getValue() == null) {
 
                         // 如果仓库值为空，则实例 直接使用默认值
-                        keMap.get(fileItem).getField()
-                                .set(object, defaultValue);
+                        keMap.get(fileItem).getField().set(object, defaultValue);
 
                         // 仓库里也使用此值
                         keMap.get(fileItem).setValue(defaultValue);
@@ -164,15 +151,12 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                     } else {
 
                         // 如果仓库里的值为非空，则实例使用仓库里的值
-                        keMap.get(fileItem).getField()
-                                .set(object, keMap.get(fileItem).getValue());
+                        keMap.get(fileItem).getField().set(object, keMap.get(fileItem).getValue());
                     }
                 }
 
             } catch (Exception e) {
-                LOGGER.error(
-                        "inject2Instance fileName " + fileName + " "
-                                + e.toString(), e);
+                LOGGER.error("inject2Instance fileName " + fileName + " " + e.toString(), e);
             }
         }
     }
@@ -183,8 +167,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public Object getConfig(String fileName, String keyName) {
 
-        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance()
-                .getConfFileMap().get(fileName);
+        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance().getConfFileMap().get(fileName);
 
         // 校验是否存在
         if (disconfCenterFile == null) {
@@ -193,8 +176,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         }
 
         if (disconfCenterFile.getKeyMaps().get(keyName) == null) {
-            LOGGER.debug("canot find " + fileName + ", " + keyName
-                    + " in store....");
+            LOGGER.debug("canot find " + fileName + ", " + keyName + " in store....");
             return null;
         }
 
@@ -207,8 +189,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public void inject2Store(String fileName, DisconfValue disconfValue) {
 
-        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance()
-                .getConfFileMap().get(fileName);
+        DisconfCenterFile disconfCenterFile = DisconfCenterStore.getInstance().getConfFileMap().get(fileName);
 
         // 校验是否存在
         if (disconfCenterFile == null) {
@@ -216,7 +197,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             return;
         }
 
-        if (disconfValue == null || disconfValue.getProperties() == null) {
+        if (disconfValue == null || disconfValue.getFileData() == null) {
             LOGGER.error("value is null for {}", fileName);
             return;
         }
@@ -225,33 +206,26 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
         for (String fileItem : keMap.keySet()) {
 
-            Object object = disconfValue.getProperties().get(fileItem);
+            Object object = disconfValue.getFileData().get(fileItem);
             if (object == null) {
-                LOGGER.error(
-                        "cannot find {} to be injectd. file content is: {}",
-                        fileItem, disconfValue.getProperties().toString());
+                LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem, disconfValue.getFileData()
+                        .toString());
                 continue;
             }
 
             // 根据类型设置值
             try {
 
-                Object value = ClassUtils.getValeByType(keMap.get(fileItem)
-                        .getField().getType(), object);
+                Object value = ClassUtils.getValeByType(keMap.get(fileItem).getField().getType(), object);
                 keMap.get(fileItem).setValue(value);
 
                 // 如果Object非null,则顺便也注入
                 if (disconfCenterFile.getObject() != null) {
-                    keMap.get(fileItem)
-                            .getField()
-                            .set(disconfCenterFile.getObject(),
-                                    keMap.get(fileItem).getValue());
+                    keMap.get(fileItem).getField().set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
                 }
 
             } catch (Exception e) {
-                LOGGER.error(
-                        "inject2Store filename: " + fileName + " "
-                                + e.toString(), e);
+                LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
             }
         }
     }
@@ -260,8 +234,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
      * 
      */
     @Override
-    public void transformScanData(
-            List<DisconfCenterBaseModel> disconfCenterBaseModels) {
+    public void transformScanData(List<DisconfCenterBaseModel> disconfCenterBaseModels) {
 
         for (DisconfCenterBaseModel disconfCenterFile : disconfCenterBaseModels) {
             DisconfCenterStore.getInstance().storeOneFile(disconfCenterFile);
@@ -300,8 +273,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
         StringBuffer sBuffer = new StringBuffer();
         sBuffer.append("\n");
-        Map<String, DisconfCenterFile> disMap = DisconfCenterStore
-                .getInstance().getConfFileMap();
+        Map<String, DisconfCenterFile> disMap = DisconfCenterStore.getInstance().getConfFileMap();
         for (String file : disMap.keySet()) {
             sBuffer.append("disfile:\t" + file + "\t");
 

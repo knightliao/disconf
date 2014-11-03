@@ -69,6 +69,7 @@
         <property name="justHostFiles">
             <list>
                 <value>atomserverm_slave.properties</value>
+                <value>testXml.xml</value>
             </list>
         </property>
     </bean>

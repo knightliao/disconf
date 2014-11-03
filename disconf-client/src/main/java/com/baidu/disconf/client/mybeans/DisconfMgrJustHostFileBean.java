@@ -53,7 +53,15 @@ public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostPro
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 
         if (justHostFiles != null) {
-            DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(justHostFiles);
+
+            Set<String> newJusSet = new HashSet<String>();
+            for (String file : justHostFiles) {
+                if (file != null) {
+                    newJusSet.add(file.trim());
+                }
+            }
+
+            DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(newJusSet);
         }
 
     }
