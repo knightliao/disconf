@@ -16,7 +16,7 @@
 
 
 	<!-- redis configuration -->
-	<bean id="redisCacheMgr" class="com.baidu.disconf.ub.common.redis.RedisCacheManager">
+	<bean id="redisCacheMgr" class="com.github.knightliao.apollo.redis.RedisCacheManager">
 		<property name="retryTimes">
 			<value>${redis.group1.retry.times}</value>
 		</property>
@@ -28,7 +28,7 @@
 		</property>
 	</bean>
 
-	<bean id="redisClient1" class="com.baidu.disconf.ub.common.redis.RedisClient">
+	<bean id="redisClient1" class="com.github.knightliao.apollo.redis.RedisClient">
 		<property name="cacheName">
 			<value>${redis.group1.client1.name}</value>
 		</property>
@@ -46,7 +46,7 @@
 		</property>
 	</bean>
 
-	<bean id="redisClient2" class="com.baidu.disconf.ub.common.redis.RedisClient">
+	<bean id="redisClient2" class="com.github.knightliao.apollo.redis.RedisClient">
 		<property name="cacheName">
 			<value>${redis.group1.client2.name}</value>
 		</property>
