@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
+import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
 
 /**
@@ -14,8 +15,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdate;
  */
 public class ScanVerify {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ScanVerify.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanVerify.class);
 
     /**
      * 判断回调函数实现的接口是否正确
@@ -32,8 +32,7 @@ public class ScanVerify {
             }
         }
         if (!hasInterface) {
-            LOGGER.error("Your class " + disconfUpdateServiceClass.toString()
-                    + " should implement interface: "
+            LOGGER.error("Your class " + disconfUpdateServiceClass.toString() + " should implement interface: "
                     + IDisconfUpdate.class.toString());
             return false;
         }
@@ -50,15 +49,14 @@ public class ScanVerify {
 
         String fileName = disconfFile.filename();
 
-        if (!fileName.endsWith(".properties")) {
+        SupportFileTypeEnum supportFileTypeEnum = SupportFileTypeEnum.getByFileName(fileName);
 
-            LOGGER.error("now we only support .properites conf: "
-                    + disconfFile.toString());
+        if (supportFileTypeEnum == null) {
+
+            LOGGER.error("now we only support .properites or .xml conf: " + disconfFile.toString());
             return false;
         }
 
         return true;
     }
-
-    
 }

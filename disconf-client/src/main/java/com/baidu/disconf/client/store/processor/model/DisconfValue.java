@@ -1,6 +1,7 @@
 package com.baidu.disconf.client.store.processor.model;
 
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 配置的值，配置文件是properties, 配置项是string<br/>
@@ -15,7 +16,7 @@ public class DisconfValue {
     private String value;
 
     // 配置文件使用
-    private Properties properties;
+    private Map<String, Object> fileData = new HashMap<String, Object>();
 
     public String getValue() {
         return value;
@@ -25,24 +26,18 @@ public class DisconfValue {
         this.value = value;
     }
 
-    public Properties getProperties() {
-        return properties;
-    }
-
-    public void setProperties(Properties properties) {
-        this.properties = properties;
-    }
-
-    @Override
-    public String toString() {
-        return "DisconfValue [value=" + value + ", properties=" + properties
-                + "]";
-    }
-
-    public DisconfValue(String value, Properties properties) {
+    public DisconfValue(String value, Map<String, Object> fileData) {
         super();
         this.value = value;
-        this.properties = properties;
+        this.fileData = fileData;
+    }
+
+    public Map<String, Object> getFileData() {
+        return fileData;
+    }
+
+    public void setFileData(Map<String, Object> fileData) {
+        this.fileData = fileData;
     }
 
 }

@@ -14,20 +14,23 @@ import java.lang.annotation.Target;
  * 
  * @author Darwin(Tianxin)
  */
-@Retention(RetentionPolicy.RUNTIME) 
-@Target({ElementType.FIELD,ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD, ElementType.METHOD })
 public @interface Column {
 
-	/**
-	 * 字段名,
-	 * @return
-	 */
-	String value();
+    /**
+     * 字段名,
+     * 
+     * @return
+     */
+    String value();
 
-	/**
-	 * 是否需要update
-	 * @return
-	 * 上午10:15:15 created by Darwin(Tianxin)
-	 */
-	boolean maybeModified() default true;
+    /**
+     * 是否需要update
+     * 
+     * @return 上午10:15:15 created by Darwin(Tianxin)
+     */
+    boolean maybeModified() default true;
+
+    boolean ignore() default false;
 }

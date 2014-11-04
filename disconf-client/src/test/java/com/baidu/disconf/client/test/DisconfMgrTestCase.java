@@ -19,6 +19,7 @@ import com.baidu.disconf.client.core.impl.DisconfCoreMgrImpl;
 import com.baidu.disconf.client.fetcher.FetcherFactory;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
+import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 import com.baidu.disconf.client.test.common.BaseSpringMockTestCase;
 import com.baidu.disconf.client.test.model.ConfA;
 import com.baidu.disconf.client.test.model.ServiceA;
@@ -36,8 +37,7 @@ import com.baidu.disconf.client.watch.WatchMgr;
  */
 public class DisconfMgrTestCase extends BaseSpringMockTestCase {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfMgrTestCase.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfMgrTestCase.class);
 
     @Autowired
     private ConfA confA;
@@ -62,8 +62,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
                 final WatchMgr watchMgr = new WatchMgrMock().getMockInstance();
                 watchMgr.init("", "");
 
-                DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(
-                        watchMgr, fetcherMgr);
+                DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(watchMgr, fetcherMgr);
 
                 return disconfCoreMgr;
             }
@@ -89,15 +88,14 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             Set<String> fileSet = new HashSet<String>();
             fileSet.add("atomserverl.properties");
             fileSet.add("atomserverm_slave.properties");
-            DisconfMgr.start(ScanPackTestCase.SCAN_PACK_NAME, fileSet);
+            DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileSet);
+            DisconfMgr.start(ScanPackTestCase.SCAN_PACK_NAME);
 
             //
-            LOGGER.info(DisconfStoreProcessorFactory
-                    .getDisconfStoreFileProcessor().confToString());
+            LOGGER.info(DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());
 
             //
-            LOGGER.info(DisconfStoreProcessorFactory
-                    .getDisconfStoreItemProcessor().confToString());
+            LOGGER.info(DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().confToString());
 
             LOGGER.info("================ AFTER DISCONF ==============================");
 
@@ -108,13 +106,10 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             Assert.assertEquals(new Long(2000), confA.getVarA2());
 
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
-            Assert.assertEquals(new Integer(1000).intValue(),
-                    serviceA.getVarAA());
+            Assert.assertEquals(new Integer(1000).intValue(), serviceA.getVarAA());
 
-            LOGGER.info(String.valueOf("staticvar: "
-                    + StaticConf.getStaticvar()));
-            Assert.assertEquals(new Integer(50).intValue(),
-                    StaticConf.getStaticvar());
+            LOGGER.info(String.valueOf("staticvar: " + StaticConf.getStaticvar()));
+            Assert.assertEquals(new Integer(50).intValue(), StaticConf.getStaticvar());
 
             LOGGER.info("================ AFTER DISCONF ==============================");
 

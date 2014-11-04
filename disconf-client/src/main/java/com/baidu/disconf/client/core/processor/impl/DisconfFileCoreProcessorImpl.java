@@ -1,14 +1,13 @@
 package com.baidu.disconf.client.core.processor.impl;
 
-import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.Set;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
+import com.baidu.disconf.client.core.filetype.FileTypeProcessorUtils;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
@@ -16,7 +15,6 @@ import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 
 /**
@@ -27,8 +25,7 @@ import com.github.knightliao.apollo.utils.data.GsonUtils;
  */
 public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfFileCoreProcessorImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfFileCoreProcessorImpl.class);
 
     // 监控器
     private WatchMgr watchMgr = null;
@@ -37,8 +34,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     private FetcherMgr fetcherMgr = null;
 
     // 仓库算子
-    private DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory
-            .getDisconfStoreFileProcessor();
+    private DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
 
     public DisconfFileCoreProcessorImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
 
@@ -57,11 +53,10 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String fileName : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to process disconf file: "
-                    + fileName + "\t=============================");
+            LOGGER.debug("==============\tstart to process disconf file: " + fileName
+                    + "\t=============================");
 
-            DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
-                    .getConfData(fileName);
+            DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(fileName);
 
             try {
                 updateOneConfFile(fileName, disconfCenterFile);
@@ -74,8 +69,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     /**
      * 更新 一個配置文件, 下载、注入到仓库、Watch 三步骤
      */
-    private void updateOneConfFile(String fileName,
-            DisconfCenterFile disconfCenterFile) throws Exception {
+    private void updateOneConfFile(String fileName, DisconfCenterFile disconfCenterFile) throws Exception {
 
         if (disconfCenterFile == null) {
             throw new Exception("cannot find disconfCenterFile " + fileName);
@@ -85,14 +79,14 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         // 下载配置
         //
         String filePath = "";
-        Properties properties = null;
+        Map<String, Object> dataMap = null;
         try {
 
             String url = disconfCenterFile.getRemoteServerUrl();
             filePath = fetcherMgr.downloadFileFromServer(url, fileName);
 
             // 读取配置
-            properties = ConfigLoaderUtils.loadConfig(filePath);
+            dataMap = FileTypeProcessorUtils.getKvMap(filePath);
 
         } catch (Exception e) {
 
@@ -104,29 +98,22 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             LOGGER.warn("using local properties in class path: " + fileName);
 
             // 读取配置
-            properties = ConfigLoaderUtils.loadConfig(fileName);
+            dataMap = FileTypeProcessorUtils.getKvMap(fileName);
         }
         LOGGER.debug("download ok.");
 
         //
         // 注入到仓库中
         //
-        Set<Entry<Object, Object>> set = properties.entrySet();
-        for (Entry<Object, Object> entry : set) {
-            LOGGER.debug(entry.toString());
-        }
-        disconfStoreProcessor.inject2Store(fileName, new DisconfValue(null,
-                properties));
+        disconfStoreProcessor.inject2Store(fileName, new DisconfValue(null, dataMap));
         LOGGER.debug("inject ok.");
 
         //
         // Watch
         //
-        DisConfCommonModel disConfCommonModel = disconfStoreProcessor
-                .getCommonModel(fileName);
+        DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(fileName);
         if (watchMgr != null) {
-            watchMgr.watchPath(this, disConfCommonModel, fileName,
-                    DisConfigTypeEnum.FILE,
+            watchMgr.watchPath(this, disConfCommonModel, fileName, DisConfigTypeEnum.FILE,
                     GsonUtils.toJson(disconfCenterFile.getKV()));
             LOGGER.debug("watch ok.");
         } else {
@@ -152,8 +139,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
      */
     private void updateOneConf(String fileName) throws Exception {
 
-        DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
-                .getConfData(fileName);
+        DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(fileName);
 
         if (disconfCenterFile != null) {
 
@@ -170,8 +156,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
      * 
      * @param fileName
      */
-    private void inject2OneConf(String fileName,
-            DisconfCenterFile disconfCenterFile) {
+    private void inject2OneConf(String fileName, DisconfCenterFile disconfCenterFile) {
 
         if (disconfCenterFile == null) {
             return;
@@ -188,14 +173,12 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
                 object = disconfCenterFile.getObject();
                 if (object == null) {
-                    object = DisconfCoreProcessUtils
-                            .getSpringBean(disconfCenterFile.getCls());
+                    object = DisconfCoreProcessUtils.getSpringBean(disconfCenterFile.getCls());
                 }
 
             } catch (Exception e) {
 
-                LOGGER.debug(disconfCenterFile.getCls()
-                        + " may be a non-java-bean");
+                LOGGER.debug(disconfCenterFile.getCls() + " may be a non-java-bean");
                 object = null;
             }
 
@@ -215,11 +198,10 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to inject value to disconf file item instance: "
-                    + key + "\t=============================");
+            LOGGER.debug("==============\tstart to inject value to disconf file item instance: " + key
+                    + "\t=============================");
 
-            DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor
-                    .getConfData(key);
+            DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(key);
 
             inject2OneConf(key, disconfCenterFile);
         }

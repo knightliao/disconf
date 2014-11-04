@@ -39,8 +39,8 @@ public class ScanStaticModel {
     // 更新 回调函数类
     private Set<Class<?>> disconfUpdateService;
 
-    // 非注解方式的配置文件
-    private Set<String> nonAnnotationFileSet;
+    // 只是托管的配置文件，没有注入到类中
+    private Set<String> justHostFiles;
 
     public Reflections getReflections() {
         return reflections;
@@ -62,8 +62,7 @@ public class ScanStaticModel {
         return disconfFileItemMap;
     }
 
-    public void setDisconfFileItemMap(
-            Map<Class<?>, Set<Method>> disconfFileItemMap) {
+    public void setDisconfFileItemMap(Map<Class<?>, Set<Method>> disconfFileItemMap) {
         this.disconfFileItemMap = disconfFileItemMap;
     }
 
@@ -87,8 +86,7 @@ public class ScanStaticModel {
         return disconfActiveBackupServiceClassSet;
     }
 
-    public void setDisconfActiveBackupServiceClassSet(
-            Set<Class<?>> disconfActiveBackupServiceClassSet) {
+    public void setDisconfActiveBackupServiceClassSet(Set<Class<?>> disconfActiveBackupServiceClassSet) {
         this.disconfActiveBackupServiceClassSet = disconfActiveBackupServiceClassSet;
     }
 
@@ -102,23 +100,19 @@ public class ScanStaticModel {
 
     @Override
     public String toString() {
-        return "ScanStaticModel [reflections=" + reflections
-                + ", disconfFileClassSet=" + disconfFileClassSet
-                + ", disconfFileItemMethodSet=" + disconfFileItemMethodSet
-                + ", disconfFileItemMap=" + disconfFileItemMap
-                + ", disconfItemMethodSet=" + disconfItemMethodSet
-                + ", disconfActiveBackupServiceClassSet="
-                + disconfActiveBackupServiceClassSet
-                + ", disconfUpdateService=" + disconfUpdateService
-                + ", nonAnnotationFileSet=" + nonAnnotationFileSet + "]";
+        return "ScanStaticModel [reflections=" + reflections + ", disconfFileClassSet=" + disconfFileClassSet
+                + ", disconfFileItemMethodSet=" + disconfFileItemMethodSet + ", disconfFileItemMap="
+                + disconfFileItemMap + ", disconfItemMethodSet=" + disconfItemMethodSet
+                + ", disconfActiveBackupServiceClassSet=" + disconfActiveBackupServiceClassSet
+                + ", disconfUpdateService=" + disconfUpdateService + ", justHostFiles=" + justHostFiles + "]";
     }
 
-    public Set<String> getNonAnnotationFileSet() {
-        return nonAnnotationFileSet;
+    public Set<String> getJustHostFiles() {
+        return justHostFiles;
     }
 
-    public void setNonAnnotationFileSet(Set<String> nonAnnotationFileSet) {
-        this.nonAnnotationFileSet = nonAnnotationFileSet;
+    public void setJustHostFiles(Set<String> justHostFiles) {
+        this.justHostFiles = justHostFiles;
     }
 
 }

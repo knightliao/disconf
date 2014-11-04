@@ -2,7 +2,6 @@ package com.baidu.disconf.client.scan.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,7 @@ import com.baidu.disconf.client.scan.inner.statically.ScanStatic;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgr;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgrFactory;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
+import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 
 /**
  * 扫描模块
@@ -23,8 +23,7 @@ import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
  */
 public class ScanMgrImpl implements ScanMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ScanMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanMgrImpl.class);
 
     // 扫描对象
     private volatile ScanStaticModel scanModel = null;
@@ -36,12 +35,14 @@ public class ScanMgrImpl implements ScanMgr {
      */
     public ScanMgrImpl() {
 
-        staticScannerMgrs.add(StaticScannerMgrFactory
-                .getDisconfFileStaticScanner());
-        staticScannerMgrs.add(StaticScannerMgrFactory
-                .getDisconfItemStaticScanner());
-        staticScannerMgrs.add(StaticScannerMgrFactory
-                .getDisconfNonAnnotationFileStaticScanner());
+        // 配置文件
+        staticScannerMgrs.add(StaticScannerMgrFactory.getDisconfFileStaticScanner());
+
+        // 配置项
+        staticScannerMgrs.add(StaticScannerMgrFactory.getDisconfItemStaticScanner());
+
+        // 非注解 托管的配置文件
+        staticScannerMgrs.add(StaticScannerMgrFactory.getDisconfNonAnnotationFileStaticScanner());
     }
 
     /**
@@ -50,8 +51,7 @@ public class ScanMgrImpl implements ScanMgr {
      * 
      * @throws Exception
      */
-    public void firstScan(String packageName, Set<String> fileSet)
-            throws Exception {
+    public void firstScan(String packageName) throws Exception {
 
         LOGGER.debug("start to scan package: " + packageName);
 
@@ -59,13 +59,16 @@ public class ScanMgrImpl implements ScanMgr {
         scanModel = ScanStatic.scan(packageName);
 
         // 增加非注解的配置
-        scanModel.setNonAnnotationFileSet(fileSet);
+        scanModel.setJustHostFiles(DisconfCenterHostFilesStore.getInstance().getJustHostFiles());
 
         // 放进仓库
         for (StaticScannerMgr scannerMgr : staticScannerMgrs) {
+
+            // 扫描进入仓库
             scannerMgr.scanData2Store(scanModel);
-            scannerMgr.exclude(DisClientConfig.getInstance()
-                    .getIgnoreDisconfKeySet());
+
+            // 忽略哪些KEY
+            scannerMgr.exclude(DisClientConfig.getInstance().getIgnoreDisconfKeySet());
         }
     }
 
@@ -78,8 +81,7 @@ public class ScanMgrImpl implements ScanMgr {
             synchronized (scanModel) {
                 // 下载模块必须先初始化
                 if (scanModel == null) {
-                    throw new Exception(
-                            "You should run first scan before second Scan");
+                    throw new Exception("You should run first scan before second Scan");
                 }
             }
         }

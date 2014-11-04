@@ -9,10 +9,10 @@ package com.baidu.unbiz.common.genericdao.bo;
  */
 public enum InsertOption {
 
-	LOW_PRIORITY, DELAYED, HIGH_PRIORITY, IGNORE;
-	
-	public String toString() {
-		return this.name().toLowerCase();
-	}
+    LOW_PRIORITY, DELAYED, HIGH_PRIORITY, IGNORE;
+
+    public String toString() {
+        return this.name().toLowerCase();
+    }
 
 }

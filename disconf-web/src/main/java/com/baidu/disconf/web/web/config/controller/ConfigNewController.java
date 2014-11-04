@@ -36,8 +36,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 @RequestMapping(WebConstants.API_PREFIX + "/config")
 public class ConfigNewController extends BaseController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ConfigUpdateController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ConfigUpdateController.class);
 
     @Autowired
     private ConfigMgr configMgr;
@@ -78,14 +77,13 @@ public class ConfigNewController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public JsonObjectBase updateFile(@Valid ConfNewForm confNewForm,
-            @RequestParam("myfilerar") MultipartFile file) {
+    public JsonObjectBase updateFile(@Valid ConfNewForm confNewForm, @RequestParam("myfilerar") MultipartFile file) {
 
         //
         // 校验
         //
         int fileSize = 1024 * 1024 * 4;
-        String[] allowExtName = { ".properties" };
+        String[] allowExtName = { ".properties", ".xml" };
         fileUploadValidator.validateFile(file, fileSize, allowExtName);
 
         //
@@ -128,8 +126,8 @@ public class ConfigNewController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/filetext", method = RequestMethod.POST)
-    public JsonObjectBase updateFileWithText(@Valid ConfNewForm confNewForm,
-            @NotNull String fileContent, @NotNull String fileName) {
+    public JsonObjectBase updateFileWithText(@Valid ConfNewForm confNewForm, @NotNull String fileContent,
+            @NotNull String fileName) {
 
         // 创建配置文件表格
         ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);

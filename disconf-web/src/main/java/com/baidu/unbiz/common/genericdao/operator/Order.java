@@ -6,33 +6,34 @@ package com.baidu.unbiz.common.genericdao.operator;
 
 /**
  * 排序
+ * 
  * @author Darwin(Tianxin)
  */
-public class Order implements Pair{
-	
-	private String column;
-	
-	private boolean asc;
-	
-	/**
-	 * @param column
-	 * @param asc
-	 */
-	public Order(String column, boolean asc) {
-		this.column = column;
-		this.asc = asc;
-	}
-	
-	public boolean isAsc(){
-		return asc;
-	}
+public class Order implements Pair {
 
-	public String getColumn() {
-		return column;
-	}
+    private String column;
 
-	public Object getValue() {
-		return asc;
-	}
-	
+    private boolean asc;
+
+    /**
+     * @param column
+     * @param asc
+     */
+    public Order(String column, boolean asc) {
+        this.column = column;
+        this.asc = asc;
+    }
+
+    public boolean isAsc() {
+        return asc;
+    }
+
+    public String getColumn() {
+        return column;
+    }
+
+    public Object getValue() {
+        return asc;
+    }
+
 }

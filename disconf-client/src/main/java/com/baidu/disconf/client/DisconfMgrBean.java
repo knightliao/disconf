@@ -10,15 +10,20 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
+import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
+
 /**
  * 第一次扫描，静态扫描
  * 
  * @author liaoqiqi
  * @version 2014-6-17
  */
-public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor,
-        PriorityOrdered {
+public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
 
+    /*
+     * 已经废弃了，不推荐使用
+     */
+    @Deprecated
     private Set<String> fileList = new HashSet<String>();
 
     /**
@@ -44,15 +49,14 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor,
 
     @Override
     public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
+        return Ordered.HIGHEST_PRECEDENCE - 1;
     }
 
     /**
      * 这个函数无法达到最高优先级，例如PropertyPlaceholderConfigurer
      */
     @Override
-    public void postProcessBeanFactory(
-            ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
     }
 
@@ -61,9 +65,13 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor,
      * 在Spring内部的Bean定义初始化后执行，这样是最高优先级的
      */
     @Override
-    public void postProcessBeanDefinitionRegistry(
-            BeanDefinitionRegistry registry) throws BeansException {
-        DisconfMgr.firstScan(scanPackage, fileList);
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+
+        // 为了做兼容
+        DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileList);
+
+        // 进行扫描
+        DisconfMgr.firstScan(scanPackage);
     }
 
     public Set<String> getFileList() {

@@ -1,8 +1,9 @@
 package com.baidu.disconf.core.common.constants;
 
+
 /**
  * 配置类型(配置文件,配置项)
- *
+ * 
  * @author liaoqiqi
  * @version 2014-5-16
  */
@@ -20,13 +21,14 @@ public enum DisConfigTypeEnum {
 
     public static DisConfigTypeEnum getByType(int type) {
 
-        if (type == 0) {
-            return DisConfigTypeEnum.FILE;
-        }
+        int index = 0;
+        for (DisConfigTypeEnum disConfigTypeEnum : DisConfigTypeEnum.values()) {
 
-        if (type == 1) {
-            return DisConfigTypeEnum.ITEM;
+            if (type == index) {
+                return disConfigTypeEnum;
+            }
 
+            index++;
         }
 
         return null;

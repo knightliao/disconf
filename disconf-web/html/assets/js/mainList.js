@@ -265,7 +265,7 @@
 
 			// 绑定删除事件
 			$("#itemDel" + id).on("click", function(e) {
-				deleteDetailTable(id);
+				deleteDetailTable(id, item.key);
 			});
 
 			$(".valuefetch" + id).on('click', function() {
@@ -291,9 +291,9 @@
 	}
 
 	// 删除
-	function deleteDetailTable(id) {
+	function deleteDetailTable(id, name) {
 
-		var ret = confirm("你确定要删除吗?");
+		var ret = confirm("你确定要删除吗 " + name + "?");
 		if (ret == false) {
 			return false;
 		}

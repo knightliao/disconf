@@ -1,7 +1,5 @@
 package com.baidu.disconf.client;
 
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +20,7 @@ import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
  */
 public class DisconfMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfMgr.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfMgr.class);
 
     // 本实例不能初始化两次
     private static boolean isFirstInit = false;
@@ -40,10 +37,9 @@ public class DisconfMgr {
      * 
      * @param scanPackage
      */
-    public synchronized static void start(String scanPackage,
-            Set<String> fileSet) {
+    public synchronized static void start(String scanPackage) {
 
-        firstScan(scanPackage, fileSet);
+        firstScan(scanPackage);
 
         secondScan();
     }
@@ -53,8 +49,7 @@ public class DisconfMgr {
      * 
      * @param scanPackage
      */
-    public synchronized static void firstScan(String scanPackage,
-            Set<String> fileSet) {
+    public synchronized static void firstScan(String scanPackage) {
 
         // 该函数不能调用两次
         if (isFirstInit == true) {
@@ -83,7 +78,7 @@ public class DisconfMgr {
             scanMgr = ScanFactory.getScanMgr();
 
             // 第一次扫描并入库
-            scanMgr.firstScan(scanPackage, fileSet);
+            scanMgr.firstScan(scanPackage);
 
             // 获取数据/注入/Watch
             disconfCoreMgr = DisconfCoreFactory.getDisconfCoreMgr();
@@ -140,13 +135,9 @@ public class DisconfMgr {
         isSecondeInit = true;
 
         //
-        LOGGER.info("Conf File Map: "
-                + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
-                        .confToString());
+        LOGGER.info("Conf File Map: " + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());
         //
-        LOGGER.info("Conf Item Map: "
-                + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
-                        .confToString());
+        LOGGER.info("Conf Item Map: " + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().confToString());
 
         LOGGER.info("******************************* DISCONF END *******************************");
     }

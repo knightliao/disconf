@@ -5,13 +5,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.baidu.disconf.ub.common.redis.RedisCacheManager;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.constant.UserConstant;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.web.auth.constant.LoginConstant;
 import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.ub.common.commons.ThreadContext;
+import com.github.knightliao.apollo.redis.RedisCacheManager;
 import com.github.knightliao.apollo.utils.web.CookieUtils;
 
 /**
@@ -40,13 +40,11 @@ public class RedisLoginImpl implements RedisLogin {
     @Override
     public Visitor isLogin(HttpServletRequest request) {
 
-        String xId = CookieUtils.getCookieValue(request,
-                LoginConstant.XONE_COOKIE_NAME_STRING);
+        String xId = CookieUtils.getCookieValue(request, LoginConstant.XONE_COOKIE_NAME_STRING);
 
         if (xId != null) {
 
-            Visitor visitor = (Visitor) redisCacheMgr
-                    .get(this.getRedisKey(xId));
+            Visitor visitor = (Visitor) redisCacheMgr.get(this.getRedisKey(xId));
 
             //
             // 登录了
@@ -93,11 +91,9 @@ public class RedisLoginImpl implements RedisLogin {
      * 
      * @param visitor
      */
-    private void updateRedisVisitor(Visitor visitor,
-            HttpServletRequest request, int expireTime) {
+    private void updateRedisVisitor(Visitor visitor, HttpServletRequest request, int expireTime) {
 
-        String xcookieName = CookieUtils.getCookieValue(request,
-                LoginConstant.XONE_COOKIE_NAME_STRING);
+        String xcookieName = CookieUtils.getCookieValue(request, LoginConstant.XONE_COOKIE_NAME_STRING);
 
         // 更新Redis数据
         if (xcookieName != null) {
@@ -105,8 +101,7 @@ public class RedisLoginImpl implements RedisLogin {
             // 更新
             if (visitor != null) {
 
-                redisCacheMgr.put(this.getRedisKey(xcookieName), expireTime,
-                        visitor);
+                redisCacheMgr.put(this.getRedisKey(xcookieName), expireTime, visitor);
             } else {
 
                 // 删除

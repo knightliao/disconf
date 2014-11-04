@@ -9,7 +9,7 @@ package com.baidu.disconf.tool.context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf.ub.common.redis.RedisClient;
+import com.github.knightliao.apollo.redis.RedisClient;
 import com.github.knightliao.apollo.utils.data.JsonUtils;
 
 /**
@@ -68,8 +68,7 @@ public class ContextMgr {
      * 
      * @param key
      * @param clz
-     * @param defaultVal
-     *            默认值，可以为空，要求类型就是clz，
+     * @param defaultVal 默认值，可以为空，要求类型就是clz，
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -77,8 +76,7 @@ public class ContextMgr {
 
         String jsonStr = (String) client.hget(key, field);
 
-        logger.info("[Disconf Context Load]" + key + ":" + field + " : "
-                + jsonStr);
+        logger.info("[Disconf Context Load]" + key + ":" + field + " : " + jsonStr);
 
         Object ret = JsonUtils.json2Object(jsonStr, clz);
 

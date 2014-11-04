@@ -29,8 +29,10 @@ function validate_file_name(fileName) {
 	switch (fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()) {
 	case 'properties':
 		break;
+	case 'xml':
+		break;
 	default:
-		errorrar.html("错误: " + "文件类型必须是properties");
+		errorrar.html("错误: " + "文件类型必须是properties/xml");
 		return false;
 	}
 
@@ -217,7 +219,7 @@ $("#uploadChoice").on(
 
 							// 验证文件名
 							if (validate_file_name(fileName) == false) {
-								$("#error").html("仅支持.properties！");
+								$("#error").html("仅支持.properties/.xml！");
 								return false;
 							}
 
