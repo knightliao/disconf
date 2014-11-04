@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.15-SNAPSHOT</version>
+    <version>2.6.15</version>
     <packaging>pom</packaging>
 
     <modules>
