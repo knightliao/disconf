@@ -133,6 +133,7 @@ APP+环境+版本+ZK查询：
 
 ### disconf-client Tutorials ###
 
+- [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
 - [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
 - [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
 - [Tutorial 3 分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
