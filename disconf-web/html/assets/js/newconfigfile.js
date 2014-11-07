@@ -220,6 +220,7 @@ $("#uploadChoice").on(
 							// 验证文件名
 							if (validate_file_name(fileName) == false) {
 								$("#error").html("仅支持.properties/.xml！");
+								$("#error").show();
 								return false;
 							}
 
@@ -236,6 +237,7 @@ $("#uploadChoice").on(
 							}).done(function(data) {
 								$("#error").removeClass("hide");
 								if (data.success === "true") {
+									$("#error").show();
 									$("#error").html(data.result);
 								} else {
 									Util.input.whiteError($("#error"), data);
