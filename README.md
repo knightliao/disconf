@@ -1,7 +1,7 @@
 Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
 =======
 
-Distributed Configuration Management Platform 
+Distributed Configuration Management Platform  
 
 分布式配置管理平台
 
