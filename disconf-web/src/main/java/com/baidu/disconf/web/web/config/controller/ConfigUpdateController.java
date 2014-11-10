@@ -33,8 +33,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 @RequestMapping(WebConstants.API_PREFIX + "/config")
 public class ConfigUpdateController extends BaseController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ConfigUpdateController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ConfigUpdateController.class);
 
     @Autowired
     private ConfigMgr configMgr;
@@ -84,19 +83,17 @@ public class ConfigUpdateController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/file/{configId}", method = RequestMethod.POST)
-    public JsonObjectBase updateFile(@PathVariable long configId,
-            @RequestParam("myfilerar") MultipartFile file) {
+    public JsonObjectBase updateFile(@PathVariable long configId, @RequestParam("myfilerar") MultipartFile file) {
 
         //
         // 校验
         //
         int fileSize = 1024 * 1024 * 4;
-        String[] allowExtName = { ".properties" };
+        String[] allowExtName = { ".properties", ".xml" };
         fileUploadValidator.validateFile(file, fileSize, allowExtName);
 
         // 业务校验
-        configValidator
-                .validateUpdateFile(configId, file.getOriginalFilename());
+        configValidator.validateUpdateFile(configId, file.getOriginalFilename());
 
         //
         // 更新
@@ -134,8 +131,7 @@ public class ConfigUpdateController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.POST)
-    public JsonObjectBase updateFileWithText(@PathVariable long configId,
-            @NotNull String fileContent) {
+    public JsonObjectBase updateFileWithText(@PathVariable long configId, @NotNull String fileContent) {
 
         //
         // 更新

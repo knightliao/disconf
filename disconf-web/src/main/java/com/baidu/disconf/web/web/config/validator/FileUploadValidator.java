@@ -19,8 +19,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Component
 public class FileUploadValidator {
 
-    protected final static Logger LOG = AopLogFactory
-            .getLogger(FileUploadValidator.class);
+    protected final static Logger LOG = AopLogFactory.getLogger(FileUploadValidator.class);
 
     /**
      * 验证文件大小，文件名，文件后缀
@@ -29,8 +28,7 @@ public class FileUploadValidator {
      * @param maxLength
      * @param allowExtName
      */
-    public void validateFile(MultipartFile file, long maxLength,
-            String[] allowExtName) {
+    public void validateFile(MultipartFile file, long maxLength, String[] allowExtName) {
 
         if (file.isEmpty()) {
             throw new FieldException("file", "您没有上传文件", null);
@@ -39,8 +37,7 @@ public class FileUploadValidator {
         // 文件大小
         if (file.getSize() < 0 || file.getSize() > maxLength) {
 
-            throw new FieldException("file", "文件不允许超过"
-                    + String.valueOf(maxLength), null);
+            throw new FieldException("file", "文件不允许超过" + String.valueOf(maxLength), null);
         }
 
         //
@@ -55,10 +52,8 @@ public class FileUploadValidator {
         //
         // 文件名后缀
         //
-        String extName = filename.substring(filename.lastIndexOf("."))
-                .toLowerCase();
-        if (allowExtName == null || allowExtName.length == 0
-                || Arrays.binarySearch(allowExtName, extName) != -1) {
+        String extName = filename.substring(filename.lastIndexOf(".")).toLowerCase();
+        if (allowExtName == null || allowExtName.length == 0 || Arrays.binarySearch(allowExtName, extName) >= 0) {
         } else {
             throw new FieldException("file", "文件后缀不允许", null);
         }
@@ -71,8 +66,7 @@ public class FileUploadValidator {
      * @param maxLength
      * @param allowExtName
      */
-    public List<MultipartFile> validateFiles(List<MultipartFile> files,
-            long maxLength, String[] allowExtName) {
+    public List<MultipartFile> validateFiles(List<MultipartFile> files, long maxLength, String[] allowExtName) {
 
         List<MultipartFile> retFiles = new ArrayList<MultipartFile>();
 
