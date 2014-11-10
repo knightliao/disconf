@@ -18,7 +18,7 @@ disconf.git branches and Maven version:
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
-## 它是什么? ##
+## 它是什么? ## 
 
 - 命名为Disconf
 - 专注于各种系统的配置管理的通用组件/通用平台
