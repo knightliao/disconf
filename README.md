@@ -112,8 +112,10 @@ Disconf为应用方提供了三个工具，
 
 主要依赖为：
 
-- Spring(3.1.2+)
-- Zookeeper(3.3.6)
+- org.springframework.spring-beans(3.1.2)
+- org.springframework.spring-core(3.1.2)
+- org.springframework.spring-aop(3.1.2)
+- org.apache.zookeeper.zookeeper(3.3.6)
 - Jedis(2.1.0
 - reflections(0.9.9-RC1)
 - gson(2.2.4)
