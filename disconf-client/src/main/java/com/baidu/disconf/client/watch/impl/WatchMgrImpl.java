@@ -23,8 +23,7 @@ import com.github.knightliao.apollo.utils.tool.ZooUtils;
  */
 public class WatchMgrImpl implements WatchMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(WatchMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(WatchMgrImpl.class);
 
     /**
      * 应用程序的 Zoo 根目录
@@ -54,14 +53,13 @@ public class WatchMgrImpl implements WatchMgr {
      * 
      * @throws Exception
      */
-    private String makeMonitorPath(DisConfigTypeEnum disConfigTypeEnum,
-            DisConfCommonModel disConfCommonModel, String key, String value)
-            throws Exception {
+    private String makeMonitorPath(DisConfigTypeEnum disConfigTypeEnum, DisConfCommonModel disConfCommonModel,
+            String key, String value) throws Exception {
 
         // 应用根目录
-        this.clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix,
-                disConfCommonModel.getApp(), disConfCommonModel.getEnv(),
-                disConfCommonModel.getVersion());
+        this.clientRootZooPath =
+                ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(), disConfCommonModel.getEnv(),
+                        disConfCommonModel.getVersion());
         ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
 
         // 监控路径
@@ -69,8 +67,7 @@ public class WatchMgrImpl implements WatchMgr {
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 
             // 新建Zoo Store目录
-            String clientDisconfFileZooPath = ZooPathMgr
-                    .getFileZooPath(clientRootZooPath);
+            String clientDisconfFileZooPath = ZooPathMgr.getFileZooPath(clientRootZooPath);
             makePath(clientDisconfFileZooPath, ZooUtils.getIp());
 
             monitorPath = ZooPathMgr.joinPath(clientDisconfFileZooPath, key);
@@ -78,8 +75,7 @@ public class WatchMgrImpl implements WatchMgr {
         } else {
 
             // 新建Zoo Store目录
-            String clientDisconfItemZooPath = ZooPathMgr
-                    .getItemZooPath(clientRootZooPath);
+            String clientDisconfItemZooPath = ZooPathMgr.getItemZooPath(clientRootZooPath);
             makePath(clientDisconfItemZooPath, ZooUtils.getIp());
             monitorPath = ZooPathMgr.joinPath(clientDisconfItemZooPath, key);
         }
@@ -108,33 +104,28 @@ public class WatchMgrImpl implements WatchMgr {
      */
     private void makeTempChildPath(String path, String data) {
 
-        String finterPrint = DisClientComConfig.getInstance()
-                .getInstanceFingerprint();
+        String finterPrint = DisClientComConfig.getInstance().getInstanceFingerprint();
 
         String mainTypeFullStr = path + "/" + finterPrint;
         try {
-            ZookeeperMgr.getInstance().createEphemeralNode(mainTypeFullStr,
-                    data, CreateMode.EPHEMERAL);
+            ZookeeperMgr.getInstance().createEphemeralNode(mainTypeFullStr, data, CreateMode.EPHEMERAL);
         } catch (Exception e) {
-            LOGGER.error("cannot create: " + mainTypeFullStr + "\t"
-                    + e.toString());
+            LOGGER.error("cannot create: " + mainTypeFullStr + "\t" + e.toString());
         }
     }
 
     /**
      * 监控路径,监控前会事先创建路径,并且会新建一个自己的Temp子结点
      */
-    public void watchPath(DisconfCoreProcessor disconfCoreMgr,
-            DisConfCommonModel disConfCommonModel, String keyName,
+    public void watchPath(DisconfCoreProcessor disconfCoreMgr, DisConfCommonModel disConfCommonModel, String keyName,
             DisConfigTypeEnum disConfigTypeEnum, String value) throws Exception {
 
         // 新建
-        String monitorPath = makeMonitorPath(disConfigTypeEnum,
-                disConfCommonModel, keyName, value);
+        String monitorPath = makeMonitorPath(disConfigTypeEnum, disConfCommonModel, keyName, value);
 
         // 进行监控
-        NodeWatcher nodeWatcher = new NodeWatcher(disconfCoreMgr, monitorPath,
-                keyName, disConfigTypeEnum, new DisconfSysUpdateCallback());
+        NodeWatcher nodeWatcher =
+                new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback());
         nodeWatcher.monitorMaster();
     }
 

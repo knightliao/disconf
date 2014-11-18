@@ -10,6 +10,8 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ZK读写
@@ -19,9 +21,15 @@ import org.apache.zookeeper.data.Stat;
  */
 public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ResilientActiveKeyValueStore.class);
+
     private static final Charset CHARSET = Charset.forName("UTF-8");
-    private static final int MAX_RETRIES = 5;
-    private static final int RETRY_PERIOD_SECONDS = 10;
+
+    // 最大重试次数
+    public static final int MAX_RETRIES = 3;
+
+    // 每次重试超时时间
+    public static final int RETRY_PERIOD_SECONDS = 2;
 
     /**
      * 
@@ -35,8 +43,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public void write(String path, String value) throws InterruptedException,
-            KeeperException {
+    public void write(String path, String value) throws InterruptedException, KeeperException {
 
         int retries = 0;
         while (true) {
@@ -47,8 +54,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
                 if (stat == null) {
 
-                    zk.create(path, value.getBytes(CHARSET),
-                            Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                    zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
                 } else {
 
@@ -63,13 +69,15 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
             } catch (KeeperException e) {
 
-                LOGGER.warn(e.toString());
+                LOGGER.warn("write connect lost... will retry " + retries + "\t" + e.toString());
 
                 if (retries++ == MAX_RETRIES) {
                     throw e;
                 }
                 // sleep then retry
-                TimeUnit.SECONDS.sleep(RETRY_PERIOD_SECONDS);
+                int sec = RETRY_PERIOD_SECONDS * retries;
+                LOGGER.warn("sleep " + sec);
+                TimeUnit.SECONDS.sleep(sec);
             }
         }
     }
@@ -86,8 +94,8 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public String createEphemeralNode(String path, String value,
-            CreateMode createMode) throws InterruptedException, KeeperException {
+    public String createEphemeralNode(String path, String value, CreateMode createMode) throws InterruptedException,
+            KeeperException {
 
         int retries = 0;
         while (true) {
@@ -98,14 +106,12 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
                 if (stat == null) {
 
-                    return zk.create(path, value.getBytes(CHARSET),
-                            Ids.OPEN_ACL_UNSAFE, createMode);
+                    return zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, createMode);
 
                 } else {
 
                     if (value != null) {
-                        zk.setData(path, value.getBytes(CHARSET),
-                                stat.getVersion());
+                        zk.setData(path, value.getBytes(CHARSET), stat.getVersion());
                     }
                 }
 
@@ -117,13 +123,15 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
             } catch (KeeperException e) {
 
-                LOGGER.warn(e.toString());
+                LOGGER.warn("createEphemeralNode connect lost... will retry " + retries + "\t" + e.toString());
 
                 if (retries++ == MAX_RETRIES) {
                     throw e;
                 }
                 // sleep then retry
-                TimeUnit.SECONDS.sleep(RETRY_PERIOD_SECONDS);
+                int sec = RETRY_PERIOD_SECONDS * retries;
+                LOGGER.warn("sleep " + sec);
+                TimeUnit.SECONDS.sleep(sec);
             }
         }
     }
@@ -140,8 +148,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public boolean exists(String path) throws InterruptedException,
-            KeeperException {
+    public boolean exists(String path) throws InterruptedException, KeeperException {
 
         int retries = 0;
         while (true) {
@@ -165,13 +172,17 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
             } catch (KeeperException e) {
 
-                LOGGER.warn(e.toString());
+                LOGGER.warn("exists connect lost... will retry " + retries + "\t" + e.toString());
 
                 if (retries++ == MAX_RETRIES) {
+                    LOGGER.error("connect final failed");
                     throw e;
                 }
+
                 // sleep then retry
-                TimeUnit.SECONDS.sleep(RETRY_PERIOD_SECONDS);
+                int sec = RETRY_PERIOD_SECONDS * retries;
+                LOGGER.warn("sleep " + sec);
+                TimeUnit.SECONDS.sleep(sec);
             }
         }
     }
@@ -189,8 +200,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public String read(String path, Watcher watcher, Stat stat)
-            throws InterruptedException, KeeperException {
+    public String read(String path, Watcher watcher, Stat stat) throws InterruptedException, KeeperException {
 
         byte[] data = zk.getData(path, watcher, stat);
         return new String(data, CHARSET);

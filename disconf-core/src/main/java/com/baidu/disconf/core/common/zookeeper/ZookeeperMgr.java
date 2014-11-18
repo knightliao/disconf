@@ -7,7 +7,6 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
-import org.apache.zookeeper.ZooKeeper.States;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +22,7 @@ import com.github.knightliao.apollo.utils.tool.ZooUtils;
  */
 public class ZookeeperMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ZookeeperMgr.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ZookeeperMgr.class);
 
     private ResilientActiveKeyValueStore store;
 
@@ -76,35 +74,10 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @return
+     * 重新连接
      */
-    public static ZookeeperMgr getInstanceWithCheck() {
-
-        ZookeeperMgr zookeeperMgr = getInstance();
-
-        if (zookeeperMgr.getZk().getState().equals(States.CLOSED)) {
-
-            LOGGER.warn("zookeeper lost connection, reconnect");
-
-            try {
-                zookeeperMgr.release();
-                zookeeperMgr.init(zookeeperMgr.curHost,
-                        zookeeperMgr.curDefaultPrefixString);
-                return zookeeperMgr;
-
-            } catch (InterruptedException e) {
-
-                LOGGER.error(e.toString());
-
-            } catch (Exception e) {
-
-                LOGGER.error(e.toString());
-            }
-
-        }
-
-        return zookeeperMgr;
+    public void reconnect() {
+        store.reconnect();
     }
 
     /**
@@ -117,8 +90,7 @@ public class ZookeeperMgr {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    private void initInternal(String hosts, String defaultPrefixString)
-            throws IOException, InterruptedException {
+    private void initInternal(String hosts, String defaultPrefixString) throws IOException, InterruptedException {
 
         curHost = hosts;
         curDefaultPrefixString = defaultPrefixString;
@@ -232,8 +204,7 @@ public class ZookeeperMgr {
     /*
      * 生成一个临时结点
      */
-    public String createEphemeralNode(String path, String value,
-            CreateMode createMode) throws Exception {
+    public String createEphemeralNode(String path, String value, CreateMode createMode) throws Exception {
 
         return store.createEphemeralNode(path, value, createMode);
     }
@@ -252,8 +223,7 @@ public class ZookeeperMgr {
      * @author liaoqiqi
      * @date 2013-6-17
      */
-    public String read(String path, Watcher watcher, Stat stat)
-            throws InterruptedException, KeeperException {
+    public String read(String path, Watcher watcher, Stat stat) throws InterruptedException, KeeperException {
 
         return store.read(path, watcher, stat);
     }

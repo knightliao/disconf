@@ -4,6 +4,7 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.EventType;
+import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,7 @@ import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
  */
 public class NodeWatcher implements Watcher {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(NodeWatcher.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(NodeWatcher.class);
 
     private String monitorPath = "";
     private String keyName = "";
@@ -30,9 +30,8 @@ public class NodeWatcher implements Watcher {
 
     private DisconfCoreProcessor disconfCoreMgr;
 
-    public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath,
-            String keyName, DisConfigTypeEnum disConfigTypeEnum,
-            DisconfSysUpdateCallback disconfSysUpdateCallback) {
+    public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath, String keyName,
+            DisConfigTypeEnum disConfigTypeEnum, DisconfSysUpdateCallback disconfSysUpdateCallback) {
 
         super();
         this.disconfCoreMgr = disconfCoreMgr;
@@ -62,8 +61,8 @@ public class NodeWatcher implements Watcher {
             LOGGER.error("cannot monitor " + monitorPath, e);
         }
 
-        LOGGER.debug("monitor path: (" + monitorPath + "," + keyName + ","
-                + disConfigTypeEnum.getModelName() + ") has been added!");
+        LOGGER.debug("monitor path: (" + monitorPath + "," + keyName + "," + disConfigTypeEnum.getModelName()
+                + ") has been added!");
     }
 
     /**
@@ -72,6 +71,9 @@ public class NodeWatcher implements Watcher {
     @Override
     public void process(WatchedEvent event) {
 
+        LOGGER.info("============GOT EVENT" + event.getType() + ": (" + monitorPath + "," + keyName + ","
+                + disConfigTypeEnum.getModelName() + ")======================");
+
         //
         // 结点更新时
         //
@@ -79,23 +81,54 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("============GOT UPDATE EVENT: (" + monitorPath
-                        + "," + keyName + ","
-                        + disConfigTypeEnum.getModelName()
-                        + ")======================");
+                LOGGER.info("============GOT UPDATE EVENT======================");
 
                 // 调用回调函数, 回调函数里会重新进行监控
-                try {
-                    disconfSysUpdateCallback.reload(disconfCoreMgr,
-                            disConfigTypeEnum, keyName);
-                } catch (Exception e) {
-                    LOGGER.error(e.toString(), e);
-                }
+                callback();
 
             } catch (Exception e) {
 
                 LOGGER.error("monitor node exception. " + monitorPath, e);
             }
+        }
+
+        //
+        // 结点断开连接，这时不要进行处理
+        //
+        if (event.getState() == KeeperState.Disconnected) {
+            LOGGER.error("============GOT Disconnected EVENT======================");
+        }
+
+        //
+        // session expired，需要重新关注哦
+        //
+        if (event.getState() == KeeperState.Expired) {
+            LOGGER.error("============GOT Expired EVENT======================");
+
+            // 重新连接
+            ZookeeperMgr.getInstance().reconnect();
+
+            callback();
+        }
+    }
+
+    /**
+     * 
+     */
+    private void callback() {
+
+        try {
+
+            // 调用回调函数, 回调函数里会重新进行监控
+            try {
+                disconfSysUpdateCallback.reload(disconfCoreMgr, disConfigTypeEnum, keyName);
+            } catch (Exception e) {
+                LOGGER.error(e.toString(), e);
+            }
+
+        } catch (Exception e) {
+
+            LOGGER.error("monitor node exception. " + monitorPath, e);
         }
     }
 }
