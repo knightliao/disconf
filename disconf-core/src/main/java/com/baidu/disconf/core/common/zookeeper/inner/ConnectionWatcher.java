@@ -23,8 +23,8 @@ public class ConnectionWatcher implements Watcher {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(ConnectionWatcher.class);
 
-    // 3秒
-    private static final int SESSION_TIMEOUT = 3000;
+    // 10 秒会话时间 ，避免频繁的session expired
+    private static final int SESSION_TIMEOUT = 10000;
 
     // 3秒
     private static final int CONNECT_TIMEOUT = 3000;
