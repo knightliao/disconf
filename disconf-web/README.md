@@ -7,19 +7,25 @@ disconf-web
 
 ## 运行样式 ##
 
-首页：
+### 主页 ###
 
-![](http://ww4.sinaimg.cn/bmiddle/60c9620fgw1ek914j9wgyj21ar0hf3zw.jpg)
+![](http://ww1.sinaimg.cn/mw1024/60c9620fgw1ekdfiw180rj20vt0gawfr.jpg)
 
-登录页面：
+### 登录页 ###
 
-![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1ek915hlp6qj20v80i8ab1.jpg)
+可以使用 dancai   Asd123 进行登录。
 
-更多页面：
+![](http://ww4.sinaimg.cn/mw1024/60c9620fgw1ekdfjkgbdcj20t70ie757.jpg)
 
-![](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1ek9165yvlpj20uh0lidjr.jpg)
+### 主界面 ###
 
-![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1ek916ibw6hj20x20mgdkh.jpg)
+![](http://ww3.sinaimg.cn/mw1024/60c9620fgw1ekdfkvdyjtj20t30ic0tn.jpg)
+
+左上角可以选择APP和环境，选择之后，就会在中间出现若干个版本，
+
+选择版本后，就会显示 APP、环境、版本 三个条件下的配置列表：
+
+![](http://ww2.sinaimg.cn/mw1024/60c9620fgw1ekdg8nmitcj215n0mewke.jpg)
 
 ## How to deploy ##
 

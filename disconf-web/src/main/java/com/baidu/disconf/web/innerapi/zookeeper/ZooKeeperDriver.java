@@ -28,35 +28,38 @@ import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataIt
 import com.baidu.dsp.common.exception.RemoteException;
 
 /**
- *
+ * 
  * @author liaoqiqi
  * @version 2014-6-24
  */
 @Service
 public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ZooKeeperDriver.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ZooKeeperDriver.class);
 
     @Autowired
     private ZooConfig zooConfig;
 
+    //
+    // 是否初始化
+    //
+    private static boolean isInit = false;
+
     /**
      * 通知某个Node更新
-     *
+     * 
      * @param app
      * @param env
      * @param version
      * @param disConfigTypeEnum
      */
-    public void notifyNodeUpdate(String app, String env, String version,
-            String key, String value, DisConfigTypeEnum disConfigTypeEnum) {
+    public void notifyNodeUpdate(String app, String env, String version, String key, String value,
+            DisConfigTypeEnum disConfigTypeEnum) {
 
         //
         // 获取路径
         //
-        String baseUrlString = ZooPathMgr.getZooBaseUrl(
-                zooConfig.getZookeeperUrlPrefix(), app, env, version);
+        String baseUrlString = ZooPathMgr.getZooBaseUrl(zooConfig.getZookeeperUrlPrefix(), app, env, version);
 
         String path = "";
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.ITEM)) {
@@ -79,8 +82,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
                 //
                 // 通知
                 //
-                ZookeeperMgr.getInstanceWithCheck().writePersistentUrl(path,
-                        value);
+                ZookeeperMgr.getInstance().writePersistentUrl(path, value);
             }
 
         } catch (Exception e) {
@@ -92,25 +94,22 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 获取分布式配置 Map
-     *
+     * 
      * @param app
      * @param env
      * @param version
      * @return
      */
-    public Map<String, ZkDisconfData> getDisconfData(String app, String env,
-            String version) {
+    public Map<String, ZkDisconfData> getDisconfData(String app, String env, String version) {
 
-        String baseUrl = ZooPathMgr.getZooBaseUrl(
-                zooConfig.getZookeeperUrlPrefix(), app, env, version);
+        String baseUrl = ZooPathMgr.getZooBaseUrl(zooConfig.getZookeeperUrlPrefix(), app, env, version);
 
         Map<String, ZkDisconfData> fileMap = new HashMap<String, ZkDisconfData>();
 
         try {
 
             fileMap = getDisconfData(ZooPathMgr.getFileZooPath(baseUrl));
-            Map<String, ZkDisconfData> itemMap = getDisconfData(ZooPathMgr
-                    .getItemZooPath(baseUrl));
+            Map<String, ZkDisconfData> itemMap = getDisconfData(ZooPathMgr.getItemZooPath(baseUrl));
             fileMap.putAll(itemMap);
 
         } catch (KeeperException e) {
@@ -124,17 +123,16 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 广度搜索法：搜索分布式配置对应的两层数据
-     *
+     * 
      * @return
      * @throws InterruptedException
      * @throws KeeperException
      */
-    private Map<String, ZkDisconfData> getDisconfData(String path)
-            throws KeeperException, InterruptedException {
+    private Map<String, ZkDisconfData> getDisconfData(String path) throws KeeperException, InterruptedException {
 
         Map<String, ZkDisconfData> ret = new HashMap<String, ZkDisconfData>();
 
-        ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstanceWithCheck();
+        ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstance();
         ZooKeeper zooKeeper = zooKeeperMgr.getZk();
 
         if (zooKeeper.exists(path, false) == null) {
@@ -181,12 +179,12 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     /**
      * 返回groupName结点向下的所有zookeeper信息
-     *
+     * 
      * @param root
      */
     public List<String> getConf(String groupName) {
 
-        ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstanceWithCheck();
+        ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstance();
         ZooKeeper zooKeeper = zooKeeperMgr.getZk();
 
         List<String> retList = new ArrayList<String>();
@@ -202,8 +200,8 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
     private static final Charset CHARSET = Charset.forName("UTF-8");
 
-    private void getConf(ZooKeeper zk, String groupName, String displayName,
-            List<String> retList) throws KeeperException, InterruptedException {
+    private void getConf(ZooKeeper zk, String groupName, String displayName, List<String> retList)
+            throws KeeperException, InterruptedException {
         try {
 
             StringBuffer sb = new StringBuffer();
@@ -232,8 +230,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
             //
             //
             //
-            Collections.sort(children,
-                    Collator.getInstance(java.util.Locale.CHINA));
+            Collections.sort(children, Collator.getInstance(java.util.Locale.CHINA));
             for (String child : children) {
 
                 String nextName = "";
@@ -252,7 +249,7 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
             }
 
         } catch (KeeperException.NoNodeException e) {
-            LOG.info("Group %s does not exist\n", groupName);
+            LOG.error("Group " + groupName + " does not exist\n");
         }
 
     }
@@ -264,9 +261,12 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public synchronized void afterPropertiesSet() throws Exception {
 
-        ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(),
-                zooConfig.getZookeeperUrlPrefix());
+        if (!isInit) {
+
+            ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(), zooConfig.getZookeeperUrlPrefix());
+            isInit = true;
+        }
     }
 }

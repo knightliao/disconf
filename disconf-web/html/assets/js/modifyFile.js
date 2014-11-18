@@ -58,8 +58,10 @@ function validate_file_name(fileName) {
 	switch (fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()) {
 	case 'properties':
 		break;
+	case 'xml':
+		break;
 	default:
-		errorrar.html("错误: " + "文件类型必须是properties");
+		errorrar.html("错误: " + "文件类型必须是properties/.xml");
 		return false;
 	}
 

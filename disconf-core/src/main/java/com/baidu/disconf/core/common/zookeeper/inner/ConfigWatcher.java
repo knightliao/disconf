@@ -40,6 +40,7 @@ public class ConfigWatcher implements Watcher {
                 System.err.printf("KeeperException: %s. Exiting.\n", e);
             }
         }
+
     }
 
     public static void main(String[] args) throws Exception {

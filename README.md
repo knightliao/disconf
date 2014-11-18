@@ -1,7 +1,7 @@
-IDisconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
+Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
 =======
 
-Distributed Configuration Management Platform 
+Distributed Configuration Management Platform  
 
 分布式配置管理平台
 
@@ -12,8 +12,8 @@ Distributed Configuration Management Platform
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.15-SNAPSHOT
-- master(stable branch)：2.6.14
+- dev(develop branch): 2.6.16-SNAPSHOT
+- master(stable branch)：2.6.15
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
@@ -30,7 +30,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.14）功能特点 ##
+## 当前版本（2.6.15）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -107,13 +107,15 @@ Disconf为应用方提供了三个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.14</version>
+        <version>2.6.15</version>
     </dependency>
 
 主要依赖为：
 
-- Spring(3.1.2+)
-- Zookeeper(3.3.6)
+- org.springframework.spring-beans(3.1.2)
+- org.springframework.spring-core(3.1.2)
+- org.springframework.spring-aop(3.1.2)
+- org.apache.zookeeper.zookeeper(3.3.6)
 - Jedis(2.1.0
 - reflections(0.9.9-RC1)
 - gson(2.2.4)
@@ -146,6 +148,7 @@ APP+环境+版本+ZK查询：
 - [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 - [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 - [注意事项](https://github.com/knightliao/disconf/wiki/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+- [Zookeeper异常考虑](https://github.com/knightliao/disconf/wiki/Zookeeper%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 
 ## 开发人员指南 ##
 
