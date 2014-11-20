@@ -32,10 +32,10 @@ function fetchItems(appId, envId, version, curConfigId) {
 		var key = "";
 		if (item.type == "配置文件") {
 			link = 'modifyFile.html?configId=' + item.configId;
-			key = '配置文件:' + item.key;
+			key = '<i title="配置文件" class="icon-file"></i>' + item.key;
 		} else {
 			link = 'modifyItem.html?configId=' + item.configId;
-			key = '配置项:' + item.key;
+			key = '<i title="配置项" class="icon-leaf"></i>' + item.key;
 		}
 
 		var style = "";
