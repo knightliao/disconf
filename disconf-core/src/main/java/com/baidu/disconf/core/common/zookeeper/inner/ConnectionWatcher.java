@@ -68,7 +68,7 @@ public class ConnectionWatcher implements Watcher {
         } else if (event.getState().equals(KeeperState.Disconnected)) {
 
             // 这时收到断开连接的消息，这里其它无能为力，因为这时已经和ZK断开连接了，只能等ZK再次开启了
-            LOGGER.error("zk Disconnected");
+            LOGGER.warn("zk Disconnected");
 
         } else if (event.getState().equals(KeeperState.Expired)) {
 
