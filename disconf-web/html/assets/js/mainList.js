@@ -230,6 +230,7 @@
 	 * @returns {String}
 	 */
 	function getMachineList(machinelist) {
+		
 		var tip;
 		if (machinelist.length == 0) {
 			tip = "";
@@ -254,6 +255,57 @@
 		}
 		return tip;
 	}
+	
+	
+	//
+	// 渲染 配置 value
+	//
+	function fetchConfigValue(configId, object) {
+		//
+		// 获取APP信息
+		//
+		$.ajax({
+			type : "GET",
+			url : "/api/config/" + configId
+		}).done(
+				function(data) {
+					if (data.success === "true") {
+						var result = data.result;
+						
+						var e = object;
+						e.popover({
+							content : "<pre>" + result.value + "</pre>",
+							html : true
+						}).popover('show');
+					}
+				});
+	}
+	
+	//
+	// 获取 ZK
+	//
+	function fetchZkInfo(configId, object) {
+		//
+		// 获取APP信息
+		//
+		$.ajax({
+			type : "GET",
+			url : "/api/config/zk/" + configId
+		}).done(
+				function(data) {
+					if (data.success === "true") {
+						var result = data.result;
+						
+						var e = object;
+						e.popover({
+							content : getMachineList(result.datalist),
+							html : true
+						}).popover('show');
+					}
+				});
+	}
+	
+	
 
 	// 详细列表绑定事件
 	function bindDetailEvent(result) {
@@ -271,19 +323,13 @@
 			$(".valuefetch" + id).on('click', function() {
 				var e = $(this);
 				e.unbind('click');
-				e.popover({
-					content : "<pre>" + item.value + "</pre>",
-					html : true
-				}).popover('show');
+				fetchConfigValue(id , e);
 			});
 
 			$(".machineinfo" + id).on('click', function() {
 				var e = $(this);
 				e.unbind('click');
-				e.popover({
-					content : getMachineList(item.machineList),
-					html : true
-				}).popover('show');
+				fetchZkInfo(id, e);
 			});
 
 		});

@@ -9,6 +9,7 @@ import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
+import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.ub.common.db.DaoPageResult;
 
 /**
@@ -27,8 +28,7 @@ public interface ConfigMgr {
      * @param disConfigTypeEnum
      * @return
      */
-    public ValueVo getConfItemByParameter(Long appId, Long envId,
-            String version, String key);
+    public ValueVo getConfItemByParameter(Long appId, Long envId, String version, String key);
 
     /**
      * 
@@ -39,8 +39,7 @@ public interface ConfigMgr {
      * @param disConfigTypeEnum
      * @return
      */
-    public Config getConfByParameter(Long appId, Long envId, String env,
-            String key, DisConfigTypeEnum disConfigTypeEnum);
+    public Config getConfByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum);
 
     /**
      * 
@@ -56,9 +55,7 @@ public interface ConfigMgr {
      * @param version
      * @return
      */
-    DaoPageResult<ConfListVo> getConfigListWithZk(ConfListForm confListForm);
-
-    DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm);
+    DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm, boolean fetchZk);
 
     /**
      * 
@@ -66,6 +63,8 @@ public interface ConfigMgr {
      * @return
      */
     public ConfListVo getConfVo(Long configId);
+
+    public MachineListVo getConfVoWithZk(Long configId);
 
     /**
      * 
@@ -96,8 +95,7 @@ public interface ConfigMgr {
      * @param confNewForm
      * @param disConfigTypeEnum
      */
-    void newConfig(ConfNewItemForm confNewForm,
-            DisConfigTypeEnum disConfigTypeEnum);
+    void newConfig(ConfNewItemForm confNewForm, DisConfigTypeEnum disConfigTypeEnum);
 
     void delete(Long configId);
 

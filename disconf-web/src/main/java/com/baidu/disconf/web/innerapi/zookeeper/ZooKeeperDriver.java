@@ -122,6 +122,42 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
     }
 
     /**
+     * 获取分布式配置 Map
+     * 
+     * @param app
+     * @param env
+     * @param version
+     * @return
+     */
+    public ZkDisconfData getDisconfData(String app, String env, String version, DisConfigTypeEnum disConfigTypeEnum,
+            String keyName) {
+
+        String baseUrl = ZooPathMgr.getZooBaseUrl(zooConfig.getZookeeperUrlPrefix(), app, env, version);
+
+        try {
+
+            ZookeeperMgr zooKeeperMgr = ZookeeperMgr.getInstance();
+            ZooKeeper zooKeeper = zooKeeperMgr.getZk();
+
+            if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
+
+                return getDisconfData(ZooPathMgr.getFileZooPath(baseUrl), keyName, zooKeeper);
+
+            } else if (disConfigTypeEnum.equals(DisConfigTypeEnum.ITEM)) {
+
+                return getDisconfData(ZooPathMgr.getItemZooPath(baseUrl), keyName, zooKeeper);
+            }
+
+        } catch (KeeperException e) {
+            LOG.error(e.getMessage(), e);
+        } catch (InterruptedException e) {
+            LOG.error(e.getMessage(), e);
+        }
+
+        return null;
+    }
+
+    /**
      * 广度搜索法：搜索分布式配置对应的两层数据
      * 
      * @return
@@ -144,37 +180,59 @@ public class ZooKeeperDriver implements InitializingBean, DisposableBean {
 
             ZkDisconfData zkDisconfData = new ZkDisconfData();
 
-            zkDisconfData.setKey(firstKey);
-
-            String secPath = path + "/" + firstKey;
-            List<String> secChiList = zooKeeper.getChildren(secPath, false);
-            List<ZkDisconfDataItem> zkDisconfDataItems = new ArrayList<ZkDisconfDataItem>();
-
-            // list
-            for (String secKey : secChiList) {
-
-                // machine
-                ZkDisconfDataItem zkDisconfDataItem = new ZkDisconfDataItem();
-                zkDisconfDataItem.setMachine(secKey);
-
-                String thirdPath = secPath + "/" + secKey;
-
-                // value
-                byte[] data = zooKeeper.getData(thirdPath, null, null);
-                if (data != null) {
-                    zkDisconfDataItem.setValue(new String(data, CHARSET));
-                }
-
-                // add
-                zkDisconfDataItems.add(zkDisconfDataItem);
+            zkDisconfData = getDisconfData(path, firstKey, zooKeeper);
+            if (zkDisconfData != null) {
+                ret.put(firstKey, zkDisconfData);
             }
-
-            zkDisconfData.setData(zkDisconfDataItems);
-
-            ret.put(firstKey, zkDisconfData);
         }
 
         return ret;
+    }
+
+    /**
+     * 获取指定 配置数据
+     * 
+     * @return
+     * @throws InterruptedException
+     * @throws KeeperException
+     */
+    private ZkDisconfData getDisconfData(String path, String keyName, ZooKeeper zooKeeper) throws KeeperException,
+            InterruptedException {
+
+        String curPath = path + "/" + keyName;
+
+        if (zooKeeper.exists(curPath, false) == null) {
+            return null;
+        }
+
+        ZkDisconfData zkDisconfData = new ZkDisconfData();
+        zkDisconfData.setKey(keyName);
+
+        List<String> secChiList = zooKeeper.getChildren(curPath, false);
+        List<ZkDisconfDataItem> zkDisconfDataItems = new ArrayList<ZkDisconfDataItem>();
+
+        // list
+        for (String secKey : secChiList) {
+
+            // machine
+            ZkDisconfDataItem zkDisconfDataItem = new ZkDisconfDataItem();
+            zkDisconfDataItem.setMachine(secKey);
+
+            String thirdPath = curPath + "/" + secKey;
+
+            // value
+            byte[] data = zooKeeper.getData(thirdPath, null, null);
+            if (data != null) {
+                zkDisconfDataItem.setValue(new String(data, CHARSET));
+            }
+
+            // add
+            zkDisconfDataItems.add(zkDisconfDataItem);
+        }
+
+        zkDisconfData.setData(zkDisconfDataItems);
+
+        return zkDisconfData;
     }
 
     /**

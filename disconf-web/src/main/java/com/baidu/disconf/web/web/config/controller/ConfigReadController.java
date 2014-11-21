@@ -24,6 +24,7 @@ import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.VersionListForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
+import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.disconf.web.utils.TarUtils;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.dsp.common.constant.WebConstants;
@@ -45,8 +46,7 @@ import com.baidu.ub.common.db.DaoPageResult;
 @RequestMapping(WebConstants.API_PREFIX + "/config")
 public class ConfigReadController extends BaseController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ConfigReadController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ConfigReadController.class);
 
     @Autowired
     private ConfigMgr configMgr;
@@ -63,8 +63,8 @@ public class ConfigReadController extends BaseController {
     @ResponseBody
     public JsonObjectBase getVersionList(@Valid VersionListForm versionListForm) {
 
-        List<String> versionList = configMgr.getVersionListByAppEnv(
-                versionListForm.getAppId(), versionListForm.getEnvId());
+        List<String> versionList =
+                configMgr.getVersionListByAppEnv(versionListForm.getAppId(), versionListForm.getEnvId());
 
         return buildListSuccess(versionList, versionList.size());
     }
@@ -83,8 +83,7 @@ public class ConfigReadController extends BaseController {
         confListForm.getPage().setOrderBy(Columns.NAME);
         confListForm.getPage().setOrder(PageOrderValidator.ASC);
 
-        DaoPageResult<ConfListVo> configs = configMgr
-                .getConfigListWithZk(confListForm);
+        DaoPageResult<ConfListVo> configs = configMgr.getConfigList(confListForm, true);
 
         return buildListSuccess(configs);
     }
@@ -103,8 +102,7 @@ public class ConfigReadController extends BaseController {
         confListForm.getPage().setOrderBy(Columns.NAME);
         confListForm.getPage().setOrder(PageOrderValidator.ASC);
 
-        DaoPageResult<ConfListVo> configs = configMgr
-                .getConfigList(confListForm);
+        DaoPageResult<ConfListVo> configs = configMgr.getConfigList(confListForm, false);
 
         return buildListSuccess(configs);
     }
@@ -125,6 +123,24 @@ public class ConfigReadController extends BaseController {
         ConfListVo config = configMgr.getConfVo(configId);
 
         return buildSuccess(config);
+    }
+
+    /**
+     * 获取 zk
+     * 
+     * @param confListForm
+     * @return
+     */
+    @RequestMapping(value = "/zk/{configId}", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase getZkInfo(@PathVariable long configId) {
+
+        // 业务校验
+        configValidator.valideConfigExist(configId);
+
+        MachineListVo machineListVo = configMgr.getConfVoWithZk(configId);
+
+        return buildSuccess(machineListVo);
     }
 
     /**
@@ -177,9 +193,9 @@ public class ConfigReadController extends BaseController {
         //
         // prefix
         //
-        String prefixString = "APP" + confListForm.getAppId() + "_" + "ENV"
-                + confListForm.getEnvId() + "_" + "VERSION"
-                + confListForm.getVersion();
+        String prefixString =
+                "APP" + confListForm.getAppId() + "_" + "ENV" + confListForm.getEnvId() + "_" + "VERSION"
+                        + confListForm.getVersion();
 
         HttpHeaders header = new HttpHeaders();
 
@@ -194,8 +210,7 @@ public class ConfigReadController extends BaseController {
             throw new DocumentNotFoundException("");
         }
 
-        header.set("Content-Disposition",
-                "attachment; filename=" + targetFile.getName());
+        header.set("Content-Disposition", "attachment; filename=" + targetFile.getName());
         header.setContentLength(res.length);
         return new HttpEntity<byte[]>(res, header);
     }

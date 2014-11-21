@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
@@ -34,8 +35,7 @@ public class ZkDeployMgrImpl implements ZkDeployMgr {
     public String getDeployInfo(String app, String env, String version) {
 
         // 路径获取
-        String url = ZooPathMgr.getZooBaseUrl(
-                zooConfig.getZookeeperUrlPrefix(), app, env, version);
+        String url = ZooPathMgr.getZooBaseUrl(zooConfig.getZookeeperUrlPrefix(), app, env, version);
 
         List<String> hostInfoList = zooKeeperDriver.getConf(url);
 
@@ -48,9 +48,15 @@ public class ZkDeployMgrImpl implements ZkDeployMgr {
      * 
      * @return
      */
-    public Map<String, ZkDisconfData> getZkDisconfDataMap(String app,
-            String env, String version) {
+    public Map<String, ZkDisconfData> getZkDisconfDataMap(String app, String env, String version) {
 
         return zooKeeperDriver.getDisconfData(app, env, version);
     }
+
+    public ZkDisconfData getZkDisconfData(String app, String env, String version, DisConfigTypeEnum disConfigTypeEnum,
+            String keyName) {
+
+        return zooKeeperDriver.getDisconfData(app, env, version, disConfigTypeEnum, keyName);
+    }
+
 }
