@@ -71,9 +71,6 @@ public class NodeWatcher implements Watcher {
     @Override
     public void process(WatchedEvent event) {
 
-        LOGGER.info("============GOT EVENT" + event.getType() + ": (" + monitorPath + "," + keyName + ","
-                + disConfigTypeEnum.getModelName() + ")======================");
-
         //
         // 结点更新时
         //
@@ -81,7 +78,8 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("============GOT UPDATE EVENT======================");
+                LOGGER.info("============GOT UPDATE EVENT" + event.getType() + ": (" + monitorPath + "," + keyName
+                        + "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 调用回调函数, 回调函数里会重新进行监控
                 callback();
@@ -96,14 +94,18 @@ public class NodeWatcher implements Watcher {
         // 结点断开连接，这时不要进行处理
         //
         if (event.getState() == KeeperState.Disconnected) {
-            LOGGER.error("============GOT Disconnected EVENT======================");
+
+            LOGGER.warn("============GOT Disconnected EVENT" + event.getType() + ": (" + monitorPath + "," + keyName
+                    + "," + disConfigTypeEnum.getModelName() + ")======================");
         }
 
         //
         // session expired，需要重新关注哦
         //
         if (event.getState() == KeeperState.Expired) {
-            LOGGER.error("============GOT Expired EVENT======================");
+
+            LOGGER.error("============GOT Expired EVENT" + event.getType() + ": (" + monitorPath + "," + keyName + ","
+                    + disConfigTypeEnum.getModelName() + ")======================");
 
             // 重新连接
             ZookeeperMgr.getInstance().reconnect();
