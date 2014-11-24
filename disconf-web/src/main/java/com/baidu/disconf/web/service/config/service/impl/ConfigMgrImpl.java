@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -179,7 +180,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         //
         final boolean myFetchZk = fetchZk;
-        Map<String, ZkDisconfData> zkDataMap = null;
+        Map<String, ZkDisconfData> zkDataMap = new HashMap<String, ZkDisconfData>();
         if (myFetchZk) {
             zkDataMap = zkDeployMgr.getZkDisconfDataMap(app.getName(), env.getName(), confListForm.getVersion());
         }
@@ -197,8 +198,11 @@ public class ConfigMgrImpl implements ConfigMgr {
                         String appNameString = app.getName();
                         String envName = env.getName();
 
-                        ConfListVo configListVo =
-                                convert(input, appNameString, envName, myzkDataMap.get(input.getName()));
+                        ZkDisconfData zkDisconfData = null;
+                        if (myzkDataMap != null && myzkDataMap.keySet().contains(input.getName())) {
+                            zkDisconfData = myzkDataMap.get(input.getName());
+                        }
+                        ConfListVo configListVo = convert(input, appNameString, envName, zkDisconfData);
 
                         // 列表操作不要显示值, 为了前端显示快速(只是内存里操作)
                         if (myFetchZk) {
