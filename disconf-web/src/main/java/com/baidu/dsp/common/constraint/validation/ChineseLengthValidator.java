@@ -9,7 +9,6 @@ import com.baidu.dsp.common.constraint.ChineseLengthConstrant;
  * 中文长度校验实现
  * 
  * @author zhangbi
- * @email zhangbi@baidu.com
  * @date 2014年1月13日下午9:26:39
  */
 public class ChineseLengthValidator implements

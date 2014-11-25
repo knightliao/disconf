@@ -14,7 +14,6 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
  * 下载文件
  * 
  * @author liaoqiqi
- * @email liaoqiqi@baidu.com
  * 
  */
 public class FetchConfFile implements UnreliableInterface {

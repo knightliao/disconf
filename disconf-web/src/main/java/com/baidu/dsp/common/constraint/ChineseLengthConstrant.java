@@ -14,7 +14,6 @@ import com.baidu.dsp.common.constraint.validation.ChineseLengthValidator;
  * 中文校验
  * 
  * @author zhangbi
- * @email zhangbi@baidu.com
  * @date 2014年1月13日下午9:24:42
  */
 @Target({ ElementType.METHOD, ElementType.FIELD })

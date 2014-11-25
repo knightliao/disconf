@@ -97,10 +97,6 @@ disconf-web
 
 修改 nginx.conf
 
-    #
-    # disconftest.baidu.com
-    #
-
     upstream disconf {
         server 127.0.0.1:8015;
     }

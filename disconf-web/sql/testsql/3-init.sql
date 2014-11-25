@@ -28,6 +28,15 @@ retry=4
 ', 2, '1_0_0_0', 1, '20140911223117', '20140911223313');
 INSERT INTO disconf.config
 (config_id, type, name, `value`, app_id, version, env_id, create_time, update_time)
+VALUES(143, 0, 'testXml2.xml', '<?xml version="1.0" encoding="UTF-8"?>
+<note>
+    <to>George</to>
+    <from>John</from>
+    <heading>Reminder</heading>
+    <body>Don''t forget the meeting!</body>
+</note>', 2, '1_0_0_0', 1, '20141110193605', '20141125145301');
+INSERT INTO disconf.config
+(config_id, type, name, `value`, app_id, version, env_id, create_time, update_time)
 VALUES(17, 1, 'staticItem', '30', 2, '1_0_0_0', 1, '20140814210709', '20140814211054');
 INSERT INTO disconf.config
 (config_id, type, name, `value`, app_id, version, env_id, create_time, update_time)
@@ -38,40 +47,12 @@ VALUES(7, 1, 'discountRate', '0.5', 2, '1_0_0_0', 1, '20140801142833', '20140905
 INSERT INTO disconf.config
 (config_id, type, name, `value`, app_id, version, env_id, create_time, update_time)
 VALUES(122, 0, 'testXml.xml', '<?xml version="1.0" encoding="UTF-8"?>
-<routes>
-    <route sourceHost="*" sourcePort="*"
-        proxyHost="cq01-rdqa-pool078.cq01.baidu.com" proxyPort="8081">
-        <rule>
-            <from method="post">/api/tools/converts</from>
-            <to method="post">/tools/converts</to>
-        </rule>
-        <rule>
-            <from method="get">/api/tools/converts/{id}</from>
-            <to method="get">/tools/converts/{id}</to>
-        </rule>
-        <rule>
-            <from method="put">/api/tools/converts/{id}</from>
-            <to method="put">/tools/converts/{id}</to>
-        </rule>
-        <rule>
-            <from method="get">/api/tools/converts</from>
-            <to method="get">/tools/converts</to>
-        </rule>
-        <rule>
-            <from method="delete">/api/tools/converts/{id}</from>
-            <to method="delete">/tools/converts/{id}</to>
-        </rule>
-        <rule>
-            <from method="put">/api/tools/converts/simpleModify/{id}
-            </from>
-            <to method="put">/tools/converts/simpleModify/{id}</to>
-        </rule>
-        <rule>
-            <from method="get">/api/tools/converts/tradeMap</from>
-            <to method="get">/tools/converts/tradeMap</to>
-        </rule>
-    </route>
-</routes>', 2, '1_0_0_0', 1, '20141103202829', '20141103202829');
+<note>
+    <to>George</to>
+    <from>John</from>
+    <heading>Reminder</heading>
+    <body>Don''t forget the meeting!</body>
+</note>', 2, '1_0_0_0', 1, '20141103202829', '20141125145242');
 INSERT INTO disconf.config
 (config_id, type, name, `value`, app_id, version, env_id, create_time, update_time)
 VALUES(29, 0, 'empty.properties', 'redis.host=10.48.57.42
@@ -84,43 +65,6 @@ INSERT INTO disconf.config
 VALUES(4, 0, 'coefficients.properties', 'coe.baiFaCoe=1.3
 coe.yuErBaoCoe=1.2 
 ', 2, '1_0_0_0', 1, '99991231235959', '20140917114137');
-INSERT INTO disconf.config
-(config_id, type, name, `value`, app_id, version, env_id, create_time, update_time)
-VALUES(143, 0, 'testXml2.xml', '<?xml version="1.0" encoding="UTF-8"?>
-<routes>
-    <route sourceHost="*" sourcePort="*"
-        proxyHost="cq01-rdqa-pool078.cq01.baidu.com" proxyPort="8081">
-        <rule>
-            <from method="post">/api/tools/converts</from>
-            <to method="post">/tools/converts</to>
-        </rule>
-        <rule>
-            <from method="get">/api/tools/converts/{id}</from>
-            <to method="get">/tools/converts/{id}</to>
-        </rule>
-        <rule>
-            <from method="put">/api/tools/converts/{id}</from>
-            <to method="put">/tools/converts/{id}</to>
-        </rule>
-        <rule>
-            <from method="get">/api/tools/converts</from>
-            <to method="get">/tools/converts</to>
-        </rule>
-        <rule>
-            <from method="delete">/api/tools/converts/{id}</from>
-            <to method="delete">/tools/converts/{id}</to>
-        </rule>
-        <rule>
-            <from method="put">/api/tools/converts/simpleModify/{id}
-            </from>
-            <to method="put">/tools/converts/simpleModify/{id}</to>
-        </rule>
-        <rule>
-            <from method="get">/api/tools/converts/tradeMap</from>
-            <to method="get">/tools/converts/tradeMap</to>
-        </rule>
-    </route>
-</routes>', 2, '1_0_0_0', 1, '20141110193605', '20141110193605');
 
 
 /* 密码是 MhxzKhl5258 */

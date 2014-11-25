@@ -49,13 +49,6 @@
         <disconf-client.version>2.6.16-SNAPSHOT</disconf-client.version>
         <disconf-tool.version>2.6.16-SNAPSHOT</disconf-tool.version>
 
-        <!-- Baidu repositories -->
-        <baidu.local.repository>http://maven.scm.baidu.com:8081/nexus/content/groups/public</baidu.local.repository>
-        <baidu.deploy.repository.id>Baidu_Local</baidu.deploy.repository.id>
-        <baidu.deploy.repository.url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local/</baidu.deploy.repository.url>
-        <baidu.deploy.snapshotRepository.id>Baidu_Local_Snapshots</baidu.deploy.snapshotRepository.id>
-        <baidu.deploy.snapshotRepository.url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local_Snapshots/</baidu.deploy.snapshotRepository.url>
-
     </properties>
 
 
@@ -762,16 +755,7 @@
         <developer>
             <name>Liao Qiqi</name>
             <id>knightliao</id>
-            <email>liaoqiqi (AT) baidu.com</email>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <name>Wu Ning</name>
-            <id>wuning</id>
-            <email>wuning01 (AT) baidu.com</email>
+            <email>knightliao@gmail.com</email>
             <roles>
                 <role>Developer</role>
             </roles>
@@ -781,7 +765,7 @@
 
     <organization>
         <name>Baidu</name>
-        <url>http://www.baidu.com</url>
+        <url>http://www.example.com</url>
     </organization>
 
     <scm>

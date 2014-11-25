@@ -16,7 +16,6 @@ import com.github.knightliao.apollo.utils.data.JsonUtils;
  * @description : ContextMgr 通过一个Redis服务器保存主机的Context信息
  * 
  * @author : WuNing
- * @email : Wuning01@baidu.com
  * @date : 2014年7月29日 下午3:56:11
  */
 

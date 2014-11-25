@@ -14,7 +14,6 @@ import javax.validation.constraints.Pattern;
  * 
  * 
  * @author zhangbi
- * @email zhangbi@baidu.com
  * @date 2014年1月16日下午4:50:15
  */
 @Target({ ElementType.METHOD, ElementType.FIELD })

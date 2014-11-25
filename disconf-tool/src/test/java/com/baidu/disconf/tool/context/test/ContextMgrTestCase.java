@@ -32,7 +32,6 @@ import com.github.knightliao.apollo.redis.RedisClient;
  * @description : ContextMgrTestCase
  * 
  * @author : WuNing
- * @email : Wuning01@baidu.com
  * @date : 2014年8月1日 下午5:30:00
  */
 @RunWith(JMockit.class)

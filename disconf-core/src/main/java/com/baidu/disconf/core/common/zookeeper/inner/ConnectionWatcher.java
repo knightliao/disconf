@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
  * 连接管理
  * 
  * @author liaoqiqi
- * @email liaoqiqi@baidu.com
  * 
  */
 public class ConnectionWatcher implements Watcher {
