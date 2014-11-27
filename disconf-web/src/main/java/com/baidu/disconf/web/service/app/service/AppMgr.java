@@ -39,4 +39,6 @@ public interface AppMgr {
     App create(AppNewForm appNew);
 
     void delete(Long appId);
+
+    String getEmails(Long id);
 }

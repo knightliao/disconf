@@ -41,6 +41,7 @@ import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
+import com.baidu.dsp.common.utils.email.LogMailBean;
 import com.baidu.ub.common.db.DaoPageResult;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
@@ -73,6 +74,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private ZkDeployMgr zkDeployMgr;
+
+    @Autowired
+    private LogMailBean logMailBean;
 
     /**
      * 根据详细参数获取配置返回
@@ -407,6 +411,14 @@ public class ConfigMgrImpl implements ConfigMgr {
         // 配置数据库的值
         //
         configDao.updateValue(configId, value);
+
+        //
+        // 发送邮件通知
+        //
+        Config config = getConfigById(configId);
+        String toEmails = appMgr.getEmails(config.getAppId());
+
+        logMailBean.sendHtmlEmail(toEmails, "hello", "hello world");
     }
 
     /**

@@ -1,5 +1,8 @@
 package com.baidu.disconf.web.service.app.bo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.baidu.dsp.common.dao.Columns;
 import com.baidu.dsp.common.dao.DB;
 import com.baidu.unbiz.common.genericdao.annotation.Column;
@@ -13,6 +16,8 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  */
 @Table(db = DB.DB_NAME, name = "app", keyColumn = Columns.APP_ID)
 public class App extends BaseObject<Long> {
+
+    protected static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     /**
      * 
@@ -30,6 +35,12 @@ public class App extends BaseObject<Long> {
      */
     @Column(value = Columns.DESC)
     private String desc;
+
+    /**
+     * 
+     */
+    @Column(value = Columns.EMAILS)
+    private String emails;
 
     /**
      * 创建时间
@@ -77,8 +88,16 @@ public class App extends BaseObject<Long> {
 
     @Override
     public String toString() {
-        return "App [name=" + name + ", desc=" + desc + ", createTime="
-                + createTime + ", updateTime=" + updateTime + "]";
+        return "App [name=" + name + ", desc=" + desc + ", emails=" + emails + ", createTime=" + createTime
+                + ", updateTime=" + updateTime + "]";
+    }
+
+    public String getEmails() {
+        return emails;
+    }
+
+    public void setEmails(String emails) {
+        this.emails = emails;
     }
 
 }

@@ -88,8 +88,7 @@ public class AppMgrImpl implements AppMgr {
         app.setDesc(appNew.getDesc());
 
         // 时间
-        String curTime = DateUtils.format(new Date(),
-                DataFormatConstants.COMMON_TIME_FORMAT);
+        String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
         app.setCreateTime(curTime);
         app.setUpdateTime(curTime);
 
@@ -99,5 +98,17 @@ public class AppMgrImpl implements AppMgr {
     @Override
     public void delete(Long appId) {
         appDao.delete(appId);
+    }
+
+    @Override
+    public String getEmails(Long id) {
+
+        App app = getById(id);
+
+        if (app == null) {
+            return "";
+        } else {
+            return app.getEmails();
+        }
     }
 }

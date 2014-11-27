@@ -3,11 +3,13 @@
     xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mockito="http://www.mockito.org/spring/mockito"
-    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task"
     xsi:schemaLocation="http://www.springframework.org/schema/aop   
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
         http://www.springframework.org/schema/beans   
-        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd   
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+        http://www.springframework.org/schema/task  
+        http://www.springframework.org/schema/task/spring-task-3.1.xsd   
         http://www.springframework.org/schema/context   
         http://www.springframework.org/schema/context/spring-context-3.0.xsd   
         http://www.springframework.org/schema/mvc   
@@ -17,6 +19,13 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <description>Spring公共配置</description>
+
+
+    <!-- 定时器开关 -->
+    <task:annotation-driven executor="proExecutor"
+        scheduler="proScheduler" />
+    <task:executor id="proExecutor" pool-size="5" />
+    <task:scheduler id="proScheduler" pool-size="10" />
 
 
     <!-- Validator设置 -->
@@ -43,6 +52,7 @@
                 <value>classpath*:/jdbc-mysql.properties</value>
                 <value>classpath*:/zoo.properties</value>
                 <value>classpath*:/redis-config.properties</value>
+                <value>classpath*:/application.properties</value>
             </list>
         </property>
     </bean>
@@ -54,6 +64,16 @@
         class="com.baidu.disconf.web.service.zookeeper.config.ZooConfig">
         <property name="zooHosts" value="${hosts}" />
         <property name="zookeeperUrlPrefix" value="${zookeeper_url_prefix}" />
+    </bean>
+
+    <bean id="emailProperties" class="com.baidu.disconf.web.utils.email.EmailProperties">
+        <property name="host" value="${EMAIL_HOST}" />
+        <property name="password" value="${EMAIL_HOST_PASSWORD}" />
+        <property name="user" value="${EMAIL_HOST_USER}" />
+        <property name="port" value="${EMAIL_PORT}" />
+        <property name="fromEmail" value="${DEFAULT_FROM_EMAIL}" />
+        <property name="receiver" value="${EMAIL_RECEIVER}" />
+        <property name="monitorOn" value="${EMAIL_MONITOR_ON}" />
     </bean>
 
 

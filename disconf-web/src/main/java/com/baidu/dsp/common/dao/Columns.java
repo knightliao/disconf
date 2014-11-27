@@ -27,4 +27,6 @@ public class Columns {
 
     public final static String TOKEN = "token";
     public final static String PASSWORD = "password";
+
+    public final static String EMAILS = "emails";
 }
