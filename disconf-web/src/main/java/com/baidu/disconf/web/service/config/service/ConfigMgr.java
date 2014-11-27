@@ -79,7 +79,7 @@ public interface ConfigMgr {
      * @param configId
      * @return
      */
-    public void updateItemValue(Long configId, String value);
+    public String updateItemValue(Long configId, String value);
 
     /**
      * 

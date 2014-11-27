@@ -405,7 +405,7 @@ public class ConfigMgrImpl implements ConfigMgr {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
-    public void updateItemValue(Long configId, String value) {
+    public String updateItemValue(Long configId, String value) {
 
         //
         // 配置数据库的值
@@ -418,7 +418,12 @@ public class ConfigMgrImpl implements ConfigMgr {
         Config config = getConfigById(configId);
         String toEmails = appMgr.getEmails(config.getAppId());
 
-        logMailBean.sendHtmlEmail(toEmails, "hello", "hello world");
+        boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails, "hello", "hello world");
+        if (isSendSuccess) {
+            return "修改成功，邮件通知成功";
+        } else {
+            return "修改成功，邮件发送失败，请检查邮箱配置";
+        }
     }
 
     /**

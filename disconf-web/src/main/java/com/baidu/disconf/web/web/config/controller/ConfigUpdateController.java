@@ -62,14 +62,15 @@ public class ConfigUpdateController extends BaseController {
         //
         // 更新, 并写入数据库
         //
-        configMgr.updateItemValue(configId, value);
+        String emailNotification = "";
+        emailNotification = configMgr.updateItemValue(configId, value);
 
         //
         // 通知ZK
         //
         configMgr.notifyZookeeper(configId);
 
-        return buildSuccess("修改成功");
+        return buildSuccess(emailNotification);
     }
 
     /**
@@ -98,12 +99,13 @@ public class ConfigUpdateController extends BaseController {
         //
         // 更新
         //
+        String emailNotification = "";
         try {
 
             String str = new String(file.getBytes(), "UTF-8");
             LOG.info("receive file: " + str);
 
-            configMgr.updateItemValue(configId, str);
+            emailNotification = configMgr.updateItemValue(configId, str);
             LOG.info("update " + configId + " ok");
 
         } catch (Exception e) {
@@ -117,7 +119,7 @@ public class ConfigUpdateController extends BaseController {
         //
         configMgr.notifyZookeeper(configId);
 
-        return buildSuccess("修改成功");
+        return buildSuccess(emailNotification);
     }
 
     /**
@@ -136,12 +138,13 @@ public class ConfigUpdateController extends BaseController {
         //
         // 更新
         //
+        String emailNotification = "";
         try {
 
             String str = new String(fileContent.getBytes(), "UTF-8");
             LOG.info("receive file: " + str);
 
-            configMgr.updateItemValue(configId, str);
+            emailNotification = configMgr.updateItemValue(configId, str);
             LOG.info("update " + configId + " ok");
 
         } catch (Exception e) {
@@ -155,7 +158,7 @@ public class ConfigUpdateController extends BaseController {
         //
         configMgr.notifyZookeeper(configId);
 
-        return buildSuccess("修改成功");
+        return buildSuccess(emailNotification);
     }
 
     /**
