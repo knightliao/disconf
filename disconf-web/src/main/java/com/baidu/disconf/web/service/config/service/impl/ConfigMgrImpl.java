@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.json.ValueVo;
+import com.baidu.disconf.web.common.comparator.StringComparator;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
@@ -46,6 +48,8 @@ import com.baidu.ub.common.db.DaoPageResult;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 import com.github.knightliao.apollo.utils.time.DateUtils;
+
+import difflib.Chunk;
 
 /**
  * 
@@ -407,6 +411,9 @@ public class ConfigMgrImpl implements ConfigMgr {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     public String updateItemValue(Long configId, String value) {
 
+        Config config = getConfigById(configId);
+        String oldValue = config.getValue();
+
         //
         // 配置数据库的值
         //
@@ -415,15 +422,67 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         // 发送邮件通知
         //
-        Config config = getConfigById(configId);
         String toEmails = appMgr.getEmails(config.getAppId());
 
-        boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails, "hello", "hello world");
+        boolean isSendSuccess =
+                logMailBean.sendHtmlEmail(toEmails, " config update", getDiff(oldValue, value, config.toString()));
         if (isSendSuccess) {
             return "修改成功，邮件通知成功";
         } else {
             return "修改成功，邮件发送失败，请检查邮箱配置";
         }
+    }
+
+    private String getDiff(String old, String newData, String identify) {
+
+        StringComparator stringComparator = new StringComparator(old, newData);
+        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/><br/> ";
+
+        try {
+
+            final List<Chunk> changesFromOriginal = stringComparator.getChangesFromOriginal();
+
+            if (changesFromOriginal.size() == 0) {
+
+                return "<span style='color:#FF0000'>OK, NO MODIFICATOIN!</span>";
+
+            } else {
+
+                String oldValue =
+                        "<br/><br/><br/><span style='color:#FF0000'>Old value:</span><br/>"
+                                + StringEscapeUtils.escapeHtml(old);
+
+                String newValue =
+                        "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>"
+                                + StringEscapeUtils.escapeHtml(newData);
+
+                String diff = "<span style='color:#FF0000'>Modification info: </span><br/>";
+                diff += StringEscapeUtils.escapeHtml(changesFromOriginal.toString());
+
+                return contentString + diff + oldValue + newValue;
+            }
+
+        } catch (IOException e) {
+            LOG.error("compare error", e);
+
+            return "comparator error" + e.toString();
+        }
+    }
+
+    /**
+     * 
+     * @param newValue
+     * @param identify
+     * @return
+     */
+    private String getNewValue(String newValue, String identify) {
+
+        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/><br/> ";
+
+        String data = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>";
+        contentString = contentString + data + StringEscapeUtils.escapeHtml(newValue);
+
+        return contentString;
     }
 
     /**
@@ -476,6 +535,11 @@ public class ConfigMgrImpl implements ConfigMgr {
         config.setUpdateTime(curTime);
 
         configDao.create(config);
+
+        // 发送邮件通知
+        //
+        String toEmails = appMgr.getEmails(config.getAppId());
+        logMailBean.sendHtmlEmail(toEmails, " config new", getNewValue(confNewForm.getValue(), config.toString()));
     }
 
     @Override

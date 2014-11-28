@@ -1,0 +1,11 @@
+Line 2
+Line 3 with changes
+Line 4
+Line 5 with changes and
+a new line
+Line 6
+new line 6.1
+Line 7
+Line 8
+Line 9
+Line 10 with changes

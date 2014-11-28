@@ -112,6 +112,10 @@ public class LogMailBean {
      */
     public boolean sendHtmlEmail(String toEmail, String title, String content) {
 
+        LOG.info("send to " + toEmail);
+        LOG.info("title: " + title);
+        LOG.info("content" + content);
+
         String localName = "";
 
         try {
