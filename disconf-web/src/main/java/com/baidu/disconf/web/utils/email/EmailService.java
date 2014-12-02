@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.web.common.email.MailSenderInfo;
 import com.baidu.disconf.web.common.email.SimpleMailSender;
+import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 
 /**
  * 
@@ -15,7 +16,7 @@ import com.baidu.disconf.web.common.email.SimpleMailSender;
 public class EmailService {
 
     @Autowired
-    private EmailProperties emailProperties;
+    private ApplicationPropertyConfig emailProperties;
 
     /**
      * 发送HTML邮箱
@@ -28,11 +29,11 @@ public class EmailService {
         // 这个类主要是设置邮件
         //
         MailSenderInfo mailInfo = new MailSenderInfo();
-        mailInfo.setMailServerHost(emailProperties.getHost());
-        mailInfo.setMailServerPort(emailProperties.getPort());
+        mailInfo.setMailServerHost(emailProperties.getEmailHost());
+        mailInfo.setMailServerPort(emailProperties.getEmailPort());
         mailInfo.setValidate(true);
-        mailInfo.setUserName(emailProperties.getUser());
-        mailInfo.setPassword(emailProperties.getPassword());// 您的邮箱密码
+        mailInfo.setUserName(emailProperties.getEmailUser());
+        mailInfo.setPassword(emailProperties.getEmailPassword());// 您的邮箱密码
 
         mailInfo.setFromAddress(emailProperties.getFromEmail());
         mailInfo.setToAddress(toEmail);

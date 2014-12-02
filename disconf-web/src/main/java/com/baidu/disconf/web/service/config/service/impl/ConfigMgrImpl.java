@@ -19,10 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.web.common.comparator.StringComparator;
+import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
@@ -31,7 +30,6 @@ import com.baidu.disconf.web.service.config.dao.ConfigDao;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
-import com.baidu.disconf.web.service.config.utils.ConfigUtils;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.disconf.web.service.env.bo.Env;
@@ -82,32 +80,8 @@ public class ConfigMgrImpl implements ConfigMgr {
     @Autowired
     private LogMailBean logMailBean;
 
-    /**
-     * 根据详细参数获取配置返回
-     */
-    public ValueVo getConfItemByParameter(Long appId, Long envId, String version, String key) {
-
-        Config config = configDao.getByParameter(appId, envId, version, key, DisConfigTypeEnum.ITEM);
-        if (config == null) {
-            return ConfigUtils.getErrorVo("cannot find this config");
-        }
-
-        ValueVo valueVo = new ValueVo();
-        valueVo.setValue(config.getValue());
-        valueVo.setStatus(Constants.OK);
-
-        return valueVo;
-    }
-
-    /**
-     * 根据详细参数获取配置
-     */
-    @Override
-    public Config getConfByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum) {
-
-        Config config = configDao.getByParameter(appId, envId, env, key, disConfigTypeEnum);
-        return config;
-    }
+    @Autowired
+    private ApplicationPropertyConfig applicationPropertyConfig;
 
     /**
      * 根据APPid获取其版本列表
@@ -424,19 +398,41 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         String toEmails = appMgr.getEmails(config.getAppId());
 
-        boolean isSendSuccess =
-                logMailBean.sendHtmlEmail(toEmails, " config update", getDiff(oldValue, value, config.toString()));
-        if (isSendSuccess) {
-            return "修改成功，邮件通知成功";
-        } else {
-            return "修改成功，邮件发送失败，请检查邮箱配置";
+        if (applicationPropertyConfig.isEmailMonitorOn() == true) {
+            boolean isSendSuccess =
+                    logMailBean.sendHtmlEmail(toEmails, " config update",
+                            getDiff(oldValue, value, config.toString(), getConfigUrlHtml(config)));
+            if (isSendSuccess) {
+                return "修改成功，邮件通知成功";
+            } else {
+                return "修改成功，邮件发送失败，请检查邮箱配置";
+            }
         }
+
+        return "修改成功";
     }
 
-    private String getDiff(String old, String newData, String identify) {
+    /**
+     * 
+     * @return
+     */
+    private String getConfigUrlHtml(Config config) {
+
+        return "<br/>点击<a href='http://" + applicationPropertyConfig.getDomain() + "/modifyFile.html?configId="
+                + config.getId() + "'> 这里 </a> 进入查看<br/>";
+    }
+
+    /**
+     * 
+     * @param old
+     * @param newData
+     * @param identify
+     * @return
+     */
+    private String getDiff(String old, String newData, String identify, String htmlClick) {
 
         StringComparator stringComparator = new StringComparator(old, newData);
-        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/><br/> ";
+        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/>" + htmlClick + "<br/> ";
 
         try {
 
@@ -457,7 +453,9 @@ public class ConfigMgrImpl implements ConfigMgr {
                                 + StringEscapeUtils.escapeHtml(newData);
 
                 String diff = "<span style='color:#FF0000'>Modification info: </span><br/>";
-                diff += StringEscapeUtils.escapeHtml(changesFromOriginal.toString());
+                for (Chunk chunk : changesFromOriginal) {
+                    diff += StringEscapeUtils.escapeHtml(chunk.toString()) + "<br/>";
+                }
 
                 return contentString + diff + oldValue + newValue;
             }
@@ -475,9 +473,9 @@ public class ConfigMgrImpl implements ConfigMgr {
      * @param identify
      * @return
      */
-    private String getNewValue(String newValue, String identify) {
+    private String getNewValue(String newValue, String identify, String htmlClick) {
 
-        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/><br/> ";
+        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/>" + htmlClick + "<br/><br/> ";
 
         String data = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>";
         contentString = contentString + data + StringEscapeUtils.escapeHtml(newValue);
@@ -539,7 +537,12 @@ public class ConfigMgrImpl implements ConfigMgr {
         // 发送邮件通知
         //
         String toEmails = appMgr.getEmails(config.getAppId());
-        logMailBean.sendHtmlEmail(toEmails, " config new", getNewValue(confNewForm.getValue(), config.toString()));
+
+        if (applicationPropertyConfig.isEmailMonitorOn() == true) {
+            logMailBean.sendHtmlEmail(toEmails, " config new",
+                    getNewValue(confNewForm.getValue(), config.toString(), getConfigUrlHtml(config)));
+        }
+
     }
 
     @Override

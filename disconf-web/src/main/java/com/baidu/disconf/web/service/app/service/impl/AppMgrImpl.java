@@ -15,6 +15,7 @@ import com.baidu.disconf.web.service.app.dao.AppDao;
 import com.baidu.disconf.web.service.app.form.AppNewForm;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.app.vo.AppListVo;
+import com.baidu.disconf.web.service.user.service.UserInnerMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
@@ -28,6 +29,9 @@ public class AppMgrImpl implements AppMgr {
 
     @Autowired
     private AppDao appDao;
+
+    @Autowired
+    private UserInnerMgr userInnerMgr;
 
     /**
      * 
@@ -44,7 +48,7 @@ public class AppMgrImpl implements AppMgr {
     @Override
     public List<AppListVo> getList() {
 
-        List<App> apps = appDao.findAll();
+        List<App> apps = appDao.getByIds(userInnerMgr.getVisitorAppIds());
 
         List<AppListVo> appListVos = new ArrayList<AppListVo>();
         for (App app : apps) {

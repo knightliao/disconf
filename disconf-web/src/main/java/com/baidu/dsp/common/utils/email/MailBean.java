@@ -13,7 +13,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.baidu.disconf.web.utils.email.EmailProperties;
+import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
@@ -28,7 +28,7 @@ public class MailBean implements InitializingBean {
     private static Logger LOG = AopLogFactory.getLogger(MailBean.class);
 
     @Autowired
-    private EmailProperties emailProperties;
+    private ApplicationPropertyConfig emailProperties;
 
     // mail sender
     private JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -67,18 +67,25 @@ public class MailBean implements InitializingBean {
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        mailSender.setHost(emailProperties.getHost());
+        mailSender.setHost(emailProperties.getEmailHost());
 
-        if (!StringUtils.isEmpty(emailProperties.getUser())) {
-            mailSender.setUsername(emailProperties.getUser());
+        if (!StringUtils.isEmpty(emailProperties.getEmailUser())) {
+            mailSender.setUsername(emailProperties.getEmailUser());
         }
 
-        if (!StringUtils.isEmpty(emailProperties.getPassword())) {
-            mailSender.setPassword(emailProperties.getPassword());
+        if (!StringUtils.isEmpty(emailProperties.getEmailPassword())) {
+            mailSender.setPassword(emailProperties.getEmailPassword());
         }
 
-        if (!StringUtils.isEmpty(emailProperties.getPort())) {
-            mailSender.setPort(emailProperties.getPortInteger());
+        if (!StringUtils.isEmpty(emailProperties.getEmailPort())) {
+
+            try {
+
+                Integer port = Integer.parseInt(emailProperties.getEmailPort());
+                mailSender.setPort(port);
+            } catch (Exception e) {
+                LOG.error(e.toString());
+            }
         }
     }
 }

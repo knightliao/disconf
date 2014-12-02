@@ -17,10 +17,11 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.form.ConfForm;
-import com.baidu.disconf.web.service.config.service.ConfigMgr;
+import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
 import com.baidu.disconf.web.service.config.utils.ConfigUtils;
 import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
+import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 
@@ -34,14 +35,16 @@ import com.baidu.dsp.common.exception.DocumentNotFoundException;
 @RequestMapping(WebConstants.API_PREFIX + "/config")
 public class ConfigFetcherController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ConfigFetcherController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ConfigFetcherController.class);
 
     @Autowired
     private ConfigValidator configValidator;
 
     @Autowired
-    private ConfigMgr configMgr;
+    private ConfigValidator4Fetch configValidator4Fetch;
+
+    @Autowired
+    private ConfigFetchMgr configFetchMgr;
 
     /**
      * 获取配置项 Item
@@ -58,15 +61,14 @@ public class ConfigFetcherController {
         //
         ConfigFullModel configModel = null;
         try {
-            configModel = configValidator.verifyConfForm(confForm);
+            configModel = configValidator4Fetch.verifyConfForm(confForm);
         } catch (Exception e) {
             LOG.warn(e.toString());
             return ConfigUtils.getErrorVo(e.getMessage());
         }
 
-        return configMgr.getConfItemByParameter(configModel.getApp().getId(),
-                configModel.getEnv().getId(), configModel.getVersion(),
-                configModel.getKey());
+        return configFetchMgr.getConfItemByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
+                configModel.getVersion(), configModel.getKey());
     }
 
     /**
@@ -86,7 +88,7 @@ public class ConfigFetcherController {
         //
         ConfigFullModel configModel = null;
         try {
-            configModel = configValidator.verifyConfForm(confForm);
+            configModel = configValidator4Fetch.verifyConfForm(confForm);
         } catch (Exception e) {
             LOG.error(e.toString());
             hasError = true;
@@ -95,10 +97,9 @@ public class ConfigFetcherController {
         if (hasError == false) {
             try {
                 //
-                Config config = configMgr.getConfByParameter(configModel
-                        .getApp().getId(), configModel.getEnv().getId(),
-                        configModel.getVersion(), configModel.getKey(),
-                        DisConfigTypeEnum.FILE);
+                Config config =
+                        configFetchMgr.getConfByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
+                                configModel.getVersion(), configModel.getKey(), DisConfigTypeEnum.FILE);
                 if (config == null) {
                     hasError = true;
                     throw new DocumentNotFoundException(configModel.getKey());

@@ -43,7 +43,7 @@
                     </list>
                 </property>
                 <property name="XONE_COOKIE_DOMAIN_STRING">
-                    <value>${cookie_domain}</value>
+                    <value>${domain}</value>
                 </property>
             </bean>
         </mvc:interceptor>

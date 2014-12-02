@@ -13,4 +13,5 @@ public interface UserDao extends BaseDao<Long, User> {
     void executeSql(String sql);
 
     User getUserByName(String name);
+
 }

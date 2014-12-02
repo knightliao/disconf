@@ -16,4 +16,5 @@ public interface AppDao extends BaseDao<Long, App> {
     public App getByName(String name);
 
     List<App> getByIds(Set<Long> ids);
+
 }

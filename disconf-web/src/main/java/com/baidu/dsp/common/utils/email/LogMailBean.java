@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.disconf.web.service.user.dto.Visitor;
-import com.baidu.disconf.web.utils.email.EmailProperties;
 import com.baidu.ub.common.commons.ThreadContext;
 import com.baidu.ub.common.log.AopLogFactory;
 
@@ -33,7 +33,7 @@ public class LogMailBean {
     private static Logger LOG = AopLogFactory.getLogger(LogMailBean.class);
 
     @Autowired
-    private EmailProperties emailProperties;
+    private ApplicationPropertyConfig emailProperties;
 
     @Autowired
     private MailBean mailBean;
@@ -53,10 +53,6 @@ public class LogMailBean {
      *
      */
     public void sendLogExceptionEmail(String message, Throwable e) {
-
-        if (emailProperties.isMonitorOn() == false) {
-            return;
-        }
 
         StringBuffer titleBuffer = new StringBuffer();
         StringBuffer logInfo = new StringBuffer();
@@ -217,7 +213,7 @@ public class LogMailBean {
             mailTitle += title.substring(0, len);
         }
 
-        String mailTo = emailProperties.getReceiver();
+        String mailTo = emailProperties.getEmailReceiver();
         String mailFrom = emailProperties.getFromEmail();
         String[] mailToList = mailTo.split(";");
 

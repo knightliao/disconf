@@ -11,8 +11,7 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 public class UserConstant {
 
-    protected final static Logger LOG = AopLogFactory
-            .getLogger(UserConstant.class);
+    protected final static Logger LOG = AopLogFactory.getLogger(UserConstant.class);
 
     /**
      * 是白名单用户
@@ -33,5 +32,10 @@ public class UserConstant {
      * 系统更新的数据统一用这个
      */
     public static final String USER_SYSTEM = "SYSTEM";
+
+    //
+    //
+    //
+    public static final String USER_APP_SEP = ",";
 
 }

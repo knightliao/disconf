@@ -30,4 +30,5 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 
         return findOne(match(Columns.NAME, name));
     }
+
 }

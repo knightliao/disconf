@@ -20,6 +20,7 @@ public class User extends BaseObject<Long> {
     // 唯一
     @Column(value = Columns.NAME)
     private String name;
+
     // token
     @Column(value = Columns.TOKEN)
     private String token;
@@ -27,6 +28,10 @@ public class User extends BaseObject<Long> {
     // 密码
     @Column(value = Columns.PASSWORD)
     private String password;
+
+    //
+    @Column(value = Columns.OWNAPPS)
+    private String ownApps;
 
     public String getName() {
         return name;
@@ -52,10 +57,17 @@ public class User extends BaseObject<Long> {
         this.password = password;
     }
 
+    public String getOwnApps() {
+        return ownApps;
+    }
+
+    public void setOwnApps(String ownApps) {
+        this.ownApps = ownApps;
+    }
+
     @Override
     public String toString() {
-        return "User [name=" + name + ", token=" + token + ", password="
-                + password + "]";
+        return "User [name=" + name + ", token=" + token + ", password=" + password + ", ownApps=" + ownApps + "]";
     }
 
 }

@@ -8,13 +8,13 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.config.bo.Config;
-import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.disconf.web.service.config.form.ConfNewForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
+import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
-import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
+import com.baidu.disconf.web.service.user.service.AuthMgr;
 import com.baidu.dsp.common.exception.FieldException;
 
 /**
@@ -34,55 +34,11 @@ public class ConfigValidator {
     @Autowired
     private ConfigMgr configMgr;
 
-    /**
-     * 
-     * @param confForm
-     */
-    public ConfigFullModel verifyConfForm(ConfForm confForm) throws Exception {
+    @Autowired
+    private ConfigFetchMgr configFetchMgr;
 
-        //
-        // app
-        //
-        if (StringUtils.isEmpty(confForm.getApp())) {
-            throw new Exception("app is empty");
-        }
-
-        App app = appMgr.getByName(confForm.getApp());
-        if (app == null) {
-            throw new Exception("app " + confForm.getApp()
-                    + " doesn't exist in db.");
-        }
-
-        //
-        // env
-        //
-        if (StringUtils.isEmpty(confForm.getEnv())) {
-            throw new Exception("app is empty");
-        }
-
-        Env env = envMgr.getByName(confForm.getEnv());
-        if (env == null) {
-            throw new Exception("env " + confForm.getEnv()
-                    + " doesn't exist in db.");
-        }
-
-        //
-        // key
-        //
-        if (StringUtils.isEmpty(confForm.getKey())) {
-            throw new Exception("key is empty");
-        }
-
-        //
-        // version
-        //
-        if (StringUtils.isEmpty(confForm.getVersion())) {
-            throw new Exception("version is empty");
-        }
-
-        return new ConfigFullModel(app, env, confForm.getVersion(),
-                confForm.getKey());
-    }
+    @Autowired
+    private AuthMgr authMgr;
 
     /**
      * 校验
@@ -91,20 +47,20 @@ public class ConfigValidator {
      */
     public Config valideConfigExist(Long id) {
 
-        try {
-
-            Config config = configMgr.getConfigById(id);
-
-            if (config == null) {
-                throw new Exception();
-            }
-
-            return config;
-
-        } catch (Exception e) {
-
-            throw new FieldException("configId", "config.id.not.exist", e);
+        //
+        // config
+        //
+        Config config = configMgr.getConfigById(id);
+        if (config == null) {
+            throw new FieldException("configId", "config.id.not.exist", null);
         }
+
+        //
+        // validate app
+        //
+        validateAppAuth(config.getAppId());
+
+        return config;
     }
 
     /**
@@ -182,12 +138,24 @@ public class ConfigValidator {
     }
 
     /**
+     * 
+     * @param appId
+     */
+    private void validateAppAuth(long appId) {
+
+        boolean ret = authMgr.verifyApp4CurrentUser(appId);
+        if (ret == false) {
+            throw new FieldException(ConfNewForm.APPID, "app.auth.noright", null);
+        }
+
+    }
+
+    /**
      * 校验新建 配置
      * 
      * @param userId
      */
-    public void validateNew(ConfNewItemForm confNewForm,
-            DisConfigTypeEnum disConfigTypeEnum) {
+    public void validateNew(ConfNewItemForm confNewForm, DisConfigTypeEnum disConfigTypeEnum) {
 
         //
         // app
@@ -196,6 +164,9 @@ public class ConfigValidator {
         if (app == null) {
             throw new FieldException(ConfNewForm.APPID, "app.not.exist", null);
         }
+
+        //
+        validateAppAuth(app.getId());
 
         //
         // env
@@ -208,9 +179,9 @@ public class ConfigValidator {
         //
         // key
         //
-        Config config = configMgr.getConfByParameter(app.getId(), env.getId(),
-                confNewForm.getVersion(), confNewForm.getKey(),
-                disConfigTypeEnum);
+        Config config =
+                configFetchMgr.getConfByParameter(app.getId(), env.getId(), confNewForm.getVersion(),
+                        confNewForm.getKey(), disConfigTypeEnum);
         if (config != null) {
             throw new FieldException(ConfNewItemForm.KEY, "key.exist", null);
         }
@@ -226,6 +197,9 @@ public class ConfigValidator {
         if (config == null) {
             throw new FieldException("configId", "config.not.exist", null);
         }
+
+        //
+        validateAppAuth(config.getAppId());
     }
 
 }
