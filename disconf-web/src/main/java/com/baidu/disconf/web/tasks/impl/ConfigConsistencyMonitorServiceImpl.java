@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
+import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.disconf.web.tasks.IConfigConsistencyMonitorService;
 
 /**
@@ -24,8 +25,11 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
     @Autowired
     private ApplicationPropertyConfig applicationPropertyConfig;
 
-    // 每1分钟执行一次自动化校验
-    @Scheduled(fixedDelay = 1 * 60 * 1000)
+    @Autowired
+    private ZkDeployMgr zkDeployMgr;
+
+    // 每3分钟执行一次自动化校验
+    @Scheduled(fixedDelay = 3 * 60 * 1000)
     @Override
     public void myTest() {
         LOG.info("task schedule just testing, every 1 min");
@@ -34,8 +38,8 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
     /**
      * 
      */
-    // 每5分钟执行一次自动化校验
-    @Scheduled(fixedDelay = 5 * 60 * 1000)
+    // 每30分钟执行一次自动化校验
+    @Scheduled(fixedDelay = 30 * 60 * 1000)
     @Override
     public void check() {
 
@@ -46,5 +50,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
             return;
         }
 
+        return;
     }
+
 }
