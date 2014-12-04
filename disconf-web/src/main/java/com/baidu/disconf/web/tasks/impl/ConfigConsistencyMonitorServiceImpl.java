@@ -7,6 +7,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
+import com.baidu.disconf.web.service.app.bo.App;
+import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.disconf.web.tasks.IConfigConsistencyMonitorService;
 
@@ -27,6 +29,9 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
 
     @Autowired
     private ZkDeployMgr zkDeployMgr;
+
+    @Autowired
+    private AppMgr appMgr;
 
     // 每3分钟执行一次自动化校验
     @Scheduled(fixedDelay = 3 * 60 * 1000)
@@ -51,6 +56,28 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
         }
 
         return;
+    }
+
+    /**
+     * 主check MGR
+     */
+    private void checkMgr() {
+
+        appMgr.getList();
+    }
+
+    /**
+     * 校验APP 一致性
+     */
+    private void checkAppConfigConsistency(App app) {
+
+    }
+
+    /**
+     * 校验APP/ENV/VERSION 一致性
+     */
+    private void checkAppEnvVersionConfigConsistency() {
+
     }
 
 }
