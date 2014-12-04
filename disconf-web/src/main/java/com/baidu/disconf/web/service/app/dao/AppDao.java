@@ -13,8 +13,18 @@ import com.baidu.unbiz.common.genericdao.dao.BaseDao;
  */
 public interface AppDao extends BaseDao<Long, App> {
 
-    public App getByName(String name);
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    App getByName(String name);
 
+    /**
+     * 
+     * @param ids
+     * @return
+     */
     List<App> getByIds(Set<Long> ids);
 
 }

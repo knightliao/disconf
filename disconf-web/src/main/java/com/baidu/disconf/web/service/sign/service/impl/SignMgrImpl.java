@@ -23,8 +23,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class SignMgrImpl implements SignMgr {
 
-    protected final static Logger LOG = AopLogFactory
-            .getLogger(SignMgrImpl.class);
+    protected final static Logger LOG = AopLogFactory.getLogger(SignMgrImpl.class);
 
     @Autowired
     private SignDao signDao;

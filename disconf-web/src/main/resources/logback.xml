@@ -3,13 +3,13 @@
 <configuration>
 
     <property name="log.base" value="./log/disconf-web" />
+    <substitutionProperty name="log.monitor" value="../log/monitor" />
 
     <jmxConfigurator />
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date [%thread] %-5level %logger{80} - %msg%n
-            </pattern>
+            <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -18,14 +18,30 @@
         <File>${log.base}.log</File>
         <rollingPolicy
             class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${log.base}.log.%d{yyyy-MM-dd}
-            </FileNamePattern>
+            <FileNamePattern>${log.base}.log.%d{yyyy-MM-dd}</FileNamePattern>
         </rollingPolicy>
         <encoder>
-            <pattern>%date [%thread] %-5level %logger{80} - %msg%n
-            </pattern>
+            <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
         </encoder>
     </appender>
+    
+    <appender name="monitorlog"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <File>${log.monitor}.log</File>
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.base}.log.%d{yyyy-MM-dd}</FileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <logger name="com.baidu.disconf.web.tasks">
+        <level value="INFO" />
+        <appender-ref ref="monitorlog" />
+    </logger>
 
     <logger name="com.baidu.disconf">
         <level value="INFO" />

@@ -429,7 +429,11 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         }
 
         // 查询
-        recordLog(sql);
+        if (params != null) {
+            recordLog(sql + "\t" + params.toString());
+        } else {
+            recordLog(sql);
+        }
         return (List<T>) jdbcTemplate.query(sql, args, mapper);
     }
 

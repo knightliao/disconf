@@ -47,7 +47,7 @@ public class AppController extends BaseController {
     @ResponseBody
     public JsonObjectBase list() {
 
-        List<AppListVo> appListVos = appMgr.getList();
+        List<AppListVo> appListVos = appMgr.getAuthAppVoList();
 
         return buildListSuccess(appListVos, appListVos.size());
     }

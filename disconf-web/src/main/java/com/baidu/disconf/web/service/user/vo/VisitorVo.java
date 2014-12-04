@@ -32,8 +32,7 @@ public class VisitorVo {
 
     @Override
     public String toString() {
-        return "VisitorVo [id=" + id + ", name=" + name + ", role=" + role
-                + "]";
+        return "VisitorVo [id=" + id + ", name=" + name + ", role=" + role + "]";
     }
 
     @Override

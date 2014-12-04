@@ -17,15 +17,31 @@ public interface EnvMgr {
      * 
      * @param name
      */
-    public Env getByName(String name);
+    Env getByName(String name);
 
     /**
      * 
      * @return
      */
-    public List<EnvListVo> getList();
+    List<Env> getList();
 
-    public Map<Long, Env> getByIds(Set<Long> ids);
+    /**
+     * 
+     * @return
+     */
+    List<EnvListVo> getVoList();
 
-    public Env getById(Long id);
+    /**
+     * 
+     * @param ids
+     * @return
+     */
+    Map<Long, Env> getByIds(Set<Long> ids);
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    Env getById(Long id);
 }

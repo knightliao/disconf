@@ -40,7 +40,7 @@ public class EnvController extends BaseController {
     @ResponseBody
     public JsonObjectBase list() {
 
-        List<EnvListVo> envListVos = envMgr.getList();
+        List<EnvListVo> envListVos = envMgr.getVoList();
 
         return buildListSuccess(envListVos, envListVos.size());
     }

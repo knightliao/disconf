@@ -66,8 +66,8 @@ public class ConfForm extends RequestFormBase {
 
     @Override
     public String toString() {
-        return "ConfForm [app=" + app + ", maintype=" + maintype + ", version="
-                + version + ", env=" + env + ", key=" + key + "]";
+        return "ConfForm [app=" + app + ", maintype=" + maintype + ", version=" + version + ", env=" + env + ", key="
+                + key + "]";
     }
 
 }

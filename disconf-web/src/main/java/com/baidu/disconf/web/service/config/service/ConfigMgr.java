@@ -23,7 +23,7 @@ public interface ConfigMgr {
      * @param appName
      * @return
      */
-    public List<String> getVersionListByAppEnv(Long appId, Long envId);
+    List<String> getVersionListByAppEnv(Long appId, Long envId);
 
     /**
      * 
@@ -32,23 +32,23 @@ public interface ConfigMgr {
      * @param version
      * @return
      */
-    DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm, boolean fetchZk);
+    DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm, boolean fetchZk, final boolean getErrorMessage);
 
     /**
      * 
      * @param configId
      * @return
      */
-    public ConfListVo getConfVo(Long configId);
+    ConfListVo getConfVo(Long configId);
 
-    public MachineListVo getConfVoWithZk(Long configId);
+    MachineListVo getConfVoWithZk(Long configId);
 
     /**
      * 
      * @param configId
      * @return
      */
-    public Config getConfigById(Long configId);
+    Config getConfigById(Long configId);
 
     /**
      * 更新 配置项/配置文件
@@ -56,14 +56,14 @@ public interface ConfigMgr {
      * @param configId
      * @return
      */
-    public String updateItemValue(Long configId, String value);
+    String updateItemValue(Long configId, String value);
 
     /**
      * 
      * @param configId
      * @return
      */
-    public String getValue(Long configId);
+    String getValue(Long configId);
 
     void notifyZookeeper(Long configId);
 

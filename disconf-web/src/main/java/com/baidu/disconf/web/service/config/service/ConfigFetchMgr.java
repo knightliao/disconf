@@ -20,7 +20,7 @@ public interface ConfigFetchMgr {
      * @param disConfigTypeEnum
      * @return
      */
-    public ValueVo getConfItemByParameter(Long appId, Long envId, String version, String key);
+    ValueVo getConfItemByParameter(Long appId, Long envId, String version, String key);
 
     /**
      * 
@@ -31,6 +31,6 @@ public interface ConfigFetchMgr {
      * @param disConfigTypeEnum
      * @return
      */
-    public Config getConfByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum);
+    Config getConfByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum);
 
 }

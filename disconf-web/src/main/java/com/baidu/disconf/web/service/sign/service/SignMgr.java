@@ -2,7 +2,6 @@ package com.baidu.disconf.web.service.sign.service;
 
 import com.baidu.disconf.web.service.user.bo.User;
 
-
 /**
  * 
  * @author liaoqiqi
@@ -10,7 +9,7 @@ import com.baidu.disconf.web.service.user.bo.User;
  */
 public interface SignMgr {
 
-    public User getUserByName(String name);
+    User getUserByName(String name);
 
     boolean validate(String userPassword, String passwordToBeValidate);
 

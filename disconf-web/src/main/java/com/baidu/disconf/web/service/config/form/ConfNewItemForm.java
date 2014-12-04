@@ -44,8 +44,7 @@ public class ConfNewItemForm extends ConfNewForm {
     }
 
     public ConfNewItemForm(ConfNewForm confNewForm) {
-        super(confNewForm.getAppId(), confNewForm.getVersion(), confNewForm
-                .getEnvId());
+        super(confNewForm.getAppId(), confNewForm.getVersion(), confNewForm.getEnvId());
     }
 
     public ConfNewItemForm() {

@@ -35,7 +35,7 @@ public class EnvMgrImpl implements EnvMgr {
      * 
      */
     @Override
-    public List<EnvListVo> getList() {
+    public List<EnvListVo> getVoList() {
 
         List<Env> envs = envDao.findAll();
 
@@ -71,6 +71,14 @@ public class EnvMgrImpl implements EnvMgr {
     @Override
     public Env getById(Long id) {
         return envDao.get(id);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public List<Env> getList() {
+        return envDao.findAll();
     }
 
 }

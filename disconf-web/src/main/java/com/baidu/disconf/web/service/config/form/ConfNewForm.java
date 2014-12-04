@@ -51,8 +51,7 @@ public class ConfNewForm {
 
     @Override
     public String toString() {
-        return "ConfNewForm [appId=" + appId + ", version=" + version
-                + ", envId=" + envId + "]";
+        return "ConfNewForm [appId=" + appId + ", version=" + version + ", envId=" + envId + "]";
     }
 
     public ConfNewForm(Long appId, String version, Long envId) {

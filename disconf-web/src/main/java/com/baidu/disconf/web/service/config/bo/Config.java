@@ -133,9 +133,7 @@ public class Config extends BaseObject<Long> {
 
     @Override
     public String toString() {
-        return "App [type=" + type + ", name=" + name + ", value=" + value
-                + ", appId=" + appId + ", version=" + version + ", envId="
-                + envId + ", createTime=" + createTime + ", updateTime="
-                + updateTime + "]";
+        return "App [type=" + type + ", name=" + name + ", value=" + value + ", appId=" + appId + ", version="
+                + version + ", envId=" + envId + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
     }
 }

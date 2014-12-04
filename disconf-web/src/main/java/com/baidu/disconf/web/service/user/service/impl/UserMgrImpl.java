@@ -26,8 +26,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class UserMgrImpl implements UserMgr {
 
-    protected final static Logger LOG = AopLogFactory
-            .getLogger(UserMgrImpl.class);
+    protected final static Logger LOG = AopLogFactory.getLogger(UserMgrImpl.class);
 
     @Autowired
     private UserInnerMgr userInnerMgr;

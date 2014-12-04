@@ -51,6 +51,11 @@ public class ZkDisconfData {
             this.errorList = errorList;
         }
 
+        @Override
+        public String toString() {
+            return "ZkDisconfDataItem [machine=" + machine + ", value=" + value + ", errorList=" + errorList + "]";
+        }
+
     }
 
     /*
@@ -74,6 +79,11 @@ public class ZkDisconfData {
 
     public void setData(List<ZkDisconfDataItem> data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "ZkDisconfData [data=" + data + ", key=" + key + "]";
     }
 
 }

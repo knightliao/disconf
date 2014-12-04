@@ -16,29 +16,64 @@ import com.baidu.disconf.web.service.app.vo.AppListVo;
 public interface AppMgr {
 
     /**
+     * 根据APP名获取APP
      * 
      * @param name
      */
-    public App getByName(String name);
+    App getByName(String name);
 
     /**
+     * 获取原始APP LIST
      * 
      * @return
      */
-    public List<AppListVo> getList();
-
-    public Map<Long, App> getByIds(Set<Long> ids);
+    List<App> getAppList();
 
     /**
+     * 
+     * 获取VO结构的APPLIST，包含权限控制
+     * 
+     * 
+     * @return
+     */
+    List<AppListVo> getAuthAppVoList();
+
+    /**
+     * 获取一堆 APP
+     * 
+     * @param ids
+     * @return
+     */
+    Map<Long, App> getByIds(Set<Long> ids);
+
+    /**
+     * 获取一个APP
      * 
      * @param id
      * @return
      */
-    public App getById(Long id);
+    App getById(Long id);
 
+    /**
+     * 生成一个APP
+     * 
+     * @param appNew
+     * @return
+     */
     App create(AppNewForm appNew);
 
+    /**
+     * 删除此APP
+     * 
+     * @param appId
+     */
     void delete(Long appId);
 
+    /**
+     * 获取此APP的EMAIL
+     * 
+     * @param id
+     * @return
+     */
     String getEmails(Long id);
 }

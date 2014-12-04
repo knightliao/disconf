@@ -10,5 +10,10 @@ import com.baidu.unbiz.common.genericdao.dao.BaseDao;
  */
 public interface EnvDao extends BaseDao<Long, Env> {
 
-    public Env getByName(String name);
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    Env getByName(String name);
 }

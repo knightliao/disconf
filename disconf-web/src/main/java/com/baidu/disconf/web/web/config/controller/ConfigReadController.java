@@ -83,7 +83,7 @@ public class ConfigReadController extends BaseController {
         confListForm.getPage().setOrderBy(Columns.NAME);
         confListForm.getPage().setOrder(PageOrderValidator.ASC);
 
-        DaoPageResult<ConfListVo> configs = configMgr.getConfigList(confListForm, true);
+        DaoPageResult<ConfListVo> configs = configMgr.getConfigList(confListForm, true, false);
 
         return buildListSuccess(configs);
     }
@@ -102,7 +102,7 @@ public class ConfigReadController extends BaseController {
         confListForm.getPage().setOrderBy(Columns.NAME);
         confListForm.getPage().setOrder(PageOrderValidator.ASC);
 
-        DaoPageResult<ConfListVo> configs = configMgr.getConfigList(confListForm, false);
+        DaoPageResult<ConfListVo> configs = configMgr.getConfigList(confListForm, false, false);
 
         return buildListSuccess(configs);
     }

@@ -46,7 +46,7 @@ public class AppMgrImpl implements AppMgr {
      * 
      */
     @Override
-    public List<AppListVo> getList() {
+    public List<AppListVo> getAuthAppVoList() {
 
         List<App> apps = appDao.getByIds(userInnerMgr.getVisitorAppIds());
 
@@ -114,5 +114,11 @@ public class AppMgrImpl implements AppMgr {
         } else {
             return app.getEmails();
         }
+    }
+
+    @Override
+    public List<App> getAppList() {
+
+        return appDao.findAll();
     }
 }

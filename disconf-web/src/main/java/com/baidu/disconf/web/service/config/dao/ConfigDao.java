@@ -15,15 +15,23 @@ import com.baidu.unbiz.common.genericdao.dao.BaseDao;
  */
 public interface ConfigDao extends BaseDao<Long, Config> {
 
-    public Config getByParameter(Long appId, Long envId, String env,
-            String key, DisConfigTypeEnum disConfigTypeEnum);
+    /**
+     * 
+     * @param appId
+     * @param envId
+     * @param env
+     * @param key
+     * @param disConfigTypeEnum
+     * @return
+     */
+    Config getByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum);
 
     /**
      * 
      * @param appName
      * @return
      */
-    public List<Config> getConfByAppEnv(Long appId, Long envId);
+    List<Config> getConfByAppEnv(Long appId, Long envId);
 
     /**
      * 
@@ -32,20 +40,19 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      * @param version
      * @return
      */
-    public DaoPageResult<Config> getConfigList(Long appId, Long envId,
-            String version, Page page);
+    DaoPageResult<Config> getConfigList(Long appId, Long envId, String version, Page page);
 
     /**
      * 
      * @param configId
      * @return
      */
-    public void updateValue(Long configId, String value);
+    void updateValue(Long configId, String value);
 
     /**
      * 
      */
-    public String getValue(Long configId);
+    String getValue(Long configId);
 
     /**
      * 
