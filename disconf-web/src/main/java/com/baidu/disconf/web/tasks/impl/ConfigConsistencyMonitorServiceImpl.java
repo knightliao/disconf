@@ -64,7 +64,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
      * 
      */
     // 每30分钟执行一次自动化校验
-    @Scheduled(fixedDelay = 10 * 60 * 1000)
+    @Scheduled(fixedDelay = 30 * 60 * 1000)
     @Override
     public void check() {
 
