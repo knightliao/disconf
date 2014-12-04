@@ -5,6 +5,8 @@ disconf-web
 
 推荐使用最新的Chrome或Firefox浏览.
 
+注：由于迭代开发快速多变的原因，当前UI可能与下图略有改变。
+
 ## 运行样式 ##
 
 ### 主页 ###
@@ -13,19 +15,36 @@ disconf-web
 
 ### 登录页 ###
 
-可以使用 dancai   Asd123 进行登录。
+可以使用 admin   admin 进行登录。
 
 ![](http://ww4.sinaimg.cn/mw1024/60c9620fgw1ekdfjkgbdcj20t70ie757.jpg)
 
 ### 主界面 ###
 
-![](http://ww3.sinaimg.cn/mw1024/60c9620fgw1ekdfkvdyjtj20t30ic0tn.jpg)
+![http://ww3.sinaimg.cn/mw1024/60c9620fgw1emxv1nw0u4j20qp0homy0.jpg](http://ww3.sinaimg.cn/mw1024/60c9620fgw1emxv1nw0u4j20qp0homy0.jpg)
 
 左上角可以选择APP和环境，选择之后，就会在中间出现若干个版本，
 
 选择版本后，就会显示 APP、环境、版本 三个条件下的配置列表：
 
-![](http://ww2.sinaimg.cn/mw1024/60c9620fgw1ekdg8nmitcj215n0mewke.jpg)
+![http://ww2.sinaimg.cn/mw1024/60c9620fgw1emxvbi281pj20qc0ga41z.jpg](http://ww2.sinaimg.cn/mw1024/60c9620fgw1emxvbi281pj20qc0ga41z.jpg)
+
+####表格中 各个列的意义是：
+
+- APP：使用哪个APP，及它的ID
+- KEY：配置文件或配置项
+- 配置内容：配置文件或配置项在配置中心中的值
+- 实例列表：使用此配置文件或配置项的所有实例列表，及每个实例的配置值。如果实例的配置值与配置中心的值不一致，这里会标识出来。
+- 修改时间：修改此配置的最后一次时间 
+- 操作：个性、删除、下载
+
+####右上角可以
+
+新建配置项、新建配置文件、新建APP
+
+####表格右上方 
+
+可以批量下载所有配置文件至本地，还可以查看ZK上的部署情况。
 
 ## How to deploy ##
 
@@ -45,12 +64,14 @@ disconf-web
 
 配置文件包括：
 
-	- jdbc-mysql.properties
-	- redis-config.properties  
-	- zoo.properties 
-	- application.properties
+	- jdbc-mysql.properties (数据库配置)
+	- redis-config.properties (Redis配置)
+	- zoo.properties (Zookeeper配置)
+	- application.properties (应用配置）
 
-分别是 数据库配置，Redis配置，Zookeeper配置，Cookie域设置
+注意，记得执行将application-demo.properties复制成application.properties：
+ 
+    cp application-demo.properties application.properties 
 
 **设置War包将要被部署的地址（以下地址可自行设定）：**
 
@@ -76,12 +97,17 @@ disconf-web
 
 **初始化数据库：**
 
-- 执行 sql/1-create.sql
-- 执行 sql/onlinesql/3-init.sql 
+依次执行：
 
-里面默认有5个用户，例如，第一个用户的用户名密码是 testUser1/MhxzKhl5258
+- 执行 sql/1-init_table.sql
+- 执行 sql/2-data.sql
+- 执行 sql/20141201/disconf.sql
 
-如果想自己设置初始化的用户名信息，可以参考代码 src/main/java/com/baidu/disconf/web/tools/UserCreateTools.java
+里面默认有6个用户
+
+如果想自己设置初始化的用户名信息，可以参考代码来自己生成用户：
+
+    src/main/java/com/baidu/disconf/web/tools/UserCreateTools.java
 
 ### 部署War ###
 
