@@ -113,11 +113,16 @@ public class LogMailBean {
         LOG.info("content" + content);
 
         String localName = "";
+        Visitor visitor = ThreadContext.getSessionVisitor();
+        if (visitor != null) {
+            LOG.info(visitor.toString());
+            localName += visitor.getLoginUserName() + " ";
+        }
 
         try {
 
             InetAddress addr = InetAddress.getLocalHost();
-            localName = addr.getHostName().toString();
+            localName += addr.getHostName().toString();
 
         } catch (UnknownHostException e) {
 

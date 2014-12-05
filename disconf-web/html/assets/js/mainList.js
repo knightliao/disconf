@@ -45,7 +45,7 @@
 	//
 	function fetchVersion(appId, envId) {
 
-		var base_url = "/api/config/versionlist?appId=" + appId;
+		var base_url = "/api/web/config/versionlist?appId=" + appId;
 		url = base_url;
 		if (envId != -1) {
 			url = base_url + "&envId=" + envId;
@@ -129,13 +129,13 @@
 
 		$("#batch_download").attr(
 				'href',
-				"/api/config/downloadfilebatch?appId=" + appId + "&envId="
+				"/api/web/config/downloadfilebatch?appId=" + appId + "&envId="
 						+ envId + "&version=" + version);
 
 		$("#mainlist_error").hide();
 		var parameter = ""
 
-		url = "/api/config/list";
+		url = "/api/web/config/list";
 		if (appId == null && envId == null && version == null) {
 
 		} else {
@@ -195,7 +195,7 @@
 						+ item.configId
 						+ '"><i title="修改" class="icon-edit"></i></a>';
 			}
-			var downloadlink = '<a href="/api/config/download/'
+			var downloadlink = '<a href="/api/web/config/download/'
 					+ +item.configId
 					+ '"><i title="下载" class="icon-download-alt"></i></a>';
 
@@ -266,7 +266,7 @@
 		//
 		$.ajax({
 			type : "GET",
-			url : "/api/config/" + configId
+			url : "/api/web/config/" + configId
 		}).done(
 				function(data) {
 					if (data.success === "true") {
@@ -290,7 +290,7 @@
 		//
 		$.ajax({
 			type : "GET",
-			url : "/api/config/zk/" + configId
+			url : "/api/web/config/zk/" + configId
 		}).done(
 				function(data) {
 					if (data.success === "true") {
@@ -346,7 +346,7 @@
 
 		$.ajax({
 			type : "DELETE",
-			url : "/api/config/" + id
+			url : "/api/web/config/" + id
 		}).done(function(data) {
 			if (data.success === "true") {
 				fetchMainList();

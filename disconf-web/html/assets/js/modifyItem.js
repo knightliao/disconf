@@ -16,7 +16,7 @@
 		//
 		$.ajax({
 			type : "GET",
-			url : "/api/config/" + configId
+			url : "/api/web/config/" + configId
 		}).done(
 				function(data) {
 					if (data.success === "true") {
@@ -51,7 +51,7 @@
 		}
 		$.ajax({
 			type : "PUT",
-			url : "/api/config/item/" + configId,
+			url : "/api/web/config/item/" + configId,
 			data : {
 				"value" : value
 			}

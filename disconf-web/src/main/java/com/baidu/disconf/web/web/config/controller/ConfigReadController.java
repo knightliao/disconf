@@ -43,7 +43,7 @@ import com.baidu.ub.common.db.DaoPageResult;
  * @version 2014-6-22
  */
 @Controller
-@RequestMapping(WebConstants.API_PREFIX + "/config")
+@RequestMapping(WebConstants.API_PREFIX + "/web/config")
 public class ConfigReadController extends BaseController {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ConfigReadController.class);

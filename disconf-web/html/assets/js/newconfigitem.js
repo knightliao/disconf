@@ -22,7 +22,7 @@ $("#item_submit").on("click", function(e) {
 	}
 	$.ajax({
 		type : "POST",
-		url : "/api/config/item",
+		url : "/api/web/config/item",
 		data : {
 			"appId" : appId,
 			"version" : version,

@@ -33,7 +33,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
  * @version 2014-6-24
  */
 @Controller
-@RequestMapping(WebConstants.API_PREFIX + "/config")
+@RequestMapping(WebConstants.API_PREFIX + "/web/config")
 public class ConfigNewController extends BaseController {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ConfigUpdateController.class);

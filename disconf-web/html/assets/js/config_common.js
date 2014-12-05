@@ -33,7 +33,7 @@ function fetchVersion(appId) {
 
 	$.ajax({
 		type : "GET",
-		url : "/api/config/versionlist?appId=" + appId
+		url : "/api/web/config/versionlist?appId=" + appId
 	}).done(function(data) {
 		if (data.success === "true") {
 			var html = "";
