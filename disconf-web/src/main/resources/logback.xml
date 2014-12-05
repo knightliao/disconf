@@ -2,8 +2,10 @@
 
 <configuration>
 
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
     <property name="log.base" value="./log/disconf-web" />
-    <property name="log.monitor" value="../log/monitor" />
+    <property name="log.monitor" value="./log/monitor" />
 
     <jmxConfigurator />
 
