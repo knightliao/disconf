@@ -129,7 +129,7 @@ Disconf为应用方提供了三个工具，
 
 APP+环境+版本+ZK查询：
 
-![http://ww3.sinaimg.cn/mw1024/60c9620fgw1emyv9b06rpj20r40c475i.jpg](http://ww3.sinaimg.cn/mw1024/60c9620fgw1emyv9b06rpj20r40c475i.jpg)
+![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
 
 ### disconf-client Tutorials ###
 
