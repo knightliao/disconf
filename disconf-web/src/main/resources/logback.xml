@@ -3,11 +3,12 @@
 <configuration>
 
     <property name="log.base" value="./log/disconf-web" />
-    <substitutionProperty name="log.monitor" value="../log/monitor" />
+    <property name="log.monitor" value="../log/monitor" />
 
     <jmxConfigurator />
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Encoding>UTF-8</Encoding>
         <encoder>
             <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
         </encoder>
@@ -16,6 +17,7 @@
     <appender name="logfile"
         class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}.log</File>
+        <Encoding>UTF-8</Encoding>
         <rollingPolicy
             class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>${log.base}.log.%d{yyyy-MM-dd}</FileNamePattern>

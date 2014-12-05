@@ -21,13 +21,6 @@
     <description>Spring公共配置</description>
 
 
-    <!-- 定时器开关 -->
-    <task:annotation-driven executor="proExecutor"
-        scheduler="proScheduler" />
-    <task:executor id="proExecutor" pool-size="5" />
-    <task:scheduler id="proScheduler" pool-size="10" />
-
-
     <!-- Validator设置 -->
     <import resource="classpath:spring-servlet-validator.xml" />
     <bean id="myvalidator"

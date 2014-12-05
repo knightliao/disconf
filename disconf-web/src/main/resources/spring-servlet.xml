@@ -162,5 +162,11 @@
 
     <!-- 拦截器配置 -->
     <import resource="classpath:spring-servlet-interceptor.xml" />
+    
+        <!-- 定时器开关 -->
+    <task:annotation-driven executor="proExecutor"
+        scheduler="proScheduler" />
+    <task:executor id="proExecutor" pool-size="5" />
+    <task:scheduler id="proScheduler" pool-size="10" />
 
 </beans>

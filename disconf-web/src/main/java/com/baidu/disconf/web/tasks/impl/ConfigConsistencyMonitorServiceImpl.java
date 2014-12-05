@@ -75,6 +75,13 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
             return;
         }
 
+        try {
+            Thread.sleep(1000 * 10);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         checkMgr();
 
         return;
