@@ -18,8 +18,7 @@ import com.baidu.disconf.client.common.model.InstanceFingerprint;
  */
 public class DisClientComConfig {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisClientComConfig.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisClientComConfig.class);
 
     protected static final DisClientComConfig INSTANCE = new DisClientComConfig();
 
@@ -34,7 +33,7 @@ public class DisClientComConfig {
 
     /**
      * 初始化实例指纹<br/>
-     * 以百度Jpass的IP和PORT为指紋，如果找不到则以本地IP为指纹
+     * 以IP和PORT为指紋，如果找不到则以本地IP为指纹
      */
     private void initInstanceFingerprint() {
 
@@ -56,14 +55,12 @@ public class DisClientComConfig {
         } else {
             // get host
             try {
-                port = Integer
-                        .parseInt(properties.getProperty("VCAP_APP_HOST"));
+                port = Integer.parseInt(properties.getProperty("VCAP_APP_HOST"));
             } catch (Exception e) {
             }
         }
 
-        instanceFingerprint = new InstanceFingerprint(host, port, UUID
-                .randomUUID().toString());
+        instanceFingerprint = new InstanceFingerprint(host, port, UUID.randomUUID().toString());
     }
 
     private InstanceFingerprint instanceFingerprint;
@@ -74,8 +71,7 @@ public class DisClientComConfig {
      * @return
      */
     public String getInstanceFingerprint() {
-        return instanceFingerprint.getHost() + "_"
-                + String.valueOf(instanceFingerprint.getPort()) + "_"
+        return instanceFingerprint.getHost() + "_" + String.valueOf(instanceFingerprint.getPort()) + "_"
                 + instanceFingerprint.getUuid();
     }
 }

@@ -39,7 +39,7 @@ public class Coefficients {
     }
 
     /**
-     * 百度百发的系数, 分布式文件配置
+     * 百发的系数, 分布式文件配置
      * 
      * @return
      */
