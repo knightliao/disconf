@@ -27,7 +27,7 @@ disconf-web
 
 选择版本后，就会显示 APP、环境、版本 三个条件下的配置列表：
 
-![http://ww2.sinaimg.cn/mw1024/60c9620fgw1emxvbi281pj20qc0ga41z.jpg](http://ww2.sinaimg.cn/mw1024/60c9620fgw1emxvbi281pj20qc0ga41z.jpg)
+![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
 
 ####表格中 各个列的意义是：
 
