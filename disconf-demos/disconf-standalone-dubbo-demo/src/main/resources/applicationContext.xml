@@ -53,7 +53,7 @@
         class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
         <property name="justHostFiles">
             <list>
-                <value>atomserverl.properties</value>
+                <value>myserver.properties</value>
             </list>
         </property>
     </bean>
@@ -70,7 +70,7 @@
         class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
         <property name="justHostFiles">
             <list>
-                <value>atomserverm_slave.properties</value>
+                <value>myserver_slave.properties</value>
             </list>
         </property>
     </bean>

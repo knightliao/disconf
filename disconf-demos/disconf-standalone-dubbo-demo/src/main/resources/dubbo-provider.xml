@@ -10,7 +10,7 @@
     <dubbo:application name="dubbo-service-app" />  
   
     <!-- 使用zookeeper注册中心暴露服务地址 -->  
-    <dubbo:registry address="zookeeper://10.48.57.42:8581" />  
+    <dubbo:registry address="zookeeper://127.0.0.1:8581" />  
   
     <!-- 用dubbo协议在20880端口暴露服务 -->  
     <dubbo:protocol name="dubbo" port="20880" />  
