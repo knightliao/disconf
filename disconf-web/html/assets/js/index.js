@@ -1,7 +1,7 @@
-(function($) {
+(function ($) {
 
-	$("#indexMain").attr("href", "/");
+    $("#indexMain").attr("href", "/");
 
-	getSession2Redirect();
+    getSession2Redirect();
 
 })(jQuery);

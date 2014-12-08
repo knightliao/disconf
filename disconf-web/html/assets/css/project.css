@@ -1,6 +1,6 @@
-html,body {
+html, body {
     font-family: "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB",
-        "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+    "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
     background-color: #fff;
     height: 100%;
     padding: 0px;
@@ -16,16 +16,19 @@ fieldset, img {
 abbr, acronym {
     border: 0;
 }
+
 /*---end reset*/
 
 .head {
     background: white;
 }
+
 .signBlock {
     position: relative;
     top: 10px;
     text-align: right;
 }
+
 .signBlock-index {
     cursor: pointer;
 }
@@ -37,29 +40,34 @@ abbr, acronym {
     width: 218px;
     height: 88px;
 }
+
 .menu {
     float: right;
     position: relative;
     top: 28px;
 }
+
 .menu li {
     float: left;
 }
+
 .menu li a {
     display: block;
     height: 30px;
     margin: 10px 0px 0px;
     padding: 10px 10px;
 }
+
 .menu li a.focus {
-    background: url("../img/toptriangle.png") no-repeat bottom center;
 }
+
 .menu li .menu-last {
     background: #52bad5;
     color: white;
     border-radius: 10px;
     height: 20px;
 }
+
 .menu li .menu-last:hover {
     background: #55a4de;
 }
@@ -74,8 +82,8 @@ abbr, acronym {
 
 .navSub {
     height: 50px;
-    background: url("../img/nav-bg.png") repeat-x;
 }
+
 .menuSub {
     width: 980px;
     height: 50px;
@@ -83,27 +91,27 @@ abbr, acronym {
     position: relative;
     left: 160px;
 }
+
 .menuSub li {
     width: 150px;
     float: left;
 }
+
 .menuSub li a {
     display: inline-block;
     width: 150px;
     color: white;
     text-align: center;
     line-height: 50px;
-    font-family: 微软黑体,黑体;
 }
+
 .menuSub li a.focus {
-    background: url("../img/nav-bg-focus.png") repeat-x;
     color: black;
     cursor: pointer;
 }
 
 .navbar-inner {
-    background: url("../img/header-bg.png") repeat-x scroll 0 0
-        transparent;
+    background: url("../img/header-bg.png") repeat-x scroll 0 0 transparent;
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
     background-attachment: fixed;
 }
@@ -122,24 +130,30 @@ button {
     padding: 5px 10px;
     border-radius: 5px;
 }
+
 button.whiteSkin {
     background: white;
     color: #A3A3A3;
     border: #DADADA 1px solid;
     border-radius: 0px;
 }
+
 button.small {
     padding: 0px;
 }
+
 th {
     background: #F9F9F9;
 }
+
 .green {
     color: green;
 }
+
 .blue {
     color: blue;
 }
+
 .red {
     color: red;
 }
@@ -148,15 +162,18 @@ th {
 .index-bigImg-wrap {
     height: 356px;
 }
+
 .index-bigImg {
     display: block;
     width: 700px;
     margin: 0 auto;
 }
+
 .index-contentWrap {
     margin-top: 20px;
     width: 970px;
 }
+
 .index-item {
     float: left;
     margin: 50px 50px 0 0;
@@ -167,13 +184,16 @@ th {
     border: #e1e1e1 1px solid;
     border-top: #0081d2 3px solid;
 }
+
 .index-item-last {
     margin-right: 0px;
 }
+
 .index-item-title {
     margin: 10px;
     font-weight: normal;
 }
+
 .index-item-explain {
     margin: 5px;
     color: #b3b3b3;
@@ -186,18 +206,18 @@ th {
 }
 
 @media (min-width: 768px) {
-  .sidebar {
-    z-index: 1000;
-    display: block;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-    padding:5px;
-    min-height:400px;
-    height:100%;
-    margin-left:0px;
-  }
+    .sidebar {
+        z-index: 1000;
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+        padding: 5px;
+        min-height: 400px;
+        height: 100%;
+        margin-left: 0px;
+    }
 }
 
 .sidebar-mask {
@@ -205,11 +225,12 @@ th {
     width: 160px;
     height: 390px;
 }
+
 .sidebar-menu li {
     width: 160px;
 }
+
 .sidebar-menu a {
-    font-family: 微软雅黑,黑体;
     display: block;
     width: 145px;
     line-height: 60px;
@@ -217,9 +238,10 @@ th {
     color: #447fa4;
     background: #d6e7f4;
 }
+
 .sidebar-menu li.focus {
-    background: url("../img/leftTriangle.png") no-repeat 145px center;
 }
+
 .sidebar-menu li a.focus {
     color: white;
     background: #52bad5;
@@ -228,63 +250,76 @@ th {
 .startActivity-form {
     margin: 30px 0px;
 }
+
 .startActivity-form-item {
     margin: 0 30px 20px;
     position: relative;
 }
+
 .startActivity-form-lastItem {
     height: 300px;
     margin-right: 0;
 }
+
 .startActivity-form-key {
     display: inline-block;
     width: 86px;
     line-height: 30px;
-    font-family: 微软雅黑,黑体;
 }
+
 .startActivity-form-key-decorate {
     line-height: 30px;
     color: red;
     margin: 0 3px;
 }
+
 .startActivity-form-value {
     width: 500px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius :5px;
+    border: 1px solid #D6D6D6 border-radius : 5 px;
 }
+
 .startActivity-form-value-small {
     width: 255px;
 }
+
 .startActivity-form-date {
     width: 145px;
     vertical-align: middle;
 }
+
 .startActivity-form-date-divide {
     display: inline-block;
     width: 30px;
     text-align: center;
 }
+
 .startActivity-form-time {
     width: 75px;
     height: 30px;
     vertical-align: middle;
 }
+
 .startActivity-form-time option {
     line-height: 30px;
 }
+
 .startActivity-form-editor {
     width: 680px;
     min-height: 200px;
 }
+
 .startActivity-submit {
     margin-right: 30px;
     float: right;
 }
+
 .error {
     margin-right: 30px;
     color: red;
     text-align: right;
 }
+
 .left {
     float: left;
 }
@@ -301,29 +336,34 @@ th {
     background: #F9F9F9;
     border: 1px solid #E8E8E8;
 }
+
 .ticketDiscount-form-item {
     position: relative;
     margin-bottom: 20px;
 }
+
 .ticketDiscount-form-key {
     display: inline-block;
     text-align: right;
     width: 86px;
     line-height: 30px;
-    font-family: 微软雅黑,黑体;
 }
+
 .ticketDiscount-form-value {
     width: 500px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius :5px;
+    border: 1px solid #D6D6D6 border-radius : 5 px;
 }
+
 .ticketDiscount-form-textarea {
     height: 100px;
     width: 512px;
 }
+
 .ticketItem-close, .ticketItem-save {
     float: right;
 }
+
 .ticketPoolWrap-item {
     float: left;
     margin: 20px;
@@ -332,34 +372,42 @@ th {
     border: 1px solid #D6D6D6;
     border-radius: 5px;
 }
+
 .ticketPoolWrap-item-line {
     margin: 0 10px;
 }
+
 .ticketPoolWrap-item-key {
     display: inline-block;
     width: 80px;
     text-align: right;
 }
+
 .ticketPoolWrap-item-close {
     border: none;
     color: #FFFFFF;
     float: right;
 }
+
 .checkWrap, .cardWrap {
     margin: 30px 40px;
 }
+
 .cardWrap-title, .cardWrap-img, .cardWrap-form {
     float: left;
 }
+
 .cardWrap-title {
     line-height: 105px;
     font-size: 14px;
     width: 50px;
 }
+
 .cardWrap-form-item {
     margin: 30px 20px;
     float: left;
 }
+
 .cardWrap-form-item-key {
     display: inline-block;
     vertical-align: middle;
@@ -372,6 +420,7 @@ th {
     margin-right: -4px;
     border-radius: 4px 0 0 4px;
 }
+
 input.cardWrap-form-item-value {
     vertical-align: middle;
     width: 50px;
@@ -379,9 +428,11 @@ input.cardWrap-form-item-value {
     margin-bottom: 0;
     border-radius: 0 4px 4px 0;
 }
+
 .ticketPoolWrap-item-create {
     margin: 40px 40px 0;
 }
+
 .ticketPoolWrap-item-submit {
     float: right;
     margin-right: 40px;
@@ -391,13 +442,16 @@ input.cardWrap-form-item-value {
 .regForm-form {
     margin: 30px 50px 30px 200px;
 }
+
 .regForm-item {
     margin: 20px 0px;
 }
+
 .regForm-item-tip {
     display: inline-block;
     margin: 0 10px;
 }
+
 .regForm-item-key {
     display: inline-block;
     vertical-align: middle;
@@ -412,6 +466,7 @@ input.cardWrap-form-item-value {
     margin-right: -5px;
     border-radius: 4px 0 0 4px;
 }
+
 input.regForm-item-value {
     height: 22px;
     vertical-align: middle;
@@ -419,11 +474,13 @@ input.regForm-item-value {
     margin-bottom: 0px;
     border-radius: 0 4px 4px 0;
 }
+
 .regForm-content-sidebar {
     float: left;
     width: 100px;
     margin: 30px 0 0 40px;
 }
+
 .regForm-content-sidebar-title {
     font-size: 16px;
     margin-bottom: 20px;
@@ -434,6 +491,7 @@ input.regForm-item-value {
 .regForm-content-sidebar-list li {
     margin: 15px 0 15px 10px;
 }
+
 .regForm-content-sidebar-list a {
     color: #52bad5;
     cursor: pointer;
@@ -447,13 +505,16 @@ input.regForm-item-value {
     border: 1px solid #E8E8E8;
     width: 510px;
 }
+
 .question-form-item {
     position: relative;
     margin-bottom: 20px;
 }
+
 .question-form-item-radio {
     margin-right: 15px;
 }
+
 .question-form-key {
     display: inline-block;
     vertical-align: middle;
@@ -468,14 +529,16 @@ input.regForm-item-value {
     margin-right: -5px;
     border-radius: 4px 0 0 4px;
 }
+
 input.question-form-value {
     width: 380px;
     height: 22px;
-    border: 1px solid #D6D6D6 border-radius :5px;
+    border: 1px solid #D6D6D6 border-radius : 5 px;
     vertical-align: middle;
     margin-bottom: 0px;
     border-radius: 0 4px 4px 0;
 }
+
 .question-item-submit {
     float: right;
     margin: 40px 60px;
@@ -491,6 +554,7 @@ input.question-form-value {
     width: 400px;
     height: 250px;
 }
+
 .publish-upload-imgBtn {
     display: block;
     float: left;
@@ -499,20 +563,25 @@ input.question-form-value {
     margin: 100px;
     font-weight: bold;
 }
+
 .publish-detail {
     margin: 30px 50px;
 }
+
 .publish-detail-title {
     font-size: 18px;
     margin: 20px 0;
 }
+
 .publish-detail-item {
     margin: 10px 0;
 }
+
 .publish-detail-item-key {
     display: inline-block;
     width: 60px;
 }
+
 /*自动推送*/
 
 .autoPush-detail {
@@ -525,13 +594,13 @@ input.question-form-value {
     width: 200px;
     margin: 10px 0;
 }
+
 input.autoPush-detail-item-input {
     margin: 10px 30px;
-    vertical-align: center;
 }
+
 .autoPush-detail-item-label {
     line-height: 30px;
-    vertical-align: center;
 }
 
 /* 产品定制  进行中*/
@@ -539,6 +608,7 @@ input.autoPush-detail-item-input {
     border: 1px solid #E8E8E8;
     margin: 50px;
 }
+
 .manage-tableWrap th {
     text-align: center;
     border: 1px solid #E8E8E8;
@@ -546,13 +616,16 @@ input.autoPush-detail-item-input {
     font-size: 16px;
     font-weight: bold;
 }
+
 .manage-tableWrap td {
     padding: 10px;
     border: 1px solid #E8E8E8;
 }
+
 .manage-table-poster {
     width: 200px;
 }
+
 .manage-table-poster-img {
     display: block;
     margin: 0 auto;
@@ -560,15 +633,19 @@ input.autoPush-detail-item-input {
     height: 140px;
     background: #F9F9F9;
 }
+
 .manage-table-info {
     width: 350px;
 }
+
 .manage-table-info-key {
     margin-right: 10px;
 }
+
 .manage-table-opr {
     width: 220px;
 }
+
 .manage-table-opr-link {
     margin: 0 5px;
     color: #005580;
@@ -580,6 +657,7 @@ input.autoPush-detail-item-input {
     border: 1px solid #E8E8E8;
     margin: 50px 0;
 }
+
 .manage-detail-tableWrap th {
     text-align: center;
     border: 1px solid #D3D6DA;
@@ -587,6 +665,7 @@ input.autoPush-detail-item-input {
     font-size: 14px;
     font-weight: bold;
 }
+
 .manage-detail-tableWrap td {
     padding: 5px;
     width: 80px;
@@ -599,10 +678,12 @@ input.autoPush-detail-item-input {
     width: 100px;
     height: 24px;
 }
+
 .manage-detail-form {
     width: 500px;
     margin: 30px 10px 10px;
 }
+
 .manage-detail-table-opr a {
     cursor: pointer;
     color: #52BAD5;
@@ -617,22 +698,25 @@ input.autoPush-detail-item-input {
     position: relative;
     margin-bottom: 20px;
 }
+
 .register-item-key {
     display: inline-block;
     width: 100px;
     line-height: 30px;
-    font-family: 微软雅黑,黑体;
 }
+
 .register-item-key-decorate {
     line-height: 30px;
     color: red;
     margin: 0 3px;
 }
+
 .register-item-value {
     width: 200px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius :5px;
+    border: 1px solid #D6D6D6 border-radius : 5 px;
 }
+
 .register-item-value-area {
     width: 212px;
     height: 50px;
@@ -642,6 +726,7 @@ input.autoPush-detail-item-input {
 .alertWrap {
 
 }
+
 .alertWrap .ui-dialog-titlebar {
     background: none;
     border: none;
@@ -650,23 +735,29 @@ input.autoPush-detail-item-input {
     line-height: 30px;
     font-size: 30px;
 }
+
 .alertWrap .ui-dialog-title {
     float: none;
 }
+
 .alertWrap .ui-dialog-titlebar-close {
     display: none;
     width: 0;
     height: 0;
 }
+
 .alertWrap .ui-dialog-buttonpane {
     text-align: center;
 }
+
 .alertWrap .ui-dialog-buttonpane .ui-dialog-buttonset {
     float: none;
 }
+
 .alertWrap .ui-widget-content {
     border: none;
 }
+
 /* 登录 */
 
 .login-item-key {
@@ -679,6 +770,7 @@ input.autoPush-detail-item-input {
     background: white;
     width: 100%;
 }
+
 .account-tableWrap thead tr td {
     text-align: center;
     border: 1px solid #E8E8E8;
@@ -686,13 +778,16 @@ input.autoPush-detail-item-input {
     font-size: 16px;
     font-weight: bold;
 }
+
 .account-tableWrap tr td {
     text-align: center;
 }
+
 .account-tableWrap td {
     padding: 3px 3px;
     border: 1px solid #E8E8E8;
 }
+
 .account-table-activate {
     cursor: pointer;
 }
@@ -703,6 +798,7 @@ input.autoPush-detail-item-input {
     height: 200px;
     padding: 200px;
 }
+
 .active-message {
     text-align: center;
 }
@@ -711,18 +807,23 @@ input.autoPush-detail-item-input {
 .help-sidebar {
     position: fixed;
 }
+
 .help-sidebar .sidebar-menu a {
     line-height: 40px;
 }
+
 .help-item-wrap {
     margin: 40px;
 }
+
 .help-item {
     margin: 30px 0;
 }
+
 .help-item-title {
     margin: 15px 0;
 }
+
 .help-item-content {
     text-indent: 2em;
     line-height: 24px;
@@ -732,6 +833,7 @@ input.autoPush-detail-item-input {
 .private-item-lastValue {
     width: 314px;
 }
+
 .private-submit {
     display: block;
     width: 80px;
@@ -746,6 +848,7 @@ input.autoPush-detail-item-input {
 .memberCard-content .cardWrap-form-item {
     margin: 30px 5px;
 }
+
 .memberCard-submit {
     display: block;
     width: 80px;
@@ -773,33 +876,42 @@ label {
     vertical-align: middle;
     margin-bottom: 0;
 }
+
 a {
     text-decoration: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 ol, ul {
     list-style: none;
 }
+
 caption, th {
     text-align: left;
 }
+
 h3 {
     height: 20px;
     line-height: 20px;
 }
+
 q:before, q:after {
     content: '';
 }
+
 .zu-top-nav-link, .zu-top-nav-link:visited, .zu-top-nav-link:active {
     color: #EEEEEE;
 }
+
 .zu-top-nav-link:hover {
     color: #EEEEEE;
     text-decoration: none;
 }
+
 .zu-top-nav-link {
     color: #EEEEEE;
     font-weight: 700;
@@ -825,8 +937,8 @@ q:before, q:after {
 
 #mainwrap {
     background: #FFFFFF;
-    margin-top:50px;
-    padding-bottom:50px;
+    margin-top: 50px;
+    padding-bottom: 50px;
 }
 
 .content {
@@ -861,32 +973,34 @@ q:before, q:after {
 .private-item {
     margin-bottom: 20px;
 }
+
 .private-item-key {
     display: inline-block;
     width: 120px;
-    overflow: right;
     line-height: 30px;
     text-align: right;
     padding-right: 20px;
     vertical-align: middle;
 }
+
 .private-item-value {
     width: 300px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius :5px;
+    border: 1px solid #D6D6D6 border-radius : 5 px;
     text-align: left;
-    overflow: left;
     vertical-align: middle;
 }
+
 .private-item-value-pre {
-    border: 1px solid #D6D6D6 border-radius :5px;
+    border: 1px solid #D6D6D6 border-radius : 5 px;
     text-align: left;
-    overflow: left;
     vertical-align: middle;
 }
+
 .hide {
     display: none;
 }
+
 .sl-custom-file {
     position: relative;
     display: inline-block;
@@ -895,12 +1009,12 @@ q:before, q:after {
     overflow: hidden;
     vertical-align: middle;
 }
+
 .sl-custom-file .ui-input-file {
     position: absolute;
     right: 0;
     top: 0;
     _zoom: 30;
-    font-size: 300px\9;
     height: 100%;
     _height: auto;
     opacity: 0;
@@ -909,35 +1023,43 @@ q:before, q:after {
     cursor: pointer;
     width: 100px;
 }
+
 .bar_rar {
     background-color: #B4F5B4;
     width: 0%;
     height: 20px;
     border-radius: 3px;
 }
+
 .percent_rar {
     position: absolute;
     display: inline-block;
     top: 3px;
     left: 48%;
 }
+
 .progress_rar {
     display: none
 }
+
 .visibility {
     display: none
 }
+
 /*为了方便使用，可以将其做成一个“类”，这样可以直接挂
  在父元素上，而不用为每一个父元素添加以下CSS属性*/
 .oz {
-    overflow: hidden; /*为父元素添加overflow属性，至于它的值可
-     以是auto,hidden,scroll三者选一*/
+    overflow: hidden;
+    /*为父元素添加overflow属性，至于它的值可
+        以是auto,hidden,scroll三者选一*/
     zoom: 1; /*在 IE6 中还需要添加zoom属性*/
 }
+
 /* form */
 .required label {
     font-weight: bold;
 }
+
 .form-single {
     background-color: #fff;
     max-width: 340px;
@@ -948,14 +1070,17 @@ q:before, q:after {
     border-radius: 5px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
+
 .form-single h2 {
     padding: 0 0 10px;
     margin: 0 0 20px;
     border-bottom: 1px solid #eee;
 }
+
 .form-single .form-submit {
     margin-top: 20px;
 }
+
 .form-single .form-submit a {
     font-size: 13px;
     margin-left: 14px;
@@ -966,14 +1091,14 @@ q:before, q:after {
     padding: 5px 0px 5px 0px;
     font-size: 12px;
     color: #999;
-    width:920px;
+    width: 920px;
 }
 
 #Main {
     width: 960px;
     margin: 0px auto 0px auto;
     padding: 0px 0px 50px 0px;
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 .sep10 {
@@ -985,6 +1110,7 @@ q:before, q:after {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 .popover {
     max-width: 500px;
     width: auto;

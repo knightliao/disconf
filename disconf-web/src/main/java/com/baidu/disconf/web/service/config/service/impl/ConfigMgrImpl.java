@@ -265,7 +265,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         confListVo.setModifyTime(config.getUpdateTime().substring(0, 12));
         confListVo.setKey(config.getName());
         // StringEscapeUtils.escapeHtml escape
-        confListVo.setValue(StringEscapeUtils.escapeHtml(config.getValue()));
+        confListVo.setValue(config.getValue());
         confListVo.setVersion(config.getVersion());
         confListVo.setType(DisConfigTypeEnum.getByType(config.getType()).getModelName());
         confListVo.setTypeId(config.getType());
