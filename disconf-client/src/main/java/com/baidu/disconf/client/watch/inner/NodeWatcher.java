@@ -78,7 +78,7 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("============GOT UPDATE EVENT" + event.getType() + ": (" + monitorPath + "," + keyName
+                LOGGER.info("============GOT UPDATE EVENT " + event.getType() + ": (" + monitorPath + "," + keyName
                         + "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 调用回调函数, 回调函数里会重新进行监控
@@ -95,7 +95,7 @@ public class NodeWatcher implements Watcher {
         //
         if (event.getState() == KeeperState.Disconnected) {
 
-            LOGGER.warn("============GOT Disconnected EVENT" + event.getType() + ": (" + monitorPath + "," + keyName
+            LOGGER.warn("============GOT Disconnected EVENT " + event.getType() + ": (" + monitorPath + "," + keyName
                     + "," + disConfigTypeEnum.getModelName() + ")======================");
         }
 
@@ -104,7 +104,7 @@ public class NodeWatcher implements Watcher {
         //
         if (event.getState() == KeeperState.Expired) {
 
-            LOGGER.error("============GOT Expired EVENT" + event.getType() + ": (" + monitorPath + "," + keyName + ","
+            LOGGER.error("============GOT Expired  " + event.getType() + ": (" + monitorPath + "," + keyName + ","
                     + disConfigTypeEnum.getModelName() + ")======================");
 
             // 重新连接
