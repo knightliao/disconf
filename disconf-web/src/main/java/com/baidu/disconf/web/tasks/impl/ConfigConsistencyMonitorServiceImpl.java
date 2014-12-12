@@ -156,7 +156,9 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
 
                     if (zkDisconfDataItem.getErrorList().size() != 0) {
 
-                        String data = zkDisconfDataItem.toString() + "<br/>original:" + confListVo.getValue();
+                        String data =
+                                zkDisconfDataItem.toString() + "<br/><br/><br/><br/><br/><br/>original:"
+                                        + confListVo.getValue();
 
                         LOG.warn(data);
 
