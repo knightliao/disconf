@@ -50,15 +50,11 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     public void tetGetJsonData() {
 
         try {
-            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.ITEM_URL,
-                    RemoteMockServer.LOCAL_HOST_LIST);
+            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.ITEM_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
-            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
-                    3, 3);
+            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl, 3, 3);
 
-            Assert.assertEquals(
-                    String.valueOf(RemoteMockServer.DEFAULT_ITEM_VALUE),
-                    valueVo.getValue());
+            Assert.assertEquals(String.valueOf(RemoteMockServer.DEFAULT_ITEM_VALUE), valueVo.getValue());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,12 +69,11 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     public void tetDownloadFromServer() {
 
         try {
-            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.FILE_URL,
-                    RemoteMockServer.LOCAL_HOST_LIST);
+            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.FILE_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
-            String downloadFilePath = restfulMgr.downloadFromServer(remoteUrl,
-                    RemoteMockServer.FILE_NAME, "",
-                    RemoteMockServer.LOCAL_DOWNLOAD_DIR, true, 3, 3);
+            String downloadFilePath =
+                    restfulMgr.downloadFromServer(remoteUrl, RemoteMockServer.FILE_NAME,
+                            RemoteMockServer.LOCAL_DOWNLOAD_DIR, true, 3, 3);
 
             File file = new File(downloadFilePath);
             String content = FileUtils.readFileToString(file);
@@ -97,16 +92,11 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     public void testZooPrefixUrl() {
 
         try {
-            RemoteUrl remoteUrl = new RemoteUrl(
-                    RemoteMockServer.ZOO_PREFIX_URL,
-                    RemoteMockServer.LOCAL_HOST_LIST);
+            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.ZOO_PREFIX_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
-            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
-                    3, 3);
+            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl, 3, 3);
 
-            Assert.assertEquals(
-                    String.valueOf(RemoteMockServer.ZOO_PREFIX_VALUE),
-                    valueVo.getValue());
+            Assert.assertEquals(String.valueOf(RemoteMockServer.ZOO_PREFIX_VALUE), valueVo.getValue());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,14 +111,11 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     public void testZooHost() {
 
         try {
-            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.ZOO_URL,
-                    RemoteMockServer.LOCAL_HOST_LIST);
+            RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.ZOO_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
-            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
-                    3, 3);
+            ValueVo valueVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl, 3, 3);
 
-            Assert.assertEquals(String.valueOf(RemoteMockServer.ZOO_HOSTS),
-                    valueVo.getValue());
+            Assert.assertEquals(String.valueOf(RemoteMockServer.ZOO_HOSTS), valueVo.getValue());
 
         } catch (Exception e) {
             e.printStackTrace();

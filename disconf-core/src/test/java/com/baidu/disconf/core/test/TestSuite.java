@@ -7,6 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.baidu.disconf.core.test.path.DisconfWebPathMgrTestCase;
 import com.baidu.disconf.core.test.path.ZooPathMgrTestCase;
 import com.baidu.disconf.core.test.restful.RestfulMgrTestCase;
+import com.baidu.disconf.core.test.utiils.MyStringUtilsTestCase;
 import com.baidu.disconf.core.test.zookeeper.ZookeeperMgrTest;
 
 /**
@@ -15,8 +16,8 @@ import com.baidu.disconf.core.test.zookeeper.ZookeeperMgrTest;
  * @version 2014-7-30
  */
 @RunWith(Suite.class)
-@SuiteClasses({ DisconfWebPathMgrTestCase.class, ZooPathMgrTestCase.class,
-        RestfulMgrTestCase.class, ZookeeperMgrTest.class })
+@SuiteClasses({ DisconfWebPathMgrTestCase.class, ZooPathMgrTestCase.class, RestfulMgrTestCase.class,
+        ZookeeperMgrTest.class, MyStringUtilsTestCase.class })
 public class TestSuite {
 
 }

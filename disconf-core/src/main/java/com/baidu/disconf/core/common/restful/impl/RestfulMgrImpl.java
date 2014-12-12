@@ -20,6 +20,7 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
 import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
 import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
+import com.baidu.disconf.core.common.utils.MyStringUtils;
 import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 
@@ -31,8 +32,7 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
  */
 public class RestfulMgrImpl implements RestfulMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(RestfulMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(RestfulMgrImpl.class);
 
     /**
      * 连接器
@@ -60,8 +60,7 @@ public class RestfulMgrImpl implements RestfulMgr {
      */
     public void init() throws Exception {
 
-        client = ClientBuilder.newBuilder().register(JacksonFeature.class)
-                .build();
+        client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
 
         if (client == null) {
             throw new Exception("RestfulMgr init failed!");
@@ -76,26 +75,23 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @return
      * @throws Exception
      */
-    public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl,
-            int retryTimes, int retyrSleepSeconds) throws Exception {
+    public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retyrSleepSeconds)
+            throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
             WebTarget webtarget = client.target(url.toURI());
 
-            LOGGER.debug("start to query url : "
-                    + webtarget.getUri().toString());
+            LOGGER.debug("start to query url : " + webtarget.getUri().toString());
 
-            Invocation.Builder builder = webtarget
-                    .request(MediaType.APPLICATION_JSON_TYPE);
+            Invocation.Builder builder = webtarget.request(MediaType.APPLICATION_JSON_TYPE);
 
             // 可重试的下载
             UnreliableInterface unreliableImpl = new RestfulGet(builder);
 
             try {
 
-                Response response = (Response) retryStrategy.retry(
-                        unreliableImpl, retryTimes, retyrSleepSeconds);
+                Response response = (Response) retryStrategy.retry(unreliableImpl, retryTimes, retyrSleepSeconds);
 
                 T t = (T) response.readEntity(clazz);
 
@@ -131,44 +127,29 @@ public class RestfulMgrImpl implements RestfulMgr {
     /**
      * 
      * 
-     * @param remoteUrl
-     *            远程地址
-     * @param fileName
-     *            文件名
-     * @param localTmpFileDir
-     *            本地临时 文件地址
-     * @param localFileDir
-     *            本地文件地址
-     * @param isTransfer2Classpath
-     *            是否将下载的文件放到Classpath目录下
+     * @param remoteUrl 远程地址
+     * @param fileName 文件名
+     * @param localFileDir 本地文件地址
+     * @param isTransfer2Classpath 是否将下载的文件放到Classpath目录下
      * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
      * @throws Exception
      */
-    public String downloadFromServer(RemoteUrl remoteUrl, String fileName,
-            String localTmpFileDir, String localFileDir,
-            boolean isTransfer2Classpath, int retryTimes, int retyrSleepSeconds)
-            throws Exception {
+    public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
+            boolean isTransfer2Classpath, int retryTimes, int retyrSleepSeconds) throws Exception {
 
-        // 本地临时全路径
-        String localTmpFilePath = OsUtil.pathJoin(localTmpFileDir, fileName);
         // 本地路径
         String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
 
+        // 唯一标识化本地文件
+        String localFilePathUnique = MyStringUtils.getRandomName(localFilePath);
+
         // 相应的File对象
-        File localTmpFile = new File(localTmpFilePath);
-        File localFile = new File(localFilePath);
-        if (localFile.exists()) {
-            localFile.delete();
-        }
+        File localFilePathUnqiueFile = new File(localFilePathUnique);
 
         try {
 
             // 可重试的下载
-            retry4ConfDownload(remoteUrl, localTmpFile, retryTimes,
-                    retyrSleepSeconds);
-
-            // 从临时文件夹迁移到下载文件夹
-            OsUtil.transferFile(localTmpFile, localFile);
+            retry4ConfDownload(remoteUrl, localFilePathUnqiueFile, retryTimes, retyrSleepSeconds);
 
             // 再次转移至classpath目录下
             if (isTransfer2Classpath) {
@@ -176,27 +157,25 @@ public class RestfulMgrImpl implements RestfulMgr {
                 File classpathFile = getLocalDownloadFileInClasspath(fileName);
                 if (classpathFile != null) {
 
-                    // 从下载文件夹复制到classpath
-                    OsUtil.transferFile(localFile, classpathFile);
-                    localFile = classpathFile;
+                    // 从下载文件复制到classpath 原子性的做转移
+                    OsUtil.transferFileAtom(localFilePathUnqiueFile, classpathFile);
+                    localFilePathUnqiueFile = classpathFile;
 
                 } else {
-                    LOGGER.warn("classpath is null, cannot transfer "
-                            + fileName + " to classpath");
+                    LOGGER.warn("classpath is null, cannot transfer " + fileName + " to classpath");
                 }
             }
 
-            LOGGER.debug("Move to: " + localFile.getAbsolutePath());
+            LOGGER.debug("Move to: " + localFilePathUnqiueFile.getAbsolutePath());
 
         } catch (Exception e) {
-            LOGGER.warn("download file failed, using previous download file.",
-                    e);
+            LOGGER.warn("download file failed, using previous download file.", e);
         }
 
         //
         // 下载失败
         //
-        if (!localFile.exists()) {
+        if (!localFilePathUnqiueFile.exists()) {
             throw new Exception("targe file cannot be found! " + fileName);
         }
 
@@ -206,8 +185,8 @@ public class RestfulMgrImpl implements RestfulMgr {
 
         // 如果是使用CLASS路径的，则返回相对classpath的路径
         if (!ConfigLoaderUtils.CLASS_PATH.isEmpty()) {
-            String relavivePathString = OsUtil.getRelativePath(localFile,
-                    new File(ConfigLoaderUtils.CLASS_PATH));
+            String relavivePathString =
+                    OsUtil.getRelativePath(localFilePathUnqiueFile, new File(ConfigLoaderUtils.CLASS_PATH));
             if (relavivePathString != null) {
                 if (new File(relavivePathString).isFile()) {
                     return relavivePathString;
@@ -216,7 +195,7 @@ public class RestfulMgrImpl implements RestfulMgr {
         }
 
         // 否则, 返回全路径
-        return localFile.getAbsolutePath();
+        return localFilePathUnqiueFile.getAbsolutePath();
     }
 
     /**
@@ -229,19 +208,17 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @param sleepSeconds
      * @return
      */
-    private Object retry4ConfDownload(RemoteUrl remoteUrl, File localTmpFile,
-            int retryTimes, int sleepSeconds) throws Exception {
+    private Object retry4ConfDownload(RemoteUrl remoteUrl, File localTmpFile, int retryTimes, int sleepSeconds)
+            throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
             // 可重试的下载
-            UnreliableInterface unreliableImpl = new FetchConfFile(url,
-                    localTmpFile);
+            UnreliableInterface unreliableImpl = new FetchConfFile(url, localTmpFile);
 
             try {
 
-                return retryStrategy.retry(unreliableImpl, retryTimes,
-                        sleepSeconds);
+                return retryStrategy.retry(unreliableImpl, retryTimes, sleepSeconds);
 
             } catch (Exception e) {
 
@@ -266,8 +243,7 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @author liaoqiqi
      * @date 2013-6-20
      */
-    private static File getLocalDownloadFileInClasspath(String fileName)
-            throws Exception {
+    private static File getLocalDownloadFileInClasspath(String fileName) throws Exception {
 
         String classpath = ConfigLoaderUtils.CLASS_PATH;
 

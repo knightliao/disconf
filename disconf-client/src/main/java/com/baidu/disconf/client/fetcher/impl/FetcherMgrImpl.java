@@ -22,8 +22,7 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
  */
 public class FetcherMgrImpl implements FetcherMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(FetcherMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(FetcherMgrImpl.class);
 
     // 获取远程配置 重试次数
     private int retryTime = 3;
@@ -46,9 +45,8 @@ public class FetcherMgrImpl implements FetcherMgr {
     //
     // 创建对象
     //
-    public FetcherMgrImpl(RestfulMgr restfulMgr, int retryTime,
-            int retrySleepSeconds, boolean enableLocalDownloadDirInClassPath,
-            String localDownloadDir, List<String> hostList) {
+    public FetcherMgrImpl(RestfulMgr restfulMgr, int retryTime, int retrySleepSeconds,
+            boolean enableLocalDownloadDirInClassPath, String localDownloadDir, List<String> hostList) {
 
         this.restfulMgr = restfulMgr;
 
@@ -72,8 +70,7 @@ public class FetcherMgrImpl implements FetcherMgr {
         // 远程地址
         RemoteUrl remoteUrl = new RemoteUrl(url, hostList);
 
-        ValueVo confItemVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl,
-                retryTime, retrySleepSeconds);
+        ValueVo confItemVo = restfulMgr.getJsonData(ValueVo.class, remoteUrl, retryTime, retrySleepSeconds);
         LOGGER.debug("remote server return: " + confItemVo.toString());
 
         if (confItemVo.getStatus().equals(Constants.NOTOK)) {
@@ -92,11 +89,8 @@ public class FetcherMgrImpl implements FetcherMgr {
      * @return
      * @throws Exception
      */
-    public String downloadFileFromServer(String url, String fileName)
-            throws Exception {
+    public String downloadFileFromServer(String url, String fileName) throws Exception {
 
-        // 临时下载路径
-        String localTmpDir = getLocalDownloadDirPath(true);
         // 下载的路径
         String localDir = getLocalDownloadDirPath(false);
 
@@ -104,9 +98,8 @@ public class FetcherMgrImpl implements FetcherMgr {
         RemoteUrl remoteUrl = new RemoteUrl(url, hostList);
 
         // 下载
-        return restfulMgr.downloadFromServer(remoteUrl, fileName, localTmpDir,
-                localDir, this.enableLocalDownloadDirInClassPath, retryTime,
-                retrySleepSeconds);
+        return restfulMgr.downloadFromServer(remoteUrl, fileName, localDir, this.enableLocalDownloadDirInClassPath,
+                retryTime, retrySleepSeconds);
     }
 
     /**
