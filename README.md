@@ -12,7 +12,7 @@ Distributed Configuration Management Platform
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.16-SNAPSHOT
+- dev(develop branch): 2.6.17-SNAPSHOT
 - master(stable branch)：2.6.16
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
