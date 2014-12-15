@@ -30,10 +30,9 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 @Aspect
 public class DisconfAspectJ {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfAspectJ.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfAspectJ.class);
 
-    @Pointcut(value = "execution(public * get*(..))")
+    @Pointcut(value = "execution(public * *(..))")
     public void anyPublicMethod() {
     }
 
@@ -46,8 +45,7 @@ public class DisconfAspectJ {
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfFileItem)")
-    public Object decideAccess(ProceedingJoinPoint pjp,
-            DisconfFileItem disconfFileItem) throws Throwable {
+    public Object decideAccess(ProceedingJoinPoint pjp, DisconfFileItem disconfFileItem) throws Throwable {
 
         MethodSignature ms = (MethodSignature) pjp.getSignature();
         Method method = ms.getMethod();
@@ -61,21 +59,17 @@ public class DisconfAspectJ {
         //
         // Field名
         //
-        Field field = MethodUtils.getFieldFromMethod(method,
-                cls.getDeclaredFields(), DisConfigTypeEnum.FILE);
+        Field field = MethodUtils.getFieldFromMethod(method, cls.getDeclaredFields(), DisConfigTypeEnum.FILE);
         if (field != null) {
 
             //
             // 请求仓库配置数据
             //
-            DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory
-                    .getDisconfStoreFileProcessor();
-            Object ret = disconfStoreProcessor.getConfig(
-                    disconfFile.filename(), disconfFileItem.name());
+            DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
+            Object ret = disconfStoreProcessor.getConfig(disconfFile.filename(), disconfFileItem.name());
             if (ret != null) {
-                LOGGER.info("using disconf store value: "
-                        + disconfFile.filename() + " ("
-                        + disconfFileItem.name() + " , " + ret + ")");
+                LOGGER.info("using disconf store value: " + disconfFile.filename() + " (" + disconfFileItem.name()
+                        + " , " + ret + ")");
                 return ret;
             }
         }
@@ -102,18 +96,15 @@ public class DisconfAspectJ {
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfItem)")
-    public Object decideAccess(ProceedingJoinPoint pjp, DisconfItem disconfItem)
-            throws Throwable {
+    public Object decideAccess(ProceedingJoinPoint pjp, DisconfItem disconfItem) throws Throwable {
 
         //
         // 请求仓库配置数据
         //
-        DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory
-                .getDisconfStoreItemProcessor();
+        DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
         Object ret = disconfStoreProcessor.getConfig(null, disconfItem.key());
         if (ret != null) {
-            LOGGER.info("using disconf store value: (" + disconfItem.key()
-                    + " , " + ret + ")");
+            LOGGER.info("using disconf store value: (" + disconfItem.key() + " , " + ret + ")");
             return ret;
         }
 
