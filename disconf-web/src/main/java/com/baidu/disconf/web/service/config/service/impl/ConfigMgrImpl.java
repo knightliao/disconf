@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf.web.common.comparator.StringComparator;
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.app.bo.App;
@@ -38,6 +37,7 @@ import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
+import com.baidu.disconf.web.utils.DiffUtils;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
@@ -46,8 +46,6 @@ import com.baidu.ub.common.db.DaoPageResult;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 import com.github.knightliao.apollo.utils.time.DateUtils;
-
-import difflib.Chunk;
 
 /**
  * 
@@ -319,7 +317,8 @@ public class ConfigMgrImpl implements ConfigMgr {
                 } else {
 
                     if (!zkDataStr.equals(valueInDb.toString().trim())) {
-                        errorKeyList.add(keyInZk);
+                        errorKeyList.add(keyInZk + "\t"
+                                + DiffUtils.getDiffSimple(zkDataStr, valueInDb.toString().trim()));
                     }
                 }
 
@@ -406,7 +405,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         if (applicationPropertyConfig.isEmailMonitorOn() == true) {
             boolean isSendSuccess =
                     logMailBean.sendHtmlEmail(toEmails, " config update",
-                            getDiff(oldValue, value, config.toString(), getConfigUrlHtml(config)));
+                            DiffUtils.getDiff(oldValue, value, config.toString(), getConfigUrlHtml(config)));
             if (isSendSuccess) {
                 return "修改成功，邮件通知成功";
             } else {
@@ -425,51 +424,6 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         return "<br/>点击<a href='http://" + applicationPropertyConfig.getDomain() + "/modifyFile.html?configId="
                 + config.getId() + "'> 这里 </a> 进入查看<br/>";
-    }
-
-    /**
-     * 
-     * @param old
-     * @param newData
-     * @param identify
-     * @return
-     */
-    private String getDiff(String old, String newData, String identify, String htmlClick) {
-
-        StringComparator stringComparator = new StringComparator(old, newData);
-        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/>" + htmlClick + "<br/> ";
-
-        try {
-
-            final List<Chunk> changesFromOriginal = stringComparator.getChangesFromOriginal();
-
-            if (changesFromOriginal.size() == 0) {
-
-                return "<span style='color:#FF0000'>OK, NO MODIFICATOIN!</span>";
-
-            } else {
-
-                String oldValue =
-                        "<br/><br/><br/><span style='color:#FF0000'>Old value:</span><br/>"
-                                + StringEscapeUtils.escapeHtml(old);
-
-                String newValue =
-                        "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>"
-                                + StringEscapeUtils.escapeHtml(newData);
-
-                String diff = "<span style='color:#FF0000'>Modification info: </span><br/>";
-                for (Chunk chunk : changesFromOriginal) {
-                    diff += StringEscapeUtils.escapeHtml(chunk.toString()) + "<br/>";
-                }
-
-                return contentString + diff + oldValue + newValue;
-            }
-
-        } catch (IOException e) {
-            LOG.error("compare error", e);
-
-            return "comparator error" + e.toString();
-        }
     }
 
     /**
