@@ -183,7 +183,7 @@ APP+环境+版本+ZK查询：
     [INFO] |  |     +- org.glassfish.hk2.external:javax.inject:jar:2.1.64:compile
     [INFO] |  |     +- org.glassfish.hk2.external:asm-all-repackaged:jar:2.1.64:compile
     [INFO] |  |     \- org.glassfish.hk2.external:cglib:jar:2.1.64:compile
-    [INFO] |  \- com.github.knightliao.apollo:apollo:jar:1.0.5-SNAPSHOT:compile
+    [INFO] |  \- com.github.knightliao.apollo:apollo:jar:1.0.5:compile
     [INFO] +- com.baidu.disconf:disconf-core:test-jar:tests:2.6.17:test
     [INFO] +- org.aspectj:aspectjtools:jar:1.7.4:compile
     [INFO] +- org.springframework:spring-test:jar:3.1.2.RELEASE:test
