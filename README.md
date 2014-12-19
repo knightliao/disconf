@@ -12,8 +12,8 @@ Distributed Configuration Management Platform
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.17-SNAPSHOT
-- master(stable branch)：2.6.16
+- dev(develop branch): 2.6.19-SNAPSHOT
+- master(stable branch)：2.6.18
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
@@ -27,7 +27,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.16）功能特点 ##
+## 当前版本（2.6.18）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -104,7 +104,7 @@ Disconf为应用方提供了三个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.16</version>
+        <version>2.6.18</version>
     </dependency>
 
 ### disconf-web 使用 ###
@@ -151,7 +151,7 @@ APP+环境+版本+ZK查询：
 
 主要依赖为：
 
-    [INFO] +- org.apache.zookeeper:zookeeper:jar:3.3.6:compile
+    +- org.apache.zookeeper:zookeeper:jar:3.3.6:compile
     [INFO] |  +- log4j:log4j:jar:1.2.14:compile
     [INFO] |  \- jline:jline:jar:0.9.94:compile
     [INFO] +- com.google.code.gson:gson:jar:2.2.4:compile
@@ -165,7 +165,7 @@ APP+环境+版本+ZK查询：
     [INFO] +- ch.qos.logback:logback-core:jar:1.0.9:compile
     [INFO] +- ch.qos.logback:logback-classic:jar:1.0.9:compile
     [INFO] +- org.slf4j:slf4j-api:jar:1.7.6:compile
-    [INFO] +- com.baidu.disconf:disconf-core:jar:2.6.17:compile
+    [INFO] +- com.baidu.disconf:disconf-core:jar:2.6.18:compile
     [INFO] |  +- commons-io:commons-io:jar:1.4:compile
     [INFO] |  +- commons-lang:commons-lang:jar:2.4:compile
     [INFO] |  +- org.glassfish.jersey.media:jersey-media-json-jackson:jar:2.0-m13:compile
@@ -184,7 +184,7 @@ APP+环境+版本+ZK查询：
     [INFO] |  |     +- org.glassfish.hk2.external:asm-all-repackaged:jar:2.1.64:compile
     [INFO] |  |     \- org.glassfish.hk2.external:cglib:jar:2.1.64:compile
     [INFO] |  \- com.github.knightliao.apollo:apollo:jar:1.0.5:compile
-    [INFO] +- com.baidu.disconf:disconf-core:test-jar:tests:2.6.17:test
+    [INFO] +- com.baidu.disconf:disconf-core:test-jar:tests:2.6.18:test
     [INFO] +- org.aspectj:aspectjtools:jar:1.7.4:compile
     [INFO] +- org.springframework:spring-test:jar:3.1.2.RELEASE:test
     [INFO] +- com.google.guava:guava:jar:site:16.0:compile
