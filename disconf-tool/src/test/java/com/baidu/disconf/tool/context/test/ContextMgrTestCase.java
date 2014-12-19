@@ -6,12 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-import mockit.Mock;
-import mockit.MockUp;
-import mockit.integration.junit4.JMockit;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.tool.context.ContextMgr;
-import com.github.knightliao.apollo.redis.RedisClient;
+import com.baidu.unbiz.redis.RedisClient;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
+import mockit.Mock;
+import mockit.MockUp;
+import mockit.integration.junit4.JMockit;
 
 /**
  * Project  : disconf-tool
@@ -29,9 +29,8 @@ import com.github.knightliao.apollo.redis.RedisClient;
  */
 
 /**
- * @description : ContextMgrTestCase
- * 
  * @author : WuNing
+ * @description : ContextMgrTestCase
  * @date : 2014年8月1日 下午5:30:00
  */
 @RunWith(JMockit.class)
@@ -44,11 +43,6 @@ public class ContextMgrTestCase extends TestCase {
         logger.info("mockup initial begin");
         new MockUp<RedisClient>() {
             Map<String, String> redisStorage = new HashMap<String, String>();
-
-            @Mock
-            public void afterPropertiesSet() {
-                logger.info("Redis Client Init");
-            }
 
             @Mock
             public boolean flushall() {
@@ -124,22 +118,29 @@ public class ContextMgrTestCase extends TestCase {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             ComplexClass other = (ComplexClass) obj;
-            if (Double.doubleToLongBits(doubleVal) != Double.doubleToLongBits(other.doubleVal))
+            if (Double.doubleToLongBits(doubleVal) != Double.doubleToLongBits(other.doubleVal)) {
                 return false;
-            if (intVal != other.intVal)
+            }
+            if (intVal != other.intVal) {
                 return false;
+            }
             if (strList == null) {
-                if (other.strList != null)
+                if (other.strList != null) {
                     return false;
-            } else if (!strList.equals(other.strList))
+                }
+            } else if (!strList.equals(other.strList)) {
                 return false;
+            }
             return true;
         }
 

@@ -456,7 +456,7 @@
             <dependency>
                 <groupId>com.github.knightliao.apollo</groupId>
                 <artifactId>apollo</artifactId>
-                <version>1.0.5-SNAPSHOT</version>
+                <version>1.0.5</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -6,19 +6,28 @@
 
 
     <!-- redis configuration -->
-    <bean id="redisCacheMgr" class="com.github.knightliao.apollo.redis.RedisCacheManager">
-        <property name="retryTimes">
-            <value>${redis.group1.retry.times}</value>
-        </property>
+    <bean id="redisCacheDspMgr" class="com.baidu.unbiz.redis.RedisCacheManager" init-method="init">
         <property name="clientList">
             <list>
-                <ref bean="redisClient1"/>
-                <ref bean="redisClient2"/>
+                <ref bean="redisClientDsp1"/>
+                <ref bean="redisClientDsp2"/>
             </list>
+        </property>
+        <property name="retryTimes">   <!-- 多写随机读策略重试次数 -->
+            <value>${redis.group1.retry.times}</value>
+        </property>
+        <property name="evictorDelayCheckSeconds">   <!-- 失效检测器轮询检测时间间隔，此值大于0表示启用失效检测器 -->
+            <value>${redis.evictor.delayCheckSeconds}</value>
+        </property>
+        <property name="evictorCheckPeriodSeconds">   <!-- 失效检测器延迟启动时间 -->
+            <value>${redis.evictor.checkPeriodSeconds}</value>
+        </property>
+        <property name="evictorFailedTimesToBeTickOut">  <!-- 失效检测器检测Ping-Pong心跳，连接失败次数超过这个值则剔除，直到心跳正常再恢复 -->
+            <value>${redis.evictor.failedTimesToBeTickOut}</value>
         </property>
     </bean>
 
-    <bean id="redisClient1" class="com.github.knightliao.apollo.redis.RedisClient">
+    <bean id="redisClientConfig1" class="com.baidu.unbiz.redis.config.RedisHAClientConfig">
         <property name="cacheName">
             <value>${redis.group1.client1.name}</value>
         </property>
@@ -36,7 +45,13 @@
         </property>
     </bean>
 
-    <bean id="redisClient2" class="com.github.knightliao.apollo.redis.RedisClient">
+    <bean id="redisClientDsp1" class="com.baidu.unbiz.redis.RedisClient">
+        <constructor-arg>
+            <ref bean="redisClientConfig1" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="redisClientConfig2" class="com.baidu.unbiz.redis.config.RedisHAClientConfig">
         <property name="cacheName">
             <value>${redis.group1.client2.name}</value>
         </property>
@@ -52,6 +67,12 @@
         <property name="redisAuthKey">
             <value>${redis.group1.client2.password}</value>
         </property>
+    </bean>
+
+    <bean id="redisClientDsp2" class="com.baidu.unbiz.redis.RedisClient">
+        <constructor-arg>
+            <ref bean="redisClientConfig2" />
+        </constructor-arg>
     </bean>
 
 </beans>
