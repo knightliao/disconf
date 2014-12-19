@@ -165,7 +165,7 @@ APP+环境+版本+ZK查询：
     [INFO] +- ch.qos.logback:logback-core:jar:1.0.9:compile
     [INFO] +- ch.qos.logback:logback-classic:jar:1.0.9:compile
     [INFO] +- org.slf4j:slf4j-api:jar:1.7.6:compile
-    [INFO] +- com.baidu.disconf:disconf-core:jar:2.6.17-SNAPSHOT:compile
+    [INFO] +- com.baidu.disconf:disconf-core:jar:2.6.17:compile
     [INFO] |  +- commons-io:commons-io:jar:1.4:compile
     [INFO] |  +- commons-lang:commons-lang:jar:2.4:compile
     [INFO] |  +- org.glassfish.jersey.media:jersey-media-json-jackson:jar:2.0-m13:compile
@@ -184,7 +184,7 @@ APP+环境+版本+ZK查询：
     [INFO] |  |     +- org.glassfish.hk2.external:asm-all-repackaged:jar:2.1.64:compile
     [INFO] |  |     \- org.glassfish.hk2.external:cglib:jar:2.1.64:compile
     [INFO] |  \- com.github.knightliao.apollo:apollo:jar:1.0.5-SNAPSHOT:compile
-    [INFO] +- com.baidu.disconf:disconf-core:test-jar:tests:2.6.17-SNAPSHOT:test
+    [INFO] +- com.baidu.disconf:disconf-core:test-jar:tests:2.6.17:test
     [INFO] +- org.aspectj:aspectjtools:jar:1.7.4:compile
     [INFO] +- org.springframework:spring-test:jar:3.1.2.RELEASE:test
     [INFO] +- com.google.guava:guava:jar:site:16.0:compile

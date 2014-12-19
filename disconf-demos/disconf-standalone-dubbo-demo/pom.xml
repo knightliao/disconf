@@ -147,9 +147,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <source>${source.version}</source>
-                    <target>${target.version}</target>
-                    <encoding>${encoding}</encoding>
                     <failOnError>true</failOnError>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
