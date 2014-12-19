@@ -704,6 +704,7 @@
                             <exclude>**/*Form.class</exclude>
                         </excludes>
                     </instrumentation>
+                    <check/>
                 </configuration>
             </plugin>
 
