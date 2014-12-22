@@ -51,7 +51,7 @@ public class UserController extends BaseController {
     /**
      * GET 获取
      * 
-     * @param demoUserId
+     * @param
      * @return
      */
     @RequestMapping(value = "/session", method = RequestMethod.GET)

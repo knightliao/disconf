@@ -52,8 +52,7 @@ public class ThreadContext {
 
     /**
      * 获取线程上下文
-     * 
-     * @param key
+     *
      */
     public final static Map<String, Object> getContext() {
         Map<String, Object> ctx = CTX_HOLDER.get();
@@ -136,7 +135,7 @@ public class ThreadContext {
     /**
      * 设置做分表分库的切分的key
      * 
-     * @param shardKey
+     * @param sessionVisitor
      *            下午8:37:51 created by Darwin(Tianxin)
      */
     public final static <K extends Serializable, U extends BaseObject<K>> void putSessionVisitor(

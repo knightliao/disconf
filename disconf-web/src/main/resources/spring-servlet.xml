@@ -11,9 +11,7 @@
            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <mvc:annotation-driven/>
 
-    <import resource="classpath:applicationContext.xml"/>
     <context:property-placeholder location="classpath*:/application.properties"
                                   ignore-unresolvable="true"/>
 
@@ -116,13 +114,11 @@
     <!-- annotation默认的方法映射适配器 -->
     <bean id="handlerMapping"
           class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-            p:prefix="/WEB-INF/console/" p:suffix=".jsp" p:order="0"/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/console/" p:suffix=".jsp" p:order="0"/>
 
 
-    <bean
-            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="defaultContentType" value="application/json"/>
         <property name="ignoreAcceptHeader" value="true"/>
         <property name="favorPathExtension" value="true"/>

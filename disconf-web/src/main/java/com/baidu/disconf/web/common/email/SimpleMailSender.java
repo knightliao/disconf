@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 简单邮件发送器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-3-2
  */
@@ -29,8 +29,8 @@ public class SimpleMailSender {
     protected static final Logger LOG = LoggerFactory.getLogger(SimpleMailSender.class);
 
     /**
-     * 
      * @param mailInfo
+     *
      * @return
      */
     private static Message setCommon(MailSenderInfo mailInfo) throws MessagingException {
@@ -73,7 +73,7 @@ public class SimpleMailSender {
 
     /**
      * 以文本格式发送邮件
-     * 
+     *
      * @param mailInfo 待发送的邮件的信息
      */
     public static boolean sendTextMail(MailSenderInfo mailInfo) {
@@ -102,7 +102,7 @@ public class SimpleMailSender {
 
     /**
      * 以HTML格式发送邮件
-     * 
+     *
      * @param mailInfo 待发送的邮件信息
      */
     public static boolean sendHtmlMail(MailSenderInfo mailInfo) {
