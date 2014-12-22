@@ -29,6 +29,9 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+    <!-- 拦截器配置 -->
+    <import resource="classpath:spring-servlet-interceptor.xml"/>
+
     <bean id="propertyConfigurerForProject1"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="order" value="1"/>

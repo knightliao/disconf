@@ -98,7 +98,7 @@
                     <constructor-arg index="2">
                         <util:map id="jsonMediaTypeParams"
                                   map-class="java.util.HashMap">
-                            <entry key="q" value="0.9994"></entry>
+                            <entry key="q" value="0.9999"></entry>
                             <entry key="charset" value="UTF-8"></entry>
                         </util:map>
                     </constructor-arg>
@@ -153,9 +153,6 @@
 
     <mvc:resources mapping="/api/system/**" location="/WEB-INF/public-resources/"
                    cache-period="259200"/>
-
-    <!-- 拦截器配置 -->
-    <import resource="classpath:spring-servlet-interceptor.xml"/>
 
     <!-- 定时器开关 -->
     <task:annotation-driven executor="proExecutor"
