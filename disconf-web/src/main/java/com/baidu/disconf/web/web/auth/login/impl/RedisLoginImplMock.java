@@ -13,7 +13,6 @@ import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.ub.common.commons.ThreadContext;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-2-4
  */

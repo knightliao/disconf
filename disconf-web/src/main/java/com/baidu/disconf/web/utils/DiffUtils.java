@@ -12,7 +12,7 @@ import com.baidu.disconf.web.common.comparator.StringComparator;
 import difflib.Chunk;
 
 /**
- * 
+ *
  */
 public class DiffUtils {
 
@@ -20,9 +20,10 @@ public class DiffUtils {
 
     /**
      * 简单的对比工作
-     * 
+     *
      * @param old
      * @param newData
+     *
      * @return
      */
     public static String getDiffSimple(String old, String newData) {
@@ -38,10 +39,11 @@ public class DiffUtils {
 
     /**
      * 专门为disconf打造的对照工具
-     * 
+     *
      * @param old
      * @param newData
      * @param identify
+     *
      * @return
      */
     public static String getDiff(String old, String newData, String identify, String htmlClick) {
@@ -59,13 +61,11 @@ public class DiffUtils {
 
             } else {
 
-                String oldValue =
-                        "<br/><br/><br/><span style='color:#FF0000'>Old value:</span><br/>"
-                                + StringEscapeUtils.escapeHtml(old);
+                String oldValue = "<br/><br/><br/><span style='color:#FF0000'>Old value:</span><br/>" +
+                                      StringEscapeUtils.escapeHtml(old);
 
-                String newValue =
-                        "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>"
-                                + StringEscapeUtils.escapeHtml(newData);
+                String newValue = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>" +
+                                      StringEscapeUtils.escapeHtml(newData);
 
                 String diff = "<span style='color:#FF0000'>Modification info: </span><br/>";
                 for (Chunk chunk : changesFromOriginal) {

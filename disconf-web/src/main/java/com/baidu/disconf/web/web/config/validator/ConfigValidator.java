@@ -18,7 +18,6 @@ import com.baidu.disconf.web.service.user.service.AuthMgr;
 import com.baidu.dsp.common.exception.FieldException;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -42,8 +41,10 @@ public class ConfigValidator {
 
     /**
      * 校验
-     * 
-     * @param userId
+     *
+     * @param id
+     *
+     * @return
      */
     public Config valideConfigExist(Long id) {
 
@@ -65,8 +66,9 @@ public class ConfigValidator {
 
     /**
      * 校验更新 配置值
-     * 
-     * @param userId
+     *
+     * @param configId
+     * @param value
      */
     public void validateUpdateItem(Long configId, String value) {
 
@@ -93,8 +95,9 @@ public class ConfigValidator {
 
     /**
      * 校验更新 配置文件
-     * 
-     * @param userId
+     *
+     * @param configId
+     * @param fileName
      */
     public void validateUpdateFile(Long configId, String fileName) {
 
@@ -121,7 +124,7 @@ public class ConfigValidator {
 
     /**
      * 判断配置是否更新
-     * 
+     *
      * @return
      */
     public boolean isValueUpdate(Long configId, String newValue) {
@@ -138,7 +141,6 @@ public class ConfigValidator {
     }
 
     /**
-     * 
      * @param appId
      */
     private void validateAppAuth(long appId) {
@@ -152,8 +154,9 @@ public class ConfigValidator {
 
     /**
      * 校验新建 配置
-     * 
-     * @param userId
+     *
+     * @param confNewForm
+     * @param disConfigTypeEnum
      */
     public void validateNew(ConfNewItemForm confNewForm, DisConfigTypeEnum disConfigTypeEnum) {
 
@@ -179,9 +182,8 @@ public class ConfigValidator {
         //
         // key
         //
-        Config config =
-                configFetchMgr.getConfByParameter(app.getId(), env.getId(), confNewForm.getVersion(),
-                        confNewForm.getKey(), disConfigTypeEnum);
+        Config config = configFetchMgr.getConfByParameter(app.getId(), env.getId(), confNewForm.getVersion(),
+                                                             confNewForm.getKey(), disConfigTypeEnum);
         if (config != null) {
             throw new FieldException(ConfNewItemForm.KEY, "key.exist", null);
         }

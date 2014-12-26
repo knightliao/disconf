@@ -13,9 +13,7 @@ import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 
 /**
- * 
  * @author knightliao
- * 
  */
 @Service
 public class ConfigValidator4Fetch {
@@ -31,7 +29,7 @@ public class ConfigValidator4Fetch {
 
     /**
      * 此接口是客户的接口，非常 重要，目前没有权限的控制
-     * 
+     *
      * @param confForm
      */
     public ConfigFullModel verifyConfForm(ConfForm confForm) throws Exception {

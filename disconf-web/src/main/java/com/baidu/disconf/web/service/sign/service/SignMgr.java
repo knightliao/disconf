@@ -3,7 +3,6 @@ package com.baidu.disconf.web.service.sign.service;
 import com.baidu.disconf.web.service.user.bo.User;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-2-6
  */

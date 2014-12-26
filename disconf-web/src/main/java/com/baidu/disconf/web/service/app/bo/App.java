@@ -10,7 +10,6 @@ import com.baidu.unbiz.common.genericdao.annotation.Table;
 import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -20,24 +19,24 @@ public class App extends BaseObject<Long> {
     protected static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -2217832889126331664L;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.NAME)
     private String name;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.DESC)
     private String desc;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.EMAILS)
     private String emails;
@@ -88,8 +87,8 @@ public class App extends BaseObject<Long> {
 
     @Override
     public String toString() {
-        return "App [name=" + name + ", desc=" + desc + ", emails=" + emails + ", createTime=" + createTime
-                + ", updateTime=" + updateTime + "]";
+        return "App [name=" + name + ", desc=" + desc + ", emails=" + emails + ", createTime=" + createTime +
+                   ", updateTime=" + updateTime + "]";
     }
 
     public String getEmails() {

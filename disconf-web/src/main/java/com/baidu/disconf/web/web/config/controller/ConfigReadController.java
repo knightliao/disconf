@@ -36,9 +36,8 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.db.DaoPageResult;
 
 /**
- * 
  * 专用于配置读取
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-22
  */
@@ -56,7 +55,7 @@ public class ConfigReadController extends BaseController {
 
     /**
      * 获取版本的List
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/versionlist", method = RequestMethod.GET)
@@ -64,15 +63,16 @@ public class ConfigReadController extends BaseController {
     public JsonObjectBase getVersionList(@Valid VersionListForm versionListForm) {
 
         List<String> versionList =
-                configMgr.getVersionListByAppEnv(versionListForm.getAppId(), versionListForm.getEnvId());
+            configMgr.getVersionListByAppEnv(versionListForm.getAppId(), versionListForm.getEnvId());
 
         return buildListSuccess(versionList, versionList.size());
     }
 
     /**
      * 获取列表,有分页的
-     * 
+     *
      * @param confListForm
+     *
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -90,8 +90,9 @@ public class ConfigReadController extends BaseController {
 
     /**
      * 获取列表,有分页的, 没有ZK信息
-     * 
+     *
      * @param confListForm
+     *
      * @return
      */
     @RequestMapping(value = "/simple/list", method = RequestMethod.GET)
@@ -109,8 +110,9 @@ public class ConfigReadController extends BaseController {
 
     /**
      * 获取某个
-     * 
-     * @param confListForm
+     *
+     * @param configId
+     *
      * @return
      */
     @RequestMapping(value = "/{configId}", method = RequestMethod.GET)
@@ -127,8 +129,9 @@ public class ConfigReadController extends BaseController {
 
     /**
      * 获取 zk
-     * 
-     * @param confListForm
+     *
+     * @param configId
+     *
      * @return
      */
     @RequestMapping(value = "/zk/{configId}", method = RequestMethod.GET)
@@ -145,8 +148,9 @@ public class ConfigReadController extends BaseController {
 
     /**
      * 下载
-     * 
-     * @param fileName
+     *
+     * @param configId
+     *
      * @return
      */
     @RequestMapping(value = "/download/{configId}", method = RequestMethod.GET)
@@ -178,8 +182,9 @@ public class ConfigReadController extends BaseController {
 
     /**
      * 批量下载配置文件
-     * 
-     * @param fileName
+     *
+     * @param confListForm
+     *
      * @return
      */
     @RequestMapping(value = "/downloadfilebatch", method = RequestMethod.GET)
@@ -194,8 +199,8 @@ public class ConfigReadController extends BaseController {
         // prefix
         //
         String prefixString =
-                "APP" + confListForm.getAppId() + "_" + "ENV" + confListForm.getEnvId() + "_" + "VERSION"
-                        + confListForm.getVersion();
+            "APP" + confListForm.getAppId() + "_" + "ENV" + confListForm.getEnvId() + "_" + "VERSION" +
+                confListForm.getVersion();
 
         HttpHeaders header = new HttpHeaders();
 

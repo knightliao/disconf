@@ -12,7 +12,6 @@ import com.baidu.dsp.common.exception.FieldException;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-2-20
  */
@@ -23,7 +22,7 @@ public class FileUploadValidator {
 
     /**
      * 验证文件大小，文件名，文件后缀
-     * 
+     *
      * @param file
      * @param maxLength
      * @param allowExtName
@@ -61,10 +60,12 @@ public class FileUploadValidator {
 
     /**
      * 验证文件大小，文件名，文件后缀
-     * 
-     * @param file
+     *
+     * @param files
      * @param maxLength
      * @param allowExtName
+     *
+     * @return
      */
     public List<MultipartFile> validateFiles(List<MultipartFile> files, long maxLength, String[] allowExtName) {
 

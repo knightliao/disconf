@@ -107,9 +107,6 @@
         </property>
     </bean>
 
-    <bean id="handlerExceptionResolver" class="com.baidu.dsp.common.handler.MyExceptionHandler">
-    </bean>
-
 
     <!-- annotation默认的方法映射适配器 -->
     <bean id="handlerMapping"

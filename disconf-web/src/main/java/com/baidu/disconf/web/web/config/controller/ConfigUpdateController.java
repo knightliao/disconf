@@ -1,7 +1,5 @@
 package com.baidu.disconf.web.web.config.controller;
 
-import java.io.IOException;
-
 import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
@@ -25,7 +23,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
  * 专用于配置更新、删除
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-24
  */
@@ -46,8 +44,10 @@ public class ConfigUpdateController extends BaseController {
 
     /**
      * 配置项的更新
-     * 
-     * @param confListForm
+     *
+     * @param configId
+     * @param value
+     *
      * @return
      */
     @RequestMapping(value = "/item/{configId}", method = RequestMethod.PUT)
@@ -75,12 +75,11 @@ public class ConfigUpdateController extends BaseController {
 
     /**
      * 配置文件的更新
-     * 
-     * @param desc
+     *
+     * @param configId
      * @param file
+     *
      * @return
-     * @throws IllegalStateException
-     * @throws IOException
      */
     @ResponseBody
     @RequestMapping(value = "/file/{configId}", method = RequestMethod.POST)
@@ -90,7 +89,7 @@ public class ConfigUpdateController extends BaseController {
         // 校验
         //
         int fileSize = 1024 * 1024 * 4;
-        String[] allowExtName = { ".properties", ".xml" };
+        String[] allowExtName = {".properties", ".xml"};
         fileUploadValidator.validateFile(file, fileSize, allowExtName);
 
         // 业务校验
@@ -124,12 +123,11 @@ public class ConfigUpdateController extends BaseController {
 
     /**
      * 配置文件的更新(文本修改)
-     * 
-     * @param desc
-     * @param file
+     *
+     * @param configId
+     * @param fileContent
+     *
      * @return
-     * @throws IllegalStateException
-     * @throws IOException
      */
     @ResponseBody
     @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.POST)
@@ -163,7 +161,7 @@ public class ConfigUpdateController extends BaseController {
 
     /**
      * delete
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/{configId}", method = RequestMethod.DELETE)

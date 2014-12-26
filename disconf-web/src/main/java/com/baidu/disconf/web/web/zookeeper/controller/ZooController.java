@@ -22,9 +22,8 @@ import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
- * 
  * Zoo API
- * 
+ *
  * @author liaoqiqi
  * @version 2014-1-20
  */
@@ -32,8 +31,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 @RequestMapping(WebConstants.API_PREFIX + "/zoo")
 public class ZooController extends BaseController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ZooController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ZooController.class);
 
     @Autowired
     private ZooConfig zooConfig;
@@ -46,8 +44,7 @@ public class ZooController extends BaseController {
 
     /**
      * 获取Zookeeper地址
-     * 
-     * @param demoUserId
+     *
      * @return
      */
     @RequestMapping(value = "/hosts", method = RequestMethod.GET)
@@ -63,8 +60,7 @@ public class ZooController extends BaseController {
 
     /**
      * 获取ZK prefix
-     * 
-     * @param demoUserId
+     *
      * @return
      */
     @RequestMapping(value = "/prefix", method = RequestMethod.GET)
@@ -80,20 +76,19 @@ public class ZooController extends BaseController {
 
     /**
      * 获取ZK 部署情况
-     * 
-     * @param demoUserId
+     *
+     * @param zkDeployForm
+     *
      * @return
      */
     @RequestMapping(value = "/zkdeploy", method = RequestMethod.GET)
     @ResponseBody
     public JsonObjectBase getZkDeployInfo(@Valid ZkDeployForm zkDeployForm) {
 
-        ConfigFullModel configFullModel = zkDeployValidator
-                .verify(zkDeployForm);
+        ConfigFullModel configFullModel = zkDeployValidator.verify(zkDeployForm);
 
-        String data = zkDeployMgr.getDeployInfo(configFullModel.getApp()
-                .getName(), configFullModel.getEnv().getName(), zkDeployForm
-                .getVersion());
+        String data = zkDeployMgr.getDeployInfo(configFullModel.getApp().getName(), configFullModel.getEnv().getName(),
+                                                   zkDeployForm.getVersion());
 
         return buildSuccess("hostInfo", data);
     }

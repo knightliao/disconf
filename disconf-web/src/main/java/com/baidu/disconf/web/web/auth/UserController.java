@@ -25,7 +25,6 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-20
  */
@@ -33,8 +32,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @RequestMapping(WebConstants.API_PREFIX + "/account")
 public class UserController extends BaseController {
 
-    private final static Logger LOG = AopLogFactory
-            .getLogger(UserController.class);
+    private final static Logger LOG = AopLogFactory.getLogger(UserController.class);
 
     @Autowired
     private UserMgr userMgr;
@@ -50,8 +48,9 @@ public class UserController extends BaseController {
 
     /**
      * GET 获取
-     * 
+     *
      * @param
+     *
      * @return
      */
     @RequestMapping(value = "/session", method = RequestMethod.GET)
@@ -72,14 +71,15 @@ public class UserController extends BaseController {
 
     /**
      * 登录
-     * 
-     * @param userId
+     *
+     * @param signin
+     * @param request
+     *
      * @return
      */
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     @ResponseBody
-    public JsonObjectBase signin(@Valid SigninForm signin,
-            HttpServletRequest request) {
+    public JsonObjectBase signin(@Valid SigninForm signin, HttpServletRequest request) {
 
         // 验证
         authValidator.validateLogin(signin);
@@ -103,8 +103,9 @@ public class UserController extends BaseController {
 
     /**
      * 登出
-     * 
-     * @param userId
+     *
+     * @param request
+     *
      * @return
      */
     @RequestMapping(value = "/signout", method = RequestMethod.GET)

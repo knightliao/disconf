@@ -13,7 +13,6 @@ import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.dsp.common.exception.FieldException;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-11
  */
@@ -27,8 +26,9 @@ public class ZkDeployValidator {
     private EnvMgr envMgr;
 
     /**
-     * 
-     * @param confForm
+     * @param zkDeployForm
+     *
+     * @return
      */
     public ConfigFullModel verify(ZkDeployForm zkDeployForm) {
 
@@ -41,8 +41,7 @@ public class ZkDeployValidator {
 
         App app = appMgr.getById(zkDeployForm.getAppId());
         if (app == null) {
-            throw new FieldException("app " + zkDeployForm.getAppId()
-                    + " doesn't exist in db.", null);
+            throw new FieldException("app " + zkDeployForm.getAppId() + " doesn't exist in db.", null);
         }
 
         //
@@ -54,8 +53,7 @@ public class ZkDeployValidator {
 
         Env env = envMgr.getById(zkDeployForm.getEnvId());
         if (env == null) {
-            throw new FieldException("env " + zkDeployForm.getEnvId()
-                    + " doesn't exist in db.", null);
+            throw new FieldException("env " + zkDeployForm.getEnvId() + " doesn't exist in db.", null);
         }
 
         //

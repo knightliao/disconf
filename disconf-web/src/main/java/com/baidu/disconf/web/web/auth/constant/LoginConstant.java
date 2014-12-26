@@ -1,13 +1,14 @@
 package com.baidu.disconf.web.web.auth.constant;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-11-28
  */
 public class LoginConstant {
 
-    /** 存在Redis中的过期时间 30分钟 */
+    /**
+     * 存在Redis中的过期时间 30分钟
+     */
     public static final int SESSION_EXPIRE_TIME = 1800;
 
     // 30天

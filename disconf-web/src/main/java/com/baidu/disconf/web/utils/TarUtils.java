@@ -17,28 +17,27 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-15
  */
 public class TarUtils {
 
     /**
-     * 
      * @param fileList
+     *
      * @return
+     *
      * @throws IOException
      * @throws CompressorException
      */
-    public static String tarFiles(String dir, String fileNamePrefix,
-            List<File> fileList) throws IOException, CompressorException {
+    public static String tarFiles(String dir, String fileNamePrefix, List<File> fileList)
+        throws IOException, CompressorException {
 
         //
         OsUtil.makeDirs(dir);
 
         // 时间
-        String curTime = DateUtils.format(new Date(),
-                DataFormatConstants.COMMON_TIME_FORMAT);
+        String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
 
         // 文件名
         String outputFilePath = fileNamePrefix + "_" + curTime + ".tar.gz";

@@ -21,7 +21,6 @@ import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -29,8 +28,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 @RequestMapping(WebConstants.API_PREFIX + "/app")
 public class AppController extends BaseController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(AppController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AppController.class);
 
     @Autowired
     private AppMgr appMgr;
@@ -40,7 +38,7 @@ public class AppController extends BaseController {
 
     /**
      * list
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -54,7 +52,7 @@ public class AppController extends BaseController {
 
     /**
      * create
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.POST)

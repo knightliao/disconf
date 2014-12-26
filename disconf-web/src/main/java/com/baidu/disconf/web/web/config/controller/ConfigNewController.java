@@ -1,7 +1,5 @@
 package com.baidu.disconf.web.web.config.controller;
 
-import java.io.IOException;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +26,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
  * 专用于配置新建
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-24
  */
@@ -49,8 +47,9 @@ public class ConfigNewController extends BaseController {
 
     /**
      * 配置项的新建
-     * 
-     * @param confListForm
+     *
+     * @param confNewForm
+     *
      * @return
      */
     @RequestMapping(value = "/item", method = RequestMethod.POST)
@@ -68,12 +67,11 @@ public class ConfigNewController extends BaseController {
 
     /**
      * 配置文件的新建(使用上传配置文件)
-     * 
-     * @param desc
+     *
+     * @param confNewForm
      * @param file
+     *
      * @return
-     * @throws IllegalStateException
-     * @throws IOException
      */
     @ResponseBody
     @RequestMapping(value = "/file", method = RequestMethod.POST)
@@ -83,7 +81,7 @@ public class ConfigNewController extends BaseController {
         // 校验
         //
         int fileSize = 1024 * 1024 * 4;
-        String[] allowExtName = { ".properties", ".xml" };
+        String[] allowExtName = {".properties", ".xml"};
         fileUploadValidator.validateFile(file, fileSize, allowExtName);
 
         //
@@ -117,17 +115,17 @@ public class ConfigNewController extends BaseController {
 
     /**
      * 配置文件的新建(使用文本)
-     * 
-     * @param desc
-     * @param file
+     *
+     * @param confNewForm
+     * @param fileContent
+     * @param fileName
+     *
      * @return
-     * @throws IllegalStateException
-     * @throws IOException
      */
     @ResponseBody
     @RequestMapping(value = "/filetext", method = RequestMethod.POST)
     public JsonObjectBase updateFileWithText(@Valid ConfNewForm confNewForm, @NotNull String fileContent,
-            @NotNull String fileName) {
+                                             @NotNull String fileName) {
 
         // 创建配置文件表格
         ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);

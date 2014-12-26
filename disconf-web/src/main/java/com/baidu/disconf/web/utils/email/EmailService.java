@@ -8,7 +8,6 @@ import com.baidu.disconf.web.common.email.SimpleMailSender;
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-3-2
  */
@@ -20,7 +19,7 @@ public class EmailService {
 
     /**
      * 发送HTML邮箱
-     * 
+     *
      * @return
      */
     public boolean sendHtmlEmail(String toEmail, String subject, String content) {

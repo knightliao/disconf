@@ -26,9 +26,8 @@ import com.baidu.ub.common.db.DaoPageResult;
 /**
  * http://blog.csdn.net/sd4000784/article/details/7745947 <br/>
  * http://blog.sina.com.cn/s/blog_6925c03c0101d1hi.html
- * 
+ *
  * @author knightliao
- * 
  */
 @Component
 public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMonitorService {
@@ -61,7 +60,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
     }
 
     /**
-     * 
+     *
      */
     // 每30分钟执行一次自动化校验
     @Scheduled(fixedDelay = 30 * 60 * 1000)
@@ -69,7 +68,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
     public void check() {
 
         /**
-         * 
+         *
          */
         if (!applicationPropertyConfig.isCheckConsistencyOn()) {
             return;
@@ -156,9 +155,8 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
 
                     if (zkDisconfDataItem.getErrorList().size() != 0) {
 
-                        String data =
-                                zkDisconfDataItem.toString() + "<br/><br/><br/><br/><br/><br/>original:"
-                                        + confListVo.getValue();
+                        String data = zkDisconfDataItem.toString() + "<br/><br/><br/><br/><br/><br/>original:" +
+                                          confListVo.getValue();
 
                         LOG.warn(data);
 
@@ -171,8 +169,8 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
 
         if (errorList.size() != 0) {
 
-            logMailBean.sendHtmlEmail(toEmails, " monitor ConfigConsistency ", monitorInfo + "<br/><br/><br/>"
-                    + errorList.toString());
+            logMailBean.sendHtmlEmail(toEmails, " monitor ConfigConsistency ",
+                                         monitorInfo + "<br/><br/><br/>" + errorList.toString());
         }
     }
 }

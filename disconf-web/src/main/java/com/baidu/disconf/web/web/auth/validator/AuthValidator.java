@@ -11,7 +11,7 @@ import com.baidu.dsp.common.exception.FieldException;
 
 /**
  * 权限验证
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-2
  */
@@ -39,8 +39,7 @@ public class AuthValidator {
 
         // 校验密码
         if (!signMgr.validate(user.getPassword(), signinForm.getPassword())) {
-            throw new FieldException(SigninForm.PASSWORD, "password.not.right",
-                    null);
+            throw new FieldException(SigninForm.PASSWORD, "password.not.right", null);
         }
     }
 }

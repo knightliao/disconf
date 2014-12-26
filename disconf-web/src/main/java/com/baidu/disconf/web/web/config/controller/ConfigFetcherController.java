@@ -27,7 +27,7 @@ import com.baidu.dsp.common.exception.DocumentNotFoundException;
 
 /**
  * 配置获取Controller, Disconf-client专门使用的
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -48,8 +48,9 @@ public class ConfigFetcherController {
 
     /**
      * 获取配置项 Item
-     * 
-     * @param demoUserId
+     *
+     * @param confForm
+     *
      * @return
      */
     @RequestMapping(value = "/item", method = RequestMethod.GET)
@@ -68,13 +69,12 @@ public class ConfigFetcherController {
         }
 
         return configFetchMgr.getConfItemByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
-                configModel.getVersion(), configModel.getKey());
+                                                        configModel.getVersion(), configModel.getKey());
     }
 
     /**
-     * 
      * 获取配置文件
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/file", method = RequestMethod.GET)
@@ -97,9 +97,10 @@ public class ConfigFetcherController {
         if (hasError == false) {
             try {
                 //
-                Config config =
-                        configFetchMgr.getConfByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
-                                configModel.getVersion(), configModel.getKey(), DisConfigTypeEnum.FILE);
+                Config config = configFetchMgr
+                                    .getConfByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
+                                                           configModel.getVersion(), configModel.getKey(),
+                                                           DisConfigTypeEnum.FILE);
                 if (config == null) {
                     hasError = true;
                     throw new DocumentNotFoundException(configModel.getKey());
@@ -121,8 +122,9 @@ public class ConfigFetcherController {
 
     /**
      * 下载
-     * 
+     *
      * @param fileName
+     *
      * @return
      */
     public HttpEntity<byte[]> downloadDspBill(String fileName, String value) {

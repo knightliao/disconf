@@ -72,6 +72,9 @@
 
     <import resource="classpath*:/applicationContext-cache.xml"/>
 
+    <bean id="handlerExceptionResolver" class="com.baidu.dsp.common.handler.MyExceptionHandler">
+    </bean>
+
     <beans profile="db-test">
         <import resource="classpath*:applicationContext-dbconfig-test.xml"/>
     </beans>

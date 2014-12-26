@@ -15,7 +15,6 @@ import com.baidu.unbiz.redis.RedisCacheManager;
 import com.github.knightliao.apollo.utils.web.CookieUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-2-4
  */
@@ -26,8 +25,9 @@ public class RedisLoginImpl implements RedisLogin {
 
     /**
      * 获取Redis上的User Key
-     * 
+     *
      * @param baiduId
+     *
      * @return
      */
     private String getRedisKey(String baiduId) {
@@ -92,7 +92,6 @@ public class RedisLoginImpl implements RedisLogin {
     }
 
     /**
-     * 
      * @param visitor
      */
     private void updateRedisVisitor(Visitor visitor, HttpServletRequest request, int expireTime) {
@@ -116,7 +115,7 @@ public class RedisLoginImpl implements RedisLogin {
 
     /**
      * 更新Session中的Userid
-     * 
+     *
      * @param session
      * @param visitor
      */

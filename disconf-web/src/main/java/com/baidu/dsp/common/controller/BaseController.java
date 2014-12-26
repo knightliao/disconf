@@ -22,7 +22,6 @@ import com.baidu.dsp.common.vo.JsonObjectUtils;
 import com.baidu.ub.common.db.DaoPageResult;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-11-26
  */
@@ -30,16 +29,16 @@ public class BaseController implements ApplicationContextAware {
 
     protected ApplicationContext context;
 
-    public void setApplicationContext(ApplicationContext arg0)
-            throws BeansException {
+    public void setApplicationContext(ApplicationContext arg0) throws BeansException {
         this.context = arg0;
     }
 
     /**
      * OK：非列表数据
-     * 
+     *
      * @param key
      * @param value
+     *
      * @return
      */
     protected <T> JsonObjectBase buildSuccess(String key, T value) {
@@ -48,9 +47,9 @@ public class BaseController implements ApplicationContextAware {
 
     /**
      * OK：非列表数据
-     * 
-     * @param key
+     *
      * @param value
+     *
      * @return
      */
     protected <T> JsonObjectBase buildSuccess(T value) {
@@ -59,11 +58,11 @@ public class BaseController implements ApplicationContextAware {
 
     /**
      * OK: 列表数据
-     * 
-     * @param key
+     *
      * @param value
-     * @param totalCnt
-     * @param pageSize
+     * @param totalCount
+     * @param <T>
+     *
      * @return
      */
     protected <T> JsonObjectBase buildListSuccess(List<?> value, int totalCount) {
@@ -73,29 +72,26 @@ public class BaseController implements ApplicationContextAware {
 
     /**
      * OK: 列表数据
-     * 
-     * @param key
-     * @param value
-     * @param totalCnt
-     * @param pageSize
+     *
+     * @param data
+     * @param <T>
+     *
      * @return
      */
-
     protected <T> JsonObjectBase buildListSuccess(DaoPageResult<T> data) {
 
-        return JsonObjectUtils.buildListSuccess(data.getResult(),
-                data.getTotalCount(), data.getFootResult());
+        return JsonObjectUtils.buildListSuccess(data.getResult(), data.getTotalCount(), data.getFootResult());
     }
 
     /**
      * 错误：参数错误
-     * 
+     *
      * @param field
      * @param message
+     *
      * @return
      */
-    protected JsonObjectBase buildParamError(String field, String message,
-            ErrorCode errorCode) {
+    protected JsonObjectBase buildParamError(String field, String message, ErrorCode errorCode) {
         Map<String, String> map = new HashMap<String, String>();
         map.put(field, message);
         if (errorCode == null) {
@@ -106,12 +102,12 @@ public class BaseController implements ApplicationContextAware {
 
     /**
      * 错误：参数错误
-     * 
+     *
      * @param bindingResult
+     *
      * @return
      */
-    protected JsonObjectBase buildFieldError(BindingResult bindingResult,
-            ErrorCode errorCode) {
+    protected JsonObjectBase buildFieldError(BindingResult bindingResult, ErrorCode errorCode) {
 
         Map<String, String> errors = new HashMap<String, String>();
         for (Object object : bindingResult.getAllErrors()) {
@@ -123,34 +119,32 @@ public class BaseController implements ApplicationContextAware {
         }
 
         if (errorCode == null) {
-            return JsonObjectUtils.buildFieldError(errors,
-                    ErrorCode.FIELD_ERROR);
+            return JsonObjectUtils.buildFieldError(errors, ErrorCode.FIELD_ERROR);
         }
         return JsonObjectUtils.buildFieldError(errors, errorCode);
     }
 
     /**
      * 错误：全局的
-     * 
+     *
      * @param message
+     *
      * @return
      */
-    protected JsonObjectBase buildGlobalError(String message,
-            ErrorCode errorCode) {
+    protected JsonObjectBase buildGlobalError(String message, ErrorCode errorCode) {
 
         return JsonObjectUtils.buildGlobalError(message, errorCode);
     }
 
     /**
      * 绑定时间
-     * 
+     *
      * @param binder
      */
     @InitBinder
     protected void dateBinder(WebDataBinder binder) {
         // The date format to parse or output your dates
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                WebConstants.TIME_FORMAT);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(WebConstants.TIME_FORMAT);
         // Create a new CustomDateEditor
         CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
         // Register it as custom editor for the Date type
