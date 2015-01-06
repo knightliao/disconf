@@ -111,6 +111,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/signout", method = RequestMethod.GET)
     @ResponseBody
     public JsonObjectBase signout(HttpServletRequest request) {
