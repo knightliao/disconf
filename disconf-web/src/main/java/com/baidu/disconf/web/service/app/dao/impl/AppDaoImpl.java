@@ -3,6 +3,7 @@ package com.baidu.disconf.web.service.app.dao.impl;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.web.service.app.bo.App;
@@ -26,6 +27,10 @@ public class AppDaoImpl extends AbstractDao<Long, App> implements AppDao {
 
     @Override
     public List<App> getByIds(Set<Long> ids) {
+
+        if (CollectionUtils.isEmpty(ids)) {
+            return findAll();
+        }
 
         return find(match(Columns.APP_ID, ids));
     }

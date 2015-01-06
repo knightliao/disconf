@@ -36,7 +36,7 @@ INSERT INTO `role` (`role_id`, `role_name`, `create_time`, `create_by`, `update_
 ALTER TABLE `user`
 ADD COLUMN `role_id` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '角色ID' AFTER `ownapps`;
 
-update `user` set role_id=2 where name='admin';
+update `user` set role_id=2,ownapps='' where name='admin';
 
 /* admin_read	admin_read*/
 INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES (null, 'admin_read', 'b76f3e20d1c8d0bc17d40158e44097d5eeee8640', '2022ab9c2754d62f9ddba5fded91e4238247ebaf','2', '3');
