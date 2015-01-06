@@ -9,15 +9,13 @@
 
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean
-                    class="com.baidu.dsp.common.interceptor.session.SessionInterceptor">
+            <bean class="com.baidu.dsp.common.interceptor.session.SessionInterceptor">
             </bean>
         </mvc:interceptor>
 
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean
-                    class="com.baidu.dsp.common.interceptor.login.LoginInterceptor">
+            <bean class="com.baidu.dsp.common.interceptor.login.LoginInterceptor">
                 <property name="notJsonPathList">
                     <list>
                         <value>/</value>

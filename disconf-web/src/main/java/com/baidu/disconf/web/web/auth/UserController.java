@@ -18,6 +18,7 @@ import com.baidu.disconf.web.service.user.vo.VisitorVo;
 import com.baidu.disconf.web.web.auth.constant.LoginConstant;
 import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.disconf.web.web.auth.validator.AuthValidator;
+import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
@@ -53,6 +54,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/session", method = RequestMethod.GET)
     @ResponseBody
     public JsonObjectBase get() {
@@ -77,6 +79,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     @ResponseBody
     public JsonObjectBase signin(@Valid SigninForm signin, HttpServletRequest request) {

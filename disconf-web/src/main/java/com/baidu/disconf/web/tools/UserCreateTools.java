@@ -2,12 +2,12 @@ package com.baidu.disconf.web.tools;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.baidu.disconf.web.service.role.bo.RoleEnum;
 import com.baidu.disconf.web.service.user.dao.UserDao;
 
 /**
- * 
  * 生成测试用户SQL的工具（不会写进数据库里，只是单纯的生成SQL）
- * 
+ *
  * @author liaoqiqi
  * @version 2014-2-8
  */
@@ -30,12 +30,12 @@ public class UserCreateTools {
         /**
          * 生成测试用户 SQL
          */
-        UserCreateCommon.createTestUser(userDao);
+        UserCreateCommon.generateCreateTestUserSQL(userDao);
 
         /**
          * 生成指定用户 SQL
          */
-        UserCreateCommon.createSpecifyUser(userDao, "admin", "admin");
+        UserCreateCommon.generateCreateSpecifyUserSQL(userDao, "admin_read", "admin_read", RoleEnum.READ_ADMIN, "2");
 
         System.exit(1);
     }

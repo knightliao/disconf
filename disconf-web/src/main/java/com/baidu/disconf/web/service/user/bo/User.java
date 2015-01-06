@@ -8,7 +8,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 用户表
- * 
+ *
  * @author liaoqiqi
  * @version 2013-11-28
  */
@@ -32,6 +32,12 @@ public class User extends BaseObject<Long> {
     //
     @Column(value = Columns.OWNAPPS)
     private String ownApps;
+
+    /**
+     * 角色ID
+     */
+    @Column(value = Columns.ROLE_ID)
+    private int roleId;
 
     public String getName() {
         return name;
@@ -65,9 +71,22 @@ public class User extends BaseObject<Long> {
         this.ownApps = ownApps;
     }
 
-    @Override
-    public String toString() {
-        return "User [name=" + name + ", token=" + token + ", password=" + password + ", ownApps=" + ownApps + "]";
+    public int getRoleId() {
+        return roleId;
     }
 
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                   "name='" + name + '\'' +
+                   ", token='" + token + '\'' +
+                   ", password='" + password + '\'' +
+                   ", ownApps='" + ownApps + '\'' +
+                   ", roleId=" + roleId +
+                   '}';
+    }
 }

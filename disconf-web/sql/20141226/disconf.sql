@@ -31,14 +31,15 @@ INSERT INTO `role` (`role_id`, `role_name`, `create_time`, `create_by`, `update_
                                                                                                             '99991231235959', 2, '99991231235959', 2);
 INSERT INTO `role` (`role_id`, `role_name`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES (2, '管理员',
                                                                                                             '99991231235959', 2, '99991231235959', 2);
-INSERT INTO `role` (`role_id`, `role_name`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES (3,
-
-                                                                                                            '测试管理员',
+INSERT INTO `role` (`role_id`, `role_name`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES (3,'测试管理员',
                                                                                                             '99991231235959', 2, '99991231235959', 2);
 ALTER TABLE `user`
-ADD COLUMN `roleId` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '角色ID' AFTER `ownapps`;
+ADD COLUMN `role_id` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '角色ID' AFTER `ownapps`;
 
-update `user` set roleId=2 where name='admin';
+update `user` set role_id=2 where name='admin';
+
+/* admin_read	admin_read*/
+INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES (null, 'admin_read', 'b76f3e20d1c8d0bc17d40158e44097d5eeee8640', '2022ab9c2754d62f9ddba5fded91e4238247ebaf','2', '3');
 
 
 use disconf;
@@ -48,9 +49,13 @@ INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `metho
   (2,'/api/app/list' , 'app列表' , '1000'),
   (3,'/api/app/list' , 'app列表' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
-  (1,'/api/app' , '生成一个app' , '0010'),
+  (1,'/api/app' , '生成一个app' , '0000'),
   (2,'/api/app' , '生成一个app' , '0010'),
   (3,'/api/app' , '生成一个app' , '0000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/env/list' , 'env-list' , '1000'),
+  (2,'/api/env/list' , 'env-list' , '1000'),
+  (3,'/api/env/list' , 'env-list' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
   (1,'/api/account/session' , '会话' , '1000'),
   (2,'/api/account/session' , '会话' , '1000'),
@@ -84,13 +89,37 @@ INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `metho
   (2,'/api/zoo/zkdeploy' , 'zoo' , '1000'),
   (3,'/api/zoo/zkdeploy' , 'zoo' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/web/config/item' , '创建item-config' , '0010'),
+  (2,'/api/web/config/item' , '创建item-config' , '0010'),
+  (3,'/api/web/config/item' , '创建item-config' , '0000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/web/config/file' , '创建file-config' , '0010'),
+  (2,'/api/web/config/file' , '创建file-config' , '0010'),
+  (3,'/api/web/config/file' , '创建file-config' , '0000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/web/config/filetext' , '创建file-config' , '0010'),
+  (2,'/api/web/config/filetext' , '创建file-config' , '0010'),
+  (3,'/api/web/config/filetext' , '创建file-config' , '0000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
   (1,'/api/web/config/versionlist' , '版本list' , '1000'),
   (2,'/api/web/config/versionlist' , '版本list' , '1000'),
   (3,'/api/web/config/versionlist' , '版本list' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/web/config/list' , 'config-list' , '1000'),
+  (2,'/api/web/config/list' , 'config-list' , '1000'),
+  (3,'/api/web/config/list' , 'config-list' , '1000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/web/config/simple/list' , 'config-list' , '1000'),
+  (2,'/api/web/config/simple/list' , 'config-list' , '1000'),
+  (3,'/api/web/config/simple/list' , 'config-list' , '1000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
   (1,'/api/web/config/{configId}' , 'get' , '1000'),
   (2,'/api/web/config/{configId}' , 'get' , '1000'),
   (3,'/api/web/config/{configId}' , 'get' , '1000');
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/web/config/zk/{configId}' , 'get-zk' , '1000'),
+  (2,'/api/web/config/zk/{configId}' , 'get-zk' , '1000'),
+  (3,'/api/web/config/zk/{configId}' , 'get-zk' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
   (1,'/api/web/config/download/{configId}' , 'download' , '1000'),
   (2,'/api/web/config/download/{configId}' , 'download' , '1000'),

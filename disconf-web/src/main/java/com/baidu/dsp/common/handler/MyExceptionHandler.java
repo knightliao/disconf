@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.baidu.dsp.common.constant.ErrorCode;
+import com.baidu.dsp.common.exception.AccessDeniedException;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 import com.baidu.dsp.common.exception.FieldException;
 import com.baidu.dsp.common.exception.base.GlobalExceptionAware;
@@ -36,29 +37,24 @@ import com.baidu.ub.common.log.AopLogFactory;
 import com.github.knightliao.apollo.utils.io.FileUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-12-2
  */
-public class MyExceptionHandler extends SimpleMappingExceptionResolver
-        implements ApplicationContextAware {
+public class MyExceptionHandler extends SimpleMappingExceptionResolver implements ApplicationContextAware {
 
-    private final static Logger LOG = AopLogFactory
-            .getLogger(MyExceptionHandler.class);
+    private final static Logger LOG = AopLogFactory.getLogger(MyExceptionHandler.class);
 
     protected ApplicationContext context;
 
-    public void setApplicationContext(ApplicationContext arg0)
-            throws BeansException {
+    public void setApplicationContext(ApplicationContext arg0) throws BeansException {
         this.context = arg0;
     }
 
     @Override
-    public ModelAndView resolveException(HttpServletRequest request,
-            HttpServletResponse response, Object o, Exception e) {
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o,
+                                         Exception e) {
 
-        LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t"
-                + e.toString());
+        LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t" + e.toString());
 
         // PathVariable 出错
         if (e instanceof TypeMismatchException) {
@@ -87,22 +83,30 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
             }
             return null;
 
+            // 用户没有请求方法的访问权限
+        } else if (e instanceof AccessDeniedException) {
+
+            LOG.warn("details: " + ((AccessDeniedException) e).getErrorMessage());
+            return buildError("auth.access.denied", ErrorCode.ACCESS_NOAUTH_ERROR);
+
+            //
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
 
-            return buildError("syserror.httpmethod",
-                    ErrorCode.HttpRequestMethodNotSupportedException);
+            return buildError("syserror.httpmethod", ErrorCode.HttpRequestMethodNotSupportedException);
 
+            //
         } else if (e instanceof MissingServletRequestParameterException) {
 
-            return buildError("syserror.param.miss",
-                    ErrorCode.MissingServletRequestParameterException);
+            return buildError("syserror.param.miss", ErrorCode.MissingServletRequestParameterException);
 
+            //
         } else if (e instanceof GlobalExceptionAware) {
 
             LOG.warn("details: ", e);
             GlobalExceptionAware g = (GlobalExceptionAware) e;
             return buildError(g.getErrorMessage(), g.getErrorCode());
 
+            //
         } else {
 
             LOG.warn("details: ", e);
@@ -112,26 +116,25 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
     /**
      * 参数转换出错
-     * 
+     *
      * @param e
+     *
      * @return
      */
     private ModelAndView getParamErrors(InvalidPropertyException e) {
 
         Map<String, String> errorMap = new HashMap<String, String>();
         errorMap.put(e.getPropertyName(), "参数错误");
-        JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(errorMap,
-                ErrorCode.TYPE_MIS_MATCH);
-        return JsonObjectUtils
-                .JsonObjectError2ModelView((JsonObjectError) jsonObject);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(errorMap, ErrorCode.TYPE_MIS_MATCH);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
     /**
      * TypeMismatchException中获取到参数错误类型
-     * 
+     *
      * @param e
-     * @param model
-     * @return 下午2:19:51 created by Darwin(Tianxin)
+     *
+     * @return
      */
     private ModelAndView getParamErrors(TypeMismatchException e) {
 
@@ -141,8 +144,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
             ConversionFailedException x = (ConversionFailedException) t;
             TypeDescriptor type = x.getTargetType();
-            Annotation[] annotations = type != null ? type.getAnnotations()
-                    : new Annotation[0];
+            Annotation[] annotations = type != null ? type.getAnnotations() : new Annotation[0];
             Map<String, String> errors = new HashMap<String, String>();
             for (Annotation a : annotations) {
                 if (a instanceof RequestParam) {
@@ -154,17 +156,15 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
             }
         }
 
-        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError("参数类型错误!",
-                ErrorCode.TYPE_MIS_MATCH);
-        return JsonObjectUtils
-                .JsonObjectError2ModelView((JsonObjectError) jsonObject);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError("参数类型错误!", ErrorCode.TYPE_MIS_MATCH);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
     /**
      * 业务字段错误校验，参数错误
-     * 
+     *
      * @param fe
-     * @param mvc
+     *
      * @return
      */
     private ModelAndView getParamErrors(FieldException fe) {
@@ -188,16 +188,14 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
                 return paramError(paramErrors, ErrorCode.FIELD_ERROR);
             }
 
-            return paramError(new HashMap<String, String>(),
-                    ErrorCode.FIELD_ERROR);
+            return paramError(new HashMap<String, String>(), ErrorCode.FIELD_ERROR);
         }
     }
 
     /**
      * 从bindException中获取到参数错误类型，参数错误
-     * 
-     * @param be
-     *            下午2:07:29 created by Darwin(Tianxin)
+     *
+     * @param be 下午2:07:29 created by Darwin(Tianxin)
      */
     private ModelAndView getParamErrors(BindException be) {
 
@@ -213,8 +211,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
                 // 如果有code,则从前往后遍历Code(特殊到一般),修改message为code所对应
                 for (String code : fe.getCodes()) {
                     try {
-                        context.getMessage(code, null,
-                                Locale.SIMPLIFIED_CHINESE);
+                        context.getMessage(code, null, Locale.SIMPLIFIED_CHINESE);
                         errorMessage = code;
                     } catch (Exception e) {
                     }
@@ -229,35 +226,31 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
     /**
      * 参数错误
-     * 
-     * @param mvc
+     *
      * @param paramErrors
+     * @param errorCode
+     *
      * @return
      */
-    private ModelAndView paramError(Map<String, String> paramErrors,
-            ErrorCode errorCode) {
+    private ModelAndView paramError(Map<String, String> paramErrors, ErrorCode errorCode) {
 
-        JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(
-                paramErrors, errorCode);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(paramErrors, errorCode);
         LOG.warn(jsonObject.toString());
-        return JsonObjectUtils
-                .JsonObjectError2ModelView((JsonObjectError) jsonObject);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
     /**
      * 全局的错误
-     * 
-     * @param mvc
+     *
      * @param errorMsg
      * @param errorCode
+     *
      * @return
      */
     private ModelAndView buildError(String errorMsg, ErrorCode errorCode) {
 
-        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError(errorMsg,
-                errorCode);
-        return JsonObjectUtils
-                .JsonObjectError2ModelView((JsonObjectError) jsonObject);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError(errorMsg, errorCode);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
 }

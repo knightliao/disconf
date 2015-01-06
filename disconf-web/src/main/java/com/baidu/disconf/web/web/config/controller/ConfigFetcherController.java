@@ -22,6 +22,7 @@ import com.baidu.disconf.web.service.config.utils.ConfigUtils;
 import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
+import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 
@@ -53,6 +54,7 @@ public class ConfigFetcherController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/item", method = RequestMethod.GET)
     @ResponseBody
     public ValueVo getItem(ConfForm confForm) {
@@ -77,6 +79,7 @@ public class ConfigFetcherController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/file", method = RequestMethod.GET)
     @ResponseBody
     public HttpEntity<byte[]> getFile(ConfForm confForm) {

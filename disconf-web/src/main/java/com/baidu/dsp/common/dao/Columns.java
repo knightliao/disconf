@@ -1,7 +1,6 @@
 package com.baidu.dsp.common.dao;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-14
  */
@@ -9,6 +8,8 @@ public class Columns {
 
     public final static String CREATE_TIME = "create_time";
     public final static String UPDATE_TIME = "update_time";
+    public final static String CREATE_BY = "create_by";
+    public final static String UPDATE_BY = "update_by";
 
     public final static String NAME = "name";
 
@@ -31,4 +32,10 @@ public class Columns {
     public final static String EMAILS = "emails";
 
     public final static String OWNAPPS = "ownapps";
+
+    public final static String ROLE_ID = "role_id";
+
+    public final static class RoleColumns {
+        public final static String ROLE_NAME = "role_name";
+    }
 }

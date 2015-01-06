@@ -6,7 +6,7 @@
 
 
     <!-- redis configuration -->
-    <bean id="redisCacheDspMgr" class="com.baidu.unbiz.redis.RedisCacheManager" init-method="init">
+    <bean id="redisCacheDspMgr" class="com.baidu.unbiz.redis.RedisCacheManager">
         <property name="clientList">
             <list>
                 <ref bean="redisClientDsp1"/>
@@ -47,7 +47,7 @@
 
     <bean id="redisClientDsp1" class="com.baidu.unbiz.redis.RedisClient">
         <constructor-arg>
-            <ref bean="redisClientConfig1" />
+            <ref bean="redisClientConfig1"/>
         </constructor-arg>
     </bean>
 
@@ -71,7 +71,7 @@
 
     <bean id="redisClientDsp2" class="com.baidu.unbiz.redis.RedisClient">
         <constructor-arg>
-            <ref bean="redisClientConfig2" />
+            <ref bean="redisClientConfig2"/>
         </constructor-arg>
     </bean>
 

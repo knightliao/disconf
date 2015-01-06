@@ -37,7 +37,7 @@
         <spring.version>3.1.2.RELEASE</spring.version>
         <junit.version>4.10</junit.version>
         <jsp.version>2.0</jsp.version>
-        <servlet.version>2.4</servlet.version>
+        <servlet.version>2.5</servlet.version>
         <cglib.version>2.2.2</cglib.version>
 
         <!-- resource path -->

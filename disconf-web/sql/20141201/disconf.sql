@@ -7,11 +7,11 @@ ALTER TABLE `user`
     ADD COLUMN `ownapps` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '能操作的APPID,逗号分隔' AFTER `token`;
 
     
-/* userid1  MhxzKhl9209*/
-/* userid2  MhxzKhl167*/
-/* userid3  MhxzKhl783*/
-/* userid4  MhxzKhl8758*/
-/* userid5  MhxzKhl112*/
+/* testUser1  MhxzKhl9209*/
+/* testUser2  MhxzKhl167*/
+/* testUser3  MhxzKhl783*/
+/* testUser4  MhxzKhl8758*/
+/* testUser5  MhxzKhl112*/
 DELETE FROM `user` where user_id=1;
 INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`) VALUES (1, 'testUser1', '5eec8499597a115c88e0a9580ae1562ab85d0b1a', 'b9070d385a13357efa09e50e080607c2b299241b','2');
 DELETE FROM `user` where user_id=2;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
+import com.baidu.disconf.web.service.role.bo.RoleEnum;
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
@@ -12,20 +13,18 @@ import com.baidu.ub.common.log.AopLogFactory;
 import com.github.knightliao.apollo.utils.common.RandomUtil;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public class UserCreateCommon {
 
     protected final static Logger LOG = AopLogFactory.getLogger(UserCreateCommon.class);
 
     /**
-     * 
      * @param userName
      * @param password
      */
-    public static void createSpecifyUser(UserDao userDao, String userName, String password) {
+    public static void generateCreateSpecifyUserSQL(UserDao userDao, String userName, String password,
+                                                    RoleEnum roleEnum, String ownAppIds) {
 
         User user = new User();
 
@@ -36,7 +35,10 @@ public class UserCreateCommon {
         user.setToken(SignUtils.createToken(userName));
 
         // set appids
-        user.setOwnApps("2");
+        user.setOwnApps(ownAppIds);
+
+        // role
+        user.setRoleId(roleEnum.getValue());
 
         System.out.println("/* " + userName + "\t" + password + "*/");
         // userDao.create(user);
@@ -55,7 +57,7 @@ public class UserCreateCommon {
     /**
      * 生成内测用户
      */
-    public static void createTestUser(UserDao userDao) {
+    public static void generateCreateTestUserSQL(UserDao userDao) {
 
         System.out.println("\n");
 
@@ -72,6 +74,8 @@ public class UserCreateCommon {
 
             user.setOwnApps("2");
 
+            user.setRoleId(RoleEnum.NORMAL.getValue());
+
             int random = RandomUtil.random(0, 10000);
             String password = "MhxzKhl" + String.valueOf(random);
             user.setPassword(SignUtils.createPassword(password));
@@ -87,7 +91,6 @@ public class UserCreateCommon {
     }
 
     /**
-     * 
      * @param userList
      */
     private static void printUserList(List<User> userList) {
@@ -102,8 +105,10 @@ public class UserCreateCommon {
                 System.out.format("DELETE FROM `user` where user_id=%d;\n", user.getId());
             }
             System.out
-                    .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`) VALUES (%d, '%s', '%s', '%s','%s');\n",
-                            user.getId(), user.getName(), user.getPassword(), user.getToken(), user.getOwnApps());
+                .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES (%d," +
+                            " '%s', " +
+                            "'%s', '%s','%s', '%d');\n", user.getId(), user.getName(), user.getPassword(),
+                           user.getToken(), user.getOwnApps(), user.getRoleId());
         }
         System.out.println("\n");
     }

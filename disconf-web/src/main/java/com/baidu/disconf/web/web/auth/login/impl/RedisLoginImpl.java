@@ -78,6 +78,7 @@ public class RedisLoginImpl implements RedisLogin {
         visitor.setId(user.getId());
         visitor.setLoginUserId(user.getId());
         visitor.setLoginUserName(user.getName());
+        visitor.setRoleId(user.getRoleId());
         visitor.setAppIds(user.getOwnApps());
 
         //

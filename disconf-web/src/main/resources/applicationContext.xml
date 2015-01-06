@@ -49,6 +49,7 @@
     </bean>
 
     <bean id="loginRedisLogin" class="com.baidu.disconf.web.web.auth.login.impl.RedisLoginImplMock"/>
+    <bean id="roleResourceAspect" class="com.baidu.disconf.web.service.roleres.service.RoleResourceAspectMock"/>
 
     <bean id="zooConfig"
           class="com.baidu.disconf.web.service.zookeeper.config.ZooConfig">
@@ -71,6 +72,7 @@
 
 
     <import resource="classpath*:/applicationContext-cache.xml"/>
+    <import resource="classpath*:/applicationContext-springcache.xml"/>
 
     <bean id="handlerExceptionResolver" class="com.baidu.dsp.common.handler.MyExceptionHandler">
     </bean>
@@ -86,11 +88,13 @@
     <beans profile="production">
         <import resource="classpath*:/applicationContext-dbconfig.xml"/>
         <bean id="loginRedisLogin" class="com.baidu.disconf.web.web.auth.login.impl.RedisLoginImpl"/>
+        <bean id="roleResourceAspect" class="com.baidu.disconf.web.service.roleres.service.RoleResourceAspect"/>
     </beans>
 
     <beans profile="rd">
         <import resource="classpath*:/applicationContext-dbconfig.xml"/>
         <bean id="loginRedisLogin" class="com.baidu.disconf.web.web.auth.login.impl.RedisLoginImplMock"/>
+        <bean id="roleResourceAspect" class="com.baidu.disconf.web.service.roleres.service.RoleResourceAspectMock"/>
     </beans>
 
 

@@ -20,7 +20,6 @@ import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -34,7 +33,7 @@ public class AppMgrImpl implements AppMgr {
     private UserInnerMgr userInnerMgr;
 
     /**
-     * 
+     *
      */
     @Override
     public App getByName(String name) {
@@ -43,7 +42,7 @@ public class AppMgrImpl implements AppMgr {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public List<AppListVo> getAuthAppVoList() {
@@ -90,6 +89,7 @@ public class AppMgrImpl implements AppMgr {
         App app = new App();
         app.setName(appNew.getApp());
         app.setDesc(appNew.getDesc());
+        app.setEmails("");
 
         // 时间
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
