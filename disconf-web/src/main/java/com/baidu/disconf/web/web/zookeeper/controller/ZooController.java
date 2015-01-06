@@ -17,6 +17,7 @@ import com.baidu.disconf.web.service.zookeeper.form.ZkDeployForm;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.disconf.web.web.zookeeper.validator.ZkDeployValidator;
+import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
@@ -47,6 +48,7 @@ public class ZooController extends BaseController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/hosts", method = RequestMethod.GET)
     @ResponseBody
     public ValueVo getHosts() {
@@ -63,6 +65,7 @@ public class ZooController extends BaseController {
      *
      * @return
      */
+    @NoAuth
     @RequestMapping(value = "/prefix", method = RequestMethod.GET)
     @ResponseBody
     public ValueVo getPrefixUrl() {
