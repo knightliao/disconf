@@ -140,3 +140,8 @@ INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `metho
   (1,'/api/web/config/filetext/{configId}' , 'update' , '0100'),
   (2,'/api/web/config/filetext/{configId}' , 'update' , '0100'),
   (3,'/api/web/config/filetext/{configId}' , 'update' , '0000');
+
+
+INSERT INTO `config` (`config_id`, `type`, `name`, `value`, `app_id`, `version`, `env_id`, `create_time`, `update_time`)
+VALUES
+  (146, 0, 'code.properties', 'syserror.paramtype=\\u8bf7\\u6c42\\u53c2\\u6570\\u89e3\\u6790\\u9519\" + \"\\u8bef', 2, '1_0_0_0', 1, '20150107115835', '20150107115835');
