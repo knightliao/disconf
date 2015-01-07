@@ -130,7 +130,7 @@ public class ConfigUpdateController extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.PUT)
     public JsonObjectBase updateFileWithText(@PathVariable long configId, @NotNull String fileContent) {
 
         //

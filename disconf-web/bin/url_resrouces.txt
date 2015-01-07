@@ -41,12 +41,11 @@
 /web/config/versionlist             版本list                1000  1000    1000
 /web/config/list                    config-list             1000  1000    1000
 /web/config/simple/list             config-list             1000  1000    1000
-/web/config/{configId}              get                     1000  1000    1000
+/web/config/{configId}              get/post                1001  1001    1000
 /web/config/zk/{configId}           get-zk                  1000  1000    1000
 /web/config/download/{configId}     download                1000  1000    1000
 /web/config/downloadfilebatch       download                1000  1000    1000
 
 /web/config/item/{configId}         update                  0100  0100    0000
-/web/config/file/{configId}         update                  0100  0100    0000
+/web/config/file/{configId}         update/post             0010  0010    0000
 /web/config/filetext/{configId}     update                  0100  0100    0000
-/web/config/{configId}              delete                  0001  0001    0000

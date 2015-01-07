@@ -113,9 +113,9 @@ INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `metho
   (2,'/api/web/config/simple/list' , 'config-list' , '1000'),
   (3,'/api/web/config/simple/list' , 'config-list' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
-  (1,'/api/web/config/{configId}' , 'get' , '1000'),
-  (2,'/api/web/config/{configId}' , 'get' , '1000'),
-  (3,'/api/web/config/{configId}' , 'get' , '1000');
+  (1,'/api/web/config/{configId}' , 'get/post' , '1001'),
+  (2,'/api/web/config/{configId}' , 'get/post' , '1001'),
+  (3,'/api/web/config/{configId}' , 'get/post' , '1000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
   (1,'/api/web/config/zk/{configId}' , 'get-zk' , '1000'),
   (2,'/api/web/config/zk/{configId}' , 'get-zk' , '1000'),
@@ -133,14 +133,10 @@ INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `metho
   (2,'/api/web/config/item/{configId}' , 'update' , '0100'),
   (3,'/api/web/config/item/{configId}' , 'update' , '0000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
-  (1,'/api/web/config/file/{configId}' , 'update' , '0100'),
-  (2,'/api/web/config/file/{configId}' , 'update' , '0100'),
-  (3,'/api/web/config/file/{configId}' , 'update' , '0000');
+  (1,'/api/web/config/file/{configId}' , 'update/post' , '0010'),
+  (2,'/api/web/config/file/{configId}' , 'update/post' , '0010'),
+  (3,'/api/web/config/file/{configId}' , 'update/post' , '0000');
 INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
   (1,'/api/web/config/filetext/{configId}' , 'update' , '0100'),
   (2,'/api/web/config/filetext/{configId}' , 'update' , '0100'),
   (3,'/api/web/config/filetext/{configId}' , 'update' , '0000');
-INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
-  (1,'/api/web/config/{configId}' , 'delete' , '0001'),
-  (2,'/api/web/config/{configId}' , 'delete' , '0001'),
-  (3,'/api/web/config/{configId}' , 'delete' , '0000');

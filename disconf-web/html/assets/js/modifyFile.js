@@ -208,7 +208,7 @@ $("#uploadChoice").on('click', 'li a', function () {
             var fileContent = $("#fileContent").val();
 
             $.ajax({
-                type: "POST",
+                type: "PUT",
                 url: "/api/web/config/filetext/" + configId,
                 data: {
                     "fileContent": fileContent

@@ -217,7 +217,7 @@
                 + '" data-placement="left">' + item.machineSize + '台 '
                 + isRight + '</a>'
 
-            return Util.string.format(mainTpl, item.appName, item.appId,
+            return Util.string.format(mainTpl,'', item.appId,
                 item.version, item.envId, item.envName, type, item.key,
                 item.createTime, item.modifyTime, item.value, link,
                 del_link, i + 1, downloadlink, data_fetch_url, machine_url);
