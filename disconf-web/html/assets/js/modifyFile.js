@@ -121,6 +121,9 @@ var options = {
     },
     complete: function (xhr) {
 
+        $("#error").show();
+        errorrar.show();
+
         var is_ok = true;
         if (xhr.status != 200 && xhr.status != 0) {
             errorrar.html("上传失败，请重新上传. 状态码：" + xhr.status);
@@ -198,8 +201,7 @@ $("#uploadChoice").on('click', 'li a', function () {
     if (uploadWithFile) {
 
         $("#file_submit").unbind('click').on('click', function (e) {
-            $("#error").show();
-            errorrar.show();
+
             // 提交
             $('#form').ajaxSubmit(options);
         });
@@ -207,9 +209,6 @@ $("#uploadChoice").on('click', 'li a', function () {
     } else {
 
         $("#file_submit").unbind('click').on('click', function (e) {
-
-            $("#error").show();
-            errorrar.show();
 
             $("#error").addClass("hide");
 
@@ -222,6 +221,10 @@ $("#uploadChoice").on('click', 'li a', function () {
                     "fileContent": fileContent
                 }
             }).done(function (data) {
+
+                $("#error").show();
+                errorrar.show();
+
                 $("#error").removeClass("hide");
                 if (data.success === "true") {
                     $("#error").html(data.result);
