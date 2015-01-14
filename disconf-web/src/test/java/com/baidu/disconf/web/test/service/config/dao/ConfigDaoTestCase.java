@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +16,15 @@ import com.baidu.disconf.web.service.config.dao.ConfigDao;
 import com.baidu.disconf.web.test.common.BaseTestCase;
 import com.github.knightliao.apollo.utils.io.FileUtils;
 
+import junit.framework.Assert;
+
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-17
  */
 public class ConfigDaoTestCase extends BaseTestCase {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(ConfigDaoTestCase.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ConfigDaoTestCase.class);
 
     @Autowired
     private ConfigDao configDao;
@@ -59,8 +57,9 @@ public class ConfigDaoTestCase extends BaseTestCase {
 
     /**
      * 读取文件的内容到byte数组中
-     * 
+     *
      * @param fileName
+     *
      * @return
      */
     private byte[] readFileContent(String fileName) {
@@ -70,8 +69,7 @@ public class ConfigDaoTestCase extends BaseTestCase {
 
             // 按GBK编码与UTF-8编码分别查找文件
             File f = new File(new String(fileName.getBytes("GBK")));
-            f = f.isFile() ? f : new File(
-                    new String(fileName.getBytes("UTF-8")));
+            f = f.isFile() ? f : new File(new String(fileName.getBytes("UTF-8")));
             if (!f.isFile()) {
                 LOG.error(fileName + " 文件不存在!");
                 return null;
