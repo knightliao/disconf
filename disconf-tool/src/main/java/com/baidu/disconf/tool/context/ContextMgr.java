@@ -9,8 +9,8 @@ package com.baidu.disconf.tool.context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.unbiz.redis.RedisClient;
-import com.baidu.unbiz.redis.config.RedisHAClientConfig;
+import com.github.knightliao.apollo.redis.RedisClient;
+import com.github.knightliao.apollo.redis.config.RedisHAClientConfig;
 import com.github.knightliao.apollo.utils.data.JsonUtils;
 
 /**
