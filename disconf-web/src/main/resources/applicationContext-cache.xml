@@ -6,7 +6,7 @@
 
 
     <!-- redis configuration -->
-    <bean id="redisCacheDspMgr" class="com.baidu.unbiz.redis.RedisCacheManager">
+    <bean id="redisCacheDspMgr" class="com.github.knightliao.apollo.redis.RedisCacheManager">
         <property name="clientList">
             <list>
                 <ref bean="redisClientDsp1"/>
@@ -27,7 +27,7 @@
         </property>
     </bean>
 
-    <bean id="redisClientConfig1" class="com.baidu.unbiz.redis.config.RedisHAClientConfig">
+    <bean id="redisClientConfig1" class="com.github.knightliao.apollo.redis.config.RedisHAClientConfig">
         <property name="cacheName">
             <value>${redis.group1.client1.name}</value>
         </property>
@@ -45,13 +45,13 @@
         </property>
     </bean>
 
-    <bean id="redisClientDsp1" class="com.baidu.unbiz.redis.RedisClient">
+    <bean id="redisClientDsp1" class="com.github.knightliao.apollo.redis.RedisClient">
         <constructor-arg>
             <ref bean="redisClientConfig1"/>
         </constructor-arg>
     </bean>
 
-    <bean id="redisClientConfig2" class="com.baidu.unbiz.redis.config.RedisHAClientConfig">
+    <bean id="redisClientConfig2" class="com.github.knightliao.apollo.redis.config.RedisHAClientConfig">
         <property name="cacheName">
             <value>${redis.group1.client2.name}</value>
         </property>
@@ -69,7 +69,7 @@
         </property>
     </bean>
 
-    <bean id="redisClientDsp2" class="com.baidu.unbiz.redis.RedisClient">
+    <bean id="redisClientDsp2" class="com.github.knightliao.apollo.redis.RedisClient">
         <constructor-arg>
             <ref bean="redisClientConfig2"/>
         </constructor-arg>
