@@ -5,13 +5,15 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 支持的文件后缀类型
- * 
+ *
  * @author knightliao
- * 
  */
 public enum SupportFileTypeEnum {
 
-    PROPERTIES(0, "properties"), XML(1, "xml");
+    /**
+     * 支持properties 特殊处理，支持非properties任意处理
+     */
+    PROPERTIES(0, "properties"), XML(1, "xml"), ANY(3, "*");
 
     private int type = 0;
     private String modelName = null;
@@ -22,10 +24,10 @@ public enum SupportFileTypeEnum {
     }
 
     /**
-     * 
      * 根据文件名返回其文件后缀ENUM
-     * 
-     * @param supportFileTypeEnum
+     *
+     * @param
+     *
      * @return
      */
     public static SupportFileTypeEnum getByFileName(String fileName) {
@@ -42,7 +44,7 @@ public enum SupportFileTypeEnum {
             }
         }
 
-        return null;
+        return SupportFileTypeEnum.ANY;
     }
 
     public static SupportFileTypeEnum getByType(int type) {

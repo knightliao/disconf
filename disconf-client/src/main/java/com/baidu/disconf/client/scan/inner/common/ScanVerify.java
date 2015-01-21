@@ -9,7 +9,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdate;
 
 /**
  * 扫描校验模块
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-15
  */
@@ -19,7 +19,7 @@ public class ScanVerify {
 
     /**
      * 判断回调函数实现的接口是否正确
-     * 
+     *
      * @return
      */
     public static boolean hasIDisconfUpdate(Class<?> disconfUpdateServiceClass) {
@@ -32,8 +32,8 @@ public class ScanVerify {
             }
         }
         if (!hasInterface) {
-            LOGGER.error("Your class " + disconfUpdateServiceClass.toString() + " should implement interface: "
-                    + IDisconfUpdate.class.toString());
+            LOGGER.error("Your class " + disconfUpdateServiceClass.toString() + " should implement interface: " +
+                             IDisconfUpdate.class.toString());
             return false;
         }
 
@@ -42,7 +42,7 @@ public class ScanVerify {
 
     /**
      * 判断配置文件的类型是否正确
-     * 
+     *
      * @return
      */
     public static boolean isDisconfFileTypeRight(DisconfFile disconfFile) {
@@ -53,7 +53,7 @@ public class ScanVerify {
 
         if (supportFileTypeEnum == null) {
 
-            LOGGER.error("now we only support .properites or .xml conf: " + disconfFile.toString());
+            LOGGER.error("now we only support this type of conf: " + disconfFile.toString());
             return false;
         }
 

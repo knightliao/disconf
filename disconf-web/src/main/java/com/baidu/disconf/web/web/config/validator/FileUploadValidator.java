@@ -51,11 +51,17 @@ public class FileUploadValidator {
         //
         // 文件名后缀
         //
-        String extName = filename.substring(filename.lastIndexOf(".")).toLowerCase();
-        if (allowExtName == null || allowExtName.length == 0 || Arrays.binarySearch(allowExtName, extName) >= 0) {
+        /*
+        if (filename.contains(".")) {
+
+            String extName = filename.substring(filename.lastIndexOf(".")).toLowerCase();
+            if (allowExtName == null || allowExtName.length == 0 || Arrays.binarySearch(allowExtName, extName) >= 0) {
+            } else {
+                //throw new FieldException("file", "文件后缀不允许", null);
+            }
         } else {
-            throw new FieldException("file", "文件后缀不允许", null);
-        }
+            //throw new FieldException("file", "文件后缀不允许", null);
+        }*/
     }
 
     /**

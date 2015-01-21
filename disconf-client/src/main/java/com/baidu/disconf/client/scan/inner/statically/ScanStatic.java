@@ -30,44 +30,45 @@ import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.google.common.base.Predicate;
 
 /**
- * 
  * 扫描静态注解，并且进行分析整合数据
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
 public class ScanStatic {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ScanStatic.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanStatic.class);
 
     /**
      * 通过扫描，获取反射对象
-     * 
+     *
      * @param packName
+     *
      * @return
      */
     private static Reflections getReflection(String packName) {
 
-        Predicate<String> filter = new FilterBuilder().includePackage(
-                Constants.DISCONF_PACK_NAME).includePackage(packName);
+        Predicate<String> filter =
+            new FilterBuilder().includePackage(Constants.DISCONF_PACK_NAME).includePackage(packName);
 
         //
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .filterInputsBy(filter)
-                .setScanners(new SubTypesScanner().filterResultsBy(filter),
-                        new TypeAnnotationsScanner().filterResultsBy(filter),
-                        new FieldAnnotationsScanner().filterResultsBy(filter),
-                        new MethodAnnotationsScanner().filterResultsBy(filter),
-                        new MethodParameterScanner())
-                .setUrls(ClasspathHelper.forPackage(packName)));
+        Reflections reflections = new Reflections(new ConfigurationBuilder().filterInputsBy(filter)
+                                                      .setScanners(new SubTypesScanner().filterResultsBy(filter),
+                                                                      new TypeAnnotationsScanner()
+                                                                          .filterResultsBy(filter),
+                                                                      new FieldAnnotationsScanner()
+                                                                          .filterResultsBy(filter),
+                                                                      new MethodAnnotationsScanner()
+                                                                          .filterResultsBy(filter),
+                                                                      new MethodParameterScanner())
+                                                      .setUrls(ClasspathHelper.forPackage(packName)));
 
         return reflections;
     }
 
     /**
      * 扫描想要的类
-     * 
+     *
      * @return
      */
     public static ScanStaticModel scan(String packName) {
@@ -83,7 +84,7 @@ public class ScanStatic {
 
     /**
      * 分析出一些关系 出来
-     * 
+     *
      * @param scanModel
      */
     private static void analysis(ScanStaticModel scanModel) {
@@ -94,7 +95,7 @@ public class ScanStatic {
 
     /**
      * 分析出配置文件与配置文件中的Field的Method的MAP
-     * 
+     *
      * @param scanModel
      */
     private static void analysis4DisconfFile(ScanStaticModel scanModel) {
@@ -124,9 +125,9 @@ public class ScanStatic {
 
             } else {
 
-                LOGGER.error("cannot find CLASS ANNOTATION "
-                        + DisconfFile.class.getName()
-                        + " for disconf file item: " + method.toString());
+                LOGGER
+                    .error("cannot find CLASS ANNOTATION " + DisconfFile.class.getName() + " for disconf file item: " +
+                               method.toString());
             }
         }
 
@@ -140,19 +141,15 @@ public class ScanStatic {
 
             // 校验是否所有配置文件都含有配置
             if (disconfFileItemMap.get(classFile).isEmpty()) {
-                LOGGER.warn("disconf file hasn't any items: "
-                        + classFile.getName());
+                LOGGER.warn("disconf file hasn't any items: " + classFile.getName());
                 continue;
             }
 
             // 校验配置文件类型是否合适(目前只支持.properties类型)
-            DisconfFile disconfFile = (DisconfFile) classFile
-                    .getAnnotation(DisconfFile.class);
-            boolean fileTypeRight = ScanVerify
-                    .isDisconfFileTypeRight(disconfFile);
+            DisconfFile disconfFile = (DisconfFile) classFile.getAnnotation(DisconfFile.class);
+            boolean fileTypeRight = ScanVerify.isDisconfFileTypeRight(disconfFile);
             if (!fileTypeRight) {
-                LOGGER.warn("now do not support NOT .properties file"
-                        + disconfFile.toString());
+                LOGGER.warn("now do not support this file type" + disconfFile.toString());
                 continue;
             }
         }
@@ -163,7 +160,7 @@ public class ScanStatic {
 
     /**
      * 扫描基本信息
-     * 
+     *
      * @return
      */
     private static ScanStaticModel scanBasicInfo(String packName) {
@@ -179,15 +176,13 @@ public class ScanStatic {
         //
         // 获取DisconfFile class
         //
-        Set<Class<?>> classdata = reflections
-                .getTypesAnnotatedWith(DisconfFile.class);
+        Set<Class<?>> classdata = reflections.getTypesAnnotatedWith(DisconfFile.class);
         scanModel.setDisconfFileClassSet(classdata);
 
         //
         // 获取DisconfFileItem method
         //
-        Set<Method> af1 = reflections
-                .getMethodsAnnotatedWith(DisconfFileItem.class);
+        Set<Method> af1 = reflections.getMethodsAnnotatedWith(DisconfFileItem.class);
         scanModel.setDisconfFileItemMethodSet(af1);
 
         //
@@ -199,15 +194,13 @@ public class ScanStatic {
         //
         // 获取DisconfActiveBackupService
         //
-        classdata = reflections
-                .getTypesAnnotatedWith(DisconfActiveBackupService.class);
+        classdata = reflections.getTypesAnnotatedWith(DisconfActiveBackupService.class);
         scanModel.setDisconfActiveBackupServiceClassSet(classdata);
 
         //
         // 获取DisconfUpdateService
         //
-        classdata = reflections
-                .getTypesAnnotatedWith(DisconfUpdateService.class);
+        classdata = reflections.getTypesAnnotatedWith(DisconfUpdateService.class);
         scanModel.setDisconfUpdateService(classdata);
 
         return scanModel;

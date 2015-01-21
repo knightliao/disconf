@@ -1,4 +1,4 @@
-package com.example.disconf.demo.service;
+package com.example.disconf.demo.service.callbacks;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,16 +10,17 @@ import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.example.disconf.demo.config.Coefficients;
 import com.example.disconf.demo.config.JedisConfig;
+import com.example.disconf.demo.service.SimpleRedisService;
 
 /**
  * 更新Redis配置时的回调函数
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-17
  */
 @Service
 @Scope("singleton")
-@DisconfUpdateService(classes = { JedisConfig.class }, itemKeys = { Coefficients.key })
+@DisconfUpdateService(classes = {JedisConfig.class}, itemKeys = {Coefficients.key})
 public class SimpleRedisServiceUpdateCallback implements IDisconfUpdate {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(SimpleRedisServiceUpdateCallback.class);
@@ -28,7 +29,7 @@ public class SimpleRedisServiceUpdateCallback implements IDisconfUpdate {
     private SimpleRedisService simpleRedisService;
 
     /**
-     * 
+     *
      */
     public void reload() throws Exception {
 

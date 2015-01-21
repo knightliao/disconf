@@ -70,6 +70,7 @@
             <list>
                 <value>myserver_slave.properties</value>
                 <value>testXml2.xml</value>
+                <value>testJson.json</value>
             </list>
         </property>
     </bean>

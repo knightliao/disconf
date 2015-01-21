@@ -61,8 +61,9 @@ function validate_file_name(fileName) {
         case 'xml':
             break;
         default:
-            errorrar.html("错误: " + "文件类型必须是properties/.xml");
-            return false;
+            //errorrar.html("错误: " + "文件类型必须是properties/.xml");
+            //return false;
+            return true;
     }
 
     return true;
@@ -77,8 +78,15 @@ var progress_rar = $('.progress_rar');
 var myfilerar = $('#myfilerar');
 var errorrar = $('#error_rar');
 var add_file_but = $('#open_dialog_rar')
+
 $('#myfilerar').change(function (evt) {
+
+    //
+    // 清空错误及显示
+    //
     errorrar.empty();
+    $("#error").empty();
+
     upload_status = 0;
     add_file_but.html("上传配置文件...")
     var ret = validate(null, null, null);
@@ -192,8 +200,11 @@ $("#uploadChoice").on('click', 'li a', function () {
         uploadWithFile = 0;
     }
 
-    $("#error").hide();
-    errorrar.hide();
+    //
+    // 清除错误信息
+    //
+    $("#error").html("");
+    errorrar.html("");
 
     //
     // 事件绑定
@@ -210,8 +221,6 @@ $("#uploadChoice").on('click', 'li a', function () {
 
         $("#file_submit").unbind('click').on('click', function (e) {
 
-            $("#error").addClass("hide");
-
             var fileContent = $("#fileContent").val();
 
             $.ajax({
@@ -220,12 +229,12 @@ $("#uploadChoice").on('click', 'li a', function () {
                 data: {
                     "fileContent": fileContent
                 }
+
             }).done(function (data) {
 
                 $("#error").show();
                 errorrar.show();
 
-                $("#error").removeClass("hide");
                 if (data.success === "true") {
                     $("#error").html(data.result);
                 } else {

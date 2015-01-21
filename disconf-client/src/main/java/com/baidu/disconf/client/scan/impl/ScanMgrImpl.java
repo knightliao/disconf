@@ -28,7 +28,7 @@ public class ScanMgrImpl implements ScanMgr {
     // 扫描对象
     private volatile ScanStaticModel scanModel = null;
 
-    private List<StaticScannerMgr> staticScannerMgrs = new ArrayList<StaticScannerMgr>();
+    private List<StaticScannerMgr> staticScannerMgrList = new ArrayList<StaticScannerMgr>();
 
     /**
      * 
@@ -36,13 +36,13 @@ public class ScanMgrImpl implements ScanMgr {
     public ScanMgrImpl() {
 
         // 配置文件
-        staticScannerMgrs.add(StaticScannerMgrFactory.getDisconfFileStaticScanner());
+        staticScannerMgrList.add(StaticScannerMgrFactory.getDisconfFileStaticScanner());
 
         // 配置项
-        staticScannerMgrs.add(StaticScannerMgrFactory.getDisconfItemStaticScanner());
+        staticScannerMgrList.add(StaticScannerMgrFactory.getDisconfItemStaticScanner());
 
         // 非注解 托管的配置文件
-        staticScannerMgrs.add(StaticScannerMgrFactory.getDisconfNonAnnotationFileStaticScanner());
+        staticScannerMgrList.add(StaticScannerMgrFactory.getDisconfNonAnnotationFileStaticScanner());
     }
 
     /**
@@ -62,7 +62,7 @@ public class ScanMgrImpl implements ScanMgr {
         scanModel.setJustHostFiles(DisconfCenterHostFilesStore.getInstance().getJustHostFiles());
 
         // 放进仓库
-        for (StaticScannerMgr scannerMgr : staticScannerMgrs) {
+        for (StaticScannerMgr scannerMgr : staticScannerMgrList) {
 
             // 扫描进入仓库
             scannerMgr.scanData2Store(scanModel);

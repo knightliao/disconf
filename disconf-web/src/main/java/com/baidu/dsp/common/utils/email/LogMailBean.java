@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class LogMailBean {
 
     /**
      * 得到系统当前的运行时间，并格式化
-     * 
+     *
      * @return
      */
     private static String getSystemDate() {
@@ -103,7 +104,7 @@ public class LogMailBean {
 
     /**
      * 发送HTML邮箱
-     * 
+     *
      * @return
      */
     public boolean sendHtmlEmail(String toEmail, String title, String content) {
@@ -111,6 +112,10 @@ public class LogMailBean {
         LOG.info("send to " + toEmail);
         LOG.info("title: " + title);
         LOG.info("content" + content);
+
+        if (StringUtils.isBlank(toEmail)) {
+            return false;
+        }
 
         String localName = "";
         Visitor visitor = ThreadContext.getSessionVisitor();
@@ -158,6 +163,7 @@ public class LogMailBean {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -187,9 +193,9 @@ public class LogMailBean {
 
     /**
      * 发送报警邮件，邮件名称，发送人，接收人在constants中定义
-     * 
+     *
      * @param content 邮件内容
-     * 
+     *
      * @return
      */
     private boolean sendErrorMail(String content, String title) {

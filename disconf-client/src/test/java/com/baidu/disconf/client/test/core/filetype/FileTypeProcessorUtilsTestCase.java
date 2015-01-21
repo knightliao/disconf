@@ -8,9 +8,7 @@ import org.junit.Test;
 import com.baidu.disconf.client.core.filetype.FileTypeProcessorUtils;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public class FileTypeProcessorUtilsTestCase {
 
@@ -32,6 +30,17 @@ public class FileTypeProcessorUtilsTestCase {
         try {
 
             Map<String, Object> map = FileTypeProcessorUtils.getKvMap("testXml.xml");
+
+            System.out.println(map.toString());
+            Assert.assertEquals(0, map.keySet().size());
+
+        } catch (Exception e) {
+            Assert.assertTrue(false);
+        }
+
+        try {
+
+            Map<String, Object> map = FileTypeProcessorUtils.getKvMap("testJson.json");
 
             System.out.println(map.toString());
             Assert.assertEquals(0, map.keySet().size());

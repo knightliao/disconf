@@ -187,14 +187,11 @@ public class ConfigMgrImpl implements ConfigMgr {
                     ConfListVo configListVo = convert(input, appNameString, envName, zkDisconfData);
 
                     // 列表操作不要显示值, 为了前端显示快速(只是内存里操作)
-                    if (myFetchZk && getErrorMessage) {
+                    if (!myFetchZk || !getErrorMessage) {
 
-                        if (getErrorMessage) {
-                        } else {
-                            // 列表 value 设置为 ""
-                            configListVo.setValue("");
-                            configListVo.setMachineList(new ArrayList<ZkDisconfData.ZkDisconfDataItem>());
-                        }
+                        // 列表 value 设置为 ""
+                        configListVo.setValue("");
+                        configListVo.setMachineList(new ArrayList<ZkDisconfData.ZkDisconfDataItem>());
                     }
 
                     return configListVo;

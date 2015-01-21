@@ -32,8 +32,9 @@ function validate_file_name(fileName) {
         case 'xml':
             break;
         default:
-            errorrar.html("错误: " + "文件类型必须是properties/xml");
-            return false;
+            //errorrar.html("错误: " + "文件类型必须是properties/xml");
+            //return false;
+            return true;
     }
 
     return true;
@@ -187,6 +188,12 @@ $("#uploadChoice").on(
             $("#text_upload_choice").show().children().show();
             uploadWithFile = 0;
         }
+
+        //
+        // 清除错误信息
+        //
+        $("#error").html("");
+        errorrar.html("");
 
         //
         // 事件绑定

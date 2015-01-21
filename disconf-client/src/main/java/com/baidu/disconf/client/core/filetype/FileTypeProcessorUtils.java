@@ -7,13 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
+import com.baidu.disconf.client.core.filetype.impl.DisconfAnyFileProcessorImpl;
 import com.baidu.disconf.client.core.filetype.impl.DisconfPropertiesProcessorImpl;
 import com.baidu.disconf.client.core.filetype.impl.DisconfXmlProcessorImpl;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public class FileTypeProcessorUtils {
 
@@ -21,7 +20,7 @@ public class FileTypeProcessorUtils {
 
     /**
      * 输入文件名，返回其相应的k-v数据
-     * 
+     *
      * @return
      */
     public static Map<String, Object> getKvMap(String fileName) throws Exception {
@@ -38,13 +37,17 @@ public class FileTypeProcessorUtils {
         if (supportFileTypeEnum.equals(SupportFileTypeEnum.PROPERTIES)) {
 
             disconfFileTypeProcessor = new DisconfPropertiesProcessorImpl();
-            dataMap = disconfFileTypeProcessor.getKvMap(fileName);
+
+        } else if (supportFileTypeEnum.equals(SupportFileTypeEnum.XML)) {
+
+            disconfFileTypeProcessor = new DisconfXmlProcessorImpl();
 
         } else {
 
-            disconfFileTypeProcessor = new DisconfXmlProcessorImpl();
-            dataMap = disconfFileTypeProcessor.getKvMap(fileName);
+            disconfFileTypeProcessor = new DisconfAnyFileProcessorImpl();
         }
+
+        dataMap = disconfFileTypeProcessor.getKvMap(fileName);
 
         if (dataMap == null) {
             dataMap = new HashMap<String, Object>();
