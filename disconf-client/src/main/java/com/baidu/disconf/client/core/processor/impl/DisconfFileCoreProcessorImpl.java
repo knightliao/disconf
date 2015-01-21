@@ -19,7 +19,7 @@ import com.github.knightliao.apollo.utils.data.GsonUtils;
 
 /**
  * 配置文件处理器实现
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
@@ -43,8 +43,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-    * 
-    */
+     *
+     */
     @Override
     public void processAllItems() {
 
@@ -53,8 +53,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String fileName : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to process disconf file: " + fileName
-                    + "\t=============================");
+            LOGGER.debug("==============\tstart to process disconf file: " + fileName +
+                             "\t=============================");
 
             DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(fileName);
 
@@ -94,7 +94,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             // 下载失败了, 尝试使用本地的配置
             //
 
-            LOGGER.error(e.toString());
+            LOGGER.error(e.toString(), e);
             LOGGER.warn("using local properties in class path: " + fileName);
 
             // 读取配置
@@ -114,7 +114,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(fileName);
         if (watchMgr != null) {
             watchMgr.watchPath(this, disConfCommonModel, fileName, DisConfigTypeEnum.FILE,
-                    GsonUtils.toJson(disconfCenterFile.getKV()));
+                                  GsonUtils.toJson(disconfCenterFile.getKV()));
             LOGGER.debug("watch ok.");
         } else {
             LOGGER.warn("cannot monitor {} because watch mgr is null", fileName);
@@ -153,7 +153,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
     /**
      * 为某个配置文件进行注入实例中
-     * 
+     *
      * @param fileName
      */
     private void inject2OneConf(String fileName, DisconfCenterFile disconfCenterFile) {
@@ -198,8 +198,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to inject value to disconf file item instance: " + key
-                    + "\t=============================");
+            LOGGER.debug("==============\tstart to inject value to disconf file item instance: " + key +
+                             "\t=============================");
 
             DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(key);
 
