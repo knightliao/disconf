@@ -75,7 +75,7 @@ public class DiffUtils {
                 }
 
                 if (stringComparator.getInsertsFromOriginal().size() != 0) {
-                    diff += "<br/>span style='color:#FF0000'>Insert info: </span><br/>";
+                    diff += "<br/><span style='color:#FF0000'>Insert info: </span><br/>";
                     for (Chunk chunk : stringComparator.getInsertsFromOriginal()) {
                         diff += StringEscapeUtils.escapeHtml(chunk.toString()) + "<br/>";
                     }
