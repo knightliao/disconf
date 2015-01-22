@@ -13,7 +13,7 @@ Distributed Configuration Management Platform
 disconf.git branches and Maven version:
 
 - dev(develop branch): 2.6.19-SNAPSHOT
-- master(stable branch)：2.6.18
+- master(stable branch)：2.6.19
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
@@ -27,7 +27,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.18）功能特点 ##
+## 当前版本（2.6.19）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -104,7 +104,7 @@ Disconf为应用方提供了三个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.18</version>
+        <version>2.6.19</version>
     </dependency>
 
 ### disconf-web 使用 ###
@@ -148,72 +148,3 @@ APP+环境+版本+ZK查询：
 	- QQ群: 239203866 
 
 ## disconf-client 主要依赖 ##
-
-主要依赖为：
-
-    +- org.apache.zookeeper:zookeeper:jar:3.3.6:compile
-    [INFO] |  +- log4j:log4j:jar:1.2.14:compile
-    [INFO] |  \- jline:jline:jar:0.9.94:compile
-    [INFO] +- com.google.code.gson:gson:jar:2.2.4:compile
-    [INFO] +- javax.ws.rs:javax.ws.rs-api:jar:2.0-rc1:compile
-    [INFO] |  \- javax.annotation:javax.annotation-api:jar:1.2-b02:compile
-    [INFO] +- org.reflections:reflections:jar:0.9.9-RC1:compile
-    [INFO] |  +- com.google.guava:guava:jar:11.0.2:compile
-    [INFO] |  |  \- com.google.code.findbugs:jsr305:jar:1.3.9:compile
-    [INFO] |  +- org.javassist:javassist:jar:3.16.1-GA:compile
-    [INFO] |  \- dom4j:dom4j:jar:1.6.1:compile
-    [INFO] +- ch.qos.logback:logback-core:jar:1.0.9:compile
-    [INFO] +- ch.qos.logback:logback-classic:jar:1.0.9:compile
-    [INFO] +- org.slf4j:slf4j-api:jar:1.7.6:compile
-    [INFO] +- com.baidu.disconf:disconf-core:jar:2.6.18:compile
-    [INFO] |  +- commons-io:commons-io:jar:1.4:compile
-    [INFO] |  +- commons-lang:commons-lang:jar:2.4:compile
-    [INFO] |  +- org.glassfish.jersey.media:jersey-media-json-jackson:jar:2.0-m13:compile
-    [INFO] |  |  +- org.glassfish.jersey.core:jersey-common:jar:2.0-m13:compile
-    [INFO] |  |  +- org.codehaus.jackson:jackson-core-asl:jar:1.9.8:compile
-    [INFO] |  |  +- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.8:compile
-    [INFO] |  |  +- org.codehaus.jackson:jackson-jaxrs:jar:1.9.8:compile
-    [INFO] |  |  \- org.codehaus.jackson:jackson-xc:jar:1.9.8:compile
-    [INFO] |  +- org.glassfish.jersey.core:jersey-client:jar:2.0-m13:compile
-    [INFO] |  |  +- org.glassfish.hk2:hk2-api:jar:2.1.64:compile
-    [INFO] |  |  |  +- org.glassfish.hk2:osgi-resource-locator:jar:1.0.1:compile
-    [INFO] |  |  |  +- javax.inject:javax.inject:jar:1:compile
-    [INFO] |  |  |  \- org.glassfish.hk2:hk2-utils:jar:2.1.64:compile
-    [INFO] |  |  \- org.glassfish.hk2:hk2-locator:jar:2.1.64:compile
-    [INFO] |  |     +- org.glassfish.hk2.external:javax.inject:jar:2.1.64:compile
-    [INFO] |  |     +- org.glassfish.hk2.external:asm-all-repackaged:jar:2.1.64:compile
-    [INFO] |  |     \- org.glassfish.hk2.external:cglib:jar:2.1.64:compile
-    [INFO] |  \- com.github.knightliao.apollo:apollo:jar:1.0.5:compile
-    [INFO] +- com.baidu.disconf:disconf-core:test-jar:tests:2.6.18:test
-    [INFO] +- org.aspectj:aspectjtools:jar:1.7.4:compile
-    [INFO] +- org.springframework:spring-test:jar:3.1.2.RELEASE:test
-    [INFO] +- com.google.guava:guava:jar:site:16.0:compile
-    [INFO] +- com.googlecode.jmockit:jmockit:jar:1.5:test
-    [INFO] +- com.googlecode.jmockit:jmockit-coverage:jar:0.999.24:test
-    [INFO] +- com.github.tomakehurst:wiremock:jar:standalone:1.46:test
-    [INFO] |  +- net.sf.jopt-simple:jopt-simple:jar:4.3:test
-    [INFO] |  +- xmlunit:xmlunit:jar:1.5:test
-    [INFO] |  +- com.fasterxml.jackson.core:jackson-core:jar:2.1.2:test
-    [INFO] |  +- org.mortbay.jetty:jetty:jar:6.1.14:test
-    [INFO] |  +- org.skyscreamer:jsonassert:jar:1.2.1:test
-    [INFO] |  |  \- org.json:json:jar:20090211:test
-    [INFO] |  +- com.jayway.jsonpath:json-path:jar:0.8.1:test
-    [INFO] |  |  \- net.minidev:json-smart:jar:1.1.1:test
-    [INFO] |  +- org.apache.httpcomponents:httpclient:jar:4.2.3:test
-    [INFO] |  |  +- org.apache.httpcomponents:httpcore:jar:4.2.2:test
-    [INFO] |  |  \- commons-codec:commons-codec:jar:1.6:test
-    [INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.1.2:test
-    [INFO] |  +- junit:junit-dep:jar:4.10:test
-    [INFO] |  \- com.fasterxml.jackson.core:jackson-databind:jar:2.1.2:test
-    [INFO] +- org.springframework:spring-context:jar:3.1.2.RELEASE:compile
-    [INFO] |  +- org.springframework:spring-expression:jar:3.1.2.RELEASE:compile
-    [INFO] |  \- org.springframework:spring-asm:jar:3.1.2.RELEASE:compile
-    [INFO] +- org.springframework:spring-beans:jar:3.1.2.RELEASE:provided
-    [INFO] +- org.springframework:spring-core:jar:3.1.2.RELEASE:provided
-    [INFO] |  \- commons-logging:commons-logging:jar:1.0.4:provided
-    [INFO] +- org.springframework:spring-aop:jar:3.1.2.RELEASE:provided
-    [INFO] |  \- aopalliance:aopalliance:jar:1.0:provided
-    [INFO] +- junit:junit:jar:4.10:test
-    [INFO] |  \- org.hamcrest:hamcrest-core:jar:1.1:test
-    [INFO] \- cglib:cglib:jar:2.2.2:compile
-    [INFO]    \- asm:asm:jar:3.3.1:compile
