@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.19-SNAPSHOT</version>
+    <version>2.6.19</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -14,7 +14,7 @@
         <module>disconf-tool</module>
     </modules>
 
-    <inceptionYear>2014</inceptionYear>
+    <inceptionYear>2015</inceptionYear>
     <licenses>
         <license>
             <name>Apache 2</name>
@@ -45,9 +45,9 @@
         <project.build.offline.sourceDir>${project.basedir}/src/main/resources</project.build.offline.sourceDir>
 
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.19-SNAPSHOT</disconf-core.version>
-        <disconf-client.version>2.6.19-SNAPSHOT</disconf-client.version>
-        <disconf-tool.version>2.6.19-SNAPSHOT</disconf-tool.version>
+        <disconf-core.version>2.6.19</disconf-core.version>
+        <disconf-client.version>2.6.19</disconf-client.version>
+        <disconf-tool.version>2.6.19</disconf-tool.version>
 
     </properties>
 
