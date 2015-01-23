@@ -9,21 +9,21 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf.client.scan.inner.statically.ScanStatic;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
+import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
+import com.baidu.disconf.client.scan.inner.statically.strategy.impl.ReflectionScanStatic;
 import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.baidu.disconf.client.utils.ScanPrinterUtils;
 
 /**
  * 扫描测试
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
 public class ScanPackTestCase extends BaseSpringTestCase {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ScanPackTestCase.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanPackTestCase.class);
 
     public static final String SCAN_PACK_NAME = "com.baidu.disconf.client.test";
 
@@ -32,7 +32,9 @@ public class ScanPackTestCase extends BaseSpringTestCase {
 
         try {
 
-            ScanStaticModel scanModel = ScanStatic.scan(SCAN_PACK_NAME);
+            ScanStaticStrategy scanStaticStrategy = new ReflectionScanStatic();
+
+            ScanStaticModel scanModel = scanStaticStrategy.scan(SCAN_PACK_NAME);
 
             // PRINT SCAN STORE
             ScanPrinterUtils.printSotreMap(scanModel.getReflections());
@@ -46,8 +48,7 @@ public class ScanPackTestCase extends BaseSpringTestCase {
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE===================");
-            Map<Class<?>, Set<Method>> fileMap = scanModel
-                    .getDisconfFileItemMap();
+            Map<Class<?>, Set<Method>> fileMap = scanModel.getDisconfFileItemMap();
             Assert.assertEquals(4, fileMap.size());
 
             // disconf item
@@ -58,8 +59,7 @@ public class ScanPackTestCase extends BaseSpringTestCase {
 
             // Active backup
             LOGGER.info("=============DISCONF ACTIVE BACKUP===================");
-            Set<Class<?>> classSet = scanModel
-                    .getDisconfActiveBackupServiceClassSet();
+            Set<Class<?>> classSet = scanModel.getDisconfActiveBackupServiceClassSet();
             ScanPrinterUtils.printActiveBackup(classSet);
             Assert.assertEquals(0, classSet.size());
 

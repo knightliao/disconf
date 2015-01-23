@@ -1,4 +1,7 @@
-package com.baidu.disconf.client.scan.inner.statically;
+/*
+ * Copyright (C) 2015 KNIGHT, Inc. All Rights Reserved.
+ */
+package com.baidu.disconf.client.scan.inner.statically.strategy.impl;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -27,17 +30,36 @@ import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.constants.Constants;
 import com.baidu.disconf.client.scan.inner.common.ScanVerify;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
+import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
 import com.google.common.base.Predicate;
 
 /**
+ * Created by knightliao on 15/1/23.
+ * <p/>
  * 扫描静态注解，并且进行分析整合数据
- *
- * @author liaoqiqi
- * @version 2014-6-6
+ * <p/>
+ * 使用 Reflection Lib
  */
-public class ScanStatic {
+public class ReflectionScanStatic implements ScanStaticStrategy {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanStatic.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanStaticStrategy.class);
+
+    /**
+     * 扫描想要的类
+     *
+     * @return
+     */
+    @Override
+    public ScanStaticModel scan(String packName) {
+
+        // 基本信息
+        ScanStaticModel scanModel = scanBasicInfo(packName);
+
+        // 分析
+        analysis(scanModel);
+
+        return scanModel;
+    }
 
     /**
      * 通过扫描，获取反射对象
@@ -46,7 +68,7 @@ public class ScanStatic {
      *
      * @return
      */
-    private static Reflections getReflection(String packName) {
+    private Reflections getReflection(String packName) {
 
         Predicate<String> filter =
             new FilterBuilder().includePackage(Constants.DISCONF_PACK_NAME).includePackage(packName);
@@ -67,27 +89,11 @@ public class ScanStatic {
     }
 
     /**
-     * 扫描想要的类
-     *
-     * @return
-     */
-    public static ScanStaticModel scan(String packName) {
-
-        // 基本信息
-        ScanStaticModel scanModel = scanBasicInfo(packName);
-
-        // 分析
-        analysis(scanModel);
-
-        return scanModel;
-    }
-
-    /**
      * 分析出一些关系 出来
      *
      * @param scanModel
      */
-    private static void analysis(ScanStaticModel scanModel) {
+    private void analysis(ScanStaticModel scanModel) {
 
         // 分析出配置文件MAP
         analysis4DisconfFile(scanModel);
@@ -98,7 +104,7 @@ public class ScanStatic {
      *
      * @param scanModel
      */
-    private static void analysis4DisconfFile(ScanStaticModel scanModel) {
+    private void analysis4DisconfFile(ScanStaticModel scanModel) {
 
         Map<Class<?>, Set<Method>> disconfFileItemMap = new HashMap<Class<?>, Set<Method>>();
 
@@ -163,7 +169,7 @@ public class ScanStatic {
      *
      * @return
      */
-    private static ScanStaticModel scanBasicInfo(String packName) {
+    private ScanStaticModel scanBasicInfo(String packName) {
 
         ScanStaticModel scanModel = new ScanStaticModel();
 
@@ -205,5 +211,4 @@ public class ScanStatic {
 
         return scanModel;
     }
-
 }

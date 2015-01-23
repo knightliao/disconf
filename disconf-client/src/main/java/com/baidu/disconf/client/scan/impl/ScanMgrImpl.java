@@ -9,15 +9,16 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.scan.ScanMgr;
 import com.baidu.disconf.client.scan.inner.dynamic.ScanDynamicStoreAdapter;
-import com.baidu.disconf.client.scan.inner.statically.ScanStatic;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgr;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgrFactory;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
+import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
+import com.baidu.disconf.client.scan.inner.statically.strategy.impl.ReflectionScanStatic;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 
 /**
  * 扫描模块
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
@@ -30,8 +31,10 @@ public class ScanMgrImpl implements ScanMgr {
 
     private List<StaticScannerMgr> staticScannerMgrList = new ArrayList<StaticScannerMgr>();
 
+    private ScanStaticStrategy scanStaticStrategy = new ReflectionScanStatic();
+
     /**
-     * 
+     *
      */
     public ScanMgrImpl() {
 
@@ -46,9 +49,8 @@ public class ScanMgrImpl implements ScanMgr {
     }
 
     /**
-     * 
      * 扫描并存储(静态)
-     * 
+     *
      * @throws Exception
      */
     public void firstScan(String packageName) throws Exception {
@@ -56,7 +58,7 @@ public class ScanMgrImpl implements ScanMgr {
         LOGGER.debug("start to scan package: " + packageName);
 
         // 获取扫描对象并分析整合
-        scanModel = ScanStatic.scan(packageName);
+        scanModel = scanStaticStrategy.scan(packageName);
 
         // 增加非注解的配置
         scanModel.setJustHostFiles(DisconfCenterHostFilesStore.getInstance().getJustHostFiles());
@@ -78,7 +80,7 @@ public class ScanMgrImpl implements ScanMgr {
     public void secondScan() throws Exception {
 
         if (scanModel == null) {
-            synchronized (scanModel) {
+            synchronized(scanModel) {
                 // 下载模块必须先初始化
                 if (scanModel == null) {
                     throw new Exception("You should run first scan before second Scan");
