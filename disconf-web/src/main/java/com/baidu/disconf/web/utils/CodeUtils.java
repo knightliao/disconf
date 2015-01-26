@@ -3,10 +3,15 @@
  */
 package com.baidu.disconf.web.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by knightliao on 15/1/7.
  */
 public class CodeUtils {
+
+    protected static final Logger LOG = LoggerFactory.getLogger(CodeUtils.class);
 
     /**
      * utf-8 转换成 unicode
@@ -94,7 +99,8 @@ public class CodeUtils {
                                 value = (value << 4) + 10 + aChar - 'A';
                                 break;
                             default:
-                                throw new IllegalArgumentException("Malformed   \\uxxxx   encoding.");
+                                LOG.warn("Malformed   \\uxxxx   encoding. " + aChar);
+                                value = aChar;
                         }
                     }
                     outBuffer.append((char) value);
