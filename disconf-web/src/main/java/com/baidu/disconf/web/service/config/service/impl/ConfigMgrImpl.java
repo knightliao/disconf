@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -315,7 +316,22 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                 } else {
 
-                    if (!zkDataStr.equals(valueInDb.toString().trim())) {
+                    boolean isEqual = true;
+
+                    if (StringUtils.isNumeric(zkDataStr) && StringUtils.isNumeric(valueInDb.toString())) {
+
+                        if (Math.abs(Double.parseDouble(zkDataStr) - Double.parseDouble(valueInDb.toString())) >
+                                0.001d) {
+                            isEqual = false;
+                        }
+
+                    } else {
+                        if (!zkDataStr.equals(valueInDb.toString().trim())) {
+                            isEqual = false;
+                        }
+                    }
+
+                    if (!isEqual) {
                         errorKeyList
                             .add(keyInZk + "\t" + DiffUtils.getDiffSimple(zkDataStr, valueInDb.toString().trim()));
                     }

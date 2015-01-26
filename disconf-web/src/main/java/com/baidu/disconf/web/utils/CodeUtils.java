@@ -99,9 +99,10 @@ public class CodeUtils {
                                 value = (value << 4) + 10 + aChar - 'A';
                                 break;
                             default:
-                                LOG.warn("Malformed   \\uxxxx   encoding. " + aChar + " original char is: " +
-                                             theString);
-                                value = aChar;
+                                //                                LOG.warn("Malformed   \\uxxxx   encoding. " + aChar
+                                // + " original char is: " +
+                                //                                             theString);
+                                value = 0;
                         }
                     }
                     outBuffer.append((char) value);
