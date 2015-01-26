@@ -391,9 +391,9 @@ public class ConfigMgrImpl implements ConfigMgr {
         String oldValue = config.getValue();
 
         //
-        // 配置数据库的值
+        // 配置数据库的值 encode to db
         //
-        configDao.updateValue(configId, value);
+        configDao.updateValue(configId, CodeUtils.utf8ToUnicode(value));
 
         //
         // 发送邮件通知
@@ -401,11 +401,12 @@ public class ConfigMgrImpl implements ConfigMgr {
         String toEmails = appMgr.getEmails(config.getAppId());
 
         if (applicationPropertyConfig.isEmailMonitorOn() == true) {
-            boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails, " config update", DiffUtils
-                                                                                              .getDiff(oldValue, value,
-                                                                                                          config
-                                                                                                              .toString(),
-                                                                                                          getConfigUrlHtml(config)));
+            boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails, " config update", DiffUtils.getDiff(CodeUtils
+                                                                                                                .unicodeToUtf8(oldValue),
+                                                                                                               value,
+                                                                                                               config
+                                                                                                                   .toString(),
+                                                                                                               getConfigUrlHtml(config)));
             if (isSendSuccess) {
                 return "修改成功，邮件通知成功";
             } else {
@@ -484,7 +485,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         config.setName(confNewForm.getKey());
         config.setType(disConfigTypeEnum.getType());
         config.setVersion(confNewForm.getVersion());
-        config.setValue(confNewForm.getValue());
+        config.setValue(CodeUtils.utf8ToUnicode(confNewForm.getValue()));
 
         // 时间
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
