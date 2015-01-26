@@ -296,8 +296,8 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         Properties prop = new Properties();
         try {
-            prop.load(IOUtils.toInputStream(dbData, "UTF-8"));
-        } catch (IOException e) {
+            prop.load(IOUtils.toInputStream(dbData));
+        } catch (Exception e) {
             LOG.error(e.toString());
             errorKeyList.add(zkData);
             return errorKeyList;
@@ -308,6 +308,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
             Object valueInDb = prop.get(keyInZk);
             String zkDataStr = zkMap.get(keyInZk);
+
+            // convert zk data to utf-8
+            //zkMap.put(keyInZk, CodeUtils.unicodeToUtf8(zkDataStr));
 
             try {
 
