@@ -244,7 +244,7 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
     /**
      * 返回groupName结点向下的所有zookeeper信息
      *
-     * @param root
+     * @param
      */
     @Override
     public List<String> getConf(String groupName) {
