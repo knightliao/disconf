@@ -12,7 +12,6 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,7 @@ import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataIt
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.disconf.web.utils.CodeUtils;
 import com.baidu.disconf.web.utils.DiffUtils;
+import com.baidu.disconf.web.utils.MyStringUtils;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
@@ -212,7 +212,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
             if (config.getType().equals(DisConfigTypeEnum.FILE.getType())) {
 
-                List<String> errorKeyList = compareConifg(zkDisconfDataItem.getValue(), config.getValue());
+                List<String> errorKeyList = compareConfig(zkDisconfDataItem.getValue(), config.getValue());
 
                 if (errorKeyList.size() != 0) {
                     zkDisconfDataItem.setErrorList(errorKeyList);
@@ -290,7 +290,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     /**
      *
      */
-    private List<String> compareConifg(String zkData, String dbData) {
+    private List<String> compareConfig(String zkData, String dbData) {
 
         List<String> errorKeyList = new ArrayList<String>();
 
@@ -318,7 +318,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                     boolean isEqual = true;
 
-                    if (StringUtils.isNumeric(zkDataStr) && StringUtils.isNumeric(valueInDb.toString())) {
+                    if (MyStringUtils.isDouble(zkDataStr) && MyStringUtils.isDouble(valueInDb.toString())) {
 
                         if (Math.abs(Double.parseDouble(zkDataStr) - Double.parseDouble(valueInDb.toString())) >
                                 0.001d) {
