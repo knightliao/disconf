@@ -387,6 +387,9 @@ public class ConfigMgrImpl implements ConfigMgr {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     public String updateItemValue(Long configId, String value) {
 
+        // encode to unicode
+        value = CodeUtils.utf8ToUnicode(value);
+
         Config config = getConfigById(configId);
         String oldValue = config.getValue();
 
@@ -484,7 +487,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         config.setName(confNewForm.getKey());
         config.setType(disConfigTypeEnum.getType());
         config.setVersion(confNewForm.getVersion());
-        config.setValue(confNewForm.getValue());
+        config.setValue(CodeUtils.utf8ToUnicode(confNewForm.getValue()));
 
         // 时间
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
