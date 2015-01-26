@@ -39,6 +39,7 @@ import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataIt
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.disconf.web.utils.CodeUtils;
 import com.baidu.disconf.web.utils.DiffUtils;
+import com.baidu.disconf.web.utils.MyStringUtils;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.utils.DataTransfer;
 import com.baidu.dsp.common.utils.ServiceUtil;
@@ -211,7 +212,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
             if (config.getType().equals(DisConfigTypeEnum.FILE.getType())) {
 
-                List<String> errorKeyList = compareConifg(zkDisconfDataItem.getValue(), config.getValue());
+                List<String> errorKeyList = compareConfig(zkDisconfDataItem.getValue(), config.getValue());
 
                 if (errorKeyList.size() != 0) {
                     zkDisconfDataItem.setErrorList(errorKeyList);
@@ -289,7 +290,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     /**
      *
      */
-    private List<String> compareConifg(String zkData, String dbData) {
+    private List<String> compareConfig(String zkData, String dbData) {
 
         List<String> errorKeyList = new ArrayList<String>();
 
@@ -315,7 +316,22 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                 } else {
 
-                    if (!zkDataStr.equals(valueInDb.toString().trim())) {
+                    boolean isEqual = true;
+
+                    if (MyStringUtils.isDouble(zkDataStr) && MyStringUtils.isDouble(valueInDb.toString())) {
+
+                        if (Math.abs(Double.parseDouble(zkDataStr) - Double.parseDouble(valueInDb.toString())) >
+                                0.001d) {
+                            isEqual = false;
+                        }
+
+                    } else {
+                        if (!zkDataStr.equals(valueInDb.toString().trim())) {
+                            isEqual = false;
+                        }
+                    }
+
+                    if (!isEqual) {
                         errorKeyList
                             .add(keyInZk + "\t" + DiffUtils.getDiffSimple(zkDataStr, valueInDb.toString().trim()));
                     }
