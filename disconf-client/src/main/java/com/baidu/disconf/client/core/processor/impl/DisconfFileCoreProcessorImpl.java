@@ -1,5 +1,6 @@
 package com.baidu.disconf.client.core.processor.impl;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -79,14 +80,11 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         // 下载配置
         //
         String filePath = "";
-        Map<String, Object> dataMap = null;
+        Map<String, Object> dataMap = new HashMap<String, Object>();
         try {
 
             String url = disconfCenterFile.getRemoteServerUrl();
             filePath = fetcherMgr.downloadFileFromServer(url, fileName);
-
-            // 读取配置
-            dataMap = FileTypeProcessorUtils.getKvMap(filePath);
 
         } catch (Exception e) {
 
@@ -97,10 +95,16 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             LOGGER.error(e.toString(), e);
             LOGGER.warn("using local properties in class path: " + fileName);
 
-            // 读取配置
-            dataMap = FileTypeProcessorUtils.getKvMap(fileName);
+            // change file path
+            filePath = fileName;
         }
         LOGGER.debug("download ok.");
+
+        try {
+            dataMap = FileTypeProcessorUtils.getKvMap(filePath);
+        } catch (Exception e) {
+            LOGGER.error("cannot get kv data", e);
+        }
 
         //
         // 注入到仓库中
