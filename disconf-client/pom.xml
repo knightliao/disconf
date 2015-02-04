@@ -85,7 +85,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -97,6 +96,7 @@
             <groupId>com.googlecode.jmockit</groupId>
             <artifactId>jmockit</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.googlecode.jmockit</groupId>
             <artifactId>jmockit-coverage</artifactId>
@@ -114,23 +114,26 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <scope>provided</scope>
         </dependency>
-
 
         <dependency>
             <groupId>junit</groupId>
