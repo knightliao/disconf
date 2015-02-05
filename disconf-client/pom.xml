@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>disconf-client</artifactId>
     <packaging>jar</packaging>
+    <version>${disconf-client.version}</version>
 
     <parent>
         <groupId>com.baidu.disconf</groupId>
@@ -233,8 +234,8 @@
     </build>
 
     <name>disconf-client</name>
-    <url>https://github.com/knightliao/disconf/tree/master/disconf-core</url>
-    <description>https://github.com/knightliao/disconf/tree/master/disconf-core</description>
+    <url>https://github.com/knightliao/disconf/tree/master/disconf-client</url>
+    <description>https://github.com/knightliao/disconf/tree/master/disconf-client</description>
 
     <organization>
         <name>Baidu</name>
@@ -308,5 +309,5 @@
             </build>
         </profile>
     </profiles>
-    <version>${disconf-core.version}</version>
+
 </project>
