@@ -7,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.example.disconf.demo.task.DisconfDemoTask;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-17
  */
@@ -19,12 +18,12 @@ public class DisconfDemoMain {
 
     // 初始化spring文档
     private static void contextInitialized() {
-        fn = new String[] { "applicationContext.xml" };
+        fn = new String[] {"applicationContext.xml"};
     }
 
-    /***
-     * 
+    /**
      * @param args
+     *
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {

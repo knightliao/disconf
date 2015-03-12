@@ -14,19 +14,24 @@ import com.google.common.collect.Maps;
 
 /**
  * Store的Mock
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-30
  */
-public class ResilientActiveKeyValueStoreMock extends
-        ResilientActiveKeyValueStore {
+public class ResilientActiveKeyValueStoreMock extends ResilientActiveKeyValueStore {
 
     // 数据结构
     Map<String, String> map = Maps.newHashMap();
 
+    /**
+     * @param
+     */
+    public ResilientActiveKeyValueStoreMock() {
+        super(true);
+    }
+
     @Override
-    public void write(String path, String value) throws InterruptedException,
-            KeeperException {
+    public void write(String path, String value) throws InterruptedException, KeeperException {
 
         map.put(path, value);
 
@@ -34,8 +39,8 @@ public class ResilientActiveKeyValueStoreMock extends
     }
 
     @Override
-    public String createEphemeralNode(String path, String value,
-            CreateMode createMode) throws InterruptedException, KeeperException {
+    public String createEphemeralNode(String path, String value, CreateMode createMode)
+        throws InterruptedException, KeeperException {
 
         map.put(path, value);
 
@@ -43,8 +48,7 @@ public class ResilientActiveKeyValueStoreMock extends
     }
 
     @Override
-    public boolean exists(String path) throws InterruptedException,
-            KeeperException {
+    public boolean exists(String path) throws InterruptedException, KeeperException {
 
         return map.containsKey(path);
     }
@@ -64,8 +68,7 @@ public class ResilientActiveKeyValueStoreMock extends
     }
 
     @Override
-    public String read(String path, Watcher watcher, Stat stat)
-            throws InterruptedException, KeeperException {
+    public String read(String path, Watcher watcher, Stat stat) throws InterruptedException, KeeperException {
 
         return map.get(path);
     }

@@ -16,7 +16,7 @@ import com.github.knightliao.apollo.utils.tool.ZooUtils;
 
 /**
  * ZK统一管理器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-7
  */
@@ -30,19 +30,18 @@ public class ZookeeperMgr {
     private String curDefaultPrefixString = "";
 
     /**
-     * 
-     * @Description: 初始化
-     * 
-     * @throws Exception
      * @return void
+     *
+     * @throws Exception
+     * @Description: 初始化
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public void init(String host, String defaultPrefixString) throws Exception {
+    public void init(String host, String defaultPrefixString, boolean debug) throws Exception {
 
         try {
 
-            initInternal(host, defaultPrefixString);
+            initInternal(host, defaultPrefixString, debug);
 
             LOGGER.debug("ZookeeperMgr init.");
 
@@ -81,21 +80,21 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 初始化
-     * 
+     * @return void
+     *
      * @throws IOException
      * @throws InterruptedException
-     * @return void
+     * @Description: 初始化
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    private void initInternal(String hosts, String defaultPrefixString) throws IOException, InterruptedException {
+    private void initInternal(String hosts, String defaultPrefixString, boolean debug)
+        throws IOException, InterruptedException {
 
         curHost = hosts;
         curDefaultPrefixString = defaultPrefixString;
 
-        store = new ResilientActiveKeyValueStore();
+        store = new ResilientActiveKeyValueStore(debug);
         store.connect(hosts);
 
         LOGGER.info("zoo prefix: " + defaultPrefixString);
@@ -106,7 +105,7 @@ public class ZookeeperMgr {
 
     /**
      * Zoo的新建目录
-     * 
+     *
      * @param dir
      */
     public void makeDir(String dir, String data) {
@@ -131,10 +130,9 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 应用程序必须调用它来释放zookeeper资源
-     * 
      * @return void
+     *
+     * @Description: 应用程序必须调用它来释放zookeeper资源
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -144,11 +142,9 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 获取子孩子 列表
-     * 
-     * @return
      * @return List<String>
+     *
+     * @Description: 获取子孩子 列表
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -158,11 +154,9 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 写持久化结点,没有则新建,存在则进行更新
-     * 
-     * @return
      * @return List<String>
+     *
+     * @Description: 写持久化结点, 没有则新建, 存在则进行更新
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -172,11 +166,9 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 读结点数据
-     * 
-     * @return
      * @return List<String>
+     *
+     * @Description: 读结点数据
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -210,16 +202,15 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 带状态信息的读取数据
-     * 
      * @param path
      * @param watcher
      * @param stat
-     * @return
+     *
+     * @return String
+     *
      * @throws InterruptedException
      * @throws KeeperException
-     * @return String
+     * @Description: 带状态信息的读取数据
      * @author liaoqiqi
      * @date 2013-6-17
      */
@@ -229,11 +220,11 @@ public class ZookeeperMgr {
     }
 
     /**
-     * 
-     * @Description: 删除结点
-     * 
      * @param path
+     *
      * @return void
+     *
+     * @Description: 删除结点
      * @author liaoqiqi
      * @date 2013-6-17
      */

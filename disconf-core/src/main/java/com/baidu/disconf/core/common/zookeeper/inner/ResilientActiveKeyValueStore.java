@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * ZK读写
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-7
  */
@@ -32,14 +32,21 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     public static final int RETRY_PERIOD_SECONDS = 2;
 
     /**
-     * 
-     * @Description: 写PATH数据, 是持久化的
-     * 
+     * @param debug
+     */
+    public ResilientActiveKeyValueStore(boolean debug) {
+        super(debug);
+    }
+
+    /**
      * @param path
      * @param value
+     *
+     * @return void
+     *
      * @throws InterruptedException
      * @throws KeeperException
-     * @return void
+     * @Description: 写PATH数据, 是持久化的
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -83,19 +90,19 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     }
 
     /**
-     * 
-     * @Description: 创建一个临时结点，如果原本存在，则不新建, 如果存在，则更新值
-     * 
      * @param path
      * @param value
+     *
+     * @return void
+     *
      * @throws InterruptedException
      * @throws KeeperException
-     * @return void
+     * @Description: 创建一个临时结点，如果原本存在，则不新建, 如果存在，则更新值
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public String createEphemeralNode(String path, String value, CreateMode createMode) throws InterruptedException,
-            KeeperException {
+    public String createEphemeralNode(String path, String value, CreateMode createMode)
+        throws InterruptedException, KeeperException {
 
         int retries = 0;
         while (true) {
@@ -137,16 +144,14 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     }
 
     /**
-     * 
-     * @Description: 判断是否存在
-     * 
+     * 判断是否存在
+     *
      * @param path
-     * @param value
+     *
+     * @return
+     *
      * @throws InterruptedException
      * @throws KeeperException
-     * @return void
-     * @author liaoqiqi
-     * @date 2013-6-14
      */
     public boolean exists(String path) throws InterruptedException, KeeperException {
 
@@ -188,15 +193,14 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     }
 
     /**
-     * 
-     * @Description: 读数据
-     * 
      * @param path
      * @param watcher
-     * @return
+     *
+     * @return String
+     *
      * @throws InterruptedException
      * @throws KeeperException
-     * @return String
+     * @Description: 读数据
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -207,11 +211,9 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     }
 
     /**
-     * 
-     * @Description: 获取子孩子数据
-     * 
-     * @return
      * @return List<String>
+     *
+     * @Description: 获取子孩子数据
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -230,11 +232,11 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     }
 
     /**
-     * 
-     * @Description: 删除结点
-     * 
      * @param path
+     *
      * @return void
+     *
+     * @Description: 删除结点
      * @author liaoqiqi
      * @date 2013-6-17
      */

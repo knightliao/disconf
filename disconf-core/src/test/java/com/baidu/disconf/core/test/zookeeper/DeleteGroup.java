@@ -7,9 +7,8 @@ import org.apache.zookeeper.KeeperException;
 import com.baidu.disconf.core.common.zookeeper.inner.ConnectionWatcher;
 
 /**
- * 
  * 递归进行删除
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -17,8 +16,14 @@ public class DeleteGroup extends ConnectionWatcher {
 
     public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
 
-    public void delete(String groupName) throws KeeperException,
-            InterruptedException {
+    /**
+     * @param
+     */
+    public DeleteGroup() {
+        super(true);
+    }
+
+    public void delete(String groupName) throws KeeperException, InterruptedException {
 
         String path = groupName;
 

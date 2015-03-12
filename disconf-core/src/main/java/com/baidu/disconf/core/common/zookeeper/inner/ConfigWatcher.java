@@ -8,7 +8,6 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.EventType;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -17,7 +16,7 @@ public class ConfigWatcher implements Watcher {
     private ResilientActiveKeyValueStore store;
 
     public ConfigWatcher(String hosts) throws IOException, InterruptedException {
-        store = new ResilientActiveKeyValueStore();
+        store = new ResilientActiveKeyValueStore(true);
         store.connect(hosts);
     }
 

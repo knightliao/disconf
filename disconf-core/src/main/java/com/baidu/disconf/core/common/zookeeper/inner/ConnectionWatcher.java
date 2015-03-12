@@ -14,9 +14,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 连接管理
- * 
+ *
  * @author liaoqiqi
- * 
  */
 public class ConnectionWatcher implements Watcher {
 
@@ -33,14 +32,24 @@ public class ConnectionWatcher implements Watcher {
 
     private static String internalHost = "";
 
+    // 是否调试状态
+    private boolean debug = false;
+
     /**
-     * 
-     * @Description: 连接ZK
-     * 
+     * @param debug
+     */
+    public ConnectionWatcher(boolean debug) {
+        this.debug = debug;
+    }
+
+    /**
      * @param hosts
+     *
+     * @return void
+     *
      * @throws IOException
      * @throws InterruptedException
-     * @return void
+     * @Description: 连接ZK
      * @author liaoqiqi
      * @date 2013-6-14
      */
@@ -66,16 +75,21 @@ public class ConnectionWatcher implements Watcher {
 
         } else if (event.getState().equals(KeeperState.Disconnected)) {
 
-            // 这时收到断开连接的消息，这里其它无能为力，因为这时已经和ZK断开连接了，只能等ZK再次开启了
+            // 这时收到断开连接的消息，这里其实无能为力，因为这时已经和ZK断开连接了，只能等ZK再次开启了
             LOGGER.warn("zk Disconnected");
 
         } else if (event.getState().equals(KeeperState.Expired)) {
 
-            // 这时收到这个信息，表示，ZK已经重新连接上了，但是会话丢失了，这时需要重新建立会话。
-            LOGGER.error("zk Expired");
+            if (!debug) {
 
-            // just reconnect forever
-            reconnect();
+                // 这时收到这个信息，表示，ZK已经重新连接上了，但是会话丢失了，这时需要重新建立会话。
+                LOGGER.error("zk Expired");
+
+                // just reconnect forever
+                reconnect();
+            } else {
+                LOGGER.info("zk Expired");
+            }
 
         } else if (event.getState().equals(KeeperState.AuthFailed)) {
 
@@ -119,11 +133,10 @@ public class ConnectionWatcher implements Watcher {
     }
 
     /**
-     * 
-     * @Description: 关闭
-     * 
-     * @throws InterruptedException
      * @return void
+     *
+     * @throws InterruptedException
+     * @Description: 关闭
      * @author liaoqiqi
      * @date 2013-6-14
      */

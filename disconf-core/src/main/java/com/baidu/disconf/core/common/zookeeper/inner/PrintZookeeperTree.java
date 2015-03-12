@@ -11,19 +11,24 @@ import org.slf4j.LoggerFactory;
 
 /**
  * ZK打印
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-7
  */
 public class PrintZookeeperTree extends ConnectionWatcher {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(PrintZookeeperTree.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(PrintZookeeperTree.class);
 
     private static final Charset CHARSET = Charset.forName("UTF-8");
 
-    public void list(String groupName) throws KeeperException,
-            InterruptedException {
+    /**
+     * @param
+     */
+    public PrintZookeeperTree() {
+        super(true);
+    }
+
+    public void list(String groupName) throws KeeperException, InterruptedException {
 
         try {
 

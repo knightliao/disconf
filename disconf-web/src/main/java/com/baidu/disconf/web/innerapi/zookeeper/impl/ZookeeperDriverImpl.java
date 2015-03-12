@@ -330,7 +330,7 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
 
         if (!isInit) {
 
-            ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(), zooConfig.getZookeeperUrlPrefix());
+            ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(), zooConfig.getZookeeperUrlPrefix(), false);
             isInit = true;
         }
     }

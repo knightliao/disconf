@@ -12,9 +12,8 @@ import com.baidu.disconf.client.scan.ScanMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 
 /**
- * 
  * Disconf Client 总入口
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-23
  */
@@ -34,7 +33,7 @@ public class DisconfMgr {
 
     /**
      * 总入口
-     * 
+     *
      * @param scanPackage
      */
     public synchronized static void start(String scanPackage) {
@@ -46,7 +45,7 @@ public class DisconfMgr {
 
     /**
      * 第一次扫描，静态扫描
-     * 
+     *
      * @param scanPackage
      */
     public synchronized static void firstScan(String scanPackage) {
@@ -95,7 +94,7 @@ public class DisconfMgr {
 
     /**
      * 第二次扫描, 动态扫描
-     * 
+     *
      * @param scanPackage
      */
     public synchronized static void secondScan() {
@@ -143,10 +142,9 @@ public class DisconfMgr {
     }
 
     /**
-     * 
-     * @Description: 总关闭
-     * 
      * @return void
+     *
+     * @Description: 总关闭
      * @author liaoqiqi
      * @date 2013-6-14
      */

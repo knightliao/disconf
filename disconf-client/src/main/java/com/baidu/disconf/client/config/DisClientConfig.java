@@ -13,14 +13,13 @@ import com.baidu.disconf.core.common.constants.Constants;
 
 /**
  * Disconf Client的用户配置文件
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
 public final class DisClientConfig {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisClientConfig.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisClientConfig.class);
 
     protected static final DisClientConfig INSTANCE = new DisClientConfig();
 
@@ -42,9 +41,10 @@ public final class DisClientConfig {
 
     /**
      * load config normal
-     * 
-     * @param bundle
+     *
      * @param filePath
+     *
+     * @throws Exception
      */
     public synchronized void loadConfig(String filePath) throws Exception {
 
@@ -73,7 +73,7 @@ public final class DisClientConfig {
 
     /**
      * app
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -82,7 +82,7 @@ public final class DisClientConfig {
 
     /**
      * 版本
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -91,7 +91,7 @@ public final class DisClientConfig {
 
     /**
      * 主或备
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -100,7 +100,7 @@ public final class DisClientConfig {
 
     /**
      * 部署环境
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -109,7 +109,7 @@ public final class DisClientConfig {
 
     /**
      * 是否从云端下载配置
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -117,8 +117,18 @@ public final class DisClientConfig {
     public boolean ENABLE_DISCONF = false;
 
     /**
+     * 是否开启DEBUG模式: 默认不开启，
+     * 1）true: 用于线下调试，当ZK断开与client连接后（如果设置断点，这个事件很容易就发生），ZK不会去重新建立连接。
+     * 2）false: 用于线上，当ZK断开与client连接后，ZK会再次去重新建立连接。
+     * @author
+     * @since 1.0.0
+     */
+    @DisInnerConfigAnnotation(name = "debug", defaultValue = "false")
+    public boolean DEBUG = false;
+
+    /**
      * 忽略哪些分布式配置
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -128,7 +138,7 @@ public final class DisClientConfig {
 
     /**
      * 获取远程配置 重试次数，默认是3次
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -137,7 +147,7 @@ public final class DisClientConfig {
 
     /**
      * 获取远程配置 重试时休眠时间，默认是5秒
-     * 
+     *
      * @author
      * @since 1.0.0
      */

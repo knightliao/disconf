@@ -15,7 +15,7 @@ import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
 
 /**
  * 结点监控器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -27,13 +27,24 @@ public class NodeWatcher implements Watcher {
     private String keyName = "";
     private DisConfigTypeEnum disConfigTypeEnum;
     private DisconfSysUpdateCallback disconfSysUpdateCallback;
+    private boolean debug;
 
     private DisconfCoreProcessor disconfCoreMgr;
 
+    /**
+     * @param disconfCoreMgr
+     * @param monitorPath
+     * @param keyName
+     * @param disConfigTypeEnum
+     * @param disconfSysUpdateCallback
+     * @param debug
+     */
     public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath, String keyName,
-            DisConfigTypeEnum disConfigTypeEnum, DisconfSysUpdateCallback disconfSysUpdateCallback) {
+                       DisConfigTypeEnum disConfigTypeEnum, DisconfSysUpdateCallback disconfSysUpdateCallback,
+                       boolean debug) {
 
         super();
+        this.debug = debug;
         this.disconfCoreMgr = disconfCoreMgr;
         this.monitorPath = monitorPath;
         this.keyName = keyName;
@@ -42,8 +53,7 @@ public class NodeWatcher implements Watcher {
     }
 
     /**
-     * 
-     * @param monitorPath
+     * @param
      */
     public void monitorMaster() {
 
@@ -61,8 +71,8 @@ public class NodeWatcher implements Watcher {
             LOGGER.error("cannot monitor " + monitorPath, e);
         }
 
-        LOGGER.debug("monitor path: (" + monitorPath + "," + keyName + "," + disConfigTypeEnum.getModelName()
-                + ") has been added!");
+        LOGGER.debug("monitor path: (" + monitorPath + "," + keyName + "," + disConfigTypeEnum.getModelName() +
+                         ") has been added!");
     }
 
     /**
@@ -78,8 +88,8 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("============GOT UPDATE EVENT " + event.getType() + ": (" + monitorPath + "," + keyName
-                        + "," + disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.info("============GOT UPDATE EVENT " + event.toString() + ": (" + monitorPath + "," + keyName +
+                                "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 调用回调函数, 回调函数里会重新进行监控
                 callback();
@@ -95,8 +105,16 @@ public class NodeWatcher implements Watcher {
         //
         if (event.getState() == KeeperState.Disconnected) {
 
-            LOGGER.warn("============GOT Disconnected EVENT " + event.getType() + ": (" + monitorPath + "," + keyName
-                    + "," + disConfigTypeEnum.getModelName() + ")======================");
+            if (!debug) {
+                LOGGER.warn("============GOT Disconnected EVENT " + event.toString() + ": (" + monitorPath + "," +
+                                keyName +
+                                "," + disConfigTypeEnum.getModelName() + ")======================");
+            } else {
+                LOGGER.info("============DEBUG MODE: GOT Disconnected EVENT " + event.toString() + ": (" + monitorPath +
+                                "," +
+                                keyName +
+                                "," + disConfigTypeEnum.getModelName() + ")======================");
+            }
         }
 
         //
@@ -104,18 +122,26 @@ public class NodeWatcher implements Watcher {
         //
         if (event.getState() == KeeperState.Expired) {
 
-            LOGGER.error("============GOT Expired  " + event.getType() + ": (" + monitorPath + "," + keyName + ","
-                    + disConfigTypeEnum.getModelName() + ")======================");
+            if (!debug) {
 
-            // 重新连接
-            ZookeeperMgr.getInstance().reconnect();
+                LOGGER
+                    .error("============GOT Expired  " + event.toString() + ": (" + monitorPath + "," + keyName + "," +
+                               disConfigTypeEnum.getModelName() + ")======================");
 
-            callback();
+                // 重新连接
+                ZookeeperMgr.getInstance().reconnect();
+
+                callback();
+            } else {
+                LOGGER.info("============DEBUG MODE: GOT Expired  " + event.toString() + ": (" + monitorPath + "," +
+                                "" + keyName + "," +
+                                disConfigTypeEnum.getModelName() + ")======================");
+            }
         }
     }
 
     /**
-     * 
+     *
      */
     private void callback() {
 
