@@ -102,6 +102,8 @@ public class ConnectionWatcher implements Watcher {
      */
     public synchronized void reconnect() {
 
+        LOGGER.info("start to reconnect....");
+
         int retries = 0;
         while (true) {
 
