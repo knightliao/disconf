@@ -11,7 +11,7 @@ import com.example.disconf.demo.config.Coefficients;
 
 /**
  * 金融宝服务，计算一天赚多少钱
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-16
  */
@@ -30,7 +30,7 @@ public class BaoBaoService {
 
     /**
      * 计算百发一天赚多少钱
-     * 
+     *
      * @return
      */
     public double calcBaiFa() {
@@ -39,7 +39,7 @@ public class BaoBaoService {
 
     /**
      * k 计算余额宝一天赚多少钱
-     * 
+     *
      * @return
      */
     public double calcYuErBao() {
@@ -51,7 +51,7 @@ public class BaoBaoService {
      * <br/>
      * 这里切面无法生效，因为SpringAOP不支持。<br/>
      * 但是这里还是正确的，因为我们会将值注入到Bean的值里.
-     * 
+     *
      * @return
      */
     @DisconfItem(key = key)

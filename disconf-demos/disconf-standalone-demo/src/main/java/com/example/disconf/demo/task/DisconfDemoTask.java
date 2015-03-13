@@ -12,7 +12,7 @@ import com.example.disconf.demo.service.SimpleStaticService;
 
 /**
  * 演示分布式配置文件、分布式配置的更新Demo
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-17
  */
@@ -33,7 +33,7 @@ public class DisconfDemoTask {
     private static final String REDIS_KEY = "disconf_key";
 
     /**
-     * 
+     *
      */
     public int run() {
 

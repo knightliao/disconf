@@ -9,8 +9,7 @@ import com.baidu.disconf.client.common.annotations.DisconfItem;
 
 /**
  * 金融系数文件
- * 
- **/
+ */
 @Service
 @DisconfFile(filename = "coefficients.properties")
 public class Coefficients {
@@ -26,7 +25,7 @@ public class Coefficients {
 
     /**
      * 阿里余额宝的系数, 分布式文件配置
-     * 
+     *
      * @return
      */
     @DisconfFileItem(name = "coe.baiFaCoe")
@@ -40,7 +39,7 @@ public class Coefficients {
 
     /**
      * 百发的系数, 分布式文件配置
-     * 
+     *
      * @return
      */
     @DisconfFileItem(name = "coe.yuErBaoCoe")
@@ -54,7 +53,7 @@ public class Coefficients {
 
     /**
      * 折扣率，分布式配置
-     * 
+     *
      * @return
      */
     @DisconfItem(key = key)

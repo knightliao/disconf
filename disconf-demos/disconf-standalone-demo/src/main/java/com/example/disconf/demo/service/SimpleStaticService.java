@@ -7,7 +7,7 @@ import com.example.disconf.demo.config.StaticConfig;
  * 使用静态配置文件的示例<br/>
  * Plus <br/>
  * 静态配置项 使用示例
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-14
  */
@@ -16,7 +16,6 @@ public class SimpleStaticService {
     private static int staticItem = 56;
 
     /**
-     * 
      * @return
      */
     public static int getStaticFileData() {
