@@ -12,14 +12,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-14
  */
 @NotNull
 @Size(min = 3, max = 20)
 @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "username.error")
-@Target({ ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
 public @interface UserNameConstraint {

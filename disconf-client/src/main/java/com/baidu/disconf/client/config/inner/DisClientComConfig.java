@@ -12,7 +12,7 @@ import com.baidu.disconf.client.common.model.InstanceFingerprint;
 
 /**
  * 一些通用的数据
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-1
  */
@@ -67,11 +67,11 @@ public class DisClientComConfig {
 
     /**
      * 获取指纹
-     * 
+     *
      * @return
      */
     public String getInstanceFingerprint() {
-        return instanceFingerprint.getHost() + "_" + String.valueOf(instanceFingerprint.getPort()) + "_"
-                + instanceFingerprint.getUuid();
+        return instanceFingerprint.getHost() + "_" + String.valueOf(instanceFingerprint.getPort()) + "_" +
+                   instanceFingerprint.getUuid();
     }
 }

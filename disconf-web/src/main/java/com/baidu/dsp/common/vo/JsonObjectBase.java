@@ -6,15 +6,15 @@ import java.util.Map;
 
 /**
  * JSON 基类
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-3
  */
 public class JsonObjectBase implements Serializable {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = -8441731449894560959L;
 
     /**
@@ -59,8 +59,7 @@ public class JsonObjectBase implements Serializable {
 
     @Override
     public String toString() {
-        return "JsonObjectBase [message=" + message + ", sessionId="
-                + sessionId + ", success=" + success + "]";
+        return "JsonObjectBase [message=" + message + ", sessionId=" + sessionId + ", success=" + success + "]";
     }
 
 }

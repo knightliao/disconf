@@ -2,7 +2,7 @@ package com.baidu.disconf.client.core;
 
 /**
  * 核心处理模块：包括第一次扫描时配置入库; 第二次扫描时配置注入;
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */

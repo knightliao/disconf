@@ -3,8 +3,6 @@ package com.baidu.disconf.core.test.zookeeper;
 import java.util.List;
 import java.util.Random;
 
-import mockit.NonStrictExpectations;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,10 +10,11 @@ import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
 import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStore;
 import com.baidu.disconf.core.test.zookeeper.mock.ResilientActiveKeyValueStoreMock;
 
+import mockit.NonStrictExpectations;
+
 /**
- * 
  * 使用Jmockit进行测试
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -62,8 +61,7 @@ public class ZookeeperMgrTest {
 
             // 写
             String url = "/disconfserver/dan_dnwebbilling_1_0_online";
-            ZookeeperMgr.getInstance().writePersistentUrl(url,
-                    String.valueOf(randomInt));
+            ZookeeperMgr.getInstance().writePersistentUrl(url, String.valueOf(randomInt));
 
             // 读
             String readData = ZookeeperMgr.getInstance().readUrl(url, null);

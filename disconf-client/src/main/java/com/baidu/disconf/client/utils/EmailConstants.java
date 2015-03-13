@@ -1,7 +1,6 @@
 package com.baidu.disconf.client.utils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-1
  */

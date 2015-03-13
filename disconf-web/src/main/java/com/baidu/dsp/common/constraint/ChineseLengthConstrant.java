@@ -12,13 +12,13 @@ import com.baidu.dsp.common.constraint.validation.ChineseLengthValidator;
 
 /**
  * 中文校验
- * 
+ *
  * @author zhangbi
  * @date 2014年1月13日下午9:24:42
  */
-@Target({ ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { ChineseLengthValidator.class })
+@Constraint(validatedBy = {ChineseLengthValidator.class})
 public @interface ChineseLengthConstrant {
     String message() default "";
 
@@ -28,21 +28,21 @@ public @interface ChineseLengthConstrant {
 
     /**
      * 支持的最大长度
-     * 
+     *
      * @return
      */
     long maxLength() default Long.MAX_VALUE;
 
     /**
      * 支持最小长度
-     * 
+     *
      * @return
      */
     long minLength() default 0;
 
     /**
      * 中文计长度的个数,默认为<code>2</code>
-     * 
+     *
      * @return
      */
     int cnHoldLength() default 2;

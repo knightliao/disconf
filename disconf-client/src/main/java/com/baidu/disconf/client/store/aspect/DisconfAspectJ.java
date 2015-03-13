@@ -22,7 +22,7 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
  * 配置拦截
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-11
  */
@@ -38,10 +38,12 @@ public class DisconfAspectJ {
 
     /**
      * 获取配置文件数据
-     * 
+     *
      * @param pjp
      * @param disconfFileItem
+     *
      * @return
+     *
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfFileItem)")
@@ -68,8 +70,8 @@ public class DisconfAspectJ {
             DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
             Object ret = disconfStoreProcessor.getConfig(disconfFile.filename(), disconfFileItem.name());
             if (ret != null) {
-                LOGGER.info("using disconf store value: " + disconfFile.filename() + " (" + disconfFileItem.name()
-                        + " , " + ret + ")");
+                LOGGER.info("using disconf store value: " + disconfFile.filename() + " (" + disconfFileItem.name() +
+                                " , " + ret + ")");
                 return ret;
             }
         }
@@ -89,10 +91,12 @@ public class DisconfAspectJ {
 
     /**
      * 获取配置项数据
-     * 
+     *
      * @param pjp
      * @param disconfFileItem
+     *
      * @return
+     *
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfItem)")

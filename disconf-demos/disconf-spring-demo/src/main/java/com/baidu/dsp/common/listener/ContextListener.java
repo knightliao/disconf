@@ -8,8 +8,7 @@ import org.springframework.web.context.ContextLoaderListener;
 
 public class ContextListener extends ContextLoaderListener {
 
-    private static final Logger logger = LoggerFactory
-            .getLogger(ContextListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContextListener.class);
 
     private static boolean isInitialized = false;
 

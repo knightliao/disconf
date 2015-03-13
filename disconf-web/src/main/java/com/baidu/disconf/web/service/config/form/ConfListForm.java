@@ -5,14 +5,13 @@ import javax.validation.constraints.NotNull;
 import com.baidu.dsp.common.form.RequestListBase;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-23
  */
 public class ConfListForm extends RequestListBase {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -2498128894396346299L;
 

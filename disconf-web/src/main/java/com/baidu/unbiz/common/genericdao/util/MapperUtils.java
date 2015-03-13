@@ -10,18 +10,19 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * 
  * @author Darwin(Tianxin)
  */
 public class MapperUtils {
 
     /**
      * 在rs中获取column字段的typeClass型的值
-     * 
+     *
      * @param rs
      * @param column
      * @param paramClass
+     *
      * @return
+     *
      * @throws SQLException
      */
     public static Object getValue4Type(ResultSet rs, String column, Class<?> typeClass) throws SQLException {

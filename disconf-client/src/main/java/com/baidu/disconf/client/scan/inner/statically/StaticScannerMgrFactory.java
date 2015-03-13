@@ -5,7 +5,6 @@ import com.baidu.disconf.client.scan.inner.statically.impl.StaticScannerItemMgrI
 import com.baidu.disconf.client.scan.inner.statically.impl.StaticScannerNonAnnotationFileMgrImpl;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-9
  */
@@ -13,7 +12,7 @@ public class StaticScannerMgrFactory {
 
     /**
      * 配置文件处理
-     * 
+     *
      * @return
      */
     public static StaticScannerMgr getDisconfFileStaticScanner() {
@@ -22,7 +21,7 @@ public class StaticScannerMgrFactory {
 
     /**
      * 配置项处理
-     * 
+     *
      * @return
      */
     public static StaticScannerMgr getDisconfItemStaticScanner() {
@@ -31,7 +30,7 @@ public class StaticScannerMgrFactory {
 
     /**
      * 非注解的配置文件处理
-     * 
+     *
      * @return
      */
     public static StaticScannerMgr getDisconfNonAnnotationFileStaticScanner() {

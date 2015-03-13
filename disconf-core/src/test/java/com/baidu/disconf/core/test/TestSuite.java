@@ -11,13 +11,12 @@ import com.baidu.disconf.core.test.utiils.MyStringUtilsTestCase;
 import com.baidu.disconf.core.test.zookeeper.ZookeeperMgrTest;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-7-30
  */
 @RunWith(Suite.class)
-@SuiteClasses({ DisconfWebPathMgrTestCase.class, ZooPathMgrTestCase.class, RestfulMgrTestCase.class,
-        ZookeeperMgrTest.class, MyStringUtilsTestCase.class })
+@SuiteClasses({DisconfWebPathMgrTestCase.class, ZooPathMgrTestCase.class, RestfulMgrTestCase.class,
+                  ZookeeperMgrTest.class, MyStringUtilsTestCase.class})
 public class TestSuite {
 
 }

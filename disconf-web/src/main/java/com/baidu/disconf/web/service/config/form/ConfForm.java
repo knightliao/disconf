@@ -3,14 +3,13 @@ package com.baidu.disconf.web.service.config.form;
 import com.baidu.dsp.common.form.RequestFormBase;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-24
  */
 public class ConfForm extends RequestFormBase {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 4556205917730218419L;
 
@@ -66,8 +65,8 @@ public class ConfForm extends RequestFormBase {
 
     @Override
     public String toString() {
-        return "ConfForm [app=" + app + ", maintype=" + maintype + ", version=" + version + ", env=" + env + ", key="
-                + key + "]";
+        return "ConfForm [app=" + app + ", maintype=" + maintype + ", version=" + version + ", env=" + env + ", key=" +
+                   key + "]";
     }
 
 }

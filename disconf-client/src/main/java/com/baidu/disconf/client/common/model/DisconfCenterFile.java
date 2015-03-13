@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * 配置文件表示
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-20
  */
@@ -48,20 +48,18 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     @Override
     public String toString() {
-        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls="
-                + cls + "\n\tfileName=" + fileName + super.toString() + "]";
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + "\n\tfileName=" + fileName +
+                   super.toString() + "]";
     }
 
     @Override
     public String infoString() {
-        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls="
-                + cls + super.infoString() + "]";
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + super.infoString() + "]";
     }
 
     /**
-     * 
      * 获取可以表示的KeyMap对
-     * 
+     *
      * @return
      */
     public Map<String, Object> getKV() {
@@ -76,7 +74,7 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     /**
      * 配置文件Item项表示，包括了值，还有其类型
-     * 
+     *
      * @author liaoqiqi
      * @version 2014-6-16
      */

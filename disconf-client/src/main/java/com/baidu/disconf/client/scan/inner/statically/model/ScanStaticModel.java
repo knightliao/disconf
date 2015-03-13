@@ -8,7 +8,7 @@ import org.reflections.Reflections;
 
 /**
  * 扫描静态存储的对象
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-9
  */
@@ -100,11 +100,11 @@ public class ScanStaticModel {
 
     @Override
     public String toString() {
-        return "ScanStaticModel [reflections=" + reflections + ", disconfFileClassSet=" + disconfFileClassSet
-                + ", disconfFileItemMethodSet=" + disconfFileItemMethodSet + ", disconfFileItemMap="
-                + disconfFileItemMap + ", disconfItemMethodSet=" + disconfItemMethodSet
-                + ", disconfActiveBackupServiceClassSet=" + disconfActiveBackupServiceClassSet
-                + ", disconfUpdateService=" + disconfUpdateService + ", justHostFiles=" + justHostFiles + "]";
+        return "ScanStaticModel [reflections=" + reflections + ", disconfFileClassSet=" + disconfFileClassSet +
+                   ", disconfFileItemMethodSet=" + disconfFileItemMethodSet + ", disconfFileItemMap=" +
+                   disconfFileItemMap + ", disconfItemMethodSet=" + disconfItemMethodSet +
+                   ", disconfActiveBackupServiceClassSet=" + disconfActiveBackupServiceClassSet +
+                   ", disconfUpdateService=" + disconfUpdateService + ", justHostFiles=" + justHostFiles + "]";
     }
 
     public Set<String> getJustHostFiles() {

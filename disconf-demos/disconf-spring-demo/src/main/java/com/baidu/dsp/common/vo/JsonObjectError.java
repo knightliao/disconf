@@ -8,15 +8,15 @@ import com.baidu.dsp.common.constant.FrontEndInterfaceConstant;
 
 /**
  * 错误类
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-3
  */
 public class JsonObjectError extends JsonObjectBase {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = -169418876178835690L;
 
     /**
@@ -44,8 +44,9 @@ public class JsonObjectError extends JsonObjectBase {
 
     /**
      * 参数错误: Field
-     * 
+     *
      * @param errors
+     *
      * @return
      */
     public void addFieldError(String field, String errorInfo) {
@@ -56,8 +57,9 @@ public class JsonObjectError extends JsonObjectBase {
 
     /**
      * 参数错误: Field
-     * 
+     *
      * @param errors
+     *
      * @return
      */
     public void addGlobalError(String errorInfo) {

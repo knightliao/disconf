@@ -4,23 +4,20 @@ import com.baidu.disconf.core.common.constants.Constants;
 
 /**
  * Zoo path 管理
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
 public class ZooPathMgr {
 
     /**
-     * 
-     * @Description: 获取ZOOKEEPER的应用基础路径
-     * 
-     * @return
      * @return String
+     *
+     * @Description: 获取ZOOKEEPER的应用基础路径
      * @author liaoqiqi
      * @date 2013-6-17
      */
-    public static String getZooBaseUrl(String urlPrefix, String app,
-            String env, String version) {
+    public static String getZooBaseUrl(String urlPrefix, String app, String env, String version) {
 
         StringBuffer sb = new StringBuffer();
         sb.append(urlPrefix);
@@ -38,9 +35,9 @@ public class ZooPathMgr {
     }
 
     /**
-     * 
      * @param path1
      * @param path2
+     *
      * @return
      */
     public static String joinPath(String path1, String path2) {
@@ -48,11 +45,9 @@ public class ZooPathMgr {
     }
 
     /**
-     * 
-     * @Description: 获取 Disconf ITEM ZOO Path
-     * 
-     * @return
      * @return String
+     *
+     * @Description: 获取 Disconf ITEM ZOO Path
      * @author liaoqiqi
      * @date 2013-6-17
      */
@@ -62,11 +57,9 @@ public class ZooPathMgr {
     }
 
     /**
-     * 
-     * @Description: 获取 Disconf FILE ZOO Path
-     * 
-     * @return
      * @return String
+     *
+     * @Description: 获取 Disconf FILE ZOO Path
      * @author liaoqiqi
      * @date 2013-6-17
      */

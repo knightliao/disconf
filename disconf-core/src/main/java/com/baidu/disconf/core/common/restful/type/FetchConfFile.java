@@ -12,21 +12,19 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
 
 /**
  * 下载文件
- * 
+ *
  * @author liaoqiqi
- * 
  */
 public class FetchConfFile implements UnreliableInterface {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(FetchConfFile.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(FetchConfFile.class);
 
     private URL remoteUrl;
     private File localTmpFile;
 
     /**
      * 远程文件，本地文件
-     * 
+     *
      * @param remoteUrl
      * @param localTmpFile
      */
@@ -50,17 +48,14 @@ public class FetchConfFile implements UnreliableInterface {
         }
 
         // start tp download
-        LOGGER.debug("start to download. From: " + remoteUrl + " , TO: "
-                + localTmpFile.getAbsolutePath());
+        LOGGER.debug("start to download. From: " + remoteUrl + " , TO: " + localTmpFile.getAbsolutePath());
 
         // 下载
         FileUtils.copyURLToFile(remoteUrl, localTmpFile);
 
         // check
         if (!OsUtil.isFileExist(localTmpFile.getAbsolutePath())) {
-            throw new Exception(
-                    "download is ok, but cannot find downloaded file."
-                            + localTmpFile);
+            throw new Exception("download is ok, but cannot find downloaded file." + localTmpFile);
         }
 
         // download success

@@ -3,12 +3,12 @@ package com.baidu.disconf.core.common.utils;
 import java.util.UUID;
 
 /**
- * 
+ *
  */
 public class MyStringUtils {
 
     /**
-     * 
+     *
      */
     private static String getUUID() {
 
@@ -18,7 +18,7 @@ public class MyStringUtils {
     }
 
     /**
-     * 
+     *
      */
     public static String getRandomName(String name) {
 

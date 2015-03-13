@@ -4,7 +4,7 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
  * 用于标识一个配置文件或配置项
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
@@ -40,38 +40,40 @@ public class DisconfKey {
 
     @Override
     public String toString() {
-        return "DisconfKey [disConfigTypeEnum=" + disConfigTypeEnum + ", key="
-                + key + "]";
+        return "DisconfKey [disConfigTypeEnum=" + disConfigTypeEnum + ", key=" + key + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime
-                * result
-                + ((disConfigTypeEnum == null) ? 0 : disConfigTypeEnum
-                        .hashCode());
+        result = prime * result + ((disConfigTypeEnum == null) ? 0 : disConfigTypeEnum.hashCode());
         result = prime * result + ((key == null) ? 0 : key.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         DisconfKey other = (DisconfKey) obj;
-        if (disConfigTypeEnum != other.disConfigTypeEnum)
+        if (disConfigTypeEnum != other.disConfigTypeEnum) {
             return false;
+        }
         if (key == null) {
-            if (other.key != null)
+            if (other.key != null) {
                 return false;
-        } else if (!key.equals(other.key))
+            }
+        } else if (!key.equals(other.key)) {
             return false;
+        }
         return true;
     }
 

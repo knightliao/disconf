@@ -6,8 +6,8 @@ import com.baidu.disconf.core.common.json.ValueVo;
 public class ConfigUtils {
 
     /**
-     * 
      * @param errorMsg
+     *
      * @return
      */
     public static ValueVo getErrorVo(String errorMsg) {

@@ -22,14 +22,13 @@ import org.apache.log4j.Logger;
 /**
  * Represents an ephemeral znode name which has an ordered sequence number
  * and can be sorted in order
- *
  */
 class ZNodeName implements Comparable<ZNodeName> {
     private final String name;
     private String prefix;
     private int sequence = -1;
     private static final Logger LOG = Logger.getLogger(ZNodeName.class);
-    
+
     public ZNodeName(String name) {
         if (name == null) {
             throw new NullPointerException("id cannot be null");
@@ -46,7 +45,7 @@ class ZNodeName implements Comparable<ZNodeName> {
             } catch (NumberFormatException e) {
                 LOG.info("Number format exception for " + idx, e);
             } catch (ArrayIndexOutOfBoundsException e) {
-               LOG.info("Array out of bounds for " + idx, e);
+                LOG.info("Array out of bounds for " + idx, e);
             }
         }
     }
@@ -58,12 +57,18 @@ class ZNodeName implements Comparable<ZNodeName> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ZNodeName sequence = (ZNodeName) o;
 
-        if (!name.equals(sequence.name)) return false;
+        if (!name.equals(sequence.name)) {
+            return false;
+        }
 
         return true;
     }

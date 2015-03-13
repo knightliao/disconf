@@ -19,8 +19,7 @@ public class SpringContextUtil implements ApplicationContextAware {
     /**
      * 实现ApplicationContextAware接口的回调方法，设置上下文环境
      */
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringContextUtil.applicationContext = applicationContext;
     }
 
@@ -29,9 +28,10 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * 
      * @param beanId
+     *
      * @return
+     *
      * @throws BeansException
      */
     public static Object getBean(Class<?> cls) throws BeansException {
@@ -39,9 +39,10 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * 
      * @param beanId
+     *
      * @return
+     *
      * @throws BeansException
      */
     public static Object getBeansOfType(Class<?> type) throws BeansException {
@@ -49,9 +50,10 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * 
      * @param beanId
+     *
      * @return
+     *
      * @throws BeansException
      */
     public static Object getBean(String name) throws BeansException {
@@ -60,15 +62,16 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     /**
      * 获取使用 Proxy.newProxyInstance 生成的代理对象
-     * 
+     *
      * @param proxy
      * @param thisClass
+     *
      * @return
+     *
      * @throws Exception
      */
-    @SuppressWarnings({ "unchecked" })
-    public static <T> T getProxyObject(Object proxy, Class<T> thisClass)
-            throws Exception {
+    @SuppressWarnings({"unchecked"})
+    public static <T> T getProxyObject(Object proxy, Class<T> thisClass) throws Exception {
         Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
         h.setAccessible(true);
         return (T) h.get(proxy);

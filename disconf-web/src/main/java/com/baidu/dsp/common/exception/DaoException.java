@@ -6,7 +6,7 @@ import com.baidu.dsp.common.exception.base.RuntimeGlobalException;
 
 /**
  * 数据库异常错误
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-24
  */

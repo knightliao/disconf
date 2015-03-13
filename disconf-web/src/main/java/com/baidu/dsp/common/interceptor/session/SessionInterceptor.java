@@ -14,9 +14,8 @@ import com.github.knightliao.apollo.utils.tool.TokenUtil;
 
 /**
  * 全局的异常处理拦截器
- * 
+ *
  * @author liaoqiqi
- * 
  */
 public class SessionInterceptor extends WebCommonInterceptor {
 
@@ -29,7 +28,7 @@ public class SessionInterceptor extends WebCommonInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
-            throws Exception {
+        throws Exception {
 
         // 删除
         MDC.remove(SESSION_KEY);
@@ -39,11 +38,12 @@ public class SessionInterceptor extends WebCommonInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-            throws Exception {
+        throws Exception {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+        throws Exception {
 
         // 初始化会话
         ThreadContext.init();

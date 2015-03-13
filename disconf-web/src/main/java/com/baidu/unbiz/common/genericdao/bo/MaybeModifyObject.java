@@ -11,7 +11,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 可能发生修改行为的对象
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public abstract class MaybeModifyObject<KEY extends Serializable> extends BaseObject<KEY> {

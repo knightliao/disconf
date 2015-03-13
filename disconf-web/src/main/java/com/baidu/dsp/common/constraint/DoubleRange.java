@@ -19,24 +19,20 @@ import javax.validation.ReportAsSingleViolation;
 import org.hibernate.validator.constraints.Range;
 
 /**
- * 
  * @author liaoqiqi
- * 
  */
 @Documented
 @Constraint(validatedBy = {})
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @DoubleMin(0)
 @DoubleMax(Double.MAX_VALUE)
 @ReportAsSingleViolation
 public @interface DoubleRange {
 
-    @OverridesAttribute(constraint = DoubleMin.class, name = "value")
-    double min() default 0;
+    @OverridesAttribute(constraint = DoubleMin.class, name = "value") double min() default 0;
 
-    @OverridesAttribute(constraint = DoubleMax.class, name = "value")
-    double max() default Double.MAX_VALUE;
+    @OverridesAttribute(constraint = DoubleMax.class, name = "value") double max() default Double.MAX_VALUE;
 
     String message() default "{org.hibernate.validator.constraints.Range.message}";
 
@@ -47,7 +43,7 @@ public @interface DoubleRange {
     /**
      * Defines several {@code @Range} annotations on the same element.
      */
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
     @Retention(RUNTIME)
     @Documented
     public @interface List {

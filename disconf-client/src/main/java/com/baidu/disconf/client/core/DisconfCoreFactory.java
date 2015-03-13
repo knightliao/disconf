@@ -8,16 +8,17 @@ import com.baidu.disconf.client.watch.WatchMgr;
 
 /**
  * Core模块的工厂类
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-29
  */
 public class DisconfCoreFactory {
 
     /**
-     * 
      * @param fetcherMgr
+     *
      * @return
+     *
      * @throws Exception
      */
     public static DisconfCoreMgr getDisconfCoreMgr() throws Exception {
@@ -27,8 +28,7 @@ public class DisconfCoreFactory {
         // Watch 模块
         WatchMgr watchMgr = WatchFactory.getWatchMgr(fetcherMgr);
 
-        DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(watchMgr,
-                fetcherMgr);
+        DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(watchMgr, fetcherMgr);
 
         return disconfCoreMgr;
     }

@@ -24,14 +24,13 @@ import com.github.knightliao.apollo.utils.web.CookieUtils;
 
 /**
  * 所有请求（一个Session可能会有多个请求）均会通过此拦截器
- * 
+ *
  * @author liaoqiqi
  * @version 2013-11-28
  */
 public class LoginInterceptor extends WebCommonInterceptor {
 
-    private static final Logger LOG = AopLogFactory
-            .getLogger(LoginInterceptor.class);
+    private static final Logger LOG = AopLogFactory.getLogger(LoginInterceptor.class);
 
     @Resource
     private UserMgr userMgr;
@@ -47,15 +46,14 @@ public class LoginInterceptor extends WebCommonInterceptor {
     private String XONE_COOKIE_DOMAIN_STRING = "127.0.0.1";
 
     @Override
-    public void afterCompletion(HttpServletRequest arg0,
-            HttpServletResponse arg1, Object arg2, Exception arg3)
-            throws Exception {
+    public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
+        throws Exception {
 
     }
 
     @Override
-    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-            Object arg2, ModelAndView arg3) throws Exception {
+    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
+        throws Exception {
     }
 
     /**
@@ -64,11 +62,10 @@ public class LoginInterceptor extends WebCommonInterceptor {
      * 如果不存在，则访问 redis，<br/>
      * 如果redis存在，则更新session和threadlocal<br/>
      * 如果redis也不存在，则认为没有登录
-     * 
      */
     @Override
-    public boolean preHandle(HttpServletRequest request,
-            HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+        throws Exception {
 
         //
         // 去掉不需拦截的path
@@ -121,8 +118,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
             } else {
 
                 // 还是没有登录
-                returnJsonSystemError(request, response, "login.error",
-                        ErrorCode.LOGIN_ERROR);
+                returnJsonSystemError(request, response, "login.error", ErrorCode.LOGIN_ERROR);
                 return false;
             }
         } else {
@@ -136,24 +132,22 @@ public class LoginInterceptor extends WebCommonInterceptor {
 
     /**
      * 种植Cookie
-     * 
+     *
      * @param request
      * @param response
      */
-    private void plantCookie(HttpServletRequest request,
-            HttpServletResponse response) {
+    private void plantCookie(HttpServletRequest request, HttpServletResponse response) {
 
-        String xId = CookieUtils.getCookieValue(request,
-                LoginConstant.XONE_COOKIE_NAME_STRING);
+        String xId = CookieUtils.getCookieValue(request, LoginConstant.XONE_COOKIE_NAME_STRING);
 
         // 没有Cookie 则生成一个随机的Cookie
         if (xId == null) {
 
             String cookieString = TokenUtil.generateToken();
 
-            CookieUtils.setCookie(response,
-                    LoginConstant.XONE_COOKIE_NAME_STRING, cookieString,
-                    XONE_COOKIE_DOMAIN_STRING, LoginConstant.XONE_COOKIE_AGE);
+            CookieUtils
+                .setCookie(response, LoginConstant.XONE_COOKIE_NAME_STRING, cookieString, XONE_COOKIE_DOMAIN_STRING,
+                              LoginConstant.XONE_COOKIE_AGE);
         } else {
         }
     }
@@ -166,8 +160,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
     }
 
     /**
-     * @param notJsonPathList
-     *            the notJsonPathList to set
+     * @param notJsonPathList the notJsonPathList to set
      */
     public void setNotJsonPathList(List<String> notJsonPathList) {
         this.notJsonPathList = notJsonPathList;
@@ -181,8 +174,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
     }
 
     /**
-     * @param notInterceptPathList
-     *            the notInterceptPathList to set
+     * @param notInterceptPathList the notInterceptPathList to set
      */
     public void setNotInterceptPathList(List<String> notInterceptPathList) {
         this.notInterceptPathList = notInterceptPathList;

@@ -21,7 +21,7 @@ import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
  * 配置文件仓库实现器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
@@ -30,7 +30,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfStoreFileProcessorImpl.class);
 
     /**
-     * 
+     *
      */
     @Override
     public void addUpdateCallbackList(String keyName, List<IDisconfUpdate> iDisconfUpdateList) {
@@ -38,12 +38,12 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
 
             DisconfCenterStore.getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel()
-                    .getDisconfConfUpdates().addAll(iDisconfUpdateList);
+                .getDisconfConfUpdates().addAll(iDisconfUpdateList);
         }
     }
 
     /**
-     * 
+     *
      */
     @Override
     public List<IDisconfUpdate> getUpdateCallbackList(String keyName) {
@@ -51,14 +51,14 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
 
             return DisconfCenterStore.getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel()
-                    .getDisconfConfUpdates();
+                       .getDisconfConfUpdates();
         }
 
         return new ArrayList<IDisconfUpdate>();
     }
 
     /**
-     * 
+     *
      */
     @Override
     public DisConfCommonModel getCommonModel(String keyName) {
@@ -75,7 +75,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public boolean hasThisConf(String keyName) {
@@ -89,7 +89,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Instance(Object object, String fileName) {
@@ -162,7 +162,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Object getConfig(String fileName, String keyName) {
@@ -184,7 +184,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Store(String fileName, DisconfValue disconfValue) {
@@ -208,8 +208,8 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
             Object object = disconfValue.getFileData().get(fileItem);
             if (object == null) {
-                LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem, disconfValue.getFileData()
-                        .toString());
+                LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem,
+                                disconfValue.getFileData().toString());
                 continue;
             }
 
@@ -231,7 +231,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void transformScanData(List<DisconfCenterBaseModel> disconfCenterBaseModels) {
@@ -242,7 +242,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public DisconfCenterBaseModel getConfData(String key) {
@@ -258,7 +258,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Set<String> getConfKeySet() {
@@ -266,7 +266,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public String confToString() {

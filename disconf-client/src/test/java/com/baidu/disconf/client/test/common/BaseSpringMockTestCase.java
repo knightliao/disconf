@@ -1,7 +1,5 @@
 package com.baidu.disconf.client.test.common;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,10 +14,11 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 import com.baidu.disconf.core.test.common.BaseCoreTestCase;
 import com.github.knightliao.apollo.utils.web.NetUtils;
 
+import junit.framework.Assert;
+
 /**
- * 
  * Spring的测试方法 + WireMock 方法
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-11
  */
@@ -27,8 +26,7 @@ import com.github.knightliao.apollo.utils.web.NetUtils;
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class BaseSpringMockTestCase extends BaseCoreTestCase {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(BaseSpringTestCase.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(BaseSpringTestCase.class);
 
     @Test
     public void pass() {
@@ -36,7 +34,6 @@ public class BaseSpringMockTestCase extends BaseCoreTestCase {
     }
 
     /**
-     * 
      * @return
      */
     @Deprecated
@@ -51,10 +48,10 @@ public class BaseSpringMockTestCase extends BaseCoreTestCase {
             Assert.assertTrue(false);
         }
 
-        if (!NetUtils.pingUrl(DisClientConfig.getInstance().getHostList()
-                .get(0)
-                + DisconfWebPathMgr.getZooHostsUrl(DisClientSysConfig
-                        .getInstance().CONF_SERVER_ZOO_ACTION))) {
+        if (!NetUtils.pingUrl(DisClientConfig.getInstance().getHostList().get(0) + DisconfWebPathMgr
+                                                                                       .getZooHostsUrl
+                                                                                            (DisClientSysConfig
+                                                                                                           .getInstance().CONF_SERVER_ZOO_ACTION))) {
             return false;
         }
 

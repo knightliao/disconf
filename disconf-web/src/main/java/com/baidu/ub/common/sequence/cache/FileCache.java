@@ -15,7 +15,7 @@ import com.github.knightliao.apollo.utils.io.FileUtils;
 
 /**
  * 序列化到本地文件的sequence缓存
- * 
+ *
  * @author Darwin(Tianxin)
  */
 class FileCache implements Serializable {
@@ -62,6 +62,7 @@ class FileCache implements Serializable {
 
     /**
      * @param sequenceName
+     *
      * @return 下午2:53:10 created by Darwin(Tianxin)
      */
     final static FileCache readFileCache(String sequenceName) {
@@ -85,14 +86,14 @@ class FileCache implements Serializable {
         }
 
         // 如果文件损坏，则删除文件
-        if (cache == null)
+        if (cache == null) {
             fcache.delete();
+        }
         return cache;
     }
 
     /**
-     * @param fileCache
-     *            下午2:56:26 created by Darwin(Tianxin)
+     * @param fileCache 下午2:56:26 created by Darwin(Tianxin)
      */
     final static void writeFile2Cache(FileCache fileCache) {
         File fcache = new File(cacheDirectory, fileCache.getSequenceName());
@@ -110,8 +111,7 @@ class FileCache implements Serializable {
     public static File cacheDirectory = null;
 
     /**
-     * @param sCacheDirectory
-     *            下午12:37:29 created by Darwin(Tianxin)
+     * @param sCacheDirectory 下午12:37:29 created by Darwin(Tianxin)
      */
     public static void setCacheDirectory(String sCacheDirectory) {
         cacheDirectory = new File(sCacheDirectory);
@@ -122,8 +122,9 @@ class FileCache implements Serializable {
 
     /**
      * 解析字符串为一个对象
-     * 
+     *
      * @param content
+     *
      * @return 上午10:04:38 created by Darwin(Tianxin)
      */
     private static FileCache parse(byte[] content) {
@@ -152,7 +153,7 @@ class FileCache implements Serializable {
 
     /**
      * 将对象序列化为一个字节数组
-     * 
+     *
      * @return 上午10:05:46 created by Darwin(Tianxin)
      */
     private byte[] toByte() {

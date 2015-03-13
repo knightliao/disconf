@@ -13,15 +13,13 @@ public class IDRouter extends ApplicationObjectSupport implements Router {
     private DBShardingRule dbShardingRule;
 
     /**
-     * @param prefix
-     *            the prefix to set
+     * @param prefix the prefix to set
      */
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
 
     /**
-     * 
      * @param dbShardingRule
      */
     public void setDbShardingRule(DBShardingRule dbShardingRule) {
@@ -38,12 +36,10 @@ public class IDRouter extends ApplicationObjectSupport implements Router {
         // userid=0的情况放到下一层处理,需要支持返回dbCode为null的情况,当sharding num为1的时候，需要返回null
         dbCode = dbShardingRule.calculateDatabaseNo(userid);
         if (dbCode != null) {
-            vdbkey = new StringBuilder(prefix).append("_").append(dbCode)
-                    .toString();
+            vdbkey = new StringBuilder(prefix).append("_").append(dbCode).toString();
         }
 
-        VirtualDataSource vdb = (VirtualDataSource) getApplicationContext()
-                .getBean(vdbkey, VirtualDataSource.class);
+        VirtualDataSource vdb = (VirtualDataSource) getApplicationContext().getBean(vdbkey, VirtualDataSource.class);
 
         if (vdb != null) {
             dbkey = vdb.getDataSourceKey(readMaster);

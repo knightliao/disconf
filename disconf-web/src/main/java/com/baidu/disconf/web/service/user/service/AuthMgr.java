@@ -1,9 +1,7 @@
 package com.baidu.disconf.web.service.user.service;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public interface AuthMgr {
 

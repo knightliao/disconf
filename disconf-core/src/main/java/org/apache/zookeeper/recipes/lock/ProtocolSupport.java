@@ -17,6 +17,9 @@
  */
 package org.apache.zookeeper.recipes.lock;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
@@ -24,17 +27,12 @@ import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
-import org.apache.zookeeper.recipes.lock.ZooKeeperOperation;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * A base class for protocol implementations which provides a number of higher 
+ * A base class for protocol implementations which provides a number of higher
  * level helper methods for working with ZooKeeper along with retrying synchronous
- *  operations if the connection to ZooKeeper closes such as 
- *  {@link #retryOperation(ZooKeeperOperation)}
- *
+ * operations if the connection to ZooKeeper closes such as
+ * {@link #retryOperation(ZooKeeperOperation)}
  */
 class ProtocolSupport {
     private static final Logger LOG = Logger.getLogger(ProtocolSupport.class);
@@ -51,16 +49,17 @@ class ProtocolSupport {
 
     /**
      * Closes this strategy and releases any ZooKeeper resources; but keeps the
-     *  ZooKeeper instance open
+     * ZooKeeper instance open
      */
     public void close() {
         if (closed.compareAndSet(false, true)) {
             doClose();
         }
     }
-    
+
     /**
      * return zookeeper client instance
+     *
      * @return zookeeper client instance
      */
     public ZooKeeper getZookeeper() {
@@ -69,6 +68,7 @@ class ProtocolSupport {
 
     /**
      * return the acl its using
+     *
      * @return the acl.
      */
     public List<ACL> getAcl() {
@@ -76,7 +76,8 @@ class ProtocolSupport {
     }
 
     /**
-     * set the acl 
+     * set the acl
+     *
      * @param acl the acl to set to
      */
     public void setAcl(List<ACL> acl) {
@@ -85,6 +86,7 @@ class ProtocolSupport {
 
     /**
      * get the retry delay in milliseconds
+     *
      * @return the retry delay
      */
     public long getRetryDelay() {
@@ -93,6 +95,7 @@ class ProtocolSupport {
 
     /**
      * Sets the time waited between retry delays
+     *
      * @param retryDelay the retry delay
      */
     public void setRetryDelay(long retryDelay) {
@@ -100,20 +103,19 @@ class ProtocolSupport {
     }
 
     /**
-     * Allow derived classes to perform 
+     * Allow derived classes to perform
      * some custom closing operations to release resources
      */
     protected void doClose() {
     }
 
-
     /**
      * Perform the given operation, retrying if the connection fails
-     * @return object. it needs to be cast to the callee's expected 
+     *
+     * @return object. it needs to be cast to the callee's expected
      * return type.
      */
-    protected Object retryOperation(ZooKeeperOperation operation) 
-        throws KeeperException, InterruptedException {
+    protected Object retryOperation(ZooKeeperOperation operation) throws KeeperException, InterruptedException {
         KeeperException exception = null;
         for (int i = 0; i < retryCount; i++) {
             try {
@@ -126,7 +128,7 @@ class ProtocolSupport {
                     exception = e;
                 }
                 LOG.debug("Attempt " + i + " failed with connection loss so " +
-                		"attempting to reconnect: " + e, e);
+                              "attempting to reconnect: " + e, e);
                 retryDelay(i);
             }
         }
@@ -136,6 +138,7 @@ class ProtocolSupport {
     /**
      * Ensures that the given path exists with no data, the current
      * ACL and no flags
+     *
      * @param path
      */
     protected void ensurePathExists(String path) {
@@ -144,12 +147,12 @@ class ProtocolSupport {
 
     /**
      * Ensures that the given path exists with the given data, ACL and flags
+     *
      * @param path
      * @param acl
      * @param flags
      */
-    protected void ensureExists(final String path, final byte[] data,
-            final List<ACL> acl, final CreateMode flags) {
+    protected void ensureExists(final String path, final byte[] data, final List<ACL> acl, final CreateMode flags) {
         try {
             retryOperation(new ZooKeeperOperation() {
                 public boolean execute() throws KeeperException, InterruptedException {
@@ -170,6 +173,7 @@ class ProtocolSupport {
 
     /**
      * Returns true if this protocol has been closed
+     *
      * @return true if this protocol is closed
      */
     protected boolean isClosed() {
@@ -178,6 +182,7 @@ class ProtocolSupport {
 
     /**
      * Performs a retry delay if this is not the first attempt
+     *
      * @param attemptCount the number of the attempts performed so far
      */
     protected void retryDelay(int attemptCount) {

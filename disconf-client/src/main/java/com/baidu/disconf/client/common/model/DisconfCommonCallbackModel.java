@@ -7,7 +7,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdate;
 
 /**
  * 记录配置更新时 或 主备切换时的回调函数
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-22
  */
@@ -31,16 +31,14 @@ public class DisconfCommonCallbackModel {
         return disconfUpdatesActiveBackups;
     }
 
-    public void setDisconfUpdatesActiveBackups(
-            List<IDisconfUpdate> disconfUpdatesActiveBackups) {
+    public void setDisconfUpdatesActiveBackups(List<IDisconfUpdate> disconfUpdatesActiveBackups) {
         this.disconfUpdatesActiveBackups = disconfUpdatesActiveBackups;
     }
 
     @Override
     public String toString() {
-        return "DisconfCommonCallbackModel [disconfConfUpdates="
-                + disconfConfUpdates + ", disconfUpdatesActiveBackups="
-                + disconfUpdatesActiveBackups + "]";
+        return "DisconfCommonCallbackModel [disconfConfUpdates=" + disconfConfUpdates +
+                   ", disconfUpdatesActiveBackups=" + disconfUpdatesActiveBackups + "]";
     }
 
 }

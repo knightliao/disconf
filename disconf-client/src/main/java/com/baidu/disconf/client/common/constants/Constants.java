@@ -2,7 +2,7 @@ package com.baidu.disconf.client.common.constants;
 
 /**
  * 常量定义
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */

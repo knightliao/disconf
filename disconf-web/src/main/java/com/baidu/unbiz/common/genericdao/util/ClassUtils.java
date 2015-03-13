@@ -20,8 +20,9 @@ public class ClassUtils {
 
     /**
      * 获取某个类锁指定的泛型参数数组
-     * 
+     *
      * @param c
+     *
      * @return
      */
     public final static Type[] getGenericTypes(Class<?> c) {
@@ -39,8 +40,9 @@ public class ClassUtils {
 
     /**
      * 获取一个类的所有字段
-     * 
+     *
      * @param entityClass
+     *
      * @return
      */
     public static Set<Field> getAllFiled(Class<?> entityClass) {
@@ -66,8 +68,9 @@ public class ClassUtils {
 
     /**
      * 获取一个类的所有方法
-     * 
+     *
      * @param entityClass
+     *
      * @return
      */
     public static Set<Method> getAllMethod(Class<?> entityClass) {
@@ -93,8 +96,9 @@ public class ClassUtils {
 
     /**
      * 将方法中非static的public方法获取到
-     * 
+     *
      * @param ms
+     *
      * @return
      */
     public static Map<String, Method> filter2Map(Set<Method> ms) {
@@ -120,8 +124,8 @@ public class ClassUtils {
                     map.put(name, m);
 
                     // 如果有同名方法，且本方法在子类中声明，且，父类本方法包含了annotation，则替换原来的方法
-                } else if (old.getDeclaringClass().isAssignableFrom(m.getDeclaringClass())
-                        && m.getAnnotation(Column.class) != null) {
+                } else if (old.getDeclaringClass().isAssignableFrom(m.getDeclaringClass()) &&
+                               m.getAnnotation(Column.class) != null) {
                     map.put(name, m);
                 }
             }
@@ -131,9 +135,9 @@ public class ClassUtils {
 
     /**
      * 将from的属性copy到to中
-     * 
+     *
      * @param from
-     * @param to 下午4:30:58 created by Darwin(Tianxin)
+     * @param to   下午4:30:58 created by Darwin(Tianxin)
      */
     public final static void copyProperties(Object from, Object to) {
 
@@ -170,9 +174,10 @@ public class ClassUtils {
 
     /**
      * 获取一个类的field
-     * 
+     *
      * @param field
      * @param class1
+     *
      * @return 下午3:01:19 created by Darwin(Tianxin)
      */
     public static Field getFieldFromClass(String field, Class<? extends Object> clazz) {

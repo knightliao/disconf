@@ -20,7 +20,7 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplBase implements StaticScannerMgr {
 
     /**
-     * 
+     *
      */
     @Override
     public void scanData2Store(ScanStaticModel scanModel) {
@@ -34,7 +34,7 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void exclude(Set<String> keySet) {
@@ -42,7 +42,7 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
     }
 
     /**
-     * 
+     *
      */
     private List<DisconfCenterBaseModel> getDisconfCenterFiles(ScanStaticModel scanModel) {
 
@@ -64,10 +64,11 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
             disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
             // Remote URL
-            String url =
-                    DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
-                            disConfCommonModel.getApp(), disConfCommonModel.getVersion(), disConfCommonModel.getEnv(),
-                            disconfCenterFile.getFileName(), DisConfigTypeEnum.FILE);
+            String url = DisconfWebPathMgr
+                             .getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+                                                       disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
+                                                       disConfCommonModel.getEnv(), disconfCenterFile.getFileName(),
+                                                       DisConfigTypeEnum.FILE);
             disconfCenterFile.setRemoteServerUrl(url);
 
             disconfCenterFiles.add(disconfCenterFile);

@@ -8,7 +8,6 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 import com.baidu.disconf.core.test.common.BaseCoreTestCase;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -34,12 +33,12 @@ public class DisconfWebPathMgrTestCase extends BaseCoreTestCase {
     public void getRemoteUrlParameterTest() {
 
         String fileUrl =
-                DisconfWebPathMgr.getRemoteUrlParameter("test", "app", "version", "env", "key", DisConfigTypeEnum.FILE);
+            DisconfWebPathMgr.getRemoteUrlParameter("test", "app", "version", "env", "key", DisConfigTypeEnum.FILE);
         System.out.println(fileUrl);
         Assert.assertEquals("test/file?app=app&env=env&type=0&key=key&version=version", fileUrl);
 
         String itemUrl =
-                DisconfWebPathMgr.getRemoteUrlParameter("test", "app", "version", "env", "key", DisConfigTypeEnum.ITEM);
+            DisconfWebPathMgr.getRemoteUrlParameter("test", "app", "version", "env", "key", DisConfigTypeEnum.ITEM);
         System.out.println(fileUrl);
         Assert.assertEquals("test/item?app=app&env=env&type=1&key=key&version=version", itemUrl);
     }

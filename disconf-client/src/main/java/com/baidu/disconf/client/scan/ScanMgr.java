@@ -1,8 +1,6 @@
 package com.baidu.disconf.client.scan;
 
-
 /**
- * 
  * @author liaoqiqi
  * @version 2014-7-29
  */

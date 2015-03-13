@@ -5,7 +5,6 @@ import java.util.List;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-23
  */
@@ -159,10 +158,10 @@ public class ConfListVo {
 
     @Override
     public String toString() {
-        return "ConfListVo [configId=" + configId + ", appName=" + appName + ", appId=" + appId + ", version="
-                + version + ", envId=" + envId + ", envName=" + envName + ", type=" + type + ", typeId=" + typeId
-                + ", key=" + key + ", value=" + value + ", createTime=" + createTime + ", modifyTime=" + modifyTime
-                + "]";
+        return "ConfListVo [configId=" + configId + ", appName=" + appName + ", appId=" + appId + ", version=" +
+                   version + ", envId=" + envId + ", envName=" + envName + ", type=" + type + ", typeId=" + typeId +
+                   ", key=" + key + ", value=" + value + ", createTime=" + createTime + ", modifyTime=" + modifyTime +
+                   "]";
     }
 
 }

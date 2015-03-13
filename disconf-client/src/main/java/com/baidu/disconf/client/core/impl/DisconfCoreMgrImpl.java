@@ -14,14 +14,13 @@ import com.baidu.disconf.client.watch.WatchMgr;
 
 /**
  * 核心处理器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */
 public class DisconfCoreMgrImpl implements DisconfCoreMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfCoreMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfCoreMgrImpl.class);
 
     private List<DisconfCoreProcessor> disconfCoreProcessorList = new ArrayList<DisconfCoreProcessor>();
 
@@ -39,12 +38,12 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
         //
         // 在这里添加好配置项、配置文件的处理器
         //
-        DisconfCoreProcessor disconfCoreProcessorFile = DisconfCoreProcessorFactory
-                .getDisconfCoreProcessorFile(watchMgr, fetcherMgr);
+        DisconfCoreProcessor disconfCoreProcessorFile =
+            DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr);
         disconfCoreProcessorList.add(disconfCoreProcessorFile);
 
-        DisconfCoreProcessor disconfCoreProcessorItem = DisconfCoreProcessorFactory
-                .getDisconfCoreProcessorItem(watchMgr, fetcherMgr);
+        DisconfCoreProcessor disconfCoreProcessorItem =
+            DisconfCoreProcessorFactory.getDisconfCoreProcessorItem(watchMgr, fetcherMgr);
         disconfCoreProcessorList.add(disconfCoreProcessorItem);
     }
 
@@ -52,7 +51,7 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
      * 1. 获取远程的所有配置数据<br/>
      * 2. 注入到仓库中<br/>
      * 3. Watch 配置 <br/>
-     * 
+     * <p/>
      * 更新 所有配置数据
      */
     public void process() {

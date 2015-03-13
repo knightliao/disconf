@@ -16,7 +16,7 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
 
 /**
  * 抓取器, 独立模块，不依赖外部模块, 由Factory来管理此实例
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-29
  */
@@ -46,7 +46,7 @@ public class FetcherMgrImpl implements FetcherMgr {
     // 创建对象
     //
     public FetcherMgrImpl(RestfulMgr restfulMgr, int retryTime, int retrySleepSeconds,
-            boolean enableLocalDownloadDirInClassPath, String localDownloadDir, List<String> hostList) {
+                          boolean enableLocalDownloadDirInClassPath, String localDownloadDir, List<String> hostList) {
 
         this.restfulMgr = restfulMgr;
 
@@ -61,8 +61,9 @@ public class FetcherMgrImpl implements FetcherMgr {
 
     /**
      * 根据 URL 从远程 获取Value值
-     * 
+     *
      * @param url
+     *
      * @return
      */
     public String getValueFromServer(String url) throws Exception {
@@ -81,12 +82,13 @@ public class FetcherMgrImpl implements FetcherMgr {
     }
 
     /**
-     * 
      * 下载配置文件, remoteUrl是 url
-     * 
+     *
      * @param url
      * @param fileName
+     *
      * @return
+     *
      * @throws Exception
      */
     public String downloadFileFromServer(String url, String fileName) throws Exception {
@@ -98,15 +100,18 @@ public class FetcherMgrImpl implements FetcherMgr {
         RemoteUrl remoteUrl = new RemoteUrl(url, hostList);
 
         // 下载
-        return restfulMgr.downloadFromServer(remoteUrl, fileName, localDir, this.enableLocalDownloadDirInClassPath,
-                retryTime, retrySleepSeconds);
+        return restfulMgr
+                   .downloadFromServer(remoteUrl, fileName, localDir, this.enableLocalDownloadDirInClassPath, retryTime,
+                                          retrySleepSeconds);
     }
 
     /**
      * 获取本地下载的路径DIR, 通过参数判断是否是临时路径
-     * 
+     *
      * @param isTmp
+     *
      * @return
+     *
      * @throws Exception
      */
     private String getLocalDownloadDirPath(boolean isTmp) throws Exception {
@@ -125,11 +130,9 @@ public class FetcherMgrImpl implements FetcherMgr {
     }
 
     /**
-     * 
-     * @Description: 获取下载的临时文件夹
-     * 
-     * @return
      * @return String
+     *
+     * @Description: 获取下载的临时文件夹
      * @author liaoqiqi
      * @date 2013-6-14
      */

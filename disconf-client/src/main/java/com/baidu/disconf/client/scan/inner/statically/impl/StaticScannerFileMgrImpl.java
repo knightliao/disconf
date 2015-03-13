@@ -28,59 +28,52 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 
 /**
  * 配置文件的静态扫描
- * 
+ *
  * @author liaoqiqi
  * @version 2014-9-9
  */
-public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase
-        implements StaticScannerMgr {
+public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implements StaticScannerMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(StaticScannerFileMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(StaticScannerFileMgrImpl.class);
 
     /**
-     * 
+     *
      */
     @Override
     public void scanData2Store(ScanStaticModel scanModel) {
 
         // 转换配置文件
         List<DisconfCenterBaseModel> disconfCenterFiles = getDisconfFiles(scanModel);
-        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
-                .transformScanData(disconfCenterFiles);
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterFiles);
 
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void exclude(Set<String> keySet) {
-        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(
-                keySet);
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(keySet);
     }
 
     /**
      * 获取配置文件数据
-     * 
+     *
      * @return
      */
-    private static List<DisconfCenterBaseModel> getDisconfFiles(
-            ScanStaticModel scanModel) {
+    private static List<DisconfCenterBaseModel> getDisconfFiles(ScanStaticModel scanModel) {
 
         List<DisconfCenterBaseModel> disconfCenterFiles = new ArrayList<DisconfCenterBaseModel>();
 
         Set<Class<?>> classSet = scanModel.getDisconfFileClassSet();
         for (Class<?> disconfFile : classSet) {
 
-            Set<Method> methods = scanModel.getDisconfFileItemMap().get(
-                    disconfFile);
+            Set<Method> methods = scanModel.getDisconfFileItemMap().get(disconfFile);
             if (methods == null) {
                 continue;
             }
 
-            DisconfCenterFile disconfCenterFile = transformScanFile(
-                    disconfFile, methods);
+            DisconfCenterFile disconfCenterFile = transformScanFile(disconfFile, methods);
 
             disconfCenterFiles.add(disconfCenterFile);
         }
@@ -90,11 +83,10 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase
 
     /**
      * 转换配置文件
-     * 
+     *
      * @return
      */
-    private static DisconfCenterFile transformScanFile(
-            Class<?> disconfFileClass, Set<Method> methods) {
+    private static DisconfCenterFile transformScanFile(Class<?> disconfFileClass, Set<Method> methods) {
 
         DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
 
@@ -102,8 +94,7 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase
         // class
         disconfCenterFile.setCls(disconfFileClass);
 
-        DisconfFile disconfFileAnnotation = disconfFileClass
-                .getAnnotation(DisconfFile.class);
+        DisconfFile disconfFileAnnotation = disconfFileClass.getAnnotation(DisconfFile.class);
 
         //
         // file name
@@ -111,16 +102,17 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase
 
         //
         // disConfCommonModel
-        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
-                disconfFileAnnotation.env(), disconfFileAnnotation.version());
+        DisConfCommonModel disConfCommonModel =
+            makeDisConfCommonModel(disconfFileAnnotation.env(), disconfFileAnnotation.version());
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
         // Remote URL
-        String url = DisconfWebPathMgr.getRemoteUrlParameter(
-                DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
-                disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
-                disConfCommonModel.getEnv(), disconfCenterFile.getFileName(),
-                DisConfigTypeEnum.FILE);
+        String url = DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+                                                                disConfCommonModel.getApp(),
+                                                                disConfCommonModel.getVersion(),
+                                                                disConfCommonModel.getEnv(),
+                                                                disconfCenterFile.getFileName(),
+                                                                DisConfigTypeEnum.FILE);
         disconfCenterFile.setRemoteServerUrl(url);
 
         // fields
@@ -134,15 +126,13 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase
         for (Method method : methods) {
 
             // 获取指定的域
-            Field field = MethodUtils.getFieldFromMethod(method,
-                    expectedFields, DisConfigTypeEnum.FILE);
+            Field field = MethodUtils.getFieldFromMethod(method, expectedFields, DisConfigTypeEnum.FILE);
             if (field == null) {
                 continue;
             }
 
             //
-            DisconfFileItem disconfFileItem = method
-                    .getAnnotation(DisconfFileItem.class);
+            DisconfFileItem disconfFileItem = method.getAnnotation(DisconfFileItem.class);
             String keyName = disconfFileItem.name();
 
             // access
@@ -152,8 +142,7 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase
             if (Modifier.isStatic(field.getModifiers())) {
                 try {
 
-                    FileItemValue fileItemValue = new FileItemValue(
-                            field.get(null), field);
+                    FileItemValue fileItemValue = new FileItemValue(field.get(null), field);
                     keyMaps.put(keyName, fileItemValue);
 
                 } catch (Exception e) {

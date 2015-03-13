@@ -4,7 +4,6 @@ import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.config.DisClientConfig;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-9
  */
@@ -12,11 +11,10 @@ public class StaticScannerMgrImplBase {
 
     /**
      * env/version 默认是应用整合设置的，但用户可以在配置中更改它
-     * 
+     *
      * @return
      */
-    protected static DisConfCommonModel makeDisConfCommonModel(String env,
-            String version) {
+    protected static DisConfCommonModel makeDisConfCommonModel(String env, String version) {
 
         DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
@@ -34,8 +32,7 @@ public class StaticScannerMgrImplBase {
         if (!version.isEmpty()) {
             disConfCommonModel.setVersion(version);
         } else {
-            disConfCommonModel
-                    .setVersion(DisClientConfig.getInstance().VERSION);
+            disConfCommonModel.setVersion(DisClientConfig.getInstance().VERSION);
         }
 
         return disConfCommonModel;

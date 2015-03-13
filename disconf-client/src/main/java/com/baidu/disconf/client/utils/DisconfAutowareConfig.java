@@ -15,7 +15,7 @@ import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 
 /**
  * 配置导入工具
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
@@ -25,13 +25,13 @@ public final class DisconfAutowareConfig {
 
     }
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfAutowareConfig.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfAutowareConfig.class);
 
     /**
      * 先用TOMCAT模式进行导入配置文件，若找不到，则用项目目录模式进行导入
-     * 
+     *
      * @param filename
+     *
      * @return
      */
     private static Properties getProperties(final String propertyFilePath) {
@@ -40,9 +40,7 @@ public final class DisconfAutowareConfig {
 
             // 使用全路径的配置文件载入器
             return ConfigLoaderUtils.loadConfig(propertyFilePath);
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
 
             try {
 
@@ -52,8 +50,7 @@ public final class DisconfAutowareConfig {
 
             } catch (Exception e1) {
 
-                LOGGER.error(String.format("read properties file %s error",
-                        propertyFilePath), e1);
+                LOGGER.error(String.format("read properties file %s error", propertyFilePath), e1);
             }
 
         }
@@ -61,17 +58,14 @@ public final class DisconfAutowareConfig {
     }
 
     /**
-     * 
      * 自动导入配置数据,能识别 DisconfFileItem 或 DisInnerConfigAnnotation 的标识
-     * 
-     * @Description: auto ware
-     * 
+     *
      * @param
-     * 
      * @param propertyFilePath
+     *
+     * @Description: auto ware
      */
-    private static void autowareConfig(final Object obj, Properties prop)
-            throws Exception {
+    private static void autowareConfig(final Object obj, Properties prop) throws Exception {
 
         if (null == prop || obj == null) {
             throw new Exception("cannot autowareConfig null");
@@ -83,8 +77,8 @@ public final class DisconfAutowareConfig {
 
             for (Field field : fields) {
 
-                if (field.isAnnotationPresent(DisconfFileItem.class)
-                        || field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
+                if (field.isAnnotationPresent(DisconfFileItem.class) ||
+                        field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
 
                     if (Modifier.isStatic(field.getModifiers())) {
                         continue;
@@ -100,8 +94,7 @@ public final class DisconfAutowareConfig {
 
                     } else {
 
-                        DisInnerConfigAnnotation config = field
-                                .getAnnotation(DisInnerConfigAnnotation.class);
+                        DisInnerConfigAnnotation config = field.getAnnotation(DisInnerConfigAnnotation.class);
                         name = config.name();
                         String defaultValue = config.defaultValue();
                         value = prop.getProperty(name, defaultValue);
@@ -120,8 +113,7 @@ public final class DisconfAutowareConfig {
 
                         } catch (Exception e) {
 
-                            LOGGER.error(String.format("invalid config: %s@%s",
-                                    name), e);
+                            LOGGER.error(String.format("invalid config: %s@%s", name), e);
                         }
                     }
                 }
@@ -133,17 +125,14 @@ public final class DisconfAutowareConfig {
     }
 
     /**
-     * 
      * 自动导入Static配置数据,能识别 DisconfFileItem 或 DisconfFileItem 的标识
-     * 
-     * @Description: auto ware
-     * 
+     *
      * @param
-     * 
      * @param propertyFilePath
+     *
+     * @Description: auto ware
      */
-    private static void autowareStaticConfig(Class<?> cls, Properties prop)
-            throws Exception {
+    private static void autowareStaticConfig(Class<?> cls, Properties prop) throws Exception {
 
         if (null == prop) {
             throw new Exception("cannot autowareConfig null");
@@ -166,8 +155,7 @@ public final class DisconfAutowareConfig {
                     String name = field.getName();
                     Object value = prop.getProperty(name, null);
                     if (value != null) {
-                        ClassUtils.setFieldValeByType(field, null,
-                                String.valueOf(value));
+                        ClassUtils.setFieldValeByType(field, null, String.valueOf(value));
                     }
                 }
             }
@@ -179,13 +167,13 @@ public final class DisconfAutowareConfig {
 
     /**
      * 自动导入配置文件至 static变量
-     * 
+     *
      * @param cls
      * @param propertyFilePath
+     *
      * @throws Exception
      */
-    public static void autowareStatucConfig(Class<?> cls,
-            final String propertyFilePath) throws Exception {
+    public static void autowareStatucConfig(Class<?> cls, final String propertyFilePath) throws Exception {
 
         // 读配置文件
         Properties prop = getProperties(propertyFilePath);
@@ -198,13 +186,13 @@ public final class DisconfAutowareConfig {
 
     /**
      * 自动导入某个配置文件
-     * 
+     *
      * @param obj
      * @param propertyFilePath
+     *
      * @throws Exception
      */
-    public static void autowareConfig(final Object obj,
-            final String propertyFilePath) throws Exception {
+    public static void autowareConfig(final Object obj, final String propertyFilePath) throws Exception {
 
         // 读配置文件
         Properties prop = getProperties(propertyFilePath);

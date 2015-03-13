@@ -10,7 +10,7 @@ import com.baidu.ub.common.sequence.dao.SequenceDao;
 
 /**
  * 生成SequenceId的Dao实现
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class SequenceDaoImpl implements SequenceDao {
@@ -37,8 +37,7 @@ public class SequenceDaoImpl implements SequenceDao {
         String querySQL = "select beidoucap.get_next_values (?, ?)";
 
         // 执行操作
-        Long value = jdbcTemplate.queryForLong(querySQL, new Object[] {
-                sequenceName, step });
+        Long value = jdbcTemplate.queryForLong(querySQL, new Object[] {sequenceName, step});
         if (value == null || value <= 0) {
             throw new RuntimeException("sequence not exist : " + sequenceName);
         }
@@ -54,8 +53,7 @@ public class SequenceDaoImpl implements SequenceDao {
 
         // 参数校验
         if (sequenceCode <= 0 || step <= 0) {
-            throw new RuntimeException("sequence not exist : code is "
-                    + sequenceCode);
+            throw new RuntimeException("sequence not exist : code is " + sequenceCode);
         }
 
         // 构造SQL
@@ -63,15 +61,13 @@ public class SequenceDaoImpl implements SequenceDao {
         String increaseSQL = "update beidoucap.sequenceid set nextid=nextid+? where id=?";
 
         // 执行操作
-        Long value = jdbcTemplate.queryForLong(querySQL,
-                new Object[] { sequenceCode });
+        Long value = jdbcTemplate.queryForLong(querySQL, new Object[] {sequenceCode});
         if (value == null || value <= 0) {
-            throw new RuntimeException("sequence not exist : code is "
-                    + sequenceCode);
+            throw new RuntimeException("sequence not exist : code is " + sequenceCode);
         }
 
         // 更新数据库中缓存的数量
-        jdbcTemplate.update(increaseSQL, new Object[] { step, sequenceCode });
+        jdbcTemplate.update(increaseSQL, new Object[] {step, sequenceCode});
         return value;
     }
 }

@@ -8,7 +8,7 @@ import com.baidu.ub.common.commons.ThreadContext;
 
 /**
  * 线程日志级别的控制
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class ThreadLog {
@@ -20,27 +20,22 @@ public class ThreadLog {
     public final static int LEVEL_ERROR = 50;
 
     public final static boolean isTraceEnabled() {
-        return ThreadContext.getThreadLog() != null
-                && ThreadContext.getThreadLog() >= LEVEL_TRACE;
+        return ThreadContext.getThreadLog() != null && ThreadContext.getThreadLog() >= LEVEL_TRACE;
     }
 
     public final static boolean isDebugEnabled() {
-        return ThreadContext.getThreadLog() != null
-                && ThreadContext.getThreadLog() >= LEVEL_DEBUG;
+        return ThreadContext.getThreadLog() != null && ThreadContext.getThreadLog() >= LEVEL_DEBUG;
     }
 
     public final static boolean isInfoEnabled() {
-        return ThreadContext.getThreadLog() != null
-                && ThreadContext.getThreadLog() >= LEVEL_INFO;
+        return ThreadContext.getThreadLog() != null && ThreadContext.getThreadLog() >= LEVEL_INFO;
     }
 
     public final static boolean isWarnEnabled() {
-        return ThreadContext.getThreadLog() != null
-                && ThreadContext.getThreadLog() >= LEVEL_WARN;
+        return ThreadContext.getThreadLog() != null && ThreadContext.getThreadLog() >= LEVEL_WARN;
     }
 
     public final static boolean isErrorEnabled() {
-        return ThreadContext.getThreadLog() != null
-                && ThreadContext.getThreadLog() >= LEVEL_ERROR;
+        return ThreadContext.getThreadLog() != null && ThreadContext.getThreadLog() >= LEVEL_ERROR;
     }
 }

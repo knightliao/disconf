@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * Gson的测试
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */

@@ -3,10 +3,8 @@ package com.baidu.disconf.core.common.json;
 import com.baidu.disconf.core.common.constants.Constants;
 
 /**
- * 
  * 通用的Value Vo
- * 
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */
@@ -47,8 +45,7 @@ public class ValueVo {
 
     @Override
     public String toString() {
-        return "ValueVo [status=" + status + ", message=" + message
-                + ", value=" + value + "]";
+        return "ValueVo [status=" + status + ", message=" + message + ", value=" + value + "]";
     }
 
 }

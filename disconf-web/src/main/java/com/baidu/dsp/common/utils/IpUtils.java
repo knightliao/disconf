@@ -3,7 +3,6 @@ package com.baidu.dsp.common.utils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-4-23
  */
@@ -27,8 +26,7 @@ public class IpUtils {
     }
 
     private static boolean validateIp(String ip) {
-        return (ip == null || ip.length() == 0 || ip
-                .equalsIgnoreCase("unknown")) ? false : true;
+        return (ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) ? false : true;
     }
 
 }

@@ -5,10 +5,11 @@ import java.util.List;
 
 /**
  * 页面返回结果
- * 
+ *
+ * @param <T>
+ *
  * @author liaoqiqi
  * @version 2014-2-20
- * @param <T>
  */
 public class DaoPageResult<T> {
 
@@ -21,8 +22,7 @@ public class DaoPageResult<T> {
 
     @Override
     public String toString() {
-        return "DaoPageResult [result=" + result + ", totalCount=" + totalCount
-                + ", footResult=" + footResult + "]";
+        return "DaoPageResult [result=" + result + ", totalCount=" + totalCount + ", footResult=" + footResult + "]";
     }
 
     public List<T> getResult() {

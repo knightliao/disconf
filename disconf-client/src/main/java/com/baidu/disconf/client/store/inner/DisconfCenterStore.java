@@ -12,9 +12,8 @@ import com.baidu.disconf.client.common.model.DisconfCenterFile;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
 
 /**
- * 
  * 配置仓库,是个单例
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-9
  */
@@ -67,8 +66,8 @@ public class DisconfCenterStore {
 
         if (confFileMap.containsKey(fileName)) {
 
-            LOGGER.error("There are two same fileName!!!! " + "first: " + confFileMap.get(fileName).toString()
-                    + ", Second: " + disconfCenterFile.toString());
+            LOGGER.error("There are two same fileName!!!! " + "first: " + confFileMap.get(fileName).toString() +
+                             ", Second: " + disconfCenterFile.toString());
         } else {
             confFileMap.put(fileName, disconfCenterFile);
         }
@@ -85,8 +84,8 @@ public class DisconfCenterStore {
 
         if (confItemMap.containsKey(key)) {
 
-            LOGGER.error("There are two same fileName!!!! " + "first: " + confItemMap.get(key).getClass().toString()
-                    + ", Second: " + disconfCenterItem.getClass().toString());
+            LOGGER.error("There are two same fileName!!!! " + "first: " + confItemMap.get(key).getClass().toString() +
+                             ", Second: " + disconfCenterItem.getClass().toString());
         } else {
             confItemMap.put(key, disconfCenterItem);
         }

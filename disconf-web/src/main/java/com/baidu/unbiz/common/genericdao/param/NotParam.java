@@ -2,7 +2,7 @@ package com.baidu.unbiz.common.genericdao.param;
 
 /**
  * 反向参数
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class NotParam {

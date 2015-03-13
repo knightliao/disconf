@@ -8,12 +8,9 @@ import javax.validation.ConstraintValidatorContext;
 import com.baidu.dsp.common.constraint.DoubleMin;
 
 /**
- * 
  * @author liaoqiqi
- * 
  */
-public class MinValidatorForDouble implements
-        ConstraintValidator<DoubleMin, Double> {
+public class MinValidatorForDouble implements ConstraintValidator<DoubleMin, Double> {
 
     private double minValue;
 
@@ -21,8 +18,7 @@ public class MinValidatorForDouble implements
         this.minValue = minValue.value();
     }
 
-    public boolean isValid(Double value,
-            ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Double value, ConstraintValidatorContext constraintValidatorContext) {
 
         // null values are valid
         if (value == null) {

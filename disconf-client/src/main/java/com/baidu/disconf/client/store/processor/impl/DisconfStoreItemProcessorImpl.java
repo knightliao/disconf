@@ -20,57 +20,50 @@ import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
  * 配置项仓库算子实现器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
 public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfStoreItemProcessorImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfStoreItemProcessorImpl.class);
 
     /**
-     * 
+     *
      */
     @Override
-    public void addUpdateCallbackList(String keyName,
-            List<IDisconfUpdate> iDisconfUpdateList) {
+    public void addUpdateCallbackList(String keyName, List<IDisconfUpdate> iDisconfUpdateList) {
 
-        if (DisconfCenterStore.getInstance().getConfItemMap()
-                .containsKey(keyName)) {
+        if (DisconfCenterStore.getInstance().getConfItemMap().containsKey(keyName)) {
 
-            DisconfCenterStore.getInstance().getConfItemMap().get(keyName)
-                    .getDisconfCommonCallbackModel().getDisconfConfUpdates()
-                    .addAll(iDisconfUpdateList);
+            DisconfCenterStore.getInstance().getConfItemMap().get(keyName).getDisconfCommonCallbackModel()
+                .getDisconfConfUpdates().addAll(iDisconfUpdateList);
         }
 
     }
 
     /**
-     * 
+     *
      */
     @Override
     public List<IDisconfUpdate> getUpdateCallbackList(String keyName) {
 
-        if (DisconfCenterStore.getInstance().getConfItemMap()
-                .containsKey(keyName)) {
+        if (DisconfCenterStore.getInstance().getConfItemMap().containsKey(keyName)) {
 
-            return DisconfCenterStore.getInstance().getConfItemMap()
-                    .get(keyName).getDisconfCommonCallbackModel()
-                    .getDisconfConfUpdates();
+            return DisconfCenterStore.getInstance().getConfItemMap().get(keyName).getDisconfCommonCallbackModel()
+                       .getDisconfConfUpdates();
         }
 
         return new ArrayList<IDisconfUpdate>();
     }
 
     /**
-     * 
+     *
      */
     @Override
     public DisConfCommonModel getCommonModel(String keyName) {
 
-        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance()
-                .getConfItemMap().get(keyName);
+        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance().getConfItemMap().get(keyName);
 
         // 校验是否存在
         if (disconfCenterItem == null) {
@@ -82,14 +75,13 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public boolean hasThisConf(String keyName) {
 
         // 配置项
-        if (DisconfCenterStore.getInstance().getConfItemMap()
-                .containsKey(keyName)) {
+        if (DisconfCenterStore.getInstance().getConfItemMap().containsKey(keyName)) {
             return true;
         }
 
@@ -97,13 +89,12 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Instance(Object object, String key) {
 
-        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance()
-                .getConfItemMap().get(key);
+        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance().getConfItemMap().get(key);
 
         // 校验是否存在
         if (disconfCenterItem == null) {
@@ -129,8 +120,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
                 // 默认值
                 Object defaultValue = disconfCenterItem.getField().get(object);
 
-                LOGGER.debug(disconfCenterItem.getKey()
-                        + " is a non-static field. ");
+                LOGGER.debug(disconfCenterItem.getKey() + " is a non-static field. ");
 
                 if (disconfCenterItem.getValue() == null) {
 
@@ -143,8 +133,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
                 } else {
 
                     // 如果仓库里的值为非空，则实例使用仓库里的值
-                    disconfCenterItem.getField().set(object,
-                            disconfCenterItem.getValue());
+                    disconfCenterItem.getField().set(object, disconfCenterItem.getValue());
                 }
 
             } else {
@@ -152,12 +141,9 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
                 //
                 // 静态类
                 //
-                if (Modifier.isStatic(disconfCenterItem.getField()
-                        .getModifiers())) {
-                    LOGGER.debug(disconfCenterItem.getKey()
-                            + " is a static field. ");
-                    disconfCenterItem.getField().set(null,
-                            disconfCenterItem.getValue());
+                if (Modifier.isStatic(disconfCenterItem.getField().getModifiers())) {
+                    LOGGER.debug(disconfCenterItem.getKey() + " is a static field. ");
+                    disconfCenterItem.getField().set(null, disconfCenterItem.getValue());
                 }
             }
 
@@ -168,13 +154,12 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Object getConfig(String fileName, String keyName) {
 
-        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance()
-                .getConfItemMap().get(keyName);
+        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance().getConfItemMap().get(keyName);
 
         // 校验是否存在
         if (disconfCenterItem == null) {
@@ -186,13 +171,12 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Store(String key, DisconfValue disconfValue) {
 
-        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance()
-                .getConfItemMap().get(key);
+        DisconfCenterItem disconfCenterItem = DisconfCenterStore.getInstance().getConfItemMap().get(key);
 
         // 校验是否存在
         if (disconfCenterItem == null) {
@@ -214,14 +198,12 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         //
         try {
 
-            Object newValue = ClassUtils.getValeByType(typeClass,
-                    disconfValue.getValue());
+            Object newValue = ClassUtils.getValeByType(typeClass, disconfValue.getValue());
             disconfCenterItem.setValue(newValue);
 
             // 如果Object非null,则顺便也注入
             if (disconfCenterItem.getObject() != null) {
-                disconfCenterItem.getField().set(disconfCenterItem.getObject(),
-                        disconfCenterItem.getValue());
+                disconfCenterItem.getField().set(disconfCenterItem.getObject(), disconfCenterItem.getValue());
             }
 
         } catch (Exception e) {
@@ -232,11 +214,10 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
-    public void transformScanData(
-            List<DisconfCenterBaseModel> disconfCenterBaseModels) {
+    public void transformScanData(List<DisconfCenterBaseModel> disconfCenterBaseModels) {
 
         for (DisconfCenterBaseModel disconfCenterItem : disconfCenterBaseModels) {
             DisconfCenterStore.getInstance().storeOneItem(disconfCenterItem);
@@ -244,7 +225,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public DisconfCenterBaseModel getConfData(String key) {
@@ -260,7 +241,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Set<String> getConfKeySet() {
@@ -268,15 +249,14 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public String confToString() {
 
         StringBuffer sBuffer = new StringBuffer();
         sBuffer.append("\n");
-        Map<String, DisconfCenterItem> disMap = DisconfCenterStore
-                .getInstance().getConfItemMap();
+        Map<String, DisconfCenterItem> disMap = DisconfCenterStore.getInstance().getConfItemMap();
         for (String file : disMap.keySet()) {
             sBuffer.append("disItem:\t" + file + "\t");
 

@@ -9,14 +9,14 @@ import com.baidu.dsp.common.form.RequestFormBase;
 
 /**
  * 登录
- * 
+ *
  * @author liaoqiqi
  * @version 2014-2-5
  */
 public class SigninForm extends RequestFormBase {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 565717265045704403L;
 

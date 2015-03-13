@@ -1,7 +1,6 @@
 package com.baidu.dsp.common.constant;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-11-26
  */

@@ -2,7 +2,7 @@ package com.baidu.dsp.common.constant;
 
 /**
  * 错误代码定义
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-2
  */
@@ -16,8 +16,7 @@ public enum ErrorCode {
     /**
      * 框架带的
      */
-    HttpRequestMethodNotSupportedException(1000), TYPE_MIS_MATCH(1001), MissingServletRequestParameterException(
-            1002),
+    HttpRequestMethodNotSupportedException(1000), TYPE_MIS_MATCH(1001), MissingServletRequestParameterException(1002),
 
     /**
      * 自定义的

@@ -13,10 +13,9 @@ import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.WatchMgrTestCase;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ScanPackTestCase.class, DisconfMgrTestCase.class,
-        WatchMgrTestCase.class, ScanMgrTestCase.class, JsonTranslate.class,
-        FetcherMgrMgrTestCase.class, DisconfCoreMgrTestCase.class,
-        ConfigMgrTestCase.class })
+@SuiteClasses({ScanPackTestCase.class, DisconfMgrTestCase.class, WatchMgrTestCase.class, ScanMgrTestCase.class,
+                  JsonTranslate.class, FetcherMgrMgrTestCase.class, DisconfCoreMgrTestCase.class,
+                  ConfigMgrTestCase.class})
 public class TestSuite {
 
 }

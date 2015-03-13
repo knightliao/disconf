@@ -6,7 +6,7 @@ package com.baidu.unbiz.common.genericdao.operator;
 
 /**
  * 一对参数
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class Match implements Pair {

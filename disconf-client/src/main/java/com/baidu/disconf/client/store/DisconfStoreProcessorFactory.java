@@ -5,7 +5,7 @@ import com.baidu.disconf.client.store.processor.impl.DisconfStoreItemProcessorIm
 
 /**
  * 仓库算子仓库
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
@@ -13,7 +13,7 @@ public class DisconfStoreProcessorFactory {
 
     /**
      * 获取配置文件仓库算子
-     * 
+     *
      * @return
      */
     public static DisconfStoreProcessor getDisconfStoreFileProcessor() {
@@ -23,7 +23,7 @@ public class DisconfStoreProcessorFactory {
 
     /**
      * 获取配置项仓库算子
-     * 
+     *
      * @return
      */
     public static DisconfStoreProcessor getDisconfStoreItemProcessor() {

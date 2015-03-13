@@ -5,7 +5,6 @@
 package com.baidu.unbiz.common.genericdao.param;
 
 /**
- * 
  * @author Darwin(Tianxin)
  */
 
@@ -13,9 +12,10 @@ public class Params {
 
     /**
      * 构造between查询的参数
-     * 
+     *
      * @param start
      * @param end
+     *
      * @return 上午10:24:53 created by Darwin(Tianxin)
      */
     public static Object between(Object start, Object end) {
@@ -24,8 +24,9 @@ public class Params {
 
     /**
      * 构造大于参数
-     * 
+     *
      * @param value
+     *
      * @return 上午10:32:37 created by Darwin(Tianxin)
      */
     public static Object greaterThan(Object value) {
@@ -34,8 +35,9 @@ public class Params {
 
     /**
      * 构造大于等於参数
-     * 
+     *
      * @param value
+     *
      * @return 上午10:32:37 created by Darwin(Tianxin)
      */
     public static Object gte(Object value) {
@@ -44,8 +46,9 @@ public class Params {
 
     /**
      * 构造小于参数
-     * 
+     *
      * @param value
+     *
      * @return 上午10:32:52 created by Darwin(Tianxin)
      */
     public static Object lessThan(Object value) {
@@ -54,8 +57,9 @@ public class Params {
 
     /**
      * 构造小于等於参数
-     * 
+     *
      * @param value
+     *
      * @return 上午10:32:52 created by Darwin(Tianxin)
      */
     public static Object lte(Object value) {
@@ -64,7 +68,7 @@ public class Params {
 
     /**
      * 构造表达式参数
-     * 
+     *
      * @return 上午10:33:02 created by Darwin(Tianxin)
      */
     public static Object express() {
@@ -73,8 +77,9 @@ public class Params {
 
     /**
      * 构造反向参数，包括not in !=
-     * 
+     *
      * @param value
+     *
      * @return 上午10:33:11 created by Darwin(Tianxin)
      */
     public static Object not(Object value) {
@@ -83,8 +88,9 @@ public class Params {
 
     /**
      * 构造加法参数
-     * 
+     *
      * @param value
+     *
      * @return
      */
     public static Object incr(Number value) {
@@ -93,8 +99,9 @@ public class Params {
 
     /**
      * 构造like查询的参数
-     * 
+     *
      * @param searchWord
+     *
      * @return
      */
     public static Object like(String searchWord) {

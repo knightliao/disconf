@@ -18,14 +18,13 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
  * 配置项处理器实现
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
 public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisconfItemCoreProcessorImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfItemCoreProcessorImpl.class);
 
     // 监控器
     private WatchMgr watchMgr = null;
@@ -34,8 +33,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     private FetcherMgr fetcherMgr = null;
 
     // 仓库算子
-    private DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory
-            .getDisconfStoreItemProcessor();
+    private DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
 
     public DisconfItemCoreProcessorImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
 
@@ -44,7 +42,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void processAllItems() {
@@ -54,11 +52,9 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to process disconf item: "
-                    + key + "\t=============================");
+            LOGGER.debug("==============\tstart to process disconf item: " + key + "\t=============================");
 
-            DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor
-                    .getConfData(key);
+            DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor.getConfData(key);
             if (disconfCenterItem != null) {
                 try {
                     updateOneConfItem(key, disconfCenterItem);
@@ -74,8 +70,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
      */
     private void updateOneConf(String keyName) throws Exception {
 
-        DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor
-                .getConfData(keyName);
+        DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor.getConfData(keyName);
         if (disconfCenterItem != null) {
 
             // 更新仓库
@@ -89,8 +84,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     /**
      * 更新一个配置
      */
-    private void updateOneConfItem(String keyName,
-            DisconfCenterItem disconfCenterItem) throws Exception {
+    private void updateOneConfItem(String keyName, DisconfCenterItem disconfCenterItem) throws Exception {
 
         if (disconfCenterItem == null) {
             throw new Exception("cannot find disconfCenterItem " + keyName);
@@ -115,18 +109,15 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
         //
         // 注入到仓库中
         //
-        disconfStoreProcessor.inject2Store(keyName, new DisconfValue(value,
-                null));
+        disconfStoreProcessor.inject2Store(keyName, new DisconfValue(value, null));
         LOGGER.debug("inject ok.");
 
         //
         // Watch
         //
         if (watchMgr != null) {
-            DisConfCommonModel disConfCommonModel = disconfStoreProcessor
-                    .getCommonModel(keyName);
-            watchMgr.watchPath(this, disConfCommonModel, keyName,
-                    DisConfigTypeEnum.ITEM, value);
+            DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(keyName);
+            watchMgr.watchPath(this, disConfCommonModel, keyName, DisConfigTypeEnum.ITEM, value);
             LOGGER.debug("watch ok.");
         } else {
             LOGGER.warn("cannot monitor {} because watch mgr is null", keyName);
@@ -168,8 +159,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 
             } else {
 
-                object = DisconfCoreProcessUtils.getSpringBean(field
-                        .getDeclaringClass());
+                object = DisconfCoreProcessUtils.getSpringBean(field.getDeclaringClass());
             }
 
             disconfStoreProcessor.inject2Instance(object, key);
@@ -180,7 +170,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Conf() {
@@ -190,11 +180,10 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to inject value to disconf item instance: "
-                    + key + "\t=============================");
+            LOGGER.debug("==============\tstart to inject value to disconf item instance: " + key +
+                             "\t=============================");
 
-            DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor
-                    .getConfData(key);
+            DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor.getConfData(key);
 
             inject2OneConf(key, disconfCenterItem);
         }

@@ -14,9 +14,8 @@ import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 
 /**
  * 只是进行配置文件托管的bean
- * 
+ *
  * @author knightliao
- * 
  */
 public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
 

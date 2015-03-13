@@ -5,9 +5,7 @@ import org.junit.Test;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public class MyStringUtilsTestCase {
 

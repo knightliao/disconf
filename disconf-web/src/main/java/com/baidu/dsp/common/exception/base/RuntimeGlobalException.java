@@ -4,16 +4,15 @@ import com.baidu.dsp.common.constant.ErrorCode;
 
 /**
  * 实现 RuntimeError的基类
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-2
  */
-public abstract class RuntimeGlobalException extends RuntimeException implements
-        GlobalExceptionAware {
+public abstract class RuntimeGlobalException extends RuntimeException implements GlobalExceptionAware {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = 1L;
 
     protected String exceptionMessage;
@@ -40,8 +39,7 @@ public abstract class RuntimeGlobalException extends RuntimeException implements
      * @param exceptionMessage
      * @param cause
      */
-    public RuntimeGlobalException(ErrorCode errorCode, String exceptionMessage,
-            Throwable cause) {
+    public RuntimeGlobalException(ErrorCode errorCode, String exceptionMessage, Throwable cause) {
         this.errorCode = errorCode;
         this.exceptionMessage = exceptionMessage;
         this.cause = cause;
@@ -53,7 +51,7 @@ public abstract class RuntimeGlobalException extends RuntimeException implements
 
     /**
      * 获取异常编码
-     * 
+     *
      * @return
      */
     public ErrorCode getErrorCode() {
@@ -62,7 +60,7 @@ public abstract class RuntimeGlobalException extends RuntimeException implements
 
     /**
      * 获取异常消息
-     * 
+     *
      * @return
      */
     public String getErrorMessage() {

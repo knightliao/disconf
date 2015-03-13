@@ -8,6 +8,7 @@ import com.baidu.ub.common.commons.ThreadContext;
 public class MultiDataSource extends AbstractRoutingDataSource {
 
     private static final Logger log = Logger.getLogger(MultiDataSource.class);
+
     static {
         ThreadContext.putContext("Bootstrap", Boolean.TRUE);
     }
@@ -32,15 +33,12 @@ public class MultiDataSource extends AbstractRoutingDataSource {
             for (int i = 4; i < stackTraces.length; i++) {// 过滤掉启动的时候，初始化的时候的一次连接没有key，如果有bean去连库数目大于1的库，就需要打印log
                 String infos = stackTraces[i].getClassName();
                 if (infos.contains("com.baidu.dsp")) {
-                    log.error(
-                            "get data source key fail,will use default data source",
-                            e);
+                    log.error("get data source key fail,will use default data source", e);
                     break;
                 }
             }
         } else {// 不是启动的时候报的找不到key，直接打印log和堆栈
-            log.error("get data source key fail,will use default data source",
-                    e);
+            log.error("get data source key fail,will use default data source", e);
             return;
         }
         return;
@@ -50,8 +48,7 @@ public class MultiDataSource extends AbstractRoutingDataSource {
         return multiDataSourceKeyContext;
     }
 
-    public void setMultiDataSourceKeyContext(
-            MultiDataSourceKeyContext multiDataSourceKeyContext) {
+    public void setMultiDataSourceKeyContext(MultiDataSourceKeyContext multiDataSourceKeyContext) {
         this.multiDataSourceKeyContext = multiDataSourceKeyContext;
     }
 

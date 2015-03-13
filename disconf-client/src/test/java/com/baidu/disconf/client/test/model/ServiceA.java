@@ -8,7 +8,7 @@ import com.baidu.disconf.client.common.annotations.DisconfItem;
 
 /**
  * 服务A，他使用的是 ConfA
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-16
  */

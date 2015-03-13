@@ -7,12 +7,11 @@ import com.baidu.dsp.common.constraint.ChineseLengthConstrant;
 
 /**
  * 中文长度校验实现
- * 
+ *
  * @author zhangbi
  * @date 2014年1月13日下午9:26:39
  */
-public class ChineseLengthValidator implements
-        ConstraintValidator<ChineseLengthConstrant, String> {
+public class ChineseLengthValidator implements ConstraintValidator<ChineseLengthConstrant, String> {
 
     private long maxLength;
     private long minLength;
@@ -44,11 +43,11 @@ public class ChineseLengthValidator implements
     }
 
     /**
-     * 
      * 获取中文字符串长度 中文算N个字符(N由{@link ChineseLengthConstrant#cnHoldLength()}指定,
      * 默认为2),英文算一个
-     * 
+     *
      * @param value
+     *
      * @return
      */
     private long getChineseLength(String value) {
@@ -57,8 +56,7 @@ public class ChineseLengthValidator implements
             /* 获取一个字符 */
             char temp = value.charAt(i);
             /* 判断是否为中文字符 */
-            if ((temp >= '\u4e00' && temp <= '\u9fa5')
-                    || (temp >= '\ufe30' && temp <= '\uffa0')) {
+            if ((temp >= '\u4e00' && temp <= '\u9fa5') || (temp >= '\ufe30' && temp <= '\uffa0')) {
                 /* 中文长度倍数 */
                 valueLength += this.chineseHoldLength;
             } else {

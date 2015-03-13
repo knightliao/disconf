@@ -120,6 +120,7 @@ public final class DisClientConfig {
      * 是否开启DEBUG模式: 默认不开启，
      * 1）true: 用于线下调试，当ZK断开与client连接后（如果设置断点，这个事件很容易就发生），ZK不会去重新建立连接。
      * 2）false: 用于线上，当ZK断开与client连接后，ZK会再次去重新建立连接。
+     *
      * @author
      * @since 1.0.0
      */

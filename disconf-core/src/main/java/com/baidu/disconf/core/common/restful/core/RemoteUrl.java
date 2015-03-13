@@ -1,17 +1,16 @@
 package com.baidu.disconf.core.common.restful.core;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * 
  * 远程对象URL表示，包括Host地址 和 URL
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */
@@ -22,8 +21,7 @@ public class RemoteUrl {
 
     private List<URL> urls = new ArrayList<URL>();
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(RemoteUrl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(RemoteUrl.class);
 
     public RemoteUrl(String url, List<String> serverList) {
 
@@ -69,8 +67,7 @@ public class RemoteUrl {
 
     @Override
     public String toString() {
-        return "RemoteUrl [url=" + url + ", serverList=" + serverList
-                + ", urls=" + urls + "]";
+        return "RemoteUrl [url=" + url + ", serverList=" + serverList + ", urls=" + urls + "]";
     }
 
 }
