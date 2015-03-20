@@ -220,8 +220,17 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     public void transformScanData(List<DisconfCenterBaseModel> disconfCenterBaseModels) {
 
         for (DisconfCenterBaseModel disconfCenterItem : disconfCenterBaseModels) {
-            DisconfCenterStore.getInstance().storeOneItem(disconfCenterItem);
+            transformScanData(disconfCenterItem);
         }
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void transformScanData(DisconfCenterBaseModel disconfCenterBaseModel) {
+        DisconfCenterStore.getInstance().storeOneItem(disconfCenterBaseModel);
+
     }
 
     /**
@@ -272,7 +281,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
     }
 
     @Override
-    public void exlucde(Set<String> keySet) {
+    public void exclude(Set<String> keySet) {
         for (String key : keySet) {
             DisconfCenterStore.getInstance().excludeOneItem(key);
         }

@@ -43,4 +43,8 @@ public class DisconfCenterHostFilesStore {
     public void addJustHostFileSet(Set<String> justHostFiles) {
         this.justHostFiles.addAll(justHostFiles);
     }
+
+    public void addJustHostFile(String justHostFile) {
+        this.justHostFiles.add(justHostFile);
+    }
 }

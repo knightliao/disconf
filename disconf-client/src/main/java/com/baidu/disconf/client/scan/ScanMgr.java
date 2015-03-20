@@ -6,7 +6,22 @@ package com.baidu.disconf.client.scan;
  */
 public interface ScanMgr {
 
+    /**
+     * @param packageName
+     *
+     * @throws Exception
+     */
     void firstScan(String packageName) throws Exception;
 
+    /**
+     * @throws Exception
+     */
     void secondScan() throws Exception;
+
+    /**
+     * reloadable for specify files
+     *
+     * @throws Exception
+     */
+    void reloadableScan(String fileName) throws Exception;
 }

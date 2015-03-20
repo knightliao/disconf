@@ -43,7 +43,7 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase implement
      */
     @Override
     public void exclude(Set<String> keySet) {
-        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().exlucde(keySet);
+        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().exclude(keySet);
     }
 
     /**

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.disconf.demo.config.JedisConfig;
+import com.example.disconf.demo.service.AutoService;
+import com.example.disconf.demo.service.AutoService2;
 import com.example.disconf.demo.service.BaoBaoService;
 import com.example.disconf.demo.service.SimpleRedisService;
 import com.example.disconf.demo.service.SimpleStaticService;
@@ -27,8 +29,14 @@ public class DisconfDemoTask {
     @Autowired
     private SimpleRedisService simpleRedisService;
 
+//    @Autowired
+//    private JedisConfig jedisConfig;
+
     @Autowired
-    private JedisConfig jedisConfig;
+    private AutoService autoService;
+
+    @Autowired
+    private AutoService2 autoService2;
 
     private static final String REDIS_KEY = "disconf_key";
 
@@ -46,11 +54,16 @@ public class DisconfDemoTask {
 
                 Thread.sleep(5000);
 
-                // LOGGER.info("redis( " + jedisConfig.getHost() + ","
-                // + jedisConfig.getPort() + ")  get key: " + REDIS_KEY
-                // + " , " + simpleRedisService.getKey(REDIS_KEY));
+                LOGGER.info("autoservice: " + autoService.getAuto());
 
-                LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")");
+                LOGGER.info("autoservice2: " + autoService2.getAuto2());
+
+//                LOGGER
+                //                    .info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")  get
+                // key: " + REDIS_KEY +
+                //                              " , " + simpleRedisService.getKey(REDIS_KEY));
+                //
+                //                LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")");
 
                 LOGGER.info("static file data:" + SimpleStaticService.getStaticFileData());
 

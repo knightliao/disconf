@@ -15,8 +15,6 @@ import com.baidu.disconf.client.watch.WatchMgr;
 public class DisconfCoreFactory {
 
     /**
-     * @param fetcherMgr
-     *
      * @return
      *
      * @throws Exception

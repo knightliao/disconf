@@ -51,16 +51,20 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
          * 配置ITEM列表处理
          */
         for (String key : disconfStoreProcessor.getConfKeySet()) {
+            processOneItem(key);
+        }
+    }
 
-            LOGGER.debug("==============\tstart to process disconf item: " + key + "\t=============================");
+    @Override
+    public void processOneItem(String key) {
+        LOGGER.debug("==============\tstart to process disconf item: " + key + "\t=============================");
 
-            DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor.getConfData(key);
-            if (disconfCenterItem != null) {
-                try {
-                    updateOneConfItem(key, disconfCenterItem);
-                } catch (Exception e) {
-                    LOGGER.error(e.toString(), e);
-                }
+        DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor.getConfData(key);
+        if (disconfCenterItem != null) {
+            try {
+                updateOneConfItem(key, disconfCenterItem);
+            } catch (Exception e) {
+                LOGGER.error(e.toString(), e);
             }
         }
     }

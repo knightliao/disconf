@@ -14,7 +14,7 @@ import com.baidu.disconf.core.common.zookeeper.inner.ConnectionWatcher;
  */
 public class DeleteGroup extends ConnectionWatcher {
 
-    public static String hosts = "10.48.57.42:8581,10.48.57.42:8582,10.48.57.42:8583";
+    public static String hosts = "127.0.0.1:8581,127.0.0.1:8582,127.0.0.1:8583";
 
     /**
      * @param

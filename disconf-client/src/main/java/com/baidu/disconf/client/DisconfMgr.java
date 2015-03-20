@@ -1,8 +1,11 @@
 package com.baidu.disconf.client;
 
+import java.util.Timer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.addons.properties.ReloadConfigurationMonitor;
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.core.DisconfCoreFactory;
@@ -30,6 +33,9 @@ public class DisconfMgr {
 
     // 核心处理器
     private static DisconfCoreMgr disconfCoreMgr = null;
+
+    // timer
+    private static Timer timer = new Timer();
 
     /**
      * 总入口
@@ -86,6 +92,37 @@ public class DisconfMgr {
             //
             isFirstInit = true;
 
+            LOGGER.info("******************************* DISCONF END FIRST SCAN *******************************");
+
+        } catch (Exception e) {
+
+            LOGGER.error(e.toString(), e);
+        }
+    }
+
+    /**
+     * reloadable config file scan
+     */
+    public synchronized static void reloadableScan(String filename) {
+
+        if (!isFirstInit) {
+            return;
+        }
+
+        //
+        //
+        //
+
+        try {
+
+            if (scanMgr != null) {
+                scanMgr.reloadableScan(filename);
+            }
+
+            if (disconfCoreMgr != null) {
+                disconfCoreMgr.processFile(filename);
+            }
+
         } catch (Exception e) {
 
             LOGGER.error(e.toString(), e);
@@ -95,7 +132,7 @@ public class DisconfMgr {
     /**
      * 第二次扫描, 动态扫描
      *
-     * @param scanPackage
+     * @param
      */
     public synchronized static void secondScan() {
 
@@ -134,11 +171,23 @@ public class DisconfMgr {
         isSecondeInit = true;
 
         //
+        // start timer
+        //
+        startTimer();
+
+        //
         LOGGER.info("Conf File Map: " + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());
         //
         LOGGER.info("Conf Item Map: " + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().confToString());
 
         LOGGER.info("******************************* DISCONF END *******************************");
+    }
+
+    /**
+     *
+     */
+    private static void startTimer() {
+        timer.schedule(new ReloadConfigurationMonitor(), 2000, 1000);// 两秒后启动任务,每秒检查一次
     }
 
     /**
@@ -157,6 +206,9 @@ public class DisconfMgr {
             if (disconfCoreMgr != null) {
                 disconfCoreMgr.release();
             }
+
+            // timer
+            timer.cancel();
 
             // close, 必须将其设置为False,以便重新更新
             isFirstInit = false;

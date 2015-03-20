@@ -28,8 +28,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * @param beanId
-     *
      * @return
      *
      * @throws BeansException
@@ -39,8 +37,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * @param beanId
-     *
      * @return
      *
      * @throws BeansException
@@ -50,8 +46,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * @param beanId
-     *
      * @return
      *
      * @throws BeansException

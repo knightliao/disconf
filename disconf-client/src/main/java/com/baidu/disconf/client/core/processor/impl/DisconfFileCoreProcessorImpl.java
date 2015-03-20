@@ -54,16 +54,22 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
          */
         for (String fileName : disconfStoreProcessor.getConfKeySet()) {
 
-            LOGGER.debug("==============\tstart to process disconf file: " + fileName +
-                             "\t=============================");
+            processOneItem(fileName);
+        }
+    }
 
-            DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(fileName);
+    @Override
+    public void processOneItem(String key) {
 
-            try {
-                updateOneConfFile(fileName, disconfCenterFile);
-            } catch (Exception e) {
-                LOGGER.error(e.toString(), e);
-            }
+        LOGGER.debug("==============\tstart to process disconf file: " + key +
+                         "\t=============================");
+
+        DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(key);
+
+        try {
+            updateOneConfFile(key, disconfCenterFile);
+        } catch (Exception e) {
+            LOGGER.error(e.toString(), e);
         }
     }
 

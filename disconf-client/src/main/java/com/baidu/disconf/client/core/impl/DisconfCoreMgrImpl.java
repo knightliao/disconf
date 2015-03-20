@@ -66,6 +66,20 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
     }
 
     /**
+     * 只处理某一个
+     *
+     * @param fileName
+     */
+    @Override
+    public void processFile(String fileName) {
+
+        DisconfCoreProcessor disconfCoreProcessorFile =
+            DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr);
+
+        disconfCoreProcessorFile.processOneItem(fileName);
+    }
+
+    /**
      * 特殊的，将仓库里的数据注入到 配置项、配置文件 的实体中
      */
     public void inject2DisconfInstance() {

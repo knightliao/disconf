@@ -36,4 +36,5 @@ public class StaticScannerMgrFactory {
     public static StaticScannerMgr getDisconfNonAnnotationFileStaticScanner() {
         return new StaticScannerNonAnnotationFileMgrImpl();
     }
+
 }

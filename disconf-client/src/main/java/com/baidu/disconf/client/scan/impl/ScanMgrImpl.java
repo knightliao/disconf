@@ -11,6 +11,7 @@ import com.baidu.disconf.client.scan.ScanMgr;
 import com.baidu.disconf.client.scan.inner.dynamic.ScanDynamicStoreAdapter;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgr;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgrFactory;
+import com.baidu.disconf.client.scan.inner.statically.impl.StaticScannerNonAnnotationFileMgrImpl;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
 import com.baidu.disconf.client.scan.inner.statically.strategy.impl.ReflectionScanStatic;
@@ -91,4 +92,20 @@ public class ScanMgrImpl implements ScanMgr {
         // 将回调函数实例化并写入仓库
         ScanDynamicStoreAdapter.scanUpdateCallbacks(scanModel);
     }
+
+    /**
+     * reloadable file scan
+     *
+     * @throws Exception
+     */
+    @Override
+    public void reloadableScan(String fileName) throws Exception {
+
+        if (DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(fileName)) {
+            return;
+        }
+
+        StaticScannerNonAnnotationFileMgrImpl.scanData2Store(fileName);
+    }
+
 }

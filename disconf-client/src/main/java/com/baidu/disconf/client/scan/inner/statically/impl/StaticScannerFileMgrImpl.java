@@ -45,7 +45,6 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
         // 转换配置文件
         List<DisconfCenterBaseModel> disconfCenterFiles = getDisconfFiles(scanModel);
         DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterFiles);
-
     }
 
     /**
@@ -53,7 +52,7 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
      */
     @Override
     public void exclude(Set<String> keySet) {
-        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(keySet);
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exclude(keySet);
     }
 
     /**
