@@ -146,5 +146,9 @@ APP+环境+版本+ZK查询：
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。 
 - 联系·讨论
 	- QQ群: 239203866 
+- 外部使用团队：
+    - [润生活](http://www.szzjcs.com/) 
 
 ## disconf-client 主要依赖 ##
+
+
