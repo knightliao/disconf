@@ -17,8 +17,6 @@ public class ReloadConfigurationMonitor extends TimerTask {
 
     protected static final Logger logger = LoggerFactory.getLogger(ReloadConfigurationMonitor.class);
 
-    private boolean isLoad = false;
-
     private static List<ReconfigurableBean> reconfigurableBeans = new ArrayList<ReconfigurableBean>();
 
     public static void addReconfigurableBean(ReconfigurableBean reconfigurableBean) {
@@ -31,9 +29,8 @@ public class ReloadConfigurationMonitor extends TimerTask {
             try {
                 bean.reloadConfiguration();
             } catch (Exception e) {
-                throw new RuntimeException("while reloading configuration of " + bean, e);
+                logger.warn("while reloading configuration of " + bean, e);
             }
         }
-
     }
 }
