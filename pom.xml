@@ -13,7 +13,6 @@
         <module>disconf-core</module>
         <module>disconf-tool</module>
         <module>disconf-web</module>
-        <module>disconf-demos</module>
     </modules>
 
     <inceptionYear>2015</inceptionYear>
