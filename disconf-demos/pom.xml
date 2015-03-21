@@ -12,6 +12,7 @@
     <modules>
         <module>disconf-standalone-demo</module>
         <module>disconf-spring-demo</module>
+        <module>disconf-standalone-dubbo-demo</module>
     </modules>
 
 </project>
