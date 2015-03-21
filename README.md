@@ -124,19 +124,28 @@ APP+环境+版本+ZK查询：
 
 - [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
 
-#### 基于注解式的分布式配置
+#### 基于注解式的分布式配置（支持配置文件和配置项）
 
-推荐新建的项目使用
+推荐新建的项目使用disconf时 使用
 
-- [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
-- [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
-- [Tutorial 3 分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
-- [Tutorial 4 分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
-- [Tutorial 5 非注解式(托管式)的分布式配置文件动态管理](https://github.com/knightliao/disconf/wiki/Tutorial5)
+- [Tutorial 1 注解式分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
+- [Tutorial 2 注解式分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
+- [Tutorial 3 注解式分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
+- [Tutorial 4 注解式分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
 
-#### 基于XML的分布式配置（无代码侵入）
+##### 注
 
-推荐旧项目使用
+将配置文件移至一个专有类里，而不是分散在项目的各个地方，整个代码架构清晰易懂、易管理。
+即便如果哪天不使用disconf，也只需要将注解去掉即可。
+
+因此，注解式是disconf官方推荐的方式。
+
+#### 基于XML的分布式配置（无代码侵入）（仅支付配置文件）
+
+推荐旧项目使用disconf时 使用
+
+- （强烈推荐的）[Tutorial 8 基于XML的分布式配置文件管理 ](https://github.com/knightliao/disconf/wiki/Tutorial8)
+- （已废弃，不推荐使用）[Tutorial 5 非注解式(托管式)的分布式配置文件动态管理](https://github.com/knightliao/disconf/wiki/Tutorial5)
 
 #### 其它
 
@@ -159,11 +168,11 @@ APP+环境+版本+ZK查询：
 
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。 
-- 联系·讨论
-	- QQ群: 239203866 
     
 ##外界使用##
 
+- 联系·讨论
+    - QQ群: 239203866 
 - [润生活](http://www.szzjcs.com/) 
 - [拉勾网](http://www.lagou.com/)
 
