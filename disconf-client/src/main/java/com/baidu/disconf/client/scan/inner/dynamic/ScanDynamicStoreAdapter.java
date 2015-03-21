@@ -163,22 +163,18 @@ public class ScanDynamicStoreAdapter {
             iDisconfUpdate = getSpringBean(disconfUpdateServiceClass);
 
         } catch (Exception e) {
-            LOGGER.warn(e.toString(), e);
-        }
 
-        //
-        // 非Spring方式
-        if (iDisconfUpdate == null) {
+            //
+            // 非Spring方式
             try {
 
                 iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass.newInstance();
 
-            } catch (Exception e) {
+            } catch (Exception e2) {
 
                 LOGGER.error("Your class " + disconfUpdateServiceClass.toString() + " cannot new instance. " +
                                  e.toString(), e);
                 return null;
-
             }
         }
 
