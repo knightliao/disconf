@@ -48,6 +48,9 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         List<Resource> resources = new ArrayList<Resource>();
         for (String filename : fileNames) {
 
+            // trim
+            filename = filename.trim();
+
             String realFileName = getFileName(filename);
 
             //
