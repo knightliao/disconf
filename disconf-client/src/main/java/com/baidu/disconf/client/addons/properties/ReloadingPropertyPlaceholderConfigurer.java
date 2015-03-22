@@ -96,20 +96,6 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
         this.applicationContext = applicationContext;
     }
 
-    private String reloadingPlaceholderPrefix =
-        ReloadingPropertyPlaceholderConfigurer.DEFAULT_RELOADING_PLACEHOLDER_PREFIX;
-
-    private String reloadingPlaceholderSuffix =
-        ReloadingPropertyPlaceholderConfigurer.DEFAULT_RELOADING_PLACEHOLDER_SUFFIX;
-
-    public void setReloadingPlaceholderPrefix(String reloadingPlaceholderPrefix) {
-        this.reloadingPlaceholderPrefix = reloadingPlaceholderPrefix;
-    }
-
-    public void setReloadingPlaceholderSuffix(String reloadingPlaceholderSuffix) {
-        this.reloadingPlaceholderSuffix = reloadingPlaceholderSuffix;
-    }
-
     protected String parseStringValue(String strVal, Properties props, Set visitedPlaceholders)
         throws BeanDefinitionStoreException {
 
@@ -118,10 +104,9 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
         // replace reloading prefix and suffix by "normal" prefix and suffix.
         // remember all the "dynamic" placeholders encountered.
         StringBuffer buf = new StringBuffer(strVal);
-        int startIndex = strVal.indexOf(this.reloadingPlaceholderPrefix);
+        int startIndex = strVal.indexOf(this.placeholderPrefix);
         while (startIndex != -1) {
-            int endIndex = buf.toString().indexOf(this.reloadingPlaceholderSuffix,
-                                                     startIndex + this.reloadingPlaceholderPrefix.length());
+            int endIndex = buf.toString().indexOf(this.placeholderSuffix, startIndex + this.placeholderPrefix.length());
             if (endIndex != -1) {
                 if (currentBeanName != null && currentPropertyName != null) {
                     String placeholder = buf.substring(startIndex + this.placeholderPrefix.length(), endIndex);
@@ -133,11 +118,9 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                 } else {
                     logger.warn("dynamic property outside bean property value - ignored: " + strVal);
                 }
-                buf.replace(endIndex, endIndex + this.reloadingPlaceholderSuffix.length(), placeholderSuffix);
-                buf.replace(startIndex, startIndex + this.reloadingPlaceholderPrefix.length(), placeholderPrefix);
-                startIndex = endIndex - this.reloadingPlaceholderPrefix.length() + this.placeholderPrefix.length() +
+                startIndex = endIndex - this.placeholderPrefix.length() + this.placeholderPrefix.length() +
                                  this.placeholderSuffix.length();
-                startIndex = strVal.indexOf(this.reloadingPlaceholderPrefix, startIndex);
+                startIndex = strVal.indexOf(this.placeholderPrefix, startIndex);
             } else {
                 startIndex = -1;
             }

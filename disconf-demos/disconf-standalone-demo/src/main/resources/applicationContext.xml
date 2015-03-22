@@ -81,11 +81,11 @@
     </bean>
 
     <bean id="autoService" class="com.example.disconf.demo.service.AutoService">
-        <property name="auto" value="#{auto=100}"/>
+        <property name="auto" value="${auto=100}"/>
     </bean>
 
     <bean id="autoService2" class="com.example.disconf.demo.service.AutoService2">
-        <property name="auto2" value="#{auto2=100}"/>
+        <property name="auto2" value="${auto2}"/>
     </bean>
 
 </beans>
