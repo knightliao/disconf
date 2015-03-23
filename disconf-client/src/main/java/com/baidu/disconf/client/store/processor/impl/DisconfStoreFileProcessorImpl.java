@@ -247,7 +247,6 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     @Override
     public void transformScanData(DisconfCenterBaseModel disconfCenterBaseModel) {
         DisconfCenterStore.getInstance().storeOneFile(disconfCenterBaseModel);
-
     }
 
     /**

@@ -25,18 +25,17 @@
     </bean>
 
     <!-- 使用注解方式的disconf配置 -->
-    <bean id="propertyConfigurerForProject"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="order" value="1"/>
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
             <list>
-                <value>classpath*:/redis.properties</value>
                 <value>classpath*:/coefficients.properties</value>
                 <value>classpath*:/remote.properties</value>
                 <value>classpath*:/static.properties</value>
+                <value>classpath*:/redis.properties</value>
             </list>
         </property>
     </bean>
@@ -56,9 +55,9 @@
         <property name="remotePort" value="${remotePort}"/>
     </bean>
 
+
     <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改会自动reload)-->
-    <bean id="configproperties"
-          class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
+    <bean id="configproperties" class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:/autoconfig.properties</value>
