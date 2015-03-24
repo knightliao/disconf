@@ -105,6 +105,11 @@ public class DisconfMgr {
      */
     public synchronized static void reloadableScan(String filename) {
 
+        // 是否开启远程配置
+        if (DisClientConfig.getInstance().ENABLE_DISCONF == false) {
+            return;
+        }
+
         if (!isFirstInit) {
             return;
         }
@@ -122,6 +127,8 @@ public class DisconfMgr {
             if (disconfCoreMgr != null) {
                 disconfCoreMgr.processFile(filename);
             }
+
+            LOGGER.debug("disconf reloadable file:" + filename);
 
         } catch (Exception e) {
 

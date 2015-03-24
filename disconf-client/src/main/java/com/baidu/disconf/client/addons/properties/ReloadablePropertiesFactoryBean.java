@@ -64,8 +64,6 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
             String ext = FilenameUtils.getExtension(filename);
             if (ext.equals("properties")) {
 
-                log.info("disconf reloadable file:" + filename + "\t" + realFileName);
-
                 PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
                     new PathMatchingResourcePatternResolver();
                 try {

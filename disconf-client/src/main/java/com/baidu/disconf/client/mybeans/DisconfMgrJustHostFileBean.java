@@ -55,7 +55,7 @@ public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostPro
             for (String file : justHostFiles) {
                 if (file != null) {
                     String fileName = file.trim();
-                    log.info("disconf no-reloadable file: " + fileName);
+                    log.debug("disconf no-reloadable file: " + fileName);
                     // 添加到配置文件托管列表里
                     DisconfCenterHostFilesStore.getInstance().addJustHostFile(fileName);
                 }
