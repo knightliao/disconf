@@ -215,7 +215,10 @@ public class DisconfMgr {
             }
 
             // timer
-            timer.cancel();
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
 
             // close, 必须将其设置为False,以便重新更新
             isFirstInit = false;
