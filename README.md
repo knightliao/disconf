@@ -123,6 +123,7 @@ APP+环境+版本+ZK查询：
 #### 总体概述
 
 - [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
+- 文章介绍：[分布式配置管理平台Disconf](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0Disconf)
 
 #### 基于注解式的分布式配置（支持配置文件和配置项）
 
