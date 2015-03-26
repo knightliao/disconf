@@ -151,10 +151,4 @@
     <mvc:resources mapping="/api/system/**" location="/WEB-INF/public-resources/"
                    cache-period="259200"/>
 
-    <!-- 定时器开关 -->
-    <task:annotation-driven executor="proExecutor"
-                            scheduler="proScheduler"/>
-    <task:executor id="proExecutor" pool-size="5"/>
-    <task:scheduler id="proScheduler" pool-size="10"/>
-
 </beans>
