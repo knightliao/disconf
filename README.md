@@ -174,5 +174,6 @@ APP+环境+版本+ZK查询：
     - QQ群: 239203866 
 - [润生活](http://www.szzjcs.com/) 
 - [拉勾网](http://www.lagou.com/)
+- [人脉通](http://renmaitong.com/)
 
 
