@@ -16,6 +16,9 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     // -----value: 默认值
     private Map<String, FileItemValue> keyMaps = new HashMap<String, FileItemValue>();
 
+    // 额外的配置数据，非注解式使用它来存储
+    private Map<String, Object> additionalKeyMaps = new HashMap<String, Object>();
+
     // 配置文件类
     private Class<?> cls;
 
@@ -46,6 +49,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
         this.keyMaps = keyMaps;
     }
 
+    public Map<String, Object> getAdditionalKeyMaps() {
+        return additionalKeyMaps;
+    }
+
+    public void setAdditionalKeyMaps(Map<String, Object> additionalKeyMaps) {
+        this.additionalKeyMaps = additionalKeyMaps;
+    }
+
     @Override
     public String toString() {
         return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + "\n\tfileName=" + fileName +
@@ -54,7 +65,8 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     @Override
     public String infoString() {
-        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + super.infoString() + "]";
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n" +
+                   "\tadditionalKeyMaps=\" + additionalKeyMaps + \n\tcls=" + cls + super.infoString() + "]";
     }
 
     /**
@@ -64,6 +76,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
      */
     public Map<String, Object> getKV() {
 
+        // 非注解式的
+        if (keyMaps.size() == 0) {
+            return additionalKeyMaps;
+        }
+
+        //
+        // 注解式的
+        //
         Map<String, Object> map = new HashMap<String, Object>();
         for (String key : keyMaps.keySet()) {
             map.put(key, keyMaps.get(key).getValue());

@@ -204,29 +204,38 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
         // 存储
         Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
-        for (String fileItem : keMap.keySet()) {
+        if (keMap.size() > 0) {
+            for (String fileItem : keMap.keySet()) {
 
-            Object object = disconfValue.getFileData().get(fileItem);
-            if (object == null) {
-                LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem,
-                                disconfValue.getFileData().toString());
-                continue;
-            }
-
-            // 根据类型设置值
-            try {
-
-                Object value = ClassUtils.getValeByType(keMap.get(fileItem).getField().getType(), object);
-                keMap.get(fileItem).setValue(value);
-
-                // 如果Object非null,则顺便也注入
-                if (disconfCenterFile.getObject() != null) {
-                    keMap.get(fileItem).getField().set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
+                Object object = disconfValue.getFileData().get(fileItem);
+                if (object == null) {
+                    LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem,
+                                    disconfValue.getFileData().toString());
+                    continue;
                 }
 
-            } catch (Exception e) {
-                LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
+                // 根据类型设置值
+                try {
+
+                    Object value = ClassUtils.getValeByType(keMap.get(fileItem).getField().getType(), object);
+                    keMap.get(fileItem).setValue(value);
+
+                    // 如果Object非null,则顺便也注入
+                    if (disconfCenterFile.getObject() != null) {
+                        keMap.get(fileItem).getField()
+                            .set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
+                    }
+
+                } catch (Exception e) {
+                    LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
+                }
             }
+        } else {
+
+            //
+            // 非注解式 或者 注解式的域集合为空，则将 文件内容写到配置库里
+            //
+            disconfCenterFile.setAdditionalKeyMaps(disconfValue.getFileData());
         }
     }
 
