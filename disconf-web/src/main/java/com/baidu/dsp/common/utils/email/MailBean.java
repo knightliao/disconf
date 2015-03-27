@@ -18,7 +18,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 邮件发送公共类
- * 
+ *
  * @author modi
  * @version 1.0.0
  */
@@ -35,12 +35,12 @@ public class MailBean implements InitializingBean {
 
     /**
      * 发送html邮件
-     * 
+     *
      * @throws MessagingException
      * @throws AddressException
      */
-    public void sendHtmlMail(String from, String[] to, String title, String text) throws AddressException,
-            MessagingException {
+    public void sendHtmlMail(String from, String[] to, String title, String text)
+        throws AddressException, MessagingException {
 
         long start = System.currentTimeMillis();
 

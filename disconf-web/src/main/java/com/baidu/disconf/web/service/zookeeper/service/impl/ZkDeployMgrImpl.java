@@ -15,7 +15,6 @@ import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-11
  */
@@ -43,9 +42,8 @@ public class ZkDeployMgrImpl implements ZkDeployMgr {
     }
 
     /**
-     * 
      * 获取每个配置级别的Map数据, Key是配置, Value是ZK配置数据
-     * 
+     *
      * @return
      */
     public Map<String, ZkDisconfData> getZkDisconfDataMap(String app, String env, String version) {
@@ -54,7 +52,7 @@ public class ZkDeployMgrImpl implements ZkDeployMgr {
     }
 
     public ZkDisconfData getZkDisconfData(String app, String env, String version, DisConfigTypeEnum disConfigTypeEnum,
-            String keyName) {
+                                          String keyName) {
 
         return zooKeeperDriver.getDisconfData(app, env, version, disConfigTypeEnum, keyName);
     }

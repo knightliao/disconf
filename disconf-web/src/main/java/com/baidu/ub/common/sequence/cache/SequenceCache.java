@@ -11,7 +11,7 @@ import com.baidu.ub.common.sequence.dao.SequenceDao;
 
 /**
  * 对北斗的SequenceId的缓存
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class SequenceCache {
@@ -33,10 +33,9 @@ public class SequenceCache {
 
     /**
      * 初始化一个Sequence
-     * 
+     *
      * @param sequenceName
-     * @param cacheSize
-     *            下午3:50:47 created by Darwin(Tianxin)
+     * @param cacheSize    下午3:50:47 created by Darwin(Tianxin)
      */
     public void initialCache(String sequenceName, int cacheSize) {
 
@@ -50,23 +49,22 @@ public class SequenceCache {
 
     /**
      * 刷新entry，向数据库请求新的ID
-     * 
-     * @param entry
-     *            上午9:54:29 created by Darwin(Tianxin)
+     *
+     * @param entry 上午9:54:29 created by Darwin(Tianxin)
      */
     private void refreshEntry(SequenceCacheEntry entry) {
         // 如果缓存是空的，则进行初始化
         if (entry.isEmpty()) {
-            long newLine = sequenceDao.generateKeys(entry.getSequenceName(),
-                    entry.getCacheSize());
+            long newLine = sequenceDao.generateKeys(entry.getSequenceName(), entry.getCacheSize());
             entry.refresh(newLine, entry.getCacheSize());
         }
     }
 
     /**
      * 获取下一个id
-     * 
+     *
      * @param sequenceName
+     *
      * @return 下午4:57:17 created by Darwin(Tianxin)
      */
     public long getValue(String sequenceName) {
@@ -94,9 +92,10 @@ public class SequenceCache {
 
     /**
      * 获取下面count个id
-     * 
+     *
      * @param sequenceName
      * @param count
+     *
      * @return 下午4:58:23 created by Darwin(Tianxin)
      */
     public long[] getValues(String sequenceName, int count) {
@@ -122,8 +121,7 @@ public class SequenceCache {
         // 构造返回的结果
         long[] result = new long[count];
         System.arraycopy(values, 0, result, 0, values.length);
-        System.arraycopy(nextValues, 0, result, values.length,
-                nextValues.length);
+        System.arraycopy(nextValues, 0, result, values.length, nextValues.length);
         return result;
     }
 

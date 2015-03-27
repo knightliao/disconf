@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * 新建配置文件表格
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-3
  */

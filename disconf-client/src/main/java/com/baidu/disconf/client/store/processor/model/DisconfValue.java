@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 配置的值，配置文件是properties, 配置项是string<br/>
  * 这个类是为了做兼容
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */

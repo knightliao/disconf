@@ -30,7 +30,6 @@ import com.baidu.unbiz.common.genericdao.param.NotParam;
 import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
- * 
  * @author Darwin(Tianxin)
  */
 public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializable> {
@@ -48,7 +47,7 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
         return getMiniSelectQuery(orMapping.getAllColumns(), matches);
     }
 
-    public Query getSelectQuery(Collection<Match> matches, Order...orders) {
+    public Query getSelectQuery(Collection<Match> matches, Order... orders) {
 
         Query query = getSelectQuery(matches);
         if (orders == null || orders.length == 0) {
@@ -68,7 +67,7 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
         return query;
     }
 
-    public Query getPageQuery(int curPage, int pageSize, Collection<Match> matches, Order...orders) {
+    public Query getPageQuery(int curPage, int pageSize, Collection<Match> matches, Order... orders) {
 
         Query query = getSelectQuery(matches, orders);
         if (curPage < 0 || pageSize <= 0) {
@@ -90,15 +89,16 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
         return query;
     }
 
-    public Query getMiniSelectQuery(Collection<String> columns, Match...matches) {
+    public Query getMiniSelectQuery(Collection<String> columns, Match... matches) {
         return getMiniSelectQuery(columns, Arrays.asList(matches));
     }
 
     /**
      * 構造一個查詢的SQL語句。當columns為null或size為0時，即為select * ...
-     * 
+     *
      * @param columns
      * @param matches
+     *
      * @return 下午1:14:54 created by Darwin(Tianxin)
      */
     public Query getMiniSelectQuery(Collection<String> columns, Collection<Match> matches) {
@@ -129,7 +129,7 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
         return new Query(sb.toString(), params);
     }
 
-    public Query getCountQuery(Match...matches) {
+    public Query getCountQuery(Match... matches) {
         return getCountQuery(Arrays.asList(matches));
     }
 
@@ -137,11 +137,11 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
         return getMiniSelectQuery(Arrays.asList("count(*)"), matches);
     }
 
-    public Query getUpdateQuery(Modify modify, Match...matches) {
+    public Query getUpdateQuery(Modify modify, Match... matches) {
         return getUpdateQuery(Arrays.asList(modify), matches);
     }
 
-    public Query getUpdateQuery(List<Modify> modifies, Match...matches) {
+    public Query getUpdateQuery(List<Modify> modifies, Match... matches) {
         return getUpdateQuery(modifies, Arrays.asList(matches));
     }
 
@@ -161,9 +161,10 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
 
     /**
      * @param matches
+     *
      * @return 下午3:15:10 created by Darwin(Tianxin)
      */
-    public Query getDeleteQuery(Match...matches) {
+    public Query getDeleteQuery(Match... matches) {
         StringBuilder sb = new StringBuilder(100);
         List<Object> params = new ArrayList<Object>(matches.length);
 
@@ -176,7 +177,7 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
     /**
      * @param modifies
      * @param sb
-     * @param params 上午10:09:44 created by Darwin(Tianxin)
+     * @param params   上午10:09:44 created by Darwin(Tianxin)
      */
     private void appendModifytoSQL(List<Modify> modifies, StringBuilder sb, List<Object> params) {
         for (Modify modify : modifies) {
@@ -219,18 +220,19 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
 
     /**
      * 構造一個create語句的query
-     * 
+     *
      * @param generateKey 由數據庫autoincrement生成key，還是應用端指定key
-     * @param quick 時候用快速方式，快速方式無法將自動生成key填充到對象中。一般此參數為false，只有當批量創建，且由數據庫生成key時該處可選。
+     * @param quick       時候用快速方式，快速方式無法將自動生成key填充到對象中。一般此參數為false，只有當批量創建，且由數據庫生成key時該處可選。
      * @param entities
+     *
      * @return 下午1:26:37 created by Darwin(Tianxin)
      */
-    public Query getCreateQuery(boolean generateKey, boolean quick, ENTITY...entities) {
+    public Query getCreateQuery(boolean generateKey, boolean quick, ENTITY... entities) {
         return getCreateQuery(Arrays.asList(entities), generateKey, quick, null);
     }
 
     // FIXME
-    public Query getCreateQuery(boolean generateKey, boolean quick, InsertOption option, ENTITY...entities) {
+    public Query getCreateQuery(boolean generateKey, boolean quick, InsertOption option, ENTITY... entities) {
         return getCreateQuery(Arrays.asList(entities), generateKey, quick, option);
     }
 
@@ -286,6 +288,7 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
     /**
      * @param column
      * @param entity
+     *
      * @return 上午9:51:49 created by Darwin(Tianxin)
      */
     private Object getColumnValue(String column, ENTITY entity) {
@@ -314,8 +317,9 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
 
     /**
      * 获取主键匹配的条件
-     * 
+     *
      * @param id
+     *
      * @return 上午9:45:33 created by Darwin(Tianxin)
      */
     public List<Match> getKeyMatches(KEY id) {
@@ -330,7 +334,7 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
 
     /**
      * 将query变成一个查询条件的字符串，放到SQL中
-     * 
+     *
      * @param matches
      * @param sb
      * @param params
@@ -338,8 +342,9 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
     public void appendQuerytoSQL(Collection<Match> matches, StringBuilder sb, List<Object> params) {
 
         // 如果query为空，则直接返回
-        if (matches == null || matches.size() == 0)
+        if (matches == null || matches.size() == 0) {
             return;
+        }
 
         sb.append(" where ");
         appendMatches(matches, sb, params);
@@ -390,8 +395,9 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
 
                 // 如果是取反的参数
                 boolean reverse = value instanceof NotParam;
-                if (reverse)
+                if (reverse) {
                     value = ((NotParam) value).getValue();
+                }
 
                 if (value == null && reverse) {
                     sb.append(column).append(" is not null");
@@ -435,8 +441,9 @@ public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializ
 
     /**
      * 将数字集合append为( 'n1','n2','n3')这种格式的字符串
-     * 
+     *
      * @param ns
+     *
      * @return
      */
     public static final String connectObjects(Collection<?> ns) {

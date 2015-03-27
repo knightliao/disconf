@@ -8,20 +8,19 @@ import com.baidu.disconf.client.config.inner.DisInnerConfigHelper;
 
 /**
  * 配置模块
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
 public class ConfigMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ConfigMgr.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ConfigMgr.class);
 
     private static boolean isInit = false;
 
     /**
      * 初始化配置
-     * 
+     *
      * @throws Exception
      */
     public synchronized static void init() throws Exception {
@@ -29,8 +28,7 @@ public class ConfigMgr {
         LOGGER.info("--------------- LOAD CONFIG START ---------------");
 
         //
-        LOGGER.info("Finer print: "
-                + DisClientComConfig.getInstance().getInstanceFingerprint());
+        LOGGER.info("Finer print: " + DisClientComConfig.getInstance().getInstanceFingerprint());
 
         // 导入系统配置
         DisClientSysConfig.getInstance().loadConfig(null);
@@ -50,7 +48,6 @@ public class ConfigMgr {
     }
 
     /**
-     * 
      * @return
      */
     public synchronized static boolean isInit() {
@@ -58,7 +55,6 @@ public class ConfigMgr {
     }
 
     /**
-     * 
      * @param args
      */
     public static void main(String[] args) {

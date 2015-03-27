@@ -6,20 +6,20 @@ package com.baidu.ub.common.sequence.cache;
 
 /**
  * Sequence缓存的数据
- * 
+ *
  * @author Darwin(Tianxin)
  */
 class SequenceCacheEntry {
 
     /**
      * 修改区分的大小
-     * 
-     * @param count2SplitCache
-     *            下午2:07:22 created by Darwin(Tianxin)
+     *
+     * @param count2SplitCache 下午2:07:22 created by Darwin(Tianxin)
      */
     public static void setCount2SplitCache(int count2SplitCache) {
-        if (count2SplitCache > 0)
+        if (count2SplitCache > 0) {
             SequenceCacheEntry.count2SplitCache = count2SplitCache;
+        }
     }
 
     /**
@@ -54,7 +54,7 @@ class SequenceCacheEntry {
 
     /**
      * 构造函数
-     * 
+     *
      * @param sequenceName
      * @param currentValue
      * @param maxValue
@@ -68,7 +68,7 @@ class SequenceCacheEntry {
 
     /**
      * 获取下一个值
-     * 
+     *
      * @return 下午4:44:49 created by Darwin(Tianxin)
      */
     synchronized long nextValue() {
@@ -81,8 +81,9 @@ class SequenceCacheEntry {
 
     /**
      * 获取下n个值
-     * 
+     *
      * @param count
+     *
      * @return 下午4:56:38 created by Darwin(Tianxin)
      */
     synchronized long[] nextValues(int count) {
@@ -101,10 +102,9 @@ class SequenceCacheEntry {
 
     /**
      * 刷新次缓存条目
-     * 
+     *
      * @param newLine
-     * @param keepCount
-     *            上午9:54:36 created by Darwin(Tianxin)
+     * @param keepCount 上午9:54:36 created by Darwin(Tianxin)
      */
     synchronized void refresh(long newLine, int keepCount) {
         this.currentValue = newLine;
@@ -114,7 +114,7 @@ class SequenceCacheEntry {
 
     /**
      * 获取该缓存的名字
-     * 
+     *
      * @return 上午10:31:37 created by Darwin(Tianxin)
      */
     String getSequenceName() {
@@ -123,7 +123,7 @@ class SequenceCacheEntry {
 
     /**
      * 获取缓存的大小
-     * 
+     *
      * @return 上午10:31:41 created by Darwin(Tianxin)
      */
     int getCacheSize() {
@@ -132,7 +132,7 @@ class SequenceCacheEntry {
 
     /**
      * 缓存中不在有多余的可供使用的ID
-     * 
+     *
      * @return 下午1:44:06 created by Darwin(Tianxin)
      */
     boolean isEmpty() {
@@ -141,28 +141,27 @@ class SequenceCacheEntry {
 
     /**
      * 每分配10%则向文件系统中序列化
-     * 
+     * <p/>
      * 下午2:57:59 created by Darwin(Tianxin)
      */
     private void dispatchSerialize2File() {
 
-        if (count2SplitCache <= 1)
+        if (count2SplitCache <= 1) {
             return;
+        }
 
         // 如果文件水位比较小，则重写文件水位
         if (fileCacheTop <= currentValue) {
             int partStep = cacheSize / count2SplitCache;
-            fileCacheTop = maxValue
-                    - ((maxValue - currentValue - 1) / partStep) * partStep;
-            FileCache.writeFile2Cache(new FileCache(sequenceName, fileCacheTop,
-                    maxValue));
+            fileCacheTop = maxValue - ((maxValue - currentValue - 1) / partStep) * partStep;
+            FileCache.writeFile2Cache(new FileCache(sequenceName, fileCacheTop, maxValue));
         }
 
     }
 
     /**
      * 启动时从文件系统中加载
-     * 
+     * <p/>
      * 下午2:57:42 created by Darwin(Tianxin)
      */
     private void loadFromFile() {

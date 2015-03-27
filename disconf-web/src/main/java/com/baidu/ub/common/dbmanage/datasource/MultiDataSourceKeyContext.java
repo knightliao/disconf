@@ -7,8 +7,7 @@ import com.baidu.ub.common.dbmanage.router.Router;
 
 public class MultiDataSourceKeyContext {
 
-    private static final Logger log = Logger
-            .getLogger(MultiDataSourceKeyContext.class);
+    private static final Logger log = Logger.getLogger(MultiDataSourceKeyContext.class);
 
     private String dbName;
 
@@ -45,8 +44,7 @@ public class MultiDataSourceKeyContext {
             }
             dbkey = router.getTargetDataSourceKey(userid, true);
 
-            StackTraceElement[] elements = Thread.currentThread()
-                    .getStackTrace();
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
 
             logTrace(dbkey, elements);
 
@@ -60,16 +58,14 @@ public class MultiDataSourceKeyContext {
         }
         for (StackTraceElement ste : elements) {
             if (ste.getClassName().indexOf("service.impl") > 0) {
-                log.debug("no transaction data source Key[" + dbkey + ","
-                        + ste.getClassName() + "." + ste.getMethodName()
-                        + ",line number:" + ste.getLineNumber() + "]");
+                log.debug("no transaction data source Key[" + dbkey + "," + ste.getClassName() + "." +
+                              ste.getMethodName() + ",line number:" + ste.getLineNumber() + "]");
                 return;
             }
         }
         for (StackTraceElement ste : elements) {
-            log.debug("no transaction data source Key[" + dbkey + ","
-                    + ste.getClassName() + "." + ste.getMethodName()
-                    + ",line number:" + ste.getLineNumber() + "]");
+            log.debug("no transaction data source Key[" + dbkey + "," + ste.getClassName() + "." + ste.getMethodName() +
+                          ",line number:" + ste.getLineNumber() + "]");
         }
         return;
     }

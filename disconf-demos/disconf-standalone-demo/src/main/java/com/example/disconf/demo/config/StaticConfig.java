@@ -5,7 +5,7 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 
 /**
  * 静态 配置文件 示例
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-17
  */

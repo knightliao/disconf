@@ -5,7 +5,6 @@
 package com.baidu.unbiz.common.genericdao.operator;
 
 /**
- * 
  * @author Darwin(Tianxin)
  */
 public interface Pair {

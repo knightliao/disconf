@@ -17,7 +17,7 @@ import com.baidu.disconf.core.test.common.BaseCoreTestCase;
 
 /**
  * 使用 WireMock 进行测试
- * 
+ *
  * @author liaoqiqi
  * @version 2014-7-30
  */
@@ -44,7 +44,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void tetGetJsonData() {
@@ -63,7 +63,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void tetDownloadFromServer() {
@@ -71,9 +71,8 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
         try {
             RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.FILE_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
-            String downloadFilePath =
-                    restfulMgr.downloadFromServer(remoteUrl, RemoteMockServer.FILE_NAME,
-                            RemoteMockServer.LOCAL_DOWNLOAD_DIR, true, 3, 3);
+            String downloadFilePath = restfulMgr.downloadFromServer(remoteUrl, RemoteMockServer.FILE_NAME,
+                                                                       RemoteMockServer.LOCAL_DOWNLOAD_DIR, true, 3, 3);
 
             File file = new File(downloadFilePath);
             String content = FileUtils.readFileToString(file);
@@ -86,7 +85,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testZooPrefixUrl() {
@@ -105,7 +104,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     }
 
     /**
-     * 
+     *
      */
     @Test
     public void testZooHost() {

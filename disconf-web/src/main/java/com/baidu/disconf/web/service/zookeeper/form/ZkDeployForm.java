@@ -3,7 +3,6 @@ package com.baidu.disconf.web.service.zookeeper.form;
 import javax.validation.constraints.NotNull;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-11
  */
@@ -44,8 +43,7 @@ public class ZkDeployForm {
 
     @Override
     public String toString() {
-        return "ZkDeployForm [appId=" + appId + ", version=" + version
-                + ", envId=" + envId + "]";
+        return "ZkDeployForm [appId=" + appId + ", version=" + version + ", envId=" + envId + "]";
     }
 
 }

@@ -10,12 +10,10 @@ import org.springframework.beans.factory.InitializingBean;
 
 import com.baidu.ub.common.log.AopLogFactory;
 
-public class VirtualDataSource implements Serializable, BeanNameAware,
-        InitializingBean {
+public class VirtualDataSource implements Serializable, BeanNameAware, InitializingBean {
 
     private static final long serialVersionUID = 2391107997087589405L;
-    private static Logger log = AopLogFactory
-            .getLogger(VirtualDataSource.class);
+    private static Logger log = AopLogFactory.getLogger(VirtualDataSource.class);
 
     protected List<String> masterSet;
     protected List<String> slaveSet;
@@ -77,8 +75,7 @@ public class VirtualDataSource implements Serializable, BeanNameAware,
 
     public String getMasterDataSourceKey() {
         if (masterPools == null) {
-            throw new IllegalStateException(
-                    "master datasource is null,can't execute the write sql");
+            throw new IllegalStateException("master datasource is null,can't execute the write sql");
         }
         int idx = chooseDSKeyIndex(masterPools.size());
         return masterPools.get(idx);
@@ -114,8 +111,7 @@ public class VirtualDataSource implements Serializable, BeanNameAware,
 
     public void afterPropertiesSet() throws Exception {
         if (masterPools == null) {
-            throw new IllegalStateException(
-                    "visualdatasource initial fail,master pool is null!");
+            throw new IllegalStateException("visualdatasource initial fail,master pool is null!");
         }
     }
 

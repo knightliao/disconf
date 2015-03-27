@@ -26,7 +26,7 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
 
 /**
  * RestFul的一个实现, 独立模块
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */
@@ -50,11 +50,10 @@ public class RestfulMgrImpl implements RestfulMgr {
     }
 
     /**
-     * 
-     * @Description: 初始化
-     * 
-     * @throws Exception
      * @return void
+     *
+     * @throws Exception
+     * @Description: 初始化
      * @author liaoqiqi
      * @date 2013-6-16
      */
@@ -69,14 +68,16 @@ public class RestfulMgrImpl implements RestfulMgr {
 
     /**
      * 获取JSON数据
-     * 
+     *
      * @param clazz
      * @param remoteUrl
+     *
      * @return
+     *
      * @throws Exception
      */
     public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retyrSleepSeconds)
-            throws Exception {
+        throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
@@ -110,10 +111,9 @@ public class RestfulMgrImpl implements RestfulMgr {
     }
 
     /**
-     * 
-     * @Description：关闭
-     * 
      * @return void
+     *
+     * @Description：关闭
      * @author liaoqiqi
      * @date 2013-6-16
      */
@@ -125,17 +125,18 @@ public class RestfulMgrImpl implements RestfulMgr {
     }
 
     /**
-     * 
-     * 
-     * @param remoteUrl 远程地址
-     * @param fileName 文件名
-     * @param localFileDir 本地文件地址
+     * @param remoteUrl            远程地址
+     * @param fileName             文件名
+     * @param localFileDir         本地文件地址
      * @param isTransfer2Classpath 是否将下载的文件放到Classpath目录下
+     *
      * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
+     *
      * @throws Exception
      */
     public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
-            boolean isTransfer2Classpath, int retryTimes, int retyrSleepSeconds) throws Exception {
+                                     boolean isTransfer2Classpath, int retryTimes, int retyrSleepSeconds)
+        throws Exception {
 
         // 本地路径
         String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
@@ -186,7 +187,7 @@ public class RestfulMgrImpl implements RestfulMgr {
         // 如果是使用CLASS路径的，则返回相对classpath的路径
         if (!ConfigLoaderUtils.CLASS_PATH.isEmpty()) {
             String relavivePathString =
-                    OsUtil.getRelativePath(localFilePathUnqiueFile, new File(ConfigLoaderUtils.CLASS_PATH));
+                OsUtil.getRelativePath(localFilePathUnqiueFile, new File(ConfigLoaderUtils.CLASS_PATH));
             if (relavivePathString != null) {
                 if (new File(relavivePathString).isFile()) {
                     return relavivePathString;
@@ -199,17 +200,17 @@ public class RestfulMgrImpl implements RestfulMgr {
     }
 
     /**
-     * 
      * Retry封装 RemoteUrl 支持多Server的下载
-     * 
+     *
      * @param remoteUrl
      * @param localTmpFile
      * @param retryTimes
      * @param sleepSeconds
+     *
      * @return
      */
     private Object retry4ConfDownload(RemoteUrl remoteUrl, File localTmpFile, int retryTimes, int sleepSeconds)
-            throws Exception {
+        throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
@@ -233,13 +234,12 @@ public class RestfulMgrImpl implements RestfulMgr {
     }
 
     /**
-     * 
-     * @Description: 获取在CLASSPATH下的文件，如果找不到CLASSPATH，则返回null
-     * 
      * @param fileName
-     * @return
-     * @throws Exception
+     *
      * @return File
+     *
+     * @throws Exception
+     * @Description: 获取在CLASSPATH下的文件，如果找不到CLASSPATH，则返回null
      * @author liaoqiqi
      * @date 2013-6-20
      */

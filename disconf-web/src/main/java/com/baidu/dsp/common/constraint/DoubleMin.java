@@ -17,14 +17,12 @@ import javax.validation.Payload;
 import com.baidu.dsp.common.constraint.validation.MinValidatorForDouble;
 
 /**
- * 
  * @author liaoqiqi
- * 
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { MinValidatorForDouble.class })
+@Constraint(validatedBy = {MinValidatorForDouble.class})
 public @interface DoubleMin {
 
     String message() default "{javax.validation.constraints.Min.message}";
@@ -38,7 +36,7 @@ public @interface DoubleMin {
      */
     double value();
 
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
     @Retention(RUNTIME)
     @Documented
     @interface List {

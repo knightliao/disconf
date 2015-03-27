@@ -2,7 +2,7 @@ package com.baidu.unbiz.common.genericdao.param;
 
 /**
  * 封装大于的参数
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class GreaterThanParam {

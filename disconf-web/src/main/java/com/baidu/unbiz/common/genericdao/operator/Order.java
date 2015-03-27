@@ -6,7 +6,7 @@ package com.baidu.unbiz.common.genericdao.operator;
 
 /**
  * 排序
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class Order implements Pair {

@@ -17,12 +17,10 @@ import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author wangxj
- * 
  */
 public class DataSourceMonitorTask extends ApplicationObjectSupport {
 
-    protected final static Logger log = AopLogFactory
-            .getLogger(DataSourceMonitorTask.class);
+    protected final static Logger log = AopLogFactory.getLogger(DataSourceMonitorTask.class);
     // protected final static Logger log =
     // Logger.getLogger(DataSourceMonitorTask.class);
 
@@ -38,8 +36,7 @@ public class DataSourceMonitorTask extends ApplicationObjectSupport {
                 List<String> masterKeys = new ArrayList<String>();
                 for (String dbKey : mkeys) {
                     log.info("check datasource:" + dbKey);
-                    DataSource ds = getApplicationContext().getBean(dbKey,
-                            DataSource.class);
+                    DataSource ds = getApplicationContext().getBean(dbKey, DataSource.class);
                     if (isConnect(ds)) {
                         masterKeys.add(dbKey);
                     }
@@ -55,8 +52,7 @@ public class DataSourceMonitorTask extends ApplicationObjectSupport {
                 List<String> slaveKeys = new ArrayList<String>();
                 for (String dbKey : skeys) {
                     log.info("check datasource:" + dbKey);
-                    DataSource ds = getApplicationContext().getBean(dbKey,
-                            DataSource.class);
+                    DataSource ds = getApplicationContext().getBean(dbKey, DataSource.class);
                     if (isConnect(ds)) {
                         slaveKeys.add(dbKey);
                     }
@@ -86,8 +82,9 @@ public class DataSourceMonitorTask extends ApplicationObjectSupport {
             log.error("all datasource is out of connection!!!");
             return false;
         }
-        if (usedList.size() != newList.size())
+        if (usedList.size() != newList.size()) {
             return true;
+        }
         for (String key : usedList) {
             if (!newList.contains(key)) {
                 return true;

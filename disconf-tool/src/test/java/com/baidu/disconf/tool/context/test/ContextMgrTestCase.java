@@ -6,12 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-import mockit.Mock;
-import mockit.MockUp;
-import mockit.integration.junit4.JMockit;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.tool.context.ContextMgr;
 import com.github.knightliao.apollo.redis.RedisClient;
+
+import junit.framework.Assert;
+import junit.framework.TestCase;
+import mockit.Mock;
+import mockit.MockUp;
+import mockit.integration.junit4.JMockit;
 
 /**
  * Project  : disconf-tool

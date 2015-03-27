@@ -12,11 +12,11 @@ import com.baidu.dsp.common.constraint.validation.PageOrderValidator;
 
 /**
  * \
- * 
+ *
  * @author liaoqiqi
  * @version 2014-1-14
  */
-@Target({ ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PageOrderValidator.class)
 public @interface PageOrderConstraint {

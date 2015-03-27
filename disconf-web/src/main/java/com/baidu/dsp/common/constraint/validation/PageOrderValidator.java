@@ -6,12 +6,10 @@ import javax.validation.ConstraintValidatorContext;
 import com.baidu.dsp.common.constraint.PageOrderConstraint;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-14
  */
-public class PageOrderValidator implements
-        ConstraintValidator<PageOrderConstraint, String> {
+public class PageOrderValidator implements ConstraintValidator<PageOrderConstraint, String> {
 
     public static final String ASC = "asc";
     public static final String DESC = "desc";

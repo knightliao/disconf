@@ -14,7 +14,7 @@ import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 
 /**
  * 第一次扫描，静态扫描
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-17
  */
@@ -27,7 +27,7 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
     private Set<String> fileList = new HashSet<String>();
 
     /**
-     * 
+     *
      */
     private String scanPackage = null;
 

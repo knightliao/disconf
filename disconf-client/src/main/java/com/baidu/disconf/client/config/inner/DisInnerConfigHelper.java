@@ -16,21 +16,19 @@ import com.github.knightliao.apollo.utils.io.OsUtil;
 
 /**
  * 用户配置、系统配置 的校验
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
 public class DisInnerConfigHelper {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisInnerConfigHelper.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisInnerConfigHelper.class);
 
     /**
-     * 
-     * @Description: 校验用户配置文件是否正常
-     * 
-     * @throws Exception
      * @return void
+     *
+     * @throws Exception
+     * @Description: 校验用户配置文件是否正常
      * @author liaoqiqi
      * @date 2013-6-13
      */
@@ -46,11 +44,9 @@ public class DisInnerConfigHelper {
 
             throw new Exception("settings: CONF_SERVER_HOST cannot find");
         }
-        DisClientConfig.getInstance().setHostList(
-                StringUtil.parseStringToStringList(
-                        DisClientConfig.getInstance().CONF_SERVER_HOST, ","));
-        LOGGER.info("SERVER conf_server_host: "
-                + DisClientConfig.getInstance().getHostList());
+        DisClientConfig.getInstance()
+            .setHostList(StringUtil.parseStringToStringList(DisClientConfig.getInstance().CONF_SERVER_HOST, ","));
+        LOGGER.info("SERVER conf_server_host: " + DisClientConfig.getInstance().getHostList());
 
         //
         // 版本
@@ -78,14 +74,17 @@ public class DisInnerConfigHelper {
 
         //
         // 是否使用远程的配置
-        LOGGER.info("SERVER ENABLE_REMOTE_CONF: "
-                + DisClientConfig.getInstance().ENABLE_DISCONF);
+        LOGGER.info("SERVER ENABLE_REMOTE_CONF: " + DisClientConfig.getInstance().ENABLE_DISCONF);
+
+        //
+        // debug mode
+        LOGGER.info("SERVER DEBUG MODE: " + DisClientConfig.getInstance().DEBUG);
 
         //
         // 忽略哪些分布式配置
         //
-        List<String> ignoreDisconfList = StringUtil.parseStringToStringList(
-                DisClientConfig.getInstance().IGNORE_DISCONF_LIST, ",");
+        List<String> ignoreDisconfList =
+            StringUtil.parseStringToStringList(DisClientConfig.getInstance().IGNORE_DISCONF_LIST, ",");
         Set<String> keySet = new HashSet<String>();
         if (ignoreDisconfList != null) {
             for (String ignoreData : ignoreDisconfList) {
@@ -93,23 +92,21 @@ public class DisInnerConfigHelper {
             }
         }
         DisClientConfig.getInstance().setIgnoreDisconfKeySet(keySet);
-        LOGGER.info("SERVER IGNORE_DISCONF_LIST: "
-                + DisClientConfig.getInstance().getIgnoreDisconfKeySet());
+        LOGGER.info("SERVER IGNORE_DISCONF_LIST: " + DisClientConfig.getInstance().getIgnoreDisconfKeySet());
 
         // 重试
-        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_TIMES: "
-                + DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES);
+        LOGGER
+            .debug("SERVER CONF_SERVER_URL_RETRY_TIMES: " + DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES);
 
-        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_SLEEP_SECONDS: "
-                + DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
+        LOGGER.debug("SERVER CONF_SERVER_URL_RETRY_SLEEP_SECONDS: " +
+                         DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS);
     }
 
     /**
-     * 
-     * @Description: 校验系统配置文件是否正常
-     * 
-     * @throws Exception
      * @return void
+     *
+     * @throws Exception
+     * @Description: 校验系统配置文件是否正常
      * @author liaoqiqi
      * @date 2013-6-13
      */
@@ -120,40 +117,32 @@ public class DisInnerConfigHelper {
         //
 
         // CONF_SERVER_STORE_ACTION
-        if (StringUtils
-                .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION)) {
+        if (StringUtils.isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION)) {
 
-            throw new Exception(
-                    "settings: CONF_SERVER_STORE_ACTION cannot find");
+            throw new Exception("settings: CONF_SERVER_STORE_ACTION cannot find");
         }
-        LOGGER.debug("SERVER CONF_SERVER_STORE_ACTION: "
-                + DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION);
+        LOGGER.debug("SERVER CONF_SERVER_STORE_ACTION: " + DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION);
 
         // CONF_SERVER_ZOO_ACTION
-        if (StringUtils
-                .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION)) {
+        if (StringUtils.isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION)) {
 
             throw new Exception("settings: CONF_SERVER_ZOO_ACTION cannot find");
         }
-        LOGGER.debug("SERVER CONF_SERVER_ZOO_ACTION: "
-                + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
+        LOGGER.debug("SERVER CONF_SERVER_ZOO_ACTION: " + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
 
         // CONF_SERVER_MASTER_NUM_ACTION
-        if (StringUtils
-                .isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION)) {
+        if (StringUtils.isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION)) {
 
-            throw new Exception(
-                    "settings: CONF_SERVER_MASTER_NUM_ACTION  cannot find");
+            throw new Exception("settings: CONF_SERVER_MASTER_NUM_ACTION  cannot find");
         }
-        LOGGER.debug("SERVER CONF_SERVER_MASTER_NUM_ACTION Action URL: "
-                + DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION);
+        LOGGER.debug("SERVER CONF_SERVER_MASTER_NUM_ACTION Action URL: " +
+                         DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION);
 
         //
         // 本地相关
         //
 
-        if (StringUtils
-                .isEmpty(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR)) {
+        if (StringUtils.isEmpty(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR)) {
 
             throw new Exception("settings: LOCAL_TMP_DIR cannot find");
         }
@@ -171,8 +160,7 @@ public class DisInnerConfigHelper {
         }
 
         // LOCAL_DOWNLOAD_DIR
-        LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: "
-                + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
+        LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: " + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
         OsUtil.makeDirs(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
 
     }

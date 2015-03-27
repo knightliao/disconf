@@ -5,9 +5,8 @@
 package com.baidu.dsp.common.exception;
 
 /**
- * 
  * 文档不存在错误
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */

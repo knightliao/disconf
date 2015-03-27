@@ -5,7 +5,6 @@ import com.baidu.dsp.common.constant.ModuleCode;
 import com.baidu.dsp.common.exception.base.RuntimeGlobalException;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-24
  */

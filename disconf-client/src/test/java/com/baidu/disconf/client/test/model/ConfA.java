@@ -8,8 +8,7 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 /**
  * 1. 分布式配置文件，fileName 是配置文件名<br/>
  * 2. 使用Spring Bean托管方式
- * 
- **/
+ */
 @Service
 @DisconfFile(filename = "confA.properties")
 public class ConfA {
@@ -26,7 +25,7 @@ public class ConfA {
 
     /**
      * name是配置文件中名字; associateField是此get方法相对应的Field名
-     * 
+     *
      * @return
      */
     @DisconfFileItem(name = "confa.varA", associateField = "varA")

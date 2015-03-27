@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-13
  */

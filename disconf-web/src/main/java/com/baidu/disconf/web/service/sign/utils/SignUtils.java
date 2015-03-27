@@ -8,7 +8,7 @@ public class SignUtils {
 
     /**
      * 生成密码， 使用shaHex加密
-     * 
+     *
      * @return
      */
     public static String createPassword(String password) {
@@ -19,7 +19,7 @@ public class SignUtils {
 
     /**
      * 生成token ,使用 UUID + 手机生成
-     * 
+     *
      * @return
      */
     public static String createToken(String phone) {

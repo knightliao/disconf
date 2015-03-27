@@ -11,7 +11,7 @@ import com.example.disconf.demo.config.RemoteServerConfig;
 import com.example.disconf.demo.service.RemoteService;
 
 /**
- * 这是RemoteService的回调函数类，这里不使用 @Service 进行注解
+ * 这是RemoteService的回调函数类
  *
  * @author liaoqiqi
  * @version 2014-6-17

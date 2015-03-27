@@ -385,8 +385,11 @@ public class ConfigMgrImpl implements ConfigMgr {
         ZkDisconfData zkDisconfData = zkDeployMgr.getZkDisconfData(app.getName(), env.getName(), config.getVersion(),
                                                                       disConfigTypeEnum, config.getName());
 
-        MachineListVo machineListVo = getZkData(zkDisconfData.getData(), config);
+        if (zkDisconfData == null) {
+            return new MachineListVo();
+        }
 
+        MachineListVo machineListVo = getZkData(zkDisconfData.getData(), config);
         return machineListVo;
     }
 

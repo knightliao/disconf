@@ -11,15 +11,15 @@ import com.baidu.ub.common.commons.ThreadContext;
 
 /**
  * 所有的List请求的基类
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-4
  */
 public abstract class RequestListBase implements Serializable {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = 7999737352570996142L;
 
     @Valid
@@ -51,15 +51,15 @@ public abstract class RequestListBase implements Serializable {
 
     /**
      * Page对象,通过ThreadContext存储FE传进来的参数数据
-     * 
+     *
      * @author liaoqiqi
      * @version 2013-12-4
      */
     public class Page implements Serializable {
 
         /**
-		 * 
-		 */
+         *
+         */
         private static final long serialVersionUID = -5120153163445183415L;
 
         public static final String ORDER_TOKEN = ",";
@@ -90,8 +90,7 @@ public abstract class RequestListBase implements Serializable {
 
         public void setPageSize(int pageSize) {
             this.pageSize = pageSize;
-            ThreadContext.putContext(FrontEndInterfaceConstant.PAGE_SIZE,
-                    pageSize);
+            ThreadContext.putContext(FrontEndInterfaceConstant.PAGE_SIZE, pageSize);
         }
 
         public String getOrderBy() {
@@ -100,8 +99,7 @@ public abstract class RequestListBase implements Serializable {
 
         public void setOrderBy(String orderBy) {
             this.orderBy = orderBy;
-            ThreadContext.putContext(FrontEndInterfaceConstant.PAGE_ORDER_BY,
-                    orderBy);
+            ThreadContext.putContext(FrontEndInterfaceConstant.PAGE_ORDER_BY, orderBy);
         }
 
         public String getOrder() {
@@ -110,8 +108,7 @@ public abstract class RequestListBase implements Serializable {
 
         public void setOrder(String order) {
             this.order = order;
-            ThreadContext.putContext(FrontEndInterfaceConstant.PAGE_ORDER,
-                    order);
+            ThreadContext.putContext(FrontEndInterfaceConstant.PAGE_ORDER, order);
         }
 
     }

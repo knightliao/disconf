@@ -17,14 +17,12 @@ import javax.validation.Payload;
 import com.baidu.dsp.common.constraint.validation.MaxValidatorForDouble;
 
 /**
- * 
  * @author liaoqiqi
- * 
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { MaxValidatorForDouble.class })
+@Constraint(validatedBy = {MaxValidatorForDouble.class})
 public @interface DoubleMax {
     String message() default "{javax.validation.constraints.Max.message}";
 
@@ -37,7 +35,7 @@ public @interface DoubleMax {
      */
     double value();
 
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
     @Retention(RUNTIME)
     @Documented
     @interface List {

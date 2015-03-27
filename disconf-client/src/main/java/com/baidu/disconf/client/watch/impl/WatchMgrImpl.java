@@ -17,7 +17,7 @@ import com.github.knightliao.apollo.utils.tool.ZooUtils;
 
 /**
  * Watch 模块的一个实现
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-10
  */
@@ -30,36 +30,44 @@ public class WatchMgrImpl implements WatchMgr {
      */
     private String clientRootZooPath = "";
 
+    /**
+     * zoo prefix
+     */
     private String zooUrlPrefix;
 
     /**
-     * 
-     * @Description: 获取自己的主备类型
-     * 
+     *
+     */
+    private boolean debug;
+
+    /**
      * @return void
+     *
+     * @Description: 获取自己的主备类型
      * @author liaoqiqi
      * @date 2013-6-16
      */
-    public void init(String hosts, String zooUrlPrefix) throws Exception {
+    public void init(String hosts, String zooUrlPrefix, boolean debug) throws Exception {
 
         this.zooUrlPrefix = zooUrlPrefix;
+        this.debug = debug;
 
         // init zookeeper
-        ZookeeperMgr.getInstance().init(hosts, zooUrlPrefix);
+        ZookeeperMgr.getInstance().init(hosts, zooUrlPrefix, debug);
     }
 
     /**
      * 新建监控
-     * 
+     *
      * @throws Exception
      */
     private String makeMonitorPath(DisConfigTypeEnum disConfigTypeEnum, DisConfCommonModel disConfCommonModel,
-            String key, String value) throws Exception {
+                                   String key, String value) throws Exception {
 
         // 应用根目录
-        this.clientRootZooPath =
-                ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(), disConfCommonModel.getEnv(),
-                        disConfCommonModel.getVersion());
+        this.clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(),
+                                                             disConfCommonModel.getEnv(),
+                                                             disConfCommonModel.getVersion());
         ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
 
         // 监控路径
@@ -91,7 +99,7 @@ public class WatchMgrImpl implements WatchMgr {
 
     /**
      * 创建路径
-     * 
+     *
      * @param path
      */
     private void makePath(String path, String data) {
@@ -118,14 +126,15 @@ public class WatchMgrImpl implements WatchMgr {
      * 监控路径,监控前会事先创建路径,并且会新建一个自己的Temp子结点
      */
     public void watchPath(DisconfCoreProcessor disconfCoreMgr, DisConfCommonModel disConfCommonModel, String keyName,
-            DisConfigTypeEnum disConfigTypeEnum, String value) throws Exception {
+                          DisConfigTypeEnum disConfigTypeEnum, String value) throws Exception {
 
         // 新建
         String monitorPath = makeMonitorPath(disConfigTypeEnum, disConfCommonModel, keyName, value);
 
         // 进行监控
         NodeWatcher nodeWatcher =
-                new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback());
+            new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback(),
+                               debug);
         nodeWatcher.monitorMaster();
     }
 

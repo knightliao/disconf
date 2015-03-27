@@ -9,9 +9,8 @@ import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 
 /**
  * Properites处理器
- * 
+ *
  * @author knightliao
- * 
  */
 public class DisconfPropertiesProcessorImpl implements DisconfFileTypeProcessor {
 

@@ -9,7 +9,7 @@ import com.baidu.ub.common.sequence.service.SequenceService;
 
 /**
  * Sequence的实现
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class SequenceServiceImpl implements SequenceService {

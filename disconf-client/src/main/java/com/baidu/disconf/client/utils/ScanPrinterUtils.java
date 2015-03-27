@@ -17,18 +17,17 @@ import com.google.common.collect.Multimap;
 
 /**
  * 扫描打印器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-9
  */
 public class ScanPrinterUtils {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(ScanPrinterUtils.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ScanPrinterUtils.class);
 
     /**
      * 打印出StoreMap的数据
-     * 
+     *
      * @param reflections
      */
     public static void printSotreMap(Reflections reflections) {
@@ -36,8 +35,7 @@ public class ScanPrinterUtils {
         LOGGER.info("Now we will print store map......");
 
         Store store = reflections.getStore();
-        Map<String/* indexName */, Multimap<String, String>> storeMap = store
-                .getStoreMap();
+        Map<String/* indexName */, Multimap<String, String>> storeMap = store.getStoreMap();
         for (String indexName : storeMap.keySet()) {
 
             LOGGER.info("====================================");
@@ -54,7 +52,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printFileItem(Set<Field> disconfFileItemSet) {
 
@@ -65,7 +63,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printFileItemMethod(Set<Method> disconfFileItemSet) {
 
@@ -76,7 +74,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printFile(Set<Class<?>> classdata) {
 
@@ -91,7 +89,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printFileMap(Map<Class<?>, Set<Field>> disconfFileItemMap) {
 
@@ -106,7 +104,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printItem(Set<Field> af1) {
 
@@ -122,7 +120,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printActiveBackup(Set<Class<?>> classdata) {
 
@@ -133,7 +131,7 @@ public class ScanPrinterUtils {
     }
 
     /**
-     * 
+     *
      */
     public static void printUpdateFile(Set<Class<?>> classdata) {
 

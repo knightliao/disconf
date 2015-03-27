@@ -20,7 +20,7 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplBase implements StaticScannerMgr {
 
     /**
-     * 
+     *
      */
     @Override
     public void scanData2Store(ScanStaticModel scanModel) {
@@ -28,51 +28,73 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
         //
         //
         //
-        List<DisconfCenterBaseModel> disconfCenterBaseModels = getDisconfCenterFiles(scanModel);
+        List<DisconfCenterBaseModel> disconfCenterBaseModels = getDisconfCenterFiles(scanModel.getJustHostFiles());
 
         DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModels);
     }
 
     /**
-     * 
+     *
      */
-    @Override
-    public void exclude(Set<String> keySet) {
-        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exlucde(keySet);
+    public static void scanData2Store(String fileName) {
+
+        DisconfCenterBaseModel disconfCenterBaseModel =
+            StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName);
+
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModel);
     }
 
     /**
-     * 
+     *
      */
-    private List<DisconfCenterBaseModel> getDisconfCenterFiles(ScanStaticModel scanModel) {
+    @Override
+    public void exclude(Set<String> keySet) {
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().exclude(keySet);
+    }
+
+    /**
+     *
+     */
+    public static List<DisconfCenterBaseModel> getDisconfCenterFiles(Set<String> fileNameList) {
 
         List<DisconfCenterBaseModel> disconfCenterFiles = new ArrayList<DisconfCenterBaseModel>();
 
-        for (String fileName : scanModel.getJustHostFiles()) {
+        for (String fileName : fileNameList) {
 
-            fileName = fileName.trim();
-
-            DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
-
-            //
-            // file name
-            disconfCenterFile.setFileName(fileName);
-
-            //
-            // disConfCommonModel
-            DisConfCommonModel disConfCommonModel = makeDisConfCommonModel("", "");
-            disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
-
-            // Remote URL
-            String url =
-                    DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
-                            disConfCommonModel.getApp(), disConfCommonModel.getVersion(), disConfCommonModel.getEnv(),
-                            disconfCenterFile.getFileName(), DisConfigTypeEnum.FILE);
-            disconfCenterFile.setRemoteServerUrl(url);
-
-            disconfCenterFiles.add(disconfCenterFile);
+            disconfCenterFiles.add(getDisconfCenterFile(fileName));
         }
 
         return disconfCenterFiles;
     }
+
+    /**
+     *
+     */
+    public static DisconfCenterBaseModel getDisconfCenterFile(String fileName) {
+
+        DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
+
+        fileName = fileName.trim();
+
+        //
+        // file name
+        disconfCenterFile.setFileName(fileName);
+
+        //
+        // disConfCommonModel
+        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel("", "");
+        disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
+
+        // Remote URL
+        String url = DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+                                                                disConfCommonModel.getApp(),
+                                                                disConfCommonModel.getVersion(),
+                                                                disConfCommonModel.getEnv(),
+                                                                disconfCenterFile.getFileName(),
+                                                                DisConfigTypeEnum.FILE);
+        disconfCenterFile.setRemoteServerUrl(url);
+
+        return disconfCenterFile;
+    }
+
 }

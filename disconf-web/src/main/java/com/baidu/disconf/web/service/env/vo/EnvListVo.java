@@ -1,7 +1,6 @@
 package com.baidu.disconf.web.service.env.vo;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-22
  */

@@ -6,7 +6,7 @@ import com.baidu.dsp.common.exception.base.RuntimeGlobalException;
 
 /**
  * 用于远程连接错误
- * 
+ *
  * @author liaoqiqi
  * @version 2014-1-26
  */

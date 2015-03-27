@@ -20,7 +20,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 此對象主要是一個存儲結構，存儲的是實體對象和數據庫表的映射關係的數據 該表被QueryGenerater應用作為生成Query的數據基礎 該表被GenericMapper應用作為裝載實體對象的規則
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class ORMapping<ENTITY extends BaseObject<K>, K extends Serializable> {
@@ -51,7 +51,7 @@ public class ORMapping<ENTITY extends BaseObject<K>, K extends Serializable> {
         this.keyColumn.addAll(Arrays.asList(sKeyColumn.split(",")));
         // 此处增加处理以便零注解
         this.table =
-                (table.name().equals("")) ? table.columnStyle().convert(entityClass.getSimpleName()) : table.name();
+            (table.name().equals("")) ? table.columnStyle().convert(entityClass.getSimpleName()) : table.name();
         this.table = (StringUtils.isNotBlank(table.db())) ? table.db() + "." + this.table : this.table;
 
         this.shardCount = table.shardCount();
@@ -124,8 +124,9 @@ public class ORMapping<ENTITY extends BaseObject<K>, K extends Serializable> {
 
     /**
      * 獲取某字段對應的get方法
-     * 
+     *
      * @param column
+     *
      * @return 上午10:18:19 created by Darwin(Tianxin)
      */
     public Method getGetter(String column) {
@@ -135,8 +136,9 @@ public class ORMapping<ENTITY extends BaseObject<K>, K extends Serializable> {
 
     /**
      * 獲取某字段對應的get方法
-     * 
+     *
      * @param column
+     *
      * @return 上午10:18:19 created by Darwin(Tianxin)
      */
     public Method getSetter(String column) {
@@ -146,6 +148,7 @@ public class ORMapping<ENTITY extends BaseObject<K>, K extends Serializable> {
 
     /**
      * @param column
+     *
      * @return 下午1:26:45 created by Darwin(Tianxin)
      */
     public boolean isKeyColumn(String column) {

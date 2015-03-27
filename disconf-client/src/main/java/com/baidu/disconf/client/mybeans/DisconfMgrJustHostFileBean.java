@@ -3,6 +3,8 @@ package com.baidu.disconf.client.mybeans;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -13,16 +15,14 @@ import org.springframework.core.PriorityOrdered;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 
 /**
- * 只是进行配置文件托管的bean
- * 
+ * 进行配置文件托管的bean: 启动时自动下载此配置；更改配置时，亦会自动下载此配置。不会进行java bean类的注入。
+ *
  * @author knightliao
- * 
  */
 public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
 
-    //
-    // 只是进行托管的配置文件（不会注入，只负责动态推送）
-    //
+    protected static final Logger log = LoggerFactory.getLogger(DisconfMgrJustHostFileBean.class);
+
     private Set<String> justHostFiles = new HashSet<String>();
 
     @Override
@@ -40,8 +40,6 @@ public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostPro
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -54,16 +52,15 @@ public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostPro
 
         if (justHostFiles != null) {
 
-            Set<String> newJusSet = new HashSet<String>();
             for (String file : justHostFiles) {
                 if (file != null) {
-                    newJusSet.add(file.trim());
+                    String fileName = file.trim();
+                    log.debug("disconf no-reloadable file: " + fileName);
+                    // 添加到配置文件托管列表里
+                    DisconfCenterHostFilesStore.getInstance().addJustHostFile(fileName);
                 }
             }
-
-            DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(newJusSet);
         }
-
     }
 
 }

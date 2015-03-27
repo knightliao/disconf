@@ -21,7 +21,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 一个映射项的对象
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class MappingItem {
@@ -31,7 +31,7 @@ public class MappingItem {
     }
 
     public MappingItem(Field field, Method setterMethod, Method getterMethod, ColumnStyle columnStyle,
-            boolean columnsModified) {
+                       boolean columnsModified) {
         this.field = field;
         this.getter = getterMethod;
         this.setter = setterMethod;
@@ -87,10 +87,11 @@ public class MappingItem {
 
     /**
      * 获取某个字段的annotation，从继承链最下面获取
-     * 
+     *
      * @param f
      * @param set
      * @param get
+     *
      * @return
      */
     static Column getColumnAnnotation(Field f, Method set, Method get) {
@@ -165,8 +166,8 @@ public class MappingItem {
             }
             // FIXME
             MappingItem item =
-                    new MappingItem(f, set, get, (table != null) ? table.columnStyle() : ColumnStyle.LOWER_CASE,
-                            (table != null) ? table.columnsModified() : false);
+                new MappingItem(f, set, get, (table != null) ? table.columnStyle() : ColumnStyle.LOWER_CASE,
+                                   (table != null) ? table.columnsModified() : false);
             if (item.isIgnore()) {
                 continue;
             }
@@ -178,7 +179,7 @@ public class MappingItem {
 
     /**
      * 判断该item是否是有效item 当property上注释为ignore时，这个接口会返回true，这时会将其在mapping中省略掉。
-     * 
+     *
      * @return
      */
     private boolean isIgnore() {

@@ -21,7 +21,7 @@ import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
  * 配置文件仓库实现器
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
@@ -30,7 +30,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfStoreFileProcessorImpl.class);
 
     /**
-     * 
+     *
      */
     @Override
     public void addUpdateCallbackList(String keyName, List<IDisconfUpdate> iDisconfUpdateList) {
@@ -38,12 +38,12 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
 
             DisconfCenterStore.getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel()
-                    .getDisconfConfUpdates().addAll(iDisconfUpdateList);
+                .getDisconfConfUpdates().addAll(iDisconfUpdateList);
         }
     }
 
     /**
-     * 
+     *
      */
     @Override
     public List<IDisconfUpdate> getUpdateCallbackList(String keyName) {
@@ -51,14 +51,14 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfFileMap().containsKey(keyName)) {
 
             return DisconfCenterStore.getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel()
-                    .getDisconfConfUpdates();
+                       .getDisconfConfUpdates();
         }
 
         return new ArrayList<IDisconfUpdate>();
     }
 
     /**
-     * 
+     *
      */
     @Override
     public DisConfCommonModel getCommonModel(String keyName) {
@@ -75,7 +75,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public boolean hasThisConf(String keyName) {
@@ -89,7 +89,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Instance(Object object, String fileName) {
@@ -162,7 +162,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Object getConfig(String fileName, String keyName) {
@@ -184,7 +184,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void inject2Store(String fileName, DisconfValue disconfValue) {
@@ -204,45 +204,62 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
         // 存储
         Map<String, FileItemValue> keMap = disconfCenterFile.getKeyMaps();
-        for (String fileItem : keMap.keySet()) {
+        if (keMap.size() > 0) {
+            for (String fileItem : keMap.keySet()) {
 
-            Object object = disconfValue.getFileData().get(fileItem);
-            if (object == null) {
-                LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem, disconfValue.getFileData()
-                        .toString());
-                continue;
-            }
-
-            // 根据类型设置值
-            try {
-
-                Object value = ClassUtils.getValeByType(keMap.get(fileItem).getField().getType(), object);
-                keMap.get(fileItem).setValue(value);
-
-                // 如果Object非null,则顺便也注入
-                if (disconfCenterFile.getObject() != null) {
-                    keMap.get(fileItem).getField().set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
+                Object object = disconfValue.getFileData().get(fileItem);
+                if (object == null) {
+                    LOGGER.error("cannot find {} to be injectd. file content is: {}", fileItem,
+                                    disconfValue.getFileData().toString());
+                    continue;
                 }
 
-            } catch (Exception e) {
-                LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
+                // 根据类型设置值
+                try {
+
+                    Object value = ClassUtils.getValeByType(keMap.get(fileItem).getField().getType(), object);
+                    keMap.get(fileItem).setValue(value);
+
+                    // 如果Object非null,则顺便也注入
+                    if (disconfCenterFile.getObject() != null) {
+                        keMap.get(fileItem).getField()
+                            .set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
+                    }
+
+                } catch (Exception e) {
+                    LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
+                }
             }
+        } else {
+
+            //
+            // 非注解式 或者 注解式的域集合为空，则将 文件内容写到配置库里
+            //
+            disconfCenterFile.setAdditionalKeyMaps(disconfValue.getFileData());
         }
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void transformScanData(List<DisconfCenterBaseModel> disconfCenterBaseModels) {
 
         for (DisconfCenterBaseModel disconfCenterFile : disconfCenterBaseModels) {
-            DisconfCenterStore.getInstance().storeOneFile(disconfCenterFile);
+            transformScanData(disconfCenterFile);
         }
     }
 
     /**
-     * 
+     *
+     */
+    @Override
+    public void transformScanData(DisconfCenterBaseModel disconfCenterBaseModel) {
+        DisconfCenterStore.getInstance().storeOneFile(disconfCenterBaseModel);
+    }
+
+    /**
+     *
      */
     @Override
     public DisconfCenterBaseModel getConfData(String key) {
@@ -258,7 +275,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Set<String> getConfKeySet() {
@@ -266,7 +283,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public String confToString() {
@@ -289,7 +306,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
     }
 
     @Override
-    public void exlucde(Set<String> keySet) {
+    public void exclude(Set<String> keySet) {
 
         for (String key : keySet) {
             DisconfCenterStore.getInstance().excludeOneFile(key);

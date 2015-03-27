@@ -10,7 +10,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * Service层工具
- * 
+ *
  * @author liaoqiqi
  * @version 2014-2-20
  */
@@ -18,12 +18,12 @@ public class ServiceUtil {
 
     /**
      * 将结果进行转化
-     * 
+     *
      * @return
      */
-    public static <ENTITIFROM, ENTITYTO> DaoPageResult<ENTITYTO> getResult(
-            DaoPageResult<ENTITIFROM> daoPageFrom,
-            DataTransfer<ENTITIFROM, ENTITYTO> dataTransfer) {
+    public static <ENTITIFROM, ENTITYTO> DaoPageResult<ENTITYTO> getResult(DaoPageResult<ENTITIFROM> daoPageFrom,
+                                                                           DataTransfer<ENTITIFROM,
+                                                                                           ENTITYTO> dataTransfer) {
 
         List<ENTITYTO> entitytos = new ArrayList<ENTITYTO>();
 
@@ -49,12 +49,12 @@ public class ServiceUtil {
 
     /**
      * 转换成Map
-     * 
+     *
      * @param enTs
+     *
      * @return
      */
-    public static <T extends BaseObject<Long>> Map<Long, T> conver2Map(
-            List<T> enTs) {
+    public static <T extends BaseObject<Long>> Map<Long, T> conver2Map(List<T> enTs) {
 
         Map<Long, T> map = new HashMap<Long, T>();
 

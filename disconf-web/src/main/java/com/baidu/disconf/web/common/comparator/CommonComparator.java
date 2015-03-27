@@ -8,9 +8,7 @@ import difflib.Chunk;
 import difflib.Delta;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public abstract class CommonComparator {
 

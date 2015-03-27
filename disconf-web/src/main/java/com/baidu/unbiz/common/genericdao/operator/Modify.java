@@ -6,7 +6,7 @@ package com.baidu.unbiz.common.genericdao.operator;
 
 /**
  * 一个字段的update操作
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class Modify implements Pair {

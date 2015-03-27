@@ -5,13 +5,14 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-demos</artifactId>
-    <version>${disconf-base.version}</version>
+    <version>2.0.0</version>
     <packaging>pom</packaging>
 
 
     <modules>
         <module>disconf-standalone-demo</module>
         <module>disconf-spring-demo</module>
+        <module>disconf-standalone-dubbo-demo</module>
     </modules>
 
 </project>

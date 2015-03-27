@@ -8,14 +8,13 @@ import com.baidu.disconf.client.utils.DisconfAutowareConfig;
 
 /**
  * Disconf 系统自带的配置
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-6
  */
 public class DisClientSysConfig {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(DisClientSysConfig.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisClientSysConfig.class);
 
     protected static final DisClientSysConfig INSTANCE = new DisClientSysConfig();
 
@@ -37,7 +36,7 @@ public class DisClientSysConfig {
 
     /**
      * load config normal
-     * 
+     *
      * @param bundle
      * @param filePath
      */
@@ -61,7 +60,7 @@ public class DisClientSysConfig {
 
     /**
      * STORE URL
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -70,7 +69,7 @@ public class DisClientSysConfig {
 
     /**
      * STORE URL
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -79,7 +78,7 @@ public class DisClientSysConfig {
 
     /**
      * 获取远程主机个数的URL
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -88,7 +87,7 @@ public class DisClientSysConfig {
 
     /**
      * 下载文件夹, 远程文件下载后会放在这里
-     * 
+     *
      * @author
      * @since 1.0.0
      */
@@ -97,7 +96,7 @@ public class DisClientSysConfig {
 
     /**
      * 让下载文件夹放在 classpath目录 下
-     * 
+     *
      * @author
      * @since 1.0.0
      */

@@ -25,38 +25,33 @@ import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 /*
  * 配置项的静态扫描 
  */
-public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase
-        implements StaticScannerMgr {
+public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase implements StaticScannerMgr {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(StaticScannerItemMgrImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(StaticScannerItemMgrImpl.class);
 
     @Override
     public void scanData2Store(ScanStaticModel scanModel) {
 
         // 转换配置项
         List<DisconfCenterBaseModel> disconfCenterItems = getDisconfItems(scanModel);
-        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
-                .transformScanData(disconfCenterItems);
+        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().transformScanData(disconfCenterItems);
 
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void exclude(Set<String> keySet) {
-        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().exlucde(
-                keySet);
+        DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().exclude(keySet);
     }
 
     /**
      * 转换配置项
-     * 
+     *
      * @return
      */
-    private static List<DisconfCenterBaseModel> getDisconfItems(
-            ScanStaticModel scanModel) {
+    private static List<DisconfCenterBaseModel> getDisconfItems(ScanStaticModel scanModel) {
 
         List<DisconfCenterBaseModel> disconfCenterItems = new ArrayList<DisconfCenterBaseModel>();
 
@@ -75,7 +70,7 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase
 
     /**
      * 转换配置项
-     * 
+     *
      * @return
      */
     private static DisconfCenterItem transformScanItem(Method method) {
@@ -89,8 +84,7 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase
         Field[] expectedFields = cls.getDeclaredFields();
 
         // field
-        Field field = MethodUtils.getFieldFromMethod(method, expectedFields,
-                DisConfigTypeEnum.ITEM);
+        Field field = MethodUtils.getFieldFromMethod(method, expectedFields, DisConfigTypeEnum.ITEM);
 
         if (field == null) {
             return null;
@@ -128,15 +122,15 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase
 
         //
         // disConfCommonModel
-        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(
-                disconfItem.env(), disconfItem.version());
+        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(disconfItem.env(), disconfItem.version());
         disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
 
         // Disconf-web url
-        String url = DisconfWebPathMgr.getRemoteUrlParameter(
-                DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
-                disConfCommonModel.getApp(), disConfCommonModel.getVersion(),
-                disConfCommonModel.getEnv(), key, DisConfigTypeEnum.ITEM);
+        String url = DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+                                                                disConfCommonModel.getApp(),
+                                                                disConfCommonModel.getVersion(),
+                                                                disConfCommonModel.getEnv(), key,
+                                                                DisConfigTypeEnum.ITEM);
         disconfCenterItem.setRemoteServerUrl(url);
 
         return disconfCenterItem;

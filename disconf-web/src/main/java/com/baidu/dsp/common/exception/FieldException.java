@@ -9,15 +9,15 @@ import com.baidu.dsp.common.exception.base.RuntimeGlobalException;
 
 /**
  * 专门用业务逻辑校验出错的异常
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-2
  */
 public class FieldException extends RuntimeGlobalException {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = -774654820037286427L;
 
     private Map<String, String> messageErrorMap = new HashMap<String, String>();
@@ -26,12 +26,11 @@ public class FieldException extends RuntimeGlobalException {
 
     /**
      * 局部的，非Map形式
-     * 
+     *
      * @param field
      * @param messageSource
      */
-    public FieldException(String field, String messageSource,
-            Throwable throwable) {
+    public FieldException(String field, String messageSource, Throwable throwable) {
 
         super(ErrorCode.FIELD_ERROR, messageSource, throwable);
         messageErrorMap.put(field, messageSource);
@@ -39,7 +38,7 @@ public class FieldException extends RuntimeGlobalException {
 
     /**
      * 局部的，用Map形式
-     * 
+     *
      * @param errorMap
      */
     public FieldException(Map<String, String> errorMap, Throwable throwable) {
@@ -53,7 +52,7 @@ public class FieldException extends RuntimeGlobalException {
 
     /**
      * 全局的
-     * 
+     *
      * @param globalErrorMsg
      */
     public FieldException(String globalErrorMsg, Throwable throwable) {

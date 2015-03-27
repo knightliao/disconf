@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * 分布式的配置文件中的ITEM
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-16
  */
@@ -19,14 +19,14 @@ public @interface DisconfFileItem {
 
     /**
      * 配置文件里的KEY的名字
-     * 
+     *
      * @return
      */
-    String name() ;
+    String name();
 
     /**
      * 所关联的域
-     * 
+     *
      * @return
      */
     String associateField() default "";

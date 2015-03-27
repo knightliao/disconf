@@ -6,7 +6,6 @@ import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-17
  */
@@ -22,7 +21,7 @@ public class RemoteServerConfig {
 
     /**
      * 地址, 分布式文件配置
-     * 
+     *
      * @return
      */
     @DisconfFileItem(name = "remoteHost")
@@ -36,7 +35,7 @@ public class RemoteServerConfig {
 
     /**
      * 端口, 分布式文件配置
-     * 
+     *
      * @return
      */
     @DisconfFileItem(name = "remotePort")

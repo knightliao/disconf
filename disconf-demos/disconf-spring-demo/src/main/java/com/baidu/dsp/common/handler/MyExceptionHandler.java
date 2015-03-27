@@ -17,29 +17,24 @@ import com.baidu.dsp.common.vo.JsonObjectError;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-12-2
  */
-public class MyExceptionHandler extends SimpleMappingExceptionResolver
-        implements ApplicationContextAware {
+public class MyExceptionHandler extends SimpleMappingExceptionResolver implements ApplicationContextAware {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(MyExceptionHandler.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(MyExceptionHandler.class);
 
     protected ApplicationContext context;
 
-    public void setApplicationContext(ApplicationContext arg0)
-            throws BeansException {
+    public void setApplicationContext(ApplicationContext arg0) throws BeansException {
         this.context = arg0;
     }
 
     @Override
-    public ModelAndView resolveException(HttpServletRequest request,
-            HttpServletResponse response, Object o, Exception e) {
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o,
+                                         Exception e) {
 
-        LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t"
-                + e.getCause());
+        LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t" + e.getCause());
 
         return buildError("syserror.inner", ErrorCode.GLOBAL_ERROR);
 
@@ -47,19 +42,18 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver
 
     /**
      * 全局的错误
-     * 
+     *
      * @param mvc
      * @param errorMsg
      * @param errorCode
+     *
      * @return
      */
     private ModelAndView buildError(String errorMsg, ErrorCode errorCode) {
 
-        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError(errorMsg,
-                errorCode);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError(errorMsg, errorCode);
         LOG.warn(jsonObject.toString());
-        return JsonObjectUtils
-                .JsonObjectError2ModelView((JsonObjectError) jsonObject);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
 }

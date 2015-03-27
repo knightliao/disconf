@@ -11,16 +11,16 @@ import com.baidu.unbiz.common.genericdao.operator.Order;
 
 /**
  * DAO有用的Utils
- * 
+ *
  * @author liaoqiqi
- * 
  */
 public class DaoUtils {
 
     /**
      * 将业务的Page转成Dao的Page
-     * 
+     *
      * @param page
+     *
      * @return
      */
     public static DaoPage daoPageAdapter(Page page) {

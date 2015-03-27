@@ -6,7 +6,7 @@ import com.baidu.dsp.common.exception.base.RuntimeGlobalException;
 
 /**
  * 文件上传错误
- * 
+ *
  * @author liaoqiqi
  * @version 2014-2-20
  */

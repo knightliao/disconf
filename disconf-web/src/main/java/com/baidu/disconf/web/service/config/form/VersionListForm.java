@@ -3,7 +3,6 @@ package com.baidu.disconf.web.service.config.form;
 import javax.validation.constraints.NotNull;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-22
  */

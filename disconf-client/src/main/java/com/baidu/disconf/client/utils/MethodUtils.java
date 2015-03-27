@@ -13,29 +13,25 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-9-9
  */
 public class MethodUtils {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(MethodUtils.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(MethodUtils.class);
 
     /**
      * 对于一个 get/is 方法，返回其相对应的Field
-     * 
+     *
      * @return
      */
-    public static Field getFieldFromMethod(Method method,
-            Field[] expectedFields, DisConfigTypeEnum disConfigTypeEnum) {
+    public static Field getFieldFromMethod(Method method, Field[] expectedFields, DisConfigTypeEnum disConfigTypeEnum) {
 
         String fieldName = null;
 
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 
-            DisconfFileItem disconfFileItem = method
-                    .getAnnotation(DisconfFileItem.class);
+            DisconfFileItem disconfFileItem = method.getAnnotation(DisconfFileItem.class);
 
             // 根据用户设定的注解来获取
             fieldName = disconfFileItem.associateField();
@@ -51,8 +47,7 @@ public class MethodUtils {
         //
         if (StringUtils.isEmpty(fieldName)) {
             // 从方法名 获取其 Field 名
-            fieldName = ClassUtils
-                    .getFieldNameByGetMethodName(method.getName());
+            fieldName = ClassUtils.getFieldNameByGetMethodName(method.getName());
         }
 
         // 确认此Field名是正确的

@@ -15,7 +15,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 与登录登出相关的
- * 
+ *
  * @author liaoqiqi
  * @version 2014-2-6
  */
@@ -42,9 +42,10 @@ public class SignMgrImpl implements SignMgr {
 
     /**
      * 验证密码是否正确
-     * 
+     *
      * @param token
      * @param password
+     *
      * @return
      */
     public boolean validate(String userPassword, String passwordToBeValidate) {

@@ -7,7 +7,6 @@ import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.vo.VisitorVo;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-11-28
  */
@@ -15,7 +14,7 @@ public interface UserMgr {
 
     /**
      * 获取用户的基本信息（登录用户）
-     * 
+     *
      * @return
      */
     Visitor getVisitor(Long userId);
@@ -25,19 +24,16 @@ public interface UserMgr {
     User getUser(Long userId);
 
     /**
-     * 
      * @return
      */
     Long create(User user);
 
     /**
-     * 
      * @param user
      */
     void create(List<User> user);
 
     /**
-     * 
      * @return
      */
     List<User> getAll();

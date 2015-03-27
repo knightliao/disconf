@@ -15,9 +15,7 @@ import com.baidu.ub.common.commons.ThreadContext;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
- * 
  * @author knightliao
- * 
  */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -40,7 +38,7 @@ public class UserInnerMgrImpl implements UserInnerMgr {
     }
 
     /**
-     * 
+     *
      */
     @Override
     public Set<Long> getVisitorAppIds() {

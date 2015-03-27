@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.zookeeper.KeeperException;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -19,7 +18,7 @@ public class ConfigUpdater {
     private Random random = new Random();
 
     public ConfigUpdater(String hosts) throws IOException, InterruptedException {
-        store = new ResilientActiveKeyValueStore();
+        store = new ResilientActiveKeyValueStore(true);
         store.connect(hosts);
     }
 

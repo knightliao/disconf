@@ -18,7 +18,6 @@ import com.baidu.ub.common.commons.ThreadContext;
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-12-5
  */
@@ -67,8 +66,8 @@ public class UserMgrImpl implements UserMgr {
     }
 
     /**
-	 * 
-	 */
+     *
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void create(List<User> users) {

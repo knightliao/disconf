@@ -10,20 +10,17 @@ import org.springframework.stereotype.Service;
 import com.baidu.dsp.common.context.ContextReader;
 
 @Service
-public class ContextReaderImpl implements ApplicationContextAware,
-        ContextReader {
+public class ContextReaderImpl implements ApplicationContextAware, ContextReader {
 
     private ApplicationContext context;
 
-    public void setApplicationContext(ApplicationContext arg0)
-            throws BeansException {
+    public void setApplicationContext(ApplicationContext arg0) throws BeansException {
         this.context = arg0;
     }
 
     public String getMessage(String resourceMessage) {
 
-        String message = context.getMessage(resourceMessage, null,
-                Locale.SIMPLIFIED_CHINESE);
+        String message = context.getMessage(resourceMessage, null, Locale.SIMPLIFIED_CHINESE);
         return message;
     }
 }

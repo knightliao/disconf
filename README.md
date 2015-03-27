@@ -12,8 +12,13 @@ Distributed Configuration Management Platform
 
 disconf.git branches and Maven version:
 
+<<<<<<< HEAD
 - dev(develop branch): 2.6.20-SNAPSHOT
 - master(stable branch)：2.6.19
+=======
+- dev(develop branch): 2.6.21-SNAPSHOT
+- master(stable branch)：2.6.20
+>>>>>>> dev
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
@@ -27,12 +32,12 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eidaxpqdy3j20pr0jrgno.jpg)
 
-## 当前版本（2.6.19）功能特点 ##
+## 当前版本（2.6.20）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
-- **注解式编程，极简的使用方式**
-- **低侵入性和强兼容性** 
+- **极简的使用方式（注解式编程 或 XML代码无代码侵入模式）**
+- **低侵入性或无侵入性、强兼容性** 
 - **需要Spring编程环境**
 
 ## 未来版本（完全版）功能特点 ##
@@ -47,7 +52,7 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
     - 异构包部署统一化：这里的异构系统是指一个系统部署多个实例时，由于配置不同，从而需要多个部署包（jar或war）的情况（下同）。使用Disconf后，异构系统的部署只需要一个部署包，不同实例的配置会自动分配。特别地，在业界大量使用部署虚拟化（如JPAAS系统，SAE，BAE）的情况下，同一个系统使用同一个部署包的情景会越来越多，Disconf可以很自然地与他天然契合。
     - 异构主备自动切换：如果一个异构系统存在主备机，主机发生挂机时，备机可以自动获取主机配置从而变成主机。
     - 异构主备机Context共享工具：异构系统下，主备机切换时可能需要共享Context。可以使用Context共享工具来共享主备的Context。
-- **注解式编程，极简的使用方式**：我们追求的是极简的、用户编程体验良好的编程方式。通过简单的标注+极简单的代码撰写，即可完成复杂的配置分布式化。
+- **极简的使用方式（注解式编程 或 XML代码无代码侵入模式）**：我们追求的是极简的、用户编程体验良好的编程方式。目前支持两种开发模式：基于XML配置或才基于注解，即可完成复杂的配置分布式化。
 - **需要Spring编程环境**
 
 注：配置项是指某个类里的某个Field字段。
@@ -60,19 +65,20 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 ### 其它功能特点 ###
 
-- **低侵入性和强兼容性**：
-	- 低侵入性：极少的代码撰写，即可实现分布式配置。	
+- **低侵入性或无侵入性、强兼容性**：
+	- 低侵入性：通过极少的注解式代码撰写，即可实现分布式配置。
+	- 无侵入性：通过XML简单配置，即可实现分布式配置。
 	- 强兼容性：为程序添加了分布式配置注解后，开启Disconf则使用分布式配置；若关闭Disconf则使用本地配置；若开启Disconf后disconf-web不能正常Work，则Disconf使用本地配置。
 - **支持配置项多个项目共享，支持批量处理项目配置**。
 - **配置监控**：平台提供自校验功能（进一步提高稳定性），可以定时校验应用系统的配置是否正确。
 
 ## 模块架构图  ##
 
-![](http://ww2.sinaimg.cn/bmiddle/60c9620fgw1ejez1p2o3lj20iq0bd75j.jpg)
+![](http://ww1.sinaimg.cn/bmiddle/60c9620fjw1eqi7cnhjp0j20e4097wfq.jpg)
 
-[查看大图](http://ww2.sinaimg.cn/mw1024/60c9620fgw1ejez1p2o3lj20iq0bd75j.jpg)
+[查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1eqi7cnhjp0j20e4097wfq.jpg)
 
-## 模块信息##
+### 模块信息###
 
 - **disconf**
 	- [disconf-core](https://github.com/knightliao/disconf/tree/master/disconf-core): 分布式配置基础包模块
@@ -81,9 +87,9 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 	- [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web): 分布式配置平台服务模块, 依赖disconf-core包。采用SpringMvc+纯HTML方式实现。
 	用户使用它来进行日常的分布式配置管理。
 - **demo**
-	- [disconf-spring-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-spring-demo): 使用disconf的SpringMvc Web demo程序
 	- [disconf-standalone-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-demo): 使用disconf的基于Spring的standalone demo程序
 	- [disconf-standalone-dubbo-demo](https://github.com/knightliao/disconf/tree/dev/disconf-demos/disconf-standalone-dubbo-demo): 集成了disconf和dubbo的基于Spring的standalone demo程序
+    - [disconf-spring-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-spring-demo): 使用disconf的SpringMvc Web demo程序
 	
 ## 用户指南 ##
 
@@ -104,7 +110,7 @@ Disconf为应用方提供了三个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.19</version>
+        <version>2.6.20</version>
     </dependency>
 
 ### disconf-web 使用 ###
@@ -117,14 +123,36 @@ APP+环境+版本+ZK查询：
 
 ![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
 
-### disconf-client Tutorials ###
+### disconf-client/disconf-web Tutorials ###
+
+#### 总体概述
 
 - [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
-- [Tutorial 1 分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
-- [Tutorial 2 分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
-- [Tutorial 3 分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
-- [Tutorial 4 分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
-- [Tutorial 5 非注解式(托管式)的分布式配置文件动态管理](https://github.com/knightliao/disconf/wiki/Tutorial5)
+- 文章介绍：[分布式配置管理平台Disconf](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0Disconf)
+
+#### 基于注解式的分布式配置（支持配置文件和配置项）
+
+推荐新建的项目使用disconf时 使用
+
+- [Tutorial 1 注解式分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
+- [Tutorial 2 注解式分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
+- [Tutorial 3 注解式分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
+- [Tutorial 4 注解式分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
+
+##### 注
+
+将配置文件移至一个专有类里，而不是分散在项目的各个地方，整个代码架构清晰易懂、易管理。
+即便如果哪天不使用disconf，也只需要将注解去掉即可。
+
+#### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
+
+推荐旧项目使用disconf时 使用
+
+- [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
+- [Tutorial 5 非注解式(托管式)的分布式配置文件动态管理,无法自动reload](https://github.com/knightliao/disconf/wiki/Tutorial5)
+
+#### 其它
+
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
 - [Tutorial 8 disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/dev/disconf-demos/disconf-standalone-dubbo-demo)
@@ -140,11 +168,17 @@ APP+环境+版本+ZK查询：
 - [disconf-web详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-web%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
 - [细节讨论](https://github.com/knightliao/disconf/wiki/%E7%BB%86%E8%8A%82%E8%AE%A8%E8%AE%BA)
 
-## 其它 ##
+## 其它##
 
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。 
-- 联系·讨论
-	- QQ群: 239203866 
+    
+##外界使用##
 
-## disconf-client 主要依赖 ##
+- 联系·讨论
+    - QQ群: 239203866 
+- [润生活](http://www.szzjcs.com/) 
+- [拉勾网](http://www.lagou.com/)
+- [人脉通](http://renmaitong.com/)
+
+

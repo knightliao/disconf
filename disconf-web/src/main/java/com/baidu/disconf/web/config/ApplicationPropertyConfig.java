@@ -3,10 +3,7 @@ package com.baidu.disconf.web.config;
 import org.springframework.stereotype.Service;
 
 /**
- * 
- * 
  * @author knightliao
- * 
  */
 @Service
 public class ApplicationPropertyConfig {
@@ -114,10 +111,10 @@ public class ApplicationPropertyConfig {
 
     @Override
     public String toString() {
-        return "ApplicationPropertyConfig [emailHost=" + emailHost + ", emailPassword=" + emailPassword
-                + ", emailUser=" + emailUser + ", emailPort=" + emailPort + ", fromEmail=" + fromEmail
-                + ", emailReceiver=" + emailReceiver + ", emailMonitorOn=" + emailMonitorOn + ", checkConsistencyOn="
-                + checkConsistencyOn + "]";
+        return "ApplicationPropertyConfig [emailHost=" + emailHost + ", emailPassword=" + emailPassword +
+                   ", emailUser=" + emailUser + ", emailPort=" + emailPort + ", fromEmail=" + fromEmail +
+                   ", emailReceiver=" + emailReceiver + ", emailMonitorOn=" + emailMonitorOn + ", checkConsistencyOn=" +
+                   checkConsistencyOn + "]";
     }
 
 }

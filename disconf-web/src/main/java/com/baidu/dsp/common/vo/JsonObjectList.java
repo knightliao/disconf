@@ -8,15 +8,15 @@ import com.baidu.ub.common.commons.ThreadContext;
 
 /**
  * JSON LIST
- * 
+ *
  * @author liaoqiqi
  * @version 2013-12-3
  */
 public class JsonObjectList extends JsonObjectBase {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static final long serialVersionUID = -9082300329723012971L;
 
     private Map<String, Object> page = new HashMap<String, Object>();
@@ -36,7 +36,7 @@ public class JsonObjectList extends JsonObjectBase {
 
     /**
      * 通过ThreadContext将FE需要的Page数据传给前端
-     * 
+     *
      * @param totalCount
      */
     public void setPage(int totalCount) {
@@ -44,14 +44,11 @@ public class JsonObjectList extends JsonObjectBase {
         //
         // 缓存中的数据
         //
-        page.put(FrontEndInterfaceConstant.PAGE_NO,
-                ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_NO));
-        page.put(FrontEndInterfaceConstant.PAGE_SIZE,
-                ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_SIZE));
-        page.put(FrontEndInterfaceConstant.PAGE_ORDER_BY, ThreadContext
-                .getContext(FrontEndInterfaceConstant.PAGE_ORDER_BY));
-        page.put(FrontEndInterfaceConstant.PAGE_ORDER,
-                ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_ORDER));
+        page.put(FrontEndInterfaceConstant.PAGE_NO, ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_NO));
+        page.put(FrontEndInterfaceConstant.PAGE_SIZE, ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_SIZE));
+        page.put(FrontEndInterfaceConstant.PAGE_ORDER_BY,
+                    ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_ORDER_BY));
+        page.put(FrontEndInterfaceConstant.PAGE_ORDER, ThreadContext.getContext(FrontEndInterfaceConstant.PAGE_ORDER));
 
         // 业务总数
         page.put(FrontEndInterfaceConstant.TOTAL_COUNT, totalCount);

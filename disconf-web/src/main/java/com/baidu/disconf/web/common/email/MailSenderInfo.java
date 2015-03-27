@@ -3,7 +3,6 @@ package com.baidu.disconf.web.common.email;
 import java.util.Properties;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-3-2
  */

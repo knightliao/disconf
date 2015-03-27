@@ -7,14 +7,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.baidu.dsp.common.form.RequestFormBase;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-24
  */
 public class AppNewForm extends RequestFormBase {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 4329463343279659715L;
 

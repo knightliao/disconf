@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Disconf 自己的配置文件中的项标注
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */

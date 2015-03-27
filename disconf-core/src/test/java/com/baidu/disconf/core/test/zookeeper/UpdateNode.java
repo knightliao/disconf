@@ -10,7 +10,7 @@ import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStor
 
 /**
  * 更新 结点
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -24,7 +24,7 @@ public class UpdateNode {
     private Random random = new Random();
 
     public UpdateNode(String hosts) throws IOException, InterruptedException {
-        store = new ResilientActiveKeyValueStore();
+        store = new ResilientActiveKeyValueStore(true);
         store.connect(hosts);
     }
 

@@ -7,7 +7,6 @@ import com.baidu.unbiz.common.genericdao.annotation.Table;
 import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -15,42 +14,42 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 public class Config extends BaseObject<Long> {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = -2217832889126331664L;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.TYPE)
     private Integer type;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.NAME)
     private String name;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.VALUE)
     private String value;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.APP_ID)
     private Long appId;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.VERSION)
     private String version;
 
     /**
-     * 
+     *
      */
     @Column(value = Columns.ENV_ID)
     private Long envId;
@@ -133,7 +132,7 @@ public class Config extends BaseObject<Long> {
 
     @Override
     public String toString() {
-        return "App [type=" + type + ", name=" + name + ", value=" + value + ", appId=" + appId + ", version="
-                + version + ", envId=" + envId + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+        return "App [type=" + type + ", name=" + name + ", value=" + value + ", appId=" + appId + ", version=" +
+                   version + ", envId=" + envId + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
     }
 }

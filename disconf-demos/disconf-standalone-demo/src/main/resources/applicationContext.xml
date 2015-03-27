@@ -15,18 +15,27 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean id="propertyConfigurerForProject1"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <!-- 使用disconf必须添加以下配置 -->
+    <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
+          destroy-method="destory">
+        <property name="scanPackage" value="com.example.disconf.demo"/>
+    </bean>
+    <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
+          init-method="init" destroy-method="destory">
+    </bean>
+
+    <!-- 使用注解方式的disconf配置 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="order" value="1"/>
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
             <list>
-                <value>classpath*:/redis.properties</value>
                 <value>classpath*:/coefficients.properties</value>
                 <value>classpath*:/remote.properties</value>
                 <value>classpath*:/static.properties</value>
+                <value>classpath*:/redis.properties</value>
             </list>
         </property>
     </bean>
@@ -46,33 +55,36 @@
         <property name="remotePort" value="${remotePort}"/>
     </bean>
 
-    <!-- 托管的配置文件 disconf只负责推送 不会注入到代码里 -->
-    <bean id="disconfMgrJustHostFileBean"
-          class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
-        <property name="justHostFiles">
+
+    <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改会自动reload)-->
+    <bean id="configproperties_disconf" class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
+        <property name="locations">
             <list>
+                <value>classpath:/autoconfig.properties</value>
+                <value>classpath:/autoconfig2.properties</value>
+                <value>classpath:/myserver_slave.properties</value>
+                <value>classpath:/testJson.json</value>
+                <value>classpath:/testXml2.xml</value>
                 <value>myserver.properties</value>
             </list>
         </property>
     </bean>
-    <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
-          destroy-method="destory">
-        <property name="scanPackage" value="com.example.disconf.demo"/>
-    </bean>
-    <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
-          init-method="init" destroy-method="destory">
-    </bean>
 
-    <!-- 托管的配置文件 disconf只负责推送 不会注入到代码里 -->
-    <bean id="disconfMgrJustHostFileBean2"
-          class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
-        <property name="justHostFiles">
+    <bean id="propertyConfigurer"
+          class="com.baidu.disconf.client.addons.properties.ReloadingPropertyPlaceholderConfigurer">
+        <property name="propertiesArray">
             <list>
-                <value>myserver_slave.properties</value>
-                <value>testXml2.xml</value>
-                <value>testJson.json</value>
+                <ref bean="configproperties_disconf"/>
             </list>
         </property>
+    </bean>
+
+    <bean id="autoService" class="com.example.disconf.demo.service.AutoService">
+        <property name="auto" value="${auto=100}"/>
+    </bean>
+
+    <bean id="autoService2" class="com.example.disconf.demo.service.AutoService2">
+        <property name="auto2" value="${auto2}"/>
     </bean>
 
 </beans>

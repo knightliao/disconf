@@ -1,9 +1,8 @@
 package com.baidu.disconf.client.common.model;
 
 /**
- * 
  * 配置基类
- * 
+ *
  * @author liaoqiqi
  * @version 2014-8-4
  */
@@ -33,8 +32,7 @@ public abstract class DisconfCenterBaseModel {
         return disconfCommonCallbackModel;
     }
 
-    public void setDisconfCommonCallbackModel(
-            DisconfCommonCallbackModel disconfCommonCallbackModel) {
+    public void setDisconfCommonCallbackModel(DisconfCommonCallbackModel disconfCommonCallbackModel) {
         this.disconfCommonCallbackModel = disconfCommonCallbackModel;
     }
 
@@ -56,11 +54,9 @@ public abstract class DisconfCenterBaseModel {
 
     @Override
     public String toString() {
-        return "\n\tDisconfCenterBaseModel [\n\tobject=" + object
-                + "\n\tremoteServerUrl=" + remoteServerUrl
-                + "\n\tdisConfCommonModel=" + disConfCommonModel
-                + "\n\tdisconfCommonCallbackModel="
-                + disconfCommonCallbackModel + "]";
+        return "\n\tDisconfCenterBaseModel [\n\tobject=" + object + "\n\tremoteServerUrl=" + remoteServerUrl +
+                   "\n\tdisConfCommonModel=" + disConfCommonModel + "\n\tdisconfCommonCallbackModel=" +
+                   disconfCommonCallbackModel + "]";
     }
 
     public String infoString() {

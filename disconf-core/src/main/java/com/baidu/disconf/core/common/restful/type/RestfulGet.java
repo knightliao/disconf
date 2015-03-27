@@ -10,14 +10,13 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
 
 /**
  * RestFul get
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-16
  */
 public class RestfulGet implements UnreliableInterface {
 
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(RestfulGet.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(RestfulGet.class);
 
     private Invocation.Builder builder = null;
 
@@ -35,8 +34,7 @@ public class RestfulGet implements UnreliableInterface {
         Response response = builder.get();
 
         if (response.getStatus() != 200) {
-            throw new Exception("query is not ok, response "
-                    + response.getStatus());
+            throw new Exception("query is not ok, response " + response.getStatus());
         }
 
         return response;

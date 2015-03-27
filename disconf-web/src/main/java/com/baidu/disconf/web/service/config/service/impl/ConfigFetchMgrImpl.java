@@ -14,9 +14,7 @@ import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
 import com.baidu.disconf.web.service.config.utils.ConfigUtils;
 
 /**
- * 
  * @author knightliao
- * 
  */
 @Service
 public class ConfigFetchMgrImpl implements ConfigFetchMgr {
@@ -30,7 +28,8 @@ public class ConfigFetchMgrImpl implements ConfigFetchMgr {
      * 根据详细参数获取配置
      */
     @Override
-    public Config getConfByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum) {
+    public Config getConfByParameter(Long appId, Long envId, String env, String key,
+                                     DisConfigTypeEnum disConfigTypeEnum) {
 
         Config config = configDao.getByParameter(appId, envId, env, key, disConfigTypeEnum);
         return config;

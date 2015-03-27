@@ -19,7 +19,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * GenericMapper the mapper
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class GenericMapper<ENTITY extends BaseObject<K>, K extends Serializable> implements RowMapper<ENTITY> {
@@ -80,6 +80,7 @@ public class GenericMapper<ENTITY extends BaseObject<K>, K extends Serializable>
      * @param entity
      * @param setMethod
      * @param value
+     *
      * @throws Exception 下午4:06:04 created by Darwin(Tianxin)
      */
     private void load2Entity(Object entity, Method setMethod, Object value) throws Exception {
@@ -90,8 +91,8 @@ public class GenericMapper<ENTITY extends BaseObject<K>, K extends Serializable>
         } catch (Exception e) {
             String sValue = value.toString();
             String sValueClass = value.getClass().toString();
-            System.out.println("Error in " + setMethod.getName() + " invoke with param :" + sValue + " type is "
-                    + sValueClass);
+            System.out.println("Error in " + setMethod.getName() + " invoke with param :" + sValue + " type is " +
+                                   sValueClass);
             throw e;
         }
     }
@@ -99,7 +100,9 @@ public class GenericMapper<ENTITY extends BaseObject<K>, K extends Serializable>
     /**
      * @param meta
      * @param genericMapper2
+     *
      * @return 下午3:45:38 created by Darwin(Tianxin)
+     *
      * @throws SQLException
      */
     private List<Setter> getSetters(ResultSetMetaData meta) throws SQLException {

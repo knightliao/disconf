@@ -13,7 +13,6 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 import com.github.knightliao.apollo.utils.common.StringUtil;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-11-26
  */

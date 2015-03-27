@@ -24,7 +24,6 @@ import com.baidu.unbiz.common.genericdao.operator.Order;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -35,17 +34,19 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDa
     private UserDao userDao;
 
     /**
-     * 
+     *
      */
     @Override
-    public Config getByParameter(Long appId, Long envId, String version, String key, DisConfigTypeEnum disConfigTypeEnum) {
+    public Config getByParameter(Long appId, Long envId, String version, String key,
+                                 DisConfigTypeEnum disConfigTypeEnum) {
 
-        return findOne(new Match(Columns.APP_ID, appId), new Match(Columns.ENV_ID, envId), new Match(Columns.VERSION,
-                version), new Match(Columns.TYPE, disConfigTypeEnum.getType()), new Match(Columns.NAME, key));
+        return findOne(new Match(Columns.APP_ID, appId), new Match(Columns.ENV_ID, envId),
+                          new Match(Columns.VERSION, version), new Match(Columns.TYPE, disConfigTypeEnum.getType()),
+                          new Match(Columns.NAME, key));
     }
 
     /**
-     * 
+     *
      */
     @Override
     public List<Config> getConfByAppEnv(Long appId, Long envId) {
@@ -60,7 +61,7 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDa
     }
 
     /**
-     * 
+     *
      */
     @Override
     public DaoPageResult<Config> getConfigList(Long appId, Long envId, String version, Page page) {
@@ -78,7 +79,7 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDa
     }
 
     /**
-     * 
+     *
      */
     @Override
     public List<Config> getConfigList(Long appId, Long envId, String version) {
@@ -95,7 +96,7 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDa
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void updateValue(Long configId, String value) {

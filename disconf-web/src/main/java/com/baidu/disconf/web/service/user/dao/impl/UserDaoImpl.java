@@ -8,7 +8,6 @@ import com.baidu.dsp.common.dao.AbstractDao;
 import com.baidu.dsp.common.dao.Columns;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2013-11-28
  */

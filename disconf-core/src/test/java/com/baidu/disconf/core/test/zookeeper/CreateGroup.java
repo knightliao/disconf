@@ -12,7 +12,6 @@ import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-16
  */
@@ -39,12 +38,10 @@ public class CreateGroup implements Watcher {
         }
     }
 
-    public void create(String groupName) throws KeeperException,
-            InterruptedException {
+    public void create(String groupName) throws KeeperException, InterruptedException {
 
         String path = "/" + groupName;
-        String createdPath = zk.create(path, null/* data */,
-                Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        String createdPath = zk.create(path, null/* data */, Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         System.out.println("Created " + createdPath);
     }
 

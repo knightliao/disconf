@@ -12,7 +12,7 @@ import com.baidu.ub.common.sequence.service.SequenceService;
 
 /**
  * 集成Sequence服务的桩
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class SequenceStub {
@@ -23,8 +23,7 @@ public class SequenceStub {
     private static SequenceService sequenceService = null;
 
     /**
-     * @param sequenceService
-     *            the sequenceService to set
+     * @param sequenceService the sequenceService to set
      */
     public void setSequenceService(SequenceService sequenceService) {
         SequenceStub.sequenceService = sequenceService;
@@ -35,7 +34,7 @@ public class SequenceStub {
 
     /**
      * 获取下一个ID
-     * 
+     *
      * @return 下午12:29:05 created by Darwin(Tianxin)
      */
     public static int getIntKey(String sequenceName) {
@@ -44,8 +43,9 @@ public class SequenceStub {
 
     /**
      * 获取count个ID
-     * 
+     *
      * @param count
+     *
      * @return 下午12:29:25 created by Darwin(Tianxin)
      */
     public static int[] getIntKeys(String sequenceName, int count) {
@@ -54,7 +54,7 @@ public class SequenceStub {
 
     /**
      * 获取下一个ID
-     * 
+     *
      * @return 下午12:29:05 created by Darwin(Tianxin)
      */
     public static long getKey(String sequenceName) {
@@ -63,8 +63,9 @@ public class SequenceStub {
 
     /**
      * 获取count个ID
-     * 
+     *
      * @param count
+     *
      * @return 2013/11/8 14:00 modify by haiyang01
      */
     public static long[] getKeys(String sequenceName, int count) {
@@ -73,7 +74,7 @@ public class SequenceStub {
 
     /**
      * 初始化一个缓存
-     * 
+     * <p/>
      * 下午3:38:46 created by Darwin(Tianxin)
      */
     public static final void initialSequence(String name, int step) {
@@ -88,7 +89,7 @@ public class SequenceStub {
 
     /**
      * 获取keyword的id
-     * 
+     *
      * @return 上午9:29:26 created by Darwin(Tianxin)
      */
     public static Long getKeywordId() {

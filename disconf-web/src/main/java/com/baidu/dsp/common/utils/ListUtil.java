@@ -20,7 +20,7 @@ public class ListUtil {
         int end = (list.size() > offset + count) ? offset + count : list.size();
         return list.subList(offset, end);
     }
-    
+
     public static int calcOffset(Page page) {
         return (page.getPageNo() - 1) * page.getPageSize();
     }

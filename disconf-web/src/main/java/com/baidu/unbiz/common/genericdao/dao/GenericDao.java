@@ -42,11 +42,11 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 虚拟的父类
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseObject<KEY>> implements
-        BaseDao<KEY, ENTITY> {
+    BaseDao<KEY, ENTITY> {
 
     private ORMapping<ENTITY, KEY> orMapping = null;
     private QueryGenerater<ENTITY, KEY> queryGenerater = null;
@@ -73,8 +73,8 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 直接传入<code>keyClass和<code>entityClass</code>
-     * 
-     * @param keyClass 主键类型
+     *
+     * @param keyClass    主键类型
      * @param entityClass 实体类
      */
     public GenericDao(Class<KEY> keyClass, Class<ENTITY> entityClass) {
@@ -87,7 +87,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 解析映射的实体类，获取主键名、表名、分片数、sequence配置
-     * 
+     *
      * @param entity
      */
     protected void analysisSequence(Class<ENTITY> entityClass) {
@@ -100,22 +100,20 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 通过getTableName获取表名
-     * 
+     *
      * @return the tableName
      */
     public String getTableName() {
 
-        System.out.println("------------------------------------");
-        System.out.println(ThreadContext.getShardKey());
-        System.out.println(getTableName(orMapping.getTable(), (Number) ThreadContext.getShardKey()));
-        System.out.println("------------------------------------");
+        recordLog("----" + ThreadContext.getShardKey() + "\t" +
+                      getTableName(orMapping.getTable(), (Number) ThreadContext.getShardKey()));
         Number shardKey = ThreadContext.getShardKey();
         return getTableName(orMapping.getTable(), shardKey);
     }
 
     /**
      * 获取shardKey所在的表名
-     * 
+     *
      * @return
      */
     public String getTableName(String table, Number shardKey) {
@@ -162,6 +160,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * @param ids
+     *
      * @return 下午9:03:31 created by Darwin(Tianxin)
      */
     private List<ENTITY> getByComplexKeys(Collection<KEY> ids) {
@@ -176,9 +175,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询符合条件的结果计数
-     * 
+     *
      * @param column 条件字段
-     * @param value 条件字段的值。支持集合对象，支持数组，会按照in 操作来组装条件
+     * @param value  条件字段的值。支持集合对象，支持数组，会按照in 操作来组装条件
+     *
      * @return
      */
     public int count(String column, Object value) {
@@ -187,18 +187,20 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询符合条件组合的记录数
-     * 
+     *
      * @param matches 查询参数,该参数为"字段名,字段值,字段名,字段值..."的排列
+     *
      * @return
      */
-    public int count(Match...matches) {
+    public int count(Match... matches) {
         return count(Arrays.asList(matches));
     }
 
     /**
      * 查询符合条件组合的记录数
-     * 
+     *
      * @param matches
+     *
      * @return 2013-8-26 下午3:04:02 created by wangchongjie
      */
     public int count(List<Match> matches) {
@@ -211,9 +213,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询符合条件的结果计数
-     * 
+     *
      * @param sql
      * @param params
+     *
      * @return
      */
     public int countBySQL(String sql, List<?> params) {
@@ -228,9 +231,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 根据条件查询若干个字段，加载到ENTITY里
-     * 
+     *
      * @param matches
      * @param columns
+     *
      * @return
      */
     protected List<ENTITY> findColumns(List<Match> matches, String[] columns) {
@@ -241,11 +245,12 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 删除符合条件组合的对象列表
-     * 
+     *
      * @param params 查询参数,该参数为"字段名,字段值,字段名,字段值..."的排列
+     *
      * @return
      */
-    public int delete(Match...matches) {
+    public int delete(Match... matches) {
         Query query = queryGenerater.getDeleteQuery(matches);
 
         // 执行操作
@@ -254,9 +259,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 根据条件删除column=value
-     * 
+     *
      * @param column
      * @param value
+     *
      * @return
      */
     public int delete(String column, Object value) {
@@ -269,9 +275,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 获取查询结果
-     * 
+     *
      * @param column 条件字段
-     * @param value 条件字段的值。支持集合对象，支持数组，会按照in 操作来组装条件
+     * @param value  条件字段的值。支持集合对象，支持数组，会按照in 操作来组装条件
+     *
      * @return
      */
     public List<ENTITY> find(String column, Object value) {
@@ -280,19 +287,21 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询符合条件组合的对象列表
-     * 
+     *
      * @param matches 查询参数,多个
+     *
      * @return
      */
-    public List<ENTITY> find(Match...matches) {
+    public List<ENTITY> find(Match... matches) {
         return find(Arrays.asList(matches), new ArrayList<Order>(0));
     }
 
     /**
      * 根据查询条件获取结果集列表
-     * 
+     *
      * @param matches
      * @param order
+     *
      * @return
      */
     public List<ENTITY> find(List<Match> matches, Order order) {
@@ -301,9 +310,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 根据查询条件获取结果集列表
-     * 
+     *
      * @param matches
      * @param order
+     *
      * @return
      */
     public List<ENTITY> find(List<Match> matches, List<Order> order) {
@@ -312,17 +322,18 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 根据查询条件获取结果集列表
-     * 
+     *
      * @param matches
      * @param order
      * @param offset
      * @param limit
+     *
      * @return
      */
     public List<ENTITY> find(List<Match> matches, List<Order> order, int offset, int limit) {
         // FIXME
         Query operate =
-                queryGenerater.getSelectQuery(matches, (order == null) ? null : order.toArray(new Order[order.size()]));
+            queryGenerater.getSelectQuery(matches, (order == null) ? null : order.toArray(new Order[order.size()]));
         String sql = operate.getSql();
         List<Object> params = operate.getParams();
 
@@ -338,11 +349,12 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 根据查询条件获取结果集列表
-     * 
+     *
      * @param matches
      * @param order
      * @param curPage
      * @param pageSize
+     *
      * @return
      */
     public List<ENTITY> page(List<Match> matches, List<Order> order, int curPage, int pageSize) {
@@ -358,11 +370,12 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询符合条件组合的对象
-     * 
+     *
      * @param matches 查询参数,该参数为"字段名,字段值,字段名,字段值..."的排列
+     *
      * @return
      */
-    public ENTITY findOne(Match...matches) {
+    public ENTITY findOne(Match... matches) {
         List<ENTITY> os = find(Arrays.asList(matches), null, 0, 1);
         if (os == null || os.size() == 0) {
             return null;
@@ -372,21 +385,23 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询符合条件组合的对象列表
-     * 
+     *
      * @param matches 查询参数,该参数为"字段名,字段值,字段名,字段值..."的排列
+     *
      * @return
      */
-    public List<ENTITY> findIncludeColumns(Collection<String> includeColumns, Match...matches) {
+    public List<ENTITY> findIncludeColumns(Collection<String> includeColumns, Match... matches) {
         return findColumns(Arrays.asList(matches), includeColumns.toArray(new String[includeColumns.size()]));
     }
 
     /**
      * 查询符合条件组合的对象列表
-     * 
+     *
      * @param matches 查询参数,该参数为"字段名,字段值,字段名,字段值..."的排列
+     *
      * @return
      */
-    public List<ENTITY> findExcludeColumns(Collection<String> excludeColumns, Match...matches) {
+    public List<ENTITY> findExcludeColumns(Collection<String> excludeColumns, Match... matches) {
         Set<String> columns = orMapping.getAllColumns();
         for (String column : excludeColumns) {
             columns.remove(column);
@@ -396,9 +411,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 根据查询条件获取结果集列表
-     * 
+     *
      * @param sql
      * @param params 无参数时可以为null
+     *
      * @return
      */
     public List<ENTITY> findBySQL(String sql, List<?> params) {
@@ -408,10 +424,11 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 按照SQL语句查询并装在记录为一个列表
-     * 
+     *
      * @param sql
      * @param params
      * @param mapper
+     *
      * @return
      */
     public <T extends Object, O extends Object> List<T> findBySQL(String sql, List<O> params, RowMapper<T> mapper) {
@@ -437,7 +454,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         return (List<T>) jdbcTemplate.query(sql, args, mapper);
     }
 
-    public <T> T findValue(String column, Class<T> tClass, Match...matches) {
+    public <T> T findValue(String column, Class<T> tClass, Match... matches) {
 
         Query query = queryGenerater.getMiniSelectQuery(Arrays.asList(column), matches);
         List<T> ts = findOneColumn(query.getSql() + " limit 1", query.getParams(), 1, tClass);
@@ -448,22 +465,23 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         }
     }
 
-    public <T> List<T> findOneColumn(String column, Class<T> tClass, Match...matches) {
+    public <T> List<T> findOneColumn(String column, Class<T> tClass, Match... matches) {
         Query query = queryGenerater.getMiniSelectQuery(Arrays.asList(column), matches);
 
         return findOneColumn(query.getSql(), query.getParams(), 1, tClass);
     }
 
-    public <T> List<T> findDistinctColumn(String column, Class<T> tClass, Match...matches) {
+    public <T> List<T> findDistinctColumn(String column, Class<T> tClass, Match... matches) {
         return findOneColumn("distinct " + column, tClass, matches);
     }
 
     /**
      * 查询某一列的值
-     * 
+     *
      * @param sql
      * @param params
      * @param mapperColumnIndex 要返回的哪一列的值，由1开始。
+     *
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -483,15 +501,17 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 查询某一列的值
-     * 
+     *
      * @param sql
      * @param params
      * @param mapperColumnIndex 要返回的那一列的值
-     * @param resultClass 要装载成的类型
+     * @param resultClass       要装载成的类型
+     *
      * @return
      */
     @SuppressWarnings("unchecked")
-    public <N> List<N> findOneColumn(String sql, List<?> params, final int mapperColumnIndex, final Class<N> resultClass) {
+    public <N> List<N> findOneColumn(String sql, List<?> params, final int mapperColumnIndex,
+                                     final Class<N> resultClass) {
 
         if (sql == null) {
             recordLog(" param sql is null!");
@@ -596,8 +616,9 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 批量更新
-     * 
+     *
      * @param entities
+     *
      * @return
      */
     public int update(List<ENTITY> entities) {
@@ -627,11 +648,11 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         return entities.size();
     }
 
-    public int update(Modify modify, Match...matches) {
+    public int update(Modify modify, Match... matches) {
         return update(Arrays.asList(modify), matches);
     }
 
-    public int update(List<Modify> modifies, Match...matches) {
+    public int update(List<Modify> modifies, Match... matches) {
 
         Query query = queryGenerater.getUpdateQuery(modifies, matches);
         return executeSQL(query.getSql(), query.getParams());
@@ -647,8 +668,9 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         }
         List<KEY> keys = new ArrayList<KEY>(entities.size());
         for (ENTITY entity : entities) {
-            if (entity != null)
+            if (entity != null) {
                 keys.add(entity.getId());
+            }
         }
 
         return delete(keys);
@@ -677,6 +699,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * @param ids
+     *
      * @return 下午8:54:16 created by Darwin(Tianxin)
      */
     private int deleteByComplexIndex(List<KEY> ids) {
@@ -690,9 +713,10 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 执行SQL语句
-     * 
+     *
      * @param sql
      * @param params
+     *
      * @return
      */
     public <E extends Object> int executeSQL(String sql, List<E> params) {
@@ -705,8 +729,9 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 将数字集合append为(n1,n2,n3)这种格式的字符串
-     * 
+     *
      * @param ns
+     *
      * @return
      */
     public static final <T extends Number> String connect(Collection<T> ns) {
@@ -754,9 +779,8 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
         // 判断是否为自动设置的ID
         KEY key = entity.getId();
-        boolean autoGeneratedKey =
-                (Number.class.isAssignableFrom(orMapping.getKeyClass()) && (key == null || (Long.parseLong(key
-                        .toString()) == 0)));
+        boolean autoGeneratedKey = (Number.class.isAssignableFrom(orMapping.getKeyClass()) &&
+                                        (key == null || (Long.parseLong(key.toString()) == 0)));
 
         // 获取insert语句
         @SuppressWarnings("unchecked")
@@ -779,6 +803,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
      * @param entity
      * @param sql
      * @param params
+     *
      * @return 下午1:11:38 created by Darwin(Tianxin)
      */
     @SuppressWarnings("unchecked")
@@ -792,8 +817,9 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql);
                 int index = 1;
-                for (Object param : params)
+                for (Object param : params) {
                     ps.setObject(index++, param);
+                }
                 return ps;
             }
         }, keyHolder);
@@ -823,8 +849,9 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql);
                 int index = 1;
-                for (Object param : params)
+                for (Object param : params) {
                     ps.setObject(index++, param);
+                }
                 return ps;
             }
         }, keyHolder);
@@ -926,9 +953,8 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         int i = 0;
         int[] result = new int[entities.size()];
         for (int index = 0, length = entities.size(); index < length; index++) {
-            int updated =
-                    createAndFetchUpdateRow(entities.get(index), query.getSql(),
-                            query.getParams().subList(i, i += paramPerEntity));
+            int updated = createAndFetchUpdateRow(entities.get(index), query.getSql(),
+                                                     query.getParams().subList(i, i += paramPerEntity));
             result[index] = updated;
         }
 
@@ -971,7 +997,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     /**
      * 记录日志的方法
-     * 
+     *
      * @param sLog
      */
     public abstract void recordLog(String sLog);

@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import redis.clients.jedis.Jedis;
-
 import com.example.disconf.demo.config.JedisConfig;
 import com.example.disconf.demo.utils.JedisUtil;
 
+import redis.clients.jedis.Jedis;
+
 /**
  * 一个简单的Redis服务
- * 
+ *
  * @author liaoqiqi
  * @version 2014-6-17
  */
@@ -54,8 +54,9 @@ public class SimpleRedisService implements InitializingBean, DisposableBean {
 
     /**
      * 获取一个值
-     * 
+     *
      * @param key
+     *
      * @return
      */
     public String getKey(String key) {

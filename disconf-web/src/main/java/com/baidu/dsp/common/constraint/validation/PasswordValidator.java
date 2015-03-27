@@ -6,12 +6,10 @@ import javax.validation.ConstraintValidatorContext;
 import com.baidu.dsp.common.constraint.PasswordConstraint;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-14
  */
-public class PasswordValidator implements
-        ConstraintValidator<PasswordConstraint, String> {
+public class PasswordValidator implements ConstraintValidator<PasswordConstraint, String> {
 
     @Override
     public void initialize(PasswordConstraint constraintAnnotation) {

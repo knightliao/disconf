@@ -14,47 +14,54 @@ public class RemoteMockServer {
     public static final Integer PORT = 9289;
 
     // 远程URL
-    public static final List<String> LOCAL_HOST_LIST = Lists
-            .newArrayList("127.0.0.1:" + String.valueOf(PORT));
+    public static final List<String> LOCAL_HOST_LIST = Lists.newArrayList("127.0.0.1:" + String.valueOf(PORT));
 
     //
     // 配置文件
     //
-    public static final String FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=confA.properties&version=1_0_0_0";
+    public static final String FILE_URL =
+        "/api/config/file?app=disconf_testcase&env=rd&type=0&key=confA.properties&version=1_0_0_0";
     public static final String FILE_NAME = "confA.properties";
     public static final String FILE_CONTENT = "confa.varA=1000\r\nconfa.varA2=2000";
 
     //
     // 空配置文件
     //
-    public static final String EMPTY_FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=empty.properties&version=1_0_0_0";
+    public static final String EMPTY_FILE_URL =
+        "/api/config/file?app=disconf_testcase&env=rd&type=0&key=empty.properties&version=1_0_0_0";
     public static final String EMPTY_FILE_NAME = "empty.properties";
 
     //
     // 静态配置文件
     //
-    public static final String STATIC_FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=staticConf.properties&version=1_0_0_0";
+    public static final String STATIC_FILE_URL =
+        "/api/config/file?app=disconf_testcase&env=rd&type=0&key=staticConf.properties&version=1_0_0_0";
     public static final String STATIC_FILE_NAME = "staticConf.properties";
     public static final String STATIC_FILE_CONTENT = "staticvar=50\r\nstaticvar2=100";
 
     //
     // 非注解 方式1
     //
-    public static final String NON_ANOTATION_FILE_URL = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=atomserverl.properties&version=1_0_0_0";
+    public static final String NON_ANOTATION_FILE_URL =
+        "/api/config/file?app=disconf_testcase&env=rd&type=0&key=atomserverl.properties&version=1_0_0_0";
     public static final String NON_ANOTATION_FILE_NAME = "atomserverl.properties";
-    public static final String NON_ANOTATTION_FILE_CONTENT = "server=10.81.11.243:16600,10.81.11.243:16602,10.81.11.243:16603\r\nretry=3";
+    public static final String NON_ANOTATTION_FILE_CONTENT =
+        "server=10.81.11.243:16600,10.81.11.243:16602,10.81.11.243:16603\r\nretry=3";
 
     //
     // 非注解 方式2
     //
-    public static final String NON_ANOTATION_FILE_URL2 = "/api/config/file?app=disconf_testcase&env=rd&type=0&key=atomserverm_slave.properties&version=1_0_0_0";
+    public static final String NON_ANOTATION_FILE_URL2 =
+        "/api/config/file?app=disconf_testcase&env=rd&type=0&key=atomserverm_slave.properties&version=1_0_0_0";
     public static final String NON_ANOTATION_FILE_NAME2 = "atomserverm_slave.properties";
-    public static final String NON_ANOTATTION_FILE_CONTENT2 = "#online\r\nserver=10.23.247.6:16700,10.23.247.22:16700,10.65.25.6:16700,10.65.25.7:16700\r\nretry=3";
+    public static final String NON_ANOTATTION_FILE_CONTENT2 =
+        "#online\r\nserver=10.23.247.6:16700,10.23.247.22:16700,10.65.25.6:16700,10.65.25.7:16700\r\nretry=3";
 
     //
     // 配置项
     //
-    public static final String ITEM_URL = "/api/config/item?app=disconf_testcase&env=rd&type=1&key=keyA&version=1_0_0_0";
+    public static final String ITEM_URL =
+        "/api/config/item?app=disconf_testcase&env=rd&type=1&key=keyA&version=1_0_0_0";
     public static final String CONTENT_TYPE = "application/json";
     public static final String DEFAULT_ITEM_VALUE = "1000";
 

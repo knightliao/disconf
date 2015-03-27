@@ -10,15 +10,16 @@ import org.slf4j.Marker;
 
 /**
  * 切面的LogFactory
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class AopLogFactory {
 
     /**
      * 获取一个日志记录实例
-     * 
+     *
      * @param clazz
+     *
      * @return 下午7:49:35 created by Darwin(Tianxin)
      */
     public static Logger getLogger(Class<?> clazz) {
@@ -28,164 +29,182 @@ public class AopLogFactory {
         return new Logger() {
 
             @Override
-            public void warn(Marker marker, String format, Object arg1,
-                    Object arg2) {
-                if (ThreadLog.isWarnEnabled())
+            public void warn(Marker marker, String format, Object arg1, Object arg2) {
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(marker, format, arg1, arg2);
-                else
+                } else {
                     core.warn(marker, format, arg1, arg2);
+                }
             }
 
             @Override
             public void warn(Marker marker, String msg, Throwable t) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(marker, msg, t);
-                else
+                } else {
                     core.warn(marker, msg, t);
+                }
             }
 
             @Override
             public void warn(Marker marker, String format, Object[] argArray) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(marker, format, argArray);
-                else
+                } else {
                     core.warn(marker, format, argArray);
+                }
             }
 
             @Override
             public void warn(Marker marker, String format, Object arg) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(marker, format, arg);
-                else
+                } else {
                     core.warn(marker, format, arg);
+                }
             }
 
             @Override
             public void warn(String format, Object arg1, Object arg2) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(format, arg1, arg2);
-                else
+                } else {
                     core.warn(format, arg1, arg2);
+                }
             }
 
             @Override
             public void warn(Marker marker, String msg) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(marker, msg);
+                }
                 core.warn(marker, msg);
             }
 
             @Override
             public void warn(String msg, Throwable t) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(msg, t);
-                else
+                } else {
                     core.warn(msg, t);
+                }
             }
 
             @Override
             public void warn(String format, Object[] argArray) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.warn(format, argArray);
-                else
+                } else {
                     core.warn(format, argArray);
+                }
             }
 
             @Override
             public void warn(String format, Object arg) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(format, arg);
-                else
+                } else {
                     core.warn(format, arg);
+                }
             }
 
             @Override
             public void warn(String msg) {
-                if (ThreadLog.isWarnEnabled())
+                if (ThreadLog.isWarnEnabled()) {
                     core.error(msg);
-                else
+                } else {
                     core.warn(msg);
+                }
             }
 
             @Override
-            public void trace(Marker marker, String format, Object arg1,
-                    Object arg2) {
-                if (ThreadLog.isTraceEnabled())
+            public void trace(Marker marker, String format, Object arg1, Object arg2) {
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(marker, format, arg1, arg2);
-                else
+                } else {
                     core.trace(marker, format, arg1, arg2);
+                }
             }
 
             @Override
             public void trace(Marker marker, String msg, Throwable t) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(marker, msg, t);
-                else
+                } else {
                     core.trace(marker, msg, t);
+                }
             }
 
             @Override
             public void trace(Marker marker, String format, Object[] argArray) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(marker, format, argArray);
-                else
+                } else {
                     core.trace(marker, format, argArray);
+                }
             }
 
             @Override
             public void trace(Marker marker, String format, Object arg) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(marker, format, arg);
-                else
+                } else {
                     core.trace(marker, format, arg);
+                }
             }
 
             @Override
             public void trace(String format, Object arg1, Object arg2) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(format, arg1, arg2);
-                else
+                } else {
                     core.trace(format, arg1, arg2);
+                }
             }
 
             @Override
             public void trace(Marker marker, String msg) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(marker, msg);
-                else
+                } else {
                     core.trace(marker, msg);
+                }
             }
 
             @Override
             public void trace(String msg, Throwable t) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(msg, t);
-                else
+                } else {
                     core.trace(msg, t);
+                }
             }
 
             @Override
             public void trace(String format, Object[] argArray) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(format, argArray);
-                else
+                } else {
                     core.trace(format, argArray);
+                }
             }
 
             @Override
             public void trace(String format, Object arg) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(format, arg);
-                else
+                } else {
                     core.trace(format, arg);
+                }
             }
 
             @Override
             public void trace(String msg) {
-                if (ThreadLog.isTraceEnabled())
+                if (ThreadLog.isTraceEnabled()) {
                     core.error(msg);
-                else
+                } else {
                     core.trace(msg);
+                }
             }
 
             @Override
@@ -239,84 +258,93 @@ public class AopLogFactory {
             }
 
             @Override
-            public void info(Marker marker, String format, Object arg1,
-                    Object arg2) {
-                if (ThreadLog.isInfoEnabled())
+            public void info(Marker marker, String format, Object arg1, Object arg2) {
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(marker, format, arg1, arg2);
-                else
+                } else {
                     core.info(marker, format, arg1, arg2);
+                }
             }
 
             @Override
             public void info(Marker marker, String msg, Throwable t) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(marker, msg, t);
-                else
+                } else {
                     core.info(marker, msg, t);
+                }
             }
 
             @Override
             public void info(Marker marker, String format, Object[] argArray) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(marker, format, argArray);
-                else
+                } else {
                     core.info(marker, format, argArray);
+                }
             }
 
             @Override
             public void info(Marker marker, String format, Object arg) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(marker, format, arg);
-                else
+                } else {
                     core.info(marker, format, arg);
+                }
             }
 
             @Override
             public void info(String format, Object arg1, Object arg2) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(format, arg1, arg2);
-                else
+                } else {
                     core.info(format, arg1, arg2);
+                }
             }
 
             @Override
             public void info(Marker marker, String msg) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(marker, msg);
-                else
+                } else {
                     core.info(marker, msg);
+                }
             }
 
             @Override
             public void info(String msg, Throwable t) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(msg, t);
-                else
+                } else {
                     core.info(msg, t);
+                }
             }
 
             @Override
             public void info(String format, Object[] argArray) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(format, argArray);
-                else
+                } else {
                     core.info(format, argArray);
+                }
             }
 
             @Override
             public void info(String format, Object arg) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(format, arg);
-                else
+                } else {
                     core.info(format, arg);
+                }
             }
 
             @Override
             public void info(String msg) {
-                if (ThreadLog.isInfoEnabled())
+                if (ThreadLog.isInfoEnabled()) {
                     core.error(msg);
-                else
+                } else {
                     core.info(msg);
+                }
             }
 
             @Override
@@ -325,8 +353,7 @@ public class AopLogFactory {
             }
 
             @Override
-            public void error(Marker marker, String format, Object arg1,
-                    Object arg2) {
+            public void error(Marker marker, String format, Object arg1, Object arg2) {
                 core.error(marker, format, arg1, arg2);
             }
 
@@ -376,83 +403,92 @@ public class AopLogFactory {
             }
 
             @Override
-            public void debug(Marker marker, String format, Object arg1,
-                    Object arg2) {
-                if (ThreadLog.isDebugEnabled())
+            public void debug(Marker marker, String format, Object arg1, Object arg2) {
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(marker, format, arg1, arg2);
-                else
+                } else {
                     core.debug(marker, format, arg1, arg2);
+                }
             }
 
             @Override
             public void debug(Marker marker, String msg, Throwable t) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(marker, msg, t);
-                else
+                } else {
                     core.debug(marker, msg, t);
+                }
             }
 
             @Override
             public void debug(Marker marker, String format, Object[] argArray) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(marker, format, argArray);
-                else
+                } else {
                     core.debug(marker, format, argArray);
+                }
             }
 
             @Override
             public void debug(Marker marker, String format, Object arg) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(marker, format, arg);
+                }
                 core.debug(marker, format, arg);
             }
 
             @Override
             public void debug(String format, Object arg1, Object arg2) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(format, arg1, arg2);
-                else
+                } else {
                     core.debug(format, arg1, arg2);
+                }
 
             }
 
             @Override
             public void debug(Marker marker, String msg) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(marker, msg);
-                else
+                } else {
                     core.debug(marker, msg);
+                }
             }
 
             @Override
             public void debug(String msg, Throwable t) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(msg, t);
+                }
                 core.debug(msg, t);
             }
 
             @Override
             public void debug(String format, Object[] argArray) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(format, argArray);
-                else
+                } else {
                     core.debug(format, argArray);
+                }
             }
 
             @Override
             public void debug(String format, Object arg) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(format, arg);
-                else
+                } else {
                     core.debug(format, arg);
+                }
             }
 
             @Override
             public void debug(String msg) {
-                if (ThreadLog.isDebugEnabled())
+                if (ThreadLog.isDebugEnabled()) {
                     core.error(msg);
-                else
+                } else {
                     core.debug(msg);
+                }
             }
         };
     }

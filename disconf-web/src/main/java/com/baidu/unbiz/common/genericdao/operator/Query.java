@@ -8,14 +8,14 @@ import java.util.List;
 
 /**
  * 封装一个sql操作
- * 
+ *
  * @author Darwin(Tianxin)
  */
 public class Query {
 
     /**
      * 默认构造函数
-     * 
+     *
      * @param sql
      * @param params
      */

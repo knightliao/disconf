@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 /**
  * 配置项表示
- * 
+ *
  * @author liaoqiqi
  * @version 2014-5-20
  */
@@ -43,14 +43,13 @@ public class DisconfCenterItem extends DisconfCenterBaseModel {
 
     @Override
     public String toString() {
-        return "\n\tDisconfCenterItem [\n\tkey=" + key + "\n\tvalue=" + value
-                + "\n\tfield=" + field + super.toString() + "]";
+        return "\n\tDisconfCenterItem [\n\tkey=" + key + "\n\tvalue=" + value + "\n\tfield=" + field +
+                   super.toString() + "]";
     }
 
     @Override
     public String infoString() {
-        return "\n\tDisconfCenterItem [\n\tvalue=" + value
-                + "\n\tfield=" + field + super.infoString() + "]";
+        return "\n\tDisconfCenterItem [\n\tvalue=" + value + "\n\tfield=" + field + super.infoString() + "]";
     }
 
 }

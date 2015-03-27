@@ -12,7 +12,6 @@ import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-20
  */
@@ -20,13 +19,13 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 @RequestMapping(WebConstants.API_PREFIX + "/user")
 public class UserController extends BaseController {
 
-    protected static final Logger LOG = LoggerFactory
-            .getLogger(UserController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     /**
      * GET 获取
-     * 
+     *
      * @param demoUserId
+     *
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -40,8 +39,9 @@ public class UserController extends BaseController {
 
     /**
      * 更新Conf值
-     * 
+     *
      * @param demoUserId
+     *
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)

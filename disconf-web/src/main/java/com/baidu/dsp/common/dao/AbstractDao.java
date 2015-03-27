@@ -26,14 +26,12 @@ import com.baidu.unbiz.common.genericdao.param.NotParam;
 import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
- * 
  * @author Darwin(Tianxin)
  */
-public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseObject<KEY>>
-        extends GenericDao<KEY, ENTITY> {
+public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseObject<KEY>> extends
+    GenericDao<KEY, ENTITY> {
 
-    protected final static Logger LOG = AopLogFactory
-            .getLogger(AbstractDao.class);
+    protected final static Logger LOG = AopLogFactory.getLogger(AbstractDao.class);
 
     @Override
     @Resource(name = "onedbJdbcTemplate")
@@ -112,9 +110,10 @@ public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseO
 
     /**
      * 新版的Page，返回TotalCount
-     * 
+     *
      * @param matches
      * @param daoPage
+     *
      * @return
      */
     public DaoPageResult<ENTITY> page2(List<Match> matches, DaoPage daoPage) {
@@ -134,11 +133,12 @@ public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseO
 
     /**
      * 根据查询条件获取结果集列表
-     * 
+     *
      * @param matches
      * @param order
      * @param curPage
      * @param pageSize
+     *
      * @return
      */
     private List<ENTITY> page(List<Match> matches, DaoPage daoPage) {

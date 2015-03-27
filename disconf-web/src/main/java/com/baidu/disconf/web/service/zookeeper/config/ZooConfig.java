@@ -1,7 +1,6 @@
 package com.baidu.disconf.web.service.zookeeper.config;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-6-24
  */

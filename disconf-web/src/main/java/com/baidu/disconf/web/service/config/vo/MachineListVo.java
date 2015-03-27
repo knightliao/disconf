@@ -5,9 +5,7 @@ import java.util.List;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 
 /**
- * 
  * @author knightliao
- * 
  */
 public class MachineListVo {
 

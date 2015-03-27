@@ -5,7 +5,6 @@
 package com.baidu.ub.common.sequence;
 
 /**
- * 
  * @author Darwin(Tianxin)
  */
 
