@@ -15,7 +15,6 @@
             <version>0.9.9-RC1</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>

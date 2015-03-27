@@ -105,7 +105,7 @@ Disconf为应用方提供了三个工具，
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.20-SNAPSHOT</version>
+        <version>2.6.20</version>
     </dependency>
 
 ### disconf-web 使用 ###
