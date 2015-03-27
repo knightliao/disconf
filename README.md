@@ -14,7 +14,6 @@ disconf.git branches and Maven version:
 
 - dev(develop branch): 2.6.21-SNAPSHOT
 - master(stable branch)：2.6.20
-
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
