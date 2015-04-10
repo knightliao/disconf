@@ -6,8 +6,13 @@
     <artifactId>disconf-standalone-dubbo-demo</artifactId>
     <version>2.0.0</version>
 
-
     <dependencies>
+
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-client</artifactId>
+            <version>2.6.21-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.reflections</groupId>
@@ -96,11 +101,7 @@
             <artifactId>jedis</artifactId>
             <version>2.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.baidu.disconf</groupId>
-            <artifactId>disconf-client</artifactId>
-            <version>2.6.19</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
