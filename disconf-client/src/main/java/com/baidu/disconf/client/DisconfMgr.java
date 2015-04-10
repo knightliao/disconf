@@ -194,7 +194,11 @@ public class DisconfMgr {
      *
      */
     private static void startTimer() {
-        timer.schedule(new ReloadConfigurationMonitor(), 2000, 1000);// 两秒后启动任务,每秒检查一次
+        if (timer != null) {
+            timer.schedule(new ReloadConfigurationMonitor(), 2000, 1000);// 两秒后启动任务,每秒检查一次
+        } else {
+            LOGGER.error("timer is null");
+        }
     }
 
     /**
