@@ -57,7 +57,8 @@
 
 
     <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改会自动reload)-->
-    <bean id="configproperties_disconf" class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
+    <bean id="configproperties_disconf"
+          class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:/autoconfig.properties</value>
@@ -72,6 +73,8 @@
 
     <bean id="propertyConfigurer"
           class="com.baidu.disconf.client.addons.properties.ReloadingPropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="propertiesArray">
             <list>
                 <ref bean="configproperties_disconf"/>
