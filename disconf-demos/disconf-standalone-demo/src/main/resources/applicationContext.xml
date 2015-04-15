@@ -23,22 +23,6 @@
           init-method="init" destroy-method="destory">
     </bean>
 
-    <!-- 使用注解方式的disconf配置 -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="1"/>
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
-        <property name="ignoreResourceNotFound" value="true"/>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-        <property name="locations">
-            <list>
-                <value>classpath*:/coefficients.properties</value>
-                <value>classpath*:/remote.properties</value>
-                <value>classpath*:/static.properties</value>
-                <value>classpath*:/redis.properties</value>
-            </list>
-        </property>
-    </bean>
-
     <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改会自动reload)-->
     <bean id="configproperties_disconf"
           class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
