@@ -8,8 +8,7 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        ">
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <context:component-scan base-package="com.baidu,com.example"/>
 
@@ -39,22 +38,6 @@
             </list>
         </property>
     </bean>
-
-    <bean id="jedisConfig" class="com.example.disconf.demo.config.JedisConfig">
-        <property name="host" value="${redis.host}"/>
-        <property name="port" value="${redis.port}"/>
-    </bean>
-
-    <bean id="coefficients" class="com.example.disconf.demo.config.Coefficients">
-        <property name="baiFaCoe" value="${coe.baiFaCoe}"/>
-        <property name="yuErBaoCoe" value="${coe.yuErBaoCoe}"/>
-    </bean>
-
-    <bean id="remoteServerConfig" class="com.example.disconf.demo.config.RemoteServerConfig">
-        <property name="remoteHost" value="${remoteHost}"/>
-        <property name="remotePort" value="${remotePort}"/>
-    </bean>
-
 
     <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改会自动reload)-->
     <bean id="configproperties_disconf"

@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        ">
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="com.baidu,com.example" />
+    <context:component-scan base-package="com.baidu,com.example"/>
 
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <bean id="propertyConfigurerForProject1"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="1" />
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        <property name="ignoreResourceNotFound" value="true" />
-        <property name="ignoreUnresolvablePlaceholders" value="true" />
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
             <list>
                 <value>classpath*:/redis.properties</value>
@@ -31,26 +30,9 @@
         </property>
     </bean>
 
-    <bean id="jedisConfig" class="com.example.disconf.demo.config.JedisConfig">
-        <property name="host" value="${redis.host}" />
-        <property name="port" value="${redis.port}" />
-    </bean>
-
-    <bean id="coefficients" class="com.example.disconf.demo.config.Coefficients">
-        <property name="baiFaCoe" value="${coe.baiFaCoe}" />
-        <property name="yuErBaoCoe" value="${coe.yuErBaoCoe}" />
-    </bean>
-
-    <bean id="remoteServerConfig" class="com.example.disconf.demo.config.RemoteServerConfig">
-        <property name="remoteHost" value="${remoteHost}" />
-        <property name="remotePort" value="${remotePort}" />
-    </bean>
-
-
-
     <!-- 非托管的配置文件 disconf只负责推送 不会注入到代码里 -->
     <bean id="disconfMgrJustHostFileBean"
-        class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
+          class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
         <property name="justHostFiles">
             <list>
                 <value>myserver.properties</value>
@@ -58,16 +40,16 @@
         </property>
     </bean>
     <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
-        destroy-method="destory">
-        <property name="scanPackage" value="com.example.disconf.demo" />
+          destroy-method="destory">
+        <property name="scanPackage" value="com.example.disconf.demo"/>
     </bean>
     <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
-        init-method="init" destroy-method="destory">
+          init-method="init" destroy-method="destory">
     </bean>
 
     <!-- 非托管的配置文件 disconf只负责推送 不会注入到代码里 -->
     <bean id="disconfMgrJustHostFileBean2"
-        class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
+          class="com.baidu.disconf.client.mybeans.DisconfMgrJustHostFileBean">
         <property name="justHostFiles">
             <list>
                 <value>myserver_slave.properties</value>
@@ -75,6 +57,6 @@
         </property>
     </bean>
 
-    <import resource="classpath*:dubbo-provider.xml" />
+    <import resource="classpath*:dubbo-provider.xml"/>
 
 </beans>
