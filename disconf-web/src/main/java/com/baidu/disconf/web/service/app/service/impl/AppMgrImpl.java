@@ -89,7 +89,7 @@ public class AppMgrImpl implements AppMgr {
         App app = new App();
         app.setName(appNew.getApp());
         app.setDesc(appNew.getDesc());
-        app.setEmails("");
+        app.setEmails(appNew.getEmails());
 
         // 时间
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);

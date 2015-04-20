@@ -29,6 +29,7 @@ public class AppValidator {
         if (app != null) {
             throw new FieldException(AppNewForm.APP, "app.exist", null);
         }
+
     }
 
 }

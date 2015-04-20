@@ -8,6 +8,7 @@ $("#item_submit").on("click", function (e) {
     $("#error").addClass("hide");
     var app = $("#app").val();
     var desc = $("#desc").val();
+    var emails = $("#emails").val();
 
     // 验证
     if (!desc || !app) {
@@ -20,7 +21,8 @@ $("#item_submit").on("click", function (e) {
         url: "/api/app",
         data: {
             "app": app,
-            "desc": desc
+            "desc": desc,
+            "emails": emails
         }
     }).done(function (data) {
         $("#error").removeClass("hide");

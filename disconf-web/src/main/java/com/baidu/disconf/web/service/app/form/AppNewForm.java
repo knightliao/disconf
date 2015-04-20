@@ -26,6 +26,9 @@ public class AppNewForm extends RequestFormBase {
     @NotEmpty(message = "desc.empty")
     private String desc;
 
+    // 邮箱
+    private String emails = "";
+
     public String getApp() {
         return app;
     }
@@ -42,8 +45,20 @@ public class AppNewForm extends RequestFormBase {
         this.desc = desc;
     }
 
+    public String getEmails() {
+        return emails;
+    }
+
+    public void setEmails(String emails) {
+        this.emails = emails;
+    }
+
     @Override
     public String toString() {
-        return "AppNew [app=" + app + ", desc=" + desc + "]";
+        return "AppNewForm{" +
+                   "app='" + app + '\'' +
+                   ", desc='" + desc + '\'' +
+                   ", emails='" + emails + '\'' +
+                   '}';
     }
 }
