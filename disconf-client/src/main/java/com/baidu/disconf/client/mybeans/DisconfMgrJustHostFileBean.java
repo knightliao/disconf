@@ -19,6 +19,7 @@ import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
  *
  * @author knightliao
  */
+@Deprecated
 public class DisconfMgrJustHostFileBean implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
 
     protected static final Logger log = LoggerFactory.getLogger(DisconfMgrJustHostFileBean.class);

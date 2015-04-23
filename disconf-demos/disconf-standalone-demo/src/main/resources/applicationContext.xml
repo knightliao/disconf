@@ -32,8 +32,7 @@
                 <value>classpath:/autoconfig2.properties</value>
                 <value>classpath:/myserver_slave.properties</value>
                 <value>classpath:/testJson.json</value>
-                <value>classpath:/testXml2.xml</value>
-                <value>myserver.properties</value>
+                <value>testXml2.xml</value>
             </list>
         </property>
     </bean>
@@ -45,6 +44,27 @@
         <property name="propertiesArray">
             <list>
                 <ref bean="configproperties_disconf"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改不会自动reload)-->
+    <bean id="configproperties_no_reloadable_disconf"
+          class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>myserver.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="propertyConfigurerForProject1"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="propertiesArray">
+            <list>
+                <ref bean="configproperties_no_reloadable_disconf"/>
             </list>
         </property>
     </bean>

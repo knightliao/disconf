@@ -94,8 +94,8 @@ Disconf可以为各种业务平台提供统一的配置管理服务。
 
 Disconf为应用方提供了三个工具，
 
-1.  [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client), 您可以在您的应用系统里加入此Jar包；
-2.  [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web), 它是一个Web平台，您可以此Web平台上管理您的配置。
+1. [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client), 您可以在您的应用系统里加入此Jar包；
+2. [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web), 它是一个Web平台，您可以此Web平台上管理您的配置。
 3. [disconf-tool](https://github.com/knightliao/disconf/tree/master/disconf-tool),可选包。
 
 ### disconf-client 使用 ###
@@ -144,7 +144,7 @@ APP+环境+版本+ZK查询：
 推荐旧项目使用disconf时 使用
 
 - [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
-- [Tutorial 5 非注解式(托管式)的分布式配置文件动态管理,无法自动reload](https://github.com/knightliao/disconf/wiki/Tutorial5)
+- [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload](https://github.com/knightliao/disconf/wiki/Tutorial5)
 
 #### 其它
 
