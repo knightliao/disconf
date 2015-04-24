@@ -144,7 +144,7 @@ APP+环境+版本+ZK查询：
 推荐旧项目使用disconf时 使用
 
 - [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
-- [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload](https://github.com/knightliao/disconf/wiki/Tutorial5)
+- [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload,对于那些比较重的资源如jdbc等，特别有用](https://github.com/knightliao/disconf/wiki/Tutorial5)
 
 #### 其它
 
