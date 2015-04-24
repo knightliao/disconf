@@ -176,4 +176,10 @@ APP+环境+版本+ZK查询：
 - [拉勾网](http://www.lagou.com/)
 - [人脉通](http://renmaitong.com/)
 
+## 他人评价
 
+![http://ww1.sinaimg.cn/bmiddle/60c9620fjw1ergy58j978j20i302u0t2.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fjw1ergy58j978j20i302u0t2.jpg)
+
+## 联系与赞助作者
+
+[https://github.com/knightliao/disconf/wiki/sponsor](https://github.com/knightliao/disconf/wiki/sponsor)
