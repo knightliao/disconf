@@ -168,10 +168,11 @@ APP+环境+版本+ZK查询：
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。 
     
-##外界使用##
+##使用情况##
 
 - 联系·讨论
     - QQ群: 239203866 
+- [百度]
 - [润生活](http://www.szzjcs.com/) 
 - [拉勾网](http://www.lagou.com/)
 - [人脉通](http://renmaitong.com/)
