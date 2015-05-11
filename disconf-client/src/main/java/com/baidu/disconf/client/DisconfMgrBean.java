@@ -34,7 +34,13 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
     /**
      * 关闭
      */
+    @Deprecated
     public void destory() {
+
+        DisconfMgr.close();
+    }
+
+    public void destroy() {
 
         DisconfMgr.close();
     }

@@ -16,11 +16,11 @@
 
     <!-- 使用disconf必须添加以下配置 -->
     <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
-          destroy-method="destory">
+          destroy-method="destroy">
         <property name="scanPackage" value="com.example.disconf.demo"/>
     </bean>
     <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
-          init-method="init" destroy-method="destory">
+          init-method="init" destroy-method="destroy">
     </bean>
 
     <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改会自动reload)-->

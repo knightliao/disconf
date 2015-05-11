@@ -19,8 +19,13 @@ public class DisconfMgrBeanSecond {
     /**
      *
      */
+    @Deprecated
     public void destory() {
 
+        DisconfMgr.close();
+    }
+
+    public void destroy() {
         DisconfMgr.close();
     }
 }
