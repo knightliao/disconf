@@ -21,11 +21,11 @@ public class JedisUtil {
         return jedis;
     }
 
-    public static Jedis createJedis(String host, int port, String passwrod) {
+    public static Jedis createJedis(String host, int port, String password) {
         Jedis jedis = new Jedis(host, port);
 
-        if (!StringUtils.isNotBlank(passwrod)) {
-            jedis.auth(passwrod);
+        if (!StringUtils.isNotBlank(password)) {
+            jedis.auth(password);
         }
 
         return jedis;

@@ -12,8 +12,7 @@ public class StaticScannerMgrFactory {
 
     /**
      * 配置文件处理
-     *
-     * @return
+
      */
     public static StaticScannerMgr getDisconfFileStaticScanner() {
         return new StaticScannerFileMgrImpl();
@@ -21,8 +20,7 @@ public class StaticScannerMgrFactory {
 
     /**
      * 配置项处理
-     *
-     * @return
+
      */
     public static StaticScannerMgr getDisconfItemStaticScanner() {
         return new StaticScannerItemMgrImpl();
@@ -30,8 +28,7 @@ public class StaticScannerMgrFactory {
 
     /**
      * 非注解的配置文件处理
-     *
-     * @return
+
      */
     public static StaticScannerMgr getDisconfNonAnnotationFileStaticScanner() {
         return new StaticScannerNonAnnotationFileMgrImpl();

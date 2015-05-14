@@ -28,8 +28,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * @return
-     *
      * @throws BeansException
      */
     public static Object getBean(Class<?> cls) throws BeansException {
@@ -37,8 +35,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * @return
-     *
      * @throws BeansException
      */
     public static Object getBeansOfType(Class<?> type) throws BeansException {
@@ -46,8 +42,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
-     * @return
-     *
      * @throws BeansException
      */
     public static Object getBean(String name) throws BeansException {
@@ -56,11 +50,6 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     /**
      * 获取使用 Proxy.newProxyInstance 生成的代理对象
-     *
-     * @param proxy
-     * @param thisClass
-     *
-     * @return
      *
      * @throws Exception
      */

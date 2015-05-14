@@ -11,7 +11,6 @@ import com.baidu.disconf.client.scan.impl.ScanMgrImpl;
 public class ScanFactory {
 
     /**
-     * @return
      *
      * @throws Exception
      */

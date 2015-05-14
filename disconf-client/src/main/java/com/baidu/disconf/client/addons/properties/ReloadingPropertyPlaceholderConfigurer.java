@@ -131,7 +131,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
 
     private DynamicProperty getDynamic(String currentBeanName, String currentPropertyName, String orgStrVal) {
         DynamicProperty dynamic = new DynamicProperty(currentBeanName, currentPropertyName, orgStrVal);
-        DynamicProperty found = (DynamicProperty) dynamicProperties.get(dynamic);
+        DynamicProperty found = dynamicProperties.get(dynamic);
         if (found != null) {
             return found;
         }

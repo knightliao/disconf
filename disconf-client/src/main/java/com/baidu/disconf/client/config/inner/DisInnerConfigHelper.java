@@ -25,8 +25,6 @@ public class DisInnerConfigHelper {
     protected static final Logger LOGGER = LoggerFactory.getLogger(DisInnerConfigHelper.class);
 
     /**
-     * @return void
-     *
      * @throws Exception
      * @Description: 校验用户配置文件是否正常
      * @author liaoqiqi
@@ -103,11 +101,8 @@ public class DisInnerConfigHelper {
     }
 
     /**
-     * @return void
-     *
      * @throws Exception
      * @Description: 校验系统配置文件是否正常
-     * @author liaoqiqi
      * @date 2013-6-13
      */
     public static void verifySysConfig() throws Exception {
@@ -148,7 +143,7 @@ public class DisInnerConfigHelper {
         }
 
         // 是否将文件放在classpath目录下
-        if (DisClientSysConfig.getInstance().ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH == true) {
+        if (DisClientSysConfig.getInstance().ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH) {
 
             String classpath = ConfigLoaderUtils.CLASS_PATH;
 

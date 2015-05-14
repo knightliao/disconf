@@ -42,13 +42,11 @@ public final class DisClientConfig {
     /**
      * load config normal
      *
-     * @param filePath
-     *
      * @throws Exception
      */
     public synchronized void loadConfig(String filePath) throws Exception {
 
-        if (isLoaded == true) {
+        if (isLoaded) {
             return;
         }
 

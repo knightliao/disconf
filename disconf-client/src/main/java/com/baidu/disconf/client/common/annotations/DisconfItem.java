@@ -19,29 +19,21 @@ public @interface DisconfItem {
 
     /**
      * 配置项的KEY，不能为空
-     *
-     * @return
      */
     String key();
 
     /**
      * 所关联的域
-     *
-     * @return
      */
     String associateField() default "";
 
     /**
      * 环境,,默认为用户指定的环境
-     *
-     * @return
      */
     String env() default "";
 
     /**
      * 版本,默认为用户指定的版本
-     *
-     * @return
      */
     String version() default "";
 }

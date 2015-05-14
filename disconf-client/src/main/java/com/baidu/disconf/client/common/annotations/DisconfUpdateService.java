@@ -20,22 +20,16 @@ public @interface DisconfUpdateService {
 
     /**
      * 配置文件
-     *
-     * @return
      */
     Class<?>[] classes() default {};
 
     /**
      * 配置文件key名
-     *
-     * @return
      */
     String[] confFileKeys() default {};
 
     /**
      * 配置项
-     *
-     * @return
      */
     String[] itemKeys() default {};
 }

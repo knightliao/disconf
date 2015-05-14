@@ -20,8 +20,7 @@ public class StaticScannerMgrImplBase {
 
     /**
      * env/version 默认是应用整合设置的，但用户可以在配置中更改它
-     *
-     * @return
+
      */
     protected static DisConfCommonModel makeDisConfCommonModel(String env, String version) {
 

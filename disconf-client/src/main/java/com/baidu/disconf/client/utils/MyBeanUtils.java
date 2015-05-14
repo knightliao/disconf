@@ -11,10 +11,6 @@ public class MyBeanUtils {
     /**
      * 获取经过CGLIB包装过的原始target bean
      *
-     * @param proxy
-     * @param targetClass
-     *
-     * @return
      *
      * @throws Exception
      */

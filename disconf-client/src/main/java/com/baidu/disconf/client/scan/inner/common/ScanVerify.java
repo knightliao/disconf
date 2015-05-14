@@ -19,8 +19,6 @@ public class ScanVerify {
 
     /**
      * 判断回调函数实现的接口是否正确
-     *
-     * @return
      */
     public static boolean hasIDisconfUpdate(Class<?> disconfUpdateServiceClass) {
 
@@ -42,8 +40,6 @@ public class ScanVerify {
 
     /**
      * 判断配置文件的类型是否正确
-     *
-     * @return
      */
     public static boolean isDisconfFileTypeRight(DisconfFile disconfFile) {
 

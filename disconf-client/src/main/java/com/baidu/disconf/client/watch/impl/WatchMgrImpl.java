@@ -26,11 +26,6 @@ public class WatchMgrImpl implements WatchMgr {
     protected static final Logger LOGGER = LoggerFactory.getLogger(WatchMgrImpl.class);
 
     /**
-     * 应用程序的 Zoo 根目录
-     */
-    private String clientRootZooPath = "";
-
-    /**
      * zoo prefix
      */
     private String zooUrlPrefix;
@@ -41,11 +36,7 @@ public class WatchMgrImpl implements WatchMgr {
     private boolean debug;
 
     /**
-     * @return void
-     *
      * @Description: 获取自己的主备类型
-     * @author liaoqiqi
-     * @date 2013-6-16
      */
     public void init(String hosts, String zooUrlPrefix, boolean debug) throws Exception {
 
@@ -65,13 +56,16 @@ public class WatchMgrImpl implements WatchMgr {
                                    String key, String value) throws Exception {
 
         // 应用根目录
-        this.clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(),
-                                                             disConfCommonModel.getEnv(),
-                                                             disConfCommonModel.getVersion());
+        /*
+            应用程序的 Zoo 根目录
+        */
+        String clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(),
+                                                               disConfCommonModel.getEnv(),
+                                                               disConfCommonModel.getVersion());
         ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
 
         // 监控路径
-        String monitorPath = "";
+        String monitorPath;
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 
             // 新建Zoo Store目录
@@ -99,8 +93,6 @@ public class WatchMgrImpl implements WatchMgr {
 
     /**
      * 创建路径
-     *
-     * @param path
      */
     private void makePath(String path, String data) {
 
@@ -112,9 +104,9 @@ public class WatchMgrImpl implements WatchMgr {
      */
     private void makeTempChildPath(String path, String data) {
 
-        String finterPrint = DisClientComConfig.getInstance().getInstanceFingerprint();
+        String finerPrint = DisClientComConfig.getInstance().getInstanceFingerprint();
 
-        String mainTypeFullStr = path + "/" + finterPrint;
+        String mainTypeFullStr = path + "/" + finerPrint;
         try {
             ZookeeperMgr.getInstance().createEphemeralNode(mainTypeFullStr, data, CreateMode.EPHEMERAL);
         } catch (Exception e) {

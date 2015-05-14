@@ -71,8 +71,6 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     /**
      * 获取可以表示的KeyMap对
-     *
-     * @return
      */
     public Map<String, Object> getKV() {
 

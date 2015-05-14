@@ -15,8 +15,6 @@ public class DisconfCoreProcessorFactory {
 
     /**
      * 获取配置文件核心处理器
-     *
-     * @return
      */
     public static DisconfCoreProcessor getDisconfCoreProcessorFile(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
 
@@ -25,8 +23,6 @@ public class DisconfCoreProcessorFactory {
 
     /**
      * 获取配置项核心 处理器
-     *
-     * @return
      */
     public static DisconfCoreProcessor getDisconfCoreProcessorItem(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
 

@@ -31,6 +31,9 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
      */
     private String scanPackage = null;
 
+    public DisconfMgrBean() {
+    }
+
     /**
      * 关闭
      */
@@ -80,10 +83,12 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
         DisconfMgr.firstScan(scanPackage);
     }
 
+    @Deprecated
     public Set<String> getFileList() {
         return fileList;
     }
 
+    @Deprecated
     public void setFileList(Set<String> fileList) {
         this.fileList = fileList;
     }

@@ -147,14 +147,10 @@ public class ScanDynamicStoreAdapter {
      * // 非Spring直接New
      * // Spring要GetBean
      * //
-     *
-     * @param disconfUpdateServiceClass
-     *
-     * @return
      */
     private static IDisconfUpdate getIDisconfUpdateInstance(Class<?> disconfUpdateServiceClass) {
 
-        IDisconfUpdate iDisconfUpdate = null;
+        IDisconfUpdate iDisconfUpdate;
 
         //
         // Spring方式
@@ -187,7 +183,7 @@ public class ScanDynamicStoreAdapter {
     private static void addOne2InverseMap(DisconfKey disconfKey, Map<DisconfKey, List<IDisconfUpdate>> inverseMap,
                                           IDisconfUpdate iDisconfUpdate) {
 
-        List<IDisconfUpdate> serviceList = null;
+        List<IDisconfUpdate> serviceList;
 
         if (inverseMap.containsKey(disconfKey)) {
             inverseMap.get(disconfKey).add(iDisconfUpdate);
@@ -201,8 +197,6 @@ public class ScanDynamicStoreAdapter {
     /**
      * 第二次扫描<br/>
      * 转换 更新 回调函数，将其写到 仓库中
-     *
-     * @return
      */
     private static void transformUpdateService(Map<DisconfKey,
                                                       List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
@@ -252,8 +246,6 @@ public class ScanDynamicStoreAdapter {
 
     /**
      * 获取Spring Bean
-     *
-     * @return
      */
     private static IDisconfUpdate getSpringBean(Class<?> cls) throws Exception {
 

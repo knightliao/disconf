@@ -20,7 +20,6 @@ public class SpringScanStatic implements ScanStaticStrategy {
     /**
      * 构造函数
      *
-     * @param context
      */
     public SpringScanStatic(ApplicationContext context) {
         this.context = context;

@@ -39,11 +39,6 @@ public class DisconfAspectJ {
     /**
      * 获取配置文件数据
      *
-     * @param pjp
-     * @param disconfFileItem
-     *
-     * @return
-     *
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfFileItem)")
@@ -76,7 +71,7 @@ public class DisconfAspectJ {
             }
         }
 
-        Object rtnOb = null;
+        Object rtnOb;
 
         try {
             // 返回原值
@@ -91,11 +86,6 @@ public class DisconfAspectJ {
 
     /**
      * 获取配置项数据
-     *
-     * @param pjp
-     * @param disconfFileItem
-     *
-     * @return
      *
      * @throws Throwable
      */
@@ -112,7 +102,7 @@ public class DisconfAspectJ {
             return ret;
         }
 
-        Object rtnOb = null;
+        Object rtnOb;
 
         try {
             // 返回原值

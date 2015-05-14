@@ -7,7 +7,6 @@ package com.baidu.disconf.client.scan;
 public interface ScanMgr {
 
     /**
-     * @param packageName
      *
      * @throws Exception
      */

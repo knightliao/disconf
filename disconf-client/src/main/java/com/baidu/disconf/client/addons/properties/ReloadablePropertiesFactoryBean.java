@@ -41,7 +41,6 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     }
 
     /**
-     * @param fileNames
      */
     public void setLocations(List<String> fileNames) {
 
@@ -122,8 +121,6 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     private ReloadablePropertiesBase reloadableProperties;
 
     /**
-     * @return
-     *
      * @throws IOException
      */
     protected Object createInstance() throws IOException {

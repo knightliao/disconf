@@ -13,7 +13,7 @@ public final class EmailConstants {
     /**
      * 发送邮件中附件的最大大小，2M
      */
-    public static final long MAX_MAILFILE_SIZE = 2000000;
+    public static final long MAX_MAIL_FILE_SIZE = 2000000;
 
     /**
      * 发送报警邮件中标题的最大长度，255

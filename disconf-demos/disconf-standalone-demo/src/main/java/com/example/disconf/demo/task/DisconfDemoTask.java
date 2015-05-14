@@ -29,8 +29,8 @@ public class DisconfDemoTask {
     @Autowired
     private SimpleRedisService simpleRedisService;
 
-//    @Autowired
-//    private JedisConfig jedisConfig;
+    @Autowired
+    private JedisConfig jedisConfig;
 
     @Autowired
     private AutoService autoService;
@@ -58,12 +58,13 @@ public class DisconfDemoTask {
 
                 LOGGER.info("autoservice2: " + autoService2.getAuto2());
 
-//                LOGGER
-                //                    .info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")  get
-                // key: " + REDIS_KEY +
-                //                              " , " + simpleRedisService.getKey(REDIS_KEY));
-                //
-                //                LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")");
+                LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")  get " +
+                                "key: " + REDIS_KEY +
+                                " , "
+                               // + simpleRedisService.getKey(REDIS_KEY)
+                );
+
+                LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")");
 
                 LOGGER.info("static file data:" + SimpleStaticService.getStaticFileData());
 

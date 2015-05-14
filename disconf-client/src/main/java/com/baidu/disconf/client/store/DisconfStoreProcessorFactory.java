@@ -13,8 +13,6 @@ public class DisconfStoreProcessorFactory {
 
     /**
      * 获取配置文件仓库算子
-     *
-     * @return
      */
     public static DisconfStoreProcessor getDisconfStoreFileProcessor() {
 
@@ -23,8 +21,6 @@ public class DisconfStoreProcessorFactory {
 
     /**
      * 获取配置项仓库算子
-     *
-     * @return
      */
     public static DisconfStoreProcessor getDisconfStoreItemProcessor() {
 

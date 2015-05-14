@@ -25,10 +25,6 @@ public enum SupportFileTypeEnum {
 
     /**
      * 根据文件名返回其文件后缀ENUM
-     *
-     * @param
-     *
-     * @return
      */
     public static SupportFileTypeEnum getByFileName(String fileName) {
 

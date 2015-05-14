@@ -46,8 +46,6 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
     /**
      * 扫描想要的类
-     *
-     * @return
      */
     @Override
     public ScanStaticModel scan(String packName) {
@@ -63,10 +61,6 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
     /**
      * 通过扫描，获取反射对象
-     *
-     * @param packName
-     *
-     * @return
      */
     private Reflections getReflection(String packName) {
 
@@ -90,8 +84,6 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
     /**
      * 分析出一些关系 出来
-     *
-     * @param scanModel
      */
     private void analysis(ScanStaticModel scanModel) {
 
@@ -101,8 +93,6 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
     /**
      * 分析出配置文件与配置文件中的Field的Method的MAP
-     *
-     * @param scanModel
      */
     private void analysis4DisconfFile(ScanStaticModel scanModel) {
 
@@ -152,7 +142,7 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
             }
 
             // 校验配置文件类型是否合适(目前只支持.properties类型)
-            DisconfFile disconfFile = (DisconfFile) classFile.getAnnotation(DisconfFile.class);
+            DisconfFile disconfFile = classFile.getAnnotation(DisconfFile.class);
             boolean fileTypeRight = ScanVerify.isDisconfFileTypeRight(disconfFile);
             if (!fileTypeRight) {
                 LOGGER.warn("now do not support this file type" + disconfFile.toString());
@@ -166,8 +156,6 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
     /**
      * 扫描基本信息
-     *
-     * @return
      */
     private ScanStaticModel scanBasicInfo(String packName) {
 

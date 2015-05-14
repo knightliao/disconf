@@ -18,43 +18,31 @@ public interface DisconfStoreProcessor {
 
     /**
      * 获取指定配置Data
-     *
-     * @return
      */
     DisconfCenterBaseModel getConfData(String key);
 
     /**
      * 获取所有配置Key列表
-     *
-     * @return
      */
     Set<String> getConfKeySet();
 
     /**
      * 增加回调函数
-     *
-     * @param iDisconfUpdateList
      */
     void addUpdateCallbackList(String keyName, List<IDisconfUpdate> iDisconfUpdateList);
 
     /**
      * 获取回调函数列表
-     *
-     * @return
      */
     List<IDisconfUpdate> getUpdateCallbackList(String keyName);
 
     /**
      * 获取配置的通用数据结构
-     *
-     * @return
      */
     DisConfCommonModel getCommonModel(String keyName);
 
     /**
      * 是否有这个配置
-     *
-     * @return
      */
     boolean hasThisConf(String keyName);
 
@@ -66,18 +54,11 @@ public interface DisconfStoreProcessor {
     /**
      * 当是配置文件时，有两个参数<br/>
      * 当是配置项时，只有一个参数 ，第二个参数忽略
-     *
-     * @param fileName
-     * @param keyName
-     *
-     * @return
      */
     Object getConfig(String fileName, String keyName);
 
     /**
      * 将配置数据注入到仓库
-     *
-     * @param fileName
      */
     void inject2Store(String fileName, DisconfValue disconfValue);
 
@@ -88,15 +69,11 @@ public interface DisconfStoreProcessor {
 
     /**
      * 添加配置
-     *
-     * @param disconfCenterBaseModel
      */
     public void transformScanData(DisconfCenterBaseModel disconfCenterBaseModel);
 
     /**
      * 获取配置仓库的表示
-     *
-     * @return
      */
     String confToString();
 

@@ -17,8 +17,6 @@ public class DisconfPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
     /**
      * Load properties into the given instance.
      *
-     * @param props
-     *
      * @throws IOException
      */
     @Override

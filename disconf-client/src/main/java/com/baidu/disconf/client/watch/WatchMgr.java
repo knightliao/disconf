@@ -15,10 +15,6 @@ public interface WatchMgr {
     /**
      * 初始化
      *
-     * @param hosts
-     * @param zooUrlPrefix
-     * @param debug
-     *
      * @throws Exception
      */
     void init(String hosts, String zooUrlPrefix, boolean debug) throws Exception;

@@ -57,8 +57,6 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
 
     /**
      * 获取配置文件数据
-     *
-     * @return
      */
     private static List<DisconfCenterBaseModel> getDisconfFiles(ScanStaticModel scanModel) {
 
@@ -83,7 +81,6 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
     /**
      * 转换配置文件
      *
-     * @return
      */
     private static DisconfCenterFile transformScanFile(Class<?> disconfFileClass, Set<Method> methods) {
 

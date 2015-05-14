@@ -32,12 +32,6 @@ public class NodeWatcher implements Watcher {
     private DisconfCoreProcessor disconfCoreMgr;
 
     /**
-     * @param disconfCoreMgr
-     * @param monitorPath
-     * @param keyName
-     * @param disConfigTypeEnum
-     * @param disconfSysUpdateCallback
-     * @param debug
      */
     public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath, String keyName,
                        DisConfigTypeEnum disConfigTypeEnum, DisconfSysUpdateCallback disconfSysUpdateCallback,
@@ -53,7 +47,6 @@ public class NodeWatcher implements Watcher {
     }
 
     /**
-     * @param
      */
     public void monitorMaster() {
 
@@ -66,6 +59,8 @@ public class NodeWatcher implements Watcher {
             ZookeeperMgr.getInstance().read(monitorPath, this, stat);
 
         } catch (InterruptedException e) {
+
+            LOGGER.info(e.toString());
 
         } catch (KeeperException e) {
             LOGGER.error("cannot monitor " + monitorPath, e);

@@ -67,8 +67,6 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
 
     /**
      * 只处理某一个
-     *
-     * @param fileName
      */
     @Override
     public void processFile(String fileName) {

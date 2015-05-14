@@ -19,22 +19,16 @@ public @interface DisconfFile {
 
     /**
      * 配置文件名,必须指定
-     *
-     * @return
      */
     String filename();
 
     /**
      * 环境,默认为用户指定的环境
-     *
-     * @return
      */
     String env() default "";
 
     /**
      * 版本,默认为用户指定的版本
-     *
-     * @return
      */
     String version() default "";
 }

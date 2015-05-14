@@ -11,8 +11,6 @@ public interface DisconfFileTypeProcessor {
 
     /**
      * 输入文件名，返回其相应的k-v数据
-     *
-     * @return
      */
     Map<String, Object> getKvMap(String fileName) throws Exception;
 }

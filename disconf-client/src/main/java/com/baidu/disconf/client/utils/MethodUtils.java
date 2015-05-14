@@ -22,12 +22,11 @@ public class MethodUtils {
 
     /**
      * 对于一个 get/is 方法，返回其相对应的Field
-     *
-     * @return
+
      */
     public static Field getFieldFromMethod(Method method, Field[] expectedFields, DisConfigTypeEnum disConfigTypeEnum) {
 
-        String fieldName = null;
+        String fieldName;
 
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 

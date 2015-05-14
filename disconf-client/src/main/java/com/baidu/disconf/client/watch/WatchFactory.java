@@ -22,13 +22,9 @@ public class WatchFactory {
 
     private static String hosts = null;
     private static String zooPrefix = null;
-    private static volatile Object hostsSync = new Object();
+    private static final Object hostsSync = new Object();
 
     /**
-     * @param fetcherMgr
-     *
-     * @return
-     *
      * @throws Exception
      */
     public static WatchMgr getWatchMgr(FetcherMgr fetcherMgr) throws Exception {

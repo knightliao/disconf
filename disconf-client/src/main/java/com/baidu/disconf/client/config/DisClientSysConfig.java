@@ -36,13 +36,10 @@ public class DisClientSysConfig {
 
     /**
      * load config normal
-     *
-     * @param bundle
-     * @param filePath
      */
     public synchronized void loadConfig(String filePath) throws Exception {
 
-        if (isLoaded == true) {
+        if (isLoaded) {
             return;
         }
 
@@ -91,7 +88,7 @@ public class DisClientSysConfig {
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "local_dowload_dir")
+    @DisInnerConfigAnnotation(name = "local_download_dir")
     public String LOCAL_DOWNLOAD_DIR;
 
     /**

@@ -48,8 +48,7 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase implement
 
     /**
      * 转换配置项
-     *
-     * @return
+
      */
     private static List<DisconfCenterBaseModel> getDisconfItems(ScanStaticModel scanModel) {
 
@@ -70,8 +69,7 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase implement
 
     /**
      * 转换配置项
-     *
-     * @return
+
      */
     private static DisconfCenterItem transformScanItem(Method method) {
 

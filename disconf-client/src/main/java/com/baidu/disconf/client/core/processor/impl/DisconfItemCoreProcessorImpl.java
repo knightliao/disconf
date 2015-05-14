@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
@@ -94,21 +95,27 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             throw new Exception("cannot find disconfCenterItem " + keyName);
         }
 
-        //
-        // 下载配置
-        //
         String value = null;
-        try {
-            String url = disconfCenterItem.getRemoteServerUrl();
-            value = fetcherMgr.getValueFromServer(url);
-            if (value != null) {
-                LOGGER.debug("value: " + value);
+
+        //
+        // 开启disconf才需要远程下载, 否则就用默认值
+        //
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            //
+            // 下载配置
+            //
+            try {
+                String url = disconfCenterItem.getRemoteServerUrl();
+                value = fetcherMgr.getValueFromServer(url);
+                if (value != null) {
+                    LOGGER.debug("value: " + value);
+                }
+            } catch (Exception e) {
+                LOGGER.error("cannot use remote configuration: " + keyName, e);
+                LOGGER.info("using local variable: " + keyName);
             }
-        } catch (Exception e) {
-            LOGGER.error("cannot use remote configuration: " + keyName, e);
-            LOGGER.info("using local variable: " + keyName);
+            LOGGER.debug("download ok.");
         }
-        LOGGER.debug("download ok.");
 
         //
         // 注入到仓库中
@@ -119,12 +126,14 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
         //
         // Watch
         //
-        if (watchMgr != null) {
-            DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(keyName);
-            watchMgr.watchPath(this, disConfCommonModel, keyName, DisConfigTypeEnum.ITEM, value);
-            LOGGER.debug("watch ok.");
-        } else {
-            LOGGER.warn("cannot monitor {} because watch mgr is null", keyName);
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            if (watchMgr != null) {
+                DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(keyName);
+                watchMgr.watchPath(this, disConfCommonModel, keyName, DisConfigTypeEnum.ITEM, value);
+                LOGGER.debug("watch ok.");
+            } else {
+                LOGGER.warn("cannot monitor {} because watch mgr is null", keyName);
+            }
         }
     }
 
@@ -159,9 +168,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             //
             // 静态
             //
-            if (Modifier.isStatic(field.getModifiers())) {
-
-            } else {
+            if (!Modifier.isStatic(field.getModifiers())) {
 
                 object = DisconfCoreProcessUtils.getSpringBean(field.getDeclaringClass());
             }

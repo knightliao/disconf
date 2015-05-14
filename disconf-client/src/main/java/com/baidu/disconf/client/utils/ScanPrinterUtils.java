@@ -27,10 +27,8 @@ public class ScanPrinterUtils {
 
     /**
      * 打印出StoreMap的数据
-     *
-     * @param reflections
      */
-    public static void printSotreMap(Reflections reflections) {
+    public static void printStoreMap(Reflections reflections) {
 
         LOGGER.info("Now we will print store map......");
 

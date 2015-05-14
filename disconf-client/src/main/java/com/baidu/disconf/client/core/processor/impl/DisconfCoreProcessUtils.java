@@ -50,8 +50,6 @@ public class DisconfCoreProcessUtils {
 
     /**
      * 获取Spring Bean
-     *
-     * @return
      */
     public static Object getSpringBean(Class<?> cls) throws Exception {
 

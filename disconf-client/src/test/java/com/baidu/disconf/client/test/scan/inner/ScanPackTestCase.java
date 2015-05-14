@@ -37,7 +37,7 @@ public class ScanPackTestCase extends BaseSpringTestCase {
             ScanStaticModel scanModel = scanStaticStrategy.scan(SCAN_PACK_NAME);
 
             // PRINT SCAN STORE
-            ScanPrinterUtils.printSotreMap(scanModel.getReflections());
+            ScanPrinterUtils.printStoreMap(scanModel.getReflections());
 
             // disconf file item
             LOGGER.info("=============DISCONF FILE ITEM===================");

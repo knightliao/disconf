@@ -17,8 +17,6 @@ public class FetcherFactory {
 
     /**
      * 获取抓取器实例，记得释放资源, 它依赖Conf模块
-     *
-     * @return
      */
     public static FetcherMgr getFetcherMgr() throws Exception {
 

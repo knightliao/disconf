@@ -20,19 +20,18 @@ public class FileTypeProcessorUtils {
 
     /**
      * 输入文件名，返回其相应的k-v数据
-     *
-     * @return
+
      */
     public static Map<String, Object> getKvMap(String fileName) throws Exception {
 
         SupportFileTypeEnum supportFileTypeEnum = SupportFileTypeEnum.getByFileName(fileName);
 
-        DisconfFileTypeProcessor disconfFileTypeProcessor = null;
+        DisconfFileTypeProcessor disconfFileTypeProcessor;
 
         //
         // 获取数据
         //
-        Map<String, Object> dataMap = null;
+        Map<String, Object> dataMap;
 
         if (supportFileTypeEnum.equals(SupportFileTypeEnum.PROPERTIES)) {
 

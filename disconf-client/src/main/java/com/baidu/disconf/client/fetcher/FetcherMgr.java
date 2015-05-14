@@ -10,20 +10,11 @@ public interface FetcherMgr {
 
     /**
      * 根据 URL 从远程 获取Value值
-     *
-     * @param url
-     *
-     * @return
      */
     String getValueFromServer(String url) throws Exception;
 
     /**
      * 下载配置文件, remoteUrl是目标 url
-     *
-     * @param url
-     * @param fileName
-     *
-     * @return
      *
      * @throws Exception
      */

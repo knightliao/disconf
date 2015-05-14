@@ -48,14 +48,12 @@ public class ConfigMgr {
     }
 
     /**
-     * @return
      */
     public synchronized static boolean isInit() {
         return isInit;
     }
 
     /**
-     * @param args
      */
     public static void main(String[] args) {
 

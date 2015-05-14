@@ -19,15 +19,12 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import com.baidu.ub.common.log.AopLogFactory;
 
 /**
- * 
  * @author liaoqiqi
  * @version 2014-1-23
  */
-public abstract class AbstractTestCase extends
-        AbstractTransactionalJUnit4SpringContextTests {
+public abstract class AbstractTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
-    protected final static Logger LOG = AopLogFactory
-            .getLogger(AbstractTestCase.class);
+    protected final static Logger LOG = AopLogFactory.getLogger(AbstractTestCase.class);
 
     /**
      * 业务数据库
@@ -43,8 +40,9 @@ public abstract class AbstractTestCase extends
 
     /**
      * 根据测试文件名获取测试文件位置
-     * 
+     *
      * @param fileName
+     *
      * @return
      */
     public static String getSQLFullPath(String fileName) {
@@ -58,10 +56,11 @@ public abstract class AbstractTestCase extends
 
     /**
      * 把一个bean的某个属性mock成mockTo类
-     * 
+     *
      * @param bean
      * @param sField
      * @param mockTo
+     *
      * @return
      */
     public Object mock(Object bean, String sField, Object mockTo) {
@@ -95,9 +94,7 @@ public abstract class AbstractTestCase extends
 
     /**
      * 执行SQL文件
-     * 
-     * @param filePath
-     * @return
+     *
      * @throws IOException
      */
     public String execute(String sqlFileName) throws IOException {

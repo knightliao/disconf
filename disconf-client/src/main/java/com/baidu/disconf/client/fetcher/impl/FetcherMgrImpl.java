@@ -61,10 +61,7 @@ public class FetcherMgrImpl implements FetcherMgr {
 
     /**
      * 根据 URL 从远程 获取Value值
-     *
-     * @param url
-     *
-     * @return
+
      */
     public String getValueFromServer(String url) throws Exception {
 
@@ -84,11 +81,6 @@ public class FetcherMgrImpl implements FetcherMgr {
     /**
      * 下载配置文件, remoteUrl是 url
      *
-     * @param url
-     * @param fileName
-     *
-     * @return
-     *
      * @throws Exception
      */
     public String downloadFileFromServer(String url, String fileName) throws Exception {
@@ -107,10 +99,6 @@ public class FetcherMgrImpl implements FetcherMgr {
 
     /**
      * 获取本地下载的路径DIR, 通过参数判断是否是临时路径
-     *
-     * @param isTmp
-     *
-     * @return
      *
      * @throws Exception
      */
