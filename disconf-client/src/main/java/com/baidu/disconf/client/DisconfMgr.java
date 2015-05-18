@@ -145,6 +145,10 @@ public class DisconfMgr {
             return;
         }
 
+        if (!DisClientConfig.getInstance().ENABLE_DISCONF) {
+            return;
+        }
+
         //
         //
         //
