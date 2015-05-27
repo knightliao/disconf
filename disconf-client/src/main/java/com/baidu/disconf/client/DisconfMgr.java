@@ -124,15 +124,19 @@ public class DisconfMgr {
         isSecondInit = true;
 
         //
-        // start timer
+        // 不开启 则不要启动timer和打印变量map
         //
-        startTimer();
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            //
+            // start timer
+            //
+            startTimer();
 
-        //
-        LOGGER.info("Conf File Map: " + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());
-        //
-        LOGGER.info("Conf Item Map: " + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().confToString());
-
+            //
+            LOGGER.info("Conf File Map: " + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());
+            //
+            LOGGER.info("Conf Item Map: " + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().confToString());
+        }
         LOGGER.info("******************************* DISCONF END *******************************");
     }
 

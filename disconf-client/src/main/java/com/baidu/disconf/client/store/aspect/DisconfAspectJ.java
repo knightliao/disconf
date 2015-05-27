@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.utils.MethodUtils;
@@ -37,37 +38,41 @@ public class DisconfAspectJ {
     }
 
     /**
-     * 获取配置文件数据
+     * 获取配置文件数据, 只有开启disconf远程才会进行切面
      *
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfFileItem)")
     public Object decideAccess(ProceedingJoinPoint pjp, DisconfFileItem disconfFileItem) throws Throwable {
 
-        MethodSignature ms = (MethodSignature) pjp.getSignature();
-        Method method = ms.getMethod();
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
 
-        //
-        // 文件名
-        //
-        Class<?> cls = method.getDeclaringClass();
-        DisconfFile disconfFile = cls.getAnnotation(DisconfFile.class);
-
-        //
-        // Field名
-        //
-        Field field = MethodUtils.getFieldFromMethod(method, cls.getDeclaredFields(), DisConfigTypeEnum.FILE);
-        if (field != null) {
+            MethodSignature ms = (MethodSignature) pjp.getSignature();
+            Method method = ms.getMethod();
 
             //
-            // 请求仓库配置数据
+            // 文件名
             //
-            DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
-            Object ret = disconfStoreProcessor.getConfig(disconfFile.filename(), disconfFileItem.name());
-            if (ret != null) {
-                LOGGER.info("using disconf store value: " + disconfFile.filename() + " (" + disconfFileItem.name() +
-                                " , " + ret + ")");
-                return ret;
+            Class<?> cls = method.getDeclaringClass();
+            DisconfFile disconfFile = cls.getAnnotation(DisconfFile.class);
+
+            //
+            // Field名
+            //
+            Field field = MethodUtils.getFieldFromMethod(method, cls.getDeclaredFields(), DisConfigTypeEnum.FILE);
+            if (field != null) {
+
+                //
+                // 请求仓库配置数据
+                //
+                DisconfStoreProcessor disconfStoreProcessor =
+                    DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
+                Object ret = disconfStoreProcessor.getConfig(disconfFile.filename(), disconfFileItem.name());
+                if (ret != null) {
+                    LOGGER.info("using disconf store value: " + disconfFile.filename() + " (" + disconfFileItem.name() +
+                                    " , " + ret + ")");
+                    return ret;
+                }
             }
         }
 
@@ -85,21 +90,23 @@ public class DisconfAspectJ {
     }
 
     /**
-     * 获取配置项数据
+     * 获取配置项数据, 只有开启disconf远程才会进行切面
      *
      * @throws Throwable
      */
     @Around("anyPublicMethod() && @annotation(disconfItem)")
     public Object decideAccess(ProceedingJoinPoint pjp, DisconfItem disconfItem) throws Throwable {
 
-        //
-        // 请求仓库配置数据
-        //
-        DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
-        Object ret = disconfStoreProcessor.getConfig(null, disconfItem.key());
-        if (ret != null) {
-            LOGGER.info("using disconf store value: (" + disconfItem.key() + " , " + ret + ")");
-            return ret;
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            //
+            // 请求仓库配置数据
+            //
+            DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
+            Object ret = disconfStoreProcessor.getConfig(null, disconfItem.key());
+            if (ret != null) {
+                LOGGER.info("using disconf store value: (" + disconfItem.key() + " , " + ret + ")");
+                return ret;
+            }
         }
 
         Object rtnOb;
