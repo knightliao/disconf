@@ -173,19 +173,21 @@ APP+环境+版本+ZK查询：
 - 联系·讨论
     - QQ群: 239203866 
 - [百度]（5+条产品线使用）
-- [润生活](http://www.szzjcs.com/) （千万融资）
+- [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
 - [拉勾网](http://www.lagou.com/) 
-- [人脉通](http://renmaitong.com/) （目前已B轮融资）
+- [人脉通](http://renmaitong.com/) （目前已B轮融资，4条产品线使用）
 
 ## 他人评价
 
+others:
+
 ![http://ww1.sinaimg.cn/bmiddle/60c9620fjw1ergy58j978j20i302u0t2.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fjw1ergy58j978j20i302u0t2.jpg)
 
-润生活全线产品：
+润生活总监：
 
 ![http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6ptf2dlj20ab01udfy.jpg](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6ptf2dlj20ab01udfy.jpg)
 
-人脉通四条产品线：
+人脉通后端RD：
 
 ![http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg)
 
