@@ -24,7 +24,7 @@ disconf.git branches and Maven version:
 
 ![](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1esvk138fy3j20gd071q4p.jpg)
 
-![image](http://ww1.sinaimg.cn/bmiddle/60c9620fjw1esvk2031tmj20ie0ivwhk.jpg)
+![image](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvk2031tmj20ie0ivwhk.jpg)
 
 ## 当前版本（2.6.22）功能特点 ##
 
@@ -37,7 +37,7 @@ disconf.git branches and Maven version:
 
 **Disconf的功能特点描述图：**
 
-![](http://ww1.sinaimg.cn/bmiddle/60c9620fjw1esvkglvc35j20ie0c5q4q.jpg)
+![](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvkglvc35j20ie0c5q4q.jpg)
 
 [查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvkglvc35j20ie0c5q4q.jpg)
 
