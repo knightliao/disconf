@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.disconf.client.DisconfMgr;
+import com.baidu.disconf.client.DisconfMgrBean;
 import com.baidu.disconf.client.core.DisconfCoreFactory;
 import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.client.core.impl.DisconfCoreMgrImpl;
@@ -24,6 +25,7 @@ import com.baidu.disconf.client.test.model.StaticConf;
 import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.mock.WatchMgrMock;
 import com.baidu.disconf.client.watch.WatchMgr;
+import com.github.knightliao.apollo.utils.common.StringUtil;
 
 import mockit.Mock;
 import mockit.MockUp;
@@ -88,7 +90,8 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             fileSet.add("atomserverl.properties");
             fileSet.add("atomserverm_slave.properties");
             DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileSet);
-            DisconfMgr.start(ScanPackTestCase.SCAN_PACK_NAME);
+            DisconfMgr.start(StringUtil.parseStringToStringList(ScanPackTestCase.SCAN_PACK_NAME,
+                                                                   DisconfMgrBean.SCAN_SPLIT_TOKEN));
 
             //
             LOGGER.info(DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());

@@ -4,9 +4,13 @@
 package com.baidu.disconf.client.scan.inner.statically.strategy.impl;
 
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,10 +52,10 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
      * 扫描想要的类
      */
     @Override
-    public ScanStaticModel scan(String packName) {
+    public ScanStaticModel scan(List<String> packNameList) {
 
         // 基本信息
-        ScanStaticModel scanModel = scanBasicInfo(packName);
+        ScanStaticModel scanModel = scanBasicInfo(packNameList);
 
         // 分析
         analysis(scanModel);
@@ -62,10 +66,26 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
     /**
      * 通过扫描，获取反射对象
      */
-    private Reflections getReflection(String packName) {
+    private Reflections getReflection(List<String> packNameList) {
 
-        Predicate<String> filter =
-            new FilterBuilder().includePackage(Constants.DISCONF_PACK_NAME).includePackage(packName);
+        //
+        // filter
+        //
+        FilterBuilder filterBuilder = new FilterBuilder().includePackage(Constants.DISCONF_PACK_NAME);
+
+        for (String packName : packNameList) {
+            filterBuilder = filterBuilder.includePackage(packName);
+        }
+        Predicate<String> filter = filterBuilder;
+
+        //
+        // urls
+        //
+        Collection<URL> urlTotals = new ArrayList<URL>();
+        for (String packName : packNameList) {
+            Set<URL> urls = ClasspathHelper.forPackage(packName);
+            urlTotals.addAll(urls);
+        }
 
         //
         Reflections reflections = new Reflections(new ConfigurationBuilder().filterInputsBy(filter)
@@ -76,8 +96,7 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
                                                                           .filterResultsBy(filter),
                                                                       new MethodAnnotationsScanner()
                                                                           .filterResultsBy(filter),
-                                                                      new MethodParameterScanner())
-                                                      .setUrls(ClasspathHelper.forPackage(packName)));
+                                                                      new MethodParameterScanner()).setUrls(urlTotals));
 
         return reflections;
     }
@@ -157,14 +176,14 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
     /**
      * 扫描基本信息
      */
-    private ScanStaticModel scanBasicInfo(String packName) {
+    private ScanStaticModel scanBasicInfo(List<String> packNameList) {
 
         ScanStaticModel scanModel = new ScanStaticModel();
 
         //
         // 扫描对象
         //
-        Reflections reflections = getReflection(packName);
+        Reflections reflections = getReflection(packNameList);
         scanModel.setReflections(reflections);
 
         //

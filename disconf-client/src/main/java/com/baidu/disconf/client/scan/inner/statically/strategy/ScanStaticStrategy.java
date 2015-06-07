@@ -1,5 +1,7 @@
 package com.baidu.disconf.client.scan.inner.statically.strategy;
 
+import java.util.List;
+
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 
 /**
@@ -10,5 +12,5 @@ import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
  */
 public interface ScanStaticStrategy {
 
-    ScanStaticModel scan(String packName);
+    ScanStaticModel scan(List<String> packNameList);
 }

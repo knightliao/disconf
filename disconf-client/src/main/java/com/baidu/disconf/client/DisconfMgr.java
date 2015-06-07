@@ -1,5 +1,6 @@
 package com.baidu.disconf.client;
 
+import java.util.List;
 import java.util.Timer;
 
 import org.slf4j.Logger;
@@ -40,9 +41,9 @@ public class DisconfMgr {
     /**
      * 总入口
      */
-    public synchronized static void start(String scanPackage) {
+    public synchronized static void start(List<String> scanPackageList) {
 
-        firstScan(scanPackage);
+        firstScan(scanPackageList);
 
         secondScan();
     }
@@ -50,7 +51,7 @@ public class DisconfMgr {
     /**
      * 第一次扫描，静态扫描 for annotation config
      */
-    public synchronized static void firstScan(String scanPackage) {
+    public synchronized static void firstScan(List<String> scanPackageList) {
 
         // 该函数不能调用两次
         if (isFirstInit) {
@@ -73,7 +74,7 @@ public class DisconfMgr {
             scanMgr = ScanFactory.getScanMgr();
 
             // 第一次扫描并入库
-            scanMgr.firstScan(scanPackage);
+            scanMgr.firstScan(scanPackageList);
 
             // 获取数据/注入/Watch
             disconfCoreMgr = DisconfCoreFactory.getDisconfCoreMgr();

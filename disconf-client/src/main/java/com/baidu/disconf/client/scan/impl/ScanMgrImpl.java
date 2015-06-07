@@ -54,12 +54,12 @@ public class ScanMgrImpl implements ScanMgr {
      *
      * @throws Exception
      */
-    public void firstScan(String packageName) throws Exception {
+    public void firstScan(List<String> packageNameList) throws Exception {
 
-        LOGGER.debug("start to scan package: " + packageName);
+        LOGGER.debug("start to scan package: " + packageNameList.toString());
 
         // 获取扫描对象并分析整合
-        scanModel = scanStaticStrategy.scan(packageName);
+        scanModel = scanStaticStrategy.scan(packageNameList);
 
         // 增加非注解的配置
         scanModel.setJustHostFiles(DisconfCenterHostFilesStore.getInstance().getJustHostFiles());

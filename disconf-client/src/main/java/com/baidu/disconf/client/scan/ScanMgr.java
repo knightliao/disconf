@@ -1,5 +1,7 @@
 package com.baidu.disconf.client.scan;
 
+import java.util.List;
+
 /**
  * @author liaoqiqi
  * @version 2014-7-29
@@ -7,10 +9,9 @@ package com.baidu.disconf.client.scan;
 public interface ScanMgr {
 
     /**
-     *
      * @throws Exception
      */
-    void firstScan(String packageName) throws Exception;
+    void firstScan(List<String> packageNameLit) throws Exception;
 
     /**
      * @throws Exception
