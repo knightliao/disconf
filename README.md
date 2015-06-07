@@ -20,7 +20,7 @@ disconf.git branches and Maven version:
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
-## Elegant Usage Preivew ##
+## Elegant Usage Preview ##
 
 ![](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1esvksl3qlxj20dk05w75b.jpg)
 
