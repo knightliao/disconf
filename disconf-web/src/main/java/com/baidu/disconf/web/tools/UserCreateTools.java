@@ -35,7 +35,7 @@ public class UserCreateTools {
         /**
          * 生成指定用户 SQL
          */
-        UserCreateCommon.generateCreateSpecifyUserSQL(userDao, "mobiledsp", "mobiledsp_Mhx", RoleEnum.NORMAL, "4");
+        UserCreateCommon.generateCreateSpecifyUserSQL(userDao, "prism", "prism_MhxzKhl", RoleEnum.NORMAL, "8");
 
         System.exit(1);
     }
