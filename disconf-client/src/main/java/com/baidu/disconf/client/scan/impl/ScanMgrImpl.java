@@ -80,8 +80,8 @@ public class ScanMgrImpl implements ScanMgr {
      */
     public void secondScan() throws Exception {
 
-        // 不开启disconf则不需要处理回调
-        if (!DisClientConfig.getInstance().ENABLE_DISCONF) {
+        // 开启disconf才需要处理回调
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
 
             if (scanModel == null) {
                 synchronized(scanModel) {
