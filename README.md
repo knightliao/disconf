@@ -170,9 +170,6 @@ APP+环境+版本+ZK查询：
     
 ##使用情况##
 
-- 联系·讨论
-    - disconf技术QQ群: 239203866 
-    - java技术QQ群：68373211
 - [百度]（5+条产品线使用）
 - [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
 - [拉勾网](http://www.lagou.com/) 
@@ -195,3 +192,9 @@ others:
 ## 联系与赞助作者
 
 [https://github.com/knightliao/disconf/wiki/sponsor](https://github.com/knightliao/disconf/wiki/sponsor)
+
+## 群·联系·讨论
+
+- disconf技术QQ群: 239203866 
+- java技术QQ群：68373211
+- 我的微信：knightliao
