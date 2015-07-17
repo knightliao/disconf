@@ -7,7 +7,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
-## 项目信息 ##
+### 项目信息 
 
 - Java项目(1.6+)
 - Maven管理(3.0.5+)
@@ -20,7 +20,7 @@ disconf.git branches and Maven version:
 
 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
-## Elegant Usage Preview ##
+### Elegant Usage Preview ##
 
 ![](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1esvksl3qlxj20dk05w75b.jpg)
 
@@ -30,14 +30,14 @@ disconf.git branches and Maven version:
 
 [查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvk2031tmj20ie0ivwhk.jpg)
 
-## 当前版本（2.6.24）功能特点 ##
+### 当前版本（2.6.24）功能特点 ##
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
 - **极简的使用方式（注解式编程 或 XML无代码侵入模式）**
 - **低侵入性或无侵入性、强兼容性** 
 
-## 未来版本（完全版）功能特点 ##
+### 未来版本（完全版）功能特点 ##
 
 **Disconf的功能特点描述图：**
 
@@ -45,7 +45,7 @@ disconf.git branches and Maven version:
 
 [查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvkqmupdfj20fp08udh7.jpg)
 
-### 重要功能特点 ###
+#### 重要功能特点 ###
 
 - **支持配置（配置项+配置文件）的分布式化管理**
 - **配置发布统一化**
@@ -59,7 +59,7 @@ disconf.git branches and Maven version:
 
 注：配置项是指某个类里的某个Field字段。
 
-### 其它功能特点 ###
+#### 其它功能特点 ###
 
 - **低侵入性或无侵入性、强兼容性**：
 	- 低侵入性：通过极少的注解式代码撰写，即可实现分布式配置。
@@ -68,13 +68,13 @@ disconf.git branches and Maven version:
 - **支持配置项多个项目共享，支持批量处理项目配置**。
 - **配置监控**：平台提供自校验功能（进一步提高稳定性），可以定时校验应用系统的配置是否正确。
 
-## 模块架构图  ##
+### 模块架构图  ##
 
 ![](http://ww2.sinaimg.cn/bmiddle/60c9620fjw1esvk366z6fj20nh0fjtbu.jpg)
 
 [查看大图](http://ww2.sinaimg.cn/mw1024/60c9620fjw1esvk366z6fj20nh0fjtbu.jpg)
 
-### 模块信息###
+#### 模块信息###
 
 - **disconf**
 	- [disconf-core](https://github.com/knightliao/disconf/tree/master/disconf-core): 分布式配置基础包模块
@@ -86,11 +86,11 @@ disconf.git branches and Maven version:
 	- [disconf-standalone-dubbo-demo](https://github.com/knightliao/disconf/tree/dev/disconf-demos/disconf-standalone-dubbo-demo): 集成了disconf和dubbo的基于Spring的standalone demo程序
     - [disconf-spring-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-spring-demo): 使用disconf的SpringMvc Web demo程序
 	
-## 用户指南 ##
+### 用户指南 ##
 
 用户请关注这里。
 
-### 概述 ###
+#### 概述 ###
 
 Disconf为应用方提供了三个工具，
 
@@ -98,7 +98,7 @@ Disconf为应用方提供了三个工具，
 2. [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web), 它是一个Web平台，您可以此Web平台上管理您的配置。
 3. [disconf-tool](https://github.com/knightliao/disconf/tree/master/disconf-tool),可选包。
 
-### disconf-client 使用 ###
+#### disconf-client 使用 ###
 
 在您的 Maven POM 文件里加入：
 
@@ -108,7 +108,7 @@ Disconf为应用方提供了三个工具，
         <version>2.6.24</version>
     </dependency>
 
-### disconf-web 使用 ###
+#### disconf-web 使用 ###
 
 部署方法请参见：[https://github.com/knightliao/disconf/tree/master/disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)
 
@@ -118,14 +118,14 @@ APP+环境+版本+ZK查询：
 
 ![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
 
-### disconf-client/disconf-web Tutorials ###
+#### disconf-client/disconf-web Tutorials ###
 
-#### 总体概述
+##### 总体概述
 
 - [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
 - 文章介绍：[分布式配置管理平台Disconf](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0Disconf)
 
-#### 基于注解式的分布式配置（支持配置文件和配置项）
+##### 基于注解式的分布式配置（支持配置文件和配置项）
 
 推荐新建的项目使用disconf时 使用
 
@@ -134,19 +134,17 @@ APP+环境+版本+ZK查询：
 - [Tutorial 3 注解式分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
 - [Tutorial 4 注解式分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
 
-##### 注
-
-将配置文件移至一个专有类里，而不是分散在项目的各个地方，整个代码架构清晰易懂、易管理。
+注：将配置文件移至一个专有类里，而不是分散在项目的各个地方，整个代码架构清晰易懂、易管理。
 即便如果哪天不使用disconf，也只需要将注解去掉即可。
 
-#### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
+##### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
 
 推荐旧项目使用disconf时 使用
 
 - [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
 - [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload,对于那些比较重的资源如jdbc等，特别有用](https://github.com/knightliao/disconf/wiki/Tutorial5)
 
-#### 其它
+##### 其它
 
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
@@ -157,25 +155,25 @@ APP+环境+版本+ZK查询：
 - [注意事项](https://github.com/knightliao/disconf/wiki/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 - [Zookeeper异常考虑](https://github.com/knightliao/disconf/wiki/Zookeeper%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 
-## 开发人员指南 ##
+### 开发人员指南 ##
 
 - [disconf-client详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-client%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
 - [disconf-web详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-web%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
 - [细节讨论](https://github.com/knightliao/disconf/wiki/%E7%BB%86%E8%8A%82%E8%AE%A8%E8%AE%BA)
 
-## 其它##
+### 其它##
 
 - [PPT下载: 分布式配置中心服务20140624.pptx](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A120140624.pptx)
 - 安全性: Disconf并没有配置审核相关的实现，但这并不意味着Disconf不重视安全性。Disconf未来可以与其它审核系统对接。 
     
-##使用情况##
+###使用情况##
 
 - [百度]（5+条产品线使用）
 - [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
 - [拉勾网](http://www.lagou.com/) 
 - [人脉通](http://renmaitong.com/) （目前已B轮融资，4条产品线使用）
 
-## 他人评价
+### 他人评价
 
 others:
 
@@ -189,11 +187,11 @@ others:
 
 ![http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg)
 
-## 联系与赞助作者
+### 联系与赞助作者
 
 [https://github.com/knightliao/disconf/wiki/sponsor](https://github.com/knightliao/disconf/wiki/sponsor)
 
-## 群·联系·讨论
+### 群·联系·讨论
 
 - disconf技术QQ群: 239203866 
 - java技术QQ群：68373211
