@@ -22,13 +22,13 @@ disconf.git branches and Maven version:
 
 ### Elegant Usage Preview ##
 
-![](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1esvksl3qlxj20dk05w75b.jpg)
+![](http://ww3.sinaimg.cn/bmiddle/60c9620fgw1eu5lsrsixcj20ga06ygna.jpg)
 
-[查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvksl3qlxj20dk05w75b.jpg)
+[查看大图](http://ww3.sinaimg.cn/mw1024/60c9620fgw1eu5lsrsixcj20ga06ygna.jpg)
 
-![image](http://ww1.sinaimg.cn/bmiddle/60c9620fjw1esvk2031tmj20ie0ivwhk.jpg)
+![image](http://ww1.sinaimg.cn/bmiddle/60c9620fgw1eu5ltt9uglj20ia0j0tbo.jpg)
 
-[查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvk2031tmj20ie0ivwhk.jpg)
+[查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fgw1eu5ltt9uglj20ia0j0tbo.jpg)
 
 ### 当前版本（2.6.24）功能特点 ##
 
@@ -86,11 +86,11 @@ disconf.git branches and Maven version:
 	- [disconf-standalone-dubbo-demo](https://github.com/knightliao/disconf/tree/dev/disconf-demos/disconf-standalone-dubbo-demo): 集成了disconf和dubbo的基于Spring的standalone demo程序
     - [disconf-spring-demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-spring-demo): 使用disconf的SpringMvc Web demo程序
 	
-### 用户指南 ##
+## 用户指南 ##
 
 用户请关注这里。
 
-#### 概述 ###
+### 概述 ###
 
 Disconf为应用方提供了三个工具，
 
@@ -98,7 +98,7 @@ Disconf为应用方提供了三个工具，
 2. [disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web), 它是一个Web平台，您可以此Web平台上管理您的配置。
 3. [disconf-tool](https://github.com/knightliao/disconf/tree/master/disconf-tool),可选包。
 
-#### disconf-client 使用 ###
+### disconf-client 使用 ###
 
 在您的 Maven POM 文件里加入：
 
@@ -108,7 +108,7 @@ Disconf为应用方提供了三个工具，
         <version>2.6.24</version>
     </dependency>
 
-#### disconf-web 使用 ###
+### disconf-web 使用 ###
 
 部署方法请参见：[https://github.com/knightliao/disconf/tree/master/disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)
 
@@ -118,14 +118,14 @@ APP+环境+版本+ZK查询：
 
 ![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
 
-#### Tutorials ###
+### Tutorials ###
 
-##### 总体概述
+#### 总体概述
 
 - [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
 - 文章介绍：[分布式配置管理平台Disconf](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0Disconf)
 
-##### 基于注解式的分布式配置（支持配置文件和配置项）
+#### 基于注解式的分布式配置（支持配置文件和配置项）
 
 推荐新建的项目使用disconf时 使用
 
@@ -137,14 +137,14 @@ APP+环境+版本+ZK查询：
 注：将配置文件移至一个专有类里，而不是分散在项目的各个地方，整个代码架构清晰易懂、易管理。
 即便如果哪天不使用disconf，也只需要将注解去掉即可。
 
-##### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
+#### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
 
 推荐旧项目使用disconf时 使用
 
 - [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
 - [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload,对于那些比较重的资源如jdbc等，特别有用](https://github.com/knightliao/disconf/wiki/Tutorial5)
 
-##### 其它
+#### 其它
 
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
