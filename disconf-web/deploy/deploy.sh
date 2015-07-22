@@ -45,10 +45,10 @@ echo "copy online config " $ONLINE_CONFIG_PATH
 echo "**********************************************"
 if [ -d "src/main/online-resources" ]; then
     printf '%s\n' "Removing src/main/online-resources/*"
-    rm src/main/online-resources/*
+    rm -rf src/main/online-resources/*
 fi
 mkdir -p src/main/online-resources
-cp "$ONLINE_CONFIG_PATH"/* src/main/online-resources -rp
+cp -rp "$ONLINE_CONFIG_PATH"/* src/main/online-resources 
 
 echo "**********************************************"
 echo "It's going to Generate the output for war"
@@ -95,14 +95,14 @@ fi
 #
 #
 echo "start to copy war"
-cp output/disconf-web.war  $WAR_ROOT_PATH  -rp
+cp -rp output/disconf-web.war  $WAR_ROOT_PATH  
 
 #
 #
 #
 echo "start to copy static"
 mkdir $WAR_ROOT_PATH/html
-cp html/output/* $WAR_ROOT_PATH/html -rp
+cp -rp html/output/* $WAR_ROOT_PATH/html
 
 #
 #
