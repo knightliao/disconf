@@ -5,3 +5,4 @@
 /.project
 /pom.xml.releaseBackup
 /*.iml
+.idea
