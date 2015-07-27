@@ -1,6 +1,3 @@
-/*
- * Copyright (C) 2015 KNIGHT, Inc. All Rights Reserved.
- */
 package com.baidu.disconf.client.scan.inner.statically.strategy.impl;
 
 import java.util.List;

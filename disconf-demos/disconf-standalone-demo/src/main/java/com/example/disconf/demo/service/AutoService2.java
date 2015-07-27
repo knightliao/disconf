@@ -1,6 +1,3 @@
-/*
- * Copyright (C) 2015 Baidu, Inc. All Rights Reserved.
- */
 package com.example.disconf.demo.service;
 
 /**

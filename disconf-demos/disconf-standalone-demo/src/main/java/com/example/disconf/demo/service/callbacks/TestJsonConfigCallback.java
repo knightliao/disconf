@@ -1,6 +1,3 @@
-/*
- * Copyright (C) 2015 KNIGHT, Inc. All Rights Reserved.
- */
 package com.example.disconf.demo.service.callbacks;
 
 import org.springframework.stereotype.Service;

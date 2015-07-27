@@ -22,13 +22,6 @@ import mockit.MockUp;
 import mockit.integration.junit4.JMockit;
 
 /**
- * Project  : disconf-tool
- * Package  : 
- * FileName : ContextMgrTestCase.java
- * Copyright (c) 2014, Baidu Inc. All rights reserved.
- */
-
-/**
  * @author : WuNing
  * @description : ContextMgrTestCase
  * @date : 2014年8月1日 下午5:30:00

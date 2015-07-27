@@ -1,9 +1,3 @@
-/**
- * Project  : disconf-client
- * Package  : com.baidu.disconf.client.context
- * FileName : ContextMgr.java
- * Copyright (c) 2014, Baidu Inc. All rights reserved.
- */
 package com.baidu.disconf.tool.context;
 
 import org.slf4j.Logger;

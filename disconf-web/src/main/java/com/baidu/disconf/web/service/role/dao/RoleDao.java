@@ -1,6 +1,3 @@
-/*
- * Copyright (C) 2015 Baidu, Inc. All Rights Reserved.
- */
 package com.baidu.disconf.web.service.role.dao;
 
 import com.baidu.disconf.web.service.role.bo.Role;

@@ -1,6 +1,3 @@
-/*
- * Copyright (C) 2015 KNIGHT, Inc. All Rights Reserved.
- */
 package com.baidu.disconf.web.innerapi.zookeeper.impl;
 
 import java.nio.charset.Charset;
