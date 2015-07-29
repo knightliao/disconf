@@ -4,12 +4,13 @@ CREATE SCHEMA IF NOT EXISTS "disconf" /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 DROP TABLE  IF EXISTS disconf."app";
 CREATE TABLE disconf.`app` (
-    `app_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
-    `name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'APP名(一般是产品线+服务名)',
-    `description` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '介绍',
-    `create_time` VARCHAR(14) NOT NULL DEFAULT '99991231235959' COMMENT '生成时间',
-    `update_time` VARCHAR(14) NOT NULL DEFAULT '99991231235959' COMMENT '修改时',
-    PRIMARY KEY (`app_id`)
+  `app_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'APP名(一般是产品线+服务名)',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '介绍',
+  `create_time` varchar(14) NOT NULL DEFAULT '99991231235959' COMMENT '生成时间',
+  `update_time` varchar(14) NOT NULL DEFAULT '99991231235959' COMMENT '修改时',
+  `emails` varchar(255) NOT NULL DEFAULT '' COMMENT '邮箱列表逗号分隔',
+  PRIMARY KEY (`app_id`)
 );
 
 
