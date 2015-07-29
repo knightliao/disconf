@@ -611,6 +611,7 @@
                     </executions>
                 </plugin>
 
+                <!-- 为了github的测试覆盖率 -->
                 <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
