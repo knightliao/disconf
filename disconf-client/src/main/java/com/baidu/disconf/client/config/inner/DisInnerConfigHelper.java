@@ -95,7 +95,7 @@ public class DisInnerConfigHelper {
         LOGGER.info("SERVER DEBUG MODE: " + DisClientConfig.getInstance().DEBUG);
 
         // 用户下载文件夹
-        if (StringUtils.isEmpty(DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR)) {
+        if (!StringUtils.isEmpty(DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR)) {
             OsUtil.makeDirs(DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR);
             LOGGER.info("SERVER USER DEFINE DOWNLOAD DIR: " + DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR);
         }
