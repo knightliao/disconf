@@ -137,8 +137,8 @@ public class RestfulMgrImpl implements RestfulMgr {
                                      boolean isTransfer2Classpath, int retryTimes, int retrySleepSeconds)
         throws Exception {
 
-        // 对 local file dir 增加二级tmp目录
-        String tmpFileDir = getSubFolderTemPath(localFileDir);
+        // 临时下载目录
+        String tmpFileDir = "./disconf/download";
 
         // 待下载的路径
         String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
@@ -260,19 +260,4 @@ public class RestfulMgrImpl implements RestfulMgr {
         return new File(OsUtil.pathJoin(classpath, fileName));
     }
 
-    /**
-     * @return String
-     *
-     * @Description: 获取下载的临时文件夹
-     * @author liaoqiqi
-     * @date 2013-6-14
-     */
-    private String getSubFolderTemPath(String path) {
-
-        String tempDir = OsUtil.pathJoin(path, "tmp");
-
-        OsUtil.makeDirs(tempDir);
-
-        return tempDir;
-    }
 }

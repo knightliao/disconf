@@ -94,18 +94,10 @@ public class DisInnerConfigHelper {
         // debug mode
         LOGGER.info("SERVER DEBUG MODE: " + DisClientConfig.getInstance().DEBUG);
 
-        //
-        // 本地配置
-        //
-        //
-
-        // 空的话，则继续 sys 的配置
-        if (StringUtils.isEmpty(DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR)) {
-            DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR = DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR;
-        } else {
-            // LOCAL_DOWNLOAD_DIR
-            LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: " + DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR);
-            OsUtil.makeDirs(DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR);
+        // 用户下载文件夹
+        if (StringUtils.isEmpty(DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR)) {
+            OsUtil.makeDirs(DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR);
+            LOGGER.info("SERVER USER DEFINE DOWNLOAD DIR: " + DisClientConfig.getInstance().USER_DEFINE_DOWNLOAD_DIR);
         }
 
         //
@@ -168,7 +160,6 @@ public class DisInnerConfigHelper {
         //
 
         if (StringUtils.isEmpty(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR)) {
-
             throw new Exception("settings: LOCAL_TMP_DIR cannot find");
         }
 
@@ -187,7 +178,6 @@ public class DisInnerConfigHelper {
         // LOCAL_DOWNLOAD_DIR
         LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: " + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
         OsUtil.makeDirs(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
-
     }
 
 }

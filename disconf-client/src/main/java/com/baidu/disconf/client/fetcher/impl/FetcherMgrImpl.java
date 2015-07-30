@@ -34,7 +34,7 @@ public class FetcherMgrImpl implements FetcherMgr {
     private boolean enableLocalDownloadDirInClassPath = true;
 
     // 下载文件夹, 远程文件下载后会放在这里
-    private String localDownloadDir = "./disconf/download";
+    private String localDownloadDir;
 
     //
     private List<String> hostList = new ArrayList<String>();

@@ -148,13 +148,13 @@ public final class DisClientConfig {
     public int CONF_SERVER_URL_RETRY_TIMES = 3;
 
     /**
-     * 下载文件夹, 远程文件下载后会放在这里 , 这个会覆盖 sys config 的数据
+     * 用户指定的 下载文件夹, 远程文件下载后会放在这里
      *
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "local_download_dir")
-    public String LOCAL_DOWNLOAD_DIR;
+    @DisInnerConfigAnnotation(name = "user_define_download_dir")
+    public String USER_DEFINE_DOWNLOAD_DIR;
 
     /**
      * 获取远程配置 重试时休眠时间，默认是5秒
