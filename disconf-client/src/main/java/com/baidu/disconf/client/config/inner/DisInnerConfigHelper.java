@@ -47,26 +47,42 @@ public class DisInnerConfigHelper {
         LOGGER.info("SERVER conf_server_host: " + DisClientConfig.getInstance().getHostList());
 
         //
-        // 版本
-        if (StringUtils.isEmpty(DisClientConfig.getInstance().VERSION)) {
+        // version
+        String version = System.getProperty(DisClientConfig.VERSION_NAME);
+        if (version == null) {
+            // 版本
+            if (StringUtils.isEmpty(DisClientConfig.getInstance().VERSION)) {
 
-            throw new Exception("settings: VERSION cannot find");
+                throw new Exception("settings: VERSION cannot find");
+            }
+        } else {
+            DisClientConfig.getInstance().VERSION = version;
         }
         LOGGER.info("SERVER version: " + DisClientConfig.getInstance().VERSION);
 
         //
         // APP名
-        if (StringUtils.isEmpty(DisClientConfig.getInstance().APP)) {
+        String app = System.getProperty(DisClientConfig.APP_NAME);
+        if (app == null) {
+            if (StringUtils.isEmpty(DisClientConfig.getInstance().APP)) {
 
-            throw new Exception("settings: APP cannot find");
+                throw new Exception("settings: APP cannot find");
+            }
+        } else {
+            DisClientConfig.getInstance().APP = app;
         }
         LOGGER.info("SERVER APP: " + DisClientConfig.getInstance().APP);
 
         //
         // 环境
-        if (StringUtils.isEmpty(DisClientConfig.getInstance().ENV)) {
+        String env = System.getProperty(DisClientConfig.ENV_NAME);
+        if (env == null) {
+            if (StringUtils.isEmpty(DisClientConfig.getInstance().ENV)) {
 
-            throw new Exception("settings: ENV cannot find");
+                throw new Exception("settings: ENV cannot find");
+            }
+        } else {
+            DisClientConfig.getInstance().ENV = env;
         }
         LOGGER.info("SERVER ENV: " + DisClientConfig.getInstance().ENV);
 
@@ -77,6 +93,20 @@ public class DisInnerConfigHelper {
         //
         // debug mode
         LOGGER.info("SERVER DEBUG MODE: " + DisClientConfig.getInstance().DEBUG);
+
+        //
+        // 本地配置
+        //
+        //
+
+        // 空的话，则继续 sys 的配置
+        if (StringUtils.isEmpty(DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR)) {
+            DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR = DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR;
+        } else {
+            // LOCAL_DOWNLOAD_DIR
+            LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: " + DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR);
+            OsUtil.makeDirs(DisClientConfig.getInstance().LOCAL_DOWNLOAD_DIR);
+        }
 
         //
         // 忽略哪些分布式配置

@@ -94,15 +94,14 @@ public class RestfulMgrImpl implements RestfulMgr {
 
                 Response response = (Response) retryStrategy.retry(unreliableImpl, retryTimes, retyrSleepSeconds);
 
-                T t = (T) response.readEntity(clazz);
-
-                return t;
+                return response.readEntity(clazz);
 
             } catch (Exception e) {
 
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
+                    LOGGER.info("pass");
                 }
             }
         }
@@ -135,22 +134,30 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @throws Exception
      */
     public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
-                                     boolean isTransfer2Classpath, int retryTimes, int retyrSleepSeconds)
+                                     boolean isTransfer2Classpath, int retryTimes, int retrySleepSeconds)
         throws Exception {
 
-        // 本地路径
+        // 对 local file dir 增加二级tmp目录
+        String tmpFileDir = getSubFolderTemPath(localFileDir);
+
+        // 待下载的路径
         String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
+        String tmpFilePath = OsUtil.pathJoin(tmpFileDir, fileName);
 
         // 唯一标识化本地文件
-        String localFilePathUnique = MyStringUtils.getRandomName(localFilePath);
+        String tmpFilePathUnique = MyStringUtils.getRandomName(tmpFilePath);
 
         // 相应的File对象
-        File localFilePathUnqiueFile = new File(localFilePathUnique);
+        File localFile = new File(localFilePath);
+        File tmpFilePathUniqueFile = new File(tmpFilePathUnique);
 
         try {
 
             // 可重试的下载
-            retry4ConfDownload(remoteUrl, localFilePathUnqiueFile, retryTimes, retyrSleepSeconds);
+            retry4ConfDownload(remoteUrl, tmpFilePathUniqueFile, retryTimes, retrySleepSeconds);
+
+            // 将 tmp file 移到 localFileDir
+            OsUtil.transferFileAtom(tmpFilePathUniqueFile, localFile, false);
 
             // 再次转移至classpath目录下
             if (isTransfer2Classpath) {
@@ -159,15 +166,15 @@ public class RestfulMgrImpl implements RestfulMgr {
                 if (classpathFile != null) {
 
                     // 从下载文件复制到classpath 原子性的做转移
-                    OsUtil.transferFileAtom(localFilePathUnqiueFile, classpathFile);
-                    localFilePathUnqiueFile = classpathFile;
+                    OsUtil.transferFileAtom(tmpFilePathUniqueFile, classpathFile, true);
+                    localFile = classpathFile;
 
                 } else {
                     LOGGER.warn("classpath is null, cannot transfer " + fileName + " to classpath");
                 }
             }
 
-            LOGGER.debug("Move to: " + localFilePathUnqiueFile.getAbsolutePath());
+            LOGGER.debug("Move to: " + localFile.getAbsolutePath());
 
         } catch (Exception e) {
             LOGGER.warn("download file failed, using previous download file.", e);
@@ -176,8 +183,8 @@ public class RestfulMgrImpl implements RestfulMgr {
         //
         // 下载失败
         //
-        if (!localFilePathUnqiueFile.exists()) {
-            throw new Exception("targe file cannot be found! " + fileName);
+        if (!localFile.exists()) {
+            throw new Exception("target file cannot be found! " + fileName);
         }
 
         //
@@ -186,17 +193,16 @@ public class RestfulMgrImpl implements RestfulMgr {
 
         // 如果是使用CLASS路径的，则返回相对classpath的路径
         if (!ConfigLoaderUtils.CLASS_PATH.isEmpty()) {
-            String relavivePathString =
-                OsUtil.getRelativePath(localFilePathUnqiueFile, new File(ConfigLoaderUtils.CLASS_PATH));
-            if (relavivePathString != null) {
-                if (new File(relavivePathString).isFile()) {
-                    return relavivePathString;
+            String relativePathString = OsUtil.getRelativePath(localFile, new File(ConfigLoaderUtils.CLASS_PATH));
+            if (relativePathString != null) {
+                if (new File(relativePathString).isFile()) {
+                    return relativePathString;
                 }
             }
         }
 
         // 否则, 返回全路径
-        return localFilePathUnqiueFile.getAbsolutePath();
+        return localFile.getAbsolutePath();
     }
 
     /**
@@ -226,6 +232,7 @@ public class RestfulMgrImpl implements RestfulMgr {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
+                    LOGGER.info("pass");
                 }
             }
         }
@@ -250,8 +257,22 @@ public class RestfulMgrImpl implements RestfulMgr {
         if (classpath == null) {
             return null;
         }
-        File file = new File(OsUtil.pathJoin(classpath, fileName));
-        return file;
+        return new File(OsUtil.pathJoin(classpath, fileName));
     }
 
+    /**
+     * @return String
+     *
+     * @Description: 获取下载的临时文件夹
+     * @author liaoqiqi
+     * @date 2013-6-14
+     */
+    private String getSubFolderTemPath(String path) {
+
+        String tempDir = OsUtil.pathJoin(path, "tmp");
+
+        OsUtil.makeDirs(tempDir);
+
+        return tempDir;
+    }
 }

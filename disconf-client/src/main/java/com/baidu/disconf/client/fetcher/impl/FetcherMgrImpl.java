@@ -61,7 +61,6 @@ public class FetcherMgrImpl implements FetcherMgr {
 
     /**
      * 根据 URL 从远程 获取Value值
-
      */
     public String getValueFromServer(String url) throws Exception {
 
@@ -86,7 +85,7 @@ public class FetcherMgrImpl implements FetcherMgr {
     public String downloadFileFromServer(String url, String fileName) throws Exception {
 
         // 下载的路径
-        String localDir = getLocalDownloadDirPath(false);
+        String localDir = getLocalDownloadDirPath();
 
         // 设置远程地址
         RemoteUrl remoteUrl = new RemoteUrl(url, hostList);
@@ -102,35 +101,15 @@ public class FetcherMgrImpl implements FetcherMgr {
      *
      * @throws Exception
      */
-    private String getLocalDownloadDirPath(boolean isTmp) throws Exception {
+    private String getLocalDownloadDirPath() throws Exception {
 
-        String localUrl = getDownloadTmpDir();
-
-        if (!isTmp) {
-            localUrl = localDownloadDir;
-        }
+        String localUrl = localDownloadDir;
 
         if (!new File(localUrl).exists()) {
             new File(localUrl).mkdirs();
         }
 
         return localUrl;
-    }
-
-    /**
-     * @return String
-     *
-     * @Description: 获取下载的临时文件夹
-     * @author liaoqiqi
-     * @date 2013-6-14
-     */
-    private String getDownloadTmpDir() {
-
-        String tempDir = OsUtil.pathJoin(localDownloadDir, "tmp");
-
-        OsUtil.makeDirs(tempDir);
-
-        return tempDir;
     }
 
     @Override

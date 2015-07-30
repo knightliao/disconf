@@ -20,7 +20,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.24
+- dev(develop branch): 2.6.25-SNAPSHOT
 - master(stable branch)：2.6.24
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 

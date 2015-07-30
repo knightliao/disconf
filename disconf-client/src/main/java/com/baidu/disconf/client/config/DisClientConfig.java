@@ -75,6 +75,7 @@ public final class DisClientConfig {
      * @author
      * @since 1.0.0
      */
+    public static final String APP_NAME = "app";
     @DisInnerConfigAnnotation(name = "app")
     public String APP;
 
@@ -84,7 +85,8 @@ public final class DisClientConfig {
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "version", defaultValue = Constants.DEFAULT_VERSION)
+    public static final String VERSION_NAME = "version";
+    @DisInnerConfigAnnotation(name = DisClientConfig.VERSION_NAME, defaultValue = Constants.DEFAULT_VERSION)
     public String VERSION = Constants.DEFAULT_VERSION;
 
     /**
@@ -102,6 +104,7 @@ public final class DisClientConfig {
      * @author
      * @since 1.0.0
      */
+    public static final String ENV_NAME = "env";
     @DisInnerConfigAnnotation(name = "env", defaultValue = Constants.DEFAULT_ENV)
     public String ENV = Constants.DEFAULT_ENV;
 
@@ -143,6 +146,15 @@ public final class DisClientConfig {
      */
     @DisInnerConfigAnnotation(name = "conf_server_url_retry_times", defaultValue = "3")
     public int CONF_SERVER_URL_RETRY_TIMES = 3;
+
+    /**
+     * 下载文件夹, 远程文件下载后会放在这里 , 这个会覆盖 sys config 的数据
+     *
+     * @author
+     * @since 1.0.0
+     */
+    @DisInnerConfigAnnotation(name = "local_download_dir")
+    public String LOCAL_DOWNLOAD_DIR;
 
     /**
      * 获取远程配置 重试时休眠时间，默认是5秒
