@@ -164,7 +164,9 @@ APP+环境+版本+ZK查询：
 
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
-- [Tutorial 8 disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/dev/disconf-demos/disconf-standalone-dubbo-demo)
+- [Tutorial disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-dubbo-demo)
+- [Tutorial 9 实现真正意义上的统一上线包](https://github.com/knightliao/disconf/wiki/Tutorial9)
+- [Tutorial 10 实现一个配置更新下载器agent](https://github.com/knightliao/disconf/wiki/Tutorial10)
 - [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 - [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 - [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
