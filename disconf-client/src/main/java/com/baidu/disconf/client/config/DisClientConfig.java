@@ -153,7 +153,7 @@ public final class DisClientConfig {
      * @author
      * @since 1.0.0
      */
-    @DisInnerConfigAnnotation(name = "user_define_download_dir")
+    @DisInnerConfigAnnotation(name = "user_define_download_dir", defaultValue = "./disconf/download")
     public String USER_DEFINE_DOWNLOAD_DIR;
 
     /**
