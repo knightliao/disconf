@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.FrontEndInterfaceConstant;
@@ -52,7 +52,6 @@ public class JsonObjectUtils {
     /**
      * 返回正确(顶层结构), 非列表请求
      *
-     * @param key
      * @param value
      *
      * @return
@@ -68,7 +67,6 @@ public class JsonObjectUtils {
     /**
      * 返回正确, 列表请求
      *
-     * @param key
      * @param value
      *
      * @return
@@ -106,7 +104,7 @@ public class JsonObjectUtils {
     /**
      * 参数错误: global
      *
-     * @param bindingResult
+     * @param
      *
      * @return
      */
@@ -121,11 +119,11 @@ public class JsonObjectUtils {
     }
 
     /**
-     * @param jsonObjectBase
+     * @param
      */
     public static ModelAndView JsonObjectError2ModelView(JsonObjectError json) {
 
-        ModelAndView model = new ModelAndView(new MappingJacksonJsonView());
+        ModelAndView model = new ModelAndView(new MappingJackson2JsonView());
         model.addObject(FrontEndInterfaceConstant.RETURN_SUCCESS, json.getSuccess());
         model.addObject(FrontEndInterfaceConstant.RETURN_MESSAGE, json.getMessage());
         model.addObject(FrontEndInterfaceConstant.STATUS_CODE_STRING, json.getStatus());

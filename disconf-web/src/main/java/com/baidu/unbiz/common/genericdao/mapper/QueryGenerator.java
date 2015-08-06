@@ -32,9 +32,9 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 /**
  * @author Darwin(Tianxin)
  */
-public class QueryGenerater<ENTITY extends BaseObject<KEY>, KEY extends Serializable> {
+public class QueryGenerator<ENTITY extends BaseObject<KEY>, KEY extends Serializable> {
 
-    public QueryGenerater(ORMapping<ENTITY, KEY> orMapping, GenericDao<KEY, ENTITY> genericDao) {
+    public QueryGenerator(ORMapping<ENTITY, KEY> orMapping, GenericDao<KEY, ENTITY> genericDao) {
         this.orMapping = orMapping;
         this.dao = genericDao;
     }

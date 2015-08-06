@@ -30,7 +30,7 @@ import com.baidu.unbiz.common.genericdao.annotation.Sequence;
 import com.baidu.unbiz.common.genericdao.bo.InsertOption;
 import com.baidu.unbiz.common.genericdao.mapper.GenericMapper;
 import com.baidu.unbiz.common.genericdao.mapper.ORMapping;
-import com.baidu.unbiz.common.genericdao.mapper.QueryGenerater;
+import com.baidu.unbiz.common.genericdao.mapper.QueryGenerator;
 import com.baidu.unbiz.common.genericdao.operator.Match;
 import com.baidu.unbiz.common.genericdao.operator.Modify;
 import com.baidu.unbiz.common.genericdao.operator.Operators;
@@ -49,7 +49,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     BaseDao<KEY, ENTITY> {
 
     private ORMapping<ENTITY, KEY> orMapping = null;
-    private QueryGenerater<ENTITY, KEY> queryGenerater = null;
+    private QueryGenerator<ENTITY, KEY> queryGenerator = null;
 
     private String sequenceName = null;
 
@@ -66,7 +66,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         Class<KEY> keyClass = (Class<KEY>) types[0];
 
         orMapping = new ORMapping<ENTITY, KEY>(entityClass, keyClass);
-        queryGenerater = new QueryGenerater<ENTITY, KEY>(orMapping, this);
+        queryGenerator = new QueryGenerator<ENTITY, KEY>(orMapping, this);
 
         analysisSequence(entityClass);
     }
@@ -80,7 +80,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     public GenericDao(Class<KEY> keyClass, Class<ENTITY> entityClass) {
 
         orMapping = new ORMapping<ENTITY, KEY>(entityClass, keyClass);
-        queryGenerater = new QueryGenerater<ENTITY, KEY>(orMapping, this);
+        queryGenerator = new QueryGenerator<ENTITY, KEY>(orMapping, this);
 
         analysisSequence(entityClass);
     }
@@ -88,7 +88,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     /**
      * 解析映射的实体类，获取主键名、表名、分片数、sequence配置
      *
-     * @param entity
+     * @param
      */
     protected void analysisSequence(Class<ENTITY> entityClass) {
         Sequence sequence = entityClass.getAnnotation(Sequence.class);
@@ -166,7 +166,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     private List<ENTITY> getByComplexKeys(Collection<KEY> ids) {
         List<ENTITY> entities = new ArrayList<ENTITY>(ids.size());
         for (KEY key : ids) {
-            List<Match> matches = queryGenerater.getKeyMatches(key);
+            List<Match> matches = queryGenerator.getKeyMatches(key);
             entities.addAll(find(matches.toArray(new Match[matches.size()])));
 
         }
@@ -205,7 +205,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
      */
     public int count(List<Match> matches) {
 
-        Query query = queryGenerater.getCountQuery(matches);
+        Query query = queryGenerator.getCountQuery(matches);
         // 执行操作
         String sql = query.getSql();
         return countBySQL(sql, query.getParams());
@@ -226,7 +226,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         } else {
             args = params.toArray(new Object[params.size()]);
         }
-        return jdbcTemplate.queryForInt(sql, args);
+        return jdbcTemplate.queryForObject(sql, Integer.class, args);
     }
 
     /**
@@ -239,19 +239,19 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
      */
     protected List<ENTITY> findColumns(List<Match> matches, String[] columns) {
 
-        Query query = queryGenerater.getMiniSelectQuery(Arrays.asList(columns), matches);
+        Query query = queryGenerator.getMiniSelectQuery(Arrays.asList(columns), matches);
         return findBySQL(query.getSql(), query.getParams());
     }
 
     /**
      * 删除符合条件组合的对象列表
-     *
-     * @param params 查询参数,该参数为"字段名,字段值,字段名,字段值..."的排列
+     * <p/>
+     * 该参数为"字段名,字段值,字段名,字段值..."的排列
      *
      * @return
      */
     public int delete(Match... matches) {
-        Query query = queryGenerater.getDeleteQuery(matches);
+        Query query = queryGenerator.getDeleteQuery(matches);
 
         // 执行操作
         return executeSQL(query.getSql(), query.getParams());
@@ -333,7 +333,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     public List<ENTITY> find(List<Match> matches, List<Order> order, int offset, int limit) {
         // FIXME
         Query operate =
-            queryGenerater.getSelectQuery(matches, (order == null) ? null : order.toArray(new Order[order.size()]));
+            queryGenerator.getSelectQuery(matches, (order == null) ? null : order.toArray(new Order[order.size()]));
         String sql = operate.getSql();
         List<Object> params = operate.getParams();
 
@@ -456,7 +456,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     public <T> T findValue(String column, Class<T> tClass, Match... matches) {
 
-        Query query = queryGenerater.getMiniSelectQuery(Arrays.asList(column), matches);
+        Query query = queryGenerator.getMiniSelectQuery(Arrays.asList(column), matches);
         List<T> ts = findOneColumn(query.getSql() + " limit 1", query.getParams(), 1, tClass);
         if (CollectionUtils.isEmpty(ts)) {
             return null;
@@ -466,7 +466,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     }
 
     public <T> List<T> findOneColumn(String column, Class<T> tClass, Match... matches) {
-        Query query = queryGenerater.getMiniSelectQuery(Arrays.asList(column), matches);
+        Query query = queryGenerator.getMiniSelectQuery(Arrays.asList(column), matches);
 
         return findOneColumn(query.getSql(), query.getParams(), 1, tClass);
     }
@@ -610,7 +610,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
             return false;
         }
 
-        Query query = queryGenerater.getUpdateQuery(entity);
+        Query query = queryGenerator.getUpdateQuery(entity);
         return executeSQL(query.getSql(), query.getParams()) == 1;
     }
 
@@ -628,7 +628,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
             return 0;
         }
 
-        final List<Query> queries = queryGenerater.getUpdateQuery(entities);
+        final List<Query> queries = queryGenerator.getUpdateQuery(entities);
         String sql = queries.get(0).getSql();
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
@@ -654,7 +654,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
     public int update(List<Modify> modifies, Match... matches) {
 
-        Query query = queryGenerater.getUpdateQuery(modifies, matches);
+        Query query = queryGenerator.getUpdateQuery(modifies, matches);
         return executeSQL(query.getSql(), query.getParams());
     }
 
@@ -705,7 +705,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
     private int deleteByComplexIndex(List<KEY> ids) {
         int count = 0;
         for (KEY key : ids) {
-            List<Match> matches = queryGenerater.getKeyMatches(key);
+            List<Match> matches = queryGenerator.getKeyMatches(key);
             count += delete(matches.toArray(new Match[matches.size()]));
         }
         return count;
@@ -784,7 +784,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
 
         // 获取insert语句
         @SuppressWarnings("unchecked")
-        Query query = queryGenerater.getCreateQuery(autoGeneratedKey, false, option, entity);
+        Query query = queryGenerator.getCreateQuery(autoGeneratedKey, false, option, entity);
         final String sql = query.getSql();
         final List<Object> params = query.getParams();
 
@@ -901,7 +901,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         // boolean autoGenerateKey = key == null;
 
         // 获取insert语句
-        Query query = queryGenerater.getCreateQuery(entities, key == null, false, option);
+        Query query = queryGenerator.getCreateQuery(entities, key == null, false, option);
 
         // FIXME 先临时这样改下
         int size = query.getParams().size();
@@ -945,7 +945,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         // boolean autoGenerateKey = key == null;
 
         // 获取insert语句
-        Query query = queryGenerater.getCreateQuery(entities, key == null, false, option);
+        Query query = queryGenerator.getCreateQuery(entities, key == null, false, option);
 
         // FIXME 先临时这样改下
         int size = query.getParams().size();
@@ -979,7 +979,7 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
         KEY key = entities.get(0).getId();
 
         // 获取insert语句
-        Query query = queryGenerater.getCreateQuery(entities, key == null, true, null);
+        Query query = queryGenerator.getCreateQuery(entities, key == null, true, null);
 
         // 执行批量插入操作
         executeSQL(query.getSql(), query.getParams());

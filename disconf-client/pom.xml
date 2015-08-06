@@ -24,6 +24,23 @@
     </licenses>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-core</artifactId>
+            <version>${disconf-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-core</artifactId>
+            <version>${disconf-core.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- common dependencies -->
+
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
@@ -47,6 +64,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+        </dependency>
+
+        <!-- log dependencies -->
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
@@ -61,26 +85,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.baidu.disconf</groupId>
-            <artifactId>disconf-core</artifactId>
-            <version>${disconf-core.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-        </dependency>
-
         <!-- ================ test ================ -->
-
-        <dependency>
-            <groupId>com.baidu.disconf</groupId>
-            <artifactId>disconf-core</artifactId>
-            <version>${disconf-core.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>com.googlecode.jmockit</groupId>

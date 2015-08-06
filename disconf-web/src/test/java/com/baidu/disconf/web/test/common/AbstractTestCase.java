@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import com.baidu.ub.common.log.AopLogFactory;
@@ -29,11 +29,10 @@ public abstract class AbstractTestCase extends AbstractTransactionalJUnit4Spring
     /**
      * 业务数据库
      */
-    @SuppressWarnings("deprecation")
     @Autowired
     @Qualifier(value = "dataSource2")
     public void setDataSource(DataSource dataSource) {
-        super.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     private static final String TEST_DATA_SQL_BASE_PATH = "sql/testdata/1_0_0/";
