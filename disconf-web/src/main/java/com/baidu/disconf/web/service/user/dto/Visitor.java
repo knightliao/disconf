@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import com.baidu.disconf.web.service.user.constant.UserConstant;
 import com.github.knightliao.apollo.db.bo.BaseObject;
@@ -84,14 +85,17 @@ public class Visitor extends BaseObject<Long> implements Serializable {
 
     public void setAppIds(String appIds) {
 
-        try {
+        if (!StringUtils.isEmpty(appIds)) {
 
-            List<Long> ids = StringUtil.parseStringToLongList(appIds, UserConstant.USER_APP_SEP);
-            setAppIds(new HashSet<Long>(ids));
+            try {
 
-        } catch (Exception e) {
+                List<Long> ids = StringUtil.parseStringToLongList(appIds, UserConstant.USER_APP_SEP);
+                setAppIds(new HashSet<Long>(ids));
 
-            LOG.error(e.toString());
+            } catch (Exception e) {
+
+                LOG.error(e.toString());
+            }
         }
     }
 }
