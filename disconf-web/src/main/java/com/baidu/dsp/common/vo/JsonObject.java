@@ -37,4 +37,10 @@ public class JsonObject extends JsonObjectBase {
         result.put(key, value);
     }
 
+    @Override
+    public String toString() {
+        return "JsonObject{" +
+                   "result=" + result +
+                   '}';
+    }
 }

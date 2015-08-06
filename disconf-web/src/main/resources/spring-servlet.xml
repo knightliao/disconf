@@ -110,17 +110,7 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/console/" p:suffix=".jsp" p:order="0"/>
 
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="order" value="1"/>
-        <property name="defaultViews">
-            <list>
-                <ref bean="jsonView"/>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="jsonView"
-          class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+    <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
         <property name="contentType" value="application/json;charset=UTF-8"/>
         <property name="disableCaching" value="true"/>
     </bean>
