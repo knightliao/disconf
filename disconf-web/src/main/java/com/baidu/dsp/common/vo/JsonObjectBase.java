@@ -47,10 +47,6 @@ public class JsonObjectBase implements Serializable {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public Map<String, Object> getMessage() {
         return message;
     }
