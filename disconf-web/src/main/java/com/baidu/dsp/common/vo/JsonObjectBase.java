@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.baidu.ub.common.commons.ThreadContext;
+
 /**
  * JSON 基类
  *
@@ -23,7 +25,7 @@ public class JsonObjectBase implements Serializable {
     protected Map<String, Object> message = new HashMap<String, Object>();
 
     public JsonObjectBase() {
-        sessionId = "00000000000000000000";
+        sessionId = ThreadContext.getSessionId();
     }
 
     /**
