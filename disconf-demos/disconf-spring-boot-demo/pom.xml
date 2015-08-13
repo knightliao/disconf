@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.baidu.disconf</groupId>
-    <artifactId>spring-boot-disconf-demo</artifactId>
+    <artifactId>disconf-spring-boot-demo</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>

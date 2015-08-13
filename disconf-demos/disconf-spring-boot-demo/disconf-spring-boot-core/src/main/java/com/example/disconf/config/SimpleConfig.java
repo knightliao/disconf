@@ -5,9 +5,6 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by wenjl on 2015/8/5.
- */
 @Service
 @Scope("singleton")
 @DisconfFile(filename = "simple.properties")

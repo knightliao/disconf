@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * 演示分布式配置文件、分布式配置的更新Demo
- *
- * @author liaoqiqi
- * @version 2014-6-17
+ * 定时输出配置修改
  */
 public class DisconfDemoTask implements Runnable{
 
