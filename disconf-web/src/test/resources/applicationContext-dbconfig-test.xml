@@ -1,49 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:task="http://www.springframework.org/schema/task"
-    xsi:schemaLocation="http://www.springframework.org/schema/aop   
-        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
-        http://www.springframework.org/schema/beans   
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
         http://www.springframework.org/schema/context   
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd   
-        http://www.springframework.org/schema/mvc   
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/jdbc 
         http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd    
         http://www.springframework.org/schema/tx   
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <context:property-placeholder
-        location="classpath*:/datasource-test.properties"
-        ignore-unresolvable="true" />
+            location="classpath*:/datasource-test.properties"
+            ignore-unresolvable="true"/>
 
     <bean id="dataSource2"
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${driver_class_name}" />
-        <property name="url" value="${datasource_location}" />
-        <property name="username" value="{username}" />
-        <property name="password" value="{password}" />
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driver_class_name}"/>
+        <property name="url" value="${datasource_location}"/>
+        <property name="username" value="{username}"/>
+        <property name="password" value="{password}"/>
     </bean>
 
     <jdbc:initialize-database data-source="dataSource2">
-        <jdbc:script location="classpath:sql/base/schema/1_0_0/disconf.sql" />
-        <jdbc:script location="classpath:sql/base/goldendata/1_0_0/disconf.sql" />
+        <jdbc:script location="classpath:sql/base/schema/1_0_0/disconf.sql"/>
+        <jdbc:script location="classpath:sql/base/goldendata/1_0_0/disconf.sql"/>
     </jdbc:initialize-database>
 
 
     <bean id="onedbJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource2" />
+        <property name="dataSource" ref="dataSource2"/>
     </bean>
 
     <!-- Transaction config -->
     <bean id="onedbTransactionManagerTest"
-        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource2" />
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource2"/>
     </bean>
-    <tx:annotation-driven transaction-manager="onedbTransactionManagerTest" />
+    <tx:annotation-driven transaction-manager="onedbTransactionManagerTest"/>
 
 </beans>

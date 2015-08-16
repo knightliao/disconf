@@ -4,7 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-
     <!-- redis configuration -->
     <bean id="redisCacheDspMgr" class="com.github.knightliao.apollo.redis.RedisCacheManager">
         <property name="clientList">

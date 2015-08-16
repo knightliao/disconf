@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -40,6 +41,7 @@ import com.github.knightliao.apollo.utils.io.FileUtils;
  * @author liaoqiqi
  * @version 2013-12-2
  */
+@Service
 public class MyExceptionHandler extends SimpleMappingExceptionResolver implements ApplicationContextAware {
 
     private final static Logger LOG = AopLogFactory.getLogger(MyExceptionHandler.class);

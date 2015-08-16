@@ -1,118 +1,46 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
-           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:property-placeholder location="classpath*:/application.properties"
-                                  ignore-unresolvable="true"/>
-
-    <bean id="handlerAdapter"
-          class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <util:list>
-                <ref bean="byteArrayHttpMessageConverter"/>
-                <ref bean="mappingJacksonHttpMessageConverter"/>
-            </util:list>
+    <!-- 配置FreeMarkerConfigurer -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+            </props>
         </property>
     </bean>
 
-    <bean id="byteArrayHttpMessageConverter"
-          class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <util:list>
-                <bean class="org.springframework.http.MediaType">
-                    <constructor-arg index="0" value="application"/>
-                    <constructor-arg index="1" value="csv"/>
-                    <constructor-arg index="2">
-                        <util:map id="csvMediaTypeParams"
-                                  map-class="java.util.HashMap">
-                            <entry key="q" value="0.9999"></entry>
-                            <entry key="charset" value="UTF-8"></entry>
-                        </util:map>
-                    </constructor-arg>
-                </bean>
-                <bean class="org.springframework.http.MediaType">
-                    <constructor-arg index="0" value="text"/>
-                    <constructor-arg index="1" value="html"/>
-                    <constructor-arg index="2">
-                        <util:map id="textHtmlMediaTypeParams"
-                                  map-class="java.util.HashMap">
-                            <entry key="q" value="0.9991"></entry>
-                            <entry key="charset" value="UTF-8"></entry>
-                        </util:map>
-                    </constructor-arg>
-                </bean>
-            </util:list>
-        </property>
+    <!--
+      View resolvers can also be configured with ResourceBundles or XML files. If you need
+      different view resolving based on Locale, you have to use the resource bundle resolver.
+    -->
+    <!-- freemarker视图解析器 -->
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix" value=".ftl"/>
+        <property name="order" value="0"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <!-- 此变量值为pageContext.request, 页面使用方法：rc.contextPath -->
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="cache" value="false"/>
     </bean>
 
-    <bean id="mappingJacksonHttpMessageConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <util:list>
-                <bean class="org.springframework.http.MediaType">
-                    <constructor-arg index="0" value="text"/>
-                    <constructor-arg index="1" value="plain"/>
-                    <constructor-arg index="2">
-                        <util:map id="textPlainMediaTypeParams"
-                                  map-class="java.util.HashMap">
-                            <entry key="q" value="0.9997"></entry>
-                            <entry key="charset" value="UTF-8"></entry>
-                        </util:map>
-                    </constructor-arg>
-                </bean>
-                <bean class="org.springframework.http.MediaType">
-                    <constructor-arg index="0" value="*"/>
-                    <constructor-arg index="1" value="*"/>
-                    <constructor-arg index="2">
-                        <util:map id="allMediaTypeParams"
-                                  map-class="java.util.HashMap">
-                            <entry key="q" value="0.9995"></entry>
-                            <entry key="charset" value="UTF-8"></entry>
-                        </util:map>
-                    </constructor-arg>
-                </bean>
-                <bean class="org.springframework.http.MediaType">
-                    <constructor-arg index="0" value="text"/>
-                    <constructor-arg index="1" value="*"/>
-                    <constructor-arg index="2">
-                        <util:map id="textMediaTypeParams"
-                                  map-class="java.util.HashMap">
-                            <entry key="q" value="0.9996"></entry>
-                            <entry key="charset" value="UTF-8"></entry>
-                        </util:map>
-                    </constructor-arg>
-                </bean>
-                <bean class="org.springframework.http.MediaType">
-                    <constructor-arg index="0" value="application"/>
-                    <constructor-arg index="1" value="json"/>
-                    <constructor-arg index="2">
-                        <util:map id="jsonMediaTypeParams"
-                                  map-class="java.util.HashMap">
-                            <entry key="q" value="0.9999"></entry>
-                            <entry key="charset" value="UTF-8"></entry>
-                        </util:map>
-                    </constructor-arg>
-                </bean>
-            </util:list>
-        </property>
-    </bean>
-
-    <!-- annotation默认的方法映射适配器 -->
-    <bean id="handlerMapping"
-          class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <!-- Convenient subclass of UrlBasedViewResolver that supports InternalResourceView
+        (i.e. Servlets and JSPs) and subclasses such as JstlView. -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/console/" p:suffix=".jsp" p:order="0"/>
-
-    <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
-        <property name="contentType" value="application/json;charset=UTF-8"/>
-        <property name="disableCaching" value="true"/>
+          abstract="false" lazy-init="default" autowire="default">
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.JstlView</value>
+        </property>
+        <property name="prefix">
+            <value>/WEB-INF/jsp_views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
     </bean>
 
     <bean id="multipartResolver"
@@ -126,6 +54,6 @@
     </bean>
 
     <mvc:resources mapping="/api/system/**" location="/WEB-INF/public-resources/"
-                   cache-period="259200"/>
+                   cache-period="0"/>
 
 </beans>

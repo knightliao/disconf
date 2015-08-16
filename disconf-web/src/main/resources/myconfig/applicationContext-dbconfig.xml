@@ -9,7 +9,6 @@
 
     <description>database数据源配置</description>
 
-
     <!-- onedb configure start -->
 
     <bean id="onedbDataSource" abstract="true"

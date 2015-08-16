@@ -26,7 +26,6 @@ import com.baidu.unbiz.common.genericdao.param.NotParam;
 import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
- * @author Darwin(Tianxin)
  */
 public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseObject<KEY>> extends
     GenericDao<KEY, ENTITY> {
@@ -135,9 +134,6 @@ public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseO
      * 根据查询条件获取结果集列表
      *
      * @param matches
-     * @param order
-     * @param curPage
-     * @param pageSize
      *
      * @return
      */
