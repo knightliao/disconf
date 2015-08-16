@@ -38,7 +38,7 @@
             <artifactId>spring-beans</artifactId>
         </dependency>
 
-        <!-- logbback -->
+        <!-- log -->
 
         <dependency>
             <groupId>ch.qos.logback</groupId>

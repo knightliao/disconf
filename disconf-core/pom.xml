@@ -28,16 +28,18 @@
 
     <dependencies>
 
+        <!-- my dependencies -->
+
+        <dependency>
+            <groupId>com.github.knightliao.apollo</groupId>
+            <artifactId>apollo</artifactId>
+        </dependency>
+
         <!-- common dependencies -->
 
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.knightliao.apollo</groupId>
-            <artifactId>apollo</artifactId>
         </dependency>
 
         <dependency>
