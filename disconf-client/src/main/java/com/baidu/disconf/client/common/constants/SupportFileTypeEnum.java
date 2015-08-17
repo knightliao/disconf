@@ -30,7 +30,7 @@ public enum SupportFileTypeEnum {
 
         String extension = FilenameUtils.getExtension(fileName);
         if (StringUtils.isEmpty(extension)) {
-            return null;
+            return SupportFileTypeEnum.ANY;
         }
 
         for (SupportFileTypeEnum supportFileTypeEnum : SupportFileTypeEnum.values()) {

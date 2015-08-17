@@ -20,7 +20,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
     - python：打算支持
     - PHP：暂未支持
 - WEB 管理端：   
-    - Java SpringMvc 实现
+    - Java SpringMvc 实现(Spring 4.1.7.RELEASE)
 
 disconf.git branches and Maven version:
 
