@@ -1,8 +1,0 @@
-/target
-/bin
-/.settings
-/.classpath
-/.project
-/pom.xml.releaseBackup
-/*.iml
-.idea

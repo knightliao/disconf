@@ -16,6 +16,9 @@
         <property name="driverClass">
             <value>${jdbc.driverClassName}</value>
         </property>
+        <property name="initialPoolSize">
+            <value>${jdbc.initialPoolSize}</value>
+        </property>
         <property name="maxPoolSize">
             <value>${jdbc.maxPoolSize}</value>
         </property>

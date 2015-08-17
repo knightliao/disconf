@@ -6,10 +6,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.baidu.dsp.common.form.RequestFormBase;
 
+import lombok.Data;
+
 /**
  * @author liaoqiqi
  * @version 2014-1-24
  */
+@Data
 public class AppNewForm extends RequestFormBase {
 
     /**
@@ -29,36 +32,4 @@ public class AppNewForm extends RequestFormBase {
     // 邮箱
     private String emails = "";
 
-    public String getApp() {
-        return app;
-    }
-
-    public void setApp(String app) {
-        this.app = app;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public String getEmails() {
-        return emails;
-    }
-
-    public void setEmails(String emails) {
-        this.emails = emails;
-    }
-
-    @Override
-    public String toString() {
-        return "AppNewForm{" +
-                   "app='" + app + '\'' +
-                   ", desc='" + desc + '\'' +
-                   ", emails='" + emails + '\'' +
-                   '}';
-    }
 }

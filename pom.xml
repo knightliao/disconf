@@ -248,6 +248,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.14.4</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.ostermiller</groupId>
                 <artifactId>utils</artifactId>
                 <version>1.07.00</version>

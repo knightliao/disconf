@@ -27,7 +27,6 @@ public abstract class RuntimeGlobalException extends RuntimeException implements
     }
 
     /**
-     * @param exceptionCode
      * @param exceptionMessage
      */
     public RuntimeGlobalException(ErrorCode errorCode, String exceptionMessage) {
@@ -35,7 +34,6 @@ public abstract class RuntimeGlobalException extends RuntimeException implements
     }
 
     /**
-     * @param exceptionCode
      * @param exceptionMessage
      * @param cause
      */

@@ -3,13 +3,13 @@ package com.baidu.dsp.common.handler;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.TypeMismatchException;
@@ -19,7 +19,6 @@ import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindException;
-import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,10 +30,10 @@ import com.baidu.dsp.common.exception.AccessDeniedException;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
 import com.baidu.dsp.common.exception.FieldException;
 import com.baidu.dsp.common.exception.base.GlobalExceptionAware;
+import com.baidu.dsp.common.utils.ParamValidateUtils;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.dsp.common.vo.JsonObjectError;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
-import com.baidu.ub.common.log.AopLogFactory;
 import com.github.knightliao.apollo.utils.io.FileUtils;
 
 /**
@@ -44,7 +43,7 @@ import com.github.knightliao.apollo.utils.io.FileUtils;
 @Service
 public class MyExceptionHandler extends SimpleMappingExceptionResolver implements ApplicationContextAware {
 
-    private final static Logger LOG = AopLogFactory.getLogger(MyExceptionHandler.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(MyExceptionHandler.class);
 
     protected ApplicationContext context;
 
@@ -56,7 +55,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o,
                                          Exception e) {
 
-        LOG.warn("ExceptionHandler FOUND. " + e.toString() + "\t" + e.toString());
+        LOG.warn(request.getRequestURI() + " ExceptionHandler FOUND. " + e.toString() + "\t" + e.getCause());
 
         // PathVariable 出错
         if (e instanceof TypeMismatchException) {
@@ -68,13 +67,12 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
 
             // @Valid 出错
         } else if (e instanceof BindException) {
-            return getParamErrors((BindException) e);
+            return ParamValidateUtils.getParamErrors((BindException) e);
 
             // 业务校验处理
         } else if (e instanceof FieldException) {
             return getParamErrors((FieldException) e);
 
-            // 下载文件不存在
         } else if (e instanceof DocumentNotFoundException) {
 
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -87,28 +85,23 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
 
             // 用户没有请求方法的访问权限
         } else if (e instanceof AccessDeniedException) {
-
             LOG.warn("details: " + ((AccessDeniedException) e).getErrorMessage());
             return buildError("auth.access.denied", ErrorCode.ACCESS_NOAUTH_ERROR);
 
-            //
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
 
             return buildError("syserror.httpmethod", ErrorCode.HttpRequestMethodNotSupportedException);
 
-            //
         } else if (e instanceof MissingServletRequestParameterException) {
 
             return buildError("syserror.param.miss", ErrorCode.MissingServletRequestParameterException);
 
-            //
         } else if (e instanceof GlobalExceptionAware) {
 
-            LOG.warn("details: ", e);
+            LOG.error("details: ", e);
             GlobalExceptionAware g = (GlobalExceptionAware) e;
             return buildError(g.getErrorMessage(), g.getErrorCode());
 
-            //
         } else {
 
             LOG.warn("details: ", e);
@@ -126,7 +119,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
     private ModelAndView getParamErrors(InvalidPropertyException e) {
 
         Map<String, String> errorMap = new HashMap<String, String>();
-        errorMap.put(e.getPropertyName(), "参数错误");
+        errorMap.put(e.getPropertyName(), " parameter cannot find");
         JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(errorMap, ErrorCode.TYPE_MIS_MATCH);
         return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
@@ -135,8 +128,6 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
      * TypeMismatchException中获取到参数错误类型
      *
      * @param e
-     *
-     * @return
      */
     private ModelAndView getParamErrors(TypeMismatchException e) {
 
@@ -150,7 +141,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
             Map<String, String> errors = new HashMap<String, String>();
             for (Annotation a : annotations) {
                 if (a instanceof RequestParam) {
-                    errors.put(((RequestParam) a).value(), "参数类型错误!");
+                    errors.put(((RequestParam) a).value(), "parameter type error!");
                 }
             }
             if (errors.size() > 0) {
@@ -158,7 +149,7 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
             }
         }
 
-        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError("参数类型错误!", ErrorCode.TYPE_MIS_MATCH);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError("parameter type error!", ErrorCode.TYPE_MIS_MATCH);
         return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
@@ -172,22 +163,22 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
     private ModelAndView getParamErrors(FieldException fe) {
 
         if (fe.isGlobal()) {
-
-            return buildError(fe.getGlobalErrorMsg(), ErrorCode.GLOBAL_ERROR);
+            if (fe.getGlobalErrorArgs() == null || fe.getGlobalErrorArgs().length <= 0) {
+                return buildError(fe.getGlobalErrorMsg(), ErrorCode.GLOBAL_ERROR);
+            } else {
+                return buildError(fe.getGlobalErrorMsg(), fe.getGlobalErrorArgs(), ErrorCode.GLOBAL_ERROR);
+            }
 
         } else {
 
             // 构造error的映射
-            Map<String, String> paramErrors = new HashMap<String, String>();
             Map<String, String> errorMap = fe.getMessageErrorMap();
+            Map<String, Object[]> errorArgs = fe.getMessageErrorArgs();
             if (errorMap != null) {
-                for (String field : errorMap.keySet()) {
-
-                    String message = errorMap.get(field);
-                    paramErrors.put(field, message);
+                if (errorArgs != null) {
+                    return paramError(errorMap, errorArgs, ErrorCode.FIELD_ERROR);
                 }
-
-                return paramError(paramErrors, ErrorCode.FIELD_ERROR);
+                return paramError(errorMap, ErrorCode.FIELD_ERROR);
             }
 
             return paramError(new HashMap<String, String>(), ErrorCode.FIELD_ERROR);
@@ -195,35 +186,19 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
     }
 
     /**
-     * 从bindException中获取到参数错误类型，参数错误
+     * 参数错误
      *
-     * @param be 下午2:07:29 created by Darwin(Tianxin)
+     * @param paramErrors
+     * @param paramErrorArgs
+     * @param errorCode
+     *
+     * @return
      */
-    private ModelAndView getParamErrors(BindException be) {
+    private ModelAndView paramError(Map<String, String> paramErrors, Map<String, Object[]> paramErrorArgs,
+                                    ErrorCode errorCode) {
 
-        // 构造error的映射
-        Map<String, String> paramErrors = new HashMap<String, String>();
-        for (Object error : be.getAllErrors()) {
-            if (error instanceof FieldError) {
-                FieldError fe = (FieldError) error;
-                String field = fe.getField();
-                // 默认错误
-                String errorMessage = fe.getDefaultMessage();
-
-                // 如果有code,则从前往后遍历Code(特殊到一般),修改message为code所对应
-                for (String code : fe.getCodes()) {
-                    try {
-                        context.getMessage(code, null, Locale.SIMPLIFIED_CHINESE);
-                        errorMessage = code;
-                    } catch (Exception e) {
-                    }
-                }
-
-                paramErrors.put(field, errorMessage);
-            }
-        }
-
-        return paramError(paramErrors, ErrorCode.FIELD_ERROR);
+        JsonObjectBase jsonObject = JsonObjectUtils.buildFieldError(paramErrors, paramErrorArgs, errorCode);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
     }
 
     /**
@@ -250,6 +225,21 @@ public class MyExceptionHandler extends SimpleMappingExceptionResolver implement
      * @return
      */
     private ModelAndView buildError(String errorMsg, ErrorCode errorCode) {
+
+        JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError(errorMsg, errorCode);
+        return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
+    }
+
+    /**
+     * 全局错误
+     *
+     * @param errorMsg
+     * @param args
+     * @param errorCode
+     *
+     * @return
+     */
+    private ModelAndView buildError(String errorMsg, Object[] args, ErrorCode errorCode) {
 
         JsonObjectBase jsonObject = JsonObjectUtils.buildGlobalError(errorMsg, errorCode);
         return JsonObjectUtils.JsonObjectError2ModelView((JsonObjectError) jsonObject);
