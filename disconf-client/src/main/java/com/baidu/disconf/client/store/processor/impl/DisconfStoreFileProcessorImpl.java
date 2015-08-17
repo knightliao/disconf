@@ -11,6 +11,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.addons.properties.ReloadConfigurationMonitor;
+import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
@@ -235,6 +237,12 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             //
             // 非注解式 或者 注解式的域集合为空，则将 文件内容写到配置库里
             //
+
+            if (disconfCenterFile.getObject() == null &&
+                    disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.PROPERTIES)) {
+                // 如果是采用XML进行配置的，则需要利用spring的reload将数据reload到bean里
+                ReloadConfigurationMonitor.reload();
+            }
             disconfCenterFile.setAdditionalKeyMaps(disconfValue.getFileData());
         }
     }

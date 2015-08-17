@@ -2,10 +2,12 @@ package com.example.disconf.demo.service.callbacks;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
+import com.example.disconf.demo.service.AutoService;
 
 /**
  * 这是 autoconfig.properties 的回调函数类
@@ -18,9 +20,13 @@ public class AutoServiceCallback implements IDisconfUpdate {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(AutoServiceCallback.class);
 
+    @Autowired
+    private AutoService autoService;
+
     @Override
     public void reload() throws Exception {
 
-        LOGGER.info("reload callback " + "autoconfig.properties or autoconfig2.properties");
+        LOGGER.info("reload callback " + "autoconfig.properties or autoconfig2.propertie" + autoService.getAuto());
+
     }
 }

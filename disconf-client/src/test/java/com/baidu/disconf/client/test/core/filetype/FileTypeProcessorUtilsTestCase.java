@@ -5,6 +5,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.core.filetype.FileTypeProcessorUtils;
 
 /**
@@ -17,7 +18,8 @@ public class FileTypeProcessorUtilsTestCase {
 
         try {
 
-            Map<String, Object> map = FileTypeProcessorUtils.getKvMap("testProperties.properties");
+            Map<String, Object> map =
+                FileTypeProcessorUtils.getKvMap(SupportFileTypeEnum.PROPERTIES, "testProperties" + ".properties");
 
             System.out.println(map.toString());
             Assert.assertEquals(map.get("staticvar2"), "100");
@@ -29,7 +31,7 @@ public class FileTypeProcessorUtilsTestCase {
 
         try {
 
-            Map<String, Object> map = FileTypeProcessorUtils.getKvMap("testXml.xml");
+            Map<String, Object> map = FileTypeProcessorUtils.getKvMap(SupportFileTypeEnum.XML, "testXml.xml");
 
             System.out.println(map.toString());
             Assert.assertEquals(0, map.keySet().size());
@@ -40,7 +42,7 @@ public class FileTypeProcessorUtilsTestCase {
 
         try {
 
-            Map<String, Object> map = FileTypeProcessorUtils.getKvMap("testJson.json");
+            Map<String, Object> map = FileTypeProcessorUtils.getKvMap(SupportFileTypeEnum.ANY, "testJson.json");
 
             System.out.println(map.toString());
             Assert.assertEquals(0, map.keySet().size());

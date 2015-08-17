@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
@@ -79,6 +80,8 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
         //
         // file name
         disconfCenterFile.setFileName(fileName);
+        // file type
+        disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
 
         //
         // disConfCommonModel

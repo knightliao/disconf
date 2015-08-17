@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
+import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
@@ -80,7 +81,6 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
 
     /**
      * 转换配置文件
-     *
      */
     private static DisconfCenterFile transformScanFile(Class<?> disconfFileClass, Set<Method> methods) {
 
@@ -95,6 +95,9 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
         //
         // file name
         disconfCenterFile.setFileName(disconfFileAnnotation.filename());
+
+        // file type
+        disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(disconfFileAnnotation.filename()));
 
         //
         // disConfCommonModel

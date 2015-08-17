@@ -115,7 +115,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         }
 
         try {
-            dataMap = FileTypeProcessorUtils.getKvMap(filePath);
+            dataMap = FileTypeProcessorUtils.getKvMap(disconfCenterFile.getSupportFileTypeEnum(), fileName);
         } catch (Exception e) {
             LOGGER.error("cannot get kv data for " + filePath, e);
         }

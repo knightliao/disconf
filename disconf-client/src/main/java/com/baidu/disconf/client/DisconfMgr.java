@@ -131,7 +131,7 @@ public class DisconfMgr {
             //
             // start timer
             //
-            startTimer();
+            //startTimer();
 
             //
             LOGGER.info("Conf File Map: " + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());

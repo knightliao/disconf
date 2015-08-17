@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
+
 /**
  * 配置文件表示
  *
@@ -24,6 +26,9 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     // 文件名
     private String fileName;
+
+    // 文件类型
+    private SupportFileTypeEnum supportFileTypeEnum = SupportFileTypeEnum.ANY;
 
     public Class<?> getCls() {
         return cls;
@@ -55,6 +60,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     public void setAdditionalKeyMaps(Map<String, Object> additionalKeyMaps) {
         this.additionalKeyMaps = additionalKeyMaps;
+    }
+
+    public SupportFileTypeEnum getSupportFileTypeEnum() {
+        return supportFileTypeEnum;
+    }
+
+    public void setSupportFileTypeEnum(SupportFileTypeEnum supportFileTypeEnum) {
+        this.supportFileTypeEnum = supportFileTypeEnum;
     }
 
     @Override

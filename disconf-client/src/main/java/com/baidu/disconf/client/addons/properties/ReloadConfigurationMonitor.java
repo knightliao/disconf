@@ -22,6 +22,11 @@ public class ReloadConfigurationMonitor extends TimerTask {
 
     public void run() {
 
+        reload();
+    }
+
+    public static void reload() {
+
         for (ReconfigurableBean bean : reconfigurableBeans) {
             try {
                 bean.reloadConfiguration();
