@@ -7,7 +7,7 @@ public interface ContextReader {
 
     String getMessage(String resourceMessage) throws NoSuchMessageException;
 
-    String getMessage(String resourceMessage, Object args[]) throws NoSuchMessageException;
+    String getMessage(String resourceMessage, Object []args) throws NoSuchMessageException;
 
     String getMessage(MessageSourceResolvable resolvable) throws NoSuchMessageException;
 }

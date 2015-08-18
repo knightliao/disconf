@@ -28,7 +28,7 @@ public class ContextReaderImpl implements ApplicationContextAware, ContextReader
         return context.getMessage(resourceMessage, null, Locale.SIMPLIFIED_CHINESE);
     }
 
-    public String getMessage(String resourceMessage, Object args[]) throws NoSuchMessageException {
+    public String getMessage(String resourceMessage, Object[] args) throws NoSuchMessageException {
         return context.getMessage(resourceMessage, args, Locale.SIMPLIFIED_CHINESE);
     }
 

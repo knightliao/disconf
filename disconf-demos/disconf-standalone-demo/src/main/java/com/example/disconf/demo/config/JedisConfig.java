@@ -1,10 +1,14 @@
 package com.example.disconf.demo.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
+import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
+import com.baidu.disconf.client.common.update.IDisconfUpdate;
 
 /**
  * Redis配置文件
@@ -15,7 +19,10 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 @Service
 @Scope("singleton")
 @DisconfFile(filename = "redis.properties")
-public class JedisConfig {
+@DisconfUpdateService(classes = {JedisConfig.class})
+public class JedisConfig implements IDisconfUpdate {
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(JedisConfig.class);
 
     // 代表连接地址
     private String host;
@@ -49,5 +56,10 @@ public class JedisConfig {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    @Override
+    public void reload() throws Exception {
+        LOGGER.info("host: " + host);
     }
 }

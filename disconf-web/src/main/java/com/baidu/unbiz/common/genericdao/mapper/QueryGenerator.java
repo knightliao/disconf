@@ -1,7 +1,3 @@
-/**
- * unbiz-genericdao#com.baidu.unbiz.common.genericdao.mapper.ORMapping.java
- * 下午1:23:55 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.mapper;
 
 import java.io.Serializable;
@@ -34,6 +30,10 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  */
 public class QueryGenerator<ENTITY extends BaseObject<KEY>, KEY extends Serializable> {
 
+    /**
+     * @param orMapping
+     * @param genericDao
+     */
     public QueryGenerator(ORMapping<ENTITY, KEY> orMapping, GenericDao<KEY, ENTITY> genericDao) {
         this.orMapping = orMapping;
         this.dao = genericDao;

@@ -80,6 +80,7 @@ public class ParamValidateUtils {
                             LOG.debug(code + "\t" + info);
                             message = code;
                         } catch (NoSuchMessageException e2) {
+                            LOG.debug("");
                         }
                     }
                 }

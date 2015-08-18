@@ -154,7 +154,7 @@ public final class DisClientConfig {
      * @since 1.0.0
      */
     @DisInnerConfigAnnotation(name = "user_define_download_dir", defaultValue = "./disconf/download")
-    public String USER_DEFINE_DOWNLOAD_DIR;
+    public String userDefineDownloadDir;
 
     /**
      * 获取远程配置 重试时休眠时间，默认是5秒
