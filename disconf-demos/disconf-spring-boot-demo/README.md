@@ -3,7 +3,7 @@ disconf-spring-boot-demo
 使用disconf的spring-boot demo程序,更少的配置
 
 
-项目启动运行Applicaion main方法
+项目启动运行Application main方法
 
     @Configuration
     @EnableAutoConfiguration
