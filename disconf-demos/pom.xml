@@ -10,6 +10,7 @@
 
 
     <modules>
+        <module>disconf-spring-boot-demo</module>
         <module>disconf-standalone-demo</module>
         <module>disconf-standalone-dubbo-demo</module>
     </modules>
