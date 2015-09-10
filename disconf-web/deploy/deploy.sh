@@ -77,7 +77,7 @@ cd html
 python build.py
 
 #
-cd $current_path
+cd ${current_path}
 
 
 #
@@ -108,7 +108,7 @@ cp -rp html/output/* $WAR_ROOT_PATH/html
 #
 #
 
-cd $WAR_ROOT_PATH 
+cd ${WAR_ROOT_PATH}
 
 echo "start to jar war"
 jar xvf disconf-web.war

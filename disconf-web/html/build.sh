@@ -14,6 +14,6 @@ fi
 
 mkdir -p output
 
-cp assets output -rp
-cp dep output -rp
-cp *.html output -rp
+cp -rp assets output
+cp -rp dep output
+cp -rp *.html output
