@@ -1,0 +1,4 @@
+#!/bin/env bash
+export LANG=zh_CN.UTF-8
+export JAVA_OPTS="-XX:MaxNewSize=500M -XX:PermSize=64m -XX:MaxPermSize=256M -XX:SurvivorRatio=4 -Xss256K $JAVA_OPTS"
+cd bin && sh catalina.sh run
