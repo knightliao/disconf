@@ -67,7 +67,7 @@ public class NodeWatcher implements Watcher {
         }
 
         LOGGER.debug("monitor path: (" + monitorPath + "," + keyName + "," + disConfigTypeEnum.getModelName() +
-                         ") has been added!");
+                ") has been added!");
     }
 
     /**
@@ -83,8 +83,8 @@ public class NodeWatcher implements Watcher {
 
             try {
 
-                LOGGER.info("============GOT UPDATE EVENT " + event.toString() + ": (" + monitorPath + "," + keyName +
-                                "," + disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.info("============GOT UPDATE EVENT " + event.toString() + ": (" + monitorPath + "," + keyName
+                        + "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 调用回调函数, 回调函数里会重新进行监控
                 callback();
@@ -101,14 +101,14 @@ public class NodeWatcher implements Watcher {
         if (event.getState() == KeeperState.Disconnected) {
 
             if (!debug) {
-                LOGGER.warn("============GOT Disconnected EVENT " + event.toString() + ": (" + monitorPath + "," +
-                                keyName +
-                                "," + disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.warn("============GOT Disconnected EVENT " + event.toString() + ": (" + monitorPath + ","
+                        + keyName + "," + disConfigTypeEnum.getModelName() + ")======================");
             } else {
-                LOGGER.info("============DEBUG MODE: GOT Disconnected EVENT " + event.toString() + ": (" + monitorPath +
-                                "," +
-                                keyName +
-                                "," + disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.debug("============DEBUG MODE: GOT Disconnected EVENT " + event.toString() + ": (" +
+                        monitorPath +
+                        "," +
+                        keyName +
+                        "," + disConfigTypeEnum.getModelName() + ")======================");
             }
         }
 
@@ -119,18 +119,16 @@ public class NodeWatcher implements Watcher {
 
             if (!debug) {
 
-                LOGGER
-                    .error("============GOT Expired  " + event.toString() + ": (" + monitorPath + "," + keyName + "," +
-                               disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.error("============GOT Expired  " + event.toString() + ": (" + monitorPath + "," + keyName
+                        + "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 重新连接
                 ZookeeperMgr.getInstance().reconnect();
 
                 callback();
             } else {
-                LOGGER.info("============DEBUG MODE: GOT Expired  " + event.toString() + ": (" + monitorPath + "," +
-                                "" + keyName + "," +
-                                disConfigTypeEnum.getModelName() + ")======================");
+                LOGGER.debug("============DEBUG MODE: GOT Expired  " + event.toString() + ": (" + monitorPath + ","
+                        + "" + keyName + "," + disConfigTypeEnum.getModelName() + ")======================");
             }
         }
     }

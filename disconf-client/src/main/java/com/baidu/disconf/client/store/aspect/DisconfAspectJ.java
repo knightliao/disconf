@@ -66,11 +66,12 @@ public class DisconfAspectJ {
                 // 请求仓库配置数据
                 //
                 DisconfStoreProcessor disconfStoreProcessor =
-                    DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
+                        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
                 Object ret = disconfStoreProcessor.getConfig(disconfFile.filename(), disconfFileItem.name());
                 if (ret != null) {
-                    LOGGER.info("using disconf store value: " + disconfFile.filename() + " (" + disconfFileItem.name() +
-                                    " , " + ret + ")");
+                    LOGGER.debug("using disconf store value: " + disconfFile.filename() + " ("
+                            + disconfFileItem.name() +
+                            " , " + ret + ")");
                     return ret;
                 }
             }
@@ -104,7 +105,7 @@ public class DisconfAspectJ {
             DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
             Object ret = disconfStoreProcessor.getConfig(null, disconfItem.key());
             if (ret != null) {
-                LOGGER.info("using disconf store value: (" + disconfItem.key() + " , " + ret + ")");
+                LOGGER.debug("using disconf store value: (" + disconfItem.key() + " , " + ret + ")");
                 return ret;
             }
         }
