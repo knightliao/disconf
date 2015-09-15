@@ -22,7 +22,7 @@ public class SessionInterceptor extends WebCommonInterceptor {
     /**
      * 会话ID
      */
-    public final static String SESSION_KEY = "sessionId";
+    public static final String SESSION_KEY = "sessionId";
 
     private static final Logger LOG = AopLogFactory.getLogger(SessionInterceptor.class);
 
