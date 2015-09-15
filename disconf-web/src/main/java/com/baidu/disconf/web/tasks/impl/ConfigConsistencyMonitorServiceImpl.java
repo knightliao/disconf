@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,10 @@ import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
 import com.baidu.disconf.web.tasks.IConfigConsistencyMonitorService;
+import com.baidu.dsp.common.interceptor.session.SessionInterceptor;
 import com.baidu.dsp.common.utils.email.LogMailBean;
 import com.baidu.ub.common.db.DaoPageResult;
+import com.github.knightliao.apollo.utils.tool.TokenUtil;
 
 /**
  * http://blog.csdn.net/sd4000784/article/details/7745947 <br/>
@@ -66,6 +69,8 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
     @Scheduled(fixedDelay = 30 * 60 * 1000)
     @Override
     public void check() {
+
+        MDC.put(SessionInterceptor.SESSION_KEY, TokenUtil.generateToken());
 
         /**
          *
@@ -156,7 +161,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
                     if (zkDisconfDataItem.getErrorList().size() != 0) {
 
                         String data = zkDisconfDataItem.toString() + "<br/><br/><br/><br/><br/><br/>original:" +
-                                          confListVo.getValue();
+                                confListVo.getValue();
 
                         LOG.warn(data);
 
@@ -170,7 +175,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
         if (errorList.size() != 0) {
 
             logMailBean.sendHtmlEmail(toEmails, " monitor ConfigConsistency ",
-                                         monitorInfo + "<br/><br/><br/>" + errorList.toString());
+                    monitorInfo + "<br/><br/><br/>" + errorList.toString());
         }
     }
 }

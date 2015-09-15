@@ -22,13 +22,13 @@ public class SessionInterceptor extends WebCommonInterceptor {
     /**
      * 会话ID
      */
-    private final static String SESSION_KEY = "sessionId";
+    public final static String SESSION_KEY = "sessionId";
 
     private static final Logger LOG = AopLogFactory.getLogger(SessionInterceptor.class);
 
     @Override
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
-        throws Exception {
+            throws Exception {
 
         // 删除
         MDC.remove(SESSION_KEY);
@@ -38,12 +38,12 @@ public class SessionInterceptor extends WebCommonInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-        throws Exception {
+            throws Exception {
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-        throws Exception {
+            throws Exception {
 
         // 初始化会话
         ThreadContext.init();
