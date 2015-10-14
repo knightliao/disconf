@@ -41,8 +41,8 @@
         <property name="suffix">
             <value>.jsp</value>
         </property>
-    </bean>
-
+    </bean>  
+    
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/>
@@ -55,5 +55,6 @@
 
     <mvc:resources mapping="/api/system/**" location="/WEB-INF/public-resources/"
                    cache-period="0"/>
-
+	<mvc:resources mapping="/html/**" location="/html/"
+                   cache-period="0"/>
 </beans>

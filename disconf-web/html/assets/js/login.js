@@ -28,10 +28,11 @@
             }
         }).done(function (data) {
             if (data.success === "true") {
+            	console.log(data.result);
                 window.VISITOR = data.result.visitor;
                 $("#loginError").hide();
                 headShowInit();
-                window.location.href = "/main.html";
+                window.location.href = "main.html";
             } else {
                 Util.input.whiteError($("#loginError"), data);
                 $("#loginError").show();

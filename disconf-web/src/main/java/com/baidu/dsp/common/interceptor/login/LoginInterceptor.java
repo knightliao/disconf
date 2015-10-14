@@ -79,7 +79,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
 
             // 更精确的定位
             for (String path : notInterceptPathList) {
-                if (requestPath.contains(path)) {
+                if (requestPath.contains(path) || requestPath.startsWith("/html") || requestPath.equals("/")) {
                     return true;
                 }
             }
