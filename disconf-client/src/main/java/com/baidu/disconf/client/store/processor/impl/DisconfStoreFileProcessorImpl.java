@@ -41,7 +41,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
         if (getInstance().getConfFileMap().containsKey(keyName)) {
 
             getInstance().getConfFileMap().get(keyName).getDisconfCommonCallbackModel().getDisconfConfUpdates()
-                .addAll(iDisconfUpdateList);
+                    .addAll(iDisconfUpdateList);
         }
     }
 
@@ -212,7 +212,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                 Object object = disconfValue.getFileData().get(fileItem);
                 if (object == null) {
                     LOGGER.error("cannot find {} to be injected. file content is: {}", fileItem,
-                                    disconfValue.getFileData().toString());
+                            disconfValue.getFileData().toString());
                     continue;
                 }
 
@@ -225,7 +225,7 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                     // 如果Object非null,则顺便也注入
                     if (disconfCenterFile.getObject() != null) {
                         keMap.get(fileItem).getField()
-                            .set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
+                                .set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
                     }
 
                 } catch (Exception e) {

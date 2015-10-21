@@ -30,27 +30,71 @@ public final class DisconfAutowareConfig {
     /**
      * 先用TOMCAT模式进行导入配置文件，若找不到，则用项目目录模式进行导入
      */
-    private static Properties getProperties(final String propertyFilePath) {
+    private static Properties getProperties(final String propertyFilePath) throws Exception {
 
         try {
 
             // 使用全路径的配置文件载入器
             return ConfigLoaderUtils.loadConfig(propertyFilePath);
+
         } catch (Exception e) {
 
-            try {
-
-                // 只用文件名 来载入试试
-                String filename = FilenameUtils.getName(propertyFilePath);
-                return ConfigLoaderUtils.loadConfig(filename);
-
-            } catch (Exception e1) {
-
-                LOGGER.error(String.format("read properties file %s error", propertyFilePath), e1);
-            }
+            // 只用文件名 来载入试试
+            String filename = FilenameUtils.getName(propertyFilePath);
+            return ConfigLoaderUtils.loadConfig(filename);
 
         }
-        return null;
+    }
+
+    /**
+     * 使用 system env 进行数据导入, 能识别   DisInnerConfigAnnotation 的标识
+     *
+     * @Description: auto ware
+     */
+    public static void autowareConfigWithSystemEnv(final Object obj) throws Exception {
+
+        try {
+
+            Field[] fields = obj.getClass().getDeclaredFields();
+
+            for (Field field : fields) {
+
+                if (field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
+
+                    if (Modifier.isStatic(field.getModifiers())) {
+                        continue;
+                    }
+
+                    String name;
+                    String value;
+
+                    // disconf使用的配置
+
+                    DisInnerConfigAnnotation config = field.getAnnotation(DisInnerConfigAnnotation.class);
+                    name = config.name();
+
+                    // 优先使用 系统参数或命令行导入
+                    value = System.getProperty(name);
+                    field.setAccessible(true);
+
+                    if (null != value) {
+
+                        try {
+
+                            ClassUtils.setFieldValeByType(field, obj, value);
+
+                        } catch (Exception e) {
+
+                            LOGGER.error(String.format("invalid config: %s", name), e);
+                        }
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+            throw new Exception("error while autowareConfigWithSystemEnv autowire config file", e);
+        }
     }
 
     /**
@@ -87,8 +131,11 @@ public final class DisconfAutowareConfig {
 
                     } else {
 
+                        // disconf使用的配置
+
                         DisInnerConfigAnnotation config = field.getAnnotation(DisInnerConfigAnnotation.class);
                         name = config.name();
+
                         String defaultValue = config.defaultValue();
                         value = prop.getProperty(name, defaultValue);
                     }

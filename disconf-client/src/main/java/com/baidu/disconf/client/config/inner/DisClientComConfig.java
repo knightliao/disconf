@@ -54,7 +54,7 @@ public class DisClientComConfig {
             }
 
         } else {
-            // get host
+            // get port
             try {
                 port = Integer.parseInt(properties.getProperty("VCAP_APP_HOST"));
             } catch (Exception e) {
@@ -72,6 +72,6 @@ public class DisClientComConfig {
      */
     public String getInstanceFingerprint() {
         return instanceFingerprint.getHost() + "_" + String.valueOf(instanceFingerprint.getPort()) + "_" +
-                   instanceFingerprint.getUuid();
+                instanceFingerprint.getUuid();
     }
 }

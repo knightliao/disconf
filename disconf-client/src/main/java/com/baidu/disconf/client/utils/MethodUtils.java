@@ -22,7 +22,6 @@ public class MethodUtils {
 
     /**
      * 对于一个 get/is 方法，返回其相对应的Field
-
      */
     public static Field getFieldFromMethod(Method method, Field[] expectedFields, DisConfigTypeEnum disConfigTypeEnum) {
 
@@ -61,4 +60,5 @@ public class MethodUtils {
 
         return null;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.baidu.disconf.client.common.model;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,13 +74,13 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     @Override
     public String toString() {
         return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + "\n\tfileName=" + fileName +
-                   super.toString() + "]";
+                super.toString() + "]";
     }
 
     @Override
     public String infoString() {
         return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n" +
-                   "\tadditionalKeyMaps=\" + additionalKeyMaps + \n\tcls=" + cls + super.infoString() + "]";
+                "\tadditionalKeyMaps=\" + additionalKeyMaps + \n\tcls=" + cls + super.infoString() + "]";
     }
 
     /**
@@ -113,6 +114,7 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
         private Object value;
         private Field field;
+        private Method setMethod;
 
         public Object getValue() {
             return value;
@@ -130,16 +132,35 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             this.field = field;
         }
 
+        public Method getSetMethod() {
+            return setMethod;
+        }
+
+        public void setSetMethod(Method setMethod) {
+            this.setMethod = setMethod;
+        }
+
         @Override
         public String toString() {
-            return "FileItemValue [value=" + value + ", field=" + field + "]";
+            return "FileItemValue{" +
+                    "value=" + value +
+                    ", field=" + field +
+                    ", setMethod=" + setMethod +
+                    '}';
         }
 
         public FileItemValue(Object value, Field field) {
             super();
             this.value = value;
             this.field = field;
+
         }
 
+        public FileItemValue(Object value, Field field, Method setMethod) {
+            super();
+            this.value = value;
+            this.field = field;
+            this.setMethod = setMethod;
+        }
     }
 }
