@@ -84,7 +84,7 @@ disconf-web
 	export ONLINE_CONFIG_PATH
 	export WAR_ROOT_PATH
 	cd disconf-web
-	sh deploy/deplopy.sh
+	sh deploy/deploy.sh
 
 这样会在	/home/work/dsp/disconf-rd/war 生成以下结果：
 
