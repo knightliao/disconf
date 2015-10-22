@@ -29,7 +29,7 @@ public class FetcherFactory {
 
         FetcherMgr fetcherMgr =
             new FetcherMgrImpl(restfulMgr, DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
-                                  DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_SLEEP_SECONDS,
+                                  DisClientConfig.getInstance().confServerUrlRetrySleepSeconds,
                                   DisClientSysConfig.getInstance().ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH,
                                   DisClientConfig.getInstance().userDefineDownloadDir,
                                   DisClientConfig.getInstance().getHostList());

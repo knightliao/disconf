@@ -173,7 +173,7 @@ public final class DisClientConfig {
      * @since 1.0.0
      */
     @DisInnerConfigAnnotation(name = "conf_server_url_retry_sleep_seconds", defaultValue = "2")
-    public int CONF_SERVER_URL_RETRY_SLEEP_SECONDS = 2;
+    public int confServerUrlRetrySleepSeconds = 2;
 
     public List<String> getHostList() {
         return hostList;
