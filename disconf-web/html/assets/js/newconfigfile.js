@@ -243,7 +243,7 @@ $("#uploadChoice").on(
                             "envId": envId,
                             "version": version,
                             "fileContent": fileContent,
-                            "fileName": fileName,
+                            "fileName": fileName
                         }
                     }).done(function (data) {
                         $("#error").removeClass("hide");

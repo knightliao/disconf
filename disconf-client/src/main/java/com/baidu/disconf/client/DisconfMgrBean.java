@@ -62,7 +62,7 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
 
     @Override
     public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
+        return Ordered.HIGHEST_PRECEDENCE + 1;
     }
 
     /**
