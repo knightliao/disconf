@@ -211,6 +211,10 @@ $("#uploadChoice").on(
                 'click',
                 function (e) {
 
+                    if (version == '自定义版本') {
+                        version = $('#selfversion_value').val();
+                    }
+
                     $("#error").addClass("hide");
 
                     var fileName = $("#fileName").val();
