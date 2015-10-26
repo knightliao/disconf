@@ -211,6 +211,10 @@ $("#uploadChoice").on(
                 'click',
                 function (e) {
 
+                    if (version == '自定义版本') {
+                        version = $('#selfversion_value').val();
+                    }
+
                     $("#error").addClass("hide");
 
                     var fileName = $("#fileName").val();
@@ -239,7 +243,7 @@ $("#uploadChoice").on(
                             "envId": envId,
                             "version": version,
                             "fileContent": fileContent,
-                            "fileName": fileName,
+                            "fileName": fileName
                         }
                     }).done(function (data) {
                         $("#error").removeClass("hide");
