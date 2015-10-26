@@ -78,16 +78,17 @@ public class DisInnerConfigHelper {
 
         //
         // 是否使用远程的配置
-        LOGGER.info("SERVER enable.remote.conf: " + DisClientConfig.getInstance().ENABLE_DISCONF);
+        LOGGER.info("SERVER disconf.enable.remote.conf: " + DisClientConfig.getInstance().ENABLE_DISCONF);
 
         //
         // debug mode
-        LOGGER.info("SERVER debug: " + DisClientConfig.getInstance().DEBUG);
+        LOGGER.info("SERVER disconf.debug: " + DisClientConfig.getInstance().DEBUG);
 
         // 用户下载文件夹
         if (!StringUtils.isEmpty(DisClientConfig.getInstance().userDefineDownloadDir)) {
             OsUtil.makeDirs(DisClientConfig.getInstance().userDefineDownloadDir);
-            LOGGER.info("SERVER user_define_download_dir: " + DisClientConfig.getInstance().userDefineDownloadDir);
+            LOGGER.info("SERVER disconf.user_define_download_dir: " + DisClientConfig.getInstance()
+                    .userDefineDownloadDir);
         }
 
         //

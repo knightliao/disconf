@@ -138,6 +138,14 @@ public final class DisconfAutowareConfig {
 
                         String defaultValue = config.defaultValue();
                         value = prop.getProperty(name, defaultValue);
+
+                        // using disconf as prefix to avoid env confusion
+                        if (value.equals(defaultValue) && name != null) {
+                            if (name.contains("disconf.")) {
+                                String newName = name.substring(name.indexOf('.') + 1);
+                                value = prop.getProperty(newName, defaultValue);
+                            }
+                        }
                     }
 
                     field.setAccessible(true);

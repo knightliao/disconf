@@ -80,7 +80,7 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     @Override
     public String infoString() {
         return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n" +
-                "\tadditionalKeyMaps=\" + additionalKeyMaps + \n\tcls=" + cls + super.infoString() + "]";
+                "\tadditionalKeyMaps=" + additionalKeyMaps + "\n\tcls=" + cls + super.infoString() + "]";
     }
 
     /**
