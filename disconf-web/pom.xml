@@ -12,8 +12,7 @@
     <parent>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-base</artifactId>
-        <version>2.6.27</version>
-        <relativePath>../</relativePath>
+        <version>2.6.28-SNAPSHOT</version>
     </parent>
 
     <dependencies>
