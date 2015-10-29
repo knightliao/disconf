@@ -36,8 +36,18 @@ public class ApplicationPropertyConfig {
     // domain
     //
     private String domain;
+    /*公用基础配置对应的app name，配置中心中仅允许创建唯一此名称的app，用于管理各个不同app全部共用的配置 */
+    private String common_base_app;
 
-    public String getEmailHost() {
+    public String getCommon_base_app() {
+		return common_base_app;
+	}
+
+	public void setCommon_base_app(String common_base_app) {
+		this.common_base_app = common_base_app;
+	}
+
+	public String getEmailHost() {
         return emailHost;
     }
 

@@ -1049,7 +1049,7 @@ q:before, q:after {
 /*为了方便使用，可以将其做成一个“类”，这样可以直接挂
  在父元素上，而不用为每一个父元素添加以下CSS属性*/
 .oz {
-    overflow: hidden;
+    /*overflow: hidden;*/
     /*为父元素添加overflow属性，至于它的值可
         以是auto,hidden,scroll三者选一*/
     zoom: 1; /*在 IE6 中还需要添加zoom属性*/

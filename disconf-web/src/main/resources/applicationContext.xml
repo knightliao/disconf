@@ -65,6 +65,7 @@
         <property name="emailMonitorOn" value="${EMAIL_MONITOR_ON}"/>
         <property name="checkConsistencyOn" value="${CHECK_CONSISTENCY_ON}"/>
         <property name="domain" value="${domain}"/>
+        <property name="common_base_app" value="${common_base_app}"/>
     </bean>
 
     <!-- import -->
