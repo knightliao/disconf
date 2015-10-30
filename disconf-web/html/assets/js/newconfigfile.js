@@ -215,8 +215,10 @@ $("#uploadChoice").on(
 
                     var fileName = $("#fileName").val();
                     var fileContent = $("#fileContent").val();
-                    version = $('#selfversion_value').val();
-
+                    if (version == '自定义版本') {
+                        version = $('#selfversion_value').val();
+                    }
+                    
                     // 验证
                     if (appId < 1 || envId < 1 || version == ""
                         || fileName == "" || fileContent == "") {
