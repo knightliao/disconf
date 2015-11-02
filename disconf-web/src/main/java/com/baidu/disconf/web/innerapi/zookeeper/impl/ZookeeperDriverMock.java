@@ -38,4 +38,13 @@ public class ZookeeperDriverMock implements ZooKeeperDriver {
     public void destroy() throws Exception {
 
     }
+
+	@Override
+	public boolean createConfigKeyNode(String app, String env, String version,
+			String key, DisConfigTypeEnum disConfigTypeEnum) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+    
+    
 }

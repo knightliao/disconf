@@ -302,6 +302,16 @@ public class ConfigMgrImpl implements ConfigMgr {
 			confListVo.setMachineSize(machineListVo.getMachineSize());
 		}
 
+		// get machine list size for config which name contins "/"
+		if (config.getName().contains("/")) {
+			MachineListVo v = getConfVoWithZk(config.getId());
+			if (v != null) {
+				confListVo.setErrorNum(v.getErrorNum());
+				confListVo.setMachineList(v.getDatalist());
+				confListVo.setMachineSize(v.getMachineSize());
+			}
+		}
+
 		return confListVo;
 	}
 
@@ -433,7 +443,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
 	public String updateItemValue(Long configId, String value) {
 
-		Config config = getConfigById(configId);
+		Config config = getConfigById(configId); 
 		String oldValue = config.getValue();
 
 		//
@@ -468,10 +478,10 @@ public class ConfigMgrImpl implements ConfigMgr {
 	 */
 	private String getConfigUrlHtml(Config config) {
 
-//		return "<br/>点击<a href='http://"
-//				+ applicationPropertyConfig.getDomain()
-//				+ "/modifyFile.html?configId=" + config.getId()
-//				+ "'> 这里 </a> 进入查看<br/>";
+		// return "<br/>点击<a href='http://"
+		// + applicationPropertyConfig.getDomain()
+		// + "/modifyFile.html?configId=" + config.getId()
+		// + "'> 这里 </a> 进入查看<br/>";
 		return "";
 	}
 
@@ -552,6 +562,14 @@ public class ConfigMgrImpl implements ConfigMgr {
 
 		configDao.create(config);
 
+		// create zk node
+		App app = appMgr.getById(confNewForm.getAppId());
+		Env env = envMgr.getById(confNewForm.getEnvId());
+		if (app != null && env != null) {
+			zooKeeperDriver.createConfigKeyNode(app.getName(), env.getName(),
+					confNewForm.getVersion(), confNewForm.getKey(),
+					disConfigTypeEnum);
+		}
 		// 发送邮件通知
 		//
 		String toEmails = appMgr.getEmails(config.getAppId());

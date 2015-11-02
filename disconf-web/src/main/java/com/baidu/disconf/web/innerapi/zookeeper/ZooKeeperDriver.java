@@ -52,5 +52,12 @@ public interface ZooKeeperDriver {
     List<String> getConf(String groupName);
 
     void destroy() throws Exception;
+    
+    /**
+     * 添加config key后同步创建zk节点
+     * @param configKey
+     * @return
+     */
+    boolean createConfigKeyNode(String app, String env, String version, String key,DisConfigTypeEnum disConfigTypeEnum);
 
 }
