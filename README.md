@@ -201,5 +201,4 @@ others:
 - java技术QQ群：68373211
 - 我的微信：knightliao
 - 招聘微博：[IT知音](http://weibo.com/u/5662585935)
-- [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F
-%8B%E6%95%99%E7%A8%8B)
+- [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
