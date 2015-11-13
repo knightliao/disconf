@@ -21,7 +21,6 @@ import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
 import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 
 /**
@@ -278,28 +277,6 @@ public class RestfulMgrImpl implements RestfulMgr {
         }
 
         throw new Exception("download failed.");
-    }
-
-    /**
-     * 获取在CLASSPATH下的文件，如果找不到CLASSPATH，则返回null
-     *
-     * @param fileName
-     *
-     * @return File
-     *
-     * @throws Exception
-     * @Description:
-     * @author liaoqiqi
-     * @date 2013-6-20
-     */
-    private static File getLocalDownloadFileInClasspath(String fileName) throws Exception {
-
-        String classpath = ConfigLoaderUtils.CLASS_PATH;
-
-        if (classpath == null) {
-            return null;
-        }
-        return new File(OsUtil.pathJoin(classpath, fileName));
     }
 
 }

@@ -61,7 +61,7 @@
             <dependency>
                 <groupId>com.github.knightliao.apollo</groupId>
                 <artifactId>apollo</artifactId>
-                <version>1.0.8</version>
+                <version>1.0.10-SNAPSHOT</version>
             </dependency>
 
             <!-- common dependencies -->

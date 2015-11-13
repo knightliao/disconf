@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
+import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
 
 /**
  * 配置文件表示
@@ -128,10 +128,10 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
                 return OsUtil.pathJoin(copy2TargetDirPath, fileName);
             }
 
-            return OsUtil.pathJoin(ConfigLoaderUtils.CLASS_PATH, copy2TargetDirPath, fileName);
+            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), copy2TargetDirPath, fileName);
         }
 
-        return OsUtil.pathJoin(ConfigLoaderUtils.CLASS_PATH, fileName);
+        return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), fileName);
     }
 
     /**
@@ -146,10 +146,10 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
                 return OsUtil.pathJoin(copy2TargetDirPath);
             }
 
-            return OsUtil.pathJoin(ConfigLoaderUtils.CLASS_PATH, copy2TargetDirPath);
+            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), copy2TargetDirPath);
         }
 
-        return ConfigLoaderUtils.CLASS_PATH;
+        return ClassLoaderUtil.getClassPath();
     }
 
     /**

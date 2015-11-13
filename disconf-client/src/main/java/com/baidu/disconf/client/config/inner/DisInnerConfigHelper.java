@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.github.knightliao.apollo.utils.common.StringUtil;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
+import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
 
 /**
  * 用户配置、系统配置 的校验
@@ -157,7 +157,7 @@ public class DisInnerConfigHelper {
         // 是否将文件放在classpath目录下
         if (DisClientSysConfig.getInstance().ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH) {
 
-            String classpath = ConfigLoaderUtils.CLASS_PATH;
+            String classpath = ClassLoaderUtil.getClassPath();
 
             if (classpath.isEmpty()) {
                 LOGGER.warn("CLASSPATH is null. we will not transfer your config file to classpath in the following");
