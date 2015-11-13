@@ -72,7 +72,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
             RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.FILE_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
             String downloadFilePath = restfulMgr.downloadFromServer(remoteUrl, RemoteMockServer.FILE_NAME,
-                                                                       RemoteMockServer.LOCAL_DOWNLOAD_DIR, true, 3, 3);
+                    RemoteMockServer.LOCAL_DOWNLOAD_DIR, RemoteMockServer.LOCAL_TARGET_DOWNLOAD_DIR, 3, 3);
 
             File file = new File(downloadFilePath);
             String content = FileUtils.readFileToString(file);

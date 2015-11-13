@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.disconf.demo.config.CodeConfig;
 import com.example.disconf.demo.config.JedisConfig;
 import com.example.disconf.demo.service.AutoService;
 import com.example.disconf.demo.service.AutoService2;
@@ -38,6 +39,9 @@ public class DisconfDemoTask {
     @Autowired
     private AutoService2 autoService2;
 
+    @Autowired
+    private CodeConfig codeConfig;
+
     private static final String REDIS_KEY = "disconf_key";
 
     /**
@@ -49,14 +53,14 @@ public class DisconfDemoTask {
 
             while (true) {
 
+                //
+                // service demo
+                //
+
                 LOGGER.info("baobao--baifa: " + baoBaoService.calcBaiFa());
                 LOGGER.info("baobao--yuerbao: " + baoBaoService.calcYuErBao());
 
                 Thread.sleep(5000);
-
-                LOGGER.info("autoservice: " + autoService.getAuto());
-
-                LOGGER.info("autoservice2: " + autoService2.getAuto2());
 
                 LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")  get " +
                                 "key: " + REDIS_KEY +
@@ -65,6 +69,20 @@ public class DisconfDemoTask {
                 );
 
                 LOGGER.info("redis( " + jedisConfig.getHost() + "," + jedisConfig.getPort() + ")");
+
+                LOGGER.info("code config: " + codeConfig.getCodeError());
+
+                //
+                // xml demo
+                //
+
+                LOGGER.info("autoservice: " + autoService.getAuto());
+
+                LOGGER.info("autoservice2: " + autoService2.getAuto2());
+
+                //
+                // static config demo
+                //
 
                 LOGGER.info("static file data:" + SimpleStaticService.getStaticFileData());
 
