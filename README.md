@@ -190,10 +190,6 @@ others:
 
 ![http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg)
 
-## 联系与赞助作者
-
-[https://github.com/knightliao/disconf/wiki/sponsor](https://github.com/knightliao/disconf/wiki/sponsor)
-
 ## 群·联系·讨论
 
 - disconf技术QQ群: 239203866 
@@ -203,3 +199,4 @@ others:
 - [技术讨论论坛:java](http://www.techv5.com/)
 - [技术讨论论坛:python](http://www.django-china.cn/)
 - [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
+- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor)
