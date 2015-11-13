@@ -37,8 +37,8 @@ public class RestfulMgrMock extends MockUp<RestfulMgr> {
      */
     @SuppressWarnings("unchecked")
     @Mock
-    public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retyrSleepSeconds)
-        throws Exception {
+    public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds)
+            throws Exception {
 
         ValueVo valueVo = new ValueVo();
         valueVo.setMessage("");
@@ -49,11 +49,9 @@ public class RestfulMgrMock extends MockUp<RestfulMgr> {
     }
 
     /**
-     * @param remoteUrl            远程地址
-     * @param fileName             文件名
-     * @param localTmpFileDir      本地临时 文件地址
-     * @param localFileDir         本地文件地址
-     * @param isTransfer2Classpath 是否将下载的文件放到Classpath目录下
+     * @param remoteUrl    远程地址
+     * @param fileName     文件名
+     * @param localFileDir 本地文件地址
      *
      * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
      *
@@ -61,8 +59,8 @@ public class RestfulMgrMock extends MockUp<RestfulMgr> {
      */
     @Mock
     public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
-                                     boolean isTransfer2Classpath, int retryTimes, int retyrSleepSeconds)
-        throws Exception {
+                                     String copy2TargetDirPath, int retryTimes, int retrySleepSeconds)
+            throws Exception {
 
         File tempFile = DirUtils.createTempDirectory();
         File tempFile2 = DirUtils.createTempDirectory();

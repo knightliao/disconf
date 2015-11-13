@@ -14,11 +14,11 @@ public interface FetcherMgr {
     String getValueFromServer(String url) throws Exception;
 
     /**
-     * 下载配置文件, remoteUrl是目标 url
+     * 下载配置文件, remoteUrl是目标 url, 下载到预定义的文件夹，并复制到classpath文件夹下
      *
      * @throws Exception
      */
-    String downloadFileFromServer(String url, String fileName) throws Exception;
+    String downloadFileFromServer(String url, String fileName, String copy2TargetDirPath) throws Exception;
 
     /**
      * 释放资源

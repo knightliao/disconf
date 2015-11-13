@@ -82,7 +82,7 @@ public class FetcherMgrImpl implements FetcherMgr {
      *
      * @throws Exception
      */
-    public String downloadFileFromServer(String url, String fileName) throws Exception {
+    public String downloadFileFromServer(String url, String fileName, String targetFileDir) throws Exception {
 
         // 下载的路径
         String localDir = getLocalDownloadDirPath();
@@ -92,8 +92,10 @@ public class FetcherMgrImpl implements FetcherMgr {
 
         // 下载
         return restfulMgr
-                   .downloadFromServer(remoteUrl, fileName, localDir, this.enableLocalDownloadDirInClassPath, retryTime,
-                                          retrySleepSeconds);
+                .downloadFromServer(remoteUrl, fileName, localDir, targetFileDir,
+                        retryTime,
+                        retrySleepSeconds);
+
     }
 
     /**

@@ -40,7 +40,7 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
     public static void scanData2Store(String fileName) {
 
         DisconfCenterBaseModel disconfCenterBaseModel =
-            StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName);
+                StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName);
 
         DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModel);
     }
@@ -80,6 +80,7 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
         //
         // file name
         disconfCenterFile.setFileName(fileName);
+
         // file type
         disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
 
@@ -90,11 +91,11 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
 
         // Remote URL
         String url = DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
-                                                                disConfCommonModel.getApp(),
-                                                                disConfCommonModel.getVersion(),
-                                                                disConfCommonModel.getEnv(),
-                                                                disconfCenterFile.getFileName(),
-                                                                DisConfigTypeEnum.FILE);
+                disConfCommonModel.getApp(),
+                disConfCommonModel.getVersion(),
+                disConfCommonModel.getEnv(),
+                disconfCenterFile.getFileName(),
+                DisConfigTypeEnum.FILE);
         disconfCenterFile.setRemoteServerUrl(url);
 
         return disconfCenterFile;

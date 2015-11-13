@@ -63,7 +63,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     public void processOneItem(String key) {
 
         LOGGER.debug("==============\tstart to process disconf file: " + key +
-                         "\t=============================");
+                "\t=============================");
 
         DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(key);
 
@@ -97,7 +97,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             try {
 
                 String url = disconfCenterFile.getRemoteServerUrl();
-                filePath = fetcherMgr.downloadFileFromServer(url, fileName);
+                filePath = fetcherMgr.downloadFileFromServer(url, fileName, disconfCenterFile.getFileDir());
 
             } catch (Exception e) {
 
@@ -115,7 +115,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         }
 
         try {
-            dataMap = FileTypeProcessorUtils.getKvMap(disconfCenterFile.getSupportFileTypeEnum(), fileName);
+            dataMap = FileTypeProcessorUtils.getKvMap(disconfCenterFile.getSupportFileTypeEnum(),
+                    disconfCenterFile.getFilePath());
         } catch (Exception e) {
             LOGGER.error("cannot get kv data for " + filePath, e);
         }
@@ -136,7 +137,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(fileName);
             if (watchMgr != null) {
                 watchMgr.watchPath(this, disConfCommonModel, fileName, DisConfigTypeEnum.FILE,
-                                      GsonUtils.toJson(disconfCenterFile.getKV()));
+                        GsonUtils.toJson(disconfCenterFile.getKV()));
                 LOGGER.debug("watch ok.");
             } else {
                 LOGGER.warn("cannot monitor {} because watch mgr is null", fileName);
@@ -220,7 +221,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
             LOGGER.debug("==============\tstart to inject value to disconf file item instance: " + key +
-                             "\t=============================");
+                    "\t=============================");
 
             DisconfCenterFile disconfCenterFile = (DisconfCenterFile) disconfStoreProcessor.getConfData(key);
 
