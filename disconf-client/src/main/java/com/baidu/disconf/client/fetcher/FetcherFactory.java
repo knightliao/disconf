@@ -2,7 +2,6 @@ package com.baidu.disconf.client.fetcher;
 
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
-import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.fetcher.impl.FetcherMgrImpl;
 import com.baidu.disconf.core.common.restful.RestfulFactory;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
@@ -28,11 +27,11 @@ public class FetcherFactory {
         RestfulMgr restfulMgr = RestfulFactory.getRestfulMgrNomal();
 
         FetcherMgr fetcherMgr =
-            new FetcherMgrImpl(restfulMgr, DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
-                                  DisClientConfig.getInstance().confServerUrlRetrySleepSeconds,
-                                  DisClientSysConfig.getInstance().ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH,
-                                  DisClientConfig.getInstance().userDefineDownloadDir,
-                                  DisClientConfig.getInstance().getHostList());
+                new FetcherMgrImpl(restfulMgr, DisClientConfig.getInstance().CONF_SERVER_URL_RETRY_TIMES,
+                        DisClientConfig.getInstance().confServerUrlRetrySleepSeconds,
+                        DisClientConfig.getInstance().enableLocalDownloadDirInClassPath,
+                        DisClientConfig.getInstance().userDefineDownloadDir,
+                        DisClientConfig.getInstance().getHostList());
 
         return fetcherMgr;
     }

@@ -129,7 +129,7 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     @Override
     protected Properties createProperties() throws IOException {
 
-       return (Properties) createMyInstance();
+        return (Properties) createMyInstance();
     }
 
     /**
@@ -168,14 +168,18 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         for (int i = 0; i < locations.length; i++) {
             Resource location = locations[i];
             File file;
+
             try {
                 file = location.getFile();
             } catch (IOException e) {
                 // not a file resource
+                // may be spring boot
+                log.warn(e.toString());
                 continue;
             }
             try {
                 long l = file.lastModified();
+
                 if (l > lastModified[i]) {
                     lastModified[i] = l;
                     reload = true;

@@ -91,13 +91,4 @@ public class DisClientSysConfig {
     @DisInnerConfigAnnotation(name = "disconf.local_download_dir")
     public String LOCAL_DOWNLOAD_DIR;
 
-    /**
-     * 让下载文件夹放在 classpath目录 下
-     *
-     * @author
-     * @since 1.0.0
-     */
-    @DisInnerConfigAnnotation(name = "disconf.enable_local_download_dir_in_class_path", defaultValue = "true")
-    public boolean ENABLE_LOCAL_DOWNLOAD_DIR_IN_CLASS_PATH = true;
-
 }

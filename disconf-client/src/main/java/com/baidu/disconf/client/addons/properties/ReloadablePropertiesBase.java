@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Useful base class for implementing {@link ReloadableProperties}.
  */
 public class ReloadablePropertiesBase extends DelegatingProperties implements ReloadableProperties {
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ReloadablePropertiesBase.class);
+
     private List<ReloadablePropertiesListener> listeners = new ArrayList<ReloadablePropertiesListener>();
     private Properties internalProperties;
 
@@ -15,7 +21,7 @@ public class ReloadablePropertiesBase extends DelegatingProperties implements Re
         this.listeners = listeners;
     }
 
-    protected Properties getDelegate()  {
+    protected Properties getDelegate() {
         synchronized(this) {
             return internalProperties;
         }

@@ -93,6 +93,7 @@ public class FetcherMgrImpl implements FetcherMgr {
         // 下载
         return restfulMgr
                 .downloadFromServer(remoteUrl, fileName, localDir, targetFileDir,
+                        enableLocalDownloadDirInClassPath,
                         retryTime,
                         retrySleepSeconds);
 

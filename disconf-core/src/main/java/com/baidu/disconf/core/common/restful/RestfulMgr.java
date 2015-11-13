@@ -33,6 +33,7 @@ public interface RestfulMgr {
      * @throws Exception
      */
     String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir, String copy2TargetDirPath,
+                              boolean enableLocalDownloadDirInClassPath,
                               int retryTimes, int retrySleepSeconds) throws Exception;
 
     void close();

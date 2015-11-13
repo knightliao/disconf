@@ -22,6 +22,7 @@ import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
+import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
 
 /**
  * RestFul的一个实现, 独立模块
@@ -136,7 +137,8 @@ public class RestfulMgrImpl implements RestfulMgr {
      */
     @Override
     public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
-                                     String copy2TargetDirPath, int retryTimes, int retrySleepSeconds)
+                                     String copy2TargetDirPath, boolean enableLocalDownloadDirInClassPath,
+                                     int retryTimes, int retrySleepSeconds)
             throws Exception {
 
         // 目标地址文件
@@ -152,12 +154,16 @@ public class RestfulMgrImpl implements RestfulMgr {
             File tmpFilePathUniqueFile = retryDownload(fileName, remoteUrl, retryTimes, retrySleepSeconds);
 
             // 将 tmp file copy localFileDir
-            transfer2SpecifyDir(tmpFilePathUniqueFile, localFileDir, fileName, false);
+            localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, localFileDir, fileName, false);
 
             // mv 到指定目录
             if (copy2TargetDirPath != null) {
 
-                localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, copy2TargetDirPath, fileName, true);
+                //
+                if (enableLocalDownloadDirInClassPath == true || !copy2TargetDirPath.equals(ClassLoaderUtil.getClassPath
+                        ())) {
+                    localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, copy2TargetDirPath, fileName, true);
+                }
             }
 
             LOGGER.debug("Move to: " + localFile.getAbsolutePath());
