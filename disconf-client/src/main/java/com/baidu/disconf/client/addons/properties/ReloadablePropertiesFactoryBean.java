@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ import com.baidu.disconf.client.DisconfMgr;
  * changed, the properties are read again from the file.
  */
 public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean implements DisposableBean,
-                                                                                          ApplicationContextAware {
+        ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
@@ -64,7 +65,7 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
             if (ext.equals("properties")) {
 
                 PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
-                    new PathMatchingResourcePatternResolver();
+                        new PathMatchingResourcePatternResolver();
                 try {
                     Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(filename);
                     for (Resource resource : resourceList) {
@@ -121,9 +122,22 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     private ReloadablePropertiesBase reloadableProperties;
 
     /**
+     * @return
+     *
      * @throws IOException
      */
-    protected Object createInstance() throws IOException {
+    @Override
+    protected Properties createProperties() throws IOException {
+
+       return (Properties) createMyInstance();
+    }
+
+    /**
+     * createInstance 废弃了
+     *
+     * @throws IOException
+     */
+    protected Object createMyInstance() throws IOException {
         // would like to uninherit from AbstractFactoryBean (but it's final!)
         if (!isSingleton()) {
             throw new RuntimeException("ReloadablePropertiesFactoryBean only works as singleton");

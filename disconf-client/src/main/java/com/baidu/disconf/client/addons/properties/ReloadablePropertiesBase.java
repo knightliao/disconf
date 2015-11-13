@@ -15,7 +15,7 @@ public class ReloadablePropertiesBase extends DelegatingProperties implements Re
         this.listeners = listeners;
     }
 
-    protected Properties getDelegate() {
+    protected Properties getDelegate()  {
         synchronized(this) {
             return internalProperties;
         }
