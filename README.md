@@ -12,6 +12,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - 部署极其简单：同一个上线包，无须改动配置，即可在 多个环境中(RD/QA/PRODUCTION) 上线
 - 部署动态化：更改配置，无需重新打包或重启，即可 实时生效
 - 统一管理：提供web平台，统一管理 多个环境(RD/QA/PRODUCTION)、多个产品 的所有配置
+- 支持微服务架构
 
 ## 项目信息 
 
