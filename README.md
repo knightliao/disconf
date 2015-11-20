@@ -177,8 +177,8 @@ APP+环境+版本+ZK查询：
 - [拉勾网](http://www.lagou.com/) 
 - [人脉通](http://renmaitong.com/) （目前已B轮融资，4条产品线使用）
 - [普联(Tp-link)技术有限公司](http://www.tp-link.com.cn/)
-- [杭州数梦工场科技有限公司](www.dtdream.com)
-- [众钱网](17money.com)
+- [杭州数梦工场科技有限公司](http://www.dtdream.com)
+- [众钱网](http://17money.com)
 - [更多](https://github.com/knightliao/disconf/issues/18)
 
 ## 他人评价
