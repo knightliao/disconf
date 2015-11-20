@@ -318,7 +318,8 @@ public class ConfigMgrImpl implements ConfigMgr {
                     errorKeyList.add(keyInZk);
 
                 } else {
-
+                    
+                    zkDataStr = zkDataStr.trim();
                     boolean isEqual = true;
 
                     if (MyStringUtils.isDouble(zkDataStr) && MyStringUtils.isDouble(valueInDb.toString())) {
