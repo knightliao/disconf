@@ -14,6 +14,10 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - 统一管理：提供web平台，统一管理 多个环境(RD/QA/PRODUCTION)、多个产品 的所有配置
 - 支持微服务架构
 
+## demos
+
+https://github.com/knightliao/disconf-demos-java
+
 ## 项目信息 
 
 - CLIENT 端：
