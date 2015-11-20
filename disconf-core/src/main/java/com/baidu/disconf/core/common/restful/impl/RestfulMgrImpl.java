@@ -21,8 +21,8 @@ import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
 import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
+import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
 
 /**
  * RestFul的一个实现, 独立模块
@@ -77,7 +77,7 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @throws Exception
      */
     public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retyrSleepSeconds)
-        throws Exception {
+            throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
@@ -124,65 +124,59 @@ public class RestfulMgrImpl implements RestfulMgr {
     }
 
     /**
-     * @param remoteUrl            远程地址
-     * @param fileName             文件名
-     * @param localFileDir         本地文件地址
-     * @param isTransfer2Classpath 是否将下载的文件放到Classpath目录下
+     * @param remoteUrl          远程地址
+     * @param fileName           文件名
+     * @param localFileDir       本地文件地址
+     * @param copy2TargetDirPath 下载完后，还需要复制到此文件夹下
+     * @param retryTimes
+     * @param retrySleepSeconds
      *
-     * @return 如果是放到Classpath目录下，则返回相对Classpath的路径，如果不是，则返回全路径
+     * @return
      *
      * @throws Exception
      */
+    @Override
     public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
-                                     boolean isTransfer2Classpath, int retryTimes, int retrySleepSeconds)
-        throws Exception {
+                                     String copy2TargetDirPath, boolean enableLocalDownloadDirInClassPath,
+                                     int retryTimes, int retrySleepSeconds)
+            throws Exception {
 
-        // 临时下载目录
-        String tmpFileDir = "./disconf/download";
+        // 目标地址文件
+        File localFile = null;
 
-        // 待下载的路径
-        String localFilePath = OsUtil.pathJoin(localFileDir, fileName);
-        String tmpFilePath = OsUtil.pathJoin(tmpFileDir, fileName);
-
-        // 唯一标识化本地文件
-        String tmpFilePathUnique = MyStringUtils.getRandomName(tmpFilePath);
-
-        // 相应的File对象
-        File localFile = new File(localFilePath);
-        File tmpFilePathUniqueFile = new File(tmpFilePathUnique);
+        //
+        // 进行下载、mv、copy
+        //
 
         try {
 
             // 可重试的下载
-            retry4ConfDownload(remoteUrl, tmpFilePathUniqueFile, retryTimes, retrySleepSeconds);
+            File tmpFilePathUniqueFile = retryDownload(fileName, remoteUrl, retryTimes, retrySleepSeconds);
 
-            // 将 tmp file 移到 localFileDir
-            OsUtil.transferFileAtom(tmpFilePathUniqueFile, localFile, false);
+            // 将 tmp file copy localFileDir
+            localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, localFileDir, fileName, false);
 
-            // 再次转移至classpath目录下
-            if (isTransfer2Classpath) {
+            // mv 到指定目录
+            if (copy2TargetDirPath != null) {
 
-                File classpathFile = getLocalDownloadFileInClasspath(fileName);
-                if (classpathFile != null) {
-
-                    // 从下载文件复制到classpath 原子性的做转移
-                    OsUtil.transferFileAtom(tmpFilePathUniqueFile, classpathFile, true);
-                    localFile = classpathFile;
-
-                } else {
-                    LOGGER.warn("classpath is null, cannot transfer " + fileName + " to classpath");
+                //
+                if (enableLocalDownloadDirInClassPath == true || !copy2TargetDirPath.equals(ClassLoaderUtil.getClassPath
+                        ())) {
+                    localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, copy2TargetDirPath, fileName, true);
                 }
             }
 
             LOGGER.debug("Move to: " + localFile.getAbsolutePath());
 
         } catch (Exception e) {
+
             LOGGER.warn("download file failed, using previous download file.", e);
         }
 
         //
-        // 下载失败
+        // 判断是否下载失败
         //
+
         if (!localFile.exists()) {
             throw new Exception("target file cannot be found! " + fileName);
         }
@@ -191,9 +185,9 @@ public class RestfulMgrImpl implements RestfulMgr {
         // 下面为下载成功
         //
 
-        // 如果是使用CLASS路径的，则返回相对classpath的路径
-        if (!ConfigLoaderUtils.CLASS_PATH.isEmpty()) {
-            String relativePathString = OsUtil.getRelativePath(localFile, new File(ConfigLoaderUtils.CLASS_PATH));
+        // 返回相对路径
+        if (localFileDir != null) {
+            String relativePathString = OsUtil.getRelativePath(localFile, new File(localFileDir));
             if (relativePathString != null) {
                 if (new File(relativePathString).isFile()) {
                     return relativePathString;
@@ -203,6 +197,57 @@ public class RestfulMgrImpl implements RestfulMgr {
 
         // 否则, 返回全路径
         return localFile.getAbsolutePath();
+    }
+
+    /**
+     * 可重试的下载
+     *
+     * @param fileName
+     * @param remoteUrl
+     * @param retryTimes
+     * @param retrySleepSeconds
+     *
+     * @throws Exception
+     */
+    private File retryDownload(String fileName, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds)
+            throws Exception {
+
+        String tmpFileDir = "./disconf/download";
+        String tmpFilePath = OsUtil.pathJoin(tmpFileDir, fileName);
+        String tmpFilePathUnique = MyStringUtils.getRandomName(tmpFilePath);
+        File tmpFilePathUniqueFile = new File(tmpFilePathUnique);
+        retry4ConfDownload(remoteUrl, tmpFilePathUniqueFile, retryTimes, retrySleepSeconds);
+
+        return tmpFilePathUniqueFile;
+    }
+
+    /**
+     * copy/mv 到指定目录
+     *
+     * @param srcFile
+     * @param copy2TargetDirPath
+     * @param fileName
+     *
+     * @return
+     *
+     * @throws Exception
+     */
+    private File transfer2SpecifyDir(File srcFile, String copy2TargetDirPath, String fileName,
+                                     boolean isMove) throws Exception {
+
+        // make dir
+        OsUtil.makeDirs(copy2TargetDirPath);
+
+        File targetPath = new File(OsUtil.pathJoin(copy2TargetDirPath, fileName));
+        if (targetPath != null) {
+            // 从下载文件 复制/mv 到targetPath 原子性的做转移
+            OsUtil.transferFileAtom(srcFile, targetPath, isMove);
+            return targetPath;
+
+        } else {
+            LOGGER.warn("targetPath is null, cannot transfer " + fileName + " to targetPath");
+            return null;
+        }
     }
 
     /**
@@ -216,7 +261,7 @@ public class RestfulMgrImpl implements RestfulMgr {
      * @return
      */
     private Object retry4ConfDownload(RemoteUrl remoteUrl, File localTmpFile, int retryTimes, int sleepSeconds)
-        throws Exception {
+            throws Exception {
 
         for (URL url : remoteUrl.getUrls()) {
 
@@ -238,26 +283,6 @@ public class RestfulMgrImpl implements RestfulMgr {
         }
 
         throw new Exception("download failed.");
-    }
-
-    /**
-     * @param fileName
-     *
-     * @return File
-     *
-     * @throws Exception
-     * @Description: 获取在CLASSPATH下的文件，如果找不到CLASSPATH，则返回null
-     * @author liaoqiqi
-     * @date 2013-6-20
-     */
-    private static File getLocalDownloadFileInClasspath(String fileName) throws Exception {
-
-        String classpath = ConfigLoaderUtils.CLASS_PATH;
-
-        if (classpath == null) {
-            return null;
-        }
-        return new File(OsUtil.pathJoin(classpath, fileName));
     }
 
 }

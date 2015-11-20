@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
+import com.github.knightliao.apollo.utils.io.OsUtil;
+import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
 
 /**
  * 配置文件表示
@@ -27,6 +29,8 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     // 文件名
     private String fileName;
+
+    private String copy2TargetDirPath;
 
     // 文件类型
     private SupportFileTypeEnum supportFileTypeEnum = SupportFileTypeEnum.ANY;
@@ -71,9 +75,18 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
         this.supportFileTypeEnum = supportFileTypeEnum;
     }
 
+    public String getCopy2TargetDirPath() {
+        return copy2TargetDirPath;
+    }
+
+    public void setCopy2TargetDirPath(String copy2TargetDirPath) {
+        this.copy2TargetDirPath = copy2TargetDirPath;
+    }
+
     @Override
     public String toString() {
-        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + "\n\tfileName=" + fileName +
+        return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + "\n\tfileName=" + fileName
+                + "\n\tcopy2TargetDirPath=" + copy2TargetDirPath +
                 super.toString() + "]";
     }
 
@@ -102,6 +115,41 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
         }
 
         return map;
+    }
+
+    /**
+     * 配置文件的路径
+     */
+    public String getFilePath() {
+
+        if (copy2TargetDirPath != null) {
+
+            if (copy2TargetDirPath.startsWith("/")) {
+                return OsUtil.pathJoin(copy2TargetDirPath, fileName);
+            }
+
+            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), copy2TargetDirPath, fileName);
+        }
+
+        return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), fileName);
+    }
+
+    /**
+     * 配置文件的路径
+     */
+    public String getFileDir() {
+
+        // 获取相对于classpath的路径
+        if (copy2TargetDirPath != null) {
+
+            if (copy2TargetDirPath.startsWith("/")) {
+                return OsUtil.pathJoin(copy2TargetDirPath);
+            }
+
+            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), copy2TargetDirPath);
+        }
+
+        return ClassLoaderUtil.getClassPath();
     }
 
     /**

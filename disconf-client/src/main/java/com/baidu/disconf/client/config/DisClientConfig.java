@@ -175,6 +175,15 @@ public final class DisClientConfig {
     @DisInnerConfigAnnotation(name = "disconf.conf_server_url_retry_sleep_seconds", defaultValue = "2")
     public int confServerUrlRetrySleepSeconds = 2;
 
+    /**
+     * 让下载文件夹放在 classpath目录 下
+     *
+     * @author
+     * @since 1.0.0
+     */
+    @DisInnerConfigAnnotation(name = "disconf.enable_local_download_dir_in_class_path", defaultValue = "true")
+    public boolean enableLocalDownloadDirInClassPath = true;
+
     public List<String> getHostList() {
         return hostList;
     }

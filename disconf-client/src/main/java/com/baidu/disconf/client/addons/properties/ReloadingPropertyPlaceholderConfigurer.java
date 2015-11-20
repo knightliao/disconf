@@ -29,7 +29,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.ObjectUtils;
 
 public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlaceholderConfigurer implements
-    InitializingBean, DisposableBean, ReloadablePropertiesListener, ApplicationContextAware {
+        InitializingBean, DisposableBean, ReloadablePropertiesListener, ApplicationContextAware {
 
     protected static final Logger logger = LoggerFactory.getLogger(ReloadingPropertyPlaceholderConfigurer.class);
 
@@ -97,7 +97,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
     }
 
     protected String parseStringValue(String strVal, Properties props, Set visitedPlaceholders)
-        throws BeanDefinitionStoreException {
+            throws BeanDefinitionStoreException {
 
         DynamicProperty dynamic = null;
 
@@ -119,7 +119,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                     logger.warn("dynamic property outside bean property value - ignored: " + strVal);
                 }
                 startIndex = endIndex - this.placeholderPrefix.length() + this.placeholderPrefix.length() +
-                                 this.placeholderSuffix.length();
+                        this.placeholderSuffix.length();
                 startIndex = strVal.indexOf(this.placeholderPrefix, startIndex);
             } else {
                 startIndex = -1;
@@ -162,7 +162,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                 if (newValue != null && !newValue.equals(oldValue) || newValue == null && oldValue != null) {
                     if (logger.isInfoEnabled()) {
                         logger.info("Property changed detected: " + placeholder +
-                                        (newValue != null ? "=" + newValue : " removed"));
+                                (newValue != null ? "=" + newValue : " removed"));
                     }
                     List<DynamicProperty> affectedDynamics = placeholderToDynamics.get(placeholder);
                     allDynamics.addAll(affectedDynamics);
@@ -245,10 +245,8 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                 }
             }
         } catch (IOException e) {
-            logger
-                .error("Error trying to reload net.unicon.iamlabs.spring.properties.example.net.unicon.iamlabs.spring" +
-                           ".properties: " +
-                           e.getMessage(), e);
+            logger.error("Error trying to reload net.unicon.iamlabs.spring.properties.example.net.unicon.iamlabs" +
+                    ".spring" + ".properties: " + e.getMessage(), e);
         }
     }
 
@@ -340,10 +338,10 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
      * copy & paste, just so we can insert our own visitor.
      */
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props)
-        throws BeansException {
+            throws BeansException {
 
         BeanDefinitionVisitor visitor =
-            new ReloadingPropertyPlaceholderConfigurer.PlaceholderResolvingBeanDefinitionVisitor(props);
+                new ReloadingPropertyPlaceholderConfigurer.PlaceholderResolvingBeanDefinitionVisitor(props);
         String[] beanNames = beanFactoryToProcess.getBeanDefinitionNames();
         for (int i = 0; i < beanNames.length; i++) {
             // Check that we're not parsing our own bean definition,
@@ -357,7 +355,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                         visitor.visitBeanDefinition(bd);
                     } catch (BeanDefinitionStoreException ex) {
                         throw new BeanDefinitionStoreException(bd.getResourceDescription(), beanNames[i],
-                                                                  ex.getMessage());
+                                ex.getMessage());
                     }
                 } finally {
                     currentBeanName = null;
@@ -369,6 +367,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
     public void afterPropertiesSet() {
         for (Properties properties : propertiesArray) {
             if (properties instanceof ReloadableProperties) {
+                logger.debug("add property listener: " + properties.toString());
                 ((ReloadableProperties) properties).addReloadablePropertiesListener(this);
             }
         }
@@ -377,6 +376,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
     public void destroy() throws Exception {
         for (Properties properties : propertiesArray) {
             if (properties instanceof ReloadableProperties) {
+                logger.debug("remove property listener: " + properties.toString());
                 ((ReloadableProperties) properties).removeReloadablePropertiesListener(this);
             }
         }
