@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.utils;
+package com.baidu.disconf.client.support;
 
 /**
  * @author liaoqiqi

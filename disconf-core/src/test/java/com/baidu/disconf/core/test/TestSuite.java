@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.baidu.disconf.core.test.path.DisconfWebPathMgrTestCase;
 import com.baidu.disconf.core.test.path.ZooPathMgrTestCase;
 import com.baidu.disconf.core.test.restful.RestfulMgrTestCase;
-import com.baidu.disconf.core.test.utiils.MyStringUtilsTestCase;
+import com.baidu.disconf.core.test.utils.MyStringUtilsTestCase;
 import com.baidu.disconf.core.test.zookeeper.ZookeeperMgrTest;
 
 /**

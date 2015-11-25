@@ -17,7 +17,7 @@ import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.github.knightliao.apollo.utils.data.GsonUtils;
+import com.baidu.disconf.core.common.utils.GsonUtils;
 
 /**
  * 配置文件处理器实现

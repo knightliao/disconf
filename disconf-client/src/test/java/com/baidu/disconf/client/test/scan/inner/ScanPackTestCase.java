@@ -16,7 +16,7 @@ import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrateg
 import com.baidu.disconf.client.scan.inner.statically.strategy.impl.ReflectionScanStatic;
 import com.baidu.disconf.client.test.common.BaseSpringTestCase;
 import com.baidu.disconf.client.utils.ScanPrinterUtils;
-import com.github.knightliao.apollo.utils.common.StringUtil;
+import com.baidu.disconf.client.utils.StringUtil;
 
 /**
  * 扫描测试
@@ -30,7 +30,7 @@ public class ScanPackTestCase extends BaseSpringTestCase {
 
     public static final String SCAN_PACK_NAME = "com.baidu.disconf.client.test";
     public static final List<String> SCAN_PACK_NAME_LIST =
-        StringUtil.parseStringToStringList(SCAN_PACK_NAME, DisconfMgrBean.SCAN_SPLIT_TOKEN);
+            StringUtil.parseStringToStringList(SCAN_PACK_NAME, DisconfMgrBean.SCAN_SPLIT_TOKEN);
 
     @Test
     public void scan() {

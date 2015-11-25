@@ -20,7 +20,7 @@ import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
-import com.github.knightliao.apollo.utils.common.ClassUtils;
+import com.baidu.disconf.client.utils.ClassUtils;
 
 /**
  * 配置文件仓库实现器

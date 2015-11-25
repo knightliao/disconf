@@ -12,8 +12,8 @@ import com.baidu.disconf.client.watch.inner.DisconfSysUpdateCallback;
 import com.baidu.disconf.client.watch.inner.NodeWatcher;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
+import com.baidu.disconf.core.common.utils.ZooUtils;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
-import com.github.knightliao.apollo.utils.tool.ZooUtils;
 
 /**
  * Watch 模块的一个实现
@@ -60,8 +60,8 @@ public class WatchMgrImpl implements WatchMgr {
             应用程序的 Zoo 根目录
         */
         String clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(),
-                                                               disConfCommonModel.getEnv(),
-                                                               disConfCommonModel.getVersion());
+                disConfCommonModel.getEnv(),
+                disConfCommonModel.getVersion());
         ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
 
         // 监控路径
@@ -125,8 +125,8 @@ public class WatchMgrImpl implements WatchMgr {
 
         // 进行监控
         NodeWatcher nodeWatcher =
-            new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback(),
-                               debug);
+                new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback(),
+                        debug);
         nodeWatcher.monitorMaster();
     }
 

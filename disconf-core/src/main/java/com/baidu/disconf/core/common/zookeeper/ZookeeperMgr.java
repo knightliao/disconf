@@ -11,8 +11,8 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.core.common.utils.ZooUtils;
 import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStore;
-import com.github.knightliao.apollo.utils.tool.ZooUtils;
 
 /**
  * ZK统一管理器
@@ -89,7 +89,7 @@ public class ZookeeperMgr {
      * @date 2013-6-14
      */
     private void initInternal(String hosts, String defaultPrefixString, boolean debug)
-        throws IOException, InterruptedException {
+            throws IOException, InterruptedException {
 
         curHost = hosts;
         curDefaultPrefixString = defaultPrefixString;

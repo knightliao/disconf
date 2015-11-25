@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
-import com.github.knightliao.apollo.utils.common.StringUtil;
-import com.github.knightliao.apollo.utils.io.OsUtil;
-import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
+import com.baidu.disconf.client.utils.StringUtil;
+import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
+import com.baidu.disconf.core.common.utils.OsUtil;
 
 /**
  * 用户配置、系统配置 的校验

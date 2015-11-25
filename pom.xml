@@ -5,13 +5,12 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.28</version>
+    <version>2.6.29-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>disconf-client</module>
         <module>disconf-core</module>
-        <module>disconf-tool</module>
     </modules>
 
     <inceptionYear>2015</inceptionYear>
@@ -26,9 +25,8 @@
 
     <properties>
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.28</disconf-core.version>
-        <disconf-client.version>2.6.28</disconf-client.version>
-        <disconf-tool.version>2.6.28</disconf-tool.version>
+        <disconf-core.version>2.6.29-SNAPSHOT</disconf-core.version>
+        <disconf-client.version>2.6.29-SNAPSHOT</disconf-client.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
@@ -54,14 +52,6 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <!-- my dependencies -->
-
-            <dependency>
-                <groupId>com.github.knightliao.apollo</groupId>
-                <artifactId>apollo</artifactId>
-                <version>1.0.12</version>
-            </dependency>
 
             <!-- common dependencies -->
 

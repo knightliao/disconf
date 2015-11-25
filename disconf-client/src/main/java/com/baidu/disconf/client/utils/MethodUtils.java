@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.github.knightliao.apollo.utils.common.ClassUtils;
 
 /**
  * @author liaoqiqi

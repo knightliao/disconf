@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.utils;
+package com.baidu.disconf.client.support;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
-import com.github.knightliao.apollo.utils.common.ClassUtils;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
+import com.baidu.disconf.client.utils.ClassUtils;
+import com.baidu.disconf.client.utils.ConfigLoaderUtils;
 
 /**
  * 配置导入工具

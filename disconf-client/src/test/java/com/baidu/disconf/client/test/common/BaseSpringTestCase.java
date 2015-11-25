@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
+import com.baidu.disconf.client.test.utils.NetUtils;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
-import com.github.knightliao.apollo.utils.web.NetUtils;
 
 import junit.framework.Assert;
 
@@ -48,9 +48,9 @@ public class BaseSpringTestCase {
         }
 
         if (!NetUtils.pingUrl(DisClientConfig.getInstance().getHostList().get(0) + DisconfWebPathMgr
-                                                                                       .getZooHostsUrl
-                                                                                            (DisClientSysConfig
-                                                                                                           .getInstance().CONF_SERVER_ZOO_ACTION))) {
+                .getZooHostsUrl
+                        (DisClientSysConfig
+                                .getInstance().CONF_SERVER_ZOO_ACTION))) {
             return false;
         }
 

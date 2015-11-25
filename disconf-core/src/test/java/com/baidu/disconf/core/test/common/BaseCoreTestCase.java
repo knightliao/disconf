@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.json.ValueVo;
+import com.baidu.disconf.core.common.utils.GsonUtils;
 import com.baidu.disconf.core.test.restful.RemoteMockServer;
-import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 
 /**
@@ -56,55 +56,55 @@ public class BaseCoreTestCase {
         valueVo.setValue(RemoteMockServer.DEFAULT_ITEM_VALUE);
         // System.out.println(GsonUtils.toJson(valueVo));
         stubFor(get(urlEqualTo(RemoteMockServer.ITEM_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
-                                    .withBody(GsonUtils.toJson(valueVo))));
+                .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVo))));
 
         //
         // 配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.FILE_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
-                                    .withHeader("Content-Disposition",
-                                                   "attachment; filename=" + RemoteMockServer.FILE_NAME).withStatus(200)
-                                    .withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
+                .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
+                        .withHeader("Content-Disposition",
+                                "attachment; filename=" + RemoteMockServer.FILE_NAME).withStatus(200)
+                        .withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
 
         //
         // 空配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.EMPTY_FILE_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
-                                    .withHeader("Content-Disposition",
-                                                   "attachment; filename=" + RemoteMockServer.EMPTY_FILE_URL)
-                                    .withStatus(200).withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
+                .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
+                        .withHeader("Content-Disposition",
+                                "attachment; filename=" + RemoteMockServer.EMPTY_FILE_URL)
+                        .withStatus(200).withBody(RemoteMockServer.FILE_CONTENT.getBytes())));
 
         //
         // 静态 配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.STATIC_FILE_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
-                                    .withHeader("Content-Disposition",
-                                                   "attachment; filename=" + RemoteMockServer.STATIC_FILE_NAME)
-                                    .withStatus(200).withBody(RemoteMockServer.STATIC_FILE_CONTENT.getBytes())));
+                .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
+                        .withHeader("Content-Disposition",
+                                "attachment; filename=" + RemoteMockServer.STATIC_FILE_NAME)
+                        .withStatus(200).withBody(RemoteMockServer.STATIC_FILE_CONTENT.getBytes())));
 
         //
         // 非注解 配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.NON_ANOTATION_FILE_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
-                                    .withHeader("Content-Disposition",
-                                                   "attachment; filename=" + RemoteMockServer.NON_ANOTATION_FILE_NAME)
-                                    .withStatus(200)
-                                    .withBody(RemoteMockServer.NON_ANOTATTION_FILE_CONTENT.getBytes())));
+                .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
+                        .withHeader("Content-Disposition",
+                                "attachment; filename=" + RemoteMockServer.NON_ANOTATION_FILE_NAME)
+                        .withStatus(200)
+                        .withBody(RemoteMockServer.NON_ANOTATTION_FILE_CONTENT.getBytes())));
 
         //
         // 非注解 配置文件2
         //
         stubFor(get(urlEqualTo(RemoteMockServer.NON_ANOTATION_FILE_URL2))
-                    .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
-                                    .withHeader("Content-Disposition",
-                                                   "attachment; filename=" + RemoteMockServer.NON_ANOTATION_FILE_NAME2)
-                                    .withStatus(200)
-                                    .withBody(RemoteMockServer.NON_ANOTATTION_FILE_CONTENT2.getBytes())));
+                .willReturn(aResponse().withHeader("Content-Type", "text/html;charset=UTF-8")
+                        .withHeader("Content-Disposition",
+                                "attachment; filename=" + RemoteMockServer.NON_ANOTATION_FILE_NAME2)
+                        .withStatus(200)
+                        .withBody(RemoteMockServer.NON_ANOTATTION_FILE_CONTENT2.getBytes())));
 
         //
         // ZOO
@@ -115,8 +115,8 @@ public class BaseCoreTestCase {
         valueVo.setValue(RemoteMockServer.ZOO_HOSTS);
         // System.out.println(GsonUtils.toJson(valueVo));
         stubFor(get(urlEqualTo(RemoteMockServer.ZOO_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
-                                    .withBody(GsonUtils.toJson(valueVo))));
+                .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVo))));
 
         valueVo = new ValueVo();
         valueVo.setMessage("");
@@ -124,8 +124,8 @@ public class BaseCoreTestCase {
         valueVo.setValue(RemoteMockServer.ZOO_PREFIX_VALUE);
         // System.out.println(GsonUtils.toJson(valueVo));
         stubFor(get(urlEqualTo(RemoteMockServer.ZOO_PREFIX_URL))
-                    .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
-                                    .withBody(GsonUtils.toJson(valueVo))));
+                .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVo))));
 
     }
 

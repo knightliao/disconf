@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.baidu.disconf.client.core.filetype.DisconfFileTypeProcessor;
-import com.github.knightliao.apollo.utils.config.ConfigLoaderUtils;
+import com.baidu.disconf.client.utils.ConfigLoaderUtils;
 
 /**
  * Properties 处理器

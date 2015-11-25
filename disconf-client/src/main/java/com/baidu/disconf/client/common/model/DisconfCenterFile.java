@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
-import com.github.knightliao.apollo.utils.io.OsUtil;
-import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
+import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
+import com.baidu.disconf.core.common.utils.OsUtil;
 
 /**
  * 配置文件表示

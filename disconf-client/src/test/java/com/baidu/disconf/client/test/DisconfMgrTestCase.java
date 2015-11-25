@@ -24,8 +24,8 @@ import com.baidu.disconf.client.test.model.ServiceA;
 import com.baidu.disconf.client.test.model.StaticConf;
 import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.mock.WatchMgrMock;
+import com.baidu.disconf.client.utils.StringUtil;
 import com.baidu.disconf.client.watch.WatchMgr;
-import com.github.knightliao.apollo.utils.common.StringUtil;
 
 import mockit.Mock;
 import mockit.MockUp;
@@ -91,7 +91,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             fileSet.add("atomserverm_slave.properties");
             DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileSet);
             DisconfMgr.start(StringUtil.parseStringToStringList(ScanPackTestCase.SCAN_PACK_NAME,
-                                                                   DisconfMgrBean.SCAN_SPLIT_TOKEN));
+                    DisconfMgrBean.SCAN_SPLIT_TOKEN));
 
             //
             LOGGER.info(DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());

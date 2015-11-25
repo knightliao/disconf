@@ -16,7 +16,7 @@ import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.inner.DisconfCenterStore;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
-import com.github.knightliao.apollo.utils.common.ClassUtils;
+import com.baidu.disconf.client.utils.ClassUtils;
 
 /**
  * 配置项仓库算子实现器
@@ -37,7 +37,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfItemMap().containsKey(keyName)) {
 
             DisconfCenterStore.getInstance().getConfItemMap().get(keyName).getDisconfCommonCallbackModel()
-                .getDisconfConfUpdates().addAll(iDisconfUpdateList);
+                    .getDisconfConfUpdates().addAll(iDisconfUpdateList);
         }
 
     }
@@ -51,7 +51,7 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
         if (DisconfCenterStore.getInstance().getConfItemMap().containsKey(keyName)) {
 
             return DisconfCenterStore.getInstance().getConfItemMap().get(keyName).getDisconfCommonCallbackModel()
-                       .getDisconfConfUpdates();
+                    .getDisconfConfUpdates();
         }
 
         return new ArrayList<IDisconfUpdate>();

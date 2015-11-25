@@ -20,9 +20,9 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
 import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
 import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
+import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
-import com.github.knightliao.apollo.utils.io.OsUtil;
-import com.github.knightliao.apollo.utils.tool.ClassLoaderUtil;
+import com.baidu.disconf.core.common.utils.OsUtil;
 
 /**
  * RestFul的一个实现, 独立模块

@@ -12,7 +12,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
-import com.github.knightliao.apollo.utils.common.StringUtil;
+import com.baidu.disconf.client.utils.StringUtil;
 
 /**
  * 第一次扫描，静态扫描

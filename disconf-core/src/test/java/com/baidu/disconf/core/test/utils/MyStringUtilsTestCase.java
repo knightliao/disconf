@@ -1,4 +1,4 @@
-package com.baidu.disconf.core.test.utiils;
+package com.baidu.disconf.core.test.utils;
 
 import org.junit.Test;
 

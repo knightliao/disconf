@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
-import com.github.knightliao.apollo.utils.io.OsUtil;
+import com.baidu.disconf.core.common.utils.OsUtil;
 
 /**
  * 下载文件
