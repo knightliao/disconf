@@ -23,6 +23,8 @@ import com.baidu.disconf.client.DisconfMgr;
  * A properties factory bean that creates a reconfigurable Properties object.
  * When the Properties' reloadConfiguration method is called, and the file has
  * changed, the properties are read again from the file.
+ * <p/>
+ * 真正的 reload bean 定义，它可以定义多个 resource 为 reload config file
  */
 public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean implements DisposableBean,
         ApplicationContextAware {
@@ -33,8 +35,13 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
 
     private Resource[] locations;
     private long[] lastModified;
-    private List<ReloadablePropertiesListener> preListeners;
+    private List<IReloadablePropertiesListener> preListeners;
 
+    /**
+     * 定义资源文件
+     *
+     * @param fileNames
+     */
     public void setLocation(final String fileNames) {
         List<String> list = new ArrayList<String>();
         list.add(fileNames);
@@ -56,7 +63,7 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
             //
             // register to disconf
             //
-            DisconfMgr.reloadableScan(realFileName);
+            DisconfMgr.getInstance().reloadableScan(realFileName);
 
             //
             // only properties will reload
@@ -82,6 +89,13 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         super.setLocations(locations);
     }
 
+    /**
+     * get file name from resource
+     *
+     * @param fileName
+     *
+     * @return
+     */
     private String getFileName(String fileName) {
 
         if (fileName != null) {
@@ -109,13 +123,15 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     }
 
     /**
+     * listener , 用于通知回调
+     *
      * @param listeners
      */
     public void setListeners(final List listeners) {
         // early type check, and avoid aliassing
-        this.preListeners = new ArrayList<ReloadablePropertiesListener>();
+        this.preListeners = new ArrayList<IReloadablePropertiesListener>();
         for (Object o : listeners) {
-            preListeners.add((ReloadablePropertiesListener) o);
+            preListeners.add((IReloadablePropertiesListener) o);
         }
     }
 
@@ -142,10 +158,14 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         if (!isSingleton()) {
             throw new RuntimeException("ReloadablePropertiesFactoryBean only works as singleton");
         }
+
+        // set listener
         reloadableProperties = new ReloadablePropertiesImpl();
         if (preListeners != null) {
             reloadableProperties.setListeners(preListeners);
         }
+
+        // reload
         reload(true);
 
         // add for monitor
@@ -159,11 +179,14 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     }
 
     /**
+     * 根据修改时间来判定是否reload
+     *
      * @param forceReload
      *
      * @throws IOException
      */
     protected void reload(final boolean forceReload) throws IOException {
+
         boolean reload = forceReload;
         for (int i = 0; i < locations.length; i++) {
             Resource location = locations[i];
@@ -197,6 +220,8 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     }
 
     /**
+     * 设置新的值
+     *
      * @throws IOException
      */
     private void doReload() throws IOException {
@@ -217,9 +242,11 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
     }
 
     /**
-     *
+     * 回调自己
      */
     class ReloadablePropertiesImpl extends ReloadablePropertiesBase implements ReconfigurableBean {
+
+        // reload myself
         public void reloadConfiguration() throws Exception {
             ReloadablePropertiesFactoryBean.this.reload(false);
         }

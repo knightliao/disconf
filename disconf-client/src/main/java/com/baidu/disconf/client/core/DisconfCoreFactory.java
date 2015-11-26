@@ -4,6 +4,7 @@ import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.core.impl.DisconfCoreMgrImpl;
 import com.baidu.disconf.client.fetcher.FetcherFactory;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
+import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchFactory;
 import com.baidu.disconf.client.watch.WatchMgr;
 
@@ -18,7 +19,7 @@ public class DisconfCoreFactory {
     /**
      * @throws Exception
      */
-    public static DisconfCoreMgr getDisconfCoreMgr() throws Exception {
+    public static DisconfCoreMgr getDisconfCoreMgr(Registry registry) throws Exception {
 
         FetcherMgr fetcherMgr = FetcherFactory.getFetcherMgr();
 
@@ -31,6 +32,6 @@ public class DisconfCoreFactory {
             watchMgr = WatchFactory.getWatchMgr(fetcherMgr);
         }
 
-        return new DisconfCoreMgrImpl(watchMgr, fetcherMgr);
+        return new DisconfCoreMgrImpl(watchMgr, fetcherMgr, registry);
     }
 }

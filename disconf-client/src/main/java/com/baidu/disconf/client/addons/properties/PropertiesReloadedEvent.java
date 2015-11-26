@@ -3,6 +3,7 @@ package com.baidu.disconf.client.addons.properties;
 import java.util.Properties;
 
 public class PropertiesReloadedEvent {
+
     final ReloadableProperties target;
     final Properties oldProperties;
 

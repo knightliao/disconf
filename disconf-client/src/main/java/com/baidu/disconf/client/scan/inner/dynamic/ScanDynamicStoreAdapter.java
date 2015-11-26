@@ -19,7 +19,7 @@ import com.baidu.disconf.client.scan.inner.dynamic.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
-import com.baidu.disconf.client.utils.SpringContextUtil;
+import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
 /**
@@ -35,10 +35,10 @@ public class ScanDynamicStoreAdapter {
     /**
      * 扫描更新回调函数
      */
-    public static void scanUpdateCallbacks(ScanStaticModel scanModel) {
+    public static void scanUpdateCallbacks(ScanStaticModel scanModel, Registry registry) {
 
         // 扫描出来
-        ScanDynamicModel scanDynamicModel = analysis4DisconfUpdate(scanModel);
+        ScanDynamicModel scanDynamicModel = analysis4DisconfUpdate(scanModel, registry);
 
         // 写到仓库中
         transformUpdateService(scanDynamicModel.getDisconfUpdateServiceInverseIndexMap());
@@ -49,7 +49,7 @@ public class ScanDynamicStoreAdapter {
      * <p/>
      * 分析出更新操作的相关配置文件内容
      */
-    private static ScanDynamicModel analysis4DisconfUpdate(ScanStaticModel scanModel) {
+    private static ScanDynamicModel analysis4DisconfUpdate(ScanStaticModel scanModel, Registry registry) {
 
         // 配置项或文件
         Map<DisconfKey, List<IDisconfUpdate>> inverseMap = new HashMap<DisconfKey, List<IDisconfUpdate>>();
@@ -59,7 +59,7 @@ public class ScanDynamicStoreAdapter {
 
             // 回调对应的参数
             DisconfUpdateService disconfUpdateService =
-                disconfUpdateServiceClass.getAnnotation(DisconfUpdateService.class);
+                    disconfUpdateServiceClass.getAnnotation(DisconfUpdateService.class);
 
             //
             // 校验是否有继承正确,是否继承IDisconfUpdate
@@ -69,7 +69,7 @@ public class ScanDynamicStoreAdapter {
 
             //
             // 获取回调接口实例
-            IDisconfUpdate iDisconfUpdate = getIDisconfUpdateInstance(disconfUpdateServiceClass);
+            IDisconfUpdate iDisconfUpdate = getIDisconfUpdateInstance(disconfUpdateServiceClass, registry);
             if (iDisconfUpdate == null) {
                 continue;
             }
@@ -122,7 +122,8 @@ public class ScanDynamicStoreAdapter {
             if (disconfFile == null) {
 
                 LOGGER
-                    .error("cannot find DisconfFile annotation for class when set callback: {} ", curClass.toString());
+                        .error("cannot find DisconfFile annotation for class when set callback: {} ",
+                                curClass.toString());
                 continue;
             }
 
@@ -148,33 +149,14 @@ public class ScanDynamicStoreAdapter {
      * // Spring要GetBean
      * //
      */
-    private static IDisconfUpdate getIDisconfUpdateInstance(Class<?> disconfUpdateServiceClass) {
+    private static IDisconfUpdate getIDisconfUpdateInstance(Class<?> disconfUpdateServiceClass, Registry registry) {
 
-        IDisconfUpdate iDisconfUpdate;
-
-        //
-        // Spring方式
-        try {
-
-            iDisconfUpdate = getSpringBean(disconfUpdateServiceClass);
-
-        } catch (Exception e) {
-
-            //
-            // 非Spring方式
-            try {
-
-                iDisconfUpdate = (IDisconfUpdate) disconfUpdateServiceClass.newInstance();
-
-            } catch (Exception e2) {
-
-                LOGGER.error("Your class " + disconfUpdateServiceClass.toString() + " cannot new instance. " +
-                                 e.toString(), e);
-                return null;
-            }
+        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass);
+        if (iDisconfUpdate == null) {
+            return null;
         }
+        return (IDisconfUpdate) iDisconfUpdate;
 
-        return iDisconfUpdate;
     }
 
     /**
@@ -199,7 +181,7 @@ public class ScanDynamicStoreAdapter {
      * 转换 更新 回调函数，将其写到 仓库中
      */
     private static void transformUpdateService(Map<DisconfKey,
-                                                      List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
+            List<IDisconfUpdate>> disconfUpdateServiceInverseIndexMap) {
 
         DisconfStoreProcessor disconfStoreProcessorFile = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
         DisconfStoreProcessor disconfStoreProcessorItem = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
@@ -218,8 +200,8 @@ public class ScanDynamicStoreAdapter {
                     }
 
                     disconfStoreProcessorFile.addUpdateCallbackList(disconfKey.getKey(),
-                                                                       disconfUpdateServiceInverseIndexMap
-                                                                           .get(disconfKey));
+                            disconfUpdateServiceInverseIndexMap
+                                    .get(disconfKey));
 
                 } else if (disconfKey.getDisConfigTypeEnum().equals(DisConfigTypeEnum.ITEM)) {
 
@@ -228,8 +210,8 @@ public class ScanDynamicStoreAdapter {
                     }
 
                     disconfStoreProcessorItem.addUpdateCallbackList(disconfKey.getKey(),
-                                                                       disconfUpdateServiceInverseIndexMap
-                                                                           .get(disconfKey));
+                            disconfUpdateServiceInverseIndexMap
+                                    .get(disconfKey));
                 }
 
             } catch (Exception e) {
@@ -244,17 +226,4 @@ public class ScanDynamicStoreAdapter {
         }
     }
 
-    /**
-     * 获取Spring Bean
-     */
-    private static IDisconfUpdate getSpringBean(Class<?> cls) throws Exception {
-
-        if (SpringContextUtil.getApplicationContext() == null) {
-            LOGGER.error("Spring Context is null. Cannot autowire " + cls.getCanonicalName());
-            return null;
-        }
-
-        // spring 方式
-        return (IDisconfUpdate) SpringContextUtil.getBean(cls);
-    }
 }

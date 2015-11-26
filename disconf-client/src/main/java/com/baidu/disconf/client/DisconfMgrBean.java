@@ -8,6 +8,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
@@ -20,40 +22,17 @@ import com.baidu.disconf.client.utils.StringUtil;
  * @author liaoqiqi
  * @version 2014-6-17
  */
-public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, PriorityOrdered {
-
-    /*
-     * 已经废弃了，不推荐使用
-     */
-    @Deprecated
-    private Set<String> fileList = new HashSet<String>();
+public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, PriorityOrdered, ApplicationContextAware {
 
     public final static String SCAN_SPLIT_TOKEN = ",";
 
-    /**
-     *
-     */
+    private ApplicationContext applicationContext;
+
     private String scanPackage = null;
-
-    public DisconfMgrBean() {
-    }
-
-    /**
-     * 关闭
-     */
-    @Deprecated
-    public void destory() {
-
-        DisconfMgr.close();
-    }
 
     public void destroy() {
 
-        DisconfMgr.close();
-    }
-
-    public String getScanPackage() {
-        return scanPackage;
+        DisconfMgr.getInstance().close();
     }
 
     public void setScanPackage(String scanPackage) {
@@ -91,8 +70,20 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
         scanPackList.addAll(hs);
 
         // 进行扫描
-        DisconfMgr.firstScan(scanPackList);
+        DisconfMgr.getInstance().setApplicationContext(applicationContext);
+        DisconfMgr.getInstance().firstScan(scanPackList);
     }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    /*
+     * 已经废弃了，不推荐使用
+     */
+    @Deprecated
+    private Set<String> fileList = new HashSet<String>();
 
     @Deprecated
     public Set<String> getFileList() {

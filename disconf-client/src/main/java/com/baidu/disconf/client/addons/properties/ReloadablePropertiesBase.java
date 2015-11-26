@@ -14,7 +14,7 @@ public class ReloadablePropertiesBase extends DelegatingProperties implements Re
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(ReloadablePropertiesBase.class);
 
-    private List<ReloadablePropertiesListener> listeners = new ArrayList<ReloadablePropertiesListener>();
+    private List<IReloadablePropertiesListener> listeners = new ArrayList<IReloadablePropertiesListener>();
     private Properties internalProperties;
 
     public void setListeners(List listeners) {
@@ -31,21 +31,43 @@ public class ReloadablePropertiesBase extends DelegatingProperties implements Re
         return getDelegate();
     }
 
-    public void addReloadablePropertiesListener(ReloadablePropertiesListener l) {
+    /**
+     * 添加listener
+     *
+     * @param l
+     */
+    public void addReloadablePropertiesListener(IReloadablePropertiesListener l) {
         listeners.add(l);
     }
 
-    public boolean removeReloadablePropertiesListener(ReloadablePropertiesListener l) {
+    /**
+     * 删除listener
+     *
+     * @param l
+     *
+     * @return
+     */
+    public boolean removeReloadablePropertiesListener(IReloadablePropertiesListener l) {
         return listeners.remove(l);
     }
 
+    /**
+     * 通过listener去通知 reload
+     *
+     * @param oldProperties
+     */
     protected void notifyPropertiesChanged(Properties oldProperties) {
         PropertiesReloadedEvent event = new PropertiesReloadedEvent(this, oldProperties);
-        for (ReloadablePropertiesListener listener : listeners) {
+        for (IReloadablePropertiesListener listener : listeners) {
             listener.propertiesReloaded(event);
         }
     }
 
+    /**
+     * set value 触发
+     *
+     * @param properties
+     */
     protected void setProperties(Properties properties) {
         Properties oldProperties = internalProperties;
         synchronized(this) {

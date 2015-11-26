@@ -10,6 +10,7 @@ import com.baidu.disconf.client.core.DisconfCoreMgr;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessorFactory;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
+import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchMgr;
 
 /**
@@ -30,20 +31,24 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
     // 抓取器
     private FetcherMgr fetcherMgr = null;
 
-    public DisconfCoreMgrImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
+    // registry
+    private Registry registry = null;
+
+    public DisconfCoreMgrImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr, Registry registry) {
 
         this.watchMgr = watchMgr;
         this.fetcherMgr = fetcherMgr;
+        this.registry = registry;
 
         //
         // 在这里添加好配置项、配置文件的处理器
         //
         DisconfCoreProcessor disconfCoreProcessorFile =
-            DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr);
+                DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr, registry);
         disconfCoreProcessorList.add(disconfCoreProcessorFile);
 
         DisconfCoreProcessor disconfCoreProcessorItem =
-            DisconfCoreProcessorFactory.getDisconfCoreProcessorItem(watchMgr, fetcherMgr);
+                DisconfCoreProcessorFactory.getDisconfCoreProcessorItem(watchMgr, fetcherMgr, registry);
         disconfCoreProcessorList.add(disconfCoreProcessorItem);
     }
 
@@ -72,7 +77,7 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
     public void processFile(String fileName) {
 
         DisconfCoreProcessor disconfCoreProcessorFile =
-            DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr);
+                DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr, registry);
 
         disconfCoreProcessorFile.processOneItem(fileName);
     }

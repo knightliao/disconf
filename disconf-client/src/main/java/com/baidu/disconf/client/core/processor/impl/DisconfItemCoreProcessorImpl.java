@@ -14,6 +14,7 @@ import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
+import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 
@@ -33,11 +34,14 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
     // 抓取器
     private FetcherMgr fetcherMgr = null;
 
+    // Registry
+    private Registry registry = null;
+
     // 仓库算子
     private DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor();
 
-    public DisconfItemCoreProcessorImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
-
+    public DisconfItemCoreProcessorImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr, Registry registry) {
+        this.registry = registry;
         this.fetcherMgr = fetcherMgr;
         this.watchMgr = watchMgr;
     }
@@ -170,7 +174,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             //
             if (!Modifier.isStatic(field.getModifiers())) {
 
-                object = DisconfCoreProcessUtils.getSpringBean(field.getDeclaringClass());
+                object = registry.getFirstByType(field.getDeclaringClass());
             }
 
             disconfStoreProcessor.inject2Instance(object, key);
@@ -192,7 +196,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
         for (String key : disconfStoreProcessor.getConfKeySet()) {
 
             LOGGER.debug("==============\tstart to inject value to disconf item instance: " + key +
-                             "\t=============================");
+                    "\t=============================");
 
             DisconfCenterItem disconfCenterItem = (DisconfCenterItem) disconfStoreProcessor.getConfData(key);
 

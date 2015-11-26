@@ -16,6 +16,7 @@ import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
 import com.baidu.disconf.client.scan.inner.statically.strategy.impl.ReflectionScanStatic;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
+import com.baidu.disconf.client.support.registry.Registry;
 
 /**
  * 扫描模块
@@ -30,6 +31,9 @@ public class ScanMgrImpl implements ScanMgr {
     // 扫描对象
     private volatile ScanStaticModel scanModel = null;
 
+    //
+    private Registry registry = null;
+
     private List<StaticScannerMgr> staticScannerMgrList = new ArrayList<StaticScannerMgr>();
 
     private ScanStaticStrategy scanStaticStrategy = new ReflectionScanStatic();
@@ -37,7 +41,9 @@ public class ScanMgrImpl implements ScanMgr {
     /**
      *
      */
-    public ScanMgrImpl() {
+    public ScanMgrImpl(Registry registry) {
+
+        this.registry = registry;
 
         // 配置文件
         staticScannerMgrList.add(StaticScannerMgrFactory.getDisconfFileStaticScanner());
@@ -93,7 +99,7 @@ public class ScanMgrImpl implements ScanMgr {
             }
 
             // 将回调函数实例化并写入仓库
-            ScanDynamicStoreAdapter.scanUpdateCallbacks(scanModel);
+            ScanDynamicStoreAdapter.scanUpdateCallbacks(scanModel, registry);
         }
     }
 

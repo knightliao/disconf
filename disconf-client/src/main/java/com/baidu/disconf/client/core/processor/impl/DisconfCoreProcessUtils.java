@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
-import com.baidu.disconf.client.utils.MyBeanUtils;
-import com.baidu.disconf.client.utils.SpringContextUtil;
 
 /**
  * @author liaoqiqi
@@ -48,19 +46,4 @@ public class DisconfCoreProcessUtils {
         }
     }
 
-    /**
-     * 获取Spring Bean
-     */
-    public static Object getSpringBean(Class<?> cls) throws Exception {
-
-        if (SpringContextUtil.getApplicationContext() == null) {
-            LOGGER.error("Spring Context is null. Cannot autowire " + cls.getCanonicalName());
-            return null;
-        }
-
-        // spring 方式
-        Object object = SpringContextUtil.getBean(cls);
-
-        return MyBeanUtils.getTargetObject(object, cls);
-    }
 }

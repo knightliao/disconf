@@ -3,6 +3,9 @@ package com.baidu.disconf.client.addons.properties;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 线程方式的reload
+ */
 public class ReloadConfiguration implements Runnable {
     List<ReconfigurableBean> reconfigurableBeans;
 

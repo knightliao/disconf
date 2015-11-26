@@ -18,6 +18,7 @@ import com.baidu.disconf.client.fetcher.FetcherFactory;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
+import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.test.common.BaseSpringMockTestCase;
 import com.baidu.disconf.client.test.model.ConfA;
 import com.baidu.disconf.client.test.model.ServiceA;
@@ -55,7 +56,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
         new MockUp<DisconfCoreFactory>() {
 
             @Mock
-            public DisconfCoreMgr getDisconfCoreMgr() throws Exception {
+            public DisconfCoreMgr getDisconfCoreMgr(Registry registry) throws Exception {
 
                 FetcherMgr fetcherMgr = FetcherFactory.getFetcherMgr();
 
@@ -63,7 +64,9 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
                 final WatchMgr watchMgr = new WatchMgrMock().getMockInstance();
                 watchMgr.init("", "", true);
 
-                DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(watchMgr, fetcherMgr);
+                // registry
+                DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(watchMgr, fetcherMgr,
+                        registry);
 
                 return disconfCoreMgr;
             }
@@ -90,7 +93,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             fileSet.add("atomserverl.properties");
             fileSet.add("atomserverm_slave.properties");
             DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileSet);
-            DisconfMgr.start(StringUtil.parseStringToStringList(ScanPackTestCase.SCAN_PACK_NAME,
+            DisconfMgr.getInstance().start(StringUtil.parseStringToStringList(ScanPackTestCase.SCAN_PACK_NAME,
                     DisconfMgrBean.SCAN_SPLIT_TOKEN));
 
             //

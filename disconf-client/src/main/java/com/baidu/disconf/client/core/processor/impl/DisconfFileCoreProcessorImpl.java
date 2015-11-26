@@ -15,6 +15,7 @@ import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
+import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.utils.GsonUtils;
@@ -38,10 +39,14 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
     // 仓库算子
     private DisconfStoreProcessor disconfStoreProcessor = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor();
 
-    public DisconfFileCoreProcessorImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr) {
+    // bean registry
+    private Registry registry = null;
+
+    public DisconfFileCoreProcessorImpl(WatchMgr watchMgr, FetcherMgr fetcherMgr, Registry registry) {
 
         this.fetcherMgr = fetcherMgr;
         this.watchMgr = watchMgr;
+        this.registry = registry;
     }
 
     /**
@@ -195,12 +200,12 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
                 object = disconfCenterFile.getObject();
                 if (object == null) {
-                    object = DisconfCoreProcessUtils.getSpringBean(disconfCenterFile.getCls());
+                    object = registry.getFirstByType(disconfCenterFile.getCls());
                 }
 
             } catch (Exception e) {
 
-                LOGGER.debug(disconfCenterFile.getCls() + " may be a non-java-bean");
+                LOGGER.error(e.toString());
                 object = null;
             }
 
