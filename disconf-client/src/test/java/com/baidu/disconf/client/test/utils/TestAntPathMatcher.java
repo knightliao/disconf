@@ -30,8 +30,8 @@ public class TestAntPathMatcher extends TestCase {
         //  String patternPath="/**/*.do";  //路径匹配模式
         //  包含模糊单字符路径匹配
 
-        String requestPath = "/app/pub/login.do"; //请求路径
-        String patternPath = "/**/lo?in.do"; //路径匹配模式
+        String requestPath = "/app/pub/login.do"; // 请求路径
+        String patternPath = "/**/lo?in.do"; // 路径匹配模式
 
         boolean result = matcher.match(patternPath, requestPath);
         assertTrue(result);
