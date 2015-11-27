@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,14 +18,14 @@ import com.baidu.disconf.web.service.roleres.constant.RoleResourceConstant;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.dsp.common.exception.AccessDeniedException;
 import com.baidu.ub.common.commons.ThreadContext;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 判断用户是否具有请求方法的访问权
  */
 @Aspect
 public class RoleResourceAspect {
-    protected static final Logger LOG = AopLogFactory.getLogger(RoleResourceAspect.class);
+
+    protected static final Logger LOG = LoggerFactory.getLogger(RoleResourceAspect.class);
 
     @Autowired
     private RoleResourceMgr roleResMgr;

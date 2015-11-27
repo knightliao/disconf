@@ -3,6 +3,7 @@ package com.baidu.disconf.web.service.user.service.impl;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,7 +16,6 @@ import com.baidu.disconf.web.service.user.service.UserInnerMgr;
 import com.baidu.disconf.web.service.user.service.UserMgr;
 import com.baidu.disconf.web.service.user.vo.VisitorVo;
 import com.baidu.ub.common.commons.ThreadContext;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author liaoqiqi
@@ -25,7 +25,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class UserMgrImpl implements UserMgr {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(UserMgrImpl.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(UserMgrImpl.class);
 
     @Autowired
     private UserInnerMgr userInnerMgr;

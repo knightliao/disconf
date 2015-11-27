@@ -11,12 +11,11 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author liaoqiqi
@@ -24,7 +23,7 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 public abstract class AbstractTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(AbstractTestCase.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AbstractTestCase.class);
 
     /**
      * 业务数据库

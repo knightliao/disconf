@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,7 +19,6 @@ import com.baidu.disconf.web.service.roleres.dao.RoleResourceDao;
 import com.baidu.disconf.web.service.roleres.service.RoleResourceMgr;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.ub.common.commons.ThreadContext;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  *
@@ -26,7 +26,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Service
 public class RoleResourceMgrImpl implements RoleResourceMgr {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(RoleResourceMgrImpl.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(RoleResourceMgrImpl.class);
 
     @Autowired
     private RoleResourceDao roleResDao;
@@ -47,7 +47,7 @@ public class RoleResourceMgrImpl implements RoleResourceMgr {
     @Cacheable(value = "${role_res_cache_name}")
     public Map<String, Map<RequestMethod, List<Integer>>> getAllAsMap() {
         Map<String, Map<RequestMethod, List<Integer>>> infoMap =
-            new HashMap<String, Map<RequestMethod, List<Integer>>>();
+                new HashMap<String, Map<RequestMethod, List<Integer>>>();
 
         LOG.info("Querying role_resource table to get all...");
         List<RoleResource> roleResList = roleResDao.findAll();

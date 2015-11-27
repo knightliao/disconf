@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.dsp.common.vo.JsonObjectUtils;
-import com.baidu.ub.common.log.AopLogFactory;
 import com.github.knightliao.apollo.utils.data.JsonUtils;
 
 /**
@@ -21,21 +21,21 @@ import com.github.knightliao.apollo.utils.data.JsonUtils;
  */
 public class WebCommonInterceptor extends HandlerInterceptorAdapter {
 
-    private static final Logger LOG = AopLogFactory.getLogger(WebCommonInterceptor.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(WebCommonInterceptor.class);
 
     @Override
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
-        throws Exception {
+            throws Exception {
     }
 
     @Override
     public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-        throws Exception {
+            throws Exception {
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-        throws Exception {
+            throws Exception {
         return false;
     }
 

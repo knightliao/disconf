@@ -9,20 +9,18 @@ import javax.sql.DataSource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.baidu.ub.common.dbmanage.datasource.VirtualDataSource;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author wangxj
  */
 public class DataSourceMonitorTask extends ApplicationObjectSupport {
 
-    protected final static Logger log = AopLogFactory.getLogger(DataSourceMonitorTask.class);
-    // protected final static Logger log =
-    // Logger.getLogger(DataSourceMonitorTask.class);
+    protected static final Logger log = LoggerFactory.getLogger(DataSourceMonitorTask.class);
 
     @Resource
     private List<VirtualDataSource> dataSourceList;

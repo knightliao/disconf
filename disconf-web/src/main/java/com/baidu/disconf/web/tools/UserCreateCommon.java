@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.web.service.role.bo.RoleEnum;
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
-import com.baidu.ub.common.log.AopLogFactory;
 import com.github.knightliao.apollo.utils.common.RandomUtil;
 
 /**
@@ -17,7 +17,7 @@ import com.github.knightliao.apollo.utils.common.RandomUtil;
  */
 public class UserCreateCommon {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(UserCreateCommon.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(UserCreateCommon.class);
 
     /**
      * @param userName
@@ -105,10 +105,12 @@ public class UserCreateCommon {
                 System.out.format("DELETE FROM `user` where user_id=%d;\n", user.getId());
             }
             System.out
-                .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES (%d," +
-                            " '%s', " +
-                            "'%s', '%s','%s', '%d');\n", user.getId(), user.getName(), user.getPassword(),
-                           user.getToken(), user.getOwnApps(), user.getRoleId());
+                    .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES "
+                                    + "(%d,"
+                                    +
+                                    " '%s', " +
+                                    "'%s', '%s','%s', '%d');\n", user.getId(), user.getName(), user.getPassword(),
+                            user.getToken(), user.getOwnApps(), user.getRoleId());
         }
         System.out.println("\n");
     }

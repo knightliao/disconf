@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,6 @@ import com.baidu.disconf.web.web.auth.constant.LoginConstant;
 import com.baidu.disconf.web.web.auth.login.RedisLogin;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.interceptor.WebCommonInterceptor;
-import com.baidu.ub.common.log.AopLogFactory;
 import com.github.knightliao.apollo.utils.tool.TokenUtil;
 import com.github.knightliao.apollo.utils.web.CookieUtils;
 
@@ -30,7 +30,7 @@ import com.github.knightliao.apollo.utils.web.CookieUtils;
  */
 public class LoginInterceptor extends WebCommonInterceptor {
 
-    private static final Logger LOG = AopLogFactory.getLogger(LoginInterceptor.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Resource
     private UserMgr userMgr;
@@ -47,13 +47,13 @@ public class LoginInterceptor extends WebCommonInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
-        throws Exception {
+            throws Exception {
 
     }
 
     @Override
     public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-        throws Exception {
+            throws Exception {
     }
 
     /**
@@ -65,7 +65,7 @@ public class LoginInterceptor extends WebCommonInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-        throws Exception {
+            throws Exception {
 
         //
         // 去掉不需拦截的path
@@ -146,8 +146,8 @@ public class LoginInterceptor extends WebCommonInterceptor {
             String cookieString = TokenUtil.generateToken();
 
             CookieUtils
-                .setCookie(response, LoginConstant.XONE_COOKIE_NAME_STRING, cookieString, XONE_COOKIE_DOMAIN_STRING,
-                              LoginConstant.XONE_COOKIE_AGE);
+                    .setCookie(response, LoginConstant.XONE_COOKIE_NAME_STRING, cookieString, XONE_COOKIE_DOMAIN_STRING,
+                            LoginConstant.XONE_COOKIE_AGE);
         } else {
         }
     }

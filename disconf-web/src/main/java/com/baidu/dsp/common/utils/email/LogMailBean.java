@@ -7,13 +7,13 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.ub.common.commons.ThreadContext;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author liaoqiqi
@@ -21,6 +21,8 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 @Service
 public class LogMailBean {
+
+    protected static final Logger LOG = LoggerFactory.getLogger(LogMailBean.class);
 
     /**
      * 发送报警邮件中标题的最大长度，255
@@ -31,7 +33,6 @@ public class LogMailBean {
      * 发送报警邮件中邮件标题信息
      */
     public static final String ALARM_MAIL_TITLE = "fatal message mail ";
-    private static Logger LOG = AopLogFactory.getLogger(LogMailBean.class);
 
     @Autowired
     private ApplicationPropertyConfig emailProperties;

@@ -1,6 +1,7 @@
 package com.baidu.disconf.web.service.sign.service.impl;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,7 +12,6 @@ import com.baidu.disconf.web.service.sign.service.SignMgr;
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 与登录登出相关的
@@ -23,7 +23,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class SignMgrImpl implements SignMgr {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(SignMgrImpl.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(SignMgrImpl.class);
 
     @Autowired
     private SignDao signDao;
@@ -43,8 +43,8 @@ public class SignMgrImpl implements SignMgr {
     /**
      * 验证密码是否正确
      *
-     * @param token
-     * @param password
+     * @param userPassword
+     * @param passwordToBeValidate
      *
      * @return
      */

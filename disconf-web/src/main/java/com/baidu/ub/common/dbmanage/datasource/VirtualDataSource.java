@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.baidu.ub.common.log.AopLogFactory;
-
 public class VirtualDataSource implements Serializable, BeanNameAware, InitializingBean {
 
+    protected static final Logger log = LoggerFactory.getLogger(VirtualDataSource.class);
+
     private static final long serialVersionUID = 2391107997087589405L;
-    private static Logger log = AopLogFactory.getLogger(VirtualDataSource.class);
 
     protected List<String> masterSet;
     protected List<String> slaveSet;

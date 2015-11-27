@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.NoSuchMessageException;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.FrontEndInterfaceConstant;
 import com.baidu.dsp.common.context.ContextReader;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 通用的JSON返回器
@@ -25,7 +25,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Component
 public class JsonObjectUtils {
 
-    private final static Logger LOG = AopLogFactory.getLogger(JsonObjectUtils.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(JsonObjectUtils.class);
 
     private static ContextReader contextReader;
 

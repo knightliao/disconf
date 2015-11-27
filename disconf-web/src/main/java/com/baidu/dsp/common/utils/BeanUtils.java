@@ -13,9 +13,8 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 反射的Utils函数集合.
@@ -24,7 +23,7 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 public class BeanUtils {
 
-    private static final Logger logger = AopLogFactory.getLogger(BeanUtils.class);
+    protected static final Logger logger = LoggerFactory.getLogger(BeanUtils.class);
 
     private static final String ENTITY_CLASS_PACKAGE = "com.baidu.dsp";
 

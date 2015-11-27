@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baidu.dsp.common.exception.FieldException;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author liaoqiqi
@@ -17,7 +17,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Component
 public class FileUploadValidator {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(FileUploadValidator.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(FileUploadValidator.class);
 
     /**
      * 验证文件大小，文件名，文件后缀

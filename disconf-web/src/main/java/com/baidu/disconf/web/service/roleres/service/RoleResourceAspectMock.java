@@ -5,17 +5,17 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 判断用户是否具有请求方法的访问权
  */
 @Aspect
 public class RoleResourceAspectMock {
-    protected static final Logger LOG = AopLogFactory.getLogger(RoleResourceAspectMock.class);
+
+    protected static final Logger LOG = LoggerFactory.getLogger(RoleResourceAspectMock.class);
 
     @Autowired
     private RoleResourceMgr roleResMgr;

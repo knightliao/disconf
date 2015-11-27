@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -14,7 +15,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * 邮件发送公共类
@@ -25,7 +25,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @Service
 public class MailBean implements InitializingBean {
 
-    private static Logger LOG = AopLogFactory.getLogger(MailBean.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(MailBean.class);
 
     @Autowired
     private ApplicationPropertyConfig emailProperties;
@@ -40,7 +40,7 @@ public class MailBean implements InitializingBean {
      * @throws AddressException
      */
     public void sendHtmlMail(String from, String[] to, String title, String text)
-        throws AddressException, MessagingException {
+            throws AddressException, MessagingException {
 
         long start = System.currentTimeMillis();
 

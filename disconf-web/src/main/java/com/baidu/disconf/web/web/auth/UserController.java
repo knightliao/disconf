@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,6 @@ import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
-import com.baidu.ub.common.log.AopLogFactory;
 
 /**
  * @author liaoqiqi
@@ -33,7 +33,7 @@ import com.baidu.ub.common.log.AopLogFactory;
 @RequestMapping(WebConstants.API_PREFIX + "/account")
 public class UserController extends BaseController {
 
-    private final static Logger LOG = AopLogFactory.getLogger(UserController.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserMgr userMgr;

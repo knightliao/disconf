@@ -1,8 +1,7 @@
 package com.baidu.disconf.web.service.user.constant;
 
 import org.slf4j.Logger;
-
-import com.baidu.ub.common.log.AopLogFactory;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author liaoqiqi
@@ -10,7 +9,7 @@ import com.baidu.ub.common.log.AopLogFactory;
  */
 public class UserConstant {
 
-    protected final static Logger LOG = AopLogFactory.getLogger(UserConstant.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(UserConstant.class);
 
     /**
      * 是白名单用户
