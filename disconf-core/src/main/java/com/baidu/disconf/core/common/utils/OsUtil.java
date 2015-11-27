@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * OsUtil
+ *
  * @author knightliao
  */
 public final class OsUtil {
@@ -193,6 +195,7 @@ public final class OsUtil {
                     try {
                         Thread.sleep(1000 * tryTime);
                     } catch (Exception e) {
+                        System.out.print("");
                     }
                 }
 

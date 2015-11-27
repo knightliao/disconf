@@ -29,7 +29,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
      *
      * @param w 上午10:27:27 created by Darwin(Tianxin)
      */
-    public final static void closeWriter(Writer w) {
+    public static final void closeWriter(Writer w) {
         if (w != null) {
             try {
                 w.close();
@@ -43,7 +43,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
      *
      * @param r 上午10:27:27 created by Darwin(Tianxin)
      */
-    public final static void closeReader(Reader r) {
+    public static final void closeReader(Reader r) {
         if (r != null) {
             try {
                 r.close();
@@ -57,7 +57,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
      *
      * @param os 上午10:27:27 created by Darwin(Tianxin)
      */
-    public final static void closeOutputStream(OutputStream os) {
+    public static final void closeOutputStream(OutputStream os) {
         if (os != null) {
             try {
                 os.close();
@@ -71,7 +71,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
      *
      * @param is 上午10:27:27 created by Darwin(Tianxin)
      */
-    public final static void closeInputStream(InputStream is) {
+    public static final void closeInputStream(InputStream is) {
         if (is != null) {
             try {
                 is.close();

@@ -114,8 +114,8 @@ public final class DisconfAutowareConfig {
 
             for (Field field : fields) {
 
-                if (field.isAnnotationPresent(DisconfFileItem.class) ||
-                        field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
+                if (field.isAnnotationPresent(DisconfFileItem.class)
+                        || field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
 
                     if (Modifier.isStatic(field.getModifiers())) {
                         continue;
@@ -167,6 +167,22 @@ public final class DisconfAutowareConfig {
 
             throw new Exception("error while autowire config file", e);
         }
+    }
+
+    /**
+     * 自动导入某个配置文件
+     *
+     * @throws Exception
+     */
+    public static void autowareConfig(final Object obj, final String propertyFilePath) throws Exception {
+
+        // 读配置文件
+        Properties prop = getProperties(propertyFilePath);
+        if (null == prop || obj == null) {
+            throw new Exception("cannot autowareConfig " + propertyFilePath);
+        }
+
+        autowareConfig(obj, prop);
     }
 
     /**
@@ -223,19 +239,4 @@ public final class DisconfAutowareConfig {
         autowareStaticConfig(cls, prop);
     }
 
-    /**
-     * 自动导入某个配置文件
-     *
-     * @throws Exception
-     */
-    public static void autowareConfig(final Object obj, final String propertyFilePath) throws Exception {
-
-        // 读配置文件
-        Properties prop = getProperties(propertyFilePath);
-        if (null == prop || obj == null) {
-            throw new Exception("cannot autowareConfig " + propertyFilePath);
-        }
-
-        autowareConfig(obj, prop);
-    }
 }

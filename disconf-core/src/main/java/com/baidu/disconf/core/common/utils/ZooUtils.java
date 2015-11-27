@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * ZooUtils
+ *
  * @author liaoqiqi
  * @version 2014-7-30
  */

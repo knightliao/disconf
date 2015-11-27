@@ -4,6 +4,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
+ * MachineInfo
+ *
  * @author liaoqiqi
  * @version 2014-7-30
  */
