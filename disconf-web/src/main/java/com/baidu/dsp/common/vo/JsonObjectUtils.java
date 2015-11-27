@@ -161,6 +161,7 @@ public class JsonObjectUtils {
         model.addObject(FrontEndInterfaceConstant.RETURN_MESSAGE, json.getMessage());
         model.addObject(FrontEndInterfaceConstant.STATUS_CODE_STRING, json.getStatus());
         model.addObject(FrontEndInterfaceConstant.SESSION_ID, json.getSessionId());
+
         return model;
     }
 
