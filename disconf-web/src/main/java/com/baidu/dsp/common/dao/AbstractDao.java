@@ -52,7 +52,7 @@ public abstract class AbstractDao<KEY extends Serializable, ENTITY extends BaseO
 
     @Override
     public void recordLog(String sLog) {
-        LOG.info(sLog);
+        LOG.debug(sLog);
     }
 
     // modified by liqingyun

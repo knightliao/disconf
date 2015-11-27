@@ -88,10 +88,12 @@ public class ZooController extends BaseController {
     @ResponseBody
     public JsonObjectBase getZkDeployInfo(@Valid ZkDeployForm zkDeployForm) {
 
+        LOG.info(zkDeployForm.toString());
+
         ConfigFullModel configFullModel = zkDeployValidator.verify(zkDeployForm);
 
         String data = zkDeployMgr.getDeployInfo(configFullModel.getApp().getName(), configFullModel.getEnv().getName(),
-                                                   zkDeployForm.getVersion());
+                zkDeployForm.getVersion());
 
         return buildSuccess("hostInfo", data);
     }

@@ -59,6 +59,8 @@ public class AppController extends BaseController {
     @ResponseBody
     public JsonObjectBase create(@Valid AppNewForm appNewForm) {
 
+        LOG.info(appNewForm.toString());
+
         appValidator.validateCreate(appNewForm);
 
         appMgr.create(appNewForm);

@@ -84,6 +84,8 @@ public class UserController extends BaseController {
     @ResponseBody
     public JsonObjectBase signin(@Valid SigninForm signin, HttpServletRequest request) {
 
+        LOG.info(signin.toString());
+
         // 验证
         authValidator.validateLogin(signin);
 

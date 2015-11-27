@@ -47,6 +47,8 @@ public class JsonObjectUtils {
         JsonObject json = new JsonObject();
         json.addData(key, value);
 
+        LOG.info(json.toString());
+
         return json;
     }
 
@@ -61,6 +63,8 @@ public class JsonObjectUtils {
 
         JsonSimpleObject json = new JsonSimpleObject();
         json.setResult(value);
+
+        LOG.info(json.toString());
 
         return json;
     }
@@ -80,6 +84,8 @@ public class JsonObjectUtils {
         json.addData(value);
         json.addFootData(footResult);
 
+        LOG.info(json.toString());
+
         return json;
     }
 
@@ -98,6 +104,8 @@ public class JsonObjectUtils {
         for (String str : errors.keySet()) {
             json.addFieldError(str, contextReader.getMessage(errors.get(str)));
         }
+
+        LOG.info(json.toString());
 
         return json;
     }
@@ -124,6 +132,8 @@ public class JsonObjectUtils {
             }
         }
 
+        LOG.info(json.toString());
+
         return json;
     }
 
@@ -136,6 +146,8 @@ public class JsonObjectUtils {
         json.setStatus(errorCode.getCode());
 
         json.addGlobalError(contextReader.getMessage(error));
+
+        LOG.info(json.toString());
 
         return json;
     }

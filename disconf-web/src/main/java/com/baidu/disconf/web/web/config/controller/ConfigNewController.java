@@ -77,6 +77,8 @@ public class ConfigNewController extends BaseController {
     @RequestMapping(value = "/file", method = RequestMethod.POST)
     public JsonObjectBase updateFile(@Valid ConfNewForm confNewForm, @RequestParam("myfilerar") MultipartFile file) {
 
+        LOG.info(confNewForm.toString());
+
         //
         // 校验
         //
@@ -126,6 +128,8 @@ public class ConfigNewController extends BaseController {
     @RequestMapping(value = "/filetext", method = RequestMethod.POST)
     public JsonObjectBase updateFileWithText(@Valid ConfNewForm confNewForm, @NotNull String fileContent,
                                              @NotNull String fileName) {
+
+        LOG.info(confNewForm.toString());
 
         // 创建配置文件表格
         ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);

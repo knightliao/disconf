@@ -59,6 +59,8 @@ public class ConfigFetcherController {
     @ResponseBody
     public ValueVo getItem(ConfForm confForm) {
 
+        LOG.info(confForm.toString());
+
         //
         // 校验
         //
@@ -71,7 +73,7 @@ public class ConfigFetcherController {
         }
 
         return configFetchMgr.getConfItemByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
-                                                        configModel.getVersion(), configModel.getKey());
+                configModel.getVersion(), configModel.getKey());
     }
 
     /**
@@ -101,9 +103,9 @@ public class ConfigFetcherController {
             try {
                 //
                 Config config = configFetchMgr
-                                    .getConfByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
-                                                           configModel.getVersion(), configModel.getKey(),
-                                                           DisConfigTypeEnum.FILE);
+                        .getConfByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
+                                configModel.getVersion(), configModel.getKey(),
+                                DisConfigTypeEnum.FILE);
                 if (config == null) {
                     hasError = true;
                     throw new DocumentNotFoundException(configModel.getKey());
