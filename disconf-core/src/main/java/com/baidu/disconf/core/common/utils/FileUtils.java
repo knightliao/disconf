@@ -34,6 +34,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
             try {
                 w.close();
             } catch (Exception e) {
+                logger.warn(e.toString());
             }
         }
     }
@@ -48,6 +49,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
             try {
                 r.close();
             } catch (Exception e) {
+                logger.warn(e.toString());
             }
         }
     }
@@ -62,6 +64,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
             try {
                 os.close();
             } catch (Exception e) {
+                logger.warn(e.toString());
             }
         }
     }
@@ -76,6 +79,7 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
             try {
                 is.close();
             } catch (Exception e) {
+                logger.warn(e.toString());
             }
         }
     }

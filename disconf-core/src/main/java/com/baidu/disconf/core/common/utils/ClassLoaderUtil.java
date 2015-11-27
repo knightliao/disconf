@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * ClassLoaderUtil
  */
 public final class ClassLoaderUtil {
 
@@ -19,9 +19,6 @@ public final class ClassLoaderUtil {
     // loader
     private static ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
-    /*
-
-     */
     private ClassLoaderUtil() {
 
     }
