@@ -155,9 +155,11 @@ public class DisconfMgr implements ApplicationContextAware {
             //startTimer();
 
             //
-            LOGGER.info("Conf File Map: " + DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().confToString());
+            LOGGER.info("Conf File Map: {}", DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
+                    .confToString());
             //
-            LOGGER.info("Conf Item Map: " + DisconfStoreProcessorFactory.getDisconfStoreItemProcessor().confToString());
+            LOGGER.info("Conf Item Map: {}", DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
+                    .confToString());
         }
         LOGGER.info("******************************* DISCONF END *******************************");
     }
@@ -188,7 +190,7 @@ public class DisconfMgr implements ApplicationContextAware {
             if (disconfCoreMgr != null) {
                 disconfCoreMgr.processFile(filename);
             }
-            LOGGER.debug("disconf reloadable file:" + filename);
+            LOGGER.debug("disconf reloadable file: {}", filename);
 
         } catch (Exception e) {
 
