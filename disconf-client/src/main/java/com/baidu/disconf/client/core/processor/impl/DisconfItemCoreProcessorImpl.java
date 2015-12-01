@@ -174,7 +174,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             //
             if (!Modifier.isStatic(field.getModifiers())) {
 
-                object = registry.getFirstByType(field.getDeclaringClass());
+                object = registry.getFirstByType(field.getDeclaringClass(), true);
             }
 
             disconfStoreProcessor.inject2Instance(object, key);

@@ -6,8 +6,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.Advised;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -44,10 +45,11 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
 
         Map<String, T> map = findByTypeWithName(type);
         if (map == null || map.isEmpty()) {
-            LOGGER.warn("Not found from Spring IoC container for " + type.getSimpleName() + ", and try to init by "
+            LOGGER.debug("Not found from Spring IoC container for " + type.getSimpleName() + ", and try to init by "
                     + "calling newInstance.");
             return simpleRegistry.findByType(type);
         }
+
         return new ArrayList<T>(map.values());
     }
 
@@ -60,6 +62,23 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
         return list.get(0);
     }
 
+    @Override
+    public <T> T getFirstByType(Class<T> type, boolean withProxy) {
+
+        T object = getFirstByType(type);
+
+        if (!withProxy) {
+            return object;
+        }
+
+        try {
+            return getTargetObject(object, type);
+        } catch (Exception e) {
+            LOGGER.warn(e.toString());
+            return object;
+        }
+    }
+
     /**
      * 调用Spring工具类获取bean
      *
@@ -68,6 +87,16 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
      * @return 容器托管的bean字典
      */
     public <T> Map<String, T> findByTypeWithName(Class<T> type) {
-        return BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, type);
+        return applicationContext.getBeansOfType(type);
+    }
+
+    protected <T> T getTargetObject(Object proxy, Class<T> targetClass) throws Exception {
+        if (AopUtils.isJdkDynamicProxy(proxy)) {
+            return (T) ((Advised) proxy).getTargetSource().getTarget();
+        } else if (AopUtils.isCglibProxy(proxy)) {
+            return (T) ((Advised) proxy).getTargetSource().getTarget();
+        } else {
+            return (T) proxy;
+        }
     }
 }

@@ -8,11 +8,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
 
+import com.baidu.disconf.client.store.aspect.DisconfAspectJ;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 import com.baidu.disconf.client.utils.StringUtil;
 
@@ -49,7 +51,6 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
      */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
     }
 
     /**
@@ -72,11 +73,31 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
         // 进行扫描
         DisconfMgr.getInstance().setApplicationContext(applicationContext);
         DisconfMgr.getInstance().firstScan(scanPackList);
+
+        // register java bean
+        registerAspect(registry);
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    /**
+     * register aspectJ for disconf get request
+     *
+     * @param registry
+     */
+    private void registerAspect(BeanDefinitionRegistry registry) {
+
+        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        beanDefinition.setBeanClass(DisconfAspectJ.class);
+        beanDefinition.setLazyInit(false);
+        beanDefinition.setAbstract(false);
+        beanDefinition.setAutowireCandidate(true);
+        beanDefinition.setScope("singleton");
+
+        registry.registerBeanDefinition("disconfAspectJ", beanDefinition);
     }
 
     /*

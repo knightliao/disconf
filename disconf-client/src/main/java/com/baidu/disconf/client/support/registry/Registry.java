@@ -24,4 +24,13 @@ public interface Registry {
      * @return 可找到的Bean的实例列表
      */
     <T> T getFirstByType(Class<T> type);
+
+    /**
+     * 查找Bean, 是否找proxy
+     *
+     * @param type 类型
+     *
+     * @return 可找到的Bean的实例列表
+     */
+    <T> T getFirstByType(Class<T> type, boolean withProxy);
 }
