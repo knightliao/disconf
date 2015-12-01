@@ -31,8 +31,8 @@ https://github.com/knightliao/disconf-demos-java
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.28-SNAPSHOT
-- master(stable branch)：2.6.28
+- dev(develop branch): 2.6.29-SNAPSHOT
+- master(stable branch)：2.6.29
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
@@ -108,7 +108,7 @@ Disconf的功能特点描述图：
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.28</version>
+        <version>2.6.29</version>
     </dependency>
 
 ### server: disconf-web 使用 ###
