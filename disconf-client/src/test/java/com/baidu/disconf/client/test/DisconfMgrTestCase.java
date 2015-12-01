@@ -93,6 +93,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             fileSet.add("atomserverl.properties");
             fileSet.add("atomserverm_slave.properties");
             DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileSet);
+
             DisconfMgr.getInstance().start(StringUtil.parseStringToStringList(ScanPackTestCase.SCAN_PACK_NAME,
                     DisconfMgrBean.SCAN_SPLIT_TOKEN));
 
