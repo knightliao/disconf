@@ -180,11 +180,12 @@ APP+环境+版本+ZK查询：
 - [普联(Tp-link)技术有限公司](http://www.tp-link.com.cn/)
 - [杭州数梦工场科技有限公司](http://www.dtdream.com)
 - [众钱网](http://17money.com)
+- [快速递](www.ksudi.com) 
 - [更多](https://github.com/knightliao/disconf/issues/18)
 
 ## 他人评价
 
-others:
+快速递技术总监:
 
 ![http://ww1.sinaimg.cn/bmiddle/60c9620fjw1ergy58j978j20i302u0t2.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fjw1ergy58j978j20i302u0t2.jpg)
 
