@@ -172,7 +172,7 @@ APP+环境+版本+ZK查询：
     
 ## 大家都在使用disconf ##
 
-- [百度]（5+条产品线使用）
+- [百度]（20+条产品线使用）
 - [网易](http://www.163.com/)
 - [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
 - [拉勾网](http://www.lagou.com/) 
@@ -181,6 +181,8 @@ APP+环境+版本+ZK查询：
 - [杭州数梦工场科技有限公司](http://www.dtdream.com)
 - [众钱网](http://17money.com)
 - [快速递](http://www.ksudi.com) 
+- [杭州趣维科技](http://www.xiaoying.tv/) (数千万RMB A轮投资)
+- [百世物流科技](http://www.800best.com/) （在全国建立了400多个运作中心和250万平米的仓库及转运中心，拥有30000多员工和上万个认证加盟商及合作伙伴）
 - [更多](https://github.com/knightliao/disconf/issues/18)
 
 ## 他人评价
