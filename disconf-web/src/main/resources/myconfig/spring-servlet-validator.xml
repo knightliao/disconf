@@ -6,7 +6,7 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>classpath:message-info</value>
+                <value>classpath:messages/message-info</value>
                 <value>classpath:com/baidu/disconf/web/web/auth/resource/sign-controller-info
                 </value>
                 <value>classpath:com/baidu/disconf/web/service/sign/resource/sign-service-info

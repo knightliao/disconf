@@ -394,6 +394,21 @@
     </build>
 
     <profiles>
+        <!-- 开发环境默认激活的profile -->
+        <profile>
+            <id>rd</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <!-- 指定环境差异配置的配置文件所在目录 -->
+                    <resource>
+                        <directory>${basedir}/profile/rd</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
 
         <!-- online -->
         <profile>
@@ -404,11 +419,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/RoleResourceAspectMock.java</exclude>
-                            </excludes>
-                        </configuration>
                     </plugin>
 
                     <plugin>
@@ -428,9 +438,6 @@
                                 <resource>
                                     <directory>${project.build.online.sourceDir}</directory>
                                     <targetPath>/</targetPath>
-                                    <includes>
-                                        <include>**/logagent.conf</include>
-                                    </includes>
                                 </resource>
 
                             </webResources>
