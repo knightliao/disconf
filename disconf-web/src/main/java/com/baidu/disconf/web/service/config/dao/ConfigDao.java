@@ -26,7 +26,7 @@ public interface ConfigDao extends BaseDao<Long, Config> {
     Config getByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum);
 
     /**
-     * @param appName
+     * @param
      *
      * @return
      */
@@ -62,4 +62,8 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      */
     List<Config> getConfigList(Long appId, Long envId, String version);
 
+    /**
+     * @param configId
+     */
+    void deleteItem(Long configId);
 }

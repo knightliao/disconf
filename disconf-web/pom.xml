@@ -335,9 +335,17 @@
 
     <!-- build -->
     <build>
-
         <defaultGoal>package</defaultGoal>
         <finalName>${project.artifactId}</finalName>
+
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
@@ -348,48 +356,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-
-            <!-- embedded jetty web server for run beidou, beidou-report, 
-                beidou-rp -->
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
                 <configuration>
-                    <!-- hot redeploy interval in seconds -->
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-
-                    <tempDirectory>${project.build.directory}/work</tempDirectory>
-
-                    <webAppConfig>
-                        <contextPath>/</contextPath>
-                    </webAppConfig>
-
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
-
-                    <!-- specify run port, default is 8080 -->
-                    <connectors>
-                        <connector
-                                implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                            <port>8089</port>
-                            <maxIdleTime>60000</maxIdleTime>
-                        </connector>
-                    </connectors>
-
-                    <!-- specify stop key and port -->
-                    <stopKey>jetty-stopy-key</stopKey>
-                    <stopPort>8009</stopPort>
-
-                    <!-- deploy multiple projects -->
-                    <contextHandlers>
-                        <contextHandler
-                                implementation="org.mortbay.jetty.webapp.WebAppContext">
-                            <resourceBase>../dsp-static-demo</resourceBase>
-                            <contextPath>/static</contextPath>
-                        </contextHandler>
-                    </contextHandlers>
+                    <webResources>
+                        <resource>
+                            <directory>${project.basedir}/src/main/resources</directory>
+                            <includes>
+                                <include>**/*.*</include>
+                            </includes>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

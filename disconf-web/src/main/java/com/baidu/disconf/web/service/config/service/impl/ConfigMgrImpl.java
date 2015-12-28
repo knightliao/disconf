@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf.web.common.Constants;
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.app.bo.App;
@@ -28,12 +29,12 @@ import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.dao.ConfigDao;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
+import com.baidu.disconf.web.service.config.service.ConfigHistoryMgr;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
-import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
@@ -71,9 +72,6 @@ public class ConfigMgrImpl implements ConfigMgr {
     private ZooKeeperDriver zooKeeperDriver;
 
     @Autowired
-    private ZooConfig zooConfig;
-
-    @Autowired
     private ZkDeployMgr zkDeployMgr;
 
     @Autowired
@@ -81,6 +79,9 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private ApplicationPropertyConfig applicationPropertyConfig;
+
+    @Autowired
+    private ConfigHistoryMgr configHistoryMgr;
 
     /**
      * 根据APPid获取其版本列表
@@ -109,7 +110,7 @@ public class ConfigMgrImpl implements ConfigMgr {
      *
      * @return
      */
-    public List<File> getDisonfFileList(ConfListForm confListForm) {
+    public List<File> getDisconfFileList(ConfListForm confListForm) {
 
         List<Config> configList =
                 configDao.getConfigList(confListForm.getAppId(), confListForm.getEnvId(), confListForm.getVersion());
@@ -155,7 +156,6 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         //
         //
-
         final App app = appMgr.getById(confListForm.getAppId());
         final Env env = envMgr.getById(confListForm.getEnvId());
 
@@ -203,7 +203,7 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     *
+     * 获取ZK data
      */
     private MachineListVo getZkData(List<ZkDisconfDataItem> datalist, Config config) {
 
@@ -318,7 +318,7 @@ public class ConfigMgrImpl implements ConfigMgr {
                     errorKeyList.add(keyInZk);
 
                 } else {
-                    
+
                     zkDataStr = zkDataStr.trim();
                     boolean isEqual = true;
 
@@ -417,6 +417,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         // 配置数据库的值 encode to db
         //
         configDao.updateValue(configId, CodeUtils.utf8ToUnicode(value));
+        configHistoryMgr.createOne(configId, oldValue, CodeUtils.utf8ToUnicode(value));
 
         //
         // 发送邮件通知
@@ -440,6 +441,8 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
+     * 主要用于邮箱发送
+     *
      * @return
      */
     private String getConfigUrlHtml(Config config) {
@@ -449,6 +452,8 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
+     * 主要用于邮箱发送
+     *
      * @param newValue
      * @param identify
      *
@@ -508,6 +513,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         config.setType(disConfigTypeEnum.getType());
         config.setVersion(confNewForm.getVersion());
         config.setValue(CodeUtils.utf8ToUnicode(confNewForm.getValue()));
+        config.setStatus(Constants.STATUS_NORMAL);
 
         // 时间
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
@@ -515,22 +521,29 @@ public class ConfigMgrImpl implements ConfigMgr {
         config.setUpdateTime(curTime);
 
         configDao.create(config);
+        configHistoryMgr.createOne(config.getId(), "", config.getValue());
 
         // 发送邮件通知
         //
         String toEmails = appMgr.getEmails(config.getAppId());
-
         if (applicationPropertyConfig.isEmailMonitorOn() == true) {
             logMailBean.sendHtmlEmail(toEmails, " config new", getNewValue(confNewForm.getValue(), config.toString(),
                     getConfigUrlHtml(config)));
         }
-
     }
 
+    /**
+     * 删除配置
+     *
+     * @param configId
+     */
     @Override
     public void delete(Long configId) {
 
-        configDao.delete(configId);
+        Config config = configDao.get(configId);
+        configHistoryMgr.createOne(configId, config.getValue(), "");
+
+        configDao.deleteItem(configId);
     }
 
 }

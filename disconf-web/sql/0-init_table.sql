@@ -59,3 +59,4 @@ CREATE TABLE `user` (
   `role_id` bigint(20) NOT NULL DEFAULT '1' COMMENT '角色ID',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
