@@ -97,11 +97,7 @@ disconf-web
 
 **初始化数据库：**
 
-依次执行：
-
-- 执行 sql/1-init_table.sql
-- 执行 sql/2-data.sql
-- 执行 sql/20141201/disconf.sql
+可以参考 sql/readme.md 来进行数据库的初始化。
 
 里面默认有6个用户
 
