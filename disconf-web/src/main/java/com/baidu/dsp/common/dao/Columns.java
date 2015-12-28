@@ -6,38 +6,38 @@ package com.baidu.dsp.common.dao;
  */
 public class Columns {
 
-    public final static String CREATE_TIME = "create_time";
-    public final static String UPDATE_TIME = "update_time";
-    public final static String CREATE_BY = "create_by";
-    public final static String UPDATE_BY = "update_by";
+    public static final String CREATE_TIME = "create_time";
+    public static final String UPDATE_TIME = "update_time";
+    public static final String CREATE_BY = "create_by";
+    public static final String UPDATE_BY = "update_by";
 
-    public final static String NAME = "name";
+    public static final String NAME = "name";
 
-    public final static String VERSION = "version";
+    public static final String VERSION = "version";
 
-    public final static String DESC = "description";
+    public static final String DESC = "description";
 
-    public final static String VALUE = "value";
+    public static final String VALUE = "value";
 
-    public final static String APP_ID = "app_id";
-    public final static String ENV_ID = "env_id";
-    public final static String CONFIG_ID = "config_id";
-    public final static String USER_ID = "user_id";
+    public static final String APP_ID = "app_id";
+    public static final String ENV_ID = "env_id";
+    public static final String CONFIG_ID = "config_id";
+    public static final String USER_ID = "user_id";
 
-    public final static String TYPE = "type";
+    public static final String TYPE = "type";
 
-    public final static String STATUS = "status";
+    public static final String STATUS = "status";
 
-    public final static String TOKEN = "token";
-    public final static String PASSWORD = "password";
+    public static final String TOKEN = "token";
+    public static final String PASSWORD = "password";
 
-    public final static String EMAILS = "emails";
+    public static final String EMAILS = "emails";
 
-    public final static String OWNAPPS = "ownapps";
+    public static final String OWNAPPS = "ownapps";
 
-    public final static String ROLE_ID = "role_id";
+    public static final String ROLE_ID = "role_id";
 
-    public final static class RoleColumns {
+    public static final class RoleColumns {
         public final static String ROLE_NAME = "role_name";
     }
 }

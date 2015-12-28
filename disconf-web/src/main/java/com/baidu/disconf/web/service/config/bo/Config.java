@@ -28,7 +28,7 @@ public class Config extends BaseObject<Long> {
     private Integer type;
 
     /**
-     *
+     * status
      */
     @Column(value = Columns.STATUS)
     private Integer status;
