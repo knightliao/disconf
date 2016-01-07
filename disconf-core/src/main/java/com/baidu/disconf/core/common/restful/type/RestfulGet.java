@@ -1,10 +1,14 @@
 package com.baidu.disconf.core.common.restful.type;
 
+import java.net.URL;
+
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
+import com.baidu.disconf.core.common.restful.impl.HttpResponseCallbackHandlerJsonHandler;
 import com.baidu.disconf.core.common.utils.http.HttpClientUtil;
 import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
 
@@ -14,17 +18,20 @@ import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
  * @author liaoqiqi
  * @version 2014-6-16
  */
-public class RestfulGet<T> implements UnreliableInterface {
+public class RestfulGet<ValueVo> implements UnreliableInterface {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(RestfulGet.class);
 
     private HttpRequestBase request = null;
-    private HttpResponseCallbackHandler<T> httpResponseCallbackHandler = null;
+    private HttpResponseCallbackHandler httpResponseCallbackHandler = null;
 
-    public RestfulGet(HttpRequestBase request, HttpResponseCallbackHandler<T> responseHandler) {
+    public RestfulGet(URL url) {
 
+        HttpGet request = new HttpGet(url.toString());
+        request.addHeader("content-type", "application/json");
         this.request = request;
-        this.httpResponseCallbackHandler = responseHandler;
+        this.httpResponseCallbackHandler = new
+                HttpResponseCallbackHandlerJsonHandler();
     }
 
     /**
@@ -33,7 +40,7 @@ public class RestfulGet<T> implements UnreliableInterface {
     @Override
     public Object call() throws Exception {
 
-        T value = HttpClientUtil.execute(request, httpResponseCallbackHandler);
+        ValueVo value = (ValueVo) HttpClientUtil.execute(request, httpResponseCallbackHandler);
 
         return value;
     }

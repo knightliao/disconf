@@ -26,10 +26,6 @@ public class HttpClientUtil {
      */
     protected static CloseableHttpClient httpclient;
 
-    static {
-        buildHttpClient();
-    }
-
     /**
      * 初始化httpclient对象
      */
@@ -127,6 +123,10 @@ public class HttpClientUtil {
             } catch (IOException e) {
             }
         }
+    }
+
+    public static void init() {
+        buildHttpClient();
     }
 
 }

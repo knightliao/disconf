@@ -114,7 +114,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
             Assert.assertEquals(new Integer(1000).intValue(), serviceA.getVarAA());
 
-            LOGGER.info(String.valueOf("staticvar: " + StaticConf.getStaticvar()));
+            LOGGER.info(String.valueOf("static var: " + StaticConf.getStaticvar()));
             Assert.assertEquals(new Integer(50).intValue(), StaticConf.getStaticvar());
 
             LOGGER.info("================ AFTER DISCONF ==============================");

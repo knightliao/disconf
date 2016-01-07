@@ -29,7 +29,6 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     public static void myInit() {
 
         restfulMgr = new RestfulMgrImpl(new RetryStrategyRoundBin());
-
     }
 
     @AfterClass

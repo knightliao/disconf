@@ -3,7 +3,6 @@ package com.baidu.disconf.core.common.restful.impl;
 import java.io.File;
 import java.net.URL;
 
-import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +35,7 @@ public class RestfulMgrImpl implements RestfulMgr {
     public RestfulMgrImpl(RetryStrategy retryStrategy) {
 
         this.retryStrategy = retryStrategy;
+        HttpClientUtil.init();
     }
 
     /**
@@ -53,12 +53,8 @@ public class RestfulMgrImpl implements RestfulMgr {
 
         for (URL url : remoteUrl.getUrls()) {
 
-            HttpGet request = new HttpGet(url.toString());
-            request.addHeader("content-type", "application/json");
-
             // 可重试的下载
-            UnreliableInterface unreliableImpl = new RestfulGet(request, new
-                    HttpResponseCallbackHandlerJsonHandler());
+            UnreliableInterface unreliableImpl = new RestfulGet(url);
 
             try {
 
@@ -77,17 +73,6 @@ public class RestfulMgrImpl implements RestfulMgr {
         }
 
         throw new Exception("cannot get: " + remoteUrl);
-    }
-
-    /**
-     * @return void
-     *
-     * @Description：关闭
-     * @author liaoqiqi
-     * @date 2013-6-16
-     */
-    public void close() {
-        HttpClientUtil.close();
     }
 
     /**
@@ -165,6 +150,11 @@ public class RestfulMgrImpl implements RestfulMgr {
 
         // 否则, 返回全路径
         return localFile.getAbsolutePath();
+    }
+
+    @Override
+    public void close() {
+        HttpClientUtil.close();
     }
 
     /**
