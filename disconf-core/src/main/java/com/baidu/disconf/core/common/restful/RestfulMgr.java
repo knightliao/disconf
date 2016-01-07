@@ -20,7 +20,7 @@ public interface RestfulMgr {
      *
      * @throws Exception
      */
-    <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retyrSleepSeconds) throws Exception;
+    <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds) throws Exception;
 
     /**
      * @param remoteUrl          远程地址
@@ -32,11 +32,11 @@ public interface RestfulMgr {
      *
      * @throws Exception
      */
-    String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir, String copy2TargetDirPath,
+    String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir, String localFileDirTemp,
+                              String copy2TargetDirPath,
                               boolean enableLocalDownloadDirInClassPath,
                               int retryTimes, int retrySleepSeconds) throws Exception;
 
     void close();
 
-    void init() throws Exception;
 }

@@ -67,6 +67,7 @@ public class RemoteMockServer {
 
     //
     public static final String LOCAL_DOWNLOAD_DIR = "./disconf/download";
+    public static final String LOCAL_DOWNLOAD_DIR_TEMP = "./disconf/tmp/download";
     public static final String LOCAL_TARGET_DOWNLOAD_DIR = "./disconf/download/target";
 
     //

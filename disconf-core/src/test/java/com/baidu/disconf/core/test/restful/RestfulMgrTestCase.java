@@ -29,12 +29,7 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
     public static void myInit() {
 
         restfulMgr = new RestfulMgrImpl(new RetryStrategyRoundBin());
-        try {
-            restfulMgr.init();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.assertTrue(false);
-        }
+
     }
 
     @AfterClass
@@ -72,7 +67,9 @@ public class RestfulMgrTestCase extends BaseCoreTestCase {
             RemoteUrl remoteUrl = new RemoteUrl(RemoteMockServer.FILE_URL, RemoteMockServer.LOCAL_HOST_LIST);
 
             String downloadFilePath = restfulMgr.downloadFromServer(remoteUrl, RemoteMockServer.FILE_NAME,
-                    RemoteMockServer.LOCAL_DOWNLOAD_DIR, RemoteMockServer.LOCAL_TARGET_DOWNLOAD_DIR, true, 3, 3);
+                    RemoteMockServer.LOCAL_DOWNLOAD_DIR, RemoteMockServer.LOCAL_DOWNLOAD_DIR_TEMP, RemoteMockServer
+                            .LOCAL_TARGET_DOWNLOAD_DIR,
+                    true, 3, 3);
 
             File file = new File(downloadFilePath);
             String content = FileUtils.readFileToString(file);

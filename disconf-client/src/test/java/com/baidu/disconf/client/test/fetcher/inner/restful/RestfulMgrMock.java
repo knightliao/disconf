@@ -58,7 +58,7 @@ public class RestfulMgrMock extends MockUp<RestfulMgr> {
      * @throws Exception
      */
     @Mock
-    public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir,
+    public String downloadFromServer(RemoteUrl remoteUrl, String fileName, String localFileDir, String localFileDirTemp,
                                      String copy2TargetDirPath, boolean download2Classpath, int retryTimes,
                                      int retrySleepSeconds)
             throws Exception {
@@ -80,8 +80,4 @@ public class RestfulMgrMock extends MockUp<RestfulMgr> {
 
     }
 
-    @Mock
-    public void init() throws Exception {
-
-    }
 }

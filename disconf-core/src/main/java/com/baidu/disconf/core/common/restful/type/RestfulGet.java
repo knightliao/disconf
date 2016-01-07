@@ -1,12 +1,12 @@
 package com.baidu.disconf.core.common.restful.type;
 
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.Response;
-
+import org.apache.http.client.methods.HttpRequestBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
+import com.baidu.disconf.core.common.utils.http.HttpClientUtil;
+import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
 
 /**
  * RestFul get
@@ -14,15 +14,17 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
  * @author liaoqiqi
  * @version 2014-6-16
  */
-public class RestfulGet implements UnreliableInterface {
+public class RestfulGet<T> implements UnreliableInterface {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(RestfulGet.class);
 
-    private Invocation.Builder builder = null;
+    private HttpRequestBase request = null;
+    private HttpResponseCallbackHandler<T> httpResponseCallbackHandler = null;
 
-    public RestfulGet(Invocation.Builder builder) {
+    public RestfulGet(HttpRequestBase request, HttpResponseCallbackHandler<T> responseHandler) {
 
-        this.builder = builder;
+        this.request = request;
+        this.httpResponseCallbackHandler = responseHandler;
     }
 
     /**
@@ -31,12 +33,8 @@ public class RestfulGet implements UnreliableInterface {
     @Override
     public Object call() throws Exception {
 
-        Response response = builder.get();
+        T value = HttpClientUtil.execute(request, httpResponseCallbackHandler);
 
-        if (response.getStatus() != 200) {
-            throw new Exception("query is not ok, response " + response.getStatus());
-        }
-
-        return response;
+        return value;
     }
 }

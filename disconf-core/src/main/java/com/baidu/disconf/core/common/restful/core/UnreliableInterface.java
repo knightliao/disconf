@@ -8,6 +8,6 @@ package com.baidu.disconf.core.common.restful.core;
  */
 public interface UnreliableInterface {
 
-    public Object call() throws Exception;
+    Object call() throws Exception;
 
 }
