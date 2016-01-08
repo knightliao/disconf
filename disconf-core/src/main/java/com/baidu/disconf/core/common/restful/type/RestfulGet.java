@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
-import com.baidu.disconf.core.common.restful.impl.HttpResponseCallbackHandlerJsonHandler;
+import com.baidu.disconf.core.common.utils.http.impl.HttpResponseCallbackHandlerJsonHandler;
 import com.baidu.disconf.core.common.utils.http.HttpClientUtil;
 import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
 
@@ -18,29 +18,29 @@ import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
  * @author liaoqiqi
  * @version 2014-6-16
  */
-public class RestfulGet<ValueVo> implements UnreliableInterface {
+public class RestfulGet<T> implements UnreliableInterface {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(RestfulGet.class);
 
     private HttpRequestBase request = null;
-    private HttpResponseCallbackHandler httpResponseCallbackHandler = null;
+    private HttpResponseCallbackHandler<T> httpResponseCallbackHandler = null;
 
-    public RestfulGet(URL url) {
+    public RestfulGet(Class<T> clazz, URL url) {
 
         HttpGet request = new HttpGet(url.toString());
         request.addHeader("content-type", "application/json");
         this.request = request;
         this.httpResponseCallbackHandler = new
-                HttpResponseCallbackHandlerJsonHandler();
+                HttpResponseCallbackHandlerJsonHandler<T>(clazz);
     }
 
     /**
      * Get数据
      */
     @Override
-    public Object call() throws Exception {
+    public T call() throws Exception {
 
-        ValueVo value = (ValueVo) HttpClientUtil.execute(request, httpResponseCallbackHandler);
+        T value = HttpClientUtil.execute(request, httpResponseCallbackHandler);
 
         return value;
     }

@@ -54,11 +54,11 @@ public class RestfulMgrImpl implements RestfulMgr {
         for (URL url : remoteUrl.getUrls()) {
 
             // 可重试的下载
-            UnreliableInterface unreliableImpl = new RestfulGet(url);
+            UnreliableInterface unreliableImpl = new RestfulGet<T>(clazz, url);
 
             try {
 
-                T t = (T) retryStrategy.retry(unreliableImpl, retryTimes, retrySleepSeconds);
+                T t = retryStrategy.retry(unreliableImpl, retryTimes, retrySleepSeconds);
 
                 return t;
 

@@ -21,7 +21,7 @@ public class RetryStrategyRoundBin implements RetryStrategy {
      * @param retryTimes
      * @param sleepSeconds
      */
-    public Object retry(UnreliableInterface unreliableImpl, int retryTimes, int sleepSeconds) throws Exception {
+    public <T> T retry(UnreliableInterface unreliableImpl, int retryTimes, int sleepSeconds) throws Exception {
 
         int cur_time = 0;
         for (; cur_time < retryTimes; ++cur_time) {
