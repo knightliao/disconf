@@ -9,7 +9,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 包括 **百度**、**滴滴打车**、**网易**、**拉勾网** 等知名互联网公司正在使用!
 
-[「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中全国开源排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
+[「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
 ## 主要目标：
 
@@ -207,7 +207,7 @@ APP+环境+版本+ZK查询：
 
 开源中国社区：
 
-[「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中全国开源排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
+[「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
 ## 群·联系·讨论
 
