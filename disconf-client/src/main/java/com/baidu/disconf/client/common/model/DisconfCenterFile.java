@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.OsUtil;
 
@@ -121,6 +122,9 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
      * 配置文件的路径
      */
     public String getFilePath() {
+        if (!DisClientConfig.getInstance().enableLocalDownloadDirInClassPath) {
+            return OsUtil.pathJoin(DisClientConfig.getInstance().userDefineDownloadDir, fileName);
+        }
 
         if (copy2TargetDirPath != null) {
 
