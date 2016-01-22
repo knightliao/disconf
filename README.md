@@ -7,7 +7,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
-包括 **百度**、**滴滴打车**、**网易**、**拉勾网** 等知名互联网公司正在使用!
+包括 **百度**、**滴滴打车**、**网易**、**拉勾网**、**苏宁易购** 等知名互联网公司正在使用!
 
 [「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
@@ -179,6 +179,7 @@ APP+环境+版本+ZK查询：
 - [百度]（20+条产品线使用）
 - [滴滴打车](http://www.xiaojukeji.com/)
 - [网易](http://www.163.com/)
+- [苏宁易购](http://www.suning.com) (搜索中心数据处理平台)
 - [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
 - [拉勾网](http://www.lagou.com/) 
 - [人脉通](http://renmaitong.com/) （目前已B轮融资，4条产品线使用）
