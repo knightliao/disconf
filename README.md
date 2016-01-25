@@ -7,7 +7,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
-包括 **百度**、**滴滴打车**、**网易**、**拉勾网** 等知名互联网公司正在使用!
+包括 **百度**、**滴滴打车**、**银联**、**网易**、**拉勾网** 等知名互联网公司正在使用!
 
 [「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
@@ -178,6 +178,7 @@ APP+环境+版本+ZK查询：
 
 - [百度]（20+条产品线使用）
 - [滴滴打车](http://www.xiaojukeji.com/)
+- [银联]
 - [网易](http://www.163.com/)
 - [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
 - [拉勾网](http://www.lagou.com/) 
@@ -219,4 +220,4 @@ APP+环境+版本+ZK查询：
 - [技术讨论论坛:java](http://www.techv5.com/)
 - [技术讨论论坛:python](http://www.django-china.cn/)
 - [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
-- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor)
+- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
