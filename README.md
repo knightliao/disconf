@@ -7,7 +7,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
-包括 **百度**、**滴滴打车**、**网易**、**拉勾网**、**苏宁易购** 等知名互联网公司正在使用!
+包括 **百度**、**滴滴打车**、**银联**、**网易**、**拉勾网**、**苏宁易购** 等知名互联网公司正在使用!
 
 [「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
@@ -178,6 +178,7 @@ APP+环境+版本+ZK查询：
 
 - [百度]（20+条产品线使用）
 - [滴滴打车](http://www.xiaojukeji.com/)
+- [银联]
 - [网易](http://www.163.com/)
 - [苏宁易购](http://www.suning.com) (搜索中心数据处理平台)
 - [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
@@ -190,6 +191,7 @@ APP+环境+版本+ZK查询：
 - [杭州同盾科技](https://www.tongdun.cn/)
 - [杭州趣维科技](http://www.xiaoying.tv/) (数千万RMB A轮投资)
 - [百世物流科技](http://www.800best.com/) （在全国建立了400多个运作中心和250万平米的仓库及转运中心，拥有30000多员工和上万个认证加盟商及合作伙伴）
+- [仙人掌股票](http://www.icaikee.com/)（2015年度最火app,所有产品线已全面接入disconf）
 - [更多](https://github.com/knightliao/disconf/issues/18)
 
 ## 他人评价
@@ -213,10 +215,12 @@ APP+环境+版本+ZK查询：
 ## 群·联系·讨论
 
 - disconf技术QQ群: 239203866 
-- java技术QQ群：68373211
-- 我的微信：knightliao
-- 招聘微博：[IT知音](http://weibo.com/u/5662585935)
-- [技术讨论论坛:java](http://www.techv5.com/)
-- [技术讨论论坛:python](http://www.django-china.cn/)
 - [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
-- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor)
+
+## 关于我
+
+- 搜索引擎推荐：[sov5搜索引擎](http://sov5.com)
+- python论坛推荐[Django中国社区](http://www.django-china.cn/)
+- 我的微信：knightliao
+- [我的简历](http://liaoqiqi.com/resume)
+- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
