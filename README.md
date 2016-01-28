@@ -214,7 +214,6 @@ APP+环境+版本+ZK查询：
 ## 群·联系·讨论
 
 - disconf技术QQ群: 239203866 
-- java技术QQ群：68373211
 - 我的微信：knightliao
 - 搜索引擎推荐：[sov5搜索引擎](http://sov5.com)
 - [我的简历](http://liaoqiqi.com/resume)
