@@ -219,7 +219,7 @@ APP+环境+版本+ZK查询：
 ## 关于我
 
 - 搜索引擎推荐：[sov5搜索引擎](http://sov5.com)
-- python论坛推荐[Django中国社区](http://www.django-china.cn/)
+- python论坛推荐：[Django中国社区](http://www.django-china.cn/)
 - 我的微信：knightliao
 - [我的简历](http://liaoqiqi.com/resume)
 - [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
