@@ -56,7 +56,7 @@ public class ConfigConsistencyMonitorServiceImpl implements IConfigConsistencyMo
     private LogMailBean logMailBean;
 
     // 每3分钟执行一次自动化校验
-    @Scheduled(fixedDelay = 3 * 60 * 1000)
+    //@Scheduled(fixedDelay = 3 * 60 * 1000)
     @Override
     public void myTest() {
         LOG.info("task schedule just testing, every 1 min");
