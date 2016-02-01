@@ -38,6 +38,7 @@ import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
 import com.baidu.disconf.web.service.zookeeper.service.ZkDeployMgr;
+import com.baidu.disconf.web.utils.CodeUtils;
 import com.baidu.disconf.web.utils.DiffUtils;
 import com.baidu.disconf.web.utils.MyStringUtils;
 import com.baidu.dsp.common.constant.DataFormatConstants;
@@ -262,7 +263,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         confListVo.setModifyTime(config.getUpdateTime().substring(0, 12));
         confListVo.setKey(config.getName());
         // StringEscapeUtils.escapeHtml escape
-        confListVo.setValue(config.getValue());
+        confListVo.setValue(CodeUtils.unicodeToUtf8(config.getValue()));
         confListVo.setVersion(config.getVersion());
         confListVo.setType(DisConfigTypeEnum.getByType(config.getType()).getModelName());
         confListVo.setTypeId(config.getType());
@@ -415,8 +416,8 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         // 配置数据库的值 encode to db
         //
-        configDao.updateValue(configId, value);
-        configHistoryMgr.createOne(configId, oldValue, value);
+        configDao.updateValue(configId, CodeUtils.utf8ToUnicode(value));
+        configHistoryMgr.createOne(configId, oldValue, CodeUtils.utf8ToUnicode(value));
 
         //
         // 发送邮件通知
@@ -425,7 +426,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         if (applicationPropertyConfig.isEmailMonitorOn() == true) {
             boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
-                    " config update", DiffUtils.getDiff(oldValue,
+                    " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
                             value,
                             config.toString(),
                             getConfigUrlHtml(config)));
@@ -511,7 +512,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         config.setName(confNewForm.getKey());
         config.setType(disConfigTypeEnum.getType());
         config.setVersion(confNewForm.getVersion());
-        config.setValue(confNewForm.getValue());
+        config.setValue(CodeUtils.utf8ToUnicode(confNewForm.getValue()));
         config.setStatus(Constants.STATUS_NORMAL);
 
         // 时间
