@@ -47,6 +47,6 @@ public class SimpleRegistry implements Registry {
 
     @Override
     public <T> T getFirstByType(Class<T> type, boolean withProxy) {
-        return getFirstByType(type, withProxy);
+        return getFirstByType(type);
     }
 }
