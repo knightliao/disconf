@@ -218,6 +218,7 @@ APP+环境+版本+ZK查询：
 
 ## 关于我
 
+- [pfrock](https://github.com/knightliao/pfrock): A plugin-based server for running fake HTTP and socket services (especially SOA service) using Python. 
 - 搜索引擎推荐：[sov5搜索引擎, 支持网页搜索和电影搜索](http://sov5.com)
 - python论坛推荐：[Django中国社区](http://www.django-china.cn/)
 - 我的微信：knightliao
