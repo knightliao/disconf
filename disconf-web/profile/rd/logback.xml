@@ -43,25 +43,6 @@
         </encoder>
     </appender>
 
-    <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
-        <layout>
-            <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
-        </layout>
-
-        <host>${host}</host>
-        <port>${port}</port>
-        <username>${username}</username>
-        <password>${password}</password>
-        <routingKeyPattern>${routingKeyPattern}</routingKeyPattern>
-        <exchangeName>${exchangeName}</exchangeName>
-
-        <declareExchange>true</declareExchange>
-        <generateId>true</generateId>
-        <charset>UTF-8</charset>
-        <durable>true</durable>
-        <deliveryMode>PERSISTENT</deliveryMode>
-    </appender>
-
     <logger name="com.baidu.disconf.web.tasks">
         <level value="INFO"/>
         <appender-ref ref="monitorlog"/>
@@ -87,7 +68,6 @@
         <level value="INFO"/>
         <appender-ref ref="stdout"/>
         <appender-ref ref="logfile"/>
-        <appender-ref ref="AMQP"/>
     </root>
 
 </configuration>
