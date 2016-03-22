@@ -45,22 +45,7 @@ disconf.git branches and Maven version:
 - [注解式分布式配置使用方式](http://ww3.sinaimg.cn/mw1024/60c9620fgw1eu5lsrsixcj20ga06ygna.jpg)
 - [XML配置式分布式配置方式](http://ww1.sinaimg.cn/mw1024/60c9620fgw1eu5ltt9uglj20ia0j0tbo.jpg)
 
-## 当前版本功能特点 ##
-
-- 支持配置（配置项+配置文件）的分布式化管理
-- 配置发布统一化
-- 极简的使用方式（注解式编程 或 XML无代码侵入模式）
-- 低侵入性或无侵入性、强兼容性
-
-## 未来版本（完全版）功能特点 ##
-
-Disconf的功能特点描述图：
-
-![](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1esvkqmupdfj20fp08udh7.jpg)
-
-[查看大图](http://ww1.sinaimg.cn/mw1024/60c9620fjw1esvkqmupdfj20fp08udh7.jpg)
-
-### 重要功能特点 ###
+## 功能特点 ##
 
 - 支持配置（配置项+配置文件）的分布式化管理
 - 配置发布统一化
@@ -68,13 +53,15 @@ Disconf的功能特点描述图：
         - 同一个上线包 无须改动配置 即可在 多个环境中(RD/QA/PRODUCTION) 上线
         - 配置存储在云端系统，用户统一管理 多个环境(RD/QA/PRODUCTION)、多个平台 的所有配置
     - 配置更新自动化：用户在平台更新配置，使用该配置的系统会自动发现该情况，并应用新配置。特殊地，如果用户为此配置定义了回调函数类，则此函数类会被自动调用。
-- 配置异构系统管理
-    - 异构包部署统一化：这里的异构系统是指一个系统部署多个实例时，由于配置不同，从而需要多个部署包（jar或war）的情况（下同）。使用Disconf后，异构系统的部署只需要一个部署包，不同实例的配置会自动分配。特别地，在业界大量使用部署虚拟化（如JPAAS系统，SAE，BAE）的情况下，同一个系统使用同一个部署包的情景会越来越多，Disconf可以很自然地与他天然契合。
-    - 异构主备自动切换：如果一个异构系统存在主备机，主机发生挂机时，备机可以自动获取主机配置从而变成主机。
-    - 异构主备机Context共享工具：异构系统下，主备机切换时可能需要共享Context。可以使用Context共享工具来共享主备的Context。
 - 极简的使用方式（注解式编程 或 XML无代码侵入模式）：我们追求的是极简的、用户编程体验良好的编程方式。目前支持两种开发模式：基于XML配置或者基于注解，即可完成复杂的配置分布式化。
 
 注：配置项是指某个类里的某个Field字段。
+
+Disconf的功能特点描述图：
+
+![](http://ww4.sinaimg.cn/bmiddle/006oy5Ulgw1f25z80js0fj30fl08uq3z.jpg)
+
+[查看大图](http://ww3.sinaimg.cn/mw1024/006oy5Ulgw1f25z80js0fj30fl08uq3z.jpg)
 
 ### 其它功能特点 ###
 
@@ -87,12 +74,11 @@ Disconf的功能特点描述图：
 
 ## 模块架构图  ##
 
-![](http://ww2.sinaimg.cn/bmiddle/60c9620fjw1esvk366z6fj20nh0fjtbu.jpg)
+![](http://ww2.sinaimg.cn/bmiddle/006oy5Ulgw1f25zc2vfwpj30nh0d6q5t.jpg)
 
-[查看大图](http://ww2.sinaimg.cn/mw1024/60c9620fjw1esvk366z6fj20nh0fjtbu.jpg)
+[查看大图](http://ww2.sinaimg.cn/mw1024/006oy5Ulgw1f25zc2vfwpj30nh0d6q5t.jpg)
 
 ### 模块信息###
-
 
 - CLIENT: client目标是支持多语言。目前只提供了java语言客户端。
     - JAVA
@@ -103,7 +89,7 @@ Disconf的功能特点描述图：
 	
 ## 用户指南 ##
 
-### clint
+### client
 
 #### java client: disconf-client 使用 ###
 
