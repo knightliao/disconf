@@ -193,6 +193,7 @@ APP+环境+版本+ZK查询：
 - [百世物流科技](http://www.800best.com/) （在全国建立了400多个运作中心和250万平米的仓库及转运中心，拥有30000多员工和上万个认证加盟商及合作伙伴）
 - [仙人掌股票](http://www.icaikee.com/)（2015年度最火app,所有产品线已全面接入disconf）
 - [多点APP](http://www.dmall.com/)
+- [上海华禽网络科技有限公司](www.huaqinwang.com) (整个公司所有产品线均在使用)
 - [更多](https://github.com/knightliao/disconf/issues/18)
 
 ## 他人评价
