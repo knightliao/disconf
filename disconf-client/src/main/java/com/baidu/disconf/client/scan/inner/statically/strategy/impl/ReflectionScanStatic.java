@@ -29,6 +29,7 @@ import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.common.annotations.DisconfItem;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.constants.Constants;
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
 import com.baidu.disconf.client.scan.inner.common.ScanVerify;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
@@ -86,14 +87,14 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
         //
         Reflections reflections = new Reflections(new ConfigurationBuilder().filterInputsBy(filter)
-                                                      .setScanners(new SubTypesScanner().filterResultsBy(filter),
-                                                                      new TypeAnnotationsScanner()
-                                                                          .filterResultsBy(filter),
-                                                                      new FieldAnnotationsScanner()
-                                                                          .filterResultsBy(filter),
-                                                                      new MethodAnnotationsScanner()
-                                                                          .filterResultsBy(filter),
-                                                                      new MethodParameterScanner()).setUrls(urlTotals));
+                .setScanners(new SubTypesScanner().filterResultsBy(filter),
+                        new TypeAnnotationsScanner()
+                                .filterResultsBy(filter),
+                        new FieldAnnotationsScanner()
+                                .filterResultsBy(filter),
+                        new MethodAnnotationsScanner()
+                                .filterResultsBy(filter),
+                        new MethodParameterScanner()).setUrls(urlTotals));
 
         return reflections;
     }
@@ -138,8 +139,9 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
             } else {
 
                 LOGGER
-                    .error("cannot find CLASS ANNOTATION " + DisconfFile.class.getName() + " for disconf file item: " +
-                               method.toString());
+                        .error("cannot find CLASS ANNOTATION " + DisconfFile.class.getName()
+                                + " for disconf file item: " +
+                                method.toString());
             }
         }
 
@@ -212,6 +214,15 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
         //
         classdata = reflections.getTypesAnnotatedWith(DisconfUpdateService.class);
         scanModel.setDisconfUpdateService(classdata);
+
+        // update pipeline
+        Set<Class<? extends IDisconfUpdatePipeline>> iDisconfUpdatePipeline = reflections.getSubTypesOf
+                (IDisconfUpdatePipeline
+                        .class);
+        if (iDisconfUpdatePipeline != null && iDisconfUpdatePipeline.size() != 0) {
+            scanModel.setiDisconfUpdatePipeline((Class<IDisconfUpdatePipeline>) iDisconfUpdatePipeline
+                    .toArray()[0]);
+        }
 
         return scanModel;
     }

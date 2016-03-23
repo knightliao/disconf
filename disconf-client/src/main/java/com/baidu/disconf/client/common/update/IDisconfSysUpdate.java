@@ -18,6 +18,6 @@ public interface IDisconfSysUpdate {
      *
      * @throws Exception
      */
-    public void reload(DisconfCoreProcessor disconfCoreMgr, DisConfigTypeEnum disConfigTypeEnum, String keyName)
-        throws Exception;
+    void reload(DisconfCoreProcessor disconfCoreMgr, DisConfigTypeEnum disConfigTypeEnum, String keyName)
+            throws Exception;
 }

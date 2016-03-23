@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
 
 /**
  * 配置仓库,是个单例
@@ -52,6 +53,9 @@ public class DisconfCenterStore {
     // 主备切换时的Key列表
     private List<String> activeBackupKeyList;
 
+    //
+    private IDisconfUpdatePipeline iDisconfUpdatePipeline = null;
+
     // 标识本机器名
     private String machineName;
 
@@ -67,7 +71,7 @@ public class DisconfCenterStore {
         if (confFileMap.containsKey(fileName)) {
 
             LOGGER.error("There are two same fileName!!!! " + "first: " + confFileMap.get(fileName).toString() +
-                             ", Second: " + disconfCenterFile.toString());
+                    ", Second: " + disconfCenterFile.toString());
         } else {
             confFileMap.put(fileName, disconfCenterFile);
         }
@@ -85,7 +89,7 @@ public class DisconfCenterStore {
         if (confItemMap.containsKey(key)) {
 
             LOGGER.error("There are two same fileName!!!! " + "first: " + confItemMap.get(key).getClass().toString() +
-                             ", Second: " + disconfCenterItem.getClass().toString());
+                    ", Second: " + disconfCenterItem.getClass().toString());
         } else {
             confItemMap.put(key, disconfCenterItem);
         }
@@ -131,4 +135,12 @@ public class DisconfCenterStore {
         this.machineName = machineName;
     }
 
+    public IDisconfUpdatePipeline getiDisconfUpdatePipeline() {
+        return iDisconfUpdatePipeline;
+    }
+
+    public void setiDisconfUpdatePipeline(
+            IDisconfUpdatePipeline iDisconfUpdatePipeline) {
+        this.iDisconfUpdatePipeline = iDisconfUpdatePipeline;
+    }
 }

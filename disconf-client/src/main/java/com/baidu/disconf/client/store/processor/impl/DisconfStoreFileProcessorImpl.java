@@ -87,7 +87,6 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             return false;
         }
         return true;
-
     }
 
     /**

@@ -8,5 +8,5 @@ package com.baidu.disconf.client.common.update;
  */
 public interface IDisconfUpdate {
 
-    public void reload() throws Exception;
+    void reload() throws Exception;
 }

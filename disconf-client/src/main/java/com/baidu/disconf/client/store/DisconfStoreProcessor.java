@@ -70,7 +70,7 @@ public interface DisconfStoreProcessor {
     /**
      * 添加配置
      */
-    public void transformScanData(DisconfCenterBaseModel disconfCenterBaseModel);
+    void transformScanData(DisconfCenterBaseModel disconfCenterBaseModel);
 
     /**
      * 获取配置仓库的表示

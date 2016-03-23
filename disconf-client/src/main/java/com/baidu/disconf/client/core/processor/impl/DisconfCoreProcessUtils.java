@@ -19,7 +19,8 @@ public class DisconfCoreProcessUtils {
     /**
      * 调用此配置影响的回调函数
      */
-    public static void callOneConf(DisconfStoreProcessor disconfStoreProcessor, String key) throws Exception {
+    public static void callOneConf(DisconfStoreProcessor disconfStoreProcessor,
+                                   String key) throws Exception {
 
         List<IDisconfUpdate> iDisconfUpdates = disconfStoreProcessor.getUpdateCallbackList(key);
 
@@ -34,6 +35,7 @@ public class DisconfCoreProcessUtils {
 
                 LOGGER.info("start to call " + iDisconfUpdate.getClass());
 
+                // set defined
                 try {
 
                     iDisconfUpdate.reload();

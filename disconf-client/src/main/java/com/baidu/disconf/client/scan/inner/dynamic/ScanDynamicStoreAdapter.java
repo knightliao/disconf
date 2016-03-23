@@ -14,9 +14,11 @@ import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.model.DisconfKey;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
 import com.baidu.disconf.client.scan.inner.common.ScanVerify;
 import com.baidu.disconf.client.scan.inner.dynamic.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
+import com.baidu.disconf.client.store.DisconfStorePipelineProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.support.registry.Registry;
@@ -42,6 +44,7 @@ public class ScanDynamicStoreAdapter {
 
         // 写到仓库中
         transformUpdateService(scanDynamicModel.getDisconfUpdateServiceInverseIndexMap());
+        transformPipelineService(scanDynamicModel.getDisconfUpdatePipeline());
     }
 
     /**
@@ -87,6 +90,17 @@ public class ScanDynamicStoreAdapter {
         // set data
         ScanDynamicModel scanDynamicModel = new ScanDynamicModel();
         scanDynamicModel.setDisconfUpdateServiceInverseIndexMap(inverseMap);
+
+        //
+        // set update pipeline
+        //
+        if (scanModel.getiDisconfUpdatePipeline() != null) {
+            IDisconfUpdatePipeline iDisconfUpdatePipeline = getIDisconfUpdatePipelineInstance(scanModel
+                    .getiDisconfUpdatePipeline(), registry);
+            if (iDisconfUpdatePipeline != null) {
+                scanDynamicModel.setDisconfUpdatePipeline(iDisconfUpdatePipeline);
+            }
+        }
 
         return scanDynamicModel;
     }
@@ -160,6 +174,22 @@ public class ScanDynamicStoreAdapter {
     }
 
     /**
+     * 获取回调接口的实现
+     * //
+     */
+    private static IDisconfUpdatePipeline getIDisconfUpdatePipelineInstance(
+            Class<IDisconfUpdatePipeline> disconfUpdateServiceClass,
+            Registry registry) {
+
+        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass);
+        if (iDisconfUpdate == null) {
+            return null;
+        }
+        return (IDisconfUpdatePipeline) iDisconfUpdate;
+
+    }
+
+    /**
      * 将一个配置回调item写到map里
      */
     private static void addOne2InverseMap(DisconfKey disconfKey, Map<DisconfKey, List<IDisconfUpdate>> inverseMap,
@@ -174,6 +204,17 @@ public class ScanDynamicStoreAdapter {
             serviceList.add(iDisconfUpdate);
             inverseMap.put(disconfKey, serviceList);
         }
+    }
+
+    /**
+     * 第二次扫描<br/>
+     * 转换 pipeline 回调函数，将其写到 仓库中
+     */
+    private static void transformPipelineService(IDisconfUpdatePipeline iDisconfUpdatePipeline) {
+
+        DisconfStorePipelineProcessor disconfStorePipelineProcessor = DisconfStoreProcessorFactory
+                .getDisconfStorePipelineProcessor();
+        disconfStorePipelineProcessor.setDisconfUpdatePipeline(iDisconfUpdatePipeline);
     }
 
     /**
