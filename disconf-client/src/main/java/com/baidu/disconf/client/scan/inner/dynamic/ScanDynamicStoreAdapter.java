@@ -135,9 +135,8 @@ public class ScanDynamicStoreAdapter {
             DisconfFile disconfFile = curClass.getAnnotation(DisconfFile.class);
             if (disconfFile == null) {
 
-                LOGGER
-                        .error("cannot find DisconfFile annotation for class when set callback: {} ",
-                                curClass.toString());
+                LOGGER.error("cannot find DisconfFile annotation for class when set callback: {} ",
+                        curClass.toString());
                 continue;
             }
 

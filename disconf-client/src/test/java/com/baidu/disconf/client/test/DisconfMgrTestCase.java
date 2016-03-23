@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import com.baidu.disconf.client.DisconfMgr;
 import com.baidu.disconf.client.DisconfMgrBean;
@@ -37,9 +39,12 @@ import mockit.MockUp;
  * @author liaoqiqi
  * @version 2014-6-10
  */
-public class DisconfMgrTestCase extends BaseSpringMockTestCase {
+public class DisconfMgrTestCase extends BaseSpringMockTestCase implements ApplicationContextAware {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfMgrTestCase.class);
+
+    // application context
+    private ApplicationContext applicationContext;
 
     @Autowired
     private ConfA confA;
@@ -94,6 +99,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             fileSet.add("atomserverm_slave.properties");
             DisconfCenterHostFilesStore.getInstance().addJustHostFileSet(fileSet);
 
+            DisconfMgr.getInstance().setApplicationContext(applicationContext);
             DisconfMgr.getInstance().start(StringUtil.parseStringToStringList(ScanPackTestCase.SCAN_PACK_NAME,
                     DisconfMgrBean.SCAN_SPLIT_TOKEN));
 
@@ -124,5 +130,14 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
+    }
+
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
     }
 }
