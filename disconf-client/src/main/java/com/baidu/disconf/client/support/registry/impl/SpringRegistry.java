@@ -32,7 +32,7 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
     }
 
     @Override
-    public <T> List<T> findByType(Class<T> type) {
+    public <T> List<T> findByType(Class<T> type, boolean newInstance) {
 
         if (applicationContext == null) {
             LOGGER.error("Spring Context is null. Cannot autowire " + type.getCanonicalName());
@@ -45,17 +45,19 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
 
         Map<String, T> map = findByTypeWithName(type);
         if (map == null || map.isEmpty()) {
-            LOGGER.debug("Not found from Spring IoC container for " + type.getSimpleName() + ", and try to init by "
-                    + "calling newInstance.");
-            return simpleRegistry.findByType(type);
+            if (newInstance) {
+                LOGGER.debug("Not found from Spring IoC container for " + type.getSimpleName() + ", and try to init by "
+                        + "calling newInstance.");
+                return simpleRegistry.findByType(type, newInstance);
+            }
         }
 
         return new ArrayList<T>(map.values());
     }
 
     @Override
-    public <T> T getFirstByType(Class<T> type) {
-        List<T> list = this.findByType(type);
+    public <T> T getFirstByType(Class<T> type, boolean newInstance) {
+        List<T> list = this.findByType(type, newInstance);
         if (list.size() == 0) {
             return null;
         }
@@ -63,9 +65,9 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
     }
 
     @Override
-    public <T> T getFirstByType(Class<T> type, boolean withProxy) {
+    public <T> T getFirstByType(Class<T> type, boolean newInstance, boolean withProxy) {
 
-        T object = getFirstByType(type);
+        T object = getFirstByType(type, newInstance);
 
         if (!withProxy) {
             return object;

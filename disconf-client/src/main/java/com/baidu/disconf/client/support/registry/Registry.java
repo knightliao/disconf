@@ -14,7 +14,7 @@ public interface Registry {
      *
      * @return 可找到的Bean的实例列表
      */
-    <T> List<T> findByType(Class<T> type);
+    <T> List<T> findByType(Class<T> type, boolean newInstance);
 
     /**
      * 查找Bean
@@ -23,7 +23,7 @@ public interface Registry {
      *
      * @return 可找到的Bean的实例列表
      */
-    <T> T getFirstByType(Class<T> type);
+    <T> T getFirstByType(Class<T> type, boolean newInstance);
 
     /**
      * 查找Bean, 是否找proxy
@@ -32,5 +32,5 @@ public interface Registry {
      *
      * @return 可找到的Bean的实例列表
      */
-    <T> T getFirstByType(Class<T> type, boolean withProxy);
+    <T> T getFirstByType(Class<T> type, boolean newInstance, boolean withProxy);
 }

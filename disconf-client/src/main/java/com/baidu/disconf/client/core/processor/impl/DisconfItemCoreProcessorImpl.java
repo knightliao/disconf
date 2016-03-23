@@ -1,8 +1,5 @@
 package com.baidu.disconf.client.core.processor.impl;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -191,14 +188,12 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 
             Object object = null;
 
-            Field field = disconfCenterItem.getField();
-
             //
             // 静态
             //
-            if (!Modifier.isStatic(field.getModifiers())) {
+            if (!disconfCenterItem.isStatic()) {
 
-                object = registry.getFirstByType(field.getDeclaringClass(), true);
+                object = registry.getFirstByType(disconfCenterItem.getDeclareClass(), false, true);
             }
 
             disconfStoreProcessor.inject2Instance(object, key);

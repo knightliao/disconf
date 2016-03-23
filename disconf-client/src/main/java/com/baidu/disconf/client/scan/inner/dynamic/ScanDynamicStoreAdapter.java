@@ -165,7 +165,7 @@ public class ScanDynamicStoreAdapter {
      */
     private static IDisconfUpdate getIDisconfUpdateInstance(Class<?> disconfUpdateServiceClass, Registry registry) {
 
-        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass);
+        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass, true);
         if (iDisconfUpdate == null) {
             return null;
         }
@@ -181,7 +181,7 @@ public class ScanDynamicStoreAdapter {
             Class<IDisconfUpdatePipeline> disconfUpdateServiceClass,
             Registry registry) {
 
-        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass);
+        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass, true);
         if (iDisconfUpdate == null) {
             return null;
         }

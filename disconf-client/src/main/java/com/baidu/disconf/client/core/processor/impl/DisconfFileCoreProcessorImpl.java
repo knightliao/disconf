@@ -224,7 +224,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
                 object = disconfCenterFile.getObject();
                 if (object == null) {
-                    object = registry.getFirstByType(disconfCenterFile.getCls(), true);
+                    object = registry.getFirstByType(disconfCenterFile.getCls(), false, true);
                 }
 
             } catch (Exception e) {

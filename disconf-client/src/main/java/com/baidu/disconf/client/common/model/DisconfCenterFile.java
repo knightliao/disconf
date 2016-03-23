@@ -2,11 +2,16 @@ package com.baidu.disconf.client.common.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.utils.ClassUtils;
 import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.OsUtil;
 
@@ -17,6 +22,8 @@ import com.baidu.disconf.core.common.utils.OsUtil;
  * @version 2014-5-20
  */
 public class DisconfCenterFile extends DisconfCenterBaseModel {
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfCenterFile.class);
 
     // -----key: 配置文件中的项名
     // -----value: 默认值
@@ -176,20 +183,61 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             this.value = value;
         }
 
-        public Field getField() {
-            return field;
-        }
-
         public void setField(Field field) {
             this.field = field;
         }
 
-        public Method getSetMethod() {
-            return setMethod;
+        /**
+         * 是否是静态域
+         *
+         * @return
+         */
+        public boolean isStatic() {
+            return Modifier.isStatic(field.getModifiers());
         }
 
-        public void setSetMethod(Method setMethod) {
-            this.setMethod = setMethod;
+        /**
+         * 设置value, 优先使用 setter method, 然后其次是反射
+         *
+         * @param value
+         */
+        public Object setValue4StaticFileItem(Object value) throws Exception {
+
+            if (setMethod != null) {
+                setMethod.invoke(null, value);
+            } else {
+                field.set(null, value);
+            }
+
+            return value;
+        }
+
+        public Object setValue4FileItem(Object object, Object value) throws Exception {
+
+            if (setMethod != null) {
+                setMethod.invoke(object, value);
+            } else {
+                field.set(object, value);
+            }
+
+            return value;
+        }
+
+        /**
+         * 返回值
+         *
+         * @param fieldValue
+         *
+         * @return
+         *
+         * @throws Exception
+         */
+        public Object getFieldValueByType(Object fieldValue) throws Exception {
+            return ClassUtils.getValeByType(field.getType(), fieldValue);
+        }
+
+        public Object getFieldDefaultValue(Object object) throws Exception {
+            return field.get(object);
         }
 
         @Override
@@ -205,7 +253,6 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             super();
             this.value = value;
             this.field = field;
-
         }
 
         public FileItemValue(Object value, Field field, Method setMethod) {
