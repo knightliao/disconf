@@ -132,7 +132,7 @@ APP+环境+版本+ZK查询：
 
 #### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
 
-推荐旧项目使用disconf时使用
+推荐新建的项目或旧项目使用disconf时使用
 
 - [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
 - [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload,对于那些比较重的资源如jdbc等，特别有用](https://github.com/knightliao/disconf/wiki/Tutorial5)
@@ -148,6 +148,8 @@ APP+环境+版本+ZK查询：
 - [Tutorial disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-dubbo-demo)
 - [Tutorial 9 实现真正意义上的统一上线包](https://github.com/knightliao/disconf/wiki/Tutorial9)
 - [Tutorial 10 实现一个配置更新下载器agent](https://github.com/knightliao/disconf/wiki/Tutorial10)
+- [Tutorial 13 增加统一的回调类,unify-notify模式：灵活处理更新配置通知](https://github.com/knightliao/disconf/wiki/Tutorial13-unify-notify)
+- [Tutorial 14 配置初始化或更新时，通知采用 "bean setter模式"](https://github.com/knightliao/disconf/wiki/Tutorial14-bean-setter-mode)
 - [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 - [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
 - [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
