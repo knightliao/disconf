@@ -35,8 +35,8 @@ https://github.com/knightliao/disconf-demos-java
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.32-SNAPSHOT
-- master(stable branch)：2.6.32-SNAPSHOT
+- dev(develop branch): 2.6.32
+- master(stable branch)：2.6.32
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
