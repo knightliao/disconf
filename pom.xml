@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.32-SNAPSHOT</version>
+    <version>2.6.32</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -25,9 +25,9 @@
 
     <properties>
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.32-SNAPSHOT</disconf-core.version>
-        <disconf-client.version>2.6.32-SNAPSHOT</disconf-client.version>
-        <disconf-client-spring.version>2.6.32-SNAPSHOT</disconf-client-spring.version>
+        <disconf-core.version>2.6.32</disconf-core.version>
+        <disconf-client.version>2.6.32</disconf-client.version>
+        <disconf-client-spring.version>2.6.32</disconf-client-spring.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
