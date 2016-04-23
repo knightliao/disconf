@@ -165,24 +165,12 @@ APP+环境+版本+ZK查询：
 ## 大家都在使用disconf ##
 
 - [百度]（20+条产品线使用）
-- [滴滴打车](http://www.xiaojukeji.com/)
+- [滴滴出行(上海/北京)](http://www.xiaojukeji.com/)
 - [银联]
 - [网易](http://www.163.com/)
 - [苏宁易购](http://www.suning.com) (搜索中心数据处理平台)
-- [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
-- [拉勾网](http://www.lagou.com/) 
-- [人脉通](http://renmaitong.com/) （目前已B轮融资，4条产品线使用）
-- [普联(Tp-link)技术有限公司](http://www.tp-link.com.cn/)
-- [杭州数梦工场科技有限公司](http://www.dtdream.com)
-- [众钱网](http://17money.com)
-- [快速递](http://www.ksudi.com) 
-- [杭州同盾科技](https://www.tongdun.cn/)
-- [杭州趣维科技](http://www.xiaoying.tv/) (数千万RMB A轮投资)
-- [百世物流科技](http://www.800best.com/) （在全国建立了400多个运作中心和250万平米的仓库及转运中心，拥有30000多员工和上万个认证加盟商及合作伙伴）
-- [仙人掌股票](http://www.icaikee.com/)（2015年度最火app,所有产品线已全面接入disconf）
-- [多点APP](http://www.dmall.com/)
-- [上海华禽网络科技有限公司](www.huaqinwang.com) (整个公司所有产品线均在使用)
-- [更多](https://github.com/knightliao/disconf/issues/18)
+- [顺丰科技]
+- [更多](https://github.com/knightliao/disconf/wiki/users)
 
 ## 他人评价
 
