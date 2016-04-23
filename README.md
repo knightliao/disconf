@@ -30,6 +30,7 @@ https://github.com/knightliao/disconf-demos-java
     - PHP：暂未支持
 - WEB 管理端：   
     - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
+    - 开放API，让开发者具有自定义定制web控制台界面的能力
 
 ### java client
 
@@ -111,6 +112,10 @@ APP+环境+版本+ZK查询：
 
 ![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
 
+#### 开放API
+
+- 让开发者具有自定义定制web控制台界面的能力: [Tutorial12 web开放API](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI)  
+
 ### java client Tutorials ###
 
 #### 总体概述
@@ -151,16 +156,6 @@ APP+环境+版本+ZK查询：
 - [Tutorial 13 增加统一的回调类,unify-notify模式：灵活处理更新配置通知](https://github.com/knightliao/disconf/wiki/Tutorial13-unify-notify)
 - [Tutorial 14 配置初始化或更新时，通知采用 "bean setter模式"](https://github.com/knightliao/disconf/wiki/Tutorial14-bean-setter-mode)
 - [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
-- [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
-- [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
-- [注意事项](https://github.com/knightliao/disconf/wiki/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
-- [Zookeeper异常考虑](https://github.com/knightliao/disconf/wiki/Zookeeper%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
-
-## 详细设计和讨论 ##
-
-- [disconf-client详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-client%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
-- [disconf-web详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-web%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
-- [细节讨论](https://github.com/knightliao/disconf/wiki/%E7%BB%86%E8%8A%82%E8%AE%A8%E8%AE%BA) 
     
 ## 大家都在使用disconf ##
 
@@ -195,10 +190,8 @@ APP+环境+版本+ZK查询：
 - disconf技术QQ群: 239203866 
 - [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
 
-## 关于我
+## 关于
 
 - 搜索引擎推荐：[sov5搜索引擎, 支持谷歌网页搜索/电影搜索/资源搜索/问答搜索](http://sov5.com)
 - python论坛推荐：[Django中国社区](http://www.django-china.cn/)
-- 我的微信：knightliao
-- [我的简历](http://liaoqiqi.com/resume)
 - [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
