@@ -7,7 +7,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
-包括 **百度**、**滴滴打车**、**银联**、**网易**、**拉勾网**、**苏宁易购** 等知名互联网公司正在使用!
+包括 **百度**、**滴滴出行**、**银联**、**网易**、**拉勾网**、**苏宁易购**、**顺丰科技** 等知名互联网公司正在使用!
 
 [「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
@@ -16,7 +16,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - 部署极其简单：同一个上线包，无须改动配置，即可在 多个环境中(RD/QA/PRODUCTION) 上线
 - 部署动态化：更改配置，无需重新打包或重启，即可 实时生效
 - 统一管理：提供web平台，统一管理 多个环境(RD/QA/PRODUCTION)、多个产品 的所有配置
-- 支持微服务架构
+- 核心目标：一个jar包，到处运行
 
 ## demos
 
