@@ -30,7 +30,7 @@ https://github.com/knightliao/disconf-demos-java
     - PHP：暂未支持
 - WEB 管理端：   
     - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
-    - 开放API，让开发者具有自定义定制web控制台界面的能力
+    - 开放API，让开发者具有自定义定制web控制台界面的能力 [Tutorial12 web开放API](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI)  
 
 ### java client
 
@@ -111,10 +111,6 @@ Disconf的功能特点描述图：
 APP+环境+版本+ZK查询：
 
 ![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
-
-#### 开放API
-
-- 让开发者具有自定义定制web控制台界面的能力: [Tutorial12 web开放API](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI)  
 
 ### java client Tutorials ###
 
