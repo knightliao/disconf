@@ -7,6 +7,10 @@ disconf-web
 
 注：由于迭代开发快速多变的原因，当前UI可能与下图略有改变。
 
+## 开放API
+
+- 让开发者具有自定义定制web控制台界面的能力: [Tutorial12 web开放API](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI)  
+
 ## 运行样式 ##
 
 ### 主页 ###

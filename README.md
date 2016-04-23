@@ -7,7 +7,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
-包括 **百度**、**滴滴打车**、**银联**、**网易**、**拉勾网**、**苏宁易购** 等知名互联网公司正在使用!
+包括 **百度**、**滴滴出行**、**银联**、**网易**、**拉勾网**、**苏宁易购**、**顺丰科技** 等知名互联网公司正在使用!
 
 [「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
 
@@ -16,7 +16,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - 部署极其简单：同一个上线包，无须改动配置，即可在 多个环境中(RD/QA/PRODUCTION) 上线
 - 部署动态化：更改配置，无需重新打包或重启，即可 实时生效
 - 统一管理：提供web平台，统一管理 多个环境(RD/QA/PRODUCTION)、多个产品 的所有配置
-- 支持微服务架构
+- 核心目标：一个jar包，到处运行
 
 ## demos
 
@@ -30,6 +30,7 @@ https://github.com/knightliao/disconf-demos-java
     - PHP：暂未支持
 - WEB 管理端：   
     - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
+    - 开放API，让开发者具有自定义定制web控制台界面的能力 [Tutorial12 web开放API](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI)  
 
 ### java client
 
@@ -151,38 +152,16 @@ APP+环境+版本+ZK查询：
 - [Tutorial 13 增加统一的回调类,unify-notify模式：灵活处理更新配置通知](https://github.com/knightliao/disconf/wiki/Tutorial13-unify-notify)
 - [Tutorial 14 配置初始化或更新时，通知采用 "bean setter模式"](https://github.com/knightliao/disconf/wiki/Tutorial14-bean-setter-mode)
 - [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
-- [异常考虑](https://github.com/knightliao/disconf/wiki/%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
-- [局限性和注意事项](https://github.com/knightliao/disconf/wiki/%E5%B1%80%E9%99%90%E6%80%A7%E5%92%8C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
-- [注意事项](https://github.com/knightliao/disconf/wiki/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
-- [Zookeeper异常考虑](https://github.com/knightliao/disconf/wiki/Zookeeper%E5%BC%82%E5%B8%B8%E8%80%83%E8%99%91)
-
-## 详细设计和讨论 ##
-
-- [disconf-client详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-client%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
-- [disconf-web详细设计文档](https://github.com/knightliao/disconf/wiki/disconf-web%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3)
-- [细节讨论](https://github.com/knightliao/disconf/wiki/%E7%BB%86%E8%8A%82%E8%AE%A8%E8%AE%BA) 
     
 ## 大家都在使用disconf ##
 
 - [百度]（20+条产品线使用）
-- [滴滴打车](http://www.xiaojukeji.com/)
+- [滴滴出行(上海/北京)](http://www.xiaojukeji.com/)
 - [银联]
 - [网易](http://www.163.com/)
 - [苏宁易购](http://www.suning.com) (搜索中心数据处理平台)
-- [润生活](http://www.szzjcs.com/) （千万融资，全线产品使用）
-- [拉勾网](http://www.lagou.com/) 
-- [人脉通](http://renmaitong.com/) （目前已B轮融资，4条产品线使用）
-- [普联(Tp-link)技术有限公司](http://www.tp-link.com.cn/)
-- [杭州数梦工场科技有限公司](http://www.dtdream.com)
-- [众钱网](http://17money.com)
-- [快速递](http://www.ksudi.com) 
-- [杭州同盾科技](https://www.tongdun.cn/)
-- [杭州趣维科技](http://www.xiaoying.tv/) (数千万RMB A轮投资)
-- [百世物流科技](http://www.800best.com/) （在全国建立了400多个运作中心和250万平米的仓库及转运中心，拥有30000多员工和上万个认证加盟商及合作伙伴）
-- [仙人掌股票](http://www.icaikee.com/)（2015年度最火app,所有产品线已全面接入disconf）
-- [多点APP](http://www.dmall.com/)
-- [上海华禽网络科技有限公司](www.huaqinwang.com) (整个公司所有产品线均在使用)
-- [更多](https://github.com/knightliao/disconf/issues/18)
+- [顺丰科技]
+- [更多](https://github.com/knightliao/disconf/wiki/users)
 
 ## 他人评价
 
@@ -207,10 +186,8 @@ APP+环境+版本+ZK查询：
 - disconf技术QQ群: 239203866 
 - [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
 
-## 关于我
+## 关于
 
 - 搜索引擎推荐：[sov5搜索引擎, 支持谷歌网页搜索/电影搜索/资源搜索/问答搜索](http://sov5.com)
 - python论坛推荐：[Django中国社区](http://www.django-china.cn/)
-- 我的微信：knightliao
-- [我的简历](http://liaoqiqi.com/resume)
 - [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
