@@ -424,7 +424,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         String toEmails = appMgr.getEmails(config.getAppId());
 
-        if (applicationPropertyConfig.isEmailMonitorOn() == true) {
+        if (applicationPropertyConfig.isEmailMonitorOn()) {
             boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
                     " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
                             value,
