@@ -99,7 +99,7 @@ Disconf的功能特点描述图：
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.31</version>
+        <version>2.6.32</version>
     </dependency>
 
 ### server: disconf-web 使用 ###
