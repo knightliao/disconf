@@ -42,7 +42,7 @@ public final class ClassLoaderUtil {
 
             // 如果是jar包内的，则返回当前路径
             if (classPath.contains(".jar!")) {
-                LOGGER.warn("using config file inline jar!");
+                LOGGER.warn("using config file inline jar!" + classPath);
                 classPath = System.getProperty("user.dir");
             }
 
