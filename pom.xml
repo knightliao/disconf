@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.32</version>
+    <version>2.6.33</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -25,9 +25,9 @@
 
     <properties>
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.32</disconf-core.version>
-        <disconf-client.version>2.6.32</disconf-client.version>
-        <disconf-client-spring.version>2.6.32</disconf-client-spring.version>
+        <disconf-core.version>2.6.33</disconf-core.version>
+        <disconf-client.version>2.6.33</disconf-client.version>
+        <disconf-client-spring.version>2.6.33</disconf-client-spring.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
@@ -120,12 +120,6 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>1.2.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-httpclient</groupId>
-                <artifactId>commons-httpclient</artifactId>
-                <version>3.1</version>
             </dependency>
 
             <dependency>

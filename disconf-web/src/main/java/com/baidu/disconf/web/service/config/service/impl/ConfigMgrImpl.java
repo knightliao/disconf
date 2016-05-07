@@ -188,7 +188,7 @@ public class ConfigMgrImpl implements ConfigMgr {
                         ConfListVo configListVo = convert(input, appNameString, envName, zkDisconfData);
 
                         // 列表操作不要显示值, 为了前端显示快速(只是内存里操作)
-                        if (!myFetchZk || !getErrorMessage) {
+                        if (!myFetchZk && !getErrorMessage) {
 
                             // 列表 value 设置为 ""
                             configListVo.setValue("");
@@ -424,7 +424,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         String toEmails = appMgr.getEmails(config.getAppId());
 
-        if (applicationPropertyConfig.isEmailMonitorOn() == true) {
+        if (applicationPropertyConfig.isEmailMonitorOn()) {
             boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
                     " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
                             value,
