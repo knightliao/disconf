@@ -65,6 +65,7 @@ disconf-web
 **将你的配置文件放到此地址目录下（以下地址可自行设定）：**
 
 	home/work/dsp/disconf-rd/online-resources
+**如果不确定如何配置，可以拷贝/disconf-web/profile/rd/目录下的文件，拷贝过去后修改即可。**
 
 配置文件包括：
 
@@ -77,9 +78,14 @@ disconf-web
  
     cp application-demo.properties application.properties 
 
+***注意，即使只有一个redis，也应该配置两个redis client，否则将造成内部错误。***
+
+
+
 **设置War包将要被部署的地址（以下地址可自行设定）：**
 
 	/home/work/dsp/disconf-rd/war
+
 
 ### 构建 ###
 
@@ -101,9 +107,21 @@ disconf-web
 
 **初始化数据库：**
 
-可以参考 sql/readme.md 来进行数据库的初始化。
+可以参考 sql/readme.md 来进行数据库的初始化。注意顺序执行
+0-init_table.sql        
+1-init_data.sql         
+201512/20151225.sql
 
-里面默认有6个用户
+里面默认有6个用户（**请注意线上环境删除这些用户以避免潜在的安全问题**）
+
+name | pwd
+------- | -------
+admin | admin
+testUser1 | MhxzKhl9209
+testUser2 | MhxzKhl167
+testUser3 | MhxzKhl783
+testUser4 | MhxzKhl8758
+testUser5 | MhxzKhl112
 
 如果想自己设置初始化的用户名信息，可以参考代码来自己生成用户：
 
