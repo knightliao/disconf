@@ -1,24 +1,5 @@
 package com.baidu.disconf.web.service.config.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.common.Constants;
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
@@ -49,6 +30,19 @@ import com.baidu.ub.common.db.DaoPageResult;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 import com.github.knightliao.apollo.utils.time.DateUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * @author liaoqiqi
@@ -127,7 +121,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                 File file = new File(curTime, config.getName());
                 try {
-                    FileUtils.writeByteArrayToFile(file, config.getValue().getBytes());
+                    FileUtils.writeByteArrayToFile(file, CodeUtils.unicodeToUtf8(config.getValue()).getBytes());
                 } catch (IOException e) {
                     LOG.warn(e.toString());
                 }
@@ -496,7 +490,7 @@ public class ConfigMgrImpl implements ConfigMgr {
      */
     @Override
     public String getValue(Long configId) {
-        return configDao.getValue(configId);
+        return CodeUtils.unicodeToUtf8(configDao.getValue(configId));
     }
 
     /**
