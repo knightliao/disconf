@@ -127,7 +127,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                 File file = new File(curTime, config.getName());
                 try {
-                    FileUtils.writeByteArrayToFile(file, config.getValue().getBytes());
+                    FileUtils.writeByteArrayToFile(file, CodeUtils.unicodeToUtf8(config.getValue()).getBytes());
                 } catch (IOException e) {
                     LOG.warn(e.toString());
                 }
@@ -496,7 +496,7 @@ public class ConfigMgrImpl implements ConfigMgr {
      */
     @Override
     public String getValue(Long configId) {
-        return configDao.getValue(configId);
+        return CodeUtils.unicodeToUtf8(configDao.getValue(configId));
     }
 
     /**
