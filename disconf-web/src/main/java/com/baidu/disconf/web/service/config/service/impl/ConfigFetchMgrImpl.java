@@ -1,5 +1,6 @@
 package com.baidu.disconf.web.service.config.service.impl;
 
+import com.baidu.disconf.web.utils.CodeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class ConfigFetchMgrImpl implements ConfigFetchMgr {
                                      DisConfigTypeEnum disConfigTypeEnum) {
 
         Config config = configDao.getByParameter(appId, envId, env, key, disConfigTypeEnum);
+        if (config != null) {
+            config.setValue(CodeUtils.unicodeToUtf8(config.getValue()));
+        }
         return config;
     }
 
@@ -44,7 +48,7 @@ public class ConfigFetchMgrImpl implements ConfigFetchMgr {
         if (config == null) {
             return ConfigUtils.getErrorVo("cannot find this config");
         }
-
+        config.setValue(CodeUtils.unicodeToUtf8(config.getValue()));
         ValueVo valueVo = new ValueVo();
         valueVo.setValue(config.getValue());
         valueVo.setStatus(Constants.OK);

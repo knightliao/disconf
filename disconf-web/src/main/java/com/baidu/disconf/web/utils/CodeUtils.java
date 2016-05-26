@@ -54,6 +54,8 @@ public class CodeUtils {
      * 2007-3-15
      */
     public static String unicodeToUtf8(String theString) {
+        if (theString == null)
+            return null;
         char aChar;
         int len = theString.length();
         StringBuffer outBuffer = new StringBuffer(len);
