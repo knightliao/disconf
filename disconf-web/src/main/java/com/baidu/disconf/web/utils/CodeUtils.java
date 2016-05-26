@@ -12,13 +12,6 @@ public class CodeUtils {
 
     /**
      * utf-8 转换成 unicode
-     *
-     * @param inStr
-     *
-     * @return
-     *
-     * @author fanhui
-     * 2007-3-15
      */
     public static String utf8ToUnicode(String inStr) {
 
@@ -45,17 +38,11 @@ public class CodeUtils {
 
     /**
      * unicode 转换成 utf-8
-     *
-     * @param theString
-     *
-     * @return
-     *
-     * @author fanhui
-     * 2007-3-15
      */
     public static String unicodeToUtf8(String theString) {
-        if (theString == null)
+        if (theString == null) {
             return null;
+        }
         char aChar;
         int len = theString.length();
         StringBuffer outBuffer = new StringBuffer(len);
