@@ -27,7 +27,7 @@ import com.baidu.disconf.client.test.model.ServiceA;
 import com.baidu.disconf.client.test.model.StaticConf;
 import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.mock.WatchMgrMock;
-import com.baidu.disconf.client.utils.StringUtil;
+import com.baidu.disconf.client.support.utils.StringUtil;
 import com.baidu.disconf.client.watch.WatchMgr;
 
 import mockit.Mock;

@@ -16,7 +16,7 @@ import org.springframework.core.PriorityOrdered;
 
 import com.baidu.disconf.client.store.aspect.DisconfAspectJ;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
-import com.baidu.disconf.client.utils.StringUtil;
+import com.baidu.disconf.client.support.utils.StringUtil;
 
 /**
  * 第一次扫描，静态扫描

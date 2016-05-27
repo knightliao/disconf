@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.config.DisClientConfig;
-import com.baidu.disconf.client.utils.ClassUtils;
+import com.baidu.disconf.client.support.utils.ClassUtils;
 import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.OsUtil;
 

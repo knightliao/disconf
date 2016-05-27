@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
-import com.baidu.disconf.client.utils.StringUtil;
+import com.baidu.disconf.client.support.utils.StringUtil;
 import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.OsUtil;
 

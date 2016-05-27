@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import com.baidu.disconf.client.utils.ClassUtils;
+import com.baidu.disconf.client.support.utils.ClassUtils;
 
 /**
  * 配置项表示
