@@ -15,6 +15,7 @@ import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.model.DisconfKey;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.scan.inner.common.ScanVerify;
 import com.baidu.disconf.client.scan.inner.dynamic.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
@@ -193,6 +194,11 @@ public class ScanDynamicStoreAdapter {
      */
     private static void addOne2InverseMap(DisconfKey disconfKey, Map<DisconfKey, List<IDisconfUpdate>> inverseMap,
                                           IDisconfUpdate iDisconfUpdate) {
+
+        // 忽略的key 应该忽略掉
+        if (DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(disconfKey.getKey())) {
+            return;
+        }
 
         List<IDisconfUpdate> serviceList;
 
