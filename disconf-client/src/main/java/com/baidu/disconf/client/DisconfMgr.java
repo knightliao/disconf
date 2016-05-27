@@ -146,13 +146,9 @@ public class DisconfMgr implements ApplicationContextAware {
         isSecondInit = true;
 
         //
-        // 不开启 则不要启动timer和打印变量map
+        // 不开启 则不要打印变量map
         //
         if (DisClientConfig.getInstance().ENABLE_DISCONF) {
-            //
-            // start timer
-            //
-            //startTimer();
 
             //
             LOGGER.info("Conf File Map: {}", DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
@@ -167,34 +163,31 @@ public class DisconfMgr implements ApplicationContextAware {
     /**
      * reloadable config file scan, for xml config
      */
-    public synchronized void reloadableScan(String filename) {
+    public synchronized void reloadableScan(String fileName) {
 
         if (!isFirstInit) {
             return;
         }
 
-        if (!DisClientConfig.getInstance().ENABLE_DISCONF) {
-            return;
-        }
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            try {
 
-        //
-        //
-        //
+                if (!DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(fileName)) {
 
-        try {
+                    if (scanMgr != null) {
+                        scanMgr.reloadableScan(fileName);
+                    }
 
-            if (scanMgr != null) {
-                scanMgr.reloadableScan(filename);
+                    if (disconfCoreMgr != null) {
+                        disconfCoreMgr.processFile(fileName);
+                    }
+                    LOGGER.debug("disconf reloadable file: {}", fileName);
+                }
+
+            } catch (Exception e) {
+
+                LOGGER.error(e.toString(), e);
             }
-
-            if (disconfCoreMgr != null) {
-                disconfCoreMgr.processFile(filename);
-            }
-            LOGGER.debug("disconf reloadable file: {}", filename);
-
-        } catch (Exception e) {
-
-            LOGGER.error(e.toString(), e);
         }
     }
 
