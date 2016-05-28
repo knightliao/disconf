@@ -2,7 +2,7 @@ package com.baidu.disconf.web.utils;
 
 import java.io.IOException;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,7 @@ public class DiffUtils {
     public static String getDiff(String old, String newData, String identify, String htmlClick) {
 
         StringComparator stringComparator = new StringComparator(old, newData);
-        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/><br/>" + htmlClick + "<br/> ";
+        String contentString = StringEscapeUtils.escapeHtml4(identify) + "<br/><br/>" + htmlClick + "<br/> ";
 
         try {
 
@@ -61,30 +61,30 @@ public class DiffUtils {
             } else {
 
                 String oldValue = "<br/><br/><br/><span style='color:#FF0000'>Old value:</span><br/>" +
-                                      StringEscapeUtils.escapeHtml(old).replaceAll("\n", "<br/>");
+                        StringEscapeUtils.escapeHtml4(old).replaceAll("\n", "<br/>");
 
                 String newValue = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>" +
-                                      StringEscapeUtils.escapeHtml(newData).replaceAll("\n", "<br/>");
+                        StringEscapeUtils.escapeHtml4(newData).replaceAll("\n", "<br/>");
 
                 String diff = "";
                 if (stringComparator.getChangesFromOriginal().size() != 0) {
                     diff = "<span style='color:#FF0000'>Change info: </span><br/>";
                     for (Chunk chunk : stringComparator.getChangesFromOriginal()) {
-                        diff += StringEscapeUtils.escapeHtml(chunk.toString()) + "<br/>";
+                        diff += StringEscapeUtils.escapeHtml4(chunk.toString()) + "<br/>";
                     }
                 }
 
                 if (stringComparator.getInsertsFromOriginal().size() != 0) {
                     diff += "<br/><span style='color:#FF0000'>Insert info: </span><br/>";
                     for (Chunk chunk : stringComparator.getInsertsFromOriginal()) {
-                        diff += StringEscapeUtils.escapeHtml(chunk.toString()) + "<br/>";
+                        diff += StringEscapeUtils.escapeHtml4(chunk.toString()) + "<br/>";
                     }
                 }
 
                 if (stringComparator.getDeletesFromOriginal().size() != 0) {
                     diff += "<br/><span style='color:#FF0000'>Delete info: </span><br/>";
                     for (Chunk chunk : stringComparator.getDeletesFromOriginal()) {
-                        diff += StringEscapeUtils.escapeHtml(chunk.toString()) + "<br/>";
+                        diff += StringEscapeUtils.escapeHtml4(chunk.toString()) + "<br/>";
                     }
                 }
 

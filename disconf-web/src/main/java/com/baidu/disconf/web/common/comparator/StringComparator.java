@@ -40,8 +40,10 @@ public class StringComparator extends CommonComparator {
             return new ArrayList<String>();
         }
 
-        List<String> lines = new ArrayList<String>();
-        lines = StringUtil.parseStringToStringList(data, "\\r?\\n");
+        List<String> lines = StringUtil.parseStringToStringList(data, "\\r?\\n");
+        if (lines == null) {
+            lines = new ArrayList<String>();
+        }
 
         return lines;
     }

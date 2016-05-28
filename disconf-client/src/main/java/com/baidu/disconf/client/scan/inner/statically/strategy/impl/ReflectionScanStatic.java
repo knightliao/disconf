@@ -81,7 +81,7 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
         //
         Collection<URL> urlTotals = new ArrayList<URL>();
         for (String packName : packNameList) {
-            Set<URL> urls = ClasspathHelper.forPackage(packName);
+            Collection<URL> urls = ClasspathHelper.forPackage(packName, ClasspathHelper.classLoaders());
             urlTotals.addAll(urls);
         }
 
@@ -138,10 +138,9 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
             } else {
 
-                LOGGER
-                        .error("cannot find CLASS ANNOTATION " + DisconfFile.class.getName()
-                                + " for disconf file item: " +
-                                method.toString());
+                LOGGER.error("cannot find CLASS ANNOTATION " + DisconfFile.class.getName()
+                        + " for disconf file item: " +
+                        method.toString());
             }
         }
 
@@ -155,7 +154,7 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
 
             // 校验是否所有配置文件都含有配置
             if (disconfFileItemMap.get(classFile).isEmpty()) {
-                LOGGER.warn("disconf file hasn't any items: " + classFile.getName());
+                LOGGER.info("disconf file hasn't any items: " + classFile.getName());
                 continue;
             }
 

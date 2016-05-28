@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -461,10 +461,10 @@ public class ConfigMgrImpl implements ConfigMgr {
      */
     private String getNewValue(String newValue, String identify, String htmlClick) {
 
-        String contentString = StringEscapeUtils.escapeHtml(identify) + "<br/>" + htmlClick + "<br/><br/> ";
+        String contentString = StringEscapeUtils.escapeHtml4(identify) + "<br/>" + htmlClick + "<br/><br/> ";
 
         String data = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>";
-        contentString = contentString + data + StringEscapeUtils.escapeHtml(newValue);
+        contentString = contentString + data + StringEscapeUtils.escapeHtml4(newValue);
 
         return contentString;
     }
