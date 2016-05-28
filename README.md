@@ -147,7 +147,6 @@ APP+环境+版本+ZK查询：
 
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
-- [Tutorial disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-dubbo-demo)
 - [Tutorial 9 实现真正意义上的统一上线包](https://github.com/knightliao/disconf/wiki/Tutorial9)
 - [Tutorial 10 实现一个配置更新下载器agent](https://github.com/knightliao/disconf/wiki/Tutorial10)
 - [Tutorial 13 增加统一的回调类,unify-notify模式：灵活处理更新配置通知](https://github.com/knightliao/disconf/wiki/Tutorial13-unify-notify)
@@ -191,4 +190,4 @@ APP+环境+版本+ZK查询：
 
 - 搜索引擎推荐：[sov5搜索引擎, 支持谷歌网页搜索/电影搜索/资源搜索/问答搜索](http://sov5.com)
 - python论坛推荐：[Django中国社区](http://www.django-china.cn/)
-- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
+- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 
