@@ -113,7 +113,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             if (copy2TargetDirPath != null) {
 
                 //
-                if (enableLocalDownloadDirInClassPath == true || !copy2TargetDirPath.equals(ClassLoaderUtil.getClassPath
+                if (enableLocalDownloadDirInClassPath || !copy2TargetDirPath.equals(ClassLoaderUtil.getClassPath
                         ())) {
                     localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, copy2TargetDirPath, fileName, true);
                 }
@@ -200,15 +200,10 @@ public class RestfulMgrImpl implements RestfulMgr {
         OsUtil.makeDirs(copy2TargetDirPath);
 
         File targetPath = new File(OsUtil.pathJoin(copy2TargetDirPath, fileName));
-        if (targetPath != null) {
-            // 从下载文件 复制/mv 到targetPath 原子性的做转移
-            OsUtil.transferFileAtom(srcFile, targetPath, isMove);
-            return targetPath;
+        // 从下载文件 复制/mv 到targetPath 原子性的做转移
+        OsUtil.transferFileAtom(srcFile, targetPath, isMove);
+        return targetPath;
 
-        } else {
-            LOGGER.warn("targetPath is null, cannot transfer " + fileName + " to targetPath");
-            return null;
-        }
     }
 
     /**
