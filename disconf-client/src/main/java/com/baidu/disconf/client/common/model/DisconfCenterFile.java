@@ -32,6 +32,9 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     // 额外的配置数据，非注解式使用它来存储
     private Map<String, Object> additionalKeyMaps = new HashMap<String, Object>();
 
+    // 是否是非注解注入方式
+    private boolean isTaggedWithNonAnnotationFile = false;
+
     // 配置文件类
     private Class<?> cls;
 
@@ -81,6 +84,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     public void setSupportFileTypeEnum(SupportFileTypeEnum supportFileTypeEnum) {
         this.supportFileTypeEnum = supportFileTypeEnum;
+    }
+
+    public boolean isTaggedWithNonAnnotationFile() {
+        return isTaggedWithNonAnnotationFile;
+    }
+
+    public void setIsTaggedWithNonAnnotationFile(boolean isTaggedWithNonAnnotationFile) {
+        this.isTaggedWithNonAnnotationFile = isTaggedWithNonAnnotationFile;
     }
 
     public String getCopy2TargetDirPath() {
