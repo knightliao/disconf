@@ -21,13 +21,14 @@ import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.store.inner.DisconfCenterHostFilesStore;
 import com.baidu.disconf.client.support.registry.Registry;
+import com.baidu.disconf.client.support.utils.StringUtil;
 import com.baidu.disconf.client.test.common.BaseSpringMockTestCase;
 import com.baidu.disconf.client.test.model.ConfA;
 import com.baidu.disconf.client.test.model.ServiceA;
 import com.baidu.disconf.client.test.model.StaticConf;
 import com.baidu.disconf.client.test.scan.inner.ScanPackTestCase;
 import com.baidu.disconf.client.test.watch.mock.WatchMgrMock;
-import com.baidu.disconf.client.support.utils.StringUtil;
+import com.baidu.disconf.client.usertools.DisconfDataGetter;
 import com.baidu.disconf.client.watch.WatchMgr;
 
 import mockit.Mock;
@@ -123,6 +124,8 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase implements Applic
             LOGGER.info(String.valueOf("static var: " + StaticConf.getStaticvar()));
             Assert.assertEquals(new Integer(50).intValue(), StaticConf.getStaticvar());
 
+            testDynamicGetter();
+
             LOGGER.info("================ AFTER DISCONF ==============================");
 
         } catch (Exception e) {
@@ -130,6 +133,18 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase implements Applic
             e.printStackTrace();
             Assert.assertTrue(false);
         }
+    }
+
+    private void testDynamicGetter() {
+
+        Assert.assertEquals(DisconfDataGetter.getByFile("confA.properties").get("confa.varA").toString(),
+                "1000");
+
+        Assert.assertEquals(DisconfDataGetter.getByItem("keyA").toString(),
+                "1000");
+
+        Assert.assertEquals(DisconfDataGetter.getByFileItem("confA.properties", "confa.varA").toString(),
+                "1000");
     }
 
     public ApplicationContext getApplicationContext() {

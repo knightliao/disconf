@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
-import com.baidu.disconf.client.test.utils.NetUtils;
+import com.baidu.disconf.client.test.support.utils.NetUtils;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 
 import junit.framework.Assert;

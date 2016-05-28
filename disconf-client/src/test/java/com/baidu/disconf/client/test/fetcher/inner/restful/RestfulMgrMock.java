@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 
-import com.baidu.disconf.client.test.utils.DirUtils;
+import com.baidu.disconf.client.test.support.utils.DirUtils;
 import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.json.ValueVo;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
