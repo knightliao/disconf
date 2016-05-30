@@ -81,7 +81,7 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
         //
         Collection<URL> urlTotals = new ArrayList<URL>();
         for (String packName : packNameList) {
-            Collection<URL> urls = ClasspathHelper.forPackage(packName, ClasspathHelper.classLoaders());
+            Set<URL> urls = ClasspathHelper.forPackage(packName);
             urlTotals.addAll(urls);
         }
 
