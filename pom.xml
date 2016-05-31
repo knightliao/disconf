@@ -25,9 +25,9 @@
 
     <properties>
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.34-SNAPSHOT</disconf-core.version>
-        <disconf-client.version>2.6.34-SNAPSHOT</disconf-client.version>
-        <disconf-client-spring.version>2.6.34-SNAPSHOT</disconf-client-spring.version>
+        <disconf-core.version>2.6.35-SNAPSHOT</disconf-core.version>
+        <disconf-client.version>2.6.35-SNAPSHOT</disconf-client.version>
+        <disconf-client-spring.version>2.6.35-SNAPSHOT</disconf-client-spring.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
