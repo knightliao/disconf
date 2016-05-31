@@ -1,7 +1,3 @@
-/**
- * adx-web#com.baidu.one.document.exception.DocumentNotFoundException.java
- * 上午11:52:33 created by Darwin(Tianxin)
- */
 package com.baidu.dsp.common.exception;
 
 /**

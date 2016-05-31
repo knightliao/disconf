@@ -1,7 +1,3 @@
-/**
- * adx-common#com.baidu.ub.generic.dao.BaseDao.java
- * 下午6:50:08 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.dao;
 
 import java.io.Serializable;
@@ -13,8 +9,6 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * DAO的定义
- *
- * @author Darwin(Tianxin)
  */
 public interface BaseDao<KEY extends Serializable, ENTITY extends BaseObject<KEY>> {
 
@@ -112,7 +106,6 @@ public interface BaseDao<KEY extends Serializable, ENTITY extends BaseObject<KEY
     /**
      * 获取全部对象
      *
-     * @return 下午4:30:53 created by Darwin(Tianxin)
      */
     List<ENTITY> findAll();
 

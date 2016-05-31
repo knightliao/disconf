@@ -99,7 +99,7 @@ public class QueryGenerator<ENTITY extends BaseObject<KEY>, KEY extends Serializ
      * @param columns
      * @param matches
      *
-     * @return 下午1:14:54 created by Darwin(Tianxin)
+     * @return 下午1:14:54
      */
     public Query getMiniSelectQuery(Collection<String> columns, Collection<Match> matches) {
         int matchSize = matches == null ? 0 : matches.size();
@@ -177,7 +177,7 @@ public class QueryGenerator<ENTITY extends BaseObject<KEY>, KEY extends Serializ
     /**
      * @param modifies
      * @param sb
-     * @param params   上午10:09:44 created by Darwin(Tianxin)
+     * @param params
      */
     private void appendModifytoSQL(List<Modify> modifies, StringBuilder sb, List<Object> params) {
         for (Modify modify : modifies) {
@@ -289,7 +289,7 @@ public class QueryGenerator<ENTITY extends BaseObject<KEY>, KEY extends Serializ
      * @param column
      * @param entity
      *
-     * @return 上午9:51:49 created by Darwin(Tianxin)
+     * @return 上午9:51:49
      */
     private Object getColumnValue(String column, ENTITY entity) {
         Method getter = orMapping.getGetter(column);

@@ -1,7 +1,3 @@
-/**
- * adx-common#com.baidu.ub.common.generic.dao.impl.ExtMapper.java
- * 下午3:26:51 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.mapper;
 
 import java.io.Serializable;
@@ -19,8 +15,6 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * GenericMapper the mapper
- *
- * @author Darwin(Tianxin)
  */
 public class GenericMapper<ENTITY extends BaseObject<K>, K extends Serializable> implements RowMapper<ENTITY> {
 
@@ -92,7 +86,7 @@ public class GenericMapper<ENTITY extends BaseObject<K>, K extends Serializable>
             String sValue = value.toString();
             String sValueClass = value.getClass().toString();
             System.out.println("Error in " + setMethod.getName() + " invoke with param :" + sValue + " type is " +
-                                   sValueClass);
+                    sValueClass);
             throw e;
         }
     }

@@ -1,7 +1,3 @@
-/**
- * beidou-3plus#com.baidu.beidou.common.bo.Pair.java
- * 上午11:55:14 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.operator;
 
 /**

@@ -1,7 +1,3 @@
-/**
- * beidou-core-493#com.baidu.beidou.common.annotation.Key.java
- * 下午1:52:56 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.annotation;
 
 import java.lang.annotation.ElementType;
@@ -14,8 +10,6 @@ import com.github.knightliao.apollo.utils.common.StringUtil;
 
 /**
  * 表示主键名的注释，添加<code>@Inherited</code>以便零注解
- *
- * @author Darwin(Tianxin)
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
