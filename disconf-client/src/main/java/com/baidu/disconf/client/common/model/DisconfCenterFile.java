@@ -214,10 +214,15 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
          */
         public Object setValue4StaticFileItem(Object value) throws Exception {
 
-            if (setMethod != null) {
-                setMethod.invoke(null, value);
-            } else {
-                field.set(null, value);
+            try {
+                if (setMethod != null) {
+                    setMethod.invoke(null, value);
+                } else {
+                    field.set(null, value);
+                }
+
+            } catch (Exception e) {
+                LOGGER.warn(e.toString());
             }
 
             return value;
@@ -225,10 +230,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
         public Object setValue4FileItem(Object object, Object value) throws Exception {
 
-            if (setMethod != null) {
-                setMethod.invoke(object, value);
-            } else {
-                field.set(object, value);
+            try {
+                if (setMethod != null) {
+                    setMethod.invoke(object, value);
+                } else {
+                    field.set(object, value);
+                }
+            } catch (Exception e) {
+                LOGGER.warn(e.toString());
             }
 
             return value;

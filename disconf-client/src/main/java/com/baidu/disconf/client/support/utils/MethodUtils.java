@@ -70,8 +70,7 @@ public class MethodUtils {
 
         Set<Method> methods = ClassUtils.getAllMethod(curClass);
         for (Method method : methods) {
-            if (method.getName().toLowerCase().equals("set" + fieldName) || method.getName().toLowerCase().equals("is" +
-                    fieldName)) {
+            if (method.getName().toLowerCase().equals("set" + fieldName)) {
                 return method;
             }
         }
