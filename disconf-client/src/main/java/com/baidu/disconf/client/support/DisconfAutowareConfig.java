@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
 
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,18 +31,8 @@ public final class DisconfAutowareConfig {
      */
     private static Properties getProperties(final String propertyFilePath) throws Exception {
 
-        try {
-
-            // 使用全路径的配置文件载入器
-            return ConfigLoaderUtils.loadConfig(propertyFilePath);
-
-        } catch (Exception e) {
-
-            // 只用文件名 来载入试试
-            String filename = FilenameUtils.getName(propertyFilePath);
-            return ConfigLoaderUtils.loadConfig(filename);
-
-        }
+        // 使用全路径的配置文件载入器
+        return ConfigLoaderUtils.loadConfig(propertyFilePath);
     }
 
     /**
