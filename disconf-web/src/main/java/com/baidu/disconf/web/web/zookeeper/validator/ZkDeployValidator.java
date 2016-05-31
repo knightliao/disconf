@@ -1,6 +1,6 @@
 package com.baidu.disconf.web.web.zookeeper.validator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

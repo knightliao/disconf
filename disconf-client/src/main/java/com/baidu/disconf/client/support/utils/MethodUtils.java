@@ -1,10 +1,10 @@
-package com.baidu.disconf.client.utils;
+package com.baidu.disconf.client.support.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,8 +70,7 @@ public class MethodUtils {
 
         Set<Method> methods = ClassUtils.getAllMethod(curClass);
         for (Method method : methods) {
-            if (method.getName().toLowerCase().equals("set" + fieldName) || method.getName().toLowerCase().equals("is" +
-                    fieldName)) {
+            if (method.getName().toLowerCase().equals("set" + fieldName)) {
                 return method;
             }
         }

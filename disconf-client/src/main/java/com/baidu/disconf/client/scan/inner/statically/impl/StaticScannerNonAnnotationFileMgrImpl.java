@@ -81,6 +81,9 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
         // file name
         disconfCenterFile.setFileName(fileName);
 
+        // 非注解式
+        disconfCenterFile.setIsTaggedWithNonAnnotationFile(true);
+
         // file type
         disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
 

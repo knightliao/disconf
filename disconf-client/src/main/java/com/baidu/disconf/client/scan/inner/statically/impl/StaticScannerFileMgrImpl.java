@@ -23,7 +23,7 @@ import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgr;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
-import com.baidu.disconf.client.utils.MethodUtils;
+import com.baidu.disconf.client.support.utils.MethodUtils;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 

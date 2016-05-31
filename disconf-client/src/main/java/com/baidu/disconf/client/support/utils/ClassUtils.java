@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.utils;
+package com.baidu.disconf.client.support.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

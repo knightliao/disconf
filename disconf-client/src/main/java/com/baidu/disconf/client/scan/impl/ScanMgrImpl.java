@@ -111,10 +111,6 @@ public class ScanMgrImpl implements ScanMgr {
     @Override
     public void reloadableScan(String fileName) throws Exception {
 
-        if (DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(fileName)) {
-            return;
-        }
-
         StaticScannerNonAnnotationFileMgrImpl.scanData2Store(fileName);
     }
 

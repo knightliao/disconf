@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.test.utils;
+package com.baidu.disconf.client.test.support.utils;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

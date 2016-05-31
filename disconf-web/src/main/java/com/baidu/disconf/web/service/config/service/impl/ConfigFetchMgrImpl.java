@@ -43,6 +43,7 @@ public class ConfigFetchMgrImpl implements ConfigFetchMgr {
         if (config == null) {
             return ConfigUtils.getErrorVo("cannot find this config");
         }
+
         ValueVo valueVo = new ValueVo();
         valueVo.setValue(config.getValue());
         valueVo.setStatus(Constants.OK);

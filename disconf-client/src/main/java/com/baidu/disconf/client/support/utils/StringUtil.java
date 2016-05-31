@@ -1,10 +1,10 @@
-package com.baidu.disconf.client.utils;
+package com.baidu.disconf.client.support.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 有关字符串处理的工具类。
@@ -25,6 +25,7 @@ public abstract class StringUtil {
     /**
      * @param source
      * @param token
+     *
      * @return
      */
     public static List<Integer> parseStringToIntegerList(String source,
@@ -53,6 +54,7 @@ public abstract class StringUtil {
     /**
      * @param source
      * @param token
+     *
      * @return
      */
     public static List<Long> parseStringToLongList(String source, String token) {
@@ -73,6 +75,7 @@ public abstract class StringUtil {
     /**
      * @param source
      * @param token
+     *
      * @return
      */
     public static List<String> parseStringToStringList(String source,
@@ -110,6 +113,7 @@ public abstract class StringUtil {
      *
      * @param str        要转换的字符串
      * @param defaultStr 默认字符串
+     *
      * @return 字符串本身或指定的默认字符串
      */
     public static String defaultIfEmpty(String str, String defaultStr) {
@@ -129,6 +133,7 @@ public abstract class StringUtil {
      *
      * @param str        要转换的字符串
      * @param defaultStr 默认字符串
+     *
      * @return 字符串本身或指定的默认字符串
      */
     public static String defaultIfBlank(String str, String defaultStr) {
@@ -156,6 +161,7 @@ public abstract class StringUtil {
      * </p>
      *
      * @param str 要转换的字符串
+     *
      * @return camel case字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toCamelCase(String str) {
@@ -224,6 +230,7 @@ public abstract class StringUtil {
      * </p>
      *
      * @param str 要转换的字符串
+     *
      * @return pascal case字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toPascalCase(String str) {
@@ -289,6 +296,7 @@ public abstract class StringUtil {
      * </p>
      *
      * @param str 要转换的字符串
+     *
      * @return 下划线分隔的大写字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toUpperCaseWithUnderscores(String str) {
@@ -364,6 +372,7 @@ public abstract class StringUtil {
      * </p>
      *
      * @param str 要转换的字符串
+     *
      * @return 下划线分隔的小写字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toLowerCaseWithUnderscores(String str) {
@@ -417,6 +426,7 @@ public abstract class StringUtil {
      * 将一个长整形转换成62进制的字符串。
      *
      * @param longValue 64位数字
+     *
      * @return 62进制的字符串
      */
     public static String longToString(long longValue) {
@@ -428,6 +438,7 @@ public abstract class StringUtil {
      *
      * @param longValue 64位数字
      * @param noCase    区分大小写
+     *
      * @return 62进制的字符串
      */
     public static String longToString(long longValue, boolean noCase) {
@@ -458,6 +469,7 @@ public abstract class StringUtil {
      * 将一个byte数组转换成62进制的字符串。
      *
      * @param bytes 二进制数组
+     *
      * @return 62进制的字符串
      */
     public static String bytesToString(byte[] bytes) {
@@ -469,6 +481,7 @@ public abstract class StringUtil {
      *
      * @param bytes  二进制数组
      * @param noCase 区分大小写
+     *
      * @return 62进制的字符串
      */
     public static String bytesToString(byte[] bytes, boolean noCase) {
@@ -507,6 +520,7 @@ public abstract class StringUtil {
      *
      * @param str 要比较的字符串
      * @param ch  结尾字符
+     *
      * @return 如果字符串<code>str</code>是否以字符<code>ch</code>结尾，则返回<code>true</code>
      */
     public static boolean endsWithChar(String str, char ch) {
@@ -546,6 +560,7 @@ public abstract class StringUtil {
      *
      * @param str 要比较的字符串
      * @param ch  开头字符
+     *
      * @return 如果字符串<code>str</code>是否以字符<code>ch</code> 开头，则返回<code>true</code>
      */
     public static boolean startsWithChar(String str, char ch) {

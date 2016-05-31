@@ -1,7 +1,7 @@
 Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=master)](https://travis-ci.org/knightliao/disconf) [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
 =======
 
-Distributed Configuration Management Platform(分布式配置管理平台)
+Distributed Configuration Management Platform(分布式配置管理平台) 
 
 专注于各种 `分布式系统配置管理` 的`通用组件`/`通用平台`, 提供统一的`配置管理服务`。
 
@@ -37,8 +37,8 @@ https://github.com/knightliao/disconf-demos-java
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.33-SNAPSHOT
-- master(stable branch)：2.6.33
+- dev(develop branch): 2.6.34
+- master(stable branch)：2.6.34
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
@@ -100,7 +100,7 @@ Disconf的功能特点描述图：
     <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
-        <version>2.6.33</version>
+        <version>2.6.34</version>
     </dependency>
 
 ### server: disconf-web 使用 ###
@@ -147,7 +147,6 @@ APP+环境+版本+ZK查询：
 
 - [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
 - [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
-- [Tutorial disconf与dubbo的集成 demo](https://github.com/knightliao/disconf/tree/master/disconf-demos/disconf-standalone-dubbo-demo)
 - [Tutorial 9 实现真正意义上的统一上线包](https://github.com/knightliao/disconf/wiki/Tutorial9)
 - [Tutorial 10 实现一个配置更新下载器agent](https://github.com/knightliao/disconf/wiki/Tutorial10)
 - [Tutorial 13 增加统一的回调类,unify-notify模式：灵活处理更新配置通知](https://github.com/knightliao/disconf/wiki/Tutorial13-unify-notify)
@@ -191,4 +190,4 @@ APP+环境+版本+ZK查询：
 
 - 搜索引擎推荐：[sov5搜索引擎, 支持谷歌网页搜索/电影搜索/资源搜索/问答搜索](http://sov5.com)
 - python论坛推荐：[Django中国社区](http://www.django-china.cn/)
-- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 捐助者会留名
+- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 

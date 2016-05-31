@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.config.DisClientConfig;
-import com.baidu.disconf.client.utils.ClassUtils;
+import com.baidu.disconf.client.support.utils.ClassUtils;
 import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.OsUtil;
 
@@ -31,6 +31,9 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     // 额外的配置数据，非注解式使用它来存储
     private Map<String, Object> additionalKeyMaps = new HashMap<String, Object>();
+
+    // 是否是非注解注入方式
+    private boolean isTaggedWithNonAnnotationFile = false;
 
     // 配置文件类
     private Class<?> cls;
@@ -81,6 +84,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     public void setSupportFileTypeEnum(SupportFileTypeEnum supportFileTypeEnum) {
         this.supportFileTypeEnum = supportFileTypeEnum;
+    }
+
+    public boolean isTaggedWithNonAnnotationFile() {
+        return isTaggedWithNonAnnotationFile;
+    }
+
+    public void setIsTaggedWithNonAnnotationFile(boolean isTaggedWithNonAnnotationFile) {
+        this.isTaggedWithNonAnnotationFile = isTaggedWithNonAnnotationFile;
     }
 
     public String getCopy2TargetDirPath() {
@@ -203,10 +214,15 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
          */
         public Object setValue4StaticFileItem(Object value) throws Exception {
 
-            if (setMethod != null) {
-                setMethod.invoke(null, value);
-            } else {
-                field.set(null, value);
+            try {
+                if (setMethod != null) {
+                    setMethod.invoke(null, value);
+                } else {
+                    field.set(null, value);
+                }
+
+            } catch (Exception e) {
+                LOGGER.warn(e.toString());
             }
 
             return value;
@@ -214,10 +230,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
         public Object setValue4FileItem(Object object, Object value) throws Exception {
 
-            if (setMethod != null) {
-                setMethod.invoke(object, value);
-            } else {
-                field.set(object, value);
+            try {
+                if (setMethod != null) {
+                    setMethod.invoke(object, value);
+                } else {
+                    field.set(object, value);
+                }
+            } catch (Exception e) {
+                LOGGER.warn(e.toString());
             }
 
             return value;

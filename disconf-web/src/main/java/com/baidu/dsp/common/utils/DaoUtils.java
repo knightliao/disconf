@@ -3,7 +3,7 @@ package com.baidu.dsp.common.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.baidu.dsp.common.form.RequestListBase.Page;
 import com.baidu.ub.common.db.DaoPage;

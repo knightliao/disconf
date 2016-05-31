@@ -1,9 +1,10 @@
-package com.baidu.disconf.client.utils;
+package com.baidu.disconf.client.support.utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.util.Properties;
@@ -49,12 +50,13 @@ public final class ConfigLoaderUtils {
             // http://stackoverflow.com/questions/3263560/sysloader-getresource-problem-in-java
             URL url = ClassLoaderUtil.getLoader().getResource(propertyFilePath);
             URI uri = new URI(url.toString());
-            props.load(new FileInputStream(uri.getPath()));
+            props.load(new InputStreamReader(new FileInputStream(uri.getPath()), "utf-8"));
 
         } catch (Exception e) {
 
             // http://stackoverflow.com/questions/574809/load-a-resource-contained-in-a-jar
-            props.load(ClassLoaderUtil.getLoader().getResourceAsStream(propertyFilePath));
+            props.load(new InputStreamReader(ClassLoaderUtil.getLoader().getResourceAsStream(propertyFilePath),
+                    "utf-8"));
         }
         return props;
     }
@@ -72,7 +74,7 @@ public final class ConfigLoaderUtils {
             throws Exception {
 
         Properties props = new Properties();
-        props.load(new FileInputStream(propertyFilePath));
+        props.load(new InputStreamReader(new FileInputStream(propertyFilePath), "utf-8"));
         return props;
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.baidu.unbiz.common.genericdao.annotation.Table;
 import com.github.knightliao.apollo.db.bo.BaseObject;

@@ -218,7 +218,10 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                     LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
                 }
             }
-        } else {
+        }
+
+        // 注解式
+        if (disconfCenterFile.isTaggedWithNonAnnotationFile()) {
 
             //
             // 非注解式 或者 注解式的域集合为空，则将 文件内容写到配置库里
