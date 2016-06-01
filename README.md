@@ -28,16 +28,14 @@ https://github.com/knightliao/disconf-demos-java
     - Java: 目前唯一支持语言
     - python：打算支持
     - PHP：暂未支持
-    - 开放API，让开发者具有自定义开发客户端的能力: [Tutorial12 web开放API-client](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI-client)  
 - WEB 管理端：   
     - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
-    - 开放API，让开发者具有自定义定制web控制台界面的能力 [Tutorial12 web开放API](https://github.com/knightliao/disconf/wiki/Tutorial12-web%E5%BC%80%E6%94%BEAPI)  
 
 ### java client
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.34
+- dev(develop branch): 2.6.35-SNAPSHOT
 - master(stable branch)：2.6.34
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
