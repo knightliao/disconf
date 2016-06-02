@@ -103,15 +103,17 @@ public class DisInnerConfigHelper {
             }
         }
         DisClientConfig.getInstance().setIgnoreDisconfKeySet(keySet);
-        LOGGER.info("SERVER ignore: " + DisClientConfig.getInstance().getIgnoreDisconfKeySet());
+        LOGGER.info("SERVER disconf.ignore: " + DisClientConfig.getInstance().getIgnoreDisconfKeySet());
 
         // 重试
-        LOGGER.debug("SERVER conf_server_url_retry_times: " + DisClientConfig
+        LOGGER.debug("SERVER disconf.conf_server_url_retry_times: " + DisClientConfig
                 .getInstance().CONF_SERVER_URL_RETRY_TIMES);
 
-        LOGGER.debug("SERVER conf_server_url_retry_sleep_seconds: " +
+        LOGGER.debug("SERVER disconf.conf_server_url_retry_sleep_seconds: " +
                 DisClientConfig.getInstance().confServerUrlRetrySleepSeconds);
 
+        LOGGER.debug("SERVER disconf.enable_local_download_dir_in_class_path: " + DisClientConfig
+                .getInstance().enableLocalDownloadDirInClassPath);
         // 是否将文件放在classpath目录下
         if (DisClientConfig.getInstance().enableLocalDownloadDirInClassPath) {
 
@@ -141,21 +143,23 @@ public class DisInnerConfigHelper {
 
             throw new Exception("settings: CONF_SERVER_STORE_ACTION cannot find");
         }
-        LOGGER.debug("SERVER CONF_SERVER_STORE_ACTION: " + DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION);
+        LOGGER.debug("SERVER disconf.conf_server_store_action: " + DisClientSysConfig
+                .getInstance().CONF_SERVER_STORE_ACTION);
 
         // CONF_SERVER_ZOO_ACTION
         if (StringUtils.isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION)) {
 
             throw new Exception("settings: CONF_SERVER_ZOO_ACTION cannot find");
         }
-        LOGGER.debug("SERVER CONF_SERVER_ZOO_ACTION: " + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
+        LOGGER.debug(
+                "SERVER disconf.conf_server_zoo_action: " + DisClientSysConfig.getInstance().CONF_SERVER_ZOO_ACTION);
 
         // CONF_SERVER_MASTER_NUM_ACTION
         if (StringUtils.isEmpty(DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION)) {
 
             throw new Exception("settings: CONF_SERVER_MASTER_NUM_ACTION  cannot find");
         }
-        LOGGER.debug("SERVER CONF_SERVER_MASTER_NUM_ACTION Action URL: " +
+        LOGGER.debug("SERVER disconf.conf_server_master_num_action: " +
                 DisClientSysConfig.getInstance().CONF_SERVER_MASTER_NUM_ACTION);
 
         //
@@ -167,7 +171,7 @@ public class DisInnerConfigHelper {
         }
 
         // LOCAL_DOWNLOAD_DIR
-        LOGGER.debug("SERVER LOCAL_DOWNLOAD_DIR: " + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
+        LOGGER.debug("SERVER disconf.local_download_dir: " + DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
         OsUtil.makeDirs(DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR);
     }
 
