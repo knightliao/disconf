@@ -30,7 +30,7 @@ public final class MachineInfo {
 
         } catch (UnknownHostException e) {
 
-            throw new Exception();
+            throw new Exception(e);
         }
     }
 
@@ -49,7 +49,7 @@ public final class MachineInfo {
 
         } catch (UnknownHostException e) {
 
-            throw new Exception();
+            throw new Exception(e);
         }
     }
 
