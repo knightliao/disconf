@@ -2,6 +2,8 @@ package com.baidu.disconf.web.web.config.controller;
 
 import javax.validation.constraints.NotNull;
 
+import com.baidu.disconf.web.utils.MyStringUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.FileUploadException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
+
+import java.io.FileInputStream;
 
 /**
  * 专用于配置更新、删除
@@ -101,7 +105,8 @@ public class ConfigUpdateController extends BaseController {
         String emailNotification = "";
         try {
 
-            String str = new String(file.getBytes(), "UTF-8");
+            String str = MyStringUtils.multipartFileToString(file);
+
             LOG.info("receive file: " + str);
 
             emailNotification = configMgr.updateItemValue(configId, str);
