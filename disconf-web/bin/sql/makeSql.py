@@ -6,7 +6,7 @@ Created on 2014年2月15日
 @author: liaoqiqi
 """
 
-myfile = open("url_resrouces.txt")
+myfile = open("url_resources.txt")
 
 lines = myfile.readlines()
 
@@ -47,4 +47,3 @@ for line in lines:
     print "(1,'" + URL_PREFIX + url + "' , '" + desc + "' , '" + role1_mask + "'),"
     print "(2,'" + URL_PREFIX + url + "' , '" + desc + "' , '" + role2_mask + "'),"
     print "(3,'" + URL_PREFIX + url + "' , '" + desc + "' , '" + role3_mask + "');"
-
