@@ -1,5 +1,6 @@
 package com.baidu.disconf.web.web.config.validator;
 
+import com.baidu.dsp.common.exception.FieldException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -32,44 +33,44 @@ public class ConfigValidator4Fetch {
      *
      * @param confForm
      */
-    public ConfigFullModel verifyConfForm(ConfForm confForm) throws Exception {
+    public ConfigFullModel verifyConfForm(ConfForm confForm,boolean unCheckKey) {
 
         //
         // app
         //
         if (StringUtils.isEmpty(confForm.getApp())) {
-            throw new Exception("app is empty");
+            throw new FieldException("app", "app is empty", null);
         }
 
         App app = appMgr.getByName(confForm.getApp());
         if (app == null) {
-            throw new Exception("app " + confForm.getApp() + " doesn't exist in db.");
+            throw new FieldException("app", "app " + confForm.getApp() + " doesn't exist in db.",null);
         }
 
         //
         // env
         //
         if (StringUtils.isEmpty(confForm.getEnv())) {
-            throw new Exception("app is empty");
+            throw new FieldException("env", "env is empty", null);
         }
 
         Env env = envMgr.getByName(confForm.getEnv());
         if (env == null) {
-            throw new Exception("env " + confForm.getEnv() + " doesn't exist in db.");
+            throw new FieldException("env", "env " + confForm.getEnv() + " doesn't exist in db.", null);
         }
 
         //
         // key
         //
-        if (StringUtils.isEmpty(confForm.getKey())) {
-            throw new Exception("key is empty");
+        if (!unCheckKey && StringUtils.isEmpty(confForm.getKey())) {
+            throw new FieldException("key", "key is empty", null);
         }
 
         //
         // version
         //
         if (StringUtils.isEmpty(confForm.getVersion())) {
-            throw new Exception("version is empty");
+            throw new FieldException("version", "version is empty", null);
         }
 
         return new ConfigFullModel(app, env, confForm.getVersion(), confForm.getKey());
