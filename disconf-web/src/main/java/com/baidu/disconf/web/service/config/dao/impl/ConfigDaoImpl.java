@@ -87,11 +87,12 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDa
         matchs.add(new Match(Columns.ENV_ID, envId));
         matchs.add(new Match(Columns.VERSION, version));
         matchs.add(new Match(Columns.STATUS, Constants.STATUS_NORMAL));
-        if (hasValue)
+        if (hasValue) {
             return find(matchs, new ArrayList<Order>());
-        else
-            return findColumns(matchs,new String[]{Columns.CONFIG_ID,Columns.TYPE,Columns.NAME,Columns.CREATE_TIME
-                    ,Columns.UPDATE_TIME,Columns.STATUS,Columns.APP_ID,Columns.ENV_ID,Columns.VERSION});
+        } else {
+            return findColumns(matchs, new String[] {Columns.CONFIG_ID, Columns.TYPE, Columns.NAME, Columns.CREATE_TIME
+                    , Columns.UPDATE_TIME, Columns.STATUS, Columns.APP_ID, Columns.ENV_ID, Columns.VERSION});
+        }
     }
 
     /**

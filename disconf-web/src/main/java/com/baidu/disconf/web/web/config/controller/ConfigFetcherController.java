@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-import com.baidu.dsp.common.controller.BaseController;
-import com.baidu.dsp.common.vo.JsonObjectBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,9 @@ import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
 import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
+import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
+import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
  * 配置获取Controller, Disconf-client专门使用的
@@ -61,16 +61,15 @@ public class ConfigFetcherController extends BaseController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public JsonObjectBase getList(ConfForm confForm) {
-        return getListImp(confForm,true);
+        return getListImp(confForm, true);
     }
 
     @NoAuth
     @RequestMapping(value = "/simple/list", method = RequestMethod.GET)
     @ResponseBody
     public JsonObjectBase getSimpleList(ConfForm confForm) {
-        return getListImp(confForm,false);
+        return getListImp(confForm, false);
     }
-
 
     /**
      * 获取配置项 Item
@@ -91,7 +90,7 @@ public class ConfigFetcherController extends BaseController {
         //
         ConfigFullModel configModel = null;
         try {
-            configModel = configValidator4Fetch.verifyConfForm(confForm,false);
+            configModel = configValidator4Fetch.verifyConfForm(confForm, false);
         } catch (Exception e) {
             LOG.warn(e.toString());
             return ConfigUtils.getErrorVo(e.getMessage());
@@ -118,7 +117,7 @@ public class ConfigFetcherController extends BaseController {
         //
         ConfigFullModel configModel = null;
         try {
-            configModel = configValidator4Fetch.verifyConfForm(confForm,false);
+            configModel = configValidator4Fetch.verifyConfForm(confForm, false);
         } catch (Exception e) {
             LOG.error(e.toString());
             hasError = true;
@@ -175,17 +174,17 @@ public class ConfigFetcherController extends BaseController {
         return new HttpEntity<byte[]>(res, header);
     }
 
-
-    private JsonObjectBase getListImp(ConfForm confForm,boolean hasValue) {
+    private JsonObjectBase getListImp(ConfForm confForm, boolean hasValue) {
         LOG.info(confForm.toString());
+
         //
         // 校验
         //
-        ConfigFullModel configModel = null;
-        configModel = configValidator4Fetch.verifyConfForm(confForm,true);
+        ConfigFullModel configModel = configValidator4Fetch.verifyConfForm(confForm, true);
 
-        List<Config> configs = configFetchMgr.getConfListByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
-                configModel.getVersion(),hasValue);
+        List<Config> configs =
+                configFetchMgr.getConfListByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
+                        configModel.getVersion(), hasValue);
 
         return buildListSuccess(configs, configs.size());
     }

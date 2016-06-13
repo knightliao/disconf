@@ -1,5 +1,7 @@
 package com.baidu.disconf.web.service.config.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,6 @@ import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.dao.ConfigDao;
 import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
 import com.baidu.disconf.web.service.config.utils.ConfigUtils;
-
-import java.util.List;
 
 /**
  * @author knightliao
@@ -56,7 +56,7 @@ public class ConfigFetchMgrImpl implements ConfigFetchMgr {
     /**
      * 根据详细参数获取配置列表返回
      */
-    public List<Config> getConfListByParameter(Long appId, Long envId, String version, Boolean hasValue){
+    public List<Config> getConfListByParameter(Long appId, Long envId, String version, Boolean hasValue) {
         return configDao.getConfigList(appId, envId, version, hasValue);
     }
 

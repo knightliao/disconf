@@ -1,6 +1,5 @@
 package com.baidu.disconf.web.web.config.validator;
 
-import com.baidu.dsp.common.exception.FieldException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -12,6 +11,7 @@ import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
+import com.baidu.dsp.common.exception.FieldException;
 
 /**
  * @author knightliao
@@ -33,7 +33,7 @@ public class ConfigValidator4Fetch {
      *
      * @param confForm
      */
-    public ConfigFullModel verifyConfForm(ConfForm confForm,boolean unCheckKey) {
+    public ConfigFullModel verifyConfForm(ConfForm confForm, boolean unCheckKey) {
 
         //
         // app
@@ -44,7 +44,7 @@ public class ConfigValidator4Fetch {
 
         App app = appMgr.getByName(confForm.getApp());
         if (app == null) {
-            throw new FieldException("app", "app " + confForm.getApp() + " doesn't exist in db.",null);
+            throw new FieldException("app", "app " + confForm.getApp() + " doesn't exist in db.", null);
         }
 
         //

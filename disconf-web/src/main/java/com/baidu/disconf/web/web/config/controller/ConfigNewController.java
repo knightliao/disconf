@@ -3,7 +3,6 @@ package com.baidu.disconf.web.web.config.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import com.baidu.disconf.web.utils.MyStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.config.form.ConfNewForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
+import com.baidu.disconf.web.utils.MyStringUtils;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.FileUploadValidator;
 import com.baidu.dsp.common.constant.WebConstants;
@@ -93,7 +93,7 @@ public class ConfigNewController extends BaseController {
         String fileContent = "";
         try {
 
-            String str = MyStringUtils.multipartFileToString(file);
+            fileContent = MyStringUtils.multipartFileToString(file);
             LOG.info("receive file: " + fileContent);
 
         } catch (Exception e) {
