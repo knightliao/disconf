@@ -22,6 +22,10 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 https://github.com/knightliao/disconf-demos-java
 
+## 开发协作
+
+请在dev上进行提交代码
+
 ## 项目信息 
 
 - CLIENT 端：
