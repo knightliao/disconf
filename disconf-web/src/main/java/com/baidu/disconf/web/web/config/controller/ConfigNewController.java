@@ -3,6 +3,7 @@ package com.baidu.disconf.web.web.config.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.baidu.disconf.web.utils.MyStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ public class ConfigNewController extends BaseController {
         String fileContent = "";
         try {
 
-            fileContent = new String(file.getBytes(), "UTF-8");
+            String str = MyStringUtils.multipartFileToString(file);
             LOG.info("receive file: " + fileContent);
 
         } catch (Exception e) {
