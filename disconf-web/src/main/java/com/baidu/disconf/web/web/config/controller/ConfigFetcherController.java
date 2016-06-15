@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
+import com.baidu.disconf.web.utils.CodeUtils;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import org.slf4j.Logger;
@@ -135,8 +136,8 @@ public class ConfigFetcherController extends BaseController {
                     hasError = true;
                     throw new DocumentNotFoundException(configModel.getKey());
                 }
-
-                return downloadDspBill(configModel.getKey(), config.getValue());
+                //API获取节点内容也需要同样做格式转换
+                return downloadDspBill(configModel.getKey(), CodeUtils.unicodeToUtf8(config.getValue()));
 
             } catch (Exception e) {
                 LOG.error(e.toString());
