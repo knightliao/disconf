@@ -20,7 +20,6 @@ import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
 import com.baidu.disconf.web.service.config.utils.ConfigUtils;
-import com.baidu.disconf.web.utils.CodeUtils;
 import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
@@ -136,7 +135,7 @@ public class ConfigFetcherController extends BaseController {
                     throw new DocumentNotFoundException(configModel.getKey());
                 }
                 //API获取节点内容也需要同样做格式转换
-                return downloadDspBill(configModel.getKey(), CodeUtils.unicodeToUtf8(config.getValue()));
+                return downloadDspBill(configModel.getKey(), config.getValue());
 
             } catch (Exception e) {
                 LOG.error(e.toString());
