@@ -81,6 +81,27 @@ public class UserMgrImpl implements UserMgr {
         return userDao.findAll();
     }
 
+    /**
+     * @param userId
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public String addOneAppForUser(Long userId, int appId) {
+
+        User user = getUser(userId);
+        String ownAppIds = user.getOwnApps();
+        if (ownAppIds.contains(",")) {
+            ownAppIds = ownAppIds + "," + appId;
+
+        } else {
+            ownAppIds = String.valueOf(appId);
+        }
+        user.setOwnApps(ownAppIds);
+        userDao.update(user);
+
+        return ownAppIds;
+    }
+
     @Override
     public User getUser(Long userId) {
 

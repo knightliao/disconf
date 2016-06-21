@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.dao.AppDao;
@@ -16,6 +18,7 @@ import com.baidu.disconf.web.service.app.form.AppNewForm;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.app.vo.AppListVo;
 import com.baidu.disconf.web.service.user.service.UserInnerMgr;
+import com.baidu.disconf.web.service.user.service.UserMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
@@ -24,6 +27,7 @@ import com.github.knightliao.apollo.utils.time.DateUtils;
  * @version 2014-6-16
  */
 @Service
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class AppMgrImpl implements AppMgr {
 
     @Autowired
@@ -31,6 +35,9 @@ public class AppMgrImpl implements AppMgr {
 
     @Autowired
     private UserInnerMgr userInnerMgr;
+
+    @Autowired
+    private UserMgr userMgr;
 
     /**
      *
@@ -84,22 +91,25 @@ public class AppMgrImpl implements AppMgr {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public App create(AppNewForm appNew) {
 
+        // new app
         App app = new App();
         app.setName(appNew.getApp());
         app.setDesc(appNew.getDesc());
         app.setEmails(appNew.getEmails());
 
-        // 时间
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
         app.setCreateTime(curTime);
         app.setUpdateTime(curTime);
 
+        //
         return appDao.create(app);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void delete(Long appId) {
         appDao.delete(appId);
     }
