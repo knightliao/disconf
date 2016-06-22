@@ -93,7 +93,7 @@ public class ConfigNewController extends BaseController {
         String fileContent = "";
         try {
 
-            String str = MyStringUtils.multipartFileToString(file);
+            fileContent = MyStringUtils.multipartFileToString(file);
             LOG.info("receive file: " + fileContent);
 
         } catch (Exception e) {
