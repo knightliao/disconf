@@ -27,6 +27,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringValueResolver;
 
 /**
  * 具有 reloadable 的 property bean
@@ -388,6 +389,14 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                 }
             }
         }
+
+        StringValueResolver stringValueResolver = new PlaceholderResolvingStringValueResolver(props);
+
+        // New in Spring 2.5: resolve placeholders in alias target names and aliases as well.
+        beanFactoryToProcess.resolveAliases(stringValueResolver);
+
+        // New in Spring 3.0: resolve placeholders in embedded values such as annotation attributes.
+        beanFactoryToProcess.addEmbeddedValueResolver(stringValueResolver);
     }
 
     /**
@@ -445,6 +454,23 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
         }
 
         protected String resolveStringValue(String strVal) throws BeansException {
+            return parseStringValue(strVal, this.props, new HashSet());
+        }
+    }
+
+    /**
+     *
+     */
+    protected class PlaceholderResolvingStringValueResolver implements StringValueResolver {
+
+        private final Properties props;
+
+        public PlaceholderResolvingStringValueResolver(Properties props) {
+            this.props = props;
+        }
+
+        @Override
+        public String resolveStringValue(String strVal) throws BeansException {
             return parseStringValue(strVal, this.props, new HashSet());
         }
     }
