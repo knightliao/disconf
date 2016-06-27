@@ -81,7 +81,6 @@ disconf-web
 ***注意，即使只有一个redis，也应该配置两个redis client，否则将造成内部错误。***
 
 
-
 **设置War包将要被部署的地址（以下地址可自行设定）：**
 
 	/home/work/dsp/disconf-rd/war
@@ -148,7 +147,7 @@ testUser5 | MhxzKhl112
     server {
 
         listen   8081;
-        server_name localhost;
+        server_name disconf.com;
         access_log /home/work/var/logs/disconf/access.log;
         error_log /home/work/var/logs/disconf/error.log;
 
