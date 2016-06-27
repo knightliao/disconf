@@ -167,6 +167,12 @@ testUser5 | MhxzKhl112
             proxy_pass http://disconf;
         }
     }
+    
+### 关于host
+
+这里的 host 设置成 disconf.com （可以自定义），但它 必须与 application.properties 里的domain一样。
+
+然后浏览器的访问域名也是这个。
 
 ## 业务功能 ##
 
