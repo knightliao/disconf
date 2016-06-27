@@ -41,6 +41,7 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     // 文件名
     private String fileName;
 
+    // 复制到指定的路径下
     private String copy2TargetDirPath;
 
     // 文件类型
