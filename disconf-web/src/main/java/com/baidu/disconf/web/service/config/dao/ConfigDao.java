@@ -17,13 +17,13 @@ public interface ConfigDao extends BaseDao<Long, Config> {
     /**
      * @param appId
      * @param envId
-     * @param env
+     * @param version
      * @param key
      * @param disConfigTypeEnum
      *
      * @return
      */
-    Config getByParameter(Long appId, Long envId, String env, String key, DisConfigTypeEnum disConfigTypeEnum);
+    Config getByParameter(Long appId, Long envId, String version, String key, DisConfigTypeEnum disConfigTypeEnum);
 
     /**
      * @param
@@ -57,10 +57,11 @@ public interface ConfigDao extends BaseDao<Long, Config> {
      * @param appId
      * @param envId
      * @param version
-     *
+     * @param hasValue
      * @return
      */
-    List<Config> getConfigList(Long appId, Long envId, String version);
+    List<Config> getConfigList(Long appId, Long envId, String version, Boolean hasValue);
+
 
     /**
      * @param configId

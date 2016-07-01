@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.baidu.unbiz.common.genericdao.bo;
 
 /**

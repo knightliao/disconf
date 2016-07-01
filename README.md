@@ -22,6 +22,10 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 https://github.com/knightliao/disconf-demos-java
 
+## 开发协作
+
+请在dev上进行提交代码
+
 ## 项目信息 
 
 - CLIENT 端：
@@ -35,8 +39,8 @@ https://github.com/knightliao/disconf-demos-java
 
 disconf.git branches and Maven version:
 
-- dev(develop branch): 2.6.35-SNAPSHOT
-- master(stable branch)：2.6.34
+- dev(develop branch): 2.6.35
+- master(stable branch)：2.6.35
 - [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
@@ -181,8 +185,7 @@ APP+环境+版本+ZK查询：
 
 ## 群·联系·讨论
 
-- disconf技术QQ群: 239203866 
-- disconf技术QQ二群: 280712860
+- disconf技术QQ群: 239203866 ; disconf技术QQ二群: 280712860
 - [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
 
 ## 关于

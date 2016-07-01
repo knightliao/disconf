@@ -20,6 +20,7 @@
 /account/session        会话      1000    1000    1000
 /account/signin         登录      1000    1000    1000
 /account/signout        登出      1000    1000    1000
+/account/password       修改密码   0100    0100    0000
 
 #
 # config / client

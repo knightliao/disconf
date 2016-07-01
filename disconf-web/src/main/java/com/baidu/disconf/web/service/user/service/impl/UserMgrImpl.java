@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
 import com.baidu.disconf.web.service.user.dto.Visitor;
@@ -81,6 +82,46 @@ public class UserMgrImpl implements UserMgr {
         return userDao.findAll();
     }
 
+    /**
+     * @param userId
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    public String addOneAppForUser(Long userId, int appId) {
+
+        User user = getUser(userId);
+        String ownAppIds = user.getOwnApps();
+        if (ownAppIds.contains(",")) {
+            ownAppIds = ownAppIds + "," + appId;
+
+        } else {
+            ownAppIds = String.valueOf(appId);
+        }
+        user.setOwnApps(ownAppIds);
+        userDao.update(user);
+
+        return ownAppIds;
+    }
+
+    /**
+     * @param newPassword
+     */
+    @Override
+    public void modifyPassword(Long userId, String newPassword) {
+
+        String passwordWithSalt = SignUtils.createPassword(newPassword);
+
+        User user = userDao.get(userId);
+        user.setPassword(passwordWithSalt);
+
+        userDao.update(user);
+    }
+
+    /**
+     * @param userId
+     *
+     * @return
+     */
     @Override
     public User getUser(Long userId) {
 

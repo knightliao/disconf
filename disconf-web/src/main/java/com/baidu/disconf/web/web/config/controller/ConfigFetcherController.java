@@ -2,6 +2,7 @@ package com.baidu.disconf.web.web.config.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,9 @@ import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
 import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
+import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.DocumentNotFoundException;
+import com.baidu.dsp.common.vo.JsonObjectBase;
 
 /**
  * 配置获取Controller, Disconf-client专门使用的
@@ -34,7 +37,7 @@ import com.baidu.dsp.common.exception.DocumentNotFoundException;
  */
 @Controller
 @RequestMapping(WebConstants.API_PREFIX + "/config")
-public class ConfigFetcherController {
+public class ConfigFetcherController extends BaseController {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ConfigFetcherController.class);
 
@@ -46,6 +49,27 @@ public class ConfigFetcherController {
 
     @Autowired
     private ConfigFetchMgr configFetchMgr;
+
+    /**
+     * 获取指定app env version 的配置项列表
+     *
+     * @param confForm
+     *
+     * @return
+     */
+    @NoAuth
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase getList(ConfForm confForm) {
+        return getListImp(confForm, true);
+    }
+
+    @NoAuth
+    @RequestMapping(value = "/simple/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonObjectBase getSimpleList(ConfForm confForm) {
+        return getListImp(confForm, false);
+    }
 
     /**
      * 获取配置项 Item
@@ -66,7 +90,7 @@ public class ConfigFetcherController {
         //
         ConfigFullModel configModel = null;
         try {
-            configModel = configValidator4Fetch.verifyConfForm(confForm);
+            configModel = configValidator4Fetch.verifyConfForm(confForm, false);
         } catch (Exception e) {
             LOG.warn(e.toString());
             return ConfigUtils.getErrorVo(e.getMessage());
@@ -93,7 +117,7 @@ public class ConfigFetcherController {
         //
         ConfigFullModel configModel = null;
         try {
-            configModel = configValidator4Fetch.verifyConfForm(confForm);
+            configModel = configValidator4Fetch.verifyConfForm(confForm, false);
         } catch (Exception e) {
             LOG.error(e.toString());
             hasError = true;
@@ -110,7 +134,7 @@ public class ConfigFetcherController {
                     hasError = true;
                     throw new DocumentNotFoundException(configModel.getKey());
                 }
-
+                //API获取节点内容也需要同样做格式转换
                 return downloadDspBill(configModel.getKey(), config.getValue());
 
             } catch (Exception e) {
@@ -148,6 +172,21 @@ public class ConfigFetcherController {
         header.set("Content-Disposition", "attachment; filename=" + name);
         header.setContentLength(res.length);
         return new HttpEntity<byte[]>(res, header);
+    }
+
+    private JsonObjectBase getListImp(ConfForm confForm, boolean hasValue) {
+        LOG.info(confForm.toString());
+
+        //
+        // 校验
+        //
+        ConfigFullModel configModel = configValidator4Fetch.verifyConfForm(confForm, true);
+
+        List<Config> configs =
+                configFetchMgr.getConfListByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
+                        configModel.getVersion(), hasValue);
+
+        return buildListSuccess(configs, configs.size());
     }
 
 }

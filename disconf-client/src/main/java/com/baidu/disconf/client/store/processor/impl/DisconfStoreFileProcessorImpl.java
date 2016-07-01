@@ -220,15 +220,10 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             }
         }
 
-        // 注解式
+        // 使用过 XML式配置
         if (disconfCenterFile.isTaggedWithNonAnnotationFile()) {
 
-            //
-            // 非注解式 或者 注解式的域集合为空，则将 文件内容写到配置库里
-            //
-
-            if (disconfCenterFile.getObject() == null &&
-                    disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.PROPERTIES)) {
+            if (disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.PROPERTIES)) {
                 // 如果是采用XML进行配置的，则需要利用spring的reload将数据reload到bean里
                 ReloadConfigurationMonitor.reload();
             }

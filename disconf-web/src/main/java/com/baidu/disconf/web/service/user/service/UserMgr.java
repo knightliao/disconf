@@ -38,4 +38,17 @@ public interface UserMgr {
      */
     List<User> getAll();
 
+    /**
+     * 为某个user添加一个app
+     *
+     * @param userId
+     */
+    String addOneAppForUser(Long userId, int appId);
+
+    /**
+     * 修改密码
+     *
+     * @param newPassword
+     */
+    void modifyPassword(Long userId, String newPassword);
 }
