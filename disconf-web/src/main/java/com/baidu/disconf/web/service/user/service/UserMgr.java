@@ -45,4 +45,10 @@ public interface UserMgr {
      */
     String addOneAppForUser(Long userId, int appId);
 
+    /**
+     * 修改密码
+     *
+     * @param newPassword
+     */
+    void modifyPassword(Long userId, String newPassword);
 }

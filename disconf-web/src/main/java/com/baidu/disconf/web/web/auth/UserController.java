@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baidu.disconf.web.service.sign.form.SigninForm;
 import com.baidu.disconf.web.service.sign.service.SignMgr;
 import com.baidu.disconf.web.service.user.bo.User;
+import com.baidu.disconf.web.service.user.dto.Visitor;
+import com.baidu.disconf.web.service.user.form.PasswordModifyForm;
 import com.baidu.disconf.web.service.user.service.UserMgr;
 import com.baidu.disconf.web.service.user.vo.VisitorVo;
 import com.baidu.disconf.web.web.auth.constant.LoginConstant;
@@ -24,6 +26,7 @@ import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
+import com.baidu.ub.common.commons.ThreadContext;
 
 /**
  * @author liaoqiqi
@@ -121,5 +124,29 @@ public class UserController extends BaseController {
         redisLogin.logout(request);
 
         return buildSuccess("ok", "ok");
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param
+     *
+     * @return
+     */
+    @RequestMapping(value = "/password", method = RequestMethod.PUT)
+    @ResponseBody
+    public JsonObjectBase password(@Valid PasswordModifyForm passwordModifyForm, HttpServletRequest request) {
+
+        // 校验
+        authValidator.validatePasswordModify(passwordModifyForm);
+
+        // 修改
+        Visitor visitor = ThreadContext.getSessionVisitor();
+        userMgr.modifyPassword(visitor.getLoginUserId(), passwordModifyForm.getNew_password());
+
+        // re login
+        redisLogin.logout(request);
+
+        return buildSuccess("修改成功，请重新登录");
     }
 }
