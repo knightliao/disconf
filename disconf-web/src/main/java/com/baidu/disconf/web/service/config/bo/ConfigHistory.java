@@ -36,4 +36,10 @@ public class ConfigHistory extends BaseObject<Long> {
     @Column(value = Columns.CREATE_TIME)
     private String createTime;
 
+    /**
+     *
+     */
+    @Column(value = Columns.UPDATE_BY)
+    private Long updateBy;
+
 }
