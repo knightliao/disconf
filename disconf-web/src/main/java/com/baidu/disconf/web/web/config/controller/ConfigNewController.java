@@ -17,7 +17,6 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.config.form.ConfNewForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
-import com.baidu.disconf.web.utils.MyStringUtils;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.FileUploadValidator;
 import com.baidu.dsp.common.constant.WebConstants;
@@ -93,7 +92,7 @@ public class ConfigNewController extends BaseController {
         String fileContent = "";
         try {
 
-            fileContent = MyStringUtils.multipartFileToString(file);
+            fileContent = new String(file.getBytes(), "UTF-8");
             LOG.info("receive file: " + fileContent);
 
         } catch (Exception e) {

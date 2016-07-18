@@ -2,7 +2,6 @@ package com.baidu.disconf.web.web.config.controller;
 
 import javax.validation.constraints.NotNull;
 
-import com.baidu.disconf.web.utils.MyStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +101,7 @@ public class ConfigUpdateController extends BaseController {
         String emailNotification = "";
         try {
 
-            String str = MyStringUtils.multipartFileToString(file);
+            String str = new String(file.getBytes(), "UTF-8");
             LOG.info("receive file: " + str);
 
             emailNotification = configMgr.updateItemValue(configId, str);
