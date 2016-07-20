@@ -36,6 +36,9 @@ public class FetcherMgrImpl implements FetcherMgr {
     // 下载文件夹, 远程文件下载后会放在这里
     private String localDownloadDir;
 
+    // temp 临时目录
+    private String localDownloadDirTemp;
+
     //
     private List<String> hostList = new ArrayList<String>();
 
@@ -46,7 +49,9 @@ public class FetcherMgrImpl implements FetcherMgr {
     // 创建对象
     //
     public FetcherMgrImpl(RestfulMgr restfulMgr, int retryTime, int retrySleepSeconds,
-                          boolean enableLocalDownloadDirInClassPath, String localDownloadDir, List<String> hostList) {
+                          boolean enableLocalDownloadDirInClassPath, String localDownloadDir, String
+                                  localDownloadDirTemp, List<String>
+                                  hostList) {
 
         this.restfulMgr = restfulMgr;
 
@@ -54,6 +59,7 @@ public class FetcherMgrImpl implements FetcherMgr {
         this.retryTime = retryTime;
         this.enableLocalDownloadDirInClassPath = enableLocalDownloadDirInClassPath;
         this.localDownloadDir = localDownloadDir;
+        this.localDownloadDirTemp = localDownloadDirTemp;
         OsUtil.makeDirs(this.localDownloadDir);
 
         this.hostList = hostList;
@@ -92,7 +98,7 @@ public class FetcherMgrImpl implements FetcherMgr {
 
         // 下载
         return restfulMgr
-                .downloadFromServer(remoteUrl, fileName, localDir, targetFileDir,
+                .downloadFromServer(remoteUrl, fileName, localDir, localDownloadDirTemp, targetFileDir,
                         enableLocalDownloadDirInClassPath,
                         retryTime,
                         retrySleepSeconds);

@@ -16,7 +16,7 @@ public class SimpleRegistry implements Registry {
     protected static final Logger LOGGER = LoggerFactory.getLogger(SimpleRegistry.class);
 
     @Override
-    public <T> List<T> findByType(Class<T> type) {
+    public <T> List<T> findByType(Class<T> type, boolean newInstance) {
 
         List<T> ret = new ArrayList<T>(1);
 
@@ -35,9 +35,9 @@ public class SimpleRegistry implements Registry {
     }
 
     @Override
-    public <T> T getFirstByType(Class<T> type) {
+    public <T> T getFirstByType(Class<T> type, boolean newInstance) {
 
-        List<T> list = this.findByType(type);
+        List<T> list = this.findByType(type, newInstance);
         if (list.size() == 0) {
             return null;
         } else {
@@ -46,7 +46,7 @@ public class SimpleRegistry implements Registry {
     }
 
     @Override
-    public <T> T getFirstByType(Class<T> type, boolean withProxy) {
-        return getFirstByType(type, withProxy);
+    public <T> T getFirstByType(Class<T> type, boolean newInstance, boolean withProxy) {
+        return getFirstByType(type, newInstance);
     }
 }

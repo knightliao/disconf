@@ -23,7 +23,7 @@ import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgr;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
-import com.baidu.disconf.client.utils.MethodUtils;
+import com.baidu.disconf.client.support.utils.MethodUtils;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.DisconfWebPathMgr;
 
@@ -140,11 +140,14 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
             // access
             field.setAccessible(true);
 
+            // get setter method
+            Method setterMethod = MethodUtils.getSetterMethodFromField(disconfFileClass, field);
+
             // static 则直接获取其值
             if (Modifier.isStatic(field.getModifiers())) {
-                try {
 
-                    FileItemValue fileItemValue = new FileItemValue(field.get(null), field);
+                try {
+                    FileItemValue fileItemValue = new FileItemValue(field.get(null), field, setterMethod);
                     keyMaps.put(keyName, fileItemValue);
 
                 } catch (Exception e) {
@@ -154,7 +157,7 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
             } else {
 
                 // 非static则为Null, 这里我们没有必要获取其Bean的值
-                FileItemValue fileItemValue = new FileItemValue(null, field);
+                FileItemValue fileItemValue = new FileItemValue(null, field, setterMethod);
                 keyMaps.put(keyName, fileItemValue);
             }
         }

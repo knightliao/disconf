@@ -1,18 +1,17 @@
 package com.baidu.disconf.client.core.processor.impl;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterItem;
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
+import com.baidu.disconf.client.store.inner.DisconfCenterStore;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
 import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchMgr;
@@ -152,6 +151,28 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 
         // 回调
         DisconfCoreProcessUtils.callOneConf(disconfStoreProcessor, key);
+        callUpdatePipeline(key);
+    }
+
+    /**
+     * @param key
+     */
+    private void callUpdatePipeline(String key) {
+
+        Object object = disconfStoreProcessor.getConfData(key);
+        if (object != null) {
+            DisconfCenterItem disconfCenterItem = (DisconfCenterItem) object;
+
+            IDisconfUpdatePipeline iDisconfUpdatePipeline =
+                    DisconfCenterStore.getInstance().getiDisconfUpdatePipeline();
+            if (iDisconfUpdatePipeline != null) {
+                try {
+                    iDisconfUpdatePipeline.reloadDisconfItem(key, disconfCenterItem.getValue());
+                } catch (Exception e) {
+                    LOGGER.error(e.toString(), e);
+                }
+            }
+        }
     }
 
     /**
@@ -167,14 +188,12 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 
             Object object = null;
 
-            Field field = disconfCenterItem.getField();
-
             //
             // 静态
             //
-            if (!Modifier.isStatic(field.getModifiers())) {
+            if (!disconfCenterItem.isStatic()) {
 
-                object = registry.getFirstByType(field.getDeclaringClass(), true);
+                object = registry.getFirstByType(disconfCenterItem.getDeclareClass(), false, true);
             }
 
             disconfStoreProcessor.inject2Instance(object, key);

@@ -1,7 +1,7 @@
 package com.baidu.disconf.client.common.constants;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 支持的文件后缀类型

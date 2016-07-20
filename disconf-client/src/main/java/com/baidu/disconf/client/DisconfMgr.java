@@ -2,6 +2,7 @@ package com.baidu.disconf.client;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -146,20 +147,23 @@ public class DisconfMgr implements ApplicationContextAware {
         isSecondInit = true;
 
         //
-        // 不开启 则不要启动timer和打印变量map
+        // 不开启 则不要打印变量map
         //
         if (DisClientConfig.getInstance().ENABLE_DISCONF) {
-            //
-            // start timer
-            //
-            //startTimer();
 
             //
-            LOGGER.info("Conf File Map: {}", DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
-                    .confToString());
+            String data = DisconfStoreProcessorFactory.getDisconfStoreFileProcessor()
+                    .confToString();
+            if (!StringUtils.isEmpty(data)) {
+                LOGGER.info("Conf File Map: {}", data);
+            }
+
             //
-            LOGGER.info("Conf Item Map: {}", DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
-                    .confToString());
+            data = DisconfStoreProcessorFactory.getDisconfStoreItemProcessor()
+                    .confToString();
+            if (!StringUtils.isEmpty(data)) {
+                LOGGER.info("Conf Item Map: {}", data);
+            }
         }
         LOGGER.info("******************************* DISCONF END *******************************");
     }
@@ -167,34 +171,31 @@ public class DisconfMgr implements ApplicationContextAware {
     /**
      * reloadable config file scan, for xml config
      */
-    public synchronized void reloadableScan(String filename) {
+    public synchronized void reloadableScan(String fileName) {
 
         if (!isFirstInit) {
             return;
         }
 
-        if (!DisClientConfig.getInstance().ENABLE_DISCONF) {
-            return;
-        }
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            try {
 
-        //
-        //
-        //
+                if (!DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(fileName)) {
 
-        try {
+                    if (scanMgr != null) {
+                        scanMgr.reloadableScan(fileName);
+                    }
 
-            if (scanMgr != null) {
-                scanMgr.reloadableScan(filename);
+                    if (disconfCoreMgr != null) {
+                        disconfCoreMgr.processFile(fileName);
+                    }
+                    LOGGER.debug("disconf reloadable file: {}", fileName);
+                }
+
+            } catch (Exception e) {
+
+                LOGGER.error(e.toString(), e);
             }
-
-            if (disconfCoreMgr != null) {
-                disconfCoreMgr.processFile(filename);
-            }
-            LOGGER.debug("disconf reloadable file: {}", filename);
-
-        } catch (Exception e) {
-
-            LOGGER.error(e.toString(), e);
         }
     }
 

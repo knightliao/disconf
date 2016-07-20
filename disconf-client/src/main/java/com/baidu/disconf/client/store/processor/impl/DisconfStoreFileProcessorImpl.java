@@ -2,7 +2,6 @@ package com.baidu.disconf.client.store.processor.impl;
 
 import static com.baidu.disconf.client.store.inner.DisconfCenterStore.getInstance;
 
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,6 @@ import com.baidu.disconf.client.common.model.DisconfCenterFile.FileItemValue;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
-import com.baidu.disconf.client.utils.ClassUtils;
 
 /**
  * 配置文件仓库实现器
@@ -87,7 +85,6 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             return false;
         }
         return true;
-
     }
 
     /**
@@ -127,9 +124,9 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                 //
                 if (object == null) {
 
-                    if (Modifier.isStatic(keMap.get(fileItem).getField().getModifiers())) {
+                    if (keMap.get(fileItem).isStatic()) {
                         LOGGER.debug(fileItem + " is a static field. ");
-                        keMap.get(fileItem).getField().set(null, keMap.get(fileItem).getValue());
+                        keMap.get(fileItem).setValue4StaticFileItem(keMap.get(fileItem).getValue());
                     }
 
                     //
@@ -139,21 +136,16 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
                     LOGGER.debug(fileItem + " is a non-static field. ");
 
-                    // 默认值
-                    Object defaultValue = keMap.get(fileItem).getField().get(object);
-
                     if (keMap.get(fileItem).getValue() == null) {
 
                         // 如果仓库值为空，则实例 直接使用默认值
-                        keMap.get(fileItem).getField().set(object, defaultValue);
-
-                        // 仓库里也使用此值
+                        Object defaultValue = keMap.get(fileItem).getFieldDefaultValue(object);
                         keMap.get(fileItem).setValue(defaultValue);
 
                     } else {
 
                         // 如果仓库里的值为非空，则实例使用仓库里的值
-                        keMap.get(fileItem).getField().set(object, keMap.get(fileItem).getValue());
+                        keMap.get(fileItem).setValue4FileItem(object, keMap.get(fileItem).getValue());
                     }
                 }
 
@@ -219,27 +211,19 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
                 // 根据类型设置值
                 try {
 
-                    Object value = ClassUtils.getValeByType(keMap.get(fileItem).getField().getType(), object);
+                    Object value = keMap.get(fileItem).getFieldValueByType(object);
                     keMap.get(fileItem).setValue(value);
-
-                    // 如果Object非null,则顺便也注入
-                    if (disconfCenterFile.getObject() != null) {
-                        keMap.get(fileItem).getField()
-                                .set(disconfCenterFile.getObject(), keMap.get(fileItem).getValue());
-                    }
 
                 } catch (Exception e) {
                     LOGGER.error("inject2Store filename: " + fileName + " " + e.toString(), e);
                 }
             }
-        } else {
+        }
 
-            //
-            // 非注解式 或者 注解式的域集合为空，则将 文件内容写到配置库里
-            //
+        // 使用过 XML式配置
+        if (disconfCenterFile.isTaggedWithNonAnnotationFile()) {
 
-            if (disconfCenterFile.getObject() == null &&
-                    disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.PROPERTIES)) {
+            if (disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.PROPERTIES)) {
                 // 如果是采用XML进行配置的，则需要利用spring的reload将数据reload到bean里
                 ReloadConfigurationMonitor.reload();
             }

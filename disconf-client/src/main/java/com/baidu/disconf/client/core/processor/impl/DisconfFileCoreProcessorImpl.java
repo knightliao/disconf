@@ -9,12 +9,14 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.core.filetype.FileTypeProcessorUtils;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.fetcher.FetcherMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
+import com.baidu.disconf.client.store.inner.DisconfCenterStore;
 import com.baidu.disconf.client.store.processor.model.DisconfValue;
 import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchMgr;
@@ -163,6 +165,28 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
         // 回调
         DisconfCoreProcessUtils.callOneConf(disconfStoreProcessor, key);
+        callUpdatePipeline(key);
+    }
+
+    /**
+     * @param key
+     */
+    private void callUpdatePipeline(String key) {
+
+        Object object = disconfStoreProcessor.getConfData(key);
+        if (object != null) {
+            DisconfCenterFile disconfCenterFile = (DisconfCenterFile) object;
+
+            IDisconfUpdatePipeline iDisconfUpdatePipeline =
+                    DisconfCenterStore.getInstance().getiDisconfUpdatePipeline();
+            if (iDisconfUpdatePipeline != null) {
+                try {
+                    iDisconfUpdatePipeline.reloadDisconfFile(key, disconfCenterFile.getFilePath());
+                } catch (Exception e) {
+                    LOGGER.error(e.toString(), e);
+                }
+            }
+        }
     }
 
     /**
@@ -202,7 +226,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
                 object = disconfCenterFile.getObject();
                 if (object == null) {
-                    object = registry.getFirstByType(disconfCenterFile.getCls(), true);
+                    object = registry.getFirstByType(disconfCenterFile.getCls(), false, true);
                 }
 
             } catch (Exception e) {

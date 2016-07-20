@@ -37,8 +37,9 @@ public class DisconfCommonCallbackModel {
 
     @Override
     public String toString() {
-        return "DisconfCommonCallbackModel [disconfConfUpdates=" + disconfConfUpdates +
-                   ", disconfUpdatesActiveBackups=" + disconfUpdatesActiveBackups + "]";
+        return "DisconfCommonCallbackModel{" +
+                "disconfConfUpdates=" + disconfConfUpdates +
+                ", disconfUpdatesActiveBackups=" + disconfUpdatesActiveBackups +
+                '}';
     }
-
 }

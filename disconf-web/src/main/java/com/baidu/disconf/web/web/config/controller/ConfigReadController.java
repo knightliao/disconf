@@ -201,7 +201,7 @@ public class ConfigReadController extends BaseController {
         //
         // get files
         //
-        List<File> fileList = configMgr.getDisonfFileList(confListForm);
+        List<File> fileList = configMgr.getDisconfFileList(confListForm);
 
         //
         // prefix

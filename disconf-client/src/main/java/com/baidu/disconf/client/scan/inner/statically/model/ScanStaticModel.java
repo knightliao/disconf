@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.reflections.Reflections;
 
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
+
 /**
  * 扫描静态存储的对象
  *
@@ -38,6 +40,7 @@ public class ScanStaticModel {
     //
     // 更新 回调函数类
     private Set<Class<?>> disconfUpdateService;
+    private Class<IDisconfUpdatePipeline> iDisconfUpdatePipeline = null;
 
     // 只是托管的配置文件，没有注入到类中
     private Set<String> justHostFiles;
@@ -117,19 +120,29 @@ public class ScanStaticModel {
         this.justHostFiles = justHostFiles;
     }
 
+    public Class<IDisconfUpdatePipeline> getiDisconfUpdatePipeline() {
+        return iDisconfUpdatePipeline;
+    }
+
+    public void setiDisconfUpdatePipeline(
+            Class<IDisconfUpdatePipeline> iDisconfUpdatePipeline) {
+        this.iDisconfUpdatePipeline = iDisconfUpdatePipeline;
+    }
+
     @Override
     public String toString() {
         return "ScanStaticModel{" +
-                   "reflections=" + reflections +
-                   ", disconfFileClassSet=" + disconfFileClassSet +
-                   ", disconfFileItemMethodSet=" + disconfFileItemMethodSet +
-                   ", disconfFileItemMap=" + disconfFileItemMap +
-                   ", disconfItemMethodSet=" + disconfItemMethodSet +
-                   ", disconfActiveBackupServiceClassSet=" + disconfActiveBackupServiceClassSet +
-                   ", disconfUpdateService=" + disconfUpdateService +
-                   ", justHostFiles=" + justHostFiles +
-                   ", reloadableFiles=" + reloadableFiles +
-                   '}';
+                "reflections=" + reflections +
+                ", disconfFileClassSet=" + disconfFileClassSet +
+                ", disconfFileItemMethodSet=" + disconfFileItemMethodSet +
+                ", disconfFileItemMap=" + disconfFileItemMap +
+                ", disconfItemMethodSet=" + disconfItemMethodSet +
+                ", iDisconfUpdatePipeline=" + iDisconfUpdatePipeline +
+                ", disconfActiveBackupServiceClassSet=" + disconfActiveBackupServiceClassSet +
+                ", disconfUpdateService=" + disconfUpdateService +
+                ", justHostFiles=" + justHostFiles +
+                ", reloadableFiles=" + reloadableFiles +
+                '}';
     }
 
 }

@@ -26,8 +26,6 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 关闭文件流
-     *
-     * @param w 上午10:27:27 created by Darwin(Tianxin)
      */
     public static final void closeWriter(Writer w) {
         if (w != null) {
@@ -41,8 +39,6 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 关闭文件流
-     *
-     * @param r 上午10:27:27 created by Darwin(Tianxin)
      */
     public static final void closeReader(Reader r) {
         if (r != null) {
@@ -56,8 +52,6 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 关闭文件流
-     *
-     * @param os 上午10:27:27 created by Darwin(Tianxin)
      */
     public static final void closeOutputStream(OutputStream os) {
         if (os != null) {
@@ -71,8 +65,6 @@ public final class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 关闭文件流
-     *
-     * @param is 上午10:27:27 created by Darwin(Tianxin)
      */
     public static final void closeInputStream(InputStream is) {
         if (is != null) {

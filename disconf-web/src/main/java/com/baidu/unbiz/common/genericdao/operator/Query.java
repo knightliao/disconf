@@ -1,7 +1,3 @@
-/**
- * beidou-core-535#com.baidu.beidou.common.bo.SQLOperation.java
- * 上午11:38:16 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.operator;
 
 import java.util.List;

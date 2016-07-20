@@ -3,7 +3,7 @@ package com.baidu.disconf.core.common.zookeeper.inner;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;

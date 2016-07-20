@@ -1,6 +1,6 @@
 package com.baidu.disconf.web.web.config.validator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -183,7 +183,7 @@ public class ConfigValidator {
         // key
         //
         Config config = configFetchMgr.getConfByParameter(app.getId(), env.getId(), confNewForm.getVersion(),
-                                                             confNewForm.getKey(), disConfigTypeEnum);
+                confNewForm.getKey(), disConfigTypeEnum);
         if (config != null) {
             throw new FieldException(ConfNewItemForm.KEY, "key.exist", null);
         }

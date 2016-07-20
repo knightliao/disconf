@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.baidu.disconf.client.core.filetype.DisconfFileTypeProcessor;
-import com.baidu.disconf.client.utils.ConfigLoaderUtils;
+import com.baidu.disconf.client.support.utils.ConfigLoaderUtils;
 
 /**
  * Properties 处理器

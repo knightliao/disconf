@@ -18,17 +18,13 @@ import com.baidu.ub.common.db.DaoPageResult;
 public interface ConfigMgr {
 
     /**
-     * @param appName
+     * @param
      *
      * @return
      */
     List<String> getVersionListByAppEnv(Long appId, Long envId);
 
     /**
-     * @param appId
-     * @param envId
-     * @param version
-     *
      * @return
      */
     DaoPageResult<ConfListVo> getConfigList(ConfListForm confListForm, boolean fetchZk, final boolean getErrorMessage);
@@ -80,6 +76,6 @@ public interface ConfigMgr {
      *
      * @return
      */
-    List<File> getDisonfFileList(ConfListForm confListForm);
+    List<File> getDisconfFileList(ConfListForm confListForm);
 
 }

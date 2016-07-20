@@ -1,7 +1,3 @@
-/**
- * unbiz-genericdao#com.baidu.unbiz.common.genericdao.mapper.MethodPair.java
- * 上午11:17:01 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.mapper;
 
 import java.lang.reflect.Field;
@@ -21,8 +17,6 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 一个映射项的对象
- *
- * @author Darwin(Tianxin)
  */
 public class MappingItem {
 
@@ -166,8 +160,8 @@ public class MappingItem {
             }
             // FIXME
             MappingItem item =
-                new MappingItem(f, set, get, (table != null) ? table.columnStyle() : ColumnStyle.LOWER_CASE,
-                                   (table != null) ? table.columnsModified() : false);
+                    new MappingItem(f, set, get, (table != null) ? table.columnStyle() : ColumnStyle.LOWER_CASE,
+                            (table != null) ? table.columnsModified() : false);
             if (item.isIgnore()) {
                 continue;
             }

@@ -20,8 +20,6 @@ public class RestfulFactory {
 
         RestfulMgr restfulMgr = new RestfulMgrImpl(new RetryStrategyRoundBin());
 
-        restfulMgr.init();
-
         return restfulMgr;
     }
 }

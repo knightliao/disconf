@@ -8,10 +8,9 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        ">
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="com.baidu"/>
+    <context:component-scan base-package="com.baidu.disconf.client.test"/>
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 

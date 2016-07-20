@@ -25,11 +25,18 @@ public class AppValidator {
      */
     public void validateCreate(AppNewForm appNewForm) {
 
+        // trim
+        if (appNewForm.getApp() != null) {
+            appNewForm.setApp(appNewForm.getApp().trim());
+        }
+        if (appNewForm.getDesc() != null) {
+            appNewForm.setDesc(appNewForm.getDesc().trim());
+        }
+
         App app = appMgr.getByName(appNewForm.getApp());
         if (app != null) {
             throw new FieldException(AppNewForm.APP, "app.exist", null);
         }
-
     }
 
 }

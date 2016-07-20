@@ -29,7 +29,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
  */
 @Controller
 @RequestMapping(WebConstants.API_PREFIX + "/web/config")
-public class  ConfigUpdateController extends BaseController {
+public class ConfigUpdateController extends BaseController {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ConfigUpdateController.class);
 
@@ -147,8 +147,7 @@ public class  ConfigUpdateController extends BaseController {
 
         } catch (Exception e) {
 
-            LOG.error(e.toString());
-            throw new FileUploadException("upload file error", e);
+            throw new FileUploadException("upload.file.error", e);
         }
 
         //

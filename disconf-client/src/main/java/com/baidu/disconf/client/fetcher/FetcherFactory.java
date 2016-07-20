@@ -2,6 +2,7 @@ package com.baidu.disconf.client.fetcher;
 
 import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.fetcher.impl.FetcherMgrImpl;
 import com.baidu.disconf.core.common.restful.RestfulFactory;
 import com.baidu.disconf.core.common.restful.RestfulMgr;
@@ -31,6 +32,7 @@ public class FetcherFactory {
                         DisClientConfig.getInstance().confServerUrlRetrySleepSeconds,
                         DisClientConfig.getInstance().enableLocalDownloadDirInClassPath,
                         DisClientConfig.getInstance().userDefineDownloadDir,
+                        DisClientSysConfig.getInstance().LOCAL_DOWNLOAD_DIR,
                         DisClientConfig.getInstance().getHostList());
 
         return fetcherMgr;

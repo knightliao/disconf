@@ -1,7 +1,3 @@
-/**
- * beidou-core#com.baidu.beidou.common.annotation.Sequence.java
- * 下午1:21:56 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.annotation;
 
 import java.lang.annotation.ElementType;
@@ -11,8 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * 配置Sequence的annotation
- *
- * @author Darwin(Tianxin)
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

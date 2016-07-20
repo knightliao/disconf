@@ -155,12 +155,14 @@ public final class OsUtil {
         FileLock lock = null;
 
         try {
-            outStream = new FileOutputStream(lockFile);
-            FileChannel channel = outStream.getChannel();
-            try {
 
-                int tryTime = 0;
-                while (tryTime < 3) {
+            int tryTime = 0;
+            while (tryTime < 3) {
+
+                try {
+
+                    outStream = new FileOutputStream(lockFile);
+                    FileChannel channel = outStream.getChannel();
 
                     lock = channel.tryLock();
                     if (lock != null) {
@@ -168,7 +170,7 @@ public final class OsUtil {
                         if (dest.exists()) {
                             // 判断内容是否一样
                             if (FileUtils.isFileEqual(src, dest)) {
-                                // 删除
+                                // 内容如果一样，就只需要删除源文件就行了
                                 if (isDeleteSource) {
                                     src.delete();
                                 }
@@ -181,7 +183,7 @@ public final class OsUtil {
                         // 转移
                         transferFile(src, dest);
 
-                        // 删除
+                        // 删除源文件
                         if (isDeleteSource) {
                             src.delete();
                         }
@@ -189,39 +191,49 @@ public final class OsUtil {
                         break;
                     }
 
-                    logger.warn("try lock failed. sleep and try " + tryTime);
-                    tryTime++;
+                } catch (FileNotFoundException e) {
 
-                    try {
-                        Thread.sleep(1000 * tryTime);
-                    } catch (Exception e) {
-                        System.out.print("");
+                    // 打不开文件，则后面进行重试
+                    logger.warn(e.toString());
+
+                } finally {
+
+                    // 释放锁，通道；删除锁文件
+                    if (null != lock) {
+                        try {
+                            lock.release();
+                        } catch (IOException e) {
+                            logger.warn(e.toString());
+                        }
+
+                        if (lockFile != null) {
+                            lockFile.delete();
+                        }
+                    }
+                    if (outStream != null) {
+                        try {
+                            outStream.close();
+                        } catch (IOException e) {
+                            logger.warn(e.toString());
+                        }
                     }
                 }
 
-            } catch (IOException e) {
-                logger.warn(e.toString());
+                // 进行重试
+                logger.warn("try lock failed. sleep and try " + tryTime);
+                tryTime++;
+
+                try {
+                    Thread.sleep(1000 * tryTime);
+                } catch (Exception e) {
+                    System.out.print("");
+                }
+
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             logger.warn(e.toString());
-
-        } finally {
-
-            if (null != lock) {
-                try {
-                    lock.release();
-                } catch (IOException e) {
-                    logger.warn(e.toString());
-                }
-            }
-            if (outStream != null) {
-                try {
-                    outStream.close();
-                } catch (IOException e) {
-                    logger.warn(e.toString());
-                }
-            }
         }
+
     }
 }

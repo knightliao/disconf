@@ -38,7 +38,7 @@ public class FetchConfFile implements UnreliableInterface {
      * 进行下载
      */
     @Override
-    public Object call() throws Exception {
+    public <T> T call() throws Exception {
 
         // 删除临时文件
         // LOGGER.info("start to remove tmp download file: " + ""

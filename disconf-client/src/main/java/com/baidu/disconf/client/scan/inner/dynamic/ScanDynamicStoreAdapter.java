@@ -14,9 +14,12 @@ import com.baidu.disconf.client.common.annotations.DisconfFile;
 import com.baidu.disconf.client.common.annotations.DisconfUpdateService;
 import com.baidu.disconf.client.common.model.DisconfKey;
 import com.baidu.disconf.client.common.update.IDisconfUpdate;
+import com.baidu.disconf.client.common.update.IDisconfUpdatePipeline;
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.scan.inner.common.ScanVerify;
 import com.baidu.disconf.client.scan.inner.dynamic.model.ScanDynamicModel;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
+import com.baidu.disconf.client.store.DisconfStorePipelineProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessor;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
 import com.baidu.disconf.client.support.registry.Registry;
@@ -42,6 +45,7 @@ public class ScanDynamicStoreAdapter {
 
         // 写到仓库中
         transformUpdateService(scanDynamicModel.getDisconfUpdateServiceInverseIndexMap());
+        transformPipelineService(scanDynamicModel.getDisconfUpdatePipeline());
     }
 
     /**
@@ -88,6 +92,17 @@ public class ScanDynamicStoreAdapter {
         ScanDynamicModel scanDynamicModel = new ScanDynamicModel();
         scanDynamicModel.setDisconfUpdateServiceInverseIndexMap(inverseMap);
 
+        //
+        // set update pipeline
+        //
+        if (scanModel.getiDisconfUpdatePipeline() != null) {
+            IDisconfUpdatePipeline iDisconfUpdatePipeline = getIDisconfUpdatePipelineInstance(scanModel
+                    .getiDisconfUpdatePipeline(), registry);
+            if (iDisconfUpdatePipeline != null) {
+                scanDynamicModel.setDisconfUpdatePipeline(iDisconfUpdatePipeline);
+            }
+        }
+
         return scanDynamicModel;
     }
 
@@ -121,9 +136,8 @@ public class ScanDynamicStoreAdapter {
             DisconfFile disconfFile = curClass.getAnnotation(DisconfFile.class);
             if (disconfFile == null) {
 
-                LOGGER
-                        .error("cannot find DisconfFile annotation for class when set callback: {} ",
-                                curClass.toString());
+                LOGGER.error("cannot find DisconfFile annotation for class when set callback: {} ",
+                        curClass.toString());
                 continue;
             }
 
@@ -151,7 +165,7 @@ public class ScanDynamicStoreAdapter {
      */
     private static IDisconfUpdate getIDisconfUpdateInstance(Class<?> disconfUpdateServiceClass, Registry registry) {
 
-        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass);
+        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass, true);
         if (iDisconfUpdate == null) {
             return null;
         }
@@ -160,10 +174,31 @@ public class ScanDynamicStoreAdapter {
     }
 
     /**
+     * 获取回调接口的实现
+     * //
+     */
+    private static IDisconfUpdatePipeline getIDisconfUpdatePipelineInstance(
+            Class<IDisconfUpdatePipeline> disconfUpdateServiceClass,
+            Registry registry) {
+
+        Object iDisconfUpdate = registry.getFirstByType(disconfUpdateServiceClass, true);
+        if (iDisconfUpdate == null) {
+            return null;
+        }
+        return (IDisconfUpdatePipeline) iDisconfUpdate;
+
+    }
+
+    /**
      * 将一个配置回调item写到map里
      */
     private static void addOne2InverseMap(DisconfKey disconfKey, Map<DisconfKey, List<IDisconfUpdate>> inverseMap,
                                           IDisconfUpdate iDisconfUpdate) {
+
+        // 忽略的key 应该忽略掉
+        if (DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(disconfKey.getKey())) {
+            return;
+        }
 
         List<IDisconfUpdate> serviceList;
 
@@ -174,6 +209,17 @@ public class ScanDynamicStoreAdapter {
             serviceList.add(iDisconfUpdate);
             inverseMap.put(disconfKey, serviceList);
         }
+    }
+
+    /**
+     * 第二次扫描<br/>
+     * 转换 pipeline 回调函数，将其写到 仓库中
+     */
+    private static void transformPipelineService(IDisconfUpdatePipeline iDisconfUpdatePipeline) {
+
+        DisconfStorePipelineProcessor disconfStorePipelineProcessor = DisconfStoreProcessorFactory
+                .getDisconfStorePipelineProcessor();
+        disconfStorePipelineProcessor.setDisconfUpdatePipeline(iDisconfUpdatePipeline);
     }
 
     /**

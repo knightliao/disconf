@@ -10,6 +10,6 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
  */
 public interface RetryStrategy {
 
-    Object retry(UnreliableInterface unreliableImpl, int retryTimes, int sleepSeconds) throws Exception;
+    <T> T retry(UnreliableInterface unreliableImpl, int retryTimes, int sleepSeconds) throws Exception;
 
 }

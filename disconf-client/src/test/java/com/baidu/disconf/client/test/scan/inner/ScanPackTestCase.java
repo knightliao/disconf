@@ -15,8 +15,8 @@ import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
 import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrategy;
 import com.baidu.disconf.client.scan.inner.statically.strategy.impl.ReflectionScanStatic;
 import com.baidu.disconf.client.test.common.BaseSpringTestCase;
-import com.baidu.disconf.client.utils.ScanPrinterUtils;
-import com.baidu.disconf.client.utils.StringUtil;
+import com.baidu.disconf.client.support.utils.ScanPrinterUtils;
+import com.baidu.disconf.client.support.utils.StringUtil;
 
 /**
  * 扫描测试

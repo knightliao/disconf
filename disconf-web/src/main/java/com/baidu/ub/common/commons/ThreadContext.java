@@ -8,8 +8,6 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 /**
  * 线程执行的上下文内容
- *
- * @author Darwin(Tianxin)
  */
 public class ThreadContext {
 
@@ -104,8 +102,6 @@ public class ThreadContext {
 
     /**
      * 获取用来做分库分表的key
-     *
-     * @return 下午8:34:15 created by Darwin(Tianxin)
      */
     @SuppressWarnings("unchecked")
     public final static <K extends Serializable> K getShardKey() {
@@ -114,8 +110,6 @@ public class ThreadContext {
 
     /**
      * 设置做分表分库的切分的key
-     *
-     * @param shardKey 下午8:37:51 created by Darwin(Tianxin)
      */
     public final static <K extends Serializable> void putShardKey(K shardKey) {
         putContext(SHARD_KEY, shardKey);
@@ -123,8 +117,6 @@ public class ThreadContext {
 
     /**
      * 获取Session中的用户信息
-     *
-     * @return 下午8:34:15 created by Darwin(Tianxin)
      */
     @SuppressWarnings("unchecked")
     public final static <U extends BaseObject<?>> U getSessionVisitor() {
@@ -133,8 +125,6 @@ public class ThreadContext {
 
     /**
      * 设置做分表分库的切分的key
-     *
-     * @param sessionVisitor 下午8:37:51 created by Darwin(Tianxin)
      */
     public final static <K extends Serializable, U extends BaseObject<K>> void putSessionVisitor(U sessionVisitor) {
         putContext(VISITOR_KEY, sessionVisitor);
@@ -142,8 +132,6 @@ public class ThreadContext {
 
     /**
      * 线程日志的级别
-     *
-     * @param logLevel 上午11:20:49 created by Darwin(Tianxin)
      */
     public final static void putThreadLog(Integer logLevel) {
         putContext(THREAD_LOG_KEY, logLevel);
@@ -151,8 +139,6 @@ public class ThreadContext {
 
     /**
      * 获取线程日志的级别
-     *
-     * @return 上午11:22:24 created by Darwin(Tianxin)
      */
     public final static Integer getThreadLog() {
         return getContext(THREAD_LOG_KEY);

@@ -32,7 +32,7 @@ public class FetcherMgrMgrTestCase extends BaseSpringTestCase {
 
         final RestfulMgr restfulMgr = new RestfulMgrMock().getMockInstance();
 
-        FetcherMgr fetcherMgr = new FetcherMgrImpl(restfulMgr, 3, 5, true, "", new ArrayList<String>());
+        FetcherMgr fetcherMgr = new FetcherMgrImpl(restfulMgr, 3, 5, true, "", "", new ArrayList<String>());
 
         try {
 
@@ -55,7 +55,7 @@ public class FetcherMgrMgrTestCase extends BaseSpringTestCase {
 
         final RestfulMgr restfulMgr = new RestfulMgrMock().getMockInstance();
 
-        FetcherMgr fetcherMgr = new FetcherMgrImpl(restfulMgr, 3, 5, true, "", new ArrayList<String>());
+        FetcherMgr fetcherMgr = new FetcherMgrImpl(restfulMgr, 3, 5, true, "", "", new ArrayList<String>());
 
         try {
 

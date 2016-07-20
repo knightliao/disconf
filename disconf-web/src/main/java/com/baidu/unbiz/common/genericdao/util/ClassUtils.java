@@ -1,7 +1,3 @@
-/**
- * beidou-core-493#com.baidu.beidou.common.utils.ClassUtils.java
- * 下午3:40:26 created by Darwin(Tianxin)
- */
 package com.baidu.unbiz.common.genericdao.util;
 
 import java.lang.reflect.Field;
@@ -125,7 +121,7 @@ public class ClassUtils {
 
                     // 如果有同名方法，且本方法在子类中声明，且，父类本方法包含了annotation，则替换原来的方法
                 } else if (old.getDeclaringClass().isAssignableFrom(m.getDeclaringClass()) &&
-                               m.getAnnotation(Column.class) != null) {
+                        m.getAnnotation(Column.class) != null) {
                     map.put(name, m);
                 }
             }

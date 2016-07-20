@@ -1,0 +1,52 @@
+
+#
+# url   描述      role1(普通人员GET/PUT/POST/DELETE)   role2(管理员)  role3(只读管理员)
+#  
+
+#
+# app
+#
+/app/list   app列表        1000  1000    1000
+/app        生成一个app     0000  0010    0000
+
+#
+# env
+#
+/env/list   env-list    1000
+
+#
+# account
+#
+/account/session        会话      1000    1000    1000
+/account/signin         登录      1000    1000    1000
+/account/signout        登出      1000    1000    1000
+/account/password       修改密码   0100    0100    0000
+
+#
+# config / client
+#
+/config/item            获取配置项          1000    1000    1000
+/config/file            获取配置文件         1000    1000    1000
+/zoo/hosts              zoo                1000    1000    1000
+/zoo/prefix             zoo                1000    1000    1000
+/zoo/zkdeploy           zoo                1000    1000    1000
+
+
+#
+# config / web
+#
+/web/config/item        创建item-config         0010    0010    0000
+/web/config/file        创建file-config         0010    0010    0000
+/web/config/filetext    创建file-config         0010    0010    0000
+
+/web/config/versionlist             版本list                1000  1000    1000
+/web/config/list                    config-list             1000  1000    1000
+/web/config/simple/list             config-list             1000  1000    1000
+/web/config/{configId}              get/post                1001  1001    1000
+/web/config/zk/{configId}           get-zk                  1000  1000    1000
+/web/config/download/{configId}     download                1000  1000    1000
+/web/config/downloadfilebatch       download                1000  1000    1000
+
+/web/config/item/{configId}         update                  0100  0100    0000
+/web/config/file/{configId}         update/post             0010  0010    0000
+/web/config/filetext/{configId}     update                  0100  0100    0000

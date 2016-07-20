@@ -1,6 +1,7 @@
 package com.baidu.disconf.core.common.path;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.baidu.disconf.core.common.constants.Constants;
@@ -64,7 +65,7 @@ public class DisconfWebPathMgr {
      */
     private static Map<String, String> getConfServerBasePathMap(String app, String version, String env, String key) {
 
-        Map<String, String> parameterMap = new HashMap<String, String>();
+        Map<String, String> parameterMap = new LinkedHashMap<String, String>();
 
         parameterMap.put(Constants.VERSION, version);
         parameterMap.put(Constants.APP, app);

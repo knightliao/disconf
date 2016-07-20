@@ -2,10 +2,16 @@ package com.baidu.disconf.client.common.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
+import com.baidu.disconf.client.config.DisClientConfig;
+import com.baidu.disconf.client.support.utils.ClassUtils;
 import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.OsUtil;
 
@@ -17,6 +23,8 @@ import com.baidu.disconf.core.common.utils.OsUtil;
  */
 public class DisconfCenterFile extends DisconfCenterBaseModel {
 
+    protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfCenterFile.class);
+
     // -----key: 配置文件中的项名
     // -----value: 默认值
     private Map<String, FileItemValue> keyMaps = new HashMap<String, FileItemValue>();
@@ -24,12 +32,16 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     // 额外的配置数据，非注解式使用它来存储
     private Map<String, Object> additionalKeyMaps = new HashMap<String, Object>();
 
+    // 是否是非注解注入方式
+    private boolean isTaggedWithNonAnnotationFile = false;
+
     // 配置文件类
     private Class<?> cls;
 
     // 文件名
     private String fileName;
 
+    // 复制到指定的路径下
     private String copy2TargetDirPath;
 
     // 文件类型
@@ -73,6 +85,14 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     public void setSupportFileTypeEnum(SupportFileTypeEnum supportFileTypeEnum) {
         this.supportFileTypeEnum = supportFileTypeEnum;
+    }
+
+    public boolean isTaggedWithNonAnnotationFile() {
+        return isTaggedWithNonAnnotationFile;
+    }
+
+    public void setIsTaggedWithNonAnnotationFile(boolean isTaggedWithNonAnnotationFile) {
+        this.isTaggedWithNonAnnotationFile = isTaggedWithNonAnnotationFile;
     }
 
     public String getCopy2TargetDirPath() {
@@ -121,6 +141,9 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
      * 配置文件的路径
      */
     public String getFilePath() {
+        if (!DisClientConfig.getInstance().enableLocalDownloadDirInClassPath) {
+            return OsUtil.pathJoin(DisClientConfig.getInstance().userDefineDownloadDir, fileName);
+        }
 
         if (copy2TargetDirPath != null) {
 
@@ -172,20 +195,70 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             this.value = value;
         }
 
-        public Field getField() {
-            return field;
-        }
-
         public void setField(Field field) {
             this.field = field;
         }
 
-        public Method getSetMethod() {
-            return setMethod;
+        /**
+         * 是否是静态域
+         *
+         * @return
+         */
+        public boolean isStatic() {
+            return Modifier.isStatic(field.getModifiers());
         }
 
-        public void setSetMethod(Method setMethod) {
-            this.setMethod = setMethod;
+        /**
+         * 设置value, 优先使用 setter method, 然后其次是反射
+         *
+         * @param value
+         */
+        public Object setValue4StaticFileItem(Object value) throws Exception {
+
+            try {
+                if (setMethod != null) {
+                    setMethod.invoke(null, value);
+                } else {
+                    field.set(null, value);
+                }
+
+            } catch (Exception e) {
+                LOGGER.warn(e.toString());
+            }
+
+            return value;
+        }
+
+        public Object setValue4FileItem(Object object, Object value) throws Exception {
+
+            try {
+                if (setMethod != null) {
+                    setMethod.invoke(object, value);
+                } else {
+                    field.set(object, value);
+                }
+            } catch (Exception e) {
+                LOGGER.warn(e.toString());
+            }
+
+            return value;
+        }
+
+        /**
+         * 返回值
+         *
+         * @param fieldValue
+         *
+         * @return
+         *
+         * @throws Exception
+         */
+        public Object getFieldValueByType(Object fieldValue) throws Exception {
+            return ClassUtils.getValeByType(field.getType(), fieldValue);
+        }
+
+        public Object getFieldDefaultValue(Object object) throws Exception {
+            return field.get(object);
         }
 
         @Override
@@ -201,7 +274,6 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             super();
             this.value = value;
             this.field = field;
-
         }
 
         public FileItemValue(Object value, Field field, Method setMethod) {

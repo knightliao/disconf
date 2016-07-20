@@ -29,6 +29,9 @@ public final class DisClientConfig {
 
     protected static final String filename = "disconf.properties";
 
+    // disconf.properties 的路径 -D 传入
+    private static final String DISCONF_CONF_FILE_PATH_ARG = "disconf.conf";
+
     private boolean isLoaded = false;
 
     private DisClientConfig() {
@@ -52,9 +55,16 @@ public final class DisClientConfig {
 
         String filePathInternal = filename;
 
+        // 指定的路径
         if (filePath != null) {
-
             filePathInternal = filePath;
+        }
+
+        // -d 的路径
+        // 优先使用 系统参数或命令行导入
+        String disconfFilePath = System.getProperty(DISCONF_CONF_FILE_PATH_ARG);
+        if (disconfFilePath != null) {
+            filePathInternal = disconfFilePath;
         }
 
         try {

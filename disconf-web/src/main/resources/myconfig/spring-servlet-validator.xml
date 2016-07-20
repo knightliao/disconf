@@ -6,17 +6,12 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
-                <value>classpath:message-info</value>
-                <value>classpath:com/baidu/disconf/web/web/auth/resource/sign-controller-info
-                </value>
-                <value>classpath:com/baidu/disconf/web/service/sign/resource/sign-service-info
-                </value>
-                <value>classpath:com/baidu/disconf/web/web/config/resource/config-controller-info
-                </value>
-                <value>classpath:com/baidu/disconf/web/service/app/resource/app-service-info
-                </value>
-                <value>classpath:com/baidu/disconf/web/web/app/resource/app-controller-info
-                </value>
+                <value>classpath:messages/message-info</value>
+                <value>classpath:messages/sign-controller-info</value>
+                <value>classpath:messages/sign-service-info</value>
+                <value>classpath:messages/config-controller-info</value>
+                <value>classpath:messages/app-service-info</value>
+                <value>classpath:messages/app-controller-info</value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="false"/>
