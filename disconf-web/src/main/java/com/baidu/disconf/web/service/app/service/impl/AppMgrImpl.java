@@ -11,15 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.dao.AppDao;
 import com.baidu.disconf.web.service.app.form.AppNewForm;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.app.vo.AppListVo;
+import com.baidu.disconf.web.service.role.constant.RoleConstant;
+import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.service.UserInnerMgr;
 import com.baidu.disconf.web.service.user.service.UserMgr;
 import com.baidu.dsp.common.constant.DataFormatConstants;
+import com.baidu.ub.common.commons.ThreadContext;
 import com.github.knightliao.apollo.utils.time.DateUtils;
 
 /**
@@ -54,9 +58,14 @@ public class AppMgrImpl implements AppMgr {
     @Override
     public List<AppListVo> getAuthAppVoList() {
 
-        List<App> apps = appDao.getByIds(userInnerMgr.getVisitorAppIds());
-
+        Visitor visitor = ThreadContext.getSessionVisitor();
         List<AppListVo> appListVos = new ArrayList<AppListVo>();
+        Set<Long> appIds = userInnerMgr.getVisitorAppIds();
+        if (CollectionUtils.isEmpty(appIds) && (visitor.getRoleId() != RoleConstant.MANAGER)) {
+            return appListVos;
+        }
+        List<App> apps = appDao.getByIds(appIds);
+
         for (App app : apps) {
             AppListVo appListVo = new AppListVo();
             appListVo.setId(app.getId());
@@ -104,8 +113,10 @@ public class AppMgrImpl implements AppMgr {
         app.setCreateTime(curTime);
         app.setUpdateTime(curTime);
 
-        //
-        return appDao.create(app);
+        app = appDao.create(app);
+        //建立用户和app关系
+        userMgr.addOneAppForUser(userMgr.getCurVisitor().getId(), app.getId());
+        return app;
     }
 
     @Override
@@ -121,7 +132,8 @@ public class AppMgrImpl implements AppMgr {
 
         if (app == null) {
             return "";
-        } else {
+        }
+        else {
             return app.getEmails();
         }
     }

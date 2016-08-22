@@ -2,6 +2,7 @@ package com.baidu.disconf.web.service.user.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,19 +88,20 @@ public class UserMgrImpl implements UserMgr {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public String addOneAppForUser(Long userId, int appId) {
+    public String addOneAppForUser(Long userId, Long appId) {
 
         User user = getUser(userId);
         String ownAppIds = user.getOwnApps();
-        if (ownAppIds.contains(",")) {
+        if (!StringUtils.isBlank(ownAppIds)) {
             ownAppIds = ownAppIds + "," + appId;
 
         } else {
             ownAppIds = String.valueOf(appId);
         }
         user.setOwnApps(ownAppIds);
+        Visitor visitor = ThreadContext.getSessionVisitor();
+        visitor.setAppIds(user.getOwnApps());
         userDao.update(user);
-
         return ownAppIds;
     }
 
