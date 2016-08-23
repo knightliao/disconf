@@ -18,7 +18,7 @@ import com.baidu.disconf.web.service.app.dao.AppDao;
 import com.baidu.disconf.web.service.app.form.AppNewForm;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.app.vo.AppListVo;
-import com.baidu.disconf.web.service.role.constant.RoleConstant;
+import com.baidu.disconf.web.service.role.bo.RoleEnum;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.service.UserInnerMgr;
 import com.baidu.disconf.web.service.user.service.UserMgr;
@@ -61,7 +61,7 @@ public class AppMgrImpl implements AppMgr {
         Visitor visitor = ThreadContext.getSessionVisitor();
         List<AppListVo> appListVos = new ArrayList<AppListVo>();
         Set<Long> appIds = userInnerMgr.getVisitorAppIds();
-        if (CollectionUtils.isEmpty(appIds) && (visitor.getRoleId() != RoleConstant.MANAGER)) {
+        if (CollectionUtils.isEmpty(appIds) && (visitor.getRoleId() != RoleEnum.ADMIN.getValue())) {
             return appListVos;
         }
         List<App> apps = appDao.getByIds(appIds);
@@ -115,7 +115,7 @@ public class AppMgrImpl implements AppMgr {
 
         app = appDao.create(app);
         Visitor visitor = ThreadContext.getSessionVisitor();
-        if(visitor.getRoleId()!=RoleConstant.MANAGER) {
+        if(visitor.getRoleId()!= RoleEnum.ADMIN.getValue()) {
             //建立用户和app关系
             userMgr.addOneAppForUser(userMgr.getCurVisitor().getId(), app.getId());
         }
