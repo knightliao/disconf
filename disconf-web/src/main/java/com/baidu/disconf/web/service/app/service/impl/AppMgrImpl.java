@@ -114,8 +114,11 @@ public class AppMgrImpl implements AppMgr {
         app.setUpdateTime(curTime);
 
         app = appDao.create(app);
-        //建立用户和app关系
-        userMgr.addOneAppForUser(userMgr.getCurVisitor().getId(), app.getId());
+        Visitor visitor = ThreadContext.getSessionVisitor();
+        if(visitor.getRoleId()!=RoleConstant.MANAGER) {
+            //建立用户和app关系
+            userMgr.addOneAppForUser(userMgr.getCurVisitor().getId(), app.getId());
+        }
         return app;
     }
 
