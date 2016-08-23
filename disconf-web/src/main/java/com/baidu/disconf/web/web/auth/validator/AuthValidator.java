@@ -66,7 +66,7 @@ public class AuthValidator {
                 user.setToken(UUID.randomUUID().toString());
                 user.setPassword(UUID.randomUUID().toString());
                 user.setRoleId(RoleEnum.NORMAL.getValue());
-                user.setOwnApps("2");
+                user.setOwnApps("");
                 userMgr.create(user);
             }
             return true;

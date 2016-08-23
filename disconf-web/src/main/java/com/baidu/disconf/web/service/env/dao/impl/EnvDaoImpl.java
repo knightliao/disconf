@@ -1,5 +1,8 @@
 package com.baidu.disconf.web.service.env.dao.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.web.service.env.bo.Env;
@@ -21,4 +24,9 @@ public class EnvDaoImpl extends AbstractDao<Long, Env> implements EnvDao {
         return findOne(new Match(Columns.NAME, name));
     }
 
+    @Override
+    public List<Env> getEnvByRole(Integer roleId) {
+        String sql = "select e.* from env e, role_env r where e.env_id=r.env_id and r.role_id=?";
+        return findBySQL(sql, Arrays.asList(roleId));
+    }
 }
