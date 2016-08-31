@@ -50,7 +50,7 @@ public class RestfulMgrImpl implements RestfulMgr {
      */
     public <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds)
             throws Exception {
-
+        Exception ex = null;
         for (URL url : remoteUrl.getUrls()) {
 
             // 可重试的下载
@@ -63,7 +63,7 @@ public class RestfulMgrImpl implements RestfulMgr {
                 return t;
 
             } catch (Exception e) {
-
+                ex = e;
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
@@ -72,7 +72,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             }
         }
 
-        throw new Exception("cannot get: " + remoteUrl);
+        throw new Exception("cannot get: " + remoteUrl, ex);
     }
 
     /**
@@ -129,8 +129,8 @@ public class RestfulMgrImpl implements RestfulMgr {
         //
         // 判断是否下载失败
         //
-
-        if (!localFile.exists()) {
+        
+        if (localFile == null || !localFile.exists()) {
             throw new Exception("target file cannot be found! " + fileName);
         }
 
@@ -139,12 +139,10 @@ public class RestfulMgrImpl implements RestfulMgr {
         //
 
         // 返回相对路径
-        if (localFileDir != null) {
-            String relativePathString = OsUtil.getRelativePath(localFile, new File(localFileDir));
-            if (relativePathString != null) {
-                if (new File(relativePathString).isFile()) {
-                    return relativePathString;
-                }
+        String relativePathString = OsUtil.getRelativePath(localFile, new File(localFileDir));
+        if (relativePathString != null) {
+            if (new File(relativePathString).isFile()) {
+                return relativePathString;
             }
         }
 
@@ -218,7 +216,7 @@ public class RestfulMgrImpl implements RestfulMgr {
      */
     private Object retry4ConfDownload(RemoteUrl remoteUrl, File localTmpFile, int retryTimes, int sleepSeconds)
             throws Exception {
-
+        Exception ex = null;
         for (URL url : remoteUrl.getUrls()) {
 
             // 可重试的下载
@@ -229,7 +227,7 @@ public class RestfulMgrImpl implements RestfulMgr {
                 return retryStrategy.retry(unreliableImpl, retryTimes, sleepSeconds);
 
             } catch (Exception e) {
-
+                ex = e;
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
@@ -238,7 +236,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             }
         }
 
-        throw new Exception("download failed.");
+        throw new Exception("download failed.", ex);
     }
 
 }
