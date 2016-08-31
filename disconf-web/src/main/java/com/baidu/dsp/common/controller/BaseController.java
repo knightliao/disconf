@@ -1,11 +1,11 @@
 package com.baidu.dsp.common.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.baidu.dsp.common.constant.ErrorCode;
+import com.baidu.dsp.common.constant.WebConstants;
+import com.baidu.dsp.common.utils.ParamValidateUtils;
+import com.baidu.dsp.common.vo.JsonObjectBase;
+import com.baidu.dsp.common.vo.JsonObjectUtils;
+import com.baidu.ub.common.db.DaoPageResult;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
@@ -18,12 +18,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.baidu.dsp.common.constant.ErrorCode;
-import com.baidu.dsp.common.constant.WebConstants;
-import com.baidu.dsp.common.utils.ParamValidateUtils;
-import com.baidu.dsp.common.vo.JsonObjectBase;
-import com.baidu.dsp.common.vo.JsonObjectUtils;
-import com.baidu.ub.common.db.DaoPageResult;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author liaoqiqi
@@ -58,6 +57,17 @@ public class BaseController implements ApplicationContextAware {
      */
     protected <T> JsonObjectBase buildSuccess(T value) {
         return JsonObjectUtils.buildSimpleObjectSuccess(value);
+    }
+
+    /**
+     * Fail：非列表数据
+     *
+     * @param value
+     *
+     * @return
+     */
+    protected <T> JsonObjectBase buildFail(T value) {
+        return JsonObjectUtils.buildSimpleObjectFail(value);
     }
 
     /**
