@@ -32,6 +32,7 @@ https://github.com/knightliao/disconf-demos-java
     - Java: 目前唯一支持语言
     - python：打算支持
     - PHP：暂未支持
+    - Node: https://github.com/Corey600/node-disconf-client
 - WEB 管理端：   
     - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
 
