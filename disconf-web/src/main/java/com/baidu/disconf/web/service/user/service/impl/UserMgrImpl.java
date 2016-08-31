@@ -90,7 +90,15 @@ public class UserMgrImpl implements UserMgr {
     public String addOneAppForUser(Long userId, int appId) {
 
         User user = getUser(userId);
+
         String ownAppIds = user.getOwnApps();
+        if ("admin".equals(user.getName())) {
+            ownAppIds = StringUtils.EMPTY;
+            user.setOwnApps(ownAppIds);
+            userDao.update(user);
+            return ownAppIds;
+        }
+
         if (StringUtils.isBlank(ownAppIds)) {
             ownAppIds = String.valueOf(appId);
         } else {
