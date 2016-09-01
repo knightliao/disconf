@@ -92,7 +92,7 @@ public class UserMgrImpl implements UserMgr {
         User user = getUser(userId);
 
         String ownAppIds = user.getOwnApps();
-        if ("admin".equals(user.getName())) {
+        if ("admin".equals(user.getName()) && StringUtils.isNotBlank(ownAppIds)) {
             ownAppIds = StringUtils.EMPTY;
             user.setOwnApps(ownAppIds);
             userDao.update(user);

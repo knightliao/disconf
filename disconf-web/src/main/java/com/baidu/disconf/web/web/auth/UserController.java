@@ -148,10 +148,10 @@ public class UserController extends BaseController {
         Visitor visitor = ThreadContext.getSessionVisitor();
         userMgr.modifyPassword(visitor.getLoginUserId(), passwordModifyForm.getNew_password());
 
-        // re login
+        // relogin
         redisLogin.logout(request);
 
-        return buildSuccess("修改成功，请重新登录");
+        return buildSuccess("修改密码成功，请重新登录");
     }
 
 
@@ -184,7 +184,7 @@ public class UserController extends BaseController {
 
         userMgr.create(user);
 
-        return buildSuccess("修改成功，请重新登录");
+        return buildSuccess("注册成功，请重新登录");
     }
 
 }

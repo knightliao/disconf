@@ -1,19 +1,21 @@
 package com.baidu.dsp.common.utils.email;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.baidu.disconf.web.config.ApplicationPropertyConfig;
+import com.baidu.disconf.web.service.user.dto.Visitor;
+import com.baidu.ub.common.commons.ThreadContext;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baidu.disconf.web.config.ApplicationPropertyConfig;
-import com.baidu.disconf.web.service.user.dto.Visitor;
-import com.baidu.ub.common.commons.ThreadContext;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author liaoqiqi
@@ -23,6 +25,8 @@ import com.baidu.ub.common.commons.ThreadContext;
 public class LogMailBean {
 
     protected static final Logger LOG = LoggerFactory.getLogger(LogMailBean.class);
+
+    private final ExecutorService service = Executors.newFixedThreadPool(10);
 
     /**
      * 发送报警邮件中标题的最大长度，255
@@ -108,7 +112,7 @@ public class LogMailBean {
      *
      * @return
      */
-    public boolean sendHtmlEmail(String toEmail, String title, String content) {
+    public boolean sendHtmlEmail(String toEmail, String title, final String content) {
 
         LOG.info("send to " + toEmail);
         LOG.info("title: " + title);
@@ -148,8 +152,8 @@ public class LogMailBean {
         }
 
         String mailTo = toEmail;
-        String mailFrom = emailProperties.getFromEmail();
-        String[] mailToList = mailTo.split(";");
+        final String mailFrom = emailProperties.getFromEmail();
+        final String[] mailToList = mailTo.split(";");
 
         if (content == null) {
 
@@ -158,7 +162,14 @@ public class LogMailBean {
         } else {
 
             try {
-                mailBean.sendHtmlMail(mailFrom, mailToList, mailTitle, content);
+                final String finalMailTitle = mailTitle;
+                service.submit(new Callable<Object>() {
+                    @Override
+                    public Object call() throws Exception {
+                        mailBean.sendHtmlMail(mailFrom, mailToList, finalMailTitle, content);
+                        return null;
+                    }
+                });
             } catch (Exception e) {
                 LOG.error("When send alarm mail,we can't send it", e);
                 return false;
