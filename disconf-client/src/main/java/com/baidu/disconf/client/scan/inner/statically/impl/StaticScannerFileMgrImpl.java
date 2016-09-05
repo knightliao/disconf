@@ -105,7 +105,8 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
         //
         // disConfCommonModel
         DisConfCommonModel disConfCommonModel =
-                makeDisConfCommonModel(disconfFileAnnotation.env(), disconfFileAnnotation.version());
+                makeDisConfCommonModel(disconfFileAnnotation.app(), disconfFileAnnotation.env(), disconfFileAnnotation
+                        .version());
         disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
 
         // Remote URL
