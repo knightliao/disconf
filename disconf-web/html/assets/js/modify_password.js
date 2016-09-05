@@ -32,7 +32,6 @@ $("#item_submit").on("click", function (e) {
             "new_password_2": new_password_2
         }
     }).done(function (data) {
-        $("#error").removeClass("hide");
         if (data.success === "true") {
             alert(data.result);
             window.location.href = "/login.html";

@@ -92,6 +92,7 @@ public class UserMgrImpl implements UserMgr {
         User user = getUser(userId);
 
         String ownAppIds = user.getOwnApps();
+        //此处`admin`用户,并非指的是管理员,而是作为一个特殊的用户
         if ("admin".equals(user.getName()) && StringUtils.isNotBlank(ownAppIds)) {
             ownAppIds = StringUtils.EMPTY;
             user.setOwnApps(ownAppIds);

@@ -73,10 +73,6 @@ public class LoginInterceptor extends WebCommonInterceptor {
         // 显示所有用户的请求
         LOG.info(request.getRequestURI());
 
-        if (requestPath.indexOf("register") != -1) {
-            return true;
-        }
-
         if (notInterceptPathList != null) {
 
             // 更精确的定位

@@ -5,6 +5,7 @@ import com.baidu.disconf.web.service.sign.form.SigninForm;
 import com.baidu.disconf.web.service.sign.service.SignMgr;
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
+import com.baidu.disconf.web.service.user.dao.UserDao;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.form.PasswordModifyForm;
 import com.baidu.disconf.web.service.user.form.RegisterForm;
@@ -29,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @author liaoqiqi
@@ -52,6 +52,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private RedisLogin redisLogin;
+
+    @Autowired
+    private UserDao userDao;
 
     /**
      * GET 获取
@@ -164,22 +167,19 @@ public class UserController extends BaseController {
         String regPwd = registerForm.getPassword();
 
         //校验是否存在用户名
-        List<User> userList = userMgr.getAll();
+        User user = userDao.getUserByName(regUserName);
 
-        if (userList != null) {
-            for (User user : userList) {
-                if (regUserName.equals(user.getName().trim())) {
-                    return buildFail("用户名存在, 注册失败");
-                }
-            }
+        if (user != null) {
+            return buildFail("用户名存在, 注册失败");
         }
 
         //新增用户
-        User user = new User();
+        user = new User();
         user.setName(regUserName);
         user.setPassword(SignUtils.createPassword(regPwd));
         user.setToken(SignUtils.createToken(regUserName));
         user.setOwnApps("0");
+        //此处给管理员的权限,就是为了admin中心权限,下方到各个部门权限
         user.setRoleId(RoleEnum.ADMIN.getValue());
 
         userMgr.create(user);

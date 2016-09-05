@@ -10,7 +10,6 @@ $("#item_submit").on("click", function (e) {
 
     // 验证
     if (!user_name || !pwd) {
-        $("#error").removeClass("hide");
         $("#error").html("注册失败, 表单不能为空或填写格式错误！");
         return;
     }
@@ -22,7 +21,6 @@ $("#item_submit").on("click", function (e) {
             "password": pwd
         }
     }).done(function (data) {
-        $("#error").removeClass("hide");
         if (data.success === "true") {
             alert(data.result);
             window.location.href = "/login.html";
