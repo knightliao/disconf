@@ -39,7 +39,8 @@ public final class ClassLoaderUtil {
 
             java.net.URL url = loader.getResource("");
             // get class path
-            classPath = url.getPath();
+            File f=new File(url.toURI());
+            classPath = f.getAbsolutePath();
             classPath = URLDecoder.decode(classPath, "utf-8");
 
             // 如果是jar包内的，则返回当前路径
