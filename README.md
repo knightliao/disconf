@@ -26,6 +26,10 @@ https://github.com/knightliao/disconf-demos-java
 
 请在dev上进行提交代码
 
+## 文档
+
+未来文档均会同步到 http://disconf.readthedocs.io/zh_CN/latest/ 这里
+
 ## 项目信息 
 
 - CLIENT 端：
