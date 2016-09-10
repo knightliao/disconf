@@ -22,7 +22,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 - demos: https://github.com/knightliao/disconf-demos-java
 - wiki: https://github.com/knightliao/disconf/wiki
-- rtfd: http://disconf.readthedocs.io
+- 文档: http://disconf.readthedocs.io
 - 协作开发: 在dev分支上提pull request
 - 提问题: https://github.com/knightliao/disconf/issues 提issue
 
