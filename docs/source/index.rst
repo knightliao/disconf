@@ -9,6 +9,11 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - demos: https://github.com/knightliao/disconf-demos-java
 - wiki: https://github.com/knightliao/disconf/wiki
 
+推荐
+
+- 有态度无广告的搜索引擎: https://sov5.com
+- 高质量的微信公众号阅读: http://100weidu.com
+
 .. toctree::
    :maxdepth: 2
    :glob:
