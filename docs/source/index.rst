@@ -11,8 +11,8 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 推荐
 
-- 有态度无广告的搜索引擎: https://sov5.com
-- 高质量的微信公众号阅读: http://100weidu.com
+- 有态度无广告的搜索引擎: https://www.sov5.com
+- 高质量的微信公众号阅读: http://www.100weidu.com
 
 .. toctree::
    :maxdepth: 2
