@@ -23,13 +23,14 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - demos: https://github.com/knightliao/disconf-demos-java
 - wiki: https://github.com/knightliao/disconf/wiki
 - 文档: http://disconf.readthedocs.io
-- 协作开发: 在dev分支上提pull request
+- 协作开发: 在 master 分支上提pull request
 - 提问题: https://github.com/knightliao/disconf/issues 提issue
 
 ## 版本
 
-- dev(latest branch): 2.6.36-SNAPSHOT
-- master(stable branch)：2.6.35
+- feature(latest branch): 2.6.36-SNAPSHOT
+- master(cooperate && contribute branch)：2.6.35
+- stable(release && stable branch): 2.6.35
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
 ## 功能特点 ##
