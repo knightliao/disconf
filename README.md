@@ -3,7 +3,7 @@ Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=mas
 
 Distributed Configuration Management Platform(分布式配置管理平台) 
 
-专注于各种 `分布式系统配置管理` 的`通用组件`/`通用平台`, 提供统一的`配置管理服务`。
+专注于各种「分布式系统配置管理」的「通用组件」和「通用平台」, 提供统一的「配置管理服务」
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
