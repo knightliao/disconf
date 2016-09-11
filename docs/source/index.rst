@@ -26,4 +26,5 @@ Distributed Configuration Management Platform(分布式配置管理平台)
    question/index
    others/src/contribute
    others/src/sponsor
+   design/src/update
    design/index

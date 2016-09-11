@@ -1,8 +1,7 @@
 Tutorial 5 基于XML的分布式配置文件管理,不会自动reload
 =======
 
-在 [Tutorial 1](Tutorial1.html) 里, 
-我们实现了一个简单的Redis服务程序，它使用分布式配置进行管理，此Redis的配置文件存储在分布式服务器 disconf-web 上。它使用的是注解式的配置管理。
+在 [Tutorial 1](Tutorial1.html) 里, 我们实现了一个简单的Redis服务程序，它使用分布式配置进行管理，此Redis的配置文件存储在分布式服务器 disconf-web 上。它使用的是注解式的配置管理。
 
 Disconf亦支持非注解式的分布式配置管理，下面定义一下概念：
 
