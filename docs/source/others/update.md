@@ -9,3 +9,4 @@
     - 支持https的web端 https://github.com/knightliao/disconf/issues/158
     - path支持windows: https://github.com/knightliao/disconf/issues/166
     - 删除类 DisconfMgrJustHostFileBean
+    - DisconfFile 的属性 copy2TargetDirPath 更改为 targetDirPath

@@ -96,8 +96,8 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
         // file name
         disconfCenterFile.setFileName(disconfFileAnnotation.filename());
 
-        // copy 2 target path
-        disconfCenterFile.setCopy2TargetDirPath(disconfFileAnnotation.copy2TargetDirPath().trim());
+        // config file target dir path
+        disconfCenterFile.setTargetDirPath(disconfFileAnnotation.targetDirPath().trim());
 
         // file type
         disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(disconfFileAnnotation.filename()));
