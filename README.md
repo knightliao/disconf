@@ -28,26 +28,6 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 ## 版本
 
-请在dev上进行提交代码
-
-## 项目信息 
-
-- CLIENT 端：
-    - Java: 目前唯一支持语言
-    - python：打算支持
-    - PHP：暂未支持
-    - Node: https://github.com/Corey600/node-disconf-client
-- WEB 管理端：   
-    - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
-
-### java client
-
-disconf.git branches and Maven version:
-
-- dev(develop branch): 2.6.35
-- master(stable branch)：2.6.35
-- [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
-=======
 - dev(latest branch): 2.6.36-SNAPSHOT
 - master(cooperate && contribute branch)：2.6.35
 - stable(release && stable branch): 2.6.35
