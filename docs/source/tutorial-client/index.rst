@@ -16,6 +16,6 @@ Tutorial-client
     src/Tutorial10
     src/Tutorial11-config-download-path
     src/Tutorial13-unify-notify
-    src/Tutorial14-bean-setter-mode.md
+    src/Tutorial14-bean-setter-mode
     src/jar-start-up
     src/config-getter
