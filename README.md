@@ -3,7 +3,7 @@ Disconf [![Build Status](https://travis-ci.org/knightliao/disconf.svg?branch=mas
 
 Distributed Configuration Management Platform(分布式配置管理平台) 
 
-专注于各种 `分布式系统配置管理` 的`通用组件`/`通用平台`, 提供统一的`配置管理服务`。
+专注于各种「分布式系统配置管理」的「通用组件」和「通用平台」, 提供统一的「配置管理服务」
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fjw1esvjzny1rmj20aj061t9a.jpg)
 
@@ -18,36 +18,20 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 - 统一管理：提供web平台，统一管理 多个环境(RD/QA/PRODUCTION)、多个产品 的所有配置
 - 核心目标：一个jar包，到处运行
 
-## demos
+## demos && 文档 && 协作
 
-https://github.com/knightliao/disconf-demos-java
+- demos: https://github.com/knightliao/disconf-demos-java
+- wiki: https://github.com/knightliao/disconf/wiki
+- 文档: http://disconf.readthedocs.io
+- 协作开发: 在 master 分支上提pull request
+- 提问题: https://github.com/knightliao/disconf/issues 提issue
 
-## 开发协作
+## 版本
 
-请在dev上进行提交代码
-
-## 项目信息 
-
-- CLIENT 端：
-    - Java: 目前唯一支持语言
-    - python：打算支持
-    - PHP：暂未支持
-- WEB 管理端：   
-    - Java SpringMvc 实现，前后端分离 实现方式(基于Spring 4.1.7.RELEASE)
-
-### java client
-
-disconf.git branches and Maven version:
-
-- dev(develop branch): 2.6.35
-- master(stable branch)：2.6.35
-- [更新日志](https://github.com/knightliao/disconf/wiki/updates) 
+- dev(dev branch): 2.6.36
+- master(latest && cooperate && contribute branch)：2.6.36
+- stable(release && stable branch): 2.6.35
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
-
-#### Java Client Elegant Usage Preview ##
-
-- [注解式分布式配置使用方式](http://ww3.sinaimg.cn/mw1024/60c9620fgw1eu5lsrsixcj20ga06ygna.jpg)
-- [XML配置式分布式配置方式](http://ww1.sinaimg.cn/mw1024/60c9620fgw1eu5ltt9uglj20ia0j0tbo.jpg)
 
 ## 功能特点 ##
 
@@ -76,85 +60,6 @@ Disconf的功能特点描述图：
 - 支持配置项多个项目共享，支持批量处理项目配置。
 - 配置监控：平台提供自校验功能（进一步提高稳定性），可以定时校验应用系统的配置是否正确。
 
-## 模块架构图  ##
-
-![](http://ww2.sinaimg.cn/bmiddle/006oy5Ulgw1f25zc2vfwpj30nh0d6q5t.jpg)
-
-[查看大图](http://ww2.sinaimg.cn/mw1024/006oy5Ulgw1f25zc2vfwpj30nh0d6q5t.jpg)
-
-### 模块信息###
-
-- CLIENT: client目标是支持多语言。目前只提供了java语言客户端。
-    - JAVA
-    	- [disconf-core](https://github.com/knightliao/disconf/tree/master/disconf-core): 分布式配置基础包模块
-    	- [disconf-client](https://github.com/knightliao/disconf/tree/master/disconf-client): 分布式配置客户端模块, 依赖disconf-core包。 用户程序使用它作为Jar包进行分布式配置编程。
-    	- [disconf-tool](https://github.com/knightliao/disconf/tree/master/disconf-tool): 分布式配置工具包，依赖disconf-core包。 Disconf-tool是disconf的辅助工具类, 目前使用不多，建议不使用。
-- 管理端：disconf-web是统一的分布式配置管理平台。[disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web): 分布式配置平台服务模块, 依赖disconf-core包。采用SpringMvc+纯HTML方式（前后端分离架构）实现。用户使用它来进行日常的分布式配置管理。
-	
-## 用户指南 ##
-
-### client
-
-#### java client: disconf-client 使用 ###
-
-在您的 Maven POM 文件里加入：
-
-    <dependency>
-        <groupId>com.baidu.disconf</groupId>
-        <artifactId>disconf-client</artifactId>
-        <version>2.6.34</version>
-    </dependency>
-
-### server: disconf-web 使用 ###
-
-部署方法请参见：[https://github.com/knightliao/disconf/tree/master/disconf-web](https://github.com/knightliao/disconf/tree/master/disconf-web)
-
-全新主页，高清大图：
-
-APP+环境+版本+ZK查询：
-
-![http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg](http://ww1.sinaimg.cn/mw1024/60c9620fgw1emyww39wjmj20qw0keq6m.jpg)
-
-#### 其它开源的disconf-web：
-
-- https://github.com/comlkz/disconf-web
-
-### java client Tutorials ###
-
-#### 总体概述
-
-- [TutorialSummary 功能总体概述](https://github.com/knightliao/disconf/wiki/TutorialSummary)
-- 文章介绍：[分布式配置管理平台Disconf](https://github.com/knightliao/disconf/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0Disconf)
-
-#### 基于注解式的分布式配置（支持配置文件和配置项）
-
-推荐新建的项目使用disconf时使用
-
-- [Tutorial 1 注解式分布式的配置文件](https://github.com/knightliao/disconf/wiki/Tutorial1)
-- [Tutorial 2 注解式分布式的配置文件高级篇: 配置更新的通知](https://github.com/knightliao/disconf/wiki/Tutorial2)
-- [Tutorial 3 注解式分布式的配置项](https://github.com/knightliao/disconf/wiki/Tutorial3)
-- [Tutorial 4 注解式分布式静态配置文件和静态配置项](https://github.com/knightliao/disconf/wiki/Tutorial4)
-
-注：将配置文件移至一个专有类里，而不是分散在项目的各个地方，整个代码架构清晰易懂、易管理。
-即便如果哪天不使用disconf，也只需要将注解去掉即可。
-
-#### 基于XML的分布式配置（无代码侵入）（仅支持配置文件）
-
-推荐新建的项目或旧项目使用disconf时使用
-
-- [Tutorial 8 基于XML的分布式配置文件管理,自动reload ](https://github.com/knightliao/disconf/wiki/Tutorial8)
-- [Tutorial 5 基于XML的分布式配置文件管理,不会自动reload,对于那些比较重的资源如jdbc等，特别有用](https://github.com/knightliao/disconf/wiki/Tutorial5)
-
-#### 其它
-
-- [Tutorial 6 disconf-web 功能详解](https://github.com/knightliao/disconf/wiki/Tutorial6)
-- [Tutorial 7 可自定义的部分托管的分布式配置](https://github.com/knightliao/disconf/wiki/Tutorial7)
-- [Tutorial 9 实现真正意义上的统一上线包](https://github.com/knightliao/disconf/wiki/Tutorial9)
-- [Tutorial 10 实现一个配置更新下载器agent](https://github.com/knightliao/disconf/wiki/Tutorial10)
-- [Tutorial 13 增加统一的回调类,unify-notify模式：灵活处理更新配置通知](https://github.com/knightliao/disconf/wiki/Tutorial13-unify-notify)
-- [Tutorial 14 配置初始化或更新时，通知采用 "bean setter模式"](https://github.com/knightliao/disconf/wiki/Tutorial14-bean-setter-mode)
-- [配置说明](https://github.com/knightliao/disconf/wiki/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
-    
 ## 大家都在使用disconf ##
 
 - [百度]（20+条产品线使用）
@@ -163,7 +68,7 @@ APP+环境+版本+ZK查询：
 - [网易](http://www.163.com/)
 - [苏宁易购](http://www.suning.com) (搜索中心数据处理平台)
 - [顺丰科技]
-- [更多](https://github.com/knightliao/disconf/wiki/users)
+- [更多](http://disconf.readthedocs.io/zh_CN/latest/others/src/contribute.html)
 
 ## 他人评价
 
@@ -179,17 +84,9 @@ APP+环境+版本+ZK查询：
 
 ![http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg)
 
-开源中国社区：
-
-[「disconf」在「2015 年度新增开源软件排名 TOP 100(OSC开源中国提供)」中排名第16强。](http://www.oschina.net/news/69808/2015-annual-ranking-top-100-new-open-source-software)
-
 ## 群·联系·讨论
 
-- disconf技术QQ群: 239203866 ; disconf技术QQ二群: 280712860
-- [媒体报道与网友教程](https://github.com/knightliao/disconf/wiki/%E5%AA%92%E4%BD%93%E6%8A%A5%E9%81%93%E4%B8%8E%E7%BD%91%E5%8F%8B%E6%95%99%E7%A8%8B)
-
-## 关于
-
-- 搜索引擎推荐：[sov5搜索引擎, 支持谷歌网页搜索/电影搜索/资源搜索/问答搜索](http://sov5.com)
-- python论坛推荐：[Django中国社区](http://www.django-china.cn/)
-- [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 
+- disconf技术QQ群: 239203866 
+- disconf技术QQ二群: 280712860
+- 有态度无广告的搜索引擎: https://www.sov5.com
+- 高质量的微信公众号阅读: http://www.100weidu.com

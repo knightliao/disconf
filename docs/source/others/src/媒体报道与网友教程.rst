@@ -1,0 +1,30 @@
+网友贡献&&媒体报道
+==================
+
+网友贡献/使用教程
+-----------------
+
+-  `cnblog: 马进举
+   统一配置管理-百度disconf <http://www.cnblogs.com/majinju/p/4502246.html>`__
+-  `csdn: 分布式配置管理平台 - Disconf
+   web管理端安装 <http://blog.csdn.net/zhu_tianwei/article/details/49512751>`__
+-  `disconf的尝试 <http://mysrc.sinaapp.com/view_note/?id=573>`__
+-  `开源分布式配置中心选型 <http://vernonzheng.com/2015/02/09/%E5%BC%80%E6%BA%90%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E9%80%89%E5%9E%8B/>`__
+-  `disconf基于XML实现 <http://blog.csdn.net/hyg1683116633/article/details/47339187>`__
+-  `Docker-Disconf <http://git.oschina.net/gongxusheng/docker-disconf>`__
+
+媒体报道
+--------
+
+-  `开源中国社区 <http://www.oschina.net/p/disconf>`__
+-  `开发者头条：Disconf - 一个 Java
+   实现的分布式配置管理平台 <http://toutiao.io/posts/ljg97>`__
+-  `微头条：百度 disconf
+   分布式配置管理平台 <http://www.wtoutiao.com/p/d1dvfL.html>`__
+-  `UDN: [运维相关] 分布式配置管理平台
+   Disconf <http://udn.yyuap.com/thread-32595-1-1.html>`__
+-  `51testing:
+   百度disconf分布式配置管理平台 <http://www.51testing.com/html/74/n-2459674-3.html>`__
+-  `推酷 Disconf ——
+   来自百度的分布式配置管理平台 <http://www.tuicool.com/articles/QniqQn7>`__
+-  `实施微服务需要哪些基础框架｜技术热点 <http://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&mid=400645575&idx=1&sn=da55d75db55117046c520de88dde1123&3rd=MzA3MDU4NTYzMw==&scene=6#rd>`__

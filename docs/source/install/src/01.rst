@@ -1,0 +1,12 @@
+disconf-client Install
+^^^^^^^^^^^^^^^^^^^^^^
+
+在您的 Maven POM 文件里加入：
+
+::
+
+    <dependency>
+        <groupId>com.baidu.disconf</groupId>
+        <artifactId>disconf-client</artifactId>
+        <version>2.6.36</version>
+    </dependency>

@@ -32,8 +32,11 @@ public class RemoteUrl {
 
             try {
 
-                if (!server.contains("http://")) {
-                    server = "http://" + server;
+                if (!server.startsWith("http://")) {
+                    if (server.startsWith("https://")) {
+                    } else {
+                        server = "http://" + server;
+                    }
                 }
 
                 urls.add(new URL(server + url));
