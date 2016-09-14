@@ -24,8 +24,8 @@ public class ConnectionWatcher implements Watcher {
     // 10 秒会话时间 ，避免频繁的session expired
     private static final int SESSION_TIMEOUT = 10000;
 
-    // 3秒
-    private static final int CONNECT_TIMEOUT = 3000;
+    // 10秒
+    private static final int CONNECT_TIMEOUT = 10000;
 
     protected ZooKeeper zk;
     private CountDownLatch connectedSignal = new CountDownLatch(1);
