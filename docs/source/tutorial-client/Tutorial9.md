@@ -15,7 +15,7 @@ Tutorial 9 实现真正意义上的统一上线包
 
 目前 disconf 已经支持 `disconf.properties` 中所有配置项 通过参数传入方式 启动。
 
-支持的配置项具体可参见： [link](../../config/client-config.html)
+支持的配置项具体可参见： [link](../../config/src/client-config.html)
 
 这样的话，未来大家只要通过 Java 参数 就可以 动态的改变启动的 app/env/version
 
