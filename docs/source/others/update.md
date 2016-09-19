@@ -1,7 +1,9 @@
+版本更新
+=======
 
-## 版本更新
+## 2.6.36 
 
-2.6.6 发布于 20160911
+2.6.36 发布于 20160911
 
 - disconf-web:
     - 配置和配置项可支持自定义app https://github.com/knightliao/disconf/issues/147 
