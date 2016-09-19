@@ -9,7 +9,7 @@ disconf-web安装
 -------
 
 -  让开发者具有自定义定制web控制台界面的能力: `Tutorial12 open api for
-   web <../../tutorial-web/12-open-api-for-web.html>`__
+   web <../../tutorial-web/src/12-open-api-for-web.html>`__
 
 运行样式
 --------

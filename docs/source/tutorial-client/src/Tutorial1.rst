@@ -429,7 +429,7 @@ Disconf启动需要此文件，文件示例是：
     # 获取远程配置 重试时休眠时间，默认是5秒
     conf_server_url_retry_sleep_seconds=1
 
-配置相关说明可参考：\ `配置 <../config/client-config.html>`__
+配置相关说明可参考：\ `配置 <../../config/src/client-config.html>`__
 
 注意：如果使用Disconf，则本地的配置文件\ ``redis.properties``\ 可以删除掉（也可以不删除掉，建议删除掉）。如果不使用Disconf，则需要此配置文件。
 
