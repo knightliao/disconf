@@ -30,7 +30,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 - dev(dev branch): 2.6.36
 - master(latest && cooperate && contribute branch)：2.6.36
-- stable(release && stable branch): 2.6.35
+- stable(release && stable branch): 2.6.36
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
 ## 功能特点 ##
