@@ -36,6 +36,11 @@ public interface ConfigMgr {
      */
     ConfListVo getConfVo(Long configId);
 
+    /**
+     * @param configId
+     *
+     * @return
+     */
     MachineListVo getConfVoWithZk(Long configId);
 
     /**
@@ -55,20 +60,34 @@ public interface ConfigMgr {
     String updateItemValue(Long configId, String value);
 
     /**
+     * 获取config value
+     *
      * @param configId
      *
      * @return
      */
     String getValue(Long configId);
 
+    /**
+     * 通知zk
+     *
+     * @param configId
+     */
     void notifyZookeeper(Long configId);
 
     /**
+     * 新建一个config
+     *
      * @param confNewForm
      * @param disConfigTypeEnum
      */
     void newConfig(ConfNewItemForm confNewForm, DisConfigTypeEnum disConfigTypeEnum);
 
+    /**
+     * 删除一个config
+     *
+     * @param configId
+     */
     void delete(Long configId);
 
     /**

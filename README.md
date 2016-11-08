@@ -30,7 +30,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 - dev(dev branch): 2.6.36
 - master(latest && cooperate && contribute branch)：2.6.36
-- stable(release && stable branch): 2.6.35
+- stable(release && stable branch): 2.6.36
 - 在Maven Central Repository里查看 [com.baidu.disconf](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.baidu.disconf%22 )
 
 ## 功能特点 ##
@@ -90,3 +90,4 @@ Disconf的功能特点描述图：
 - disconf技术QQ二群: 280712860
 - 有态度无广告的搜索引擎: https://www.sov5.com
 - 高质量的微信公众号阅读: http://www.100weidu.com
+- Python中国社区: http://www.python88.com
