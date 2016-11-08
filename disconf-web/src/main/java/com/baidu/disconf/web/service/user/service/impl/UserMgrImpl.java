@@ -1,14 +1,5 @@
 package com.baidu.disconf.web.service.user.service.impl;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
@@ -17,6 +8,15 @@ import com.baidu.disconf.web.service.user.service.UserInnerMgr;
 import com.baidu.disconf.web.service.user.service.UserMgr;
 import com.baidu.disconf.web.service.user.vo.VisitorVo;
 import com.baidu.ub.common.commons.ThreadContext;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author liaoqiqi
@@ -90,13 +90,26 @@ public class UserMgrImpl implements UserMgr {
     public String addOneAppForUser(Long userId, int appId) {
 
         User user = getUser(userId);
-        String ownAppIds = user.getOwnApps();
-        if (ownAppIds.contains(",")) {
-            ownAppIds = ownAppIds + "," + appId;
 
-        } else {
-            ownAppIds = String.valueOf(appId);
+        String ownAppIds = user.getOwnApps();
+        //此处`admin`用户,并非指的是管理员,而是作为一个特殊的用户
+        if ("admin".equals(user.getName()) && StringUtils.isNotBlank(ownAppIds)) {
+            ownAppIds = StringUtils.EMPTY;
+            user.setOwnApps(ownAppIds);
+            userDao.update(user);
+            return ownAppIds;
         }
+
+        if (StringUtils.isBlank(ownAppIds)) {
+            ownAppIds = String.valueOf(appId);
+        } else {
+            if (",".equals(ownAppIds.substring(ownAppIds.length() - 1))) {
+                ownAppIds += appId;
+            } else {
+                ownAppIds += "," + appId;
+            }
+        }
+
         user.setOwnApps(ownAppIds);
         userDao.update(user);
 

@@ -109,19 +109,12 @@ VALUES
     (71, 2, '/api/web/config/filetext/{configId}', 'update', '0100', '99991231235959'),
     (72, 3, '/api/web/config/filetext/{configId}', 'update', '0000', '99991231235959');
 
-/* testUser1  MhxzKhl9209*/
-/* testUser2  MhxzKhl167*/
-/* testUser3  MhxzKhl783*/
-/* testUser4  MhxzKhl8758*/
-/* testUser5  MhxzKhl112*/
+INSERT INTO `role_resource` (`role_id`, `url_pattern`, `url_description`, `method_mask`) VALUES
+  (1,'/api/account/password' , '修改密码' , '0100'),
+  (2,'/api/account/password' , '修改密码' , '0100'),
+  (3,'/api/account/password' , '修改密码' , '0000');
+
 /* admin    admin*/
 INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`, `role_id`)
 VALUES
-    (1, 'testUser1', '5eec8499597a115c88e0a9580ae1562ab85d0b1a', 'b9070d385a13357efa09e50e080607c2b299241b', '2', 1),
-    (2, 'testUser2', '71e9dc667eefa5a3a4840cb4f1ce22bc246f22f0', 'b169dec42f61ec6cbad88d70e7c4c6b89630ccfb', '2', 1),
-    (3, 'testUser3', 'e2cdc4a9195030543e38e19a923f075d54471cc4', 'a1a20b0e03a5191c530cbfc064eda3c16254df64', '2', 1),
-    (4, 'testUser4', '5cef2d7e4ada5a615f03e12b569d80aedfb056fc', '007b07fccbc1c82c987f7b8e4651e85cca01cf2b', '2', 1),
-    (5, 'testUser5', 'f996eeaa224abe0037d99adbce73c315e13238f9', 'c9dfdcb50a3d84f2b6a4771dcb7c2ceb19e7d281', '2', 1),
-    (6, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'f28d164d23291c732f64134e6b7d92be3ff8b1b3', '', 2),
-    (7, 'admin_read', 'b76f3e20d1c8d0bc17d40158e44097d5eeee8640', '2022ab9c2754d62f9ddba5fded91e4238247ebaf', '2', 3),
-    (8, 'mobiledsp', '0855b44a368e44dc6e6825532073b29a368584af', '132069654193f802203d1c6c86e753ecede698f6', '4', 1);
+    (1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'f28d164d23291c732f64134e6b7d92be3ff8b1b3', '', 2)

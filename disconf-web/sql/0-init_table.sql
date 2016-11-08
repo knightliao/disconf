@@ -14,6 +14,7 @@ CREATE TABLE `app` (
 CREATE TABLE `config` (
   `config_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '唯一的ID（没有啥意义，主键，自增长而已）',
   `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '配置文件/配置项',
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '状态：1是正常 0是删除',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '配置文件名/配置项KeY名',
   `value` text NOT NULL COMMENT '0 配置文件：文件的内容，1 配置项：配置值',
   `app_id` bigint(20) NOT NULL COMMENT 'appid',
@@ -23,6 +24,17 @@ CREATE TABLE `config` (
   `update_time` varchar(14) NOT NULL DEFAULT '99991231235959' COMMENT '修改时间',
   PRIMARY KEY (`config_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='配置';
+
+CREATE TABLE `config_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `config_id` bigint(20) NOT NULL,
+  `old_value` longtext NOT NULL,
+  `new_value` longtext NOT NULL,
+  `create_time` varchar(14) NOT NULL DEFAULT '99991231235959',
+  `update_by` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `env` (
   `env_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '环境ID（主键，自增长）',

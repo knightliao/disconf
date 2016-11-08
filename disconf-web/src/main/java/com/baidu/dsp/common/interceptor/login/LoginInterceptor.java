@@ -1,17 +1,5 @@
 package com.baidu.dsp.common.interceptor.login;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.baidu.disconf.web.service.user.constant.UserConstant;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.service.UserMgr;
@@ -21,6 +9,16 @@ import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.interceptor.WebCommonInterceptor;
 import com.github.knightliao.apollo.utils.tool.TokenUtil;
 import com.github.knightliao.apollo.utils.web.CookieUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 所有请求（一个Session可能会有多个请求）均会通过此拦截器

@@ -276,7 +276,8 @@ th {
 .startActivity-form-value {
     width: 500px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius : 5 px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
 }
 
 .startActivity-form-value-small {
@@ -352,7 +353,8 @@ th {
 .ticketDiscount-form-value {
     width: 500px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius : 5 px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
 }
 
 .ticketDiscount-form-textarea {
@@ -533,7 +535,8 @@ input.regForm-item-value {
 input.question-form-value {
     width: 380px;
     height: 22px;
-    border: 1px solid #D6D6D6 border-radius : 5 px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
     vertical-align: middle;
     margin-bottom: 0px;
     border-radius: 0 4px 4px 0;
@@ -714,7 +717,8 @@ input.autoPush-detail-item-input {
 .register-item-value {
     width: 200px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius : 5 px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
 }
 
 .register-item-value-area {
@@ -986,13 +990,15 @@ q:before, q:after {
 .private-item-value {
     width: 300px;
     height: 30px;
-    border: 1px solid #D6D6D6 border-radius : 5 px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
     text-align: left;
     vertical-align: middle;
 }
 
 .private-item-value-pre {
-    border: 1px solid #D6D6D6 border-radius : 5 px;
+    border: 1px solid #D6D6D6;
+    border-radius: 5px;
     text-align: left;
     vertical-align: middle;
 }
