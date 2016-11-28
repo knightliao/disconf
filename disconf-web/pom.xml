@@ -271,7 +271,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!-- log -->
@@ -349,6 +349,16 @@
         </resources>
 
         <plugins>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                    <configuration>
+                        <server>tomcat</server>
+                        <path>/</path>
+                        <port>1234</port>
+                    </configuration>
+                </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -360,10 +370,11 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>${project.basedir}/src/main/resources</directory>
+                            <directory>${project.basedir}/html</directory>
                             <includes>
                                 <include>**/*.*</include>
                             </includes>
+                            <targetPath>/</targetPath>
                         </resource>
                     </webResources>
                 </configuration>
