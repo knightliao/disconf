@@ -12,6 +12,7 @@ public class Columns {
     public static final String UPDATE_BY = "update_by";
 
     public static final String NAME = "name";
+    public static final String ISCOMMON = "iscommon";
 
     public static final String VERSION = "version";
 

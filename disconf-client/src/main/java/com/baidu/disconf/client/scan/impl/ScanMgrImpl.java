@@ -114,4 +114,11 @@ public class ScanMgrImpl implements ScanMgr {
         StaticScannerNonAnnotationFileMgrImpl.scanData2Store(fileName);
     }
 
+	@Override
+	public void reloadableScan(String fileName, Boolean isPublicFile) throws Exception {
+		
+		  StaticScannerNonAnnotationFileMgrImpl.scanData2Store(fileName,isPublicFile);
+		  
+	}
+    
 }

@@ -148,6 +148,58 @@ public class ConfigFetcherController extends BaseController {
             throw new DocumentNotFoundException("");
         }
     }
+    
+    /**
+     * 根据给定的 APP/DEV/VERSION获取该目录下的全部文件名称
+     * @param confForm
+     * @return
+     */
+    @NoAuth
+    @RequestMapping(value = "/fileList", method = RequestMethod.GET)
+    @ResponseBody
+    public String getFileList(ConfForm confForm) {
+
+        boolean hasError = false;
+        StringBuffer stringBuffer = new StringBuffer();
+        //
+        // 校验
+        //
+        ConfigFullModel configModel = null;
+        try {
+            configModel = configValidator4Fetch.verifyConfForm(confForm, false);
+        } catch (Exception e) {
+            LOG.error(e.toString());
+            hasError = true;
+        }
+
+        if (hasError == false) {
+            try {
+                //
+            	
+            	List<Config> configs = configFetchMgr.getConfListByParameter(configModel.getApp().getId(), configModel.getEnv().getId(), configModel.getVersion(), true);
+             
+                if (configs == null || configs.size() == 0) {
+                    hasError = true;
+                    throw new DocumentNotFoundException(configModel.getKey());
+                }
+                
+               
+                for (Config config : configs) {
+                	
+                	stringBuffer.append(config.getName());
+                	stringBuffer.append(",");
+				}
+                
+
+            } catch (Exception e) {
+                LOG.error(e.toString());
+            }
+        }
+        
+        return stringBuffer.toString();
+    }
+    
+    
 
     /**
      * 下载

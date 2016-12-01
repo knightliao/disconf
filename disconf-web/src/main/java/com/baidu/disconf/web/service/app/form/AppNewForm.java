@@ -31,5 +31,40 @@ public class AppNewForm extends RequestFormBase {
 
     // 邮箱
     private String emails = "";
+ 
+    private Boolean isCommon;
+
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public String getEmails() {
+		return emails;
+	}
+
+	public void setEmails(String emails) {
+		this.emails = emails;
+	}
+
+	public Boolean getIsCommon() {
+		return isCommon;
+	}
+
+	public void setIsCommon(Boolean isCommon) {
+		this.isCommon = isCommon;
+	}
+	
 
 }

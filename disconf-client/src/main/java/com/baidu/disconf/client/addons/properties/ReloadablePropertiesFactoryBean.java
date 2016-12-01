@@ -3,7 +3,9 @@ package com.baidu.disconf.client.addons.properties;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.FilenameUtils;
@@ -48,46 +50,129 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         setLocations(list);
     }
 
+    
     /**
+     * 处理规则：
+     * 如果用户有指定的配置文件，则读取配置文件，如果没有指定
+     * 则读取 远程全部公共配置文件和本地文件
+     * @param fileNames
+     */
+    private Map<String,List<String>> fileNameAnalysis(List<String> fileNames){
+    	
+    	
+    	Map<String,List<String>> fileList = new HashMap<String, List<String>>();
+    		
+		if(fileNames.get(0).equals("classpath:/*.properties")){
+			fileList = DisconfMgr.getInstance().loadDefultFileList();
+		}else{
+    		fileList.put("local", fileNames);
+    		
+    	}
+    	
+    	return fileList;
+    }
+    
+    
+    /**
+     * 新的setLocations支持通配符，获取该环境的全部配置文件
+     * @param fileNames
      */
     public void setLocations(List<String> fileNames) {
+    	
+    	Map<String,List<String>> fileList = fileNameAnalysis(fileNames);
 
         List<Resource> resources = new ArrayList<Resource>();
-        for (String filename : fileNames) {
+        
+        Boolean isPublicFile = false;
+        for(String str: fileList.keySet()){
+        	
+        	if(str.equals("local")){
+        		isPublicFile = false;
+        	}else{
+        		isPublicFile = true;
+        	}
+        	
+        	List<String> files = fileList.get(str);
+        	
+            for (String filename : files) {
 
-            // trim
-            filename = filename.trim();
+                // trim
+                filename = filename.trim();
 
-            String realFileName = getFileName(filename);
+                String realFileName = getFileName(filename);
 
-            //
-            // register to disconf
-            //
-            DisconfMgr.getInstance().reloadableScan(realFileName);
+                //
+                // register to disconf
+                //
+                DisconfMgr.getInstance().reloadableScan(realFileName,isPublicFile);
 
-            //
-            // only properties will reload
-            //
-            String ext = FilenameUtils.getExtension(filename);
-            if (ext.equals("properties")) {
+                //
+                // only properties will reload
+                //
+                String ext = FilenameUtils.getExtension(filename);
+                if (ext.equals("properties")) {
 
-                PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
-                        new PathMatchingResourcePatternResolver();
-                try {
-                    Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(filename);
-                    for (Resource resource : resourceList) {
-                        resources.add(resource);
+                    PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
+                            new PathMatchingResourcePatternResolver();
+                    try {
+                        Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(filename);
+                        for (Resource resource : resourceList) {
+                            resources.add(resource);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
+        	
         }
 
         this.locations = resources.toArray(new Resource[resources.size()]);
         lastModified = new long[locations.length];
         super.setLocations(locations);
     }
+    
+    
+//    /**
+//     */
+//    public void setLocations(List<String> fileNames) {
+//
+//        List<Resource> resources = new ArrayList<Resource>();
+//        for (String filename : fileNames) {
+//
+//            // trim
+//            filename = filename.trim();
+//
+//            String realFileName = getFileName(filename);
+//
+//            //
+//            // register to disconf
+//            //
+//            DisconfMgr.getInstance().reloadableScan(realFileName);
+//
+//            //
+//            // only properties will reload
+//            //
+//            String ext = FilenameUtils.getExtension(filename);
+//            if (ext.equals("properties")) {
+//
+//                PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
+//                        new PathMatchingResourcePatternResolver();
+//                try {
+//                    Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(filename);
+//                    for (Resource resource : resourceList) {
+//                        resources.add(resource);
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//
+//        this.locations = resources.toArray(new Resource[resources.size()]);
+//        lastModified = new long[locations.length];
+//        super.setLocations(locations);
+//    }
 
     /**
      * get file name from resource

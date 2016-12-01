@@ -16,6 +16,7 @@ import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
 import com.baidu.disconf.core.common.utils.OsUtil;
 import com.baidu.disconf.core.common.utils.http.HttpClientUtil;
+import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
 
 /**
  * RestFul的一个实现, 独立模块
@@ -55,6 +56,45 @@ public class RestfulMgrImpl implements RestfulMgr {
 
             // 可重试的下载
             UnreliableInterface unreliableImpl = new RestfulGet<T>(clazz, url);
+
+            try {
+
+                T t = retryStrategy.retry(unreliableImpl, retryTimes, retrySleepSeconds);
+
+                return t;
+
+            } catch (Exception e) {
+                ex = e;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                    LOGGER.info("pass");
+                }
+            }
+        }
+
+        throw new Exception("cannot get: " + remoteUrl, ex);
+    }
+    
+    
+    
+    /**
+     * 获取String数据
+     *
+     * @param clazz
+     * @param remoteUrl
+     *
+     * @return
+     *
+     * @throws Exception
+     */
+    public <T> T getStringData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds)
+            throws Exception {
+        Exception ex = null;
+        for (URL url : remoteUrl.getUrls()) {
+
+            // 可重试的下载
+            UnreliableInterface unreliableImpl = new RestfulGet<T>(clazz, url,HttpResponseCallbackHandler.STRING);
 
             try {
 

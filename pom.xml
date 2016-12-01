@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>disconf-client</module>
         <module>disconf-core</module>
+        <module>disconf-client</module>
     </modules>
 
     <inceptionYear>2015</inceptionYear>
@@ -627,6 +627,12 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.10</version>
+                <configuration>
+		          <scanIntervalSeconds>10</scanIntervalSeconds>
+		          <webAppConfig>
+		            <contextPath>/</contextPath>
+		          </webAppConfig>
+		        </configuration>
             </plugin>
 
             <plugin>

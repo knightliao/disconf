@@ -21,7 +21,18 @@ public interface RestfulMgr {
      * @throws Exception
      */
     <T> T getJsonData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds) throws Exception;
-
+    
+    /**
+     * 获取String数据
+     * @param clazz
+     * @param remoteUrl
+     * @param retryTimes
+     * @param retrySleepSeconds
+     * @return
+     * @throws Exception
+     */
+    <T> T getStringData(Class<T> clazz, RemoteUrl remoteUrl, int retryTimes, int retrySleepSeconds) throws Exception;
+    
     /**
      * @param remoteUrl     远程地址
      * @param fileName      文件名

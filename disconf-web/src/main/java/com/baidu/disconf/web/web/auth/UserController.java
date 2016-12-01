@@ -1,5 +1,7 @@
 package com.baidu.disconf.web.web.auth;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -25,6 +27,7 @@ import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.ErrorCode;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.vo.JsonObject;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.commons.ThreadContext;
 
@@ -106,7 +109,9 @@ public class UserController extends BaseController {
 
         VisitorVo visitorVo = userMgr.getCurVisitor();
 
-        return buildSuccess("visitor", visitorVo);
+        JsonObject js = (JsonObject) buildSuccess("visitor", visitorVo);
+        Map<String,Object> map  =  js.getResult();
+        return js;
     }
 
     /**

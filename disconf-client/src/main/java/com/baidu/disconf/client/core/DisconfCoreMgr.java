@@ -1,5 +1,7 @@
 package com.baidu.disconf.client.core;
 
+import java.util.List;
+
 /**
  * 核心处理模块：包括第一次扫描时配置入库; 第二次扫描时配置注入;
  *
@@ -33,4 +35,6 @@ public interface DisconfCoreMgr {
      * 释放一些资源
      */
     void release();
+    
+    List<String> loadFileList(String url) throws Exception;
 }

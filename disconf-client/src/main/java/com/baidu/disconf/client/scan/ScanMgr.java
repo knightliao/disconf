@@ -24,4 +24,11 @@ public interface ScanMgr {
      * @throws Exception
      */
     void reloadableScan(String fileName) throws Exception;
+    
+    /**
+     * reloadable for specify files
+     *
+     * @throws Exception
+     */
+    void reloadableScan(String fileName,Boolean isPublicFile) throws Exception;
 }
