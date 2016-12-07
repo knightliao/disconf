@@ -10,10 +10,12 @@ import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.client.watch.inner.DisconfSysUpdateCallback;
 import com.baidu.disconf.client.watch.inner.NodeWatcher;
+import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.utils.ZooUtils;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
+import com.google.gson.JsonObject;
 
 /**
  * Watch 模块的一个实现
@@ -120,8 +122,14 @@ public class WatchMgrImpl implements WatchMgr {
     public void watchPath(DisconfCoreProcessor disconfCoreMgr, DisConfCommonModel disConfCommonModel, String keyName,
                           DisConfigTypeEnum disConfigTypeEnum, String value) throws Exception {
 
+    	
+    	JsonObject jsonObject = new JsonObject();
+    	
+    	jsonObject.addProperty(Constants.NODE_VALUE, value);
+    	jsonObject.addProperty(Constants.NODE_UPDATE_FLAG, Constants.STATUS_INIT);
+    	
         // 新建
-        String monitorPath = makeMonitorPath(disConfigTypeEnum, disConfCommonModel, keyName, value);
+        String monitorPath = makeMonitorPath(disConfigTypeEnum, disConfCommonModel, keyName, jsonObject.toString());
 
         // 进行监控
         NodeWatcher nodeWatcher =

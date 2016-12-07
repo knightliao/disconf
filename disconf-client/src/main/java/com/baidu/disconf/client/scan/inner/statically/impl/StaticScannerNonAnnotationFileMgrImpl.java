@@ -133,7 +133,9 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
 
        // file type
        disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
-
+ 
+       disconfCenterFile.setIsPublicFile(isPublicFile);
+ 
        DisConfCommonModel disConfCommonModel = null;
        
        if(isPublicFile == false){

@@ -1,6 +1,7 @@
 package com.baidu.disconf.client;
 
 import java.util.ArrayList;
+ 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -216,24 +217,14 @@ public class DisconfMgr implements ApplicationContextAware {
 			
 			
 			//首先将公共配置的文件全部获取到
+ 
 			DisClientConfig disClientConfig = DisClientConfig.getInstance();
 			
 			if (disconfCoreMgr!= null) {
 				
-				
 				String host = disClientConfig.getHostList().get(0);
-				
-				StringBuffer url = new StringBuffer();
-			 
-				url.append("/api/config/fileList?");
-				url.append("app="+disClientConfig.COMMONAPP+"&");
-				url.append("version="+disClientConfig.COMMONVERSION+"&");
-				url.append("env="+disClientConfig.ENV+"&");
-				url.append("key=0");
-				
-				List<String> commonList = disconfCoreMgr.loadFileList(url.toString());
-				redata.put("common", commonList);
-				
+ 
+				//在将本地配置的文件全部获取到
 				StringBuffer localurl = new StringBuffer();
 				localurl.append("/api/config/fileList?");
 				localurl.append("app="+disClientConfig.APP+"&");
@@ -244,6 +235,19 @@ public class DisconfMgr implements ApplicationContextAware {
 				List<String> localList = disconfCoreMgr.loadFileList(localurl.toString());
 				redata.put("local", localList);
 				
+				
+				//首先将公共配置的文件全部获取到
+				StringBuffer url = new StringBuffer();
+			 
+				url.append("/api/config/fileList?");
+				url.append("app="+disClientConfig.COMMONAPP+"&");
+				url.append("version="+disClientConfig.COMMONVERSION+"&");
+				url.append("env="+disClientConfig.ENV+"&");
+				url.append("key=0");
+				
+				List<String> commonList = disconfCoreMgr.loadFileList(url.toString());
+				redata.put("common", commonList);
+ 
 				return redata;
 			}
 		} catch (Exception e) {

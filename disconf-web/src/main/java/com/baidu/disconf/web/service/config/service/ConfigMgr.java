@@ -2,6 +2,7 @@ package com.baidu.disconf.web.service.config.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.config.bo.Config;
@@ -74,7 +75,23 @@ public interface ConfigMgr {
      * @param configId
      */
     void notifyZookeeper(Long configId);
-
+    
+    /**
+     * 通知ZK,把某一台机器更新
+     * @param configId
+     * @param nodeName
+     */
+    void notifyZookeeper(Long configId,String nodeName);
+    
+    
+    /**
+     * 根据配置Id获取Zooker上所有已经绑定的节点
+     * @param configId
+     * @return
+     */
+    Map<String,Object>  zookeeperNodeList(Long configId);
+    
+   
     /**
      * 新建一个config
      *

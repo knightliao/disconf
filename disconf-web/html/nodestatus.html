@@ -3,7 +3,9 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <title>Disconf - 分布式配置管理平台</title>
+
 
         <link rel="stylesheet" href="dep/bootstrap/css/bootstrap.css" />
         <!--[if lte IE 6]>
@@ -91,93 +93,45 @@
 <div id="Wrapper" class="clearfix">
     <div id="Main" style="margin-top:50px;">
         <div class="container-fluid">
-            <div class="row-fluid" style="min-height:400px;">
-                <div class="sidebar span2" style="float:left;overflow:visible;">
 
-                                                <div class="dropdown" style="margin-top:20px;width:100%">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="appDropdownMenu" data-toggle="dropdown" style="width:100%;">
-                                    <span id="appDropdownMenuTitle">Apps</span>
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu"  id ="applist"  role="menu" aria-labelledby="appDropdownMenu"></ul>
-                            </div>
-                            
-                            <!--envroment list-->
-                            <ul id="envChoice" class="nav nav-pills nav-stacked" style="margin-top:20px;">
-                            </ul>
+            <div class="row-fluid">
+                <ul class="breadcrumb" style="background-color:#fff;">
+                    <li>
+                        <a href="/main.html">配置</a>
+                    </li>
+                    <li class="active">
+                        /节点状态
+                    </li>
+                </ul>
+            </div>
 
-                </div>
-                <div class="span10" style="float:left">
+            <div class="row-fluid">
+                <div class="span12">
 
-                    <div class="row-fluid">
-                        <div class="contentWrap clearfix">
-                            <ul id="versionChoice" class="nav nav-tabs" role="tablist"></ul>
-                        </div>
-                    </div>
-
-                    <div id="zk_deploy" class="row-fluid" style="margin-bottom:5px">
-                                <span id="env_info" href="#" class="muted" style="float:left" title="" type="">
-                                </span>
-                                <span id="app_info" href="#" class="muted" style="float:left" title="" type="">
-                                </span>
-                        <a id="zk_deploy_button" href="#" class="btn-small btn-primary" style="float:right;" title=""
-                           type="button">
-                            <b>ZK部署情况</b>
-                        </a>
-                        <a id="batch_download" href="#" class="btn-small btn-primary"
-                           style="float:right;margin-right:5px;" title="" type="button">
-                            <b>批量下载</b>
-                        </a>
-                    </div>
-
-                    <div id="zk_deploy_info" class="hide" style="padding-bottom:20px;">
-                                <pre id="zk_deploy_info_pre" style="min-height:200px">
-                                </pre>
-                    </div>
-
-                    <div class="row-fluid">
-
-                        <div class="contentWrap clearfix">
-                            <div id="mainlist_error" class="alert alert-warning" role="alert"></div>
+                    <div class="content">
+                        <form id="form" action="/config/" method="post" enctype="multipart/form-data"
+                              class="private-form clearfix">
+                            <h2 class="autoPush-detail-title"> 节点列表 </h2>
+                        </form>
+                        <div class="row-fluid">
                             <table id="mainlist"
-                                   class="table table-bordered table-condensed table-hover account-tableWrap table-striped"
-                                   style="display:none">
+                                   class="table table-bordered table-condensed table-hover account-tableWrap table-striped" >
                                 <thead>
                                 <tr>
-                                    <td>#</td>
-                                    <td>APP</td>
-                                    <td>KEY</td>
-                                    <td>配置内容</td>
-                                    <td>实例列表</td>
-                                    <td>修改时间</td>
+                                	<td>节点名称</td>
+                                    <td>节点状态</td>
                                     <td>操作</td>
-                                    <td>更新状态</td>
                                 </tr>
                                 </thead>
                                 <tbody id="accountBody"
                                        style="max-width:760px; overflow-wrap: break-word;word-wrap: break-word;"
-                                       class="account-tableWrap"></tbody>
+                                       class="account-tableWrap">
+                                       
+                                </tbody>
                             </table>
-                        </div>
+                       </div>
                     </div>
                 </div>
-
-                <!-- 详细信息单行模板-->
-                <div id="tbodyTpl" class="hide" style="width:0px;">
-                    <table>
-                        <tr>
-                            <td>{12}</td>
-                            <td style="max-width:100px">{1}</td>
-                            <td style="max-width:100px">{6} &nbsp; {5}</td>
-                            <td>{14}</td>
-                            <td>{15}</td>
-                            <td>{8}</td>
-                            <td>{10} &nbsp; {11} &nbsp; {13} &nbsp; </td>
-                            <td><a href="/nodestatus.html?configId={16}">查看</a></td>
-                        </tr>
-                    </table>
-                </div>
-
             </div>
         </div>
     </div>
@@ -218,12 +172,9 @@
           s.parentNode.insertBefore(hm, s);
         })();
         </script>
-
-
-<script src="assets/js/mainList.js"></script>
-
+		<script src="assets/js/config_common.js"></script>
+		<script src="assets/js/nodestatus.js"></script>
         <script src="assets/js/footer.js"></script>
-    
     </body>
 </html>
 

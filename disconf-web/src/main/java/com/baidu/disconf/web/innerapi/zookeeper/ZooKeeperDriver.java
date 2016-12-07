@@ -22,6 +22,18 @@ public interface ZooKeeperDriver {
      */
     void notifyNodeUpdate(String app, String env, String version, String key, String value,
                           DisConfigTypeEnum disConfigTypeEnum);
+    
+    
+    /**
+     * 通知某个Node更新,仅对某一个客户端进行更新。其他节点不更新
+     *
+     * @param app
+     * @param env
+     * @param version
+     * @param disConfigTypeEnum
+     */
+    void notifyNodeUpdate(String app, String env, String version, String key, String value,
+                          DisConfigTypeEnum disConfigTypeEnum,String nodeName);
 
     /**
      * 获取分布式配置 Map

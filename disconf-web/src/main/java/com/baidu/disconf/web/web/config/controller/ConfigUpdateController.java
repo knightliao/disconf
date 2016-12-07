@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
 import com.baidu.disconf.web.web.config.validator.FileUploadValidator;
+import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.FileUploadException;
@@ -113,13 +114,9 @@ public class ConfigUpdateController extends BaseController {
             throw new FileUploadException("upload file error", e);
         }
 
-        //
-        // 通知ZK
-        //
-        configMgr.notifyZookeeper(configId);
-
         return buildSuccess(emailNotification);
     }
+
 
     /**
      * 配置文件的更新(文本修改)
@@ -153,10 +150,32 @@ public class ConfigUpdateController extends BaseController {
         //
         // 通知ZK
         //
-        configMgr.notifyZookeeper(configId);
+        //configMgr.notifyZookeeper(configId);
 
         return buildSuccess(emailNotification);
     }
+    
+    
+    /**
+     * 配置文件的更新(文本修改)
+     *
+     * @param configId
+     * @param fileContent
+     *
+     * @return
+     */
+    @NoAuth
+    @ResponseBody
+    @RequestMapping(value = "/nodeUpdate", method = RequestMethod.POST)
+    public void updateNodeText(long configId,String machineName) {
+
+    	configMgr.notifyZookeeper(configId,machineName);
+    	
+    }
+    
+    
+    
+    
 
     /**
      * delete

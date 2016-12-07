@@ -1,9 +1,8 @@
 package com.baidu.disconf.client.core.processor;
 
 import java.util.List;
-
 import org.aspectj.ajdt.internal.core.builder.EclipseSourceContext;
-
+ 
 /**
  * 处理算子
  *

@@ -34,6 +34,16 @@ public class AppNewForm extends RequestFormBase {
  
     private Boolean isCommon;
 
+
+	public Boolean getIsCommon() {
+		return isCommon;
+	}
+
+	public void setIsCommon(Boolean isCommon) {
+		this.isCommon = isCommon;
+	}
+	
+
 	public String getApp() {
 		return app;
 	}
@@ -57,14 +67,7 @@ public class AppNewForm extends RequestFormBase {
 	public void setEmails(String emails) {
 		this.emails = emails;
 	}
-
-	public Boolean getIsCommon() {
-		return isCommon;
-	}
-
-	public void setIsCommon(Boolean isCommon) {
-		this.isCommon = isCommon;
-	}
-	
+    
+    
 
 }

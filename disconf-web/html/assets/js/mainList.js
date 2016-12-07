@@ -209,18 +209,20 @@
             var isRight = "OK";
             var style = "";
             if (item.errorNum > 0) {
-                isRight = "; 其中" + item.errorNum + "台出现错误";
+                isRight = "; 其中" + item.errorNum + "台不同步";
                 style = "text-error";
             }
             var machine_url = '<a href="javascript:void(0);" class="' + style
                 + ' machineinfo' + item.configId
                 + '" data-placement="left">' + item.machineSize + '台 '
                 + isRight + '</a>'
+                
+            var configId = item.configId;
 
             return Util.string.format(mainTpl,'', item.appId,
                 item.version, item.envId, item.envName, type, item.key,
                 item.createTime, item.modifyTime, item.value, link,
-                del_link, i + 1, downloadlink, data_fetch_url, machine_url);
+                del_link, i + 1, downloadlink, data_fetch_url, machine_url,configId);
         }
     }
 

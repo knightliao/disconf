@@ -20,6 +20,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.baidu.disconf.client.DisconfMgr;
+import com.baidu.disconf.client.common.model.DisconfCenterFile;
+import com.baidu.disconf.client.config.DisClientConfig;
 
 /**
  * A properties factory bean that creates a reconfigurable Properties object.
@@ -91,7 +93,8 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         	}else{
         		isPublicFile = true;
         	}
-        	
+        	String app = isPublicFile ? DisconfCenterFile.COMMONPATH:DisconfCenterFile.LOCALPATH;
+ 
         	List<String> files = fileList.get(str);
         	
             for (String filename : files) {
@@ -115,7 +118,8 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
                     PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
                             new PathMatchingResourcePatternResolver();
                     try {
-                        Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(filename);
+ 
+                        Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(app+filename);
                         for (Resource resource : resourceList) {
                             resources.add(resource);
                         }
@@ -131,48 +135,7 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         lastModified = new long[locations.length];
         super.setLocations(locations);
     }
-    
-    
-//    /**
-//     */
-//    public void setLocations(List<String> fileNames) {
-//
-//        List<Resource> resources = new ArrayList<Resource>();
-//        for (String filename : fileNames) {
-//
-//            // trim
-//            filename = filename.trim();
-//
-//            String realFileName = getFileName(filename);
-//
-//            //
-//            // register to disconf
-//            //
-//            DisconfMgr.getInstance().reloadableScan(realFileName);
-//
-//            //
-//            // only properties will reload
-//            //
-//            String ext = FilenameUtils.getExtension(filename);
-//            if (ext.equals("properties")) {
-//
-//                PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver =
-//                        new PathMatchingResourcePatternResolver();
-//                try {
-//                    Resource[] resourceList = pathMatchingResourcePatternResolver.getResources(filename);
-//                    for (Resource resource : resourceList) {
-//                        resources.add(resource);
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        this.locations = resources.toArray(new Resource[resources.size()]);
-//        lastModified = new long[locations.length];
-//        super.setLocations(locations);
-//    }
+ 
 
     /**
      * get file name from resource

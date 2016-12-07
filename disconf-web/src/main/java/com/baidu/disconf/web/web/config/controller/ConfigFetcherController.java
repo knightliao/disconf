@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,6 +71,7 @@ public class ConfigFetcherController extends BaseController {
     public JsonObjectBase getSimpleList(ConfForm confForm) {
         return getListImp(confForm, false);
     }
+    
 
     /**
      * 获取配置项 Item

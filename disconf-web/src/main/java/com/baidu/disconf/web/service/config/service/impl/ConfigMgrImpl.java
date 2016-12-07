@@ -47,6 +47,11 @@ import com.baidu.ub.common.db.DaoPageResult;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 import com.github.knightliao.apollo.utils.time.DateUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import lombok.core.Main;
 
 /**
  * @author liaoqiqi
@@ -301,7 +306,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
 
             zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
-                    confListVo.getKey(), GsonUtils.toJson(confListVo.getValue()),
+                    confListVo.getKey(),GsonUtils.toJson(confListVo.getValue()),
                     DisConfigTypeEnum.FILE);
 
         } else {
@@ -311,8 +316,48 @@ public class ConfigMgrImpl implements ConfigMgr {
         }
 
     }
+    
+    
 
-    /**
+    @Override
+	public void notifyZookeeper(Long configId, String nodeName) {
+
+        ConfListVo confListVo = getConfVo(configId);
+
+        if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
+
+        	String value =  GsonUtils.toJson(confListVo.getValue());
+        	
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(),value,
+                    DisConfigTypeEnum.FILE,nodeName);
+
+        }  
+		
+	}
+
+	@Override
+	public Map<String, Object> zookeeperNodeList(Long configId) {
+    	
+    	ConfListVo confListVo = getConfVo(configId);
+    	
+    	
+        if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
+
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(), GsonUtils.toJson(confListVo.getValue()),
+                    DisConfigTypeEnum.FILE);
+
+        } else {
+
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(), confListVo.getValue(), DisConfigTypeEnum.ITEM);
+        }
+    	
+		return null;
+	}
+
+	/**
      * 获取配置值
      */
     @Override
@@ -412,6 +457,11 @@ public class ConfigMgrImpl implements ConfigMgr {
             return errorKeyList;
         }
 
+        Gson gson  = new Gson();
+        JsonObject jsonObject =  gson.fromJson(zkData, JsonObject.class);
+        
+        zkData = jsonObject.get(com.baidu.disconf.core.common.constants.Constants.NODE_VALUE).getAsString();
+        
         Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
         for (String keyInZk : zkMap.keySet()) {
 
@@ -543,4 +593,13 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         return machineListVo;
     }
+    
+    public static void main(String[] args) {
+    	
+    	String vaString = "";
+    	
+    			
+    	
+		
+	}
 }

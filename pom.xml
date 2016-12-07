@@ -10,7 +10,7 @@
 
     <modules>
         <module>disconf-core</module>
-        <module>disconf-client</module>
+        <module>disconf-web</module>
     </modules>
 
     <inceptionYear>2015</inceptionYear>
@@ -632,6 +632,11 @@
 		          <webAppConfig>
 		            <contextPath>/</contextPath>
 		          </webAppConfig>
+		          <connectors>
+	             	<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+	             		<port>9090</port>
+	             	</connector>
+		          </connectors>
 		        </configuration>
             </plugin>
 
