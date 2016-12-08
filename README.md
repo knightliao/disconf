@@ -193,3 +193,16 @@ APP+环境+版本+ZK查询：
 - 搜索引擎推荐：[sov5搜索引擎, 支持谷歌网页搜索/电影搜索/资源搜索/问答搜索](http://sov5.com)
 - python论坛推荐：[Django中国社区](http://www.django-china.cn/)
 - [联系与赞助作者](https://github.com/knightliao/disconf/wiki/sponsor) 
+
+2016/12/08
+对disconf进行修改，使其支持多个环境的配置。
+例如disconf.properties的三项可配置为
+# 版本, 请采用 X_X_X_X 格式  
+disconf.version=1_0_0_0,1_0_0_0,1_0_0_0
+# APP 请采用 产品线_服务名 格式 
+disconf.app=disconf_demo,common,common
+# 环境
+disconf.env=rd,rd,qa
+
+注意：不同环境下的配置文件名称必须不同，例如disconf_demo+1_0_0_0+rd环境下有test.properties,common+1_0_0_0+rd环境下不能包含名称为
+test.properties的配置
