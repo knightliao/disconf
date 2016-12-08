@@ -85,19 +85,24 @@ public class DisconfCoreProcessUtils {
 	 * @return String
 	 * @throws
 	 */
-	public static String requireRestUrl(DisConfCommonModel obj,String fileName){
+	public static List<String> requireRestUrl(DisConfCommonModel obj,String fileName){
+		List<String> restUrls = new ArrayList<String>();
 		String app = obj.getApp();
 		String version = obj.getVersion();
 		String env = obj.getEnv();
 		StringBuffer rest = new StringBuffer();
-		rest.append("http://");
-		rest.append(DisClientConfig.getInstance().CONF_SERVER_HOST);
-		rest.append("/api/web/config/list/configs?");
-		rest.append(Constants.APP+"="+app);
-		rest.append("&"+Constants.ENV+"="+env);
-		rest.append("&"+Constants.VERSION+"="+version);
-		rest.append("&"+Constants.KEY+"="+fileName);
-		return rest.toString();
+		List<String> hostList = DisClientConfig.getInstance().getHostList();
+		for(String str : hostList){
+			rest.append("http://");
+			rest.append(str);
+			rest.append("/api/web/config/list/configs?");
+			rest.append(Constants.APP+"="+app);
+			rest.append("&"+Constants.ENV+"="+env);
+			rest.append("&"+Constants.VERSION+"="+version);
+			rest.append("&"+Constants.KEY+"="+fileName);
+			restUrls.add(rest.toString());
+		}
+		return restUrls;
 	}
 	
 	/**
@@ -176,14 +181,16 @@ public class DisconfCoreProcessUtils {
 		List<DisConfCommonModel> disConfCommonModels = splitDisConfCommonModel(disConfCommonModel);
 		for(DisConfCommonModel obj : disConfCommonModels){
 			//接口地址
-			String rest = DisconfCoreProcessUtils.requireRestUrl(obj,fileName);
-			String jsonStr = RestUtil.restGet(rest);
-			if(jsonStr.contains(fileName)){
-				map.put(DisconfCoreProcessUtils.requireRemoteUrl(obj, fileName,disConfigTypeEnum), obj);
+			List<String> rests = DisconfCoreProcessUtils.requireRestUrl(obj,fileName);
+			for(String rest :rests){
+				String jsonStr = RestUtil.restGet(rest);
+				if(jsonStr.contains(fileName)){
+					map.put(DisconfCoreProcessUtils.requireRemoteUrl(obj, fileName,disConfigTypeEnum), obj);
+				}
 			}
 			
 		}
 		return map;
 	}
-
+	
 }
