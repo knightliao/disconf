@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.baidu.disconf.web.service.config.bo.Config;
+import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.VersionListForm;
 import com.baidu.disconf.web.service.config.service.ConfigMgr;
@@ -27,6 +29,7 @@ import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.disconf.web.utils.TarUtils;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
+import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.constraint.validation.PageOrderValidator;
 import com.baidu.dsp.common.controller.BaseController;
@@ -113,6 +116,29 @@ public class ConfigReadController extends BaseController {
 
         return buildListSuccess(configs);
     }
+    
+    /**
+     * 
+     * 获取配置项列表，无zk信息
+     * @author 周宁
+     * @date 2016年12月8日
+     * @param confListForm
+     * @return
+     * @throws
+     */
+    @NoAuth
+    @RequestMapping(value = "/list/configs", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Config> getConfigs(@Valid ConfForm confForm) {
+
+        LOG.info(confForm.toString());
+
+         List<Config> configs = configMgr.getConfigList(confForm);
+
+        return configs;
+    }
+    
+    
 
     /**
      * 获取某个

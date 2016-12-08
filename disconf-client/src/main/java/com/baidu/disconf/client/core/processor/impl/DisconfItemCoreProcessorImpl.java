@@ -1,5 +1,8 @@
 package com.baidu.disconf.client.core.processor.impl;
 
+import java.util.Map;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,12 +106,25 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
         //
         // 开启disconf才需要远程下载, 否则就用默认值
         //
+        String url = null;
+        DisConfCommonModel disConfCommonModel = null;
+		Map<String,DisConfCommonModel> urlModelMap = DisconfCoreProcessUtils.getUrlModelMap(keyName,disconfCenterItem,DisConfigTypeEnum.ITEM);
+        if(urlModelMap==null||urlModelMap.size()==0){
+			throw new RuntimeException("配置项不存在");
+		}
+        Set<String> urls = urlModelMap.keySet();
+        if(urls.size()>1){
+        	throw new RuntimeException("不同APP、ENV、VERSION的环境下不能上传名称相同的配置项");
+        }
+        for(String str : urls){
+        	url = str;
+        	disConfCommonModel = urlModelMap.get(str);
+        }
         if (DisClientConfig.getInstance().ENABLE_DISCONF) {
             //
             // 下载配置
             //
             try {
-                String url = disconfCenterItem.getRemoteServerUrl();
                 value = fetcherMgr.getValueFromServer(url);
                 if (value != null) {
                     LOGGER.debug("value: " + value);
@@ -131,7 +147,6 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
         //
         if (DisClientConfig.getInstance().ENABLE_DISCONF) {
             if (watchMgr != null) {
-                DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(keyName);
                 watchMgr.watchPath(this, disConfCommonModel, keyName, DisConfigTypeEnum.ITEM, value);
                 LOGGER.debug("watch ok.");
             } else {

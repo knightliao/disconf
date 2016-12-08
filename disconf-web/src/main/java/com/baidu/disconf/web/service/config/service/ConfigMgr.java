@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.config.bo.Config;
+import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
@@ -77,5 +78,16 @@ public interface ConfigMgr {
      * @return
      */
     List<File> getDisconfFileList(ConfListForm confListForm);
+    
+    /**
+     * 
+     * 获取配置列表
+     * @author 周宁
+     * @date 2016年12月8日
+     * @param confForm
+     * @return List<Config>
+     * @throws
+     */
+    List<Config> getConfigList(ConfForm confForm);
 
 }

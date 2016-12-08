@@ -27,6 +27,7 @@ import com.baidu.disconf.web.service.app.bo.App;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.dao.ConfigDao;
+import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.disconf.web.service.config.form.ConfListForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
 import com.baidu.disconf.web.service.config.service.ConfigHistoryMgr;
@@ -401,6 +402,12 @@ public class ConfigMgrImpl implements ConfigMgr {
     public Config getConfigById(Long configId) {
 
         return configDao.get(configId);
+    }
+    
+    @Override
+    public List<Config> getConfigList(ConfForm confForm) {
+
+        return configDao.getConfigList(confForm);
     }
 
     /**

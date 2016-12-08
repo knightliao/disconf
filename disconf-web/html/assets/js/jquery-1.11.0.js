@@ -8947,7 +8947,7 @@ jQuery.extend({
 
 	// Main method
 	ajax: function( url, options ) {
-
+		url.url ="/disconf-web"+url.url;
 		// If url is an object, simulate pre-1.5 signature
 		if ( typeof url === "object" ) {
 			options = url;

@@ -2,6 +2,7 @@ package com.baidu.disconf.client.core.processor.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import com.baidu.disconf.client.store.processor.model.DisconfValue;
 import com.baidu.disconf.client.support.registry.Registry;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf.core.common.restful.core.RestUtil;
 import com.baidu.disconf.core.common.utils.GsonUtils;
 
 /**
@@ -96,14 +98,26 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         //
         // 开启disconf才需要远程下载, 否则就本地就好
         //
+        String url = null;
+        DisConfCommonModel disConfCommonModel = null;
+		Map<String,DisConfCommonModel> urlModelMap = DisconfCoreProcessUtils.getUrlModelMap(fileName,disconfCenterFile,DisConfigTypeEnum.FILE);
+        if(urlModelMap==null||urlModelMap.size()==0){
+			throw new RuntimeException("配置文件不存在");
+		}
+        Set<String> urls = urlModelMap.keySet();
+        if(urls.size()>1){
+        	throw new RuntimeException("不同APP、ENV、VERSION的环境下不能上传名称相同的配置文件");
+        }
+        for(String str : urls){
+        	url = str;
+        	disConfCommonModel = urlModelMap.get(str);
+        }
         if (DisClientConfig.getInstance().ENABLE_DISCONF) {
 
             //
             // 下载配置
             //
             try {
-
-                String url = disconfCenterFile.getRemoteServerUrl();
                 filePath = fetcherMgr.downloadFileFromServer(url, fileName, disconfCenterFile.getFileDir());
 
             } catch (Exception e) {
@@ -141,7 +155,6 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             //
             // Watch
             //
-            DisConfCommonModel disConfCommonModel = disconfStoreProcessor.getCommonModel(fileName);
             if (watchMgr != null) {
                 watchMgr.watchPath(this, disConfCommonModel, fileName, DisConfigTypeEnum.FILE,
                         GsonUtils.toJson(disconfCenterFile.getKV()));
@@ -152,7 +165,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         }
     }
 
-    /**
+	/**
      * 更新消息: 某个配置文件 + 回调
      */
     @Override
@@ -257,4 +270,14 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             inject2OneConf(key, disconfCenterFile);
         }
     }
+    
+    public static void main(String[] args) {
+    	String url = "http://localhost:81/disconf-web/api/web/config/list/configs?app=common&env=rd&version=1_0_0_0&key=test1.properties";
+		try {
+			String asd = RestUtil.restGet(url);
+			System.out.println(asd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.common.Constants;
 import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.dao.ConfigDao;
+import com.baidu.disconf.web.service.config.form.ConfForm;
 import com.baidu.dsp.common.constant.DataFormatConstants;
 import com.baidu.dsp.common.dao.AbstractDao;
 import com.baidu.dsp.common.dao.Columns;
@@ -29,6 +31,7 @@ import com.github.knightliao.apollo.utils.time.DateUtils;
 @Service
 public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDao {
 
+	
     /**
      *
      */
@@ -129,4 +132,18 @@ public class ConfigDaoImpl extends AbstractDao<Long, Config> implements ConfigDa
         Config config = get(configId);
         return config.getValue();
     }
+
+	@Override
+	public List<Config> getConfigList(ConfForm confForm) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select t1.* from");
+		sql.append(" config t1");
+		sql.append(" left join app t2 on t1.app_id = t2.app_id");
+		sql.append(" left join env t3 on t1.env_id = t3.env_id");
+		sql.append(" where t1.version=?");
+		sql.append(" and t1.name=?");
+		sql.append(" and t2.name=?");
+		sql.append(" and t3.name=?");
+		return this.jdbcTemplate.query(sql.toString(),new Object[]{confForm.getVersion(),confForm.getKey(),confForm.getApp(),confForm.getEnv()}, new BeanPropertyRowMapper<Config>(Config.class));
+	}
 }
