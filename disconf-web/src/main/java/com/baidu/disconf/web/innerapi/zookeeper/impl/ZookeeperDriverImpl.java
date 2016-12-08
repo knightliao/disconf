@@ -27,9 +27,12 @@ import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.dsp.common.exception.RemoteException;
+import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import lombok.core.Main;
 
 /**
  * Created by knightliao on 15/1/14.
@@ -83,27 +86,26 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
                 LOG.info(path + " not exist. not update ZK.");
             } else {
             	
-            	 List<String>  clients = ZookeeperMgr.getInstance().getZk().getChildren(path, null);
-            	 
-            	 for (String clent : clients) {
-            		 String cpath = ZooPathMgr.joinPath(path, clent);
-            		 boolean cIsExit = ZookeeperMgr.getInstance().exists(cpath);
-            		 if(cIsExit == true){
-            			 
-            			  byte [] data = ZookeeperMgr.getInstance().getZk().getData(cpath, null, null);
-            			  String s = new String(data);
-            			  Gson gson = new Gson();
-            			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
-            			  jsonObject.addProperty(Constants.NODE_UPDATE_FLAG,Constants.STATUS_UPDATE);
-            			  jsonObject.addProperty(Constants.NODE_VALUE, value);
-            		      //标示为需要更新状态
-            			  ZookeeperMgr.getInstance().writePersistentUrl(cpath, jsonObject.toString());
-            			 	
-            		 } 
+            	
+           	 List<String>  clients = ZookeeperMgr.getInstance().getZk().getChildren(path, null);
+           	 
+           	 	for (String clent : clients) {
+               		 String cpath = ZooPathMgr.joinPath(path, clent);
+               		 boolean cIsExit = ZookeeperMgr.getInstance().exists(cpath);
+               		 if(cIsExit == true){
+               			  byte [] data = ZookeeperMgr.getInstance().getZk().getData(cpath, null, null);
+               			  String s = new String(data);
+               			  Gson gson = new Gson();
+               			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
+               			  jsonObject.addProperty(Constants.NODE_UPDATE_FLAG,Constants.STATUS_UPDATE);
+               			 
+               		      //标示为需要更新状态
+               			  ZookeeperMgr.getInstance().writePersistentUrl(cpath, jsonObject.toString());
+               		 } 
 				}
-            	 
-            	 //修改节点内容，并更新
-            	 ZookeeperMgr.getInstance().writePersistentUrl(path,value);
+           	 
+           	 //修改节点内容，并更新
+           	 ZookeeperMgr.getInstance().writePersistentUrl(path,value);
             }
 
         } catch (Exception e) {
@@ -154,7 +156,7 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
                 			  Gson gson = new Gson();
                 			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
                 			  jsonObject.addProperty(Constants.NODE_UPDATE_FLAG,Constants.STATUS_UPDATE);
-                			  jsonObject.addProperty(Constants.NODE_VALUE, value);
+                			 
                 		      //标示为需要更新状态
                 			  ZookeeperMgr.getInstance().writePersistentUrl(cpath, jsonObject.toString());
                 		 } 
@@ -310,17 +312,19 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
             // value
             byte[] data = zooKeeper.getData(thirdPath, null, null);
             if (data != null) {
-                zkDisconfDataItem.setValue(new String(data, CHARSET));
+              
                 
               //获取分布式主机下面的节点更新状态
-                String s = new String(data);
+                String s = new String(data,CHARSET);
  			    Gson gson = new Gson();
  			    JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
  			  
  			    JsonElement  jsonElement =  jsonObject.get(Constants.NODE_UPDATE_FLAG);
  			    String status = jsonElement.getAsString();
-                
-                
+ 			    JsonElement jsonElement2 = jsonObject.get(Constants.NODE_VALUE);
+ 			    String val = jsonElement2.getAsString();
+ 			    
+ 			    zkDisconfDataItem.setValue(val);
                 zkDisconfDataItem.setStatus(status);
                 
             }
@@ -426,4 +430,16 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
             isInit = true;
         }
     }
+    
+    public static void main(String[] args) {
+		
+    	String  s = "key1\u003d1134454\nkey3\u003d333454";
+    	
+    	Gson gson = new Gson();
+    	 String  xxx = GsonUtils.toJson(s);
+    	JsonObject j = gson.fromJson(xxx, JsonObject.class);
+    	
+    	System.out.println(j);
+    	
+	}
 }

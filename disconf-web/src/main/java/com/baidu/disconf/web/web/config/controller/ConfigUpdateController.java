@@ -22,6 +22,8 @@ import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.FileUploadException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
+import net.sf.ehcache.transaction.xa.EhcacheXAException;
+
 /**
  * 专用于配置更新、删除
  *
@@ -69,7 +71,7 @@ public class ConfigUpdateController extends BaseController {
         //
         // 通知ZK
         //
-        configMgr.notifyZookeeper(configId);
+        //configMgr.notifyZookeeper(configId);
 
         return buildSuccess(emailNotification);
     }
@@ -128,7 +130,7 @@ public class ConfigUpdateController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.PUT)
-    public JsonObjectBase updateFileWithText(@PathVariable long configId, @NotNull String fileContent) {
+    public JsonObjectBase updateFileWithText(@PathVariable long configId, @NotNull String syncChoose, @NotNull String fileContent) {
 
         //
         // 更新
@@ -150,7 +152,10 @@ public class ConfigUpdateController extends BaseController {
         //
         // 通知ZK
         //
-        //configMgr.notifyZookeeper(configId);
+        if(syncChoose!= null && syncChoose.equals("1")){
+        	configMgr.notifyZookeeper(configId);
+        }
+        
 
         return buildSuccess(emailNotification);
     }
@@ -167,9 +172,11 @@ public class ConfigUpdateController extends BaseController {
     @NoAuth
     @ResponseBody
     @RequestMapping(value = "/nodeUpdate", method = RequestMethod.POST)
-    public void updateNodeText(long configId,String machineName) {
+    public JsonObjectBase updateNodeText(long configId,String machineName) {
 
-    	configMgr.notifyZookeeper(configId,machineName);
+		configMgr.notifyZookeeper(configId,machineName);
+	 
+    	return buildSuccess("客户端："+machineName+"更新成功");
     	
     }
     

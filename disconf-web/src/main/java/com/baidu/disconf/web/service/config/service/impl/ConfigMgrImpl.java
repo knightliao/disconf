@@ -277,20 +277,20 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         // 发送邮件通知
         //
-        String toEmails = appMgr.getEmails(config.getAppId());
-
-        if (applicationPropertyConfig.isEmailMonitorOn()) {
-            boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
-                    " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
-                            value,
-                            config.toString(),
-                            getConfigUrlHtml(config)));
-            if (isSendSuccess) {
-                return "修改成功，邮件通知成功";
-            } else {
-                return "修改成功，邮件发送失败，请检查邮箱配置";
-            }
-        }
+//        String toEmails = appMgr.getEmails(config.getAppId());
+//
+//        if (applicationPropertyConfig.isEmailMonitorOn()) {
+//            boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
+//                    " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
+//                            value,
+//                            config.toString(),
+//                            getConfigUrlHtml(config)));
+//            if (isSendSuccess) {
+//                return "修改成功，邮件通知成功";
+//            } else {
+//                return "修改成功，邮件发送失败，请检查邮箱配置";
+//            }
+//        }
 
         return "修改成功";
     }
@@ -456,11 +456,6 @@ public class ConfigMgrImpl implements ConfigMgr {
             errorKeyList.add(zkData);
             return errorKeyList;
         }
-
-        Gson gson  = new Gson();
-        JsonObject jsonObject =  gson.fromJson(zkData, JsonObject.class);
-        
-        zkData = jsonObject.get(com.baidu.disconf.core.common.constants.Constants.NODE_VALUE).getAsString();
         
         Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
         for (String keyInZk : zkMap.keySet()) {

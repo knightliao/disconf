@@ -144,6 +144,15 @@
                                 <span class="private-item-key">配置文件名：</span>
                                 <span id="key" class="private-item-value">FFFF</span>
                             </p>
+                            
+                             <p class="private-item">
+                                <span class="private-item-key">同步客户端：</span>
+                                <select id="syncChoose">
+                                	<option value="0">否，我稍后手动同步</option>
+                                	<option value="1">是，更新全部客户端</option>
+                                </select>
+                                
+                            </p>
 
                             <div class="private-item clearfix">
                                 <span style="float:left" class="private-item-key">原配置文件内容：</span>
@@ -154,7 +163,7 @@
                                 <span class="private-item-key">修改方式：</span>
 
                                 <div class="btn-group">
-                                    <a id="uploadChoiceA" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <a id="uploadChoiceA" class="btn" data-toggle="dropdown" href="#">
                                         <span style="margin-right:2px;">选择上传方式</span><span class="caret"></span> </a>
                                     <ul class="dropdown-menu" id="uploadChoice">
                                         <li>

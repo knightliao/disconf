@@ -25,7 +25,8 @@ function fetchConfigUsage() {
 	            var result = data.result;
 	            
 	            var e = $(this);
-	            $("#accountBody").html(getMachineList(result.datalist,configId));
+	            $("#nodestatusbody").html("");
+	            $("#nodestatusbody").html(getMachineList(result.datalist,configId));
 	      
 	        }
 	 });
@@ -79,9 +80,8 @@ function nodeSysn(configId,machineName){
 	    function (data) {
 	        if (data.success === "true") {
 	            var result = data.result;
-	            
-	            var e = $(this);
-	            $("#accountBody").html(getMachineList(result.datalist));
+	            alert(data.result)
+	            fetchConfigUsage()
 	      
 	        }
 	 });

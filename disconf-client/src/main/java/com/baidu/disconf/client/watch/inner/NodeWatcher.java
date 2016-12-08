@@ -34,6 +34,7 @@ public class NodeWatcher implements Watcher {
     private DisConfigTypeEnum disConfigTypeEnum;
     private DisconfSysUpdateCallback disconfSysUpdateCallback;
     private boolean debug;
+    private String nodeChilName;
 
     private DisconfCoreProcessor disconfCoreMgr;
 
@@ -50,6 +51,23 @@ public class NodeWatcher implements Watcher {
         this.keyName = keyName;
         this.disConfigTypeEnum = disConfigTypeEnum;
         this.disconfSysUpdateCallback = disconfSysUpdateCallback;
+    }
+    
+    
+    /**
+     */
+    public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath, String keyName,
+                       DisConfigTypeEnum disConfigTypeEnum, DisconfSysUpdateCallback disconfSysUpdateCallback,
+                       boolean debug,String nodeChilName) {
+
+        super();
+        this.debug = debug;
+        this.disconfCoreMgr = disconfCoreMgr;
+        this.monitorPath = monitorPath;
+        this.keyName = keyName;
+        this.disConfigTypeEnum = disConfigTypeEnum;
+        this.disconfSysUpdateCallback = disconfSysUpdateCallback;
+        this.nodeChilName = nodeChilName;
     }
 
     /**
@@ -85,6 +103,7 @@ public class NodeWatcher implements Watcher {
         //
         // 结点更新时
         //
+    	LOGGER.info("eventType:"+event.getType());
         if (event.getType() == EventType.NodeDataChanged) {
         	
             try {
@@ -166,7 +185,7 @@ public class NodeWatcher implements Watcher {
         	
         	ZookeeperMgr zookeeperMgr = ZookeeperMgr.getInstance();
         	
-        	String nodeName = DisClientComConfig.getInstance().getInstanceFingerprint();
+        	String nodeName =  DisClientComConfig.getInstance().getInstanceFingerprint();
         	
         	if(nodeName!=null){
         	  String path = ZooPathMgr.joinPath(event.getPath(), nodeName);
@@ -175,13 +194,15 @@ public class NodeWatcher implements Watcher {
         	  if(flag == true){
         		  
         		  //判断本次更新 自己是否在更新目录里面。
-        		  byte [] data = ZookeeperMgr.getInstance().getZk().getData(path, null, null);
+        		  byte [] data = ZookeeperMgr.getInstance().getZk().getData(path,null, null); //不监控
        			  String s = new String(data);
        			  Gson gson = new Gson();
        			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
        			  
        			  JsonElement  jsonElement =  jsonObject.get(Constants.NODE_UPDATE_FLAG);
        			  String status = jsonElement.getAsString();
+       			  
+       			  LOGGER.info("nodeChilName="+ nodeChilName +",nodeName="+nodeName +", sataus="+ status+",data="+jsonObject );
         		  
        			  if(status.equals(Constants.STATUS_UPDATE)){
        				  
@@ -191,14 +212,13 @@ public class NodeWatcher implements Watcher {
        					  
        					  //回调完成后修改自己的状态为 初始状态，等待下次更新
        					  LOGGER.info("回调成功，更新节点为初始状态，等待下次更新");
-       					  jsonObject.addProperty(Constants.NODE_UPDATE_FLAG, Constants.STATUS_INIT);
-       					  zookeeperMgr.writePersistentUrl(path, jsonObject.toString());
        					 
        					  
        				  } catch (Exception e) {
        					  LOGGER.error(e.toString(), e);
        				  }
-       				  
+       			  }else{
+       				  this.monitorMaster();  //如果本次更新没有自己重新监控
        			  }
         		  
         	  }

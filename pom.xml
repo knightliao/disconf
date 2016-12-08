@@ -10,7 +10,7 @@
 
     <modules>
         <module>disconf-core</module>
-        <module>disconf-web</module>
+        <module>disconf-client</module>
     </modules>
 
     <inceptionYear>2015</inceptionYear>

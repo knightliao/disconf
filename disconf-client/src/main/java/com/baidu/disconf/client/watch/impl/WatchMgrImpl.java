@@ -104,7 +104,7 @@ public class WatchMgrImpl implements WatchMgr {
     /**
      * 在指定路径下创建一个临时结点
      */
-    private void makeTempChildPath(String path, String data) {
+    private String makeTempChildPath(String path, String data) {
 
         String finerPrint = DisClientComConfig.getInstance().getInstanceFingerprint();
 
@@ -114,6 +114,8 @@ public class WatchMgrImpl implements WatchMgr {
         } catch (Exception e) {
             LOGGER.error("cannot create: " + mainTypeFullStr + "\t" + e.toString());
         }
+        
+        return mainTypeFullStr;
     }
 
     /**
@@ -134,8 +136,9 @@ public class WatchMgrImpl implements WatchMgr {
         // 进行监控
         NodeWatcher nodeWatcher =
                 new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback(),
-                        debug);
+                        debug,DisClientComConfig.getInstance().getInstanceFingerprint());
         nodeWatcher.monitorMaster();
+        
     }
 
     @Override
