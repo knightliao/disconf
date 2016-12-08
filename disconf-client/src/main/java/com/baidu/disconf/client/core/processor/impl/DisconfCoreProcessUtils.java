@@ -101,6 +101,7 @@ public class DisconfCoreProcessUtils {
 			rest.append("&"+Constants.VERSION+"="+version);
 			rest.append("&"+Constants.KEY+"="+fileName);
 			restUrls.add(rest.toString());
+			rest.setLength(0);
 		}
 		return restUrls;
 	}

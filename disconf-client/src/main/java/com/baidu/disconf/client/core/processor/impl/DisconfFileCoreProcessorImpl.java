@@ -62,7 +62,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         /**
          * 配置文件列表处理
          */
-        for (String fileName : disconfStoreProcessor.getConfKeySet()) {
+    	Set<String> fileNames = disconfStoreProcessor.getConfKeySet();
+        for (String fileName : fileNames) {
 
             processOneItem(fileName);
         }
