@@ -1,14 +1,14 @@
 联系和赞助
 ========
 
-## 联系我
-
-- weibo: [http://weibo.com/knightliao](http://weibo.com/knightliao)
-- wechat: knightliao
-- 主页: http://liaoqiqi.com
-
 ## 赞助
 
 如果您觉得disconf不错，可以资助作者, 资助公司或个人会留下名字。
 
 ![](http://ww4.sinaimg.cn/mw690/006pzvAPgw1fam2shzciqj30no0zkq54.jpg)
+
+## 联系我
+
+- weibo: [http://weibo.com/knightliao](http://weibo.com/knightliao)
+- wechat: knightliao
+- 主页: http://liaoqiqi.com

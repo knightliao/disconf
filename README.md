@@ -90,6 +90,7 @@ Disconf的功能特点描述图：
 
 ## 群·联系·讨论
 
+- 赞助作者: http://disconf.readthedocs.io/zh_CN/latest/others/src/sponsor.html
 - disconf技术QQ群: 239203866 
 - disconf技术QQ二群: 280712860
 - 有态度无广告的搜索引擎: https://www.sov5.com
