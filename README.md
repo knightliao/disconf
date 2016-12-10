@@ -89,5 +89,8 @@ Disconf的功能特点描述图：
 - disconf技术QQ群: 239203866 
 - disconf技术QQ二群: 280712860
 - 有态度无广告的搜索引擎: https://www.sov5.com
-- 高质量的微信公众号阅读: http://www.100weidu.com
+- 微读 - 高品质阅读: http://www.100weidu.com
 - Python中国社区: http://www.python88.com
+- Disconf - 分布式配置管理平台: http://github.com/knightliao/disconf
+- CanalX - 基于 `Canal` 的数据感知服务框架: http://github.com/knightliao/canalX
+- jutf - Java Unit Test Framework: https://github.com/knightliao/jutf
