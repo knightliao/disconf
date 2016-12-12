@@ -114,7 +114,7 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
 		}
         Set<String> urls = urlModelMap.keySet();
         if(urls.size()>1){
-        	throw new RuntimeException("不同APP、ENV、VERSION的环境下不能上传名称相同的配置项");
+        	throw new RuntimeException("不同APP、ENV、VERSION的环境下不能上传名称相同的配置项:"+keyName);
         }
         for(String str : urls){
         	url = str;

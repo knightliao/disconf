@@ -107,7 +107,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 		}
         Set<String> urls = urlModelMap.keySet();
         if(urls.size()>1){
-        	throw new RuntimeException("不同APP、ENV、VERSION的环境下不能上传名称相同的配置文件");
+        	throw new RuntimeException("不同APP、ENV、VERSION的环境下不能上传名称相同的配置文件:"+fileName);
         }
         for(String str : urls){
         	url = str;
