@@ -5,7 +5,7 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.36</version>
+    <version>2.6.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -25,9 +25,9 @@
 
     <properties>
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.36</disconf-core.version>
-        <disconf-client.version>2.6.36</disconf-client.version>
-        <disconf-client-spring.version>2.6.36</disconf-client-spring.version>
+        <disconf-core.version>2.6.4-SNAPSHOT</disconf-core.version>
+        <disconf-client.version>2.6.4-SNAPSHOT</disconf-client.version>
+        <disconf-client-spring.version>2.6.4-SNAPSHOT</disconf-client-spring.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
@@ -794,5 +794,20 @@
             </build>
         </profile>
     </profiles>
+    
+    
+    	<!-- 将本地的文件打包到私服 -->
+	<distributionManagement>
+		<repository>
+			<id>proj-releases</id>
+			<name>Releases-Repository</name>
+			<url>http://192.168.12.8:8082/nexus/content/repositories/proj-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>proj-snapshots</id>
+			<name>Snapshots-Repository</name>
+			<url>http://192.168.12.8:8082/nexus/content/repositories/proj-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
