@@ -1,8 +1,8 @@
 package com.baidu.dsp.common.vo;
 
-import java.util.List;
-import java.util.Map;
-
+import com.baidu.dsp.common.constant.ErrorCode;
+import com.baidu.dsp.common.constant.FrontEndInterfaceConstant;
+import com.baidu.dsp.common.context.ContextReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.baidu.dsp.common.constant.ErrorCode;
-import com.baidu.dsp.common.constant.FrontEndInterfaceConstant;
-import com.baidu.dsp.common.context.ContextReader;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 通用的JSON返回器
@@ -62,6 +61,24 @@ public class JsonObjectUtils {
     public static <T> JsonObjectBase buildSimpleObjectSuccess(T value) {
 
         JsonSimpleObject json = new JsonSimpleObject();
+        json.setResult(value);
+
+        LOG.info(json.toString());
+
+        return json;
+    }
+
+    /**
+     * 返回错误(顶层结构), 非列表请求
+     *
+     * @param value
+     *
+     * @return
+     */
+    public static <T> JsonObjectBase buildSimpleObjectFail(T value) {
+
+        JsonSimpleObject json = new JsonSimpleObject();
+        json.setSuccess(FrontEndInterfaceConstant.RETURN_FAIL);
         json.setResult(value);
 
         LOG.info(json.toString());

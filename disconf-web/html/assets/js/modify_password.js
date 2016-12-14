@@ -13,9 +13,16 @@ $("#item_submit").on("click", function (e) {
     // 验证
     if (!old_password || !new_password || !new_password_2) {
         $("#error").removeClass("hide");
-        $("#error").html("表单不能为空或填写格式错误！");
+        $("#error").html("修改密码失败, 表单不能为空或填写格式错误！");
         return;
     }
+
+    if (new_password != new_password_2) {
+        $("#error").removeClass("hide");
+        $("#error").html("修改密码失败, 两次输入的密码不一致！");
+        return;
+    }
+
     $.ajax({
         type: "PUT",
         url: "/api/account/password",
@@ -27,7 +34,8 @@ $("#item_submit").on("click", function (e) {
     }).done(function (data) {
         $("#error").removeClass("hide");
         if (data.success === "true") {
-            $("#error").html(data.result);
+            alert(data.result);
+            window.location.href = "/login.html";
         } else {
             Util.input.whiteError($("#error"), data);
         }

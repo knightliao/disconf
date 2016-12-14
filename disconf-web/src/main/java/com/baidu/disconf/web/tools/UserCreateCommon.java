@@ -1,16 +1,15 @@
 package com.baidu.disconf.web.tools;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.baidu.disconf.web.service.role.bo.RoleEnum;
 import com.baidu.disconf.web.service.sign.utils.SignUtils;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dao.UserDao;
 import com.github.knightliao.apollo.utils.common.RandomUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author knightliao
@@ -94,10 +93,6 @@ public class UserCreateCommon {
      * @param userList
      */
     private static void printUserList(List<User> userList) {
-
-        //
-        //
-        //
 
         for (User user : userList) {
 
