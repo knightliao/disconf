@@ -13,6 +13,9 @@ import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.disconf.web.service.env.dao.EnvDao;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.service.env.vo.EnvListVo;
+import com.baidu.disconf.web.service.role.bo.RoleEnum;
+import com.baidu.disconf.web.service.user.dto.Visitor;
+import com.baidu.ub.common.commons.ThreadContext;
 
 /**
  * @author liaoqiqi
@@ -23,6 +26,7 @@ public class EnvMgrImpl implements EnvMgr {
 
     @Autowired
     private EnvDao envDao;
+
 
     @Override
     public Env getByName(String name) {
@@ -35,8 +39,15 @@ public class EnvMgrImpl implements EnvMgr {
      */
     @Override
     public List<EnvListVo> getVoList() {
+        Visitor visitor = ThreadContext.getSessionVisitor();
 
-        List<Env> envs = envDao.findAll();
+        List<Env> envs;
+        if (visitor.getRoleId() != RoleEnum.ADMIN.getValue()) {
+            envs = envDao.getEnvByRole(visitor.getRoleId());
+        }
+        else {
+            envs = envDao.findAll();
+        }
 
         List<EnvListVo> envListVos = new ArrayList<EnvListVo>();
         for (Env env : envs) {

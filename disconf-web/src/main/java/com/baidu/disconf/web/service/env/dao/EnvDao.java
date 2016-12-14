@@ -1,5 +1,7 @@
 package com.baidu.disconf.web.service.env.dao;
 
+import java.util.List;
+
 import com.baidu.disconf.web.service.env.bo.Env;
 import com.baidu.unbiz.common.genericdao.dao.BaseDao;
 
@@ -15,4 +17,6 @@ public interface EnvDao extends BaseDao<Long, Env> {
      * @return
      */
     Env getByName(String name);
+
+    List<Env> getEnvByRole(Integer roleId);
 }

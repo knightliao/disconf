@@ -43,7 +43,7 @@ public interface UserMgr {
      *
      * @param userId
      */
-    String addOneAppForUser(Long userId, int appId);
+    String addOneAppForUser(Long userId, Long appId);
 
     /**
      * 修改密码

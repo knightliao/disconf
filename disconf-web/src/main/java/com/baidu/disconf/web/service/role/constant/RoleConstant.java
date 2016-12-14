@@ -5,5 +5,4 @@ package com.baidu.disconf.web.service.role.constant;
  * @version 2014-1-13
  */
 public class RoleConstant {
-
 }

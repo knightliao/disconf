@@ -1,14 +1,19 @@
 package com.baidu.disconf.web.web.auth.validator;
 
+import java.util.UUID;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.baidu.disconf.web.service.role.bo.RoleEnum;
 import com.baidu.disconf.web.service.sign.form.SigninForm;
 import com.baidu.disconf.web.service.sign.service.SignMgr;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.form.PasswordModifyForm;
 import com.baidu.disconf.web.service.user.service.UserMgr;
+import com.baidu.disconf.web.tools.LDAPUtil;
 import com.baidu.dsp.common.exception.FieldException;
 import com.baidu.ub.common.commons.ThreadContext;
 
@@ -46,6 +51,29 @@ public class AuthValidator {
         }
     }
 
+    public boolean validateLADPLogin(SigninForm signinForm) {
+        // 校验用户是否存在
+        if (StringUtils.containsIgnoreCase(signinForm.getName(), "BG") || StringUtils
+                .containsIgnoreCase(signinForm.getName(), "BL")) {
+            if (!LDAPUtil.validateByLdap(signinForm.getName(), signinForm.getPassword())) {
+                throw new FieldException("username.or.password.not.exist", null);
+            }
+
+            User user = signMgr.getUserByName(signinForm.getName());
+            if (user == null) {
+                user = new User();
+                user.setName(signinForm.getName());
+                user.setToken(UUID.randomUUID().toString());
+                user.setPassword(UUID.randomUUID().toString());
+                user.setRoleId(RoleEnum.NORMAL.getValue());
+                user.setOwnApps("");
+                userMgr.create(user);
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 验证密码更新
      */
@@ -61,7 +89,8 @@ public class AuthValidator {
         }
 
         if (!passwordModifyForm.getNew_password().equals(passwordModifyForm.getNew_password_2())) {
-            throw new FieldException(PasswordModifyForm.NEW_PASSWORD, "two.password.not.equal", null);
+            throw new FieldException(PasswordModifyForm.NEW_PASSWORD, "two.password.not.equal",
+                    null);
         }
     }
 }

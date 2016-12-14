@@ -89,8 +89,11 @@ public class UserController extends BaseController {
 
         LOG.info(signin.toString());
 
+        //先通过LADP验证登录
+        if(!authValidator.validateLADPLogin(signin)) {
         // 验证
         authValidator.validateLogin(signin);
+        }
 
         // 数据库登录
         User user = signMgr.signin(signin.getName());
