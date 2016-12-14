@@ -1,5 +1,6 @@
 package com.baidu.disconf.client.core.processor.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,7 +124,8 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
 
         try {
             dataMap = FileTypeProcessorUtils.getKvMap(disconfCenterFile.getSupportFileTypeEnum(),
-                    disconfCenterFile.getFilePath());
+                    DisClientConfig.getInstance().enableLocalDownloadDirInClassPath ? disconfCenterFile.getFilePath()
+                            : DisClientConfig.getInstance().userDefineDownloadDir + File.separator + fileName);
         } catch (Exception e) {
             LOGGER.error("cannot get kv data for " + filePath, e);
         }
