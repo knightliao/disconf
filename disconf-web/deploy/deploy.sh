@@ -48,7 +48,7 @@ if [ -d "src/main/online-resources" ]; then
     rm -rf src/main/online-resources/*
 fi
 mkdir -p src/main/online-resources
-cp -rp "$ONLINE_CONFIG_PATH"/* src/main/online-resources 
+cp -rp "$ONLINE_CONFIG_PATH"/*.properties src/main/online-resources 
 
 echo "**********************************************"
 echo "It's going to Generate the output for war"
