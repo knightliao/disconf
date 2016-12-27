@@ -28,6 +28,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringValueResolver;
+import org.springframework.core.Ordered;
 
 /**
  * 具有 reloadable 的 property bean
@@ -48,6 +49,8 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
     private String placeholderSuffix = DEFAULT_PLACEHOLDER_SUFFIX;
 
     private String beanName;
+
+    private int orderInSpringPostProcessors = Ordered.HIGHEST_PRECEDENCE;
 
     private BeanFactory beanFactory;
     private Properties[] propertiesArray;
@@ -511,5 +514,14 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
         super.setBeanFactory(beanFactory);
+    }
+
+    public void setOrderInSpringPostProcessors(int orderInSpringPostProcessors) {
+        this.orderInSpringPostProcessors = orderInSpringPostProcessors;
+    }
+
+    @Override
+    public int getOrder() {
+        return orderInSpringPostProcessors;
     }
 }
