@@ -5,6 +5,7 @@
 /log
 /pom.xml.releaseBackup
 /output
+/deploy/src
 /.pydevproject
 /*tmp
 /*.iml

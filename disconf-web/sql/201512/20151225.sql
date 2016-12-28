@@ -1,3 +1,5 @@
+USE `disconf`;
+
 CREATE TABLE `config_history` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `config_id` BIGINT NOT NULL,
