@@ -177,6 +177,15 @@ public final class DisClientConfig {
     public String userDefineDownloadDir = "./disconf/download";
 
     /**
+     * 开启classpath路径定义，下载文件夹会相对classpath进行创建
+     *
+     * @author
+     * @since 1.0.1
+     */
+    @DisInnerConfigAnnotation(name = "disconf.user_define_download_dir_in_class_path", defaultValue = "true")
+    public boolean userDefineDownloadDirInClassPath = true;
+
+    /**
      * 获取远程配置 重试时休眠时间，默认是5秒
      *
      * @author
@@ -193,6 +202,16 @@ public final class DisClientConfig {
      */
     @DisInnerConfigAnnotation(name = "disconf.enable_local_download_dir_in_class_path", defaultValue = "true")
     public boolean enableLocalDownloadDirInClassPath = true;
+
+    /**
+     * 用户指定的 配置文件夹, 远程文件下载后会自动拷贝到这里<br>
+     * 需设置enableLocalDownloadDirInClassPath=true
+     *
+     * @author
+     * @since 1.0.1
+     */
+    @DisInnerConfigAnnotation(name = "disconf.user_define_prop_dir", defaultValue = "")
+    public String userDefinePropDir = "";
 
     public List<String> getHostList() {
         return hostList;

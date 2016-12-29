@@ -86,7 +86,23 @@ public class DisInnerConfigHelper {
 
         // 用户下载文件夹
         if (!StringUtils.isEmpty(DisClientConfig.getInstance().userDefineDownloadDir)) {
-            OsUtil.makeDirs(DisClientConfig.getInstance().userDefineDownloadDir);
+
+            LOGGER.debug("SERVER disconf.user_define_download_dir_in_class_path: " + DisClientConfig
+                    .getInstance().userDefineDownloadDirInClassPath);
+
+            String contextPath = "";
+            //是否将远程文件下载载到classpath相对目录下
+            if (DisClientConfig.getInstance().userDefineDownloadDirInClassPath) {
+                contextPath = ClassLoaderUtil.getClassPath();
+                if (contextPath.isEmpty()) {
+                    LOGGER.warn("CLASSPATH is null. we will not transfer your config file to classpath in the following");
+                } else {
+                    LOGGER.debug("classpath: " + contextPath);
+                }
+            }
+
+
+            OsUtil.makeDirs(contextPath + DisClientConfig.getInstance().userDefineDownloadDir);
             LOGGER.info("SERVER disconf.user_define_download_dir: " + DisClientConfig.getInstance()
                     .userDefineDownloadDir);
         }
@@ -114,6 +130,10 @@ public class DisInnerConfigHelper {
 
         LOGGER.debug("SERVER disconf.enable_local_download_dir_in_class_path: " + DisClientConfig
                 .getInstance().enableLocalDownloadDirInClassPath);
+
+        LOGGER.debug("SERVER disconf.user_define_prop_dir: " + DisClientConfig
+                .getInstance().userDefinePropDir);
+
         // 是否将文件放在classpath目录下
         if (DisClientConfig.getInstance().enableLocalDownloadDirInClassPath) {
 
