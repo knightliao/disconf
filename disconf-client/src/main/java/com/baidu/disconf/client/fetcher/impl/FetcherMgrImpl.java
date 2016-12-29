@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,9 @@ public class FetcherMgrImpl implements FetcherMgr {
     // 下载的文件会被迁移到classpath根路径下
     private boolean enableLocalDownloadDirInClassPath = true;
 
+    // 用户定义配置文件目录
+    private String userDefinePropDir;
+
     // 下载文件夹, 远程文件下载后会放在这里
     private String localDownloadDir;
 
@@ -59,6 +63,31 @@ public class FetcherMgrImpl implements FetcherMgr {
         this.retryTime = retryTime;
         this.enableLocalDownloadDirInClassPath = enableLocalDownloadDirInClassPath;
         this.localDownloadDir = localDownloadDir;
+        this.localDownloadDirTemp = localDownloadDirTemp;
+        OsUtil.makeDirs(this.localDownloadDir);
+
+        this.hostList = hostList;
+    }
+
+    //
+    // 创建对象
+    //
+    public FetcherMgrImpl(RestfulMgr restfulMgr, int retryTime, int retrySleepSeconds,
+                          boolean enableLocalDownloadDirInClassPath, String userDefinePropDir, String localDownloadDir, boolean userDefineDownloadDirInClassPath, String
+                                  localDownloadDirTemp, List<String>
+                                  hostList) {
+
+        this.restfulMgr = restfulMgr;
+
+        this.retrySleepSeconds = retrySleepSeconds;
+        this.retryTime = retryTime;
+        this.enableLocalDownloadDirInClassPath = enableLocalDownloadDirInClassPath;
+        this.userDefinePropDir = userDefinePropDir;
+        if (userDefineDownloadDirInClassPath) {
+            this.localDownloadDir = ClassLoaderUtil.getClassPath() + localDownloadDir;
+        } else {
+            this.localDownloadDir = localDownloadDir;
+        }
         this.localDownloadDirTemp = localDownloadDirTemp;
         OsUtil.makeDirs(this.localDownloadDir);
 
@@ -95,6 +124,9 @@ public class FetcherMgrImpl implements FetcherMgr {
 
         // 设置远程地址
         RemoteUrl remoteUrl = new RemoteUrl(url, hostList);
+
+        // 支持用户自定义配置文件目录
+        targetFileDir = enableLocalDownloadDirInClassPath ? targetFileDir + userDefinePropDir : targetFileDir;
 
         // 下载
         return restfulMgr
