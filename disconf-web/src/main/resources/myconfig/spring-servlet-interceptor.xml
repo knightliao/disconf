@@ -30,6 +30,8 @@
                         <value>/api/config/file</value>
                         <value>/api/config/list</value>
                         <value>/api/config/simple/list</value>
+                        <!-- 开放批量下载 TODO：后续需要添加授权机制，提高安全性 -->
+                        <value>/api/web/config/downloadfilebatch</value>
                     </list>
                 </property>
                 <property name="XONE_COOKIE_DOMAIN_STRING">
