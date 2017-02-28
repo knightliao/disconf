@@ -1,0 +1,30 @@
+description = 'disconf-client'
+
+dependencies {
+    compile project(':disconf-core')
+    compile(group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.3.6') {
+        exclude(module: 'jmxri')
+        exclude(module: 'jmxtools')
+        exclude(module: 'jms')
+    }
+    compile group: 'commons-io', name: 'commons-io', version: '1.4'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.2.4'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.9-RC1'
+    compile group: 'com.google.guava', name: 'guava', version: '20.0'
+    compile group: 'org.aspectj', name: 'aspectjtools', version: '1.7.4'
+    compile(group: 'ch.qos.logback', name: 'logback-core', version: '1.0.9')
+    compile(group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.9')
+    compile(group: 'org.slf4j', name: 'slf4j-api', version: '1.7.6')
+    compile(group: 'org.springframework', name: 'spring-context', version: '4.1.7.RELEASE')
+    compile(group: 'org.springframework', name: 'spring-beans', version: '4.1.7.RELEASE')
+    compile(group: 'org.springframework', name: 'spring-core', version: '4.1.7.RELEASE')
+    compile(group: 'org.springframework', name: 'spring-aop', version: '4.1.7.RELEASE')
+
+    testCompile project(':disconf-core')
+    testCompile group: 'com.googlecode.jmockit', name: 'jmockit', version: '1.5'
+    testCompile group: 'com.googlecode.jmockit', name: 'jmockit-coverage', version: '0.999.24'
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '1.46', classifier: 'standalone'
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.1.7.RELEASE'
+}

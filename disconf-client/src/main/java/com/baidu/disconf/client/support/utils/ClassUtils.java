@@ -2,6 +2,7 @@ package com.baidu.disconf.client.support.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -100,13 +101,43 @@ public class ClassUtils {
      *
      * @param type
      * @param value
-     *
      * @return
-     *
      * @throws Exception
      */
     public static Object getValeByType(Class<?> type, Object value)
             throws Exception {
+        if (value != null) {
+            Class<?> clz = value.getClass();
+            if (type.isAssignableFrom(clz)) {
+                return value;
+            } else if (clz.isAssignableFrom(boolean.class) || clz.isAssignableFrom(Boolean.class)) {
+                if (type.isAssignableFrom(boolean.class) || type.isAssignableFrom(Boolean.class))
+                    return value;
+                else if (type.isAssignableFrom(Number.class)) {
+                    return (Boolean) value ? 0 : 1;
+                }
+            } else if (Number.class.isAssignableFrom(clz)) {
+                Number v = (Number) value;
+                if (boolean.class.isAssignableFrom(type) || Boolean.class.isAssignableFrom(type))
+                    return v.byteValue() != 0;
+                else if (byte.class.isAssignableFrom(type) || Byte.class.isAssignableFrom(type))
+                    return v.byteValue();
+                else if (short.class.isAssignableFrom(type) || Short.class.isAssignableFrom(type))
+                    return v.shortValue();
+                else if (int.class.isAssignableFrom(type) || Integer.class.isAssignableFrom(type))
+                    return v.intValue();
+                else if (long.class.isAssignableFrom(type) || Long.class.isAssignableFrom(type))
+                    return v.longValue();
+                else if (float.class.isAssignableFrom(type) || Float.class.isAssignableFrom(type))
+                    return v.floatValue();
+                else if (double.class.isAssignableFrom(type) || Double.class.isAssignableFrom(type))
+                    return v.doubleValue();
+                else if (String.class.isAssignableFrom(type))
+                    return v.toString();
+                else if (Date.class.isAssignableFrom(type))
+                    return new Date(v.longValue());
+            }
+        }
 
         // 预处理
         if (!(value instanceof String)) {
@@ -165,7 +196,6 @@ public class ClassUtils {
      * 获取一个类的所有方法
      *
      * @param entityClass
-     *
      * @return
      */
     public static Set<Method> getAllMethod(Class<?> entityClass) {

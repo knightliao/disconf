@@ -226,6 +226,8 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
             if (disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.PROPERTIES)) {
                 // 如果是采用XML进行配置的，则需要利用spring的reload将数据reload到bean里
                 ReloadConfigurationMonitor.reload();
+            }else if(disconfCenterFile.getSupportFileTypeEnum().equals(SupportFileTypeEnum.YML)){
+                ReloadConfigurationMonitor.reload();
             }
             disconfCenterFile.setAdditionalKeyMaps(disconfValue.getFileData());
         }

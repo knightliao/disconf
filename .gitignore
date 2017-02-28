@@ -16,3 +16,9 @@
 .idea
 BCLOUD
 build.sh
+/disconf-client/build
+/disconf-core/build
+/.gradle
+/gradle
+/gradlew
+/gradlew.bat

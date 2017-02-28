@@ -1,0 +1,6 @@
+rootProject.name = 'disconf-base'
+include ':disconf-client'
+include ':disconf-core'
+
+project(':disconf-client').projectDir = "$rootDir/disconf-client" as File
+project(':disconf-core').projectDir = "$rootDir/disconf-core" as File
