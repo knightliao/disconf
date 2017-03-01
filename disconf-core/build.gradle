@@ -1,33 +1,36 @@
-
 description = 'disconf-core'
 dependencies {
-    compile group: 'com.google.guava', name: 'guava', version:'20.0'
-    compile group: 'commons-io', name: 'commons-io', version:'1.4'
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version:'4.5.1'
-    compile group: 'com.google.code.gson', name: 'gson', version:'2.2.4'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.4'
-    compile(group: 'org.apache.zookeeper', name: 'zookeeper', version:'3.3.6') {
-exclude(module: 'log4j')
-exclude(module: 'jmxri')
-exclude(module: 'jmxtools')
-exclude(module: 'jms')
+    compile group: 'com.google.guava', name: 'guava', version: '20.0'
+    compile group: 'commons-io', name: 'commons-io', version: '1.4'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.1'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.2.4'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile(group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.3.6') {
+        exclude(module: 'log4j')
+        exclude(module: 'jmxri')
+        exclude(module: 'jmxtools')
+        exclude(module: 'jms')
     }
-    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.6'
-    testCompile group: 'com.googlecode.jmockit', name: 'jmockit', version:'1.5'
-    testCompile group: 'junit', name: 'junit', version:'4.10'
-    testCompile group: 'com.github.tomakehurst', name: 'wiremock', version:'1.46', classifier:'standalone'
-    compile(group: 'log4j', name: 'log4j', version:'1.2.14') {
-exclude(module: 'jmxri')
-exclude(module: 'jmxtools')
-exclude(module: 'jms')
-       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
-       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
-       Please review and delete this closure when resolved. */
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.6'
+    testCompile group: 'com.googlecode.jmockit', name: 'jmockit', version: '1.5'
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '1.46', classifier: 'standalone'
+    compile(group: 'log4j', name: 'log4j', version: '1.2.14') {
+        exclude(module: 'jmxri')
+        exclude(module: 'jmxtools')
+        exclude(module: 'jms')
     }
 }
 
-task packageTests(type: Jar) {
-  from sourceSets.test.output
-  classifier = 'tests'
+task testJar(type: Jar) {
+    classifier = 'tests'
+    from sourceSets.test.output
 }
-artifacts.archives packageTests
+
+configurations {
+    tests
+}
+
+artifacts {
+    tests testJar
+}

@@ -21,7 +21,7 @@ dependencies {
     compile(group: 'org.springframework', name: 'spring-core', version: '4.1.7.RELEASE')
     compile(group: 'org.springframework', name: 'spring-aop', version: '4.1.7.RELEASE')
 
-    testCompile project(':disconf-core')
+    testCompile project(path: ':disconf-core', configuration: 'tests')
     testCompile group: 'com.googlecode.jmockit', name: 'jmockit', version: '1.5'
     testCompile group: 'com.googlecode.jmockit', name: 'jmockit-coverage', version: '0.999.24'
     testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '1.46', classifier: 'standalone'
