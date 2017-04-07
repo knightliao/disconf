@@ -101,6 +101,8 @@ public class CodeUtils {
                         aChar = '\n';
                     } else if (aChar == 'f') {
                         aChar = '\f';
+                    } else if (aChar == '\\') {
+                        outBuffer.append(aChar);
                     }
                     outBuffer.append(aChar);
                 }
