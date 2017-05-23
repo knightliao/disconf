@@ -1,8 +1,10 @@
 package com.baidu.disconf.core.common.zookeeper;
 
-import java.io.IOException;
-import java.util.List;
-
+import com.baidu.disconf.core.common.utils.ZooUtils;
+import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStore;
+import com.baidu.disconf.core.common.zookeeper.inner.ZKHost;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
@@ -11,8 +13,8 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.disconf.core.common.utils.ZooUtils;
-import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStore;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * ZK统一管理器
@@ -27,6 +29,7 @@ public class ZookeeperMgr {
     private ResilientActiveKeyValueStore store;
 
     private String curHost = "";
+    private String zkHosts = "";
     private String curDefaultPrefixString = "";
 
     /**
@@ -88,9 +91,9 @@ public class ZookeeperMgr {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    private void initInternal(String hosts, String defaultPrefixString, boolean debug)
-            throws IOException, InterruptedException {
+    private void initInternal(String hosts, String defaultPrefixString, boolean debug) throws IOException, InterruptedException {
 
+        zkHosts = hosts;
         curHost = hosts;
         curDefaultPrefixString = defaultPrefixString;
 
@@ -100,7 +103,8 @@ public class ZookeeperMgr {
         LOGGER.info("zoo prefix: " + defaultPrefixString);
 
         // 新建父目录
-        makeDir(defaultPrefixString, ZooUtils.getIp());
+        //makeDir(defaultPrefixString, ZooUtils.getIp());
+        makeDir(defaultPrefixString, ZooUtils.getNonLocalIp(null));
     }
 
     /**
@@ -113,7 +117,7 @@ public class ZookeeperMgr {
         try {
 
             boolean deafult_path_exist = store.exists(dir);
-            if (!deafult_path_exist) {
+            if (! deafult_path_exist) {
                 LOGGER.info("create: " + dir);
                 this.writePersistentUrl(dir, data);
             } else {
@@ -231,5 +235,32 @@ public class ZookeeperMgr {
     public void deleteNode(String path) {
 
         store.deleteNode(path);
+    }
+
+    public String getZkHosts() {
+        return zkHosts;
+    }
+
+    /** 获取zkhosts的列表 */
+    public List<ZKHost> getZKHostsList() {
+        String hosts = getZkHosts();
+        if (Strings.isNullOrEmpty(getZkHosts())) {
+            return Lists.newArrayList();
+        }
+        List<ZKHost> zkHosts = Lists.newArrayList();
+        String hostsList[] = hosts.split(",");
+        for (String host : hostsList) {
+            int port = 2181;
+            int pidx = host.lastIndexOf(':');
+            if (pidx >= 0) {
+                // otherwise : is at the end of the string, ignore
+                if (pidx < host.length() - 1) {
+                    port = Integer.parseInt(host.substring(pidx + 1));
+                }
+                host = host.substring(0, pidx);
+            }
+            zkHosts.add(new ZKHost(host, port));
+        }
+        return zkHosts;
     }
 }

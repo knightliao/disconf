@@ -1,9 +1,5 @@
 package com.baidu.disconf.client.watch.impl;
 
-import org.apache.zookeeper.CreateMode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.config.inner.DisClientComConfig;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
@@ -14,6 +10,9 @@ import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.utils.ZooUtils;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
+import org.apache.zookeeper.CreateMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Watch 模块的一个实现
@@ -62,15 +61,18 @@ public class WatchMgrImpl implements WatchMgr {
         String clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(),
                 disConfCommonModel.getEnv(),
                 disConfCommonModel.getVersion());
-        ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
-
+        //ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
+        //ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getNonLocalIp(DisClientConfig.getInstance().HOST));
+        ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getNonLocalIp(null));
         // 监控路径
         String monitorPath;
         if (disConfigTypeEnum.equals(DisConfigTypeEnum.FILE)) {
 
             // 新建Zoo Store目录
             String clientDisconfFileZooPath = ZooPathMgr.getFileZooPath(clientRootZooPath);
-            makePath(clientDisconfFileZooPath, ZooUtils.getIp());
+            //makePath(clientDisconfFileZooPath, ZooUtils.getIp());
+            //makePath(clientDisconfFileZooPath, ZooUtils.getNonLocalIp(DisClientConfig.getInstance().HOST));
+            makePath(clientDisconfFileZooPath, ZooUtils.getNonLocalIp(null));
 
             monitorPath = ZooPathMgr.joinPath(clientDisconfFileZooPath, key);
 
@@ -78,7 +80,9 @@ public class WatchMgrImpl implements WatchMgr {
 
             // 新建Zoo Store目录
             String clientDisconfItemZooPath = ZooPathMgr.getItemZooPath(clientRootZooPath);
-            makePath(clientDisconfItemZooPath, ZooUtils.getIp());
+            //makePath(clientDisconfItemZooPath, ZooUtils.getIp());
+            //makePath(clientDisconfItemZooPath, ZooUtils.getNonLocalIp(DisClientConfig.getInstance().HOST));
+            makePath(clientDisconfItemZooPath, ZooUtils.getNonLocalIp(null));
             monitorPath = ZooPathMgr.joinPath(clientDisconfItemZooPath, key);
         }
 
