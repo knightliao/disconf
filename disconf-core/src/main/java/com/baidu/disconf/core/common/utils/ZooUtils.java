@@ -25,7 +25,7 @@ public final class ZooUtils {
     public static String getIp() {
 
         try {
-            return MachineInfo.getNonLocalHostIp();
+            return MachineInfo.getHostIp();
         } catch (Exception e) {
             LOGGER.error("cannot get host info", e);
             return "";
