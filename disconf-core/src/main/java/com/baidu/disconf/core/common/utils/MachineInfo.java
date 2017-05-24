@@ -68,9 +68,20 @@ public final class MachineInfo {
      */
     public static String getNonLocalHostIp() throws Exception {
         String host = null;
-        // 获取ip地址
+        // 从环境变量获取配置
         try {
-            host = InetAddress.getLocalHost().getHostAddress();
+            host = System.getProperty("disconf.host");
+            if (isInvalidLocal(host)) {
+                host = System.getenv("disconf_host");
+            }
+        } catch (Exception e) {
+            logger.warn(e.getMessage(), e);
+        }
+        // 如果系统未配置host地址，则使用自动获取ip地址
+        try {
+            if (isInvalidLocal(host)) {
+                host = InetAddress.getLocalHost().getHostAddress();
+            }
         } catch (Exception e) {
             logger.warn(e.getMessage(), e);
         }
