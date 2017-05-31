@@ -34,12 +34,11 @@ public class CodeUtils {
                 int mag   = Integer.SIZE - Integer.numberOfLeadingZeros(chr1);
                 int chars = Math.max(((mag + (SHIFT - 1)) / SHIFT), 1);
 
-                StringBuilder builder = new StringBuilder("\\u");
+                sb.append("\\u");
                 for (int j = 0; j < SHIFT - chars; j++) {
-                    builder.append('0');
+                    sb.append('0');
                 }
-                builder.append(Integer.toHexString(chr1));
-                sb.append(builder.toString().toLowerCase());
+                sb.append(Integer.toHexString(chr1).toLowerCase());
             }
         }
         return sb.toString();
