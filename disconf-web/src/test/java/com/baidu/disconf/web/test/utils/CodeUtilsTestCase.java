@@ -1,13 +1,14 @@
 package com.baidu.disconf.web.test.utils;
 
-import com.baidu.disconf.web.utils.CodeUtils;
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.io.FileUtils;
-import org.aspectj.apache.bcel.classfile.Code;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
+import com.baidu.disconf.web.utils.CodeUtils;
 
 /**
  * Created by knightliao on 15/1/7.

@@ -53,8 +53,8 @@ public class CodeUtils {
         if (theString == null) {
             return null;
         }
-        char         aChar;
-        int          len       = theString.length();
+        char aChar;
+        int len = theString.length();
         StringBuffer outBuffer = new StringBuffer(len);
         for (int x = 0; x < len; ) {
             aChar = theString.charAt(x++);
