@@ -530,7 +530,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
                 } else {
                     List<String> errorKeyList = new ArrayList<String>();
-                    errorKeyList.add(config.getValue().trim());
+                    errorKeyList.add(value.trim());
                     zkDisconfDataItem.setErrorList(errorKeyList);
                     errorNum++;
                 }
