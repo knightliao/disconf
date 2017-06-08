@@ -184,6 +184,13 @@ public class DisconfStoreItemProcessorImpl implements DisconfStoreProcessor {
 
             Object newValue = disconfCenterItem.getFieldValueByType(disconfValue.getValue());
             disconfCenterItem.setValue(newValue);
+            /** 在first scan的时候就给static的属性赋值，这样在所有的类的static块里也能正确获取到这些static属性的值，
+             * 如果放到second scan才给static的属性赋值，因为那时所有的类都加载结束了，init()的时候才会执行second scan，
+             * 那时类的static块也已经执行完了，就会出现static块里取不到相应的值
+             * */
+            if (disconfCenterItem.isStatic()) {
+              disconfCenterItem.setValue4StaticFileItem(newValue);
+            }
 
         } catch (Exception e) {
             LOGGER.error("key: " + key + " " + e.toString(), e);
