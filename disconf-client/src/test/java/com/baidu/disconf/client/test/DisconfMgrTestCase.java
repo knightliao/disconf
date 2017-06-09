@@ -89,6 +89,7 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase implements Applic
             LOGGER.info(String.valueOf("varA: " + confA.getVarA()));
             LOGGER.info(String.valueOf("varA2: " + confA.getVarA2()));
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
+            LOGGER.info(String.valueOf("varAAStatic: " + serviceA.getVarAAStatic()));
 
             LOGGER.info("================ BEFORE DISCONF ==============================");
 
@@ -120,6 +121,9 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase implements Applic
 
             LOGGER.info(String.valueOf("varAA: " + serviceA.getVarAA()));
             Assert.assertEquals(new Integer(1000).intValue(), serviceA.getVarAA());
+
+            LOGGER.info(String.valueOf("varAAStatic: " + serviceA.getVarAAStatic()));
+            Assert.assertEquals(new Integer(2001).intValue(), serviceA.getVarAAStatic());
 
             LOGGER.info(String.valueOf("static var: " + StaticConf.getStaticvar()));
             Assert.assertEquals(new Integer(50).intValue(), StaticConf.getStaticvar());

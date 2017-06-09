@@ -23,6 +23,13 @@ public class ServiceA {
 
     public static final String keyA = "keyA";
 
+    /**
+     * 2. 用于静态方式获取的分布式配置项<br/>
+     */
+    private static int varAAStatic = 20;
+
+    public static final String staticKeyA = "staticKeyA";
+
     @Autowired
     private ConfA confA;
 
@@ -43,4 +50,12 @@ public class ServiceA {
         this.varAA = varAA;
     }
 
+    @DisconfItem(key = ServiceA.staticKeyA)
+    public static int getVarAAStatic() {
+      return varAAStatic;
+    }
+
+    public static void setVarAAStatic(int varAAStatic) {
+      ServiceA.varAAStatic = varAAStatic;
+    }
 }

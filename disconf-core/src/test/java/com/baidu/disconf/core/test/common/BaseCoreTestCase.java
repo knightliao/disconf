@@ -60,6 +60,17 @@ public class BaseCoreTestCase {
                         .withBody(GsonUtils.toJson(valueVo))));
 
         //
+        // 静态配置项
+        //
+        ValueVo valueVoStatic = new ValueVo();
+        valueVoStatic.setMessage("");
+        valueVoStatic.setStatus(Constants.OK);
+        valueVoStatic.setValue(RemoteMockServer.DEFAULT_STATIC_ITEM_VALUE);
+        stubFor(get(urlEqualTo(RemoteMockServer.STATIC_ITEM_URL))
+                .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVoStatic))));
+
+        //
         // 配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.FILE_URL))

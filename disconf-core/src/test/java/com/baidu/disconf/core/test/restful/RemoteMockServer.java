@@ -66,6 +66,13 @@ public class RemoteMockServer {
     public static final String DEFAULT_ITEM_VALUE = "1000";
 
     //
+    // 静态配置项
+    //
+    public static final String STATIC_ITEM_URL =
+            "/api/config/item?version=1_0_0_0&app=disconf_testcase&env=rd&key=staticKeyA&type=1";
+    public static final String DEFAULT_STATIC_ITEM_VALUE = "2001";
+
+    //
     public static final String LOCAL_DOWNLOAD_DIR = "./disconf/download";
     public static final String LOCAL_DOWNLOAD_DIR_TEMP = "./disconf/tmp/download";
     public static final String LOCAL_TARGET_DOWNLOAD_DIR = "./disconf/download/target";
