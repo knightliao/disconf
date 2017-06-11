@@ -37,7 +37,7 @@ public class RemoteMockServer {
     public static final String STATIC_FILE_URL =
             "/api/config/file?version=1_0_0_0&app=disconf_testcase&env=rd&key=staticConf.properties&type=0";
     public static final String STATIC_FILE_NAME = "staticConf.properties";
-    public static final String STATIC_FILE_CONTENT = "staticvar=50\r\nstaticvar2=100";
+    public static final String STATIC_FILE_CONTENT = "staticvar=50\r\nstaticvar2=100\r\nstaticvar3=4001";
 
     //
     // 非注解 方式1
@@ -71,6 +71,13 @@ public class RemoteMockServer {
     public static final String STATIC_ITEM_URL =
             "/api/config/item?version=1_0_0_0&app=disconf_testcase&env=rd&key=staticKeyA&type=1";
     public static final String DEFAULT_STATIC_ITEM_VALUE = "2001";
+
+    //
+    // 静态配置项
+    //
+    public static final String STATIC_ITEM_URL_2 =
+            "/api/config/item?version=1_0_0_0&app=disconf_testcase&env=rd&key=staticKeyB&type=1";
+    public static final String DEFAULT_STATIC_ITEM_VALUE_2 = "3001";
 
     //
     public static final String LOCAL_DOWNLOAD_DIR = "./disconf/download";

@@ -48,7 +48,7 @@ public class ScanPackTestCase extends BaseSpringTestCase {
             LOGGER.info("=============DISCONF FILE ITEM===================");
             Set<Method> methods = scanModel.getDisconfFileItemMethodSet();
             ScanPrinterUtils.printFileItemMethod(methods);
-            Assert.assertEquals(6, methods.size());
+            Assert.assertEquals(7, methods.size());
             Assert.assertEquals(4, scanModel.getDisconfFileClassSet().size());
 
             // disconf file item
@@ -60,7 +60,7 @@ public class ScanPackTestCase extends BaseSpringTestCase {
             LOGGER.info("=============DISCONF ITEM===================");
             methods = scanModel.getDisconfItemMethodSet();
             ScanPrinterUtils.printFileItemMethod(methods);
-            Assert.assertEquals(2, methods.size());
+            Assert.assertEquals(3, methods.size());
 
             // Active backup
             LOGGER.info("=============DISCONF ACTIVE BACKUP===================");

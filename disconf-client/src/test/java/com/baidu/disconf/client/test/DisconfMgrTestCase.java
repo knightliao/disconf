@@ -125,8 +125,14 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase implements Applic
             LOGGER.info(String.valueOf("varAAStatic: " + serviceA.getVarAAStatic()));
             Assert.assertEquals(new Integer(2001).intValue(), serviceA.getVarAAStatic());
 
+            LOGGER.info(String.valueOf("varBBStatic: " + serviceA.getVarBBStatic()));
+            Assert.assertEquals(new Integer(3001).intValue(), serviceA.getVarBBStatic());
+
             LOGGER.info(String.valueOf("static var: " + StaticConf.getStaticvar()));
             Assert.assertEquals(new Integer(50).intValue(), StaticConf.getStaticvar());
+
+            LOGGER.info(String.valueOf("static var: " + StaticConf.getStaticvar3()));
+            Assert.assertEquals(new Integer(4001).intValue(), StaticConf.getStaticvar3());
 
             testDynamicGetter();
 

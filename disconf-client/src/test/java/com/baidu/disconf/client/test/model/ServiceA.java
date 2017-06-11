@@ -30,6 +30,13 @@ public class ServiceA {
 
     public static final String staticKeyA = "staticKeyA";
 
+    /**
+     * 3. 用于静态方式获取的分布式配置项，且没有setter方法，用于测试反射
+     */
+    private static int varBBStatic = 30;
+
+    public static final String staticKeyB = "staticKeyB";
+
     @Autowired
     private ConfA confA;
 
@@ -57,5 +64,10 @@ public class ServiceA {
 
     public static void setVarAAStatic(int varAAStatic) {
       ServiceA.varAAStatic = varAAStatic;
+    }
+
+    @DisconfItem(key = ServiceA.staticKeyB)
+    public static int getVarBBStatic() {
+        return varBBStatic;
     }
 }

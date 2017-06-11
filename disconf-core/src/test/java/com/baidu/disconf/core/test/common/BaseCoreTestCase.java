@@ -71,6 +71,17 @@ public class BaseCoreTestCase {
                         .withBody(GsonUtils.toJson(valueVoStatic))));
 
         //
+        // 静态配置项2，用于测试没有setter方法的配置项
+        //
+        ValueVo valueVoStatic2 = new ValueVo();
+        valueVoStatic2.setMessage("");
+        valueVoStatic2.setStatus(Constants.OK);
+        valueVoStatic2.setValue(RemoteMockServer.DEFAULT_STATIC_ITEM_VALUE_2);
+        stubFor(get(urlEqualTo(RemoteMockServer.STATIC_ITEM_URL_2))
+                .willReturn(aResponse().withHeader("Content-Type", RemoteMockServer.CONTENT_TYPE).withStatus(200)
+                        .withBody(GsonUtils.toJson(valueVoStatic2))));
+
+        //
         // 配置文件
         //
         stubFor(get(urlEqualTo(RemoteMockServer.FILE_URL))
