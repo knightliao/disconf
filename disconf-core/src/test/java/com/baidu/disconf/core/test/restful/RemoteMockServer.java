@@ -23,6 +23,7 @@ public class RemoteMockServer {
             "/api/config/file?version=1_0_0_0&app=disconf_testcase&env=rd&key=confA.properties&type=0";
     public static final String FILE_NAME = "confA.properties";
     public static final String FILE_CONTENT = "confa.varA=1000\r\nconfa.varA2=2000";
+    public static final String FILE_CONTENT_NEW = "confa.varA=9999\r\nconfa.varA2=2000";
 
     //
     // 空配置文件
@@ -64,6 +65,7 @@ public class RemoteMockServer {
             "/api/config/item?version=1_0_0_0&app=disconf_testcase&env=rd&key=keyA&type=1";
     public static final String CONTENT_TYPE = "application/json";
     public static final String DEFAULT_ITEM_VALUE = "1000";
+    public static final String DEFAULT_ITEM_VALUE_NEW = "8888";
 
     //
     // 静态配置项
@@ -88,7 +90,11 @@ public class RemoteMockServer {
     // zoo
     //
     public static final String ZOO_URL = "/api/zoo/hosts";
-    public static final String ZOO_HOSTS = "127.0.0.1:8581,127.0.0.1:8582,127.0.0.1:8583";
+    public static final int ZOO_PORT = 8581;
+    public static final String ZOO_HOSTS = "127.0.0.1:" + ZOO_PORT;
     public static final String ZOO_PREFIX_URL = "/api/zoo/prefix";
     public static final String ZOO_PREFIX_VALUE = "/disconf";
+
+    public static final String ZOO_FILE_UPDATE_PATH = ZOO_PREFIX_VALUE + "/disconf_testcase_1_0_0_0_rd/file/confA.properties";
+    public static final String ZOO_ITEM_UPDATE_PATH = ZOO_PREFIX_VALUE + "/disconf_testcase_1_0_0_0_rd/item/keyA";
 }
