@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.gson.Gson;
+
 /**
  * 类工具
  *
@@ -155,9 +157,20 @@ public class ClassUtils {
 
             return Double.valueOf(dataValue);
 
-        } else {
+        }  else if (typeName.equals("string")
+                || typeName.equals("java.lang.string")) {
 
-            return value;
+            return dataValue;
+        } 
+        else {
+			try {
+				// 其他类型尝试JSON解析
+				Gson gson = new Gson();
+				return gson.fromJson(value.toString(), type);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			return value;
         }
     }
 
