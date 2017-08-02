@@ -24,4 +24,12 @@ public interface ScanMgr {
      * @throws Exception
      */
     void reloadableScan(String fileName) throws Exception;
+
+    /**
+     * reloadable for non-annotation config file(eg: spring xml)
+     * @param fileName      config file name
+     * @param relativePath  relative path
+     * @throws Exception
+     */
+    void reloadableScan(String fileName , String relativePath) throws Exception;
 }

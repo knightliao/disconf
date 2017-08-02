@@ -170,7 +170,7 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             if (targetDirPath.startsWith("/")) {
                 return OsUtil.pathJoin(targetDirPath);
             }
-
+            LOGGER.info("Download target file path : {}" , OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), targetDirPath));
             return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), targetDirPath);
         }
 

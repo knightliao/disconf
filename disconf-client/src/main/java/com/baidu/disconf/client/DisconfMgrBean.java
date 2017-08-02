@@ -30,7 +30,7 @@ public class DisconfMgrBean implements BeanDefinitionRegistryPostProcessor, Prio
 
     private ApplicationContext applicationContext;
 
-    private String scanPackage = null;
+    private String  scanPackage = null;
 
     public void destroy() {
 

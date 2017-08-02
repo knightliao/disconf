@@ -53,7 +53,7 @@ public class DisconfMgr implements ApplicationContextAware {
     }
 
     /**
-     * 总入口
+     * 总入口 (Just for test ?)
      */
     public synchronized void start(List<String> scanPackageList) {
 
@@ -190,6 +190,38 @@ public class DisconfMgr implements ApplicationContextAware {
                         disconfCoreMgr.processFile(fileName);
                     }
                     LOGGER.debug("disconf reloadable file: {}", fileName);
+                }
+
+            } catch (Exception e) {
+
+                LOGGER.error(e.toString(), e);
+            }
+        }
+    }
+
+    /**
+     * reloadable config file scan, for xml config
+     * Modify at 20170802 by felix.sung
+     */
+    public synchronized void reloadableScan(String fileName,String relativePath) {
+
+        if (!isFirstInit) {
+            return;
+        }
+
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            try {
+
+                if (!DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(fileName)) {
+
+                    if (scanMgr != null) {
+                        scanMgr.reloadableScan(fileName,relativePath);
+                    }
+
+                    if (disconfCoreMgr != null) {
+                        disconfCoreMgr.processFile(fileName);
+                    }
+                    LOGGER.debug("disconf reloadable file: {} , relativeFilePath : {}", fileName , relativePath);
                 }
 
             } catch (Exception e) {

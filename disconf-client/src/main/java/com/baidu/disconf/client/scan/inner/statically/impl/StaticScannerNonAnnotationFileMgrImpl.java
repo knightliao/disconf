@@ -37,10 +37,19 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
     /**
      *
      */
+    @Deprecated
     public static void scanData2Store(String fileName) {
 
         DisconfCenterBaseModel disconfCenterBaseModel =
                 StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName);
+
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModel);
+    }
+
+    public static void scanData2Store(String fileName, String relativePath) {
+
+        DisconfCenterBaseModel disconfCenterBaseModel =
+                StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName,relativePath);
 
         DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModel);
     }
@@ -86,6 +95,43 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
 
         // file type
         disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
+
+        //
+        // disConfCommonModel
+        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel("", "", "");
+        disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
+
+        // Remote URL
+        String url = DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+                disConfCommonModel.getApp(),
+                disConfCommonModel.getVersion(),
+                disConfCommonModel.getEnv(),
+                disconfCenterFile.getFileName(),
+                DisConfigTypeEnum.FILE);
+        disconfCenterFile.setRemoteServerUrl(url);
+
+        return disconfCenterFile;
+    }
+
+    /**
+     *
+     */
+    public static DisconfCenterBaseModel getDisconfCenterFile(String fileName , String relativePath) {
+
+        DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
+
+        fileName = fileName.trim();
+
+        //
+        // file name
+        disconfCenterFile.setFileName(fileName);
+
+        // 非注解式
+        disconfCenterFile.setIsTaggedWithNonAnnotationFile(true);
+
+        // file type
+        disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
+        disconfCenterFile.setTargetDirPath(relativePath);
 
         //
         // disConfCommonModel
