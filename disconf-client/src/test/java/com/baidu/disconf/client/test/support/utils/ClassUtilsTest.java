@@ -1,4 +1,4 @@
-package com.baidu.disconf.client.support.utils;
+package com.baidu.disconf.client.test.support.utils;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.baidu.disconf.client.support.utils.ClassUtils;
 
 public class ClassUtilsTest {
 
@@ -29,4 +31,12 @@ public class ClassUtilsTest {
 		assertTrue(ClassUtils.getValeByType(List.class, "234.4,123") == null);
 	}
 
+	@Test
+	public void testGetFieldNameByGetMethodName() {
+		assertTrue(ClassUtils.getFieldNameByGetMethodName("getOrderNo").equals("orderNo"));
+		assertTrue(ClassUtils.getFieldNameByGetMethodName("isSended").equals("sended"));
+		assertTrue(ClassUtils.getFieldNameByGetMethodName("isA").equals("a"));
+		assertTrue(ClassUtils.getFieldNameByGetMethodName("someMethod") == null);
+	}
+	
 }
