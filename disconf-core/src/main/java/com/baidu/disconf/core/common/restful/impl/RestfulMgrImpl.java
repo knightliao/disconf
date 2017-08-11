@@ -113,8 +113,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             if (targetDirPath != null) {
 
                 //
-                if (enableLocalDownloadDirInClassPath || !targetDirPath.equals(ClassLoaderUtil.getClassPath
-                        ())) {
+                if (enableLocalDownloadDirInClassPath || !targetDirPath.equals(ClassLoaderUtil.getClassPath())) {
                     localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, targetDirPath, fileName, true);
                 }
             }

@@ -136,16 +136,16 @@ public class ConfigUpdateController extends BaseController {
         //
         // 更新
         //
-        String emailNotification = "";
+        String emailNotification;
         try {
 
-            String str = new String(fileContent.getBytes(), "UTF-8");
+            String str = new String(fileContent.getBytes("UTF-8"), "UTF-8");
             LOG.info("receive file: " + str);
 
             emailNotification = configMgr.updateItemValue(configId, str);
             LOG.info("update " + configId + " ok");
 
-        } catch (Exception e) {
+        }catch (Exception e) {
 
             throw new FileUploadException("upload.file.error", e);
         }

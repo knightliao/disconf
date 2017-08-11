@@ -125,6 +125,7 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
         if (fileName != null) {
             int index = fileName.indexOf(':');
             if (index < 0) {
+                return fileName;
             } else {
                 fileName = fileName.substring(index + 1);
             }
