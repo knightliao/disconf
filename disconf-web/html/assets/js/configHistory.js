@@ -19,6 +19,7 @@
         }).done(
             function (data) {
                 if (data.success === "true") {
+                    var html = '';
                     var result = data.page.result;
                     $.each(result, function (index, item) {
                         html += '<li><a rel=' + item.id + ' href="#">'
