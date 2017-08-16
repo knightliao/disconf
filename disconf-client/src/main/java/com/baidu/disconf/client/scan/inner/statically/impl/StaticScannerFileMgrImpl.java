@@ -116,6 +116,11 @@ public class StaticScannerFileMgrImpl extends StaticScannerMgrImplBase implement
                 disConfCommonModel.getEnv(),
                 disconfCenterFile.getFileName(),
                 DisConfigTypeEnum.FILE);
+
+        //需要转化成utf8编码的URL
+        if (disconfFileAnnotation.unicodeToUtf8()) {
+            url += "&unicodeToUtf8=1";
+        }
         disconfCenterFile.setRemoteServerUrl(url);
 
         // fields

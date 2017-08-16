@@ -3,4 +3,6 @@
 - 0-init_table.sql        create db,tables
 - 1-init_data.sql         create data
 - 201512/20151225.sql     patch
-- 20160701/20160701.sql   patch
+- 20160201/20160201.sql     patch
+- 20160701/20160701.sql     patch
+- 20160814/20160814.sql     patch

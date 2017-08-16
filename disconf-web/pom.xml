@@ -14,7 +14,26 @@
         <artifactId>disconf-base</artifactId>
         <version>2.6.36</version>
     </parent>
+    <profiles>
+        <!-- 开发环境，默认激活 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault><!--默认启用的是dev环境配置 -->
+            </activation>
+        </profile>
 
+        <!-- 生产环境 -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
     <dependencies>
 
         <dependency>
@@ -79,17 +98,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
         </dependency>
 
         <dependency>
@@ -110,6 +119,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
         </dependency>
 
         <dependency>
@@ -336,17 +350,24 @@
 
     <!-- build -->
     <build>
-        <defaultGoal>package</defaultGoal>
-        <finalName>${project.artifactId}</finalName>
 
+        <defaultGoal>package</defaultGoal>
+        <filters>
+            <filter>src/main/filters/${env}.properties</filter>
+        </filters>
         <resources>
             <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
+                <directory>src/main/java</directory>
                 <includes>
-                    <include>**/*.*</include>
+                    <include>**/*.properties</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
         </resources>
+        <finalName>${project.artifactId}</finalName>
 
         <plugins>
             <plugin>
@@ -357,75 +378,27 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>${project.basedir}/src/main/resources</directory>
-                            <includes>
-                                <include>**/*.*</include>
-                            </includes>
-                        </resource>
-                    </webResources>
-                </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.10.v20150310</version>
+                <configuration>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                    <httpConnector>
+                        <port>8015</port>
+                        <idleTimeout>60000</idleTimeout>
+                    </httpConnector>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <stopKey/>
+                    <stopPort/>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <!-- 开发环境默认激活的profile -->
-        <profile>
-            <id>rd</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <resources>
-                    <!-- 指定环境差异配置的配置文件所在目录 -->
-                    <resource>
-                        <directory>${basedir}/profile/rd</directory>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-
-        <!-- online -->
-        <profile>
-            <id>online</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <webResources>
-
-                                <resource>
-                                    <directory>${project.build.online.sourceDir}</directory>
-                                    <targetPath>WEB-INF/classes</targetPath>
-                                    <includes>
-                                        <include>**/*.*</include>
-                                    </includes>
-                                </resource>
-
-                                <resource>
-                                    <directory>${project.build.online.sourceDir}</directory>
-                                    <targetPath>/</targetPath>
-                                </resource>
-
-                            </webResources>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>
 
