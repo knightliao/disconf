@@ -46,7 +46,7 @@ public class ConfigHistoryMgrImpl implements ConfigHistoryMgr {
 
 
     /**
-     * 历史配置列表
+     * 鍘嗗彶閰嶇疆鍒楄〃
      */
     @Override
     public DaoPageResult<ConfHistoryListVo> getConfigHistoryList(ConfHistoryListForm confHistoryListForm) {

@@ -14,7 +14,7 @@
 
 <body>
 
-    <div class="navbar navbar-fixed-top ">
+    <div class="navbar navbar-fixed-top clearfix">
         <div class="navbar-inner zu-top">
             <div class="container">
                 <button type="button" class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
@@ -24,22 +24,39 @@
                 </button>
                 <div class="nav-collapse collapse">
 
-                    <a id="indexMain" href="/main.html" class="brand" style="margin-left:0px;"><span class="zu-top-nav-link">Disconf</span></a>
-                    <span class="span7"> </span>
+                    <a id="brand_url" href="/main.html" class="brand" style="margin-left:0px;padding:8px;"> <span class="zu-top-nav-link">Disconf</span> </a>
+
+                    <span class="span2"> </span>
                     <form class="navbar-form pull-left">
                         <button class="btn btn-warning" title="GitHub" type="button" style=""  onclick="window.open('https://github.com/knightliao/disconf', '_blank');">
                             <i class="icon-circle-arrow-up  icon-white"></i> <b>GitHub</b>
                         </button>
                     </form>
-                    
-                    
+
                     <ul class="nav pull-right" >
-                        
+
                         <div class="login-yes"  style="display:none;padding:10px;">
+                            <li style="display:none;" id="userRoleManage">
+                                <a href="/user_role_manage.html">
+                                    <span class="zu-top-nav-link">用户权限管理</span>
+                                </a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <li style="display:inline;">
-                                <a href="#">
+                                <a href="/user_profile_modify.html">
                                     <span class="zu-top-nav-link loginName" id="username"></span>
                                 </a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <li style="display:inline;" class="dropdown">
+                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="zu-top-nav-link">新建<b class="caret"></b></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/newapp.html">新建APP</a></li>
+                                    <li><a href="/newconfig_item.html">新建配置项</a></li>
+                                    <li><a href="/newconfig_file.html">新建配置文件</a></li>
+                                </ul>
                             </li>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <li style="display:inline;">
@@ -48,26 +65,25 @@
                                 </a>
                             </li>
                         </div>
-                        
-                        
+
                         <div class="login-no"  style="padding:10px;">
                             <li style="display:inline;">
                                 <a href="/login.html"><span class="zu-top-nav-link">登录</span></a>
-                            </li>   
+                            </li>
                         </div>
-                        
+
                     </ul>
-                    
                 </div>
             </div>
+
         </div>
     </div>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 
 <div id="headwrap">
     <div class="main container">
