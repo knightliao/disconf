@@ -1,6 +1,5 @@
 package com.baidu.disconf.web.utils;
 import java.security.MessageDigest;
-
 /**
  * @author Chen Hui
  * @since 2016/3/1
