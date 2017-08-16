@@ -65,6 +65,29 @@
         <property name="emailMonitorOn" value="${EMAIL_MONITOR_ON}"/>
         <property name="checkConsistencyOn" value="${CHECK_CONSISTENCY_ON}"/>
         <property name="domain" value="${domain}"/>
+        <property name="emailEncoding" value="${EMAIL_ENCODING}" />
+        <property name="emailProtocol" value="${EMAIL_PROTOCOL}" />
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${EMAIL_HOST}"/>
+        <property name="port" value="465"/>
+        <property name="username" value="${EMAIL_HOST_USER}"/>
+        <property name="password" value="${EMAIL_HOST_PASSWORD}"/>
+        <property name="defaultEncoding" value="${EMAIL_ENCODING}" />
+        <property name="protocol" value="${EMAIL_PROTOCOL}" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.starttls.required">true</prop>
+                <prop key="mail.debug">true</prop>
+                <!--<prop key="mail.smtp.ssl.enable">true</prop>
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.socketFactory.port">465</prop>
+                <prop key="mail.smtp.socketFactory.fallback">false</prop>-->
+            </props>
+        </property>
     </bean>
 
     <!-- import -->

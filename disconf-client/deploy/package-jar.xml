@@ -16,7 +16,6 @@
             <directory>target/classes</directory>
             <excludes>
                 <exclude>disconf.properties</exclude>
-                <exclude>logback.xml</exclude>
             </excludes>
             <outputDirectory>/</outputDirectory>
         </fileSet>

@@ -24,6 +24,10 @@ public class ApplicationPropertyConfig {
 
     private String emailReceiver;
 
+    private String emailProtocol;
+    private String emailEncoding;
+
+
     private boolean emailMonitorOn = false;
 
     //
@@ -109,12 +113,36 @@ public class ApplicationPropertyConfig {
         this.domain = domain;
     }
 
-    @Override
-    public String toString() {
-        return "ApplicationPropertyConfig [emailHost=" + emailHost + ", emailPassword=" + emailPassword +
-                   ", emailUser=" + emailUser + ", emailPort=" + emailPort + ", fromEmail=" + fromEmail +
-                   ", emailReceiver=" + emailReceiver + ", emailMonitorOn=" + emailMonitorOn + ", checkConsistencyOn=" +
-                   checkConsistencyOn + "]";
+    public String getEmailProtocol() {
+        return emailProtocol;
     }
 
+    public void setEmailProtocol(String emailProtocol) {
+        this.emailProtocol = emailProtocol;
+    }
+
+    public String getEmailEncoding() {
+        return emailEncoding;
+    }
+
+    public void setEmailEncoding(String emailEncoding) {
+        this.emailEncoding = emailEncoding;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationPropertyConfig{" +
+                "emailHost='" + emailHost + '\'' +
+                ", emailPassword='" + emailPassword + '\'' +
+                ", emailUser='" + emailUser + '\'' +
+                ", emailPort='" + emailPort + '\'' +
+                ", fromEmail='" + fromEmail + '\'' +
+                ", emailReceiver='" + emailReceiver + '\'' +
+                ", emailProtocol='" + emailProtocol + '\'' +
+                ", emailEncoding='" + emailEncoding + '\'' +
+                ", emailMonitorOn=" + emailMonitorOn +
+                ", checkConsistencyOn=" + checkConsistencyOn +
+                ", domain='" + domain + '\'' +
+                '}';
+    }
 }

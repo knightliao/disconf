@@ -12,7 +12,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
  * @version 2013-12-13
  */
 @TestExecutionListeners(BaseTestBeforeClass.class)
-@ContextConfiguration(locations = "classpath:applicationContext.xml")
+@ContextConfiguration(locations = {"classpath:applicationContext-mail.xml","classpath:applicationContext-dbconfig-test.xml"})
 @TransactionConfiguration(transactionManager = "onedbTransactionManagerTest")
 @ActiveProfiles({ "db-test" })
 public class BaseTestCase extends AbstractTestCase {
