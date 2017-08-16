@@ -1,7 +1,12 @@
 package com.baidu.disconf.web.web.config.controller;
 
-import javax.validation.constraints.NotNull;
-
+import com.baidu.disconf.web.service.config.service.ConfigMgr;
+import com.baidu.disconf.web.web.config.validator.ConfigValidator;
+import com.baidu.disconf.web.web.config.validator.FileUploadValidator;
+import com.baidu.dsp.common.constant.WebConstants;
+import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.exception.FileUploadException;
+import com.baidu.dsp.common.vo.JsonObjectBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.baidu.disconf.web.service.config.service.ConfigMgr;
-import com.baidu.disconf.web.web.config.validator.ConfigValidator;
-import com.baidu.disconf.web.web.config.validator.FileUploadValidator;
-import com.baidu.dsp.common.constant.WebConstants;
-import com.baidu.dsp.common.controller.BaseController;
-import com.baidu.dsp.common.exception.FileUploadException;
-import com.baidu.dsp.common.vo.JsonObjectBase;
+import javax.validation.constraints.NotNull;
 
 /**
  * 专用于配置更新、删除
@@ -132,6 +131,9 @@ public class ConfigUpdateController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/filetext/{configId}", method = RequestMethod.PUT)
     public JsonObjectBase updateFileWithText(@PathVariable long configId, @NotNull String fileContent) {
+
+        // 业务校验,校验configId是否存在与用户是否有该configId的权限
+        configValidator.valideConfigExist(configId);
 
         //
         // 更新

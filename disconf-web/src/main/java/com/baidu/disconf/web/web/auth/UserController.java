@@ -1,21 +1,10 @@
 package com.baidu.disconf.web.web.auth;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.baidu.disconf.web.service.sign.form.SigninForm;
-import com.baidu.disconf.web.service.sign.service.SignMgr;
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dto.Visitor;
 import com.baidu.disconf.web.service.user.form.PasswordModifyForm;
+import com.baidu.disconf.web.service.user.form.UserProfileForm;
 import com.baidu.disconf.web.service.user.service.UserMgr;
 import com.baidu.disconf.web.service.user.vo.VisitorVo;
 import com.baidu.disconf.web.web.auth.constant.LoginConstant;
@@ -27,6 +16,16 @@ import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 import com.baidu.ub.common.commons.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * @author liaoqiqi
@@ -43,9 +42,6 @@ public class UserController extends BaseController {
 
     @Autowired
     private AuthValidator authValidator;
-
-    @Autowired
-    private SignMgr signMgr;
 
     @Autowired
     private RedisLogin redisLogin;
@@ -90,10 +86,10 @@ public class UserController extends BaseController {
         LOG.info(signin.toString());
 
         // 验证
-        authValidator.validateLogin(signin);
+        User user = authValidator.validateLogin(signin);
 
         // 数据库登录
-        User user = signMgr.signin(signin.getName());
+//        User user = signMgr.signin(signin.getName());
 
         // 过期时间
         int expireTime = LoginConstant.SESSION_EXPIRE_TIME;
@@ -125,6 +121,13 @@ public class UserController extends BaseController {
 
         return buildSuccess("ok", "ok");
     }
+    @NoAuth
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonObjectBase updateProfile(@Valid UserProfileForm userProfileForm,HttpServletRequest request) {
+        userMgr.updateProfile(userProfileForm);
+        return buildSuccess("ok", "ok");
+    }
 
     /**
      * 修改密码
@@ -149,4 +152,5 @@ public class UserController extends BaseController {
 
         return buildSuccess("修改成功，请重新登录");
     }
+
 }

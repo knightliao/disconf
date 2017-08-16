@@ -30,9 +30,9 @@ public class UserCreateCommon {
 
         user.setName(userName);
 
-        user.setPassword(SignUtils.createPassword(password));
+//        user.setPassword(SignUtils.createPassword(password));
         // token
-        user.setToken(SignUtils.createToken(userName));
+//        user.setToken(SignUtils.createToken(userName));
 
         // set appids
         user.setOwnApps(ownAppIds);
@@ -78,9 +78,9 @@ public class UserCreateCommon {
 
             int random = RandomUtil.random(0, 10000);
             String password = "MhxzKhl" + String.valueOf(random);
-            user.setPassword(SignUtils.createPassword(password));
+//            user.setPassword(SignUtils.createPassword(password));
             // token
-            user.setToken(SignUtils.createToken(user.getName()));
+//            user.setToken(SignUtils.createToken(user.getName()));
 
             System.out.println("/* userid" + user.getId() + "\t" + password + "*/");
             // userDao.create(user);
@@ -104,13 +104,13 @@ public class UserCreateCommon {
             if (user.getId() != null) {
                 System.out.format("DELETE FROM `user` where user_id=%d;\n", user.getId());
             }
-            System.out
-                    .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES "
-                                    + "(%d,"
-                                    +
-                                    " '%s', " +
-                                    "'%s', '%s','%s', '%d');\n", user.getId(), user.getName(), user.getPassword(),
-                            user.getToken(), user.getOwnApps(), user.getRoleId());
+//            System.out
+//                    .format("INSERT INTO `user` (`user_id`, `name`, `password`, `token`, `ownapps`,`role_id`) VALUES "
+//                                    + "(%d,"
+//                                    +
+//                                    " '%s', " +
+//                                    "'%s', '%s','%s', '%d');\n", user.getId(), user.getName(), user.getPassword(),
+//                            user.getToken(), user.getOwnApps(), user.getRoleId());
         }
         System.out.println("\n");
     }

@@ -3,6 +3,7 @@ package com.baidu.disconf.web.web.auth.login.impl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.baidu.disconf.web.service.role.service.RoleMgr;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baidu.disconf.web.service.user.bo.User;
@@ -22,6 +23,8 @@ public class RedisLoginImpl implements RedisLogin {
 
     @Autowired
     private RedisCacheManager redisCacheMgr;
+    @Autowired
+    private RoleMgr roleMgr;
 
     /**
      * 获取Redis上的User Key
@@ -80,7 +83,7 @@ public class RedisLoginImpl implements RedisLogin {
         visitor.setLoginUserName(user.getName());
         visitor.setRoleId(user.getRoleId());
         visitor.setAppIds(user.getOwnApps());
-
+        visitor.setRoleName(roleMgr.get(user.getRoleId()).getRoleName());
         //
         // 更新session
         //

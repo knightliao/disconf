@@ -1,18 +1,5 @@
 package com.baidu.disconf.web.web.config.controller;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.service.config.form.ConfNewForm;
 import com.baidu.disconf.web.service.config.form.ConfNewItemForm;
@@ -23,6 +10,18 @@ import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.FileUploadException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * 专用于配置新建
@@ -55,10 +54,11 @@ public class ConfigNewController extends BaseController {
     @RequestMapping(value = "/item", method = RequestMethod.POST)
     @ResponseBody
     public JsonObjectBase newItem(@Valid ConfNewItemForm confNewForm) {
-
+        if(confNewForm.getKey() != null) {
+            confNewForm.setKey(confNewForm.getKey().trim());
+        }
         // 业务校验
         configValidator.validateNew(confNewForm, DisConfigTypeEnum.ITEM);
-
         //
         configMgr.newConfig(confNewForm, DisConfigTypeEnum.ITEM);
 
@@ -133,7 +133,7 @@ public class ConfigNewController extends BaseController {
 
         // 创建配置文件表格
         ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);
-        confNewItemForm.setKey(fileName);
+        confNewItemForm.setKey(fileName.trim());
         confNewItemForm.setValue(fileContent);
 
         // 业务校验

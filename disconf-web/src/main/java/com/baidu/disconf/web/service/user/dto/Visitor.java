@@ -30,6 +30,7 @@ public class Visitor extends BaseObject<Long> implements Serializable {
 
     // role
     private int roleId;
+    private String roleName;
 
     // app list
     private Set<Long> appIds;
@@ -76,6 +77,14 @@ public class Visitor extends BaseObject<Long> implements Serializable {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override

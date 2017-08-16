@@ -3,7 +3,7 @@ CREATE TABLE `config_history` (
   `config_id` BIGINT NOT NULL,
   `old_value` LONGTEXT NOT NULL,
   `new_value` LONGTEXT NOT NULL,
-  `create_time` VARCHAR(14) NOT NULL DEFAULT '99991231235959',
+  `create_time` VARCHAR(14) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 )DEFAULT CHARSET=utf8 ENGINE=InnoDB;
 

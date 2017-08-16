@@ -1,9 +1,20 @@
 package com.baidu.disconf.web.web.config.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
-
+import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf.core.common.json.ValueVo;
+import com.baidu.disconf.web.service.config.bo.Config;
+import com.baidu.disconf.web.service.config.form.ConfForm;
+import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
+import com.baidu.disconf.web.service.config.utils.ConfigUtils;
+import com.baidu.disconf.web.utils.CodeUtils;
+import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
+import com.baidu.disconf.web.web.config.validator.ConfigValidator;
+import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
+import com.baidu.dsp.common.annotation.NoAuth;
+import com.baidu.dsp.common.constant.WebConstants;
+import com.baidu.dsp.common.controller.BaseController;
+import com.baidu.dsp.common.exception.DocumentNotFoundException;
+import com.baidu.dsp.common.vo.JsonObjectBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
-import com.baidu.disconf.core.common.json.ValueVo;
-import com.baidu.disconf.web.service.config.bo.Config;
-import com.baidu.disconf.web.service.config.form.ConfForm;
-import com.baidu.disconf.web.service.config.service.ConfigFetchMgr;
-import com.baidu.disconf.web.service.config.utils.ConfigUtils;
-import com.baidu.disconf.web.web.config.dto.ConfigFullModel;
-import com.baidu.disconf.web.web.config.validator.ConfigValidator;
-import com.baidu.disconf.web.web.config.validator.ConfigValidator4Fetch;
-import com.baidu.dsp.common.annotation.NoAuth;
-import com.baidu.dsp.common.constant.WebConstants;
-import com.baidu.dsp.common.controller.BaseController;
-import com.baidu.dsp.common.exception.DocumentNotFoundException;
-import com.baidu.dsp.common.vo.JsonObjectBase;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * 配置获取Controller, Disconf-client专门使用的
@@ -54,7 +54,6 @@ public class ConfigFetcherController extends BaseController {
      * 获取指定app env version 的配置项列表
      *
      * @param confForm
-     *
      * @return
      */
     @NoAuth
@@ -75,7 +74,6 @@ public class ConfigFetcherController extends BaseController {
      * 获取配置项 Item
      *
      * @param confForm
-     *
      * @return
      */
     @NoAuth
@@ -103,12 +101,13 @@ public class ConfigFetcherController extends BaseController {
     /**
      * 获取配置文件
      *
+     * @param unicodeToUtf8 返回的结果是否需要将unicode转换为utf-8,0或null:不要,1:要
      * @return
      */
     @NoAuth
     @RequestMapping(value = "/file", method = RequestMethod.GET)
     @ResponseBody
-    public HttpEntity<byte[]> getFile(ConfForm confForm) {
+    public HttpEntity<byte[]> getFile(ConfForm confForm, Integer unicodeToUtf8) {
 
         boolean hasError = false;
 
@@ -135,7 +134,7 @@ public class ConfigFetcherController extends BaseController {
                     throw new DocumentNotFoundException(configModel.getKey());
                 }
                 //API获取节点内容也需要同样做格式转换
-                return downloadDspBill(configModel.getKey(), config.getValue());
+                return downloadDspBill(configModel.getKey(), config.getValue(), unicodeToUtf8);
 
             } catch (Exception e) {
                 LOG.error(e.toString());
@@ -153,13 +152,20 @@ public class ConfigFetcherController extends BaseController {
      * 下载
      *
      * @param fileName
-     *
+     * @param unicodeToUtf8 返回的结果是否需要将unicode转换为utf-8,0或null:不要,1:要
      * @return
      */
-    public HttpEntity<byte[]> downloadDspBill(String fileName, String value) {
+    public HttpEntity<byte[]> downloadDspBill(String fileName, String value, Integer unicodeToUtf8) {
 
         HttpHeaders header = new HttpHeaders();
-        byte[] res = value.getBytes();
+        byte[] res;
+        //对内容转换
+        if (unicodeToUtf8 != null && unicodeToUtf8 == 1) {
+            String utf8Value = CodeUtils.unicodeToUtf8(value);
+            res = utf8Value.getBytes();
+        } else {
+            res = value.getBytes();
+        }
 
         String name = null;
 

@@ -20,12 +20,14 @@ public class CodeUtils {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < inStr.length(); i++) {
             Character.UnicodeBlock ub = Character.UnicodeBlock.of(myBuffer[i]);
-            if (ub == Character.UnicodeBlock.BASIC_LATIN) {
+            if (ub == Character.UnicodeBlock.BASIC_LATIN || ub == Character.UnicodeBlock.LATIN_1_SUPPLEMENT) {
                 sb.append(myBuffer[i]);
-            } else if (ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
+            }
+            //没必要全角转半角,不然中文的（）等字符会被改成英文的()
+            /*else if (ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
                 int j = (int) myBuffer[i] - 65248;
                 sb.append((char) j);
-            } else {
+            } */ else {
                 int chr1 = (char) myBuffer[i];
                 String hexS = Integer.toHexString(chr1);
                 String unicode = "\\u" + hexS;
