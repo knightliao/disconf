@@ -3,6 +3,9 @@ package com.baidu.disconf.web.web.config.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.baidu.disconf.core.common.utils.FileUtils;
+import com.baidu.disconf.web.utils.ZipUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,11 @@ import com.baidu.dsp.common.controller.BaseController;
 import com.baidu.dsp.common.exception.FileUploadException;
 import com.baidu.dsp.common.vo.JsonObjectBase;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 专用于配置新建
  *
@@ -35,6 +43,7 @@ import com.baidu.dsp.common.vo.JsonObjectBase;
 public class ConfigNewController extends BaseController {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ConfigUpdateController.class);
+    private static final String TMP_FILE_PATH = "/tmp";
 
     @Autowired
     private ConfigMgr configMgr;
@@ -75,7 +84,7 @@ public class ConfigNewController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public JsonObjectBase updateFile(@Valid ConfNewForm confNewForm, @RequestParam("myfilerar") MultipartFile file) {
+    public JsonObjectBase updateFile(@Valid ConfNewForm confNewForm, @RequestParam("myfilerar") MultipartFile file) throws IOException {
 
         LOG.info(confNewForm.toString());
 
@@ -83,36 +92,13 @@ public class ConfigNewController extends BaseController {
         // 校验
         //
         int fileSize = 1024 * 1024 * 4;
-        String[] allowExtName = {".properties", ".xml"};
+        String[] allowExtName = {".properties", ".xml",".zip"};
         fileUploadValidator.validateFile(file, fileSize, allowExtName);
 
-        //
-        // 更新
-        //
-        String fileContent = "";
-        try {
+        // 处理(新增压缩包)
+        String retMessage = handleAndSaveFileContent(confNewForm,file);
 
-            fileContent = new String(file.getBytes(), "UTF-8");
-            LOG.info("receive file: " + fileContent);
-
-        } catch (Exception e) {
-
-            LOG.error(e.toString());
-            throw new FileUploadException("upload file error", e);
-        }
-
-        // 创建配置文件表格
-        ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);
-        confNewItemForm.setKey(file.getOriginalFilename());
-        confNewItemForm.setValue(fileContent);
-
-        // 业务校验
-        configValidator.validateNew(confNewItemForm, DisConfigTypeEnum.FILE);
-
-        //
-        configMgr.newConfig(confNewItemForm, DisConfigTypeEnum.FILE);
-
-        return buildSuccess("创建成功");
+        return buildSuccess(retMessage);
     }
 
     /**
@@ -144,4 +130,62 @@ public class ConfigNewController extends BaseController {
 
         return buildSuccess("创建成功");
     }
+
+
+    /**
+     * 配置文件，统一处理方法
+     */
+    private String handleAndSaveFileContent(ConfNewForm confNewForm, MultipartFile file) throws IOException {
+        //step 1: 获取文件后缀信息
+        String filename = file.getOriginalFilename();
+        String extName = filename.substring(filename.lastIndexOf(".")).toLowerCase();
+
+        //step 2: 定义待处理的文件列表数据
+        List<File> configFiles = new ArrayList<File>();
+
+        //step 3: 处理文件列表
+        File tmpConfigFile = new File(TMP_FILE_PATH,file.getOriginalFilename());
+        FileUtils.copyInputStreamToFile(file.getInputStream(), tmpConfigFile);
+        if(StringUtils.equals(extName,"properties")){
+            configFiles.add(tmpConfigFile);
+        }else if(StringUtils.equals(extName,"zip")){
+            configFiles = ZipUtil.upzipFile(tmpConfigFile,TMP_FILE_PATH);
+        }else{
+            //Nothing
+        }
+
+        //step 4: 保存文件信息
+        saveFileContent(configFiles,confNewForm);
+
+        return "处理成功";
+
+    }
+
+    private void saveFileContent(List<File> configFiles,ConfNewForm confNewForm){
+
+        for(File file : configFiles){
+            String fileContent = "";
+            try {
+                fileContent = new String(FileUtils.readFileToString(file,"UTF-8"));
+                LOG.info("receive file: " + fileContent);
+
+            } catch (Exception e) {
+                LOG.error(e.toString());
+                throw new FileUploadException("upload file error", e);
+            }
+
+
+            // 创建配置文件表格
+            ConfNewItemForm confNewItemForm = new ConfNewItemForm(confNewForm);
+            confNewItemForm.setKey(file.getName());
+            confNewItemForm.setValue(fileContent);
+
+            // 业务校验
+            configValidator.validateNew(confNewItemForm, DisConfigTypeEnum.FILE);
+
+            // 目前都是没有事务支持的,@jack_lcz
+            configMgr.newConfig(confNewItemForm, DisConfigTypeEnum.FILE);
+        }
+    }
+
 }
