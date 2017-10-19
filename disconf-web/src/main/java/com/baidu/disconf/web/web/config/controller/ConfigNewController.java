@@ -146,9 +146,9 @@ public class ConfigNewController extends BaseController {
         //step 3: 处理文件列表
         File tmpConfigFile = new File(TMP_FILE_PATH,file.getOriginalFilename());
         FileUtils.copyInputStreamToFile(file.getInputStream(), tmpConfigFile);
-        if(StringUtils.equals(extName,"properties")){
+        if(StringUtils.equals(extName,".properties")){
             configFiles.add(tmpConfigFile);
-        }else if(StringUtils.equals(extName,"zip")){
+        }else if(StringUtils.equals(extName,".zip")){
             configFiles = ZipUtil.upzipFile(tmpConfigFile,TMP_FILE_PATH);
         }else{
             //Nothing
