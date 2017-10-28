@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
 import com.baidu.disconf.core.common.utils.http.impl.HttpResponseCallbackHandlerJsonHandler;
+import com.baidu.disconf.core.common.utils.http.impl.HttpResponseCallbackHandlerStringHandler;
 import com.baidu.disconf.core.common.utils.http.HttpClientUtil;
 import com.baidu.disconf.core.common.utils.http.HttpResponseCallbackHandler;
 
@@ -32,6 +33,23 @@ public class RestfulGet<T> implements UnreliableInterface {
         this.request = request;
         this.httpResponseCallbackHandler = new
                 HttpResponseCallbackHandlerJsonHandler<T>(clazz);
+    }
+    
+    public RestfulGet(Class<T> clazz, URL url,String type) {
+
+        HttpGet request = new HttpGet(url.toString());
+        request.addHeader("content-type", "application/json");
+        this.request = request;
+        
+        if(type.equals(HttpResponseCallbackHandler.STRING)){
+       	 this.httpResponseCallbackHandler = new
+                 HttpResponseCallbackHandlerStringHandler<T>(clazz);
+        }else if(type.equals(HttpResponseCallbackHandler.JSON)){
+        	 this.httpResponseCallbackHandler = new
+                     HttpResponseCallbackHandlerJsonHandler<T>(clazz);
+        }
+        
+       
     }
 
     /**

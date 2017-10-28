@@ -9,9 +9,15 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.baidu.disconf.client.config.inner.DisClientComConfig;
 import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
+import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
+import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 /**
  * 结点监控器
@@ -28,6 +34,7 @@ public class NodeWatcher implements Watcher {
     private DisConfigTypeEnum disConfigTypeEnum;
     private DisconfSysUpdateCallback disconfSysUpdateCallback;
     private boolean debug;
+    private String nodeChilName;
 
     private DisconfCoreProcessor disconfCoreMgr;
 
@@ -44,6 +51,23 @@ public class NodeWatcher implements Watcher {
         this.keyName = keyName;
         this.disConfigTypeEnum = disConfigTypeEnum;
         this.disconfSysUpdateCallback = disconfSysUpdateCallback;
+    }
+    
+    
+    /**
+     */
+    public NodeWatcher(DisconfCoreProcessor disconfCoreMgr, String monitorPath, String keyName,
+                       DisConfigTypeEnum disConfigTypeEnum, DisconfSysUpdateCallback disconfSysUpdateCallback,
+                       boolean debug,String nodeChilName) {
+
+        super();
+        this.debug = debug;
+        this.disconfCoreMgr = disconfCoreMgr;
+        this.monitorPath = monitorPath;
+        this.keyName = keyName;
+        this.disConfigTypeEnum = disConfigTypeEnum;
+        this.disconfSysUpdateCallback = disconfSysUpdateCallback;
+        this.nodeChilName = nodeChilName;
     }
 
     /**
@@ -79,15 +103,16 @@ public class NodeWatcher implements Watcher {
         //
         // 结点更新时
         //
+    	LOGGER.info("eventType:"+event.getType());
         if (event.getType() == EventType.NodeDataChanged) {
-
+        	
             try {
 
                 LOGGER.info("============GOT UPDATE EVENT " + event.toString() + ": (" + monitorPath + "," + keyName
                         + "," + disConfigTypeEnum.getModelName() + ")======================");
 
                 // 调用回调函数, 回调函数里会重新进行监控
-                callback();
+                callback(event);
 
             } catch (Exception e) {
 
@@ -146,6 +171,58 @@ public class NodeWatcher implements Watcher {
             } catch (Exception e) {
                 LOGGER.error(e.toString(), e);
             }
+
+        } catch (Exception e) {
+
+            LOGGER.error("monitor node exception. " + monitorPath, e);
+        }
+    }
+    
+    
+    private void callback(WatchedEvent event) {
+
+        try {
+        	
+        	ZookeeperMgr zookeeperMgr = ZookeeperMgr.getInstance();
+        	
+        	String nodeName =  DisClientComConfig.getInstance().getInstanceFingerprint();
+        	
+        	if(nodeName!=null){
+        	  String path = ZooPathMgr.joinPath(event.getPath(), nodeName);
+              Boolean flag = zookeeperMgr.exists(path);
+        	 
+        	  if(flag == true){
+        		  
+        		  //判断本次更新 自己是否在更新目录里面。
+        		  byte [] data = ZookeeperMgr.getInstance().getZk().getData(path,null, null); //不监控
+       			  String s = new String(data);
+       			  Gson gson = new Gson();
+       			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
+       			  
+       			  JsonElement  jsonElement =  jsonObject.get(Constants.NODE_UPDATE_FLAG);
+       			  String status = jsonElement.getAsString();
+       			  
+       			  LOGGER.info("nodeChilName="+ nodeChilName +",nodeName="+nodeName +", sataus="+ status+",data="+jsonObject );
+        		  
+       			  if(status.equals(Constants.STATUS_UPDATE)){
+       				  
+       				  // 调用回调函数, 回调函数里会重新进行监控
+       				  try {
+       					  disconfSysUpdateCallback.reload(disconfCoreMgr, disConfigTypeEnum, keyName);
+       					  
+       					  //回调完成后修改自己的状态为 初始状态，等待下次更新
+       					  LOGGER.info("回调成功，更新节点为初始状态，等待下次更新");
+       					 
+       					  
+       				  } catch (Exception e) {
+       					  LOGGER.error(e.toString(), e);
+       				  }
+       			  }else{
+       				  this.monitorMaster();  //如果本次更新没有自己重新监控
+       			  }
+        		  
+        	  }
+        	}
 
         } catch (Exception e) {
 

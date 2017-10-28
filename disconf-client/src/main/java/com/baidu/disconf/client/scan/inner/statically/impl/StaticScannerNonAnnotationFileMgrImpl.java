@@ -8,6 +8,7 @@ import com.baidu.disconf.client.common.constants.SupportFileTypeEnum;
 import com.baidu.disconf.client.common.model.DisConfCommonModel;
 import com.baidu.disconf.client.common.model.DisconfCenterBaseModel;
 import com.baidu.disconf.client.common.model.DisconfCenterFile;
+import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.config.DisClientSysConfig;
 import com.baidu.disconf.client.scan.inner.statically.StaticScannerMgr;
 import com.baidu.disconf.client.scan.inner.statically.model.ScanStaticModel;
@@ -41,6 +42,14 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
 
         DisconfCenterBaseModel disconfCenterBaseModel =
                 StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName);
+
+        DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModel);
+    }
+    
+    public static void scanData2Store(String fileName,Boolean isPublicFile) {
+
+        DisconfCenterBaseModel disconfCenterBaseModel =
+                StaticScannerNonAnnotationFileMgrImpl.getDisconfCenterFile(fileName,isPublicFile);
 
         DisconfStoreProcessorFactory.getDisconfStoreFileProcessor().transformScanData(disconfCenterBaseModel);
     }
@@ -103,5 +112,52 @@ public class StaticScannerNonAnnotationFileMgrImpl extends StaticScannerMgrImplB
 
         return disconfCenterFile;
     }
+    
+    
+    
+    /**
+    *
+    */
+   public static DisconfCenterBaseModel getDisconfCenterFile(String fileName,Boolean isPublicFile) {
+
+       DisconfCenterFile disconfCenterFile = new DisconfCenterFile();
+
+       fileName = fileName.trim();
+
+       //
+       // file name
+       disconfCenterFile.setFileName(fileName);
+
+       // 非注解式
+       disconfCenterFile.setIsTaggedWithNonAnnotationFile(true);
+
+       // file type
+       disconfCenterFile.setSupportFileTypeEnum(SupportFileTypeEnum.getByFileName(fileName));
+ 
+       disconfCenterFile.setIsPublicFile(isPublicFile);
+ 
+       DisConfCommonModel disConfCommonModel = null;
+       
+       if(isPublicFile == false){
+           // disConfCommonModel
+           disConfCommonModel = makeDisConfCommonModel("", "", "");
+       }else{
+           // disConfCommonModel
+           disConfCommonModel = makeDisConfCommonModel(DisClientConfig.getInstance().COMMONAPP,DisClientConfig.getInstance().ENV,DisClientConfig.getInstance().COMMONVERSION);
+       }
+       
+       disconfCenterFile.setDisConfCommonModel(disConfCommonModel);
+
+       // Remote URL
+       String url = DisconfWebPathMgr.getRemoteUrlParameter(DisClientSysConfig.getInstance().CONF_SERVER_STORE_ACTION,
+               disConfCommonModel.getApp(),
+               disConfCommonModel.getVersion(),
+               disConfCommonModel.getEnv(),
+               disconfCenterFile.getFileName(),
+               DisConfigTypeEnum.FILE);
+       disconfCenterFile.setRemoteServerUrl(url);
+
+       return disconfCenterFile;
+   }
 
 }

@@ -82,8 +82,23 @@ public class FetcherMgrImpl implements FetcherMgr {
 
         return confItemVo.getValue();
     }
+    
+    
 
-    /**
+    @Override
+	public String getFileListFromServcer(String url) throws Exception {
+    	
+        // 远程地址
+        RemoteUrl remoteUrl = new RemoteUrl(url, hostList);
+
+        String fileList = restfulMgr.getStringData(String.class, remoteUrl, retryTime, retrySleepSeconds);
+        LOGGER.debug("remote server return: " + fileList);
+
+        return fileList;
+    	
+	}
+
+	/**
      * 下载配置文件, remoteUrl是 url
      *
      * @throws Exception

@@ -9,6 +9,7 @@ $("#item_submit").on("click", function (e) {
     var app = $("#app").val();
     var desc = $("#desc").val();
     var emails = $("#emails").val();
+    var iscommon = $("#iscommon").val();
 
     // 验证
     if (!desc || !app) {
@@ -22,7 +23,8 @@ $("#item_submit").on("click", function (e) {
         data: {
             "app": app,
             "desc": desc,
-            "emails": emails
+            "emails": emails,
+            "isCommon":iscommon
         }
     }).done(function (data) {
         $("#error").removeClass("hide");

@@ -1,6 +1,9 @@
 package com.baidu.disconf.client.core.processor.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -257,4 +260,20 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
             inject2OneConf(key, disconfCenterFile);
         }
     }
+
+	@Override
+	public List<String> findFileListFromServer(String url) throws Exception {
+		
+		String str = fetcherMgr.getFileListFromServcer(url);
+		
+		List<String> list = new ArrayList<String>();
+		if(str!=null && str!="" ){
+			String fileName [] = str.split(",");
+			Collections.addAll(list, fileName);
+		}
+		
+		return list;
+	}
+    
+    
 }

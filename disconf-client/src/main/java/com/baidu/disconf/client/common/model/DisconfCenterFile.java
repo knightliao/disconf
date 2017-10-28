@@ -24,6 +24,9 @@ import com.baidu.disconf.core.common.utils.OsUtil;
 public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfCenterFile.class);
+    
+    public static final String COMMONPATH = "/conf/common/";
+    public static final String LOCALPATH = "/conf/local/";
 
     // -----key: 配置文件中的项名
     // -----value: 默认值
@@ -46,8 +49,20 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
 
     // 文件类型
     private SupportFileTypeEnum supportFileTypeEnum = SupportFileTypeEnum.ANY;
+    
+    //区分文件是公共配置还是本地配置
+    private Boolean isPublicFile;
+ 
 
-    public Class<?> getCls() {
+	public Boolean getIsPublicFile() {
+		return isPublicFile;
+	}
+
+	public void setIsPublicFile(Boolean isPublicFile) {
+		this.isPublicFile = isPublicFile;
+	}
+
+	public Class<?> getCls() {
         return cls;
     }
 
@@ -156,7 +171,10 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), targetDirPath, fileName);
         }
 
-        return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), fileName);
+        String filePath = isPublicFile ? COMMONPATH:LOCALPATH ;
+        		
+        
+        return OsUtil.pathJoin(ClassLoaderUtil.getClassPath()+filePath, fileName);
     }
 
     /**
@@ -174,7 +192,8 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
             return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), targetDirPath);
         }
 
-        return ClassLoaderUtil.getClassPath();
+        String filePath = isPublicFile ? COMMONPATH:LOCALPATH ;
+        return ClassLoaderUtil.getClassPath()+filePath;
     }
 
     /**

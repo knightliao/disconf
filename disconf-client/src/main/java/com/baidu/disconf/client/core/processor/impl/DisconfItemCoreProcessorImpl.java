@@ -1,5 +1,7 @@
 package com.baidu.disconf.client.core.processor.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -222,5 +224,11 @@ public class DisconfItemCoreProcessorImpl implements DisconfCoreProcessor {
             inject2OneConf(key, disconfCenterItem);
         }
     }
+
+	@Override
+	public List<String> findFileListFromServer(String url) throws Exception {
+		return null;
+	}
+    
 
 }

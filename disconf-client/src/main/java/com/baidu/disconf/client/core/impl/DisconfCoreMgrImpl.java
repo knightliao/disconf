@@ -95,8 +95,17 @@ public class DisconfCoreMgrImpl implements DisconfCoreMgr {
             disconfCoreProcessor.inject2Conf();
         }
     }
-
+    
     @Override
+	public List<String> loadFileList(String url) throws Exception {
+    	
+    	  DisconfCoreProcessor disconfCoreProcessorFile =
+                  DisconfCoreProcessorFactory.getDisconfCoreProcessorFile(watchMgr, fetcherMgr, registry);
+    	
+		return disconfCoreProcessorFile.findFileListFromServer(url);
+	}
+
+	@Override
     public void release() {
 
         if (fetcherMgr != null) {

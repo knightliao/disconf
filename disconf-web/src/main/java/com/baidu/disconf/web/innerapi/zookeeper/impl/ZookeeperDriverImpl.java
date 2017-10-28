@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
@@ -25,6 +27,12 @@ import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.zookeeper.config.ZooConfig;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.dsp.common.exception.RemoteException;
+import com.github.knightliao.apollo.utils.data.GsonUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import lombok.core.Main;
 
 /**
  * Created by knightliao on 15/1/14.
@@ -69,17 +77,35 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
         try {
 
             path = ZooPathMgr.joinPath(path, key);
-
+            
+            
+          //将节点下面的所有的客户端标示为需要更新
             boolean isExist = ZookeeperMgr.getInstance().exists(path);
             if (!isExist) {
 
                 LOG.info(path + " not exist. not update ZK.");
-
             } else {
-                //
-                // 通知
-                //
-                ZookeeperMgr.getInstance().writePersistentUrl(path, value);
+            	
+            	
+           	 List<String>  clients = ZookeeperMgr.getInstance().getZk().getChildren(path, null);
+           	 
+           	 	for (String clent : clients) {
+               		 String cpath = ZooPathMgr.joinPath(path, clent);
+               		 boolean cIsExit = ZookeeperMgr.getInstance().exists(cpath);
+               		 if(cIsExit == true){
+               			  byte [] data = ZookeeperMgr.getInstance().getZk().getData(cpath, null, null);
+               			  String s = new String(data);
+               			  Gson gson = new Gson();
+               			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
+               			  jsonObject.addProperty(Constants.NODE_UPDATE_FLAG,Constants.STATUS_UPDATE);
+               			 
+               		      //标示为需要更新状态
+               			  ZookeeperMgr.getInstance().writePersistentUrl(cpath, jsonObject.toString());
+               		 } 
+				}
+           	 
+           	 //修改节点内容，并更新
+           	 ZookeeperMgr.getInstance().writePersistentUrl(path,value);
             }
 
         } catch (Exception e) {
@@ -88,8 +114,70 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
             throw new RemoteException("zk.notify.error", e);
         }
     }
+    
+    
 
-    /**
+    @Override
+	public void notifyNodeUpdate(String app, String env, String version, String key, String value,
+			DisConfigTypeEnum disConfigTypeEnum, String nodeName) {
+    	
+        // 获取路径
+        String baseUrlString = ZooPathMgr.getZooBaseUrl(zooConfig.getZookeeperUrlPrefix(), app, env, version);
+
+        String path = "";
+        if (disConfigTypeEnum.equals(DisConfigTypeEnum.ITEM)) {
+
+            path = ZooPathMgr.getItemZooPath(baseUrlString);
+        } else {
+            path = ZooPathMgr.getFileZooPath(baseUrlString);
+        }
+
+        try {
+
+            path = ZooPathMgr.joinPath(path, key);
+            
+            
+          //将节点下面的所有的客户端标示为需要更新
+            boolean isExist = ZookeeperMgr.getInstance().exists(path);
+            if (!isExist) {
+
+                LOG.info(path + " not exist. not update ZK.");
+            } else {
+            	
+            	 List<String>  clients = ZookeeperMgr.getInstance().getZk().getChildren(path, null);
+            	 
+            	 for (String clent : clients) {
+            		 if(clent.equals(nodeName)){
+                		 String cpath = ZooPathMgr.joinPath(path, clent);
+                		 boolean cIsExit = ZookeeperMgr.getInstance().exists(cpath);
+                		 if(cIsExit == true){
+                			  byte [] data = ZookeeperMgr.getInstance().getZk().getData(cpath, null, null);
+                			  String s = new String(data);
+                			  Gson gson = new Gson();
+                			  JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
+                			  jsonObject.addProperty(Constants.NODE_UPDATE_FLAG,Constants.STATUS_UPDATE);
+                			 
+                		      //标示为需要更新状态
+                			  ZookeeperMgr.getInstance().writePersistentUrl(cpath, jsonObject.toString());
+                		 } 
+            		 }
+				}
+            	 
+            	 //修改节点内容，并更新
+            	 ZookeeperMgr.getInstance().writePersistentUrl(path,value);
+            }
+
+        } catch (Exception e) {
+
+            LOG.error(e.toString(), e);
+            throw new RemoteException("zk.notify.error", e);
+        }
+		
+	}
+
+
+
+	/**
      * 获取分布式配置 Map
      *
      * @param app
@@ -218,15 +306,28 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
             // machine
             ZkDisconfData.ZkDisconfDataItem zkDisconfDataItem = new ZkDisconfData.ZkDisconfDataItem();
             zkDisconfDataItem.setMachine(secKey);
-
+            
             String thirdPath = curPath + "/" + secKey;
-
+            
             // value
             byte[] data = zooKeeper.getData(thirdPath, null, null);
             if (data != null) {
-                zkDisconfDataItem.setValue(new String(data, CHARSET));
+              
+                
+              //获取分布式主机下面的节点更新状态
+                String s = new String(data,CHARSET);
+ 			    Gson gson = new Gson();
+ 			    JsonObject jsonObject = gson.fromJson(s, JsonObject.class);
+ 			  
+ 			    JsonElement  jsonElement =  jsonObject.get(Constants.NODE_UPDATE_FLAG);
+ 			    String status = jsonElement.getAsString();
+ 			    JsonElement jsonElement2 = jsonObject.get(Constants.NODE_VALUE);
+ 			    String val = jsonElement2.getAsString();
+ 			    
+ 			    zkDisconfDataItem.setValue(val);
+                zkDisconfDataItem.setStatus(status);
+                
             }
-
             // add
             zkDisconfDataItems.add(zkDisconfDataItem);
         }
@@ -329,4 +430,16 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
             isInit = true;
         }
     }
+    
+    public static void main(String[] args) {
+		
+    	String  s = "key1\u003d1134454\nkey3\u003d333454";
+    	
+    	Gson gson = new Gson();
+    	 String  xxx = GsonUtils.toJson(s);
+    	JsonObject j = gson.fromJson(xxx, JsonObject.class);
+    	
+    	System.out.println(j);
+    	
+	}
 }

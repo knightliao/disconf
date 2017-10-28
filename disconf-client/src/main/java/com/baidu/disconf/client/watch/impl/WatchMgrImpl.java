@@ -10,10 +10,12 @@ import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
 import com.baidu.disconf.client.watch.WatchMgr;
 import com.baidu.disconf.client.watch.inner.DisconfSysUpdateCallback;
 import com.baidu.disconf.client.watch.inner.NodeWatcher;
+import com.baidu.disconf.core.common.constants.Constants;
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.core.common.path.ZooPathMgr;
 import com.baidu.disconf.core.common.utils.ZooUtils;
 import com.baidu.disconf.core.common.zookeeper.ZookeeperMgr;
+import com.google.gson.JsonObject;
 
 /**
  * Watch 模块的一个实现
@@ -102,7 +104,7 @@ public class WatchMgrImpl implements WatchMgr {
     /**
      * 在指定路径下创建一个临时结点
      */
-    private void makeTempChildPath(String path, String data) {
+    private String makeTempChildPath(String path, String data) {
 
         String finerPrint = DisClientComConfig.getInstance().getInstanceFingerprint();
 
@@ -112,6 +114,8 @@ public class WatchMgrImpl implements WatchMgr {
         } catch (Exception e) {
             LOGGER.error("cannot create: " + mainTypeFullStr + "\t" + e.toString());
         }
+        
+        return mainTypeFullStr;
     }
 
     /**
@@ -120,14 +124,21 @@ public class WatchMgrImpl implements WatchMgr {
     public void watchPath(DisconfCoreProcessor disconfCoreMgr, DisConfCommonModel disConfCommonModel, String keyName,
                           DisConfigTypeEnum disConfigTypeEnum, String value) throws Exception {
 
+    	
+    	JsonObject jsonObject = new JsonObject();
+    	
+    	jsonObject.addProperty(Constants.NODE_VALUE, value);
+    	jsonObject.addProperty(Constants.NODE_UPDATE_FLAG, Constants.STATUS_INIT);
+    	
         // 新建
-        String monitorPath = makeMonitorPath(disConfigTypeEnum, disConfCommonModel, keyName, value);
+        String monitorPath = makeMonitorPath(disConfigTypeEnum, disConfCommonModel, keyName, jsonObject.toString());
 
         // 进行监控
         NodeWatcher nodeWatcher =
                 new NodeWatcher(disconfCoreMgr, monitorPath, keyName, disConfigTypeEnum, new DisconfSysUpdateCallback(),
-                        debug);
+                        debug,DisClientComConfig.getInstance().getInstanceFingerprint());
         nodeWatcher.monitorMaster();
+        
     }
 
     @Override

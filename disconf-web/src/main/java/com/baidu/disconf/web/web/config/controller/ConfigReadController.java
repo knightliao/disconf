@@ -27,6 +27,7 @@ import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.disconf.web.utils.TarUtils;
 import com.baidu.disconf.web.web.config.validator.ConfigValidator;
+import com.baidu.dsp.common.annotation.NoAuth;
 import com.baidu.dsp.common.constant.WebConstants;
 import com.baidu.dsp.common.constraint.validation.PageOrderValidator;
 import com.baidu.dsp.common.controller.BaseController;
@@ -146,7 +147,6 @@ public class ConfigReadController extends BaseController {
 
         // 业务校验
         configValidator.valideConfigExist(configId);
-
         MachineListVo machineListVo = configMgr.getConfVoWithZk(configId);
 
         return buildSuccess(machineListVo);
@@ -226,5 +226,25 @@ public class ConfigReadController extends BaseController {
         header.set("Content-Disposition", "attachment; filename=" + targetFile.getName());
         header.setContentLength(res.length);
         return new HttpEntity<byte[]>(res, header);
+    }
+    
+    
+    
+    /**
+     * 根据配置获取该配置下所有节点的更新状态
+     *
+     * @param configId
+     * @param file
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/nodeList/{configId}", method = RequestMethod.POST)
+    public JsonObjectBase nodeStatusList(@PathVariable long configId){
+    	
+    	
+    	MachineListVo machineListVo = configMgr.getConfVoWithZk(configId);
+    	
+    	return null;
     }
 }

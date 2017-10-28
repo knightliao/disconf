@@ -53,7 +53,20 @@ public class App extends BaseObject<Long> {
     @Column(value = Columns.UPDATE_TIME)
     private String updateTime;
 
-    public String getName() {
+    @Column(value = Columns.ISCOMMON)
+    private Boolean isCommon;
+    
+    
+    
+    public Boolean getIsCommon() {
+		return isCommon;
+	}
+
+	public void setIsCommon(Boolean isCommon) {
+		this.isCommon = isCommon;
+	}
+
+	public String getName() {
         return name;
     }
 

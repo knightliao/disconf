@@ -75,6 +75,11 @@ public class DisInnerConfigHelper {
             throw new Exception("settings: " + DisClientConfig.ENV_NAME + "  cannot find");
         }
         LOGGER.info("SERVER " + DisClientConfig.ENV_NAME + ": " + DisClientConfig.getInstance().ENV);
+        
+        
+        LOGGER.info("SERVER disconf.common_app: "+ DisClientConfig.getInstance().COMMONAPP);
+        
+        LOGGER.info("SERVER disconf.common_version: "+ DisClientConfig.getInstance().COMMONVERSION);
 
         //
         // 是否使用远程的配置

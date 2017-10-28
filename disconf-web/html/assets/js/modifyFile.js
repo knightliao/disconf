@@ -222,12 +222,14 @@ $("#uploadChoice").on('click', 'li a', function () {
         $("#file_submit").unbind('click').on('click', function (e) {
 
             var fileContent = $("#fileContent").val();
+            var syncChoose  = $("#syncChoose").val();
 
             $.ajax({
                 type: "PUT",
                 url: "/api/web/config/filetext/" + configId,
                 data: {
-                    "fileContent": fileContent
+                    "fileContent": fileContent,
+                    "syncChoose" : syncChoose
                 }
 
             }).done(function (data) {

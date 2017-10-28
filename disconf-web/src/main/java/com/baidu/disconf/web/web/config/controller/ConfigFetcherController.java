@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,6 +71,7 @@ public class ConfigFetcherController extends BaseController {
     public JsonObjectBase getSimpleList(ConfForm confForm) {
         return getListImp(confForm, false);
     }
+    
 
     /**
      * 获取配置项 Item
@@ -148,6 +150,58 @@ public class ConfigFetcherController extends BaseController {
             throw new DocumentNotFoundException("");
         }
     }
+    
+    /**
+     * 根据给定的 APP/DEV/VERSION获取该目录下的全部文件名称
+     * @param confForm
+     * @return
+     */
+    @NoAuth
+    @RequestMapping(value = "/fileList", method = RequestMethod.GET)
+    @ResponseBody
+    public String getFileList(ConfForm confForm) {
+
+        boolean hasError = false;
+        StringBuffer stringBuffer = new StringBuffer();
+        //
+        // 校验
+        //
+        ConfigFullModel configModel = null;
+        try {
+            configModel = configValidator4Fetch.verifyConfForm(confForm, false);
+        } catch (Exception e) {
+            LOG.error(e.toString());
+            hasError = true;
+        }
+
+        if (hasError == false) {
+            try {
+                //
+            	
+            	List<Config> configs = configFetchMgr.getConfListByParameter(configModel.getApp().getId(), configModel.getEnv().getId(), configModel.getVersion(), true);
+             
+                if (configs == null || configs.size() == 0) {
+                    hasError = true;
+                    throw new DocumentNotFoundException(configModel.getKey());
+                }
+                
+               
+                for (Config config : configs) {
+                	
+                	stringBuffer.append(config.getName());
+                	stringBuffer.append(",");
+				}
+                
+
+            } catch (Exception e) {
+                LOG.error(e.toString());
+            }
+        }
+        
+        return stringBuffer.toString();
+    }
+    
+    
 
     /**
      * 下载

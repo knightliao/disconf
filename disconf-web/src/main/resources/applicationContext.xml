@@ -62,8 +62,8 @@
         <property name="emailPort" value="${EMAIL_PORT}"/>
         <property name="fromEmail" value="${DEFAULT_FROM_EMAIL}"/>
         <property name="emailReceiver" value="${EMAIL_RECEIVER}"/>
-        <property name="emailMonitorOn" value="${EMAIL_MONITOR_ON}"/>
-        <property name="checkConsistencyOn" value="${CHECK_CONSISTENCY_ON}"/>
+        <property name="emailMonitorOn" value="true"/>
+        <property name="checkConsistencyOn" value="false"/>
         <property name="domain" value="${domain}"/>
     </bean>
 

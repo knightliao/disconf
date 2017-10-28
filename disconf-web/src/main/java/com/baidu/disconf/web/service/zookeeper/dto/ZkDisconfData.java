@@ -3,6 +3,8 @@ package com.baidu.disconf.web.service.zookeeper.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.INTERNAL;
+
 /**
  * 每个配置对应的数据
  *
@@ -11,6 +13,7 @@ import java.util.List;
  */
 public class ZkDisconfData {
 
+	
     /**
      * 每个配置对应一个实例的数据
      *
@@ -24,10 +27,22 @@ public class ZkDisconfData {
 
         // 值
         private String value = "";
+        
+        //节点状态
+        private String status;
 
         private List<String> errorList = new ArrayList<String>();
+  
 
-        public String getMachine() {
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
+		}
+
+		public String getMachine() {
             return machine;
         }
 

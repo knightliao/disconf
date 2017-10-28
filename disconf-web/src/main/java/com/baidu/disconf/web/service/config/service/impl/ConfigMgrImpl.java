@@ -47,6 +47,11 @@ import com.baidu.ub.common.db.DaoPageResult;
 import com.github.knightliao.apollo.utils.data.GsonUtils;
 import com.github.knightliao.apollo.utils.io.OsUtil;
 import com.github.knightliao.apollo.utils.time.DateUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import lombok.core.Main;
 
 /**
  * @author liaoqiqi
@@ -272,20 +277,20 @@ public class ConfigMgrImpl implements ConfigMgr {
         //
         // 发送邮件通知
         //
-        String toEmails = appMgr.getEmails(config.getAppId());
-
-        if (applicationPropertyConfig.isEmailMonitorOn()) {
-            boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
-                    " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
-                            value,
-                            config.toString(),
-                            getConfigUrlHtml(config)));
-            if (isSendSuccess) {
-                return "修改成功，邮件通知成功";
-            } else {
-                return "修改成功，邮件发送失败，请检查邮箱配置";
-            }
-        }
+//        String toEmails = appMgr.getEmails(config.getAppId());
+//
+//        if (applicationPropertyConfig.isEmailMonitorOn()) {
+//            boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
+//                    " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
+//                            value,
+//                            config.toString(),
+//                            getConfigUrlHtml(config)));
+//            if (isSendSuccess) {
+//                return "修改成功，邮件通知成功";
+//            } else {
+//                return "修改成功，邮件发送失败，请检查邮箱配置";
+//            }
+//        }
 
         return "修改成功";
     }
@@ -301,7 +306,7 @@ public class ConfigMgrImpl implements ConfigMgr {
         if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
 
             zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
-                    confListVo.getKey(), GsonUtils.toJson(confListVo.getValue()),
+                    confListVo.getKey(),GsonUtils.toJson(confListVo.getValue()),
                     DisConfigTypeEnum.FILE);
 
         } else {
@@ -311,8 +316,48 @@ public class ConfigMgrImpl implements ConfigMgr {
         }
 
     }
+    
+    
 
-    /**
+    @Override
+	public void notifyZookeeper(Long configId, String nodeName) {
+
+        ConfListVo confListVo = getConfVo(configId);
+
+        if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
+
+        	String value =  GsonUtils.toJson(confListVo.getValue());
+        	
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(),value,
+                    DisConfigTypeEnum.FILE,nodeName);
+
+        }  
+		
+	}
+
+	@Override
+	public Map<String, Object> zookeeperNodeList(Long configId) {
+    	
+    	ConfListVo confListVo = getConfVo(configId);
+    	
+    	
+        if (confListVo.getTypeId().equals(DisConfigTypeEnum.FILE.getType())) {
+
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(), GsonUtils.toJson(confListVo.getValue()),
+                    DisConfigTypeEnum.FILE);
+
+        } else {
+
+            zooKeeperDriver.notifyNodeUpdate(confListVo.getAppName(), confListVo.getEnvName(), confListVo.getVersion(),
+                    confListVo.getKey(), confListVo.getValue(), DisConfigTypeEnum.ITEM);
+        }
+    	
+		return null;
+	}
+
+	/**
      * 获取配置值
      */
     @Override
@@ -411,7 +456,7 @@ public class ConfigMgrImpl implements ConfigMgr {
             errorKeyList.add(zkData);
             return errorKeyList;
         }
-
+        
         Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
         for (String keyInZk : zkMap.keySet()) {
 
@@ -543,4 +588,13 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         return machineListVo;
     }
+    
+    public static void main(String[] args) {
+    	
+    	String vaString = "";
+    	
+    			
+    	
+		
+	}
 }

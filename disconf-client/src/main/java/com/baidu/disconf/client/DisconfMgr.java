@@ -1,6 +1,10 @@
 package com.baidu.disconf.client;
 
+import java.util.ArrayList;
+ 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -13,6 +17,8 @@ import com.baidu.disconf.client.config.ConfigMgr;
 import com.baidu.disconf.client.config.DisClientConfig;
 import com.baidu.disconf.client.core.DisconfCoreFactory;
 import com.baidu.disconf.client.core.DisconfCoreMgr;
+import com.baidu.disconf.client.core.processor.DisconfCoreProcessor;
+import com.baidu.disconf.client.core.processor.DisconfCoreProcessorFactory;
 import com.baidu.disconf.client.scan.ScanFactory;
 import com.baidu.disconf.client.scan.ScanMgr;
 import com.baidu.disconf.client.store.DisconfStoreProcessorFactory;
@@ -184,6 +190,89 @@ public class DisconfMgr implements ApplicationContextAware {
 
                     if (scanMgr != null) {
                         scanMgr.reloadableScan(fileName);
+                    }
+
+                    if (disconfCoreMgr != null) {
+                        disconfCoreMgr.processFile(fileName);
+                    }
+                    LOGGER.debug("disconf reloadable file: {}", fileName);
+                }
+
+            } catch (Exception e) {
+
+                LOGGER.error(e.toString(), e);
+            }
+        }
+    }
+    
+    /**
+     * 如果用户配置没有指定配置文件则将该环境下所有的配置文件全部LOAD出来
+     * @return
+     * @throws Exception 
+     */
+    public Map<String,List<String>> loadDefultFileList(){
+    	
+    	try {
+			Map<String,List<String>> redata  = new HashMap<String,List<String>>();
+			
+			
+			//首先将公共配置的文件全部获取到
+ 
+			DisClientConfig disClientConfig = DisClientConfig.getInstance();
+			
+			if (disconfCoreMgr!= null) {
+				
+				String host = disClientConfig.getHostList().get(0);
+ 
+				//在将本地配置的文件全部获取到
+				StringBuffer localurl = new StringBuffer();
+				localurl.append("/api/config/fileList?");
+				localurl.append("app="+disClientConfig.APP+"&");
+				localurl.append("version="+disClientConfig.VERSION+"&");
+				localurl.append("env="+disClientConfig.ENV+"&");
+				localurl.append("key=0");
+				
+				List<String> localList = disconfCoreMgr.loadFileList(localurl.toString());
+				redata.put("local", localList);
+				
+				
+				//首先将公共配置的文件全部获取到
+				StringBuffer url = new StringBuffer();
+			 
+				url.append("/api/config/fileList?");
+				url.append("app="+disClientConfig.COMMONAPP+"&");
+				url.append("version="+disClientConfig.COMMONVERSION+"&");
+				url.append("env="+disClientConfig.ENV+"&");
+				url.append("key=0");
+				
+				List<String> commonList = disconfCoreMgr.loadFileList(url.toString());
+				redata.put("common", commonList);
+ 
+				return redata;
+			}
+		} catch (Exception e) {
+			LOGGER.error("无法获取远程公共配置和本地配置。",e);
+			e.printStackTrace();
+			return null;
+		}
+    	
+    	return null;
+    }
+    
+    
+    public synchronized void reloadableScan(String fileName,Boolean isPublicFile) {
+
+        if (!isFirstInit) {
+            return;
+        }
+
+        if (DisClientConfig.getInstance().ENABLE_DISCONF) {
+            try {
+
+                if (!DisClientConfig.getInstance().getIgnoreDisconfKeySet().contains(fileName)) {
+
+                    if (scanMgr != null) {
+                        scanMgr.reloadableScan(fileName,isPublicFile);
                     }
 
                     if (disconfCoreMgr != null) {

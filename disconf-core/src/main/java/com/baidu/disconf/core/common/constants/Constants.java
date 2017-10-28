@@ -38,4 +38,12 @@ public class Constants {
     public final static String ZOO_UPDATE_STRING = "UPDATE-NOTIFYING";
 
     public final static String SEP_STRING = "/";
+    
+    
+    public static final String  STATUS_INIT = "0";  //初始状态
+	public static final String  STATUS_UPDATE = "1"; //需要更新状态
+	public static final String  STATUS_REF = "2";    //需要刷新状态
+	
+	public static final String  NODE_UPDATE_FLAG = "status";
+	public static final String  NODE_VALUE = "value";
 }

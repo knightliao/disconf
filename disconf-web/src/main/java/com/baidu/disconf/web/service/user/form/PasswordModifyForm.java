@@ -32,5 +32,25 @@ public class PasswordModifyForm extends RequestFormBase {
     @NotEmpty(message = "password.empty")
     private String new_password_2;
     public static final String NEW_PASSWORD_2 = "new_password_2";
+	public String getOld_password() {
+		return old_password;
+	}
+	public void setOld_password(String old_password) {
+		this.old_password = old_password;
+	}
+	public String getNew_password() {
+		return new_password;
+	}
+	public void setNew_password(String new_password) {
+		this.new_password = new_password;
+	}
+	public String getNew_password_2() {
+		return new_password_2;
+	}
+	public void setNew_password_2(String new_password_2) {
+		this.new_password_2 = new_password_2;
+	}
+    
+    
 
 }

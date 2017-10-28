@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -23,9 +24,10 @@ public final class GsonUtils {
      * @return
      */
     public static String toJson(Object object) {
-
-        Gson gson = new Gson();
-        String json = gson.toJson(object);
+    	
+	    GsonBuilder gb =new GsonBuilder();
+	    gb.disableHtmlEscaping();
+        String json =  gb.create().toJson(object);
         return json;
     }
 

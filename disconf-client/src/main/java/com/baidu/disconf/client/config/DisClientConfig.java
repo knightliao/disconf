@@ -109,6 +109,20 @@ public final class DisClientConfig {
     public String VERSION = Constants.DEFAULT_VERSION;
 
     /**
+     * 公共APP配置
+     */
+    public static final String COMMON_APP_NAME = "disconf.common_app";
+    @DisInnerConfigAnnotation(name=DisClientConfig.COMMON_APP_NAME)
+    public String COMMONAPP;
+    
+    /**
+     * 公共配置版本
+     */
+    public static final String COMMON_VERSION_NAME = "disconf.common_version";
+    @DisInnerConfigAnnotation(name=DisClientConfig.COMMON_VERSION_NAME)
+    public String COMMONVERSION;
+    
+    /**
      * 主或备
      *
      * @author

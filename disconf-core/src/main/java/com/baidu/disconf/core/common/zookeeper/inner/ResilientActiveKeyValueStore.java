@@ -177,6 +177,8 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
             } catch (KeeperException e) {
 
+            	e.printStackTrace();
+            	
                 LOGGER.warn("exists connect lost... will retry " + retries + "\t" + e.toString());
 
                 if (retries++ == MAX_RETRIES) {

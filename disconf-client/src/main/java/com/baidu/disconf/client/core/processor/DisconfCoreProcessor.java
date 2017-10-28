@@ -1,5 +1,8 @@
 package com.baidu.disconf.client.core.processor;
 
+import java.util.List;
+import org.aspectj.ajdt.internal.core.builder.EclipseSourceContext;
+ 
 /**
  * 处理算子
  *
@@ -27,4 +30,11 @@ public interface DisconfCoreProcessor {
      * 特殊的，将数据注入到配置实体中
      */
     void inject2Conf();
+    
+    /**
+     * 
+     * @return
+     * @throws Exception
+     */
+    List<String> findFileListFromServer(String url)throws Exception;
 }

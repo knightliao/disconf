@@ -3,6 +3,7 @@ package com.baidu.disconf.core.common.zookeeper;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.chainsaw.Main;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
@@ -232,4 +233,34 @@ public class ZookeeperMgr {
 
         store.deleteNode(path);
     }
+    
+    public static void main(String[] args) throws Exception {
+		
+    	ZookeeperMgr zookeeperMgr = new ZookeeperMgr();
+    	zookeeperMgr.initInternal("127.0.0.1:2181", "/testNode", true);
+    	
+    	System.out.println("创建zookeeper节点！");
+    	
+    	String newPath ="/testNode/test1"; 
+    		
+    	
+        zookeeperMgr.exists(newPath);
+    	
+    	
+  
+    	zookeeperMgr.createEphemeralNode(newPath, "haha", CreateMode.EPHEMERAL);
+    	
+    	
+    	String paaa = "/disconf/bs_1.0_dev/file/common-test.properties/charlespc_0_6d90d520-819d-418d-8ee1-5f09f68ee4c5";
+    	
+  		byte p[] = zookeeperMgr.getZk().getData(paaa, false, null);
+		
+		String s = new String(p);
+		System.out.println(s);
+    	
+    	
+    	
+    	
+	}
+    
 }
