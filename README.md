@@ -6,6 +6,8 @@ Disconf
 [![Coverage Status](https://coveralls.io/repos/knightliao/disconf/badge.png?branch=master)](https://coveralls.io/r/knightliao/disconf?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.baidu.disconf/disconf-client/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.baidu.disconf/disconf-client)
 
+招聘：我的团队开始招聘啦！ https://shimo.im/docs/mOqakWapJlMh91WP
+
 Distributed Configuration Management Platform(分布式配置管理平台) 
 
 专注于各种「分布式系统配置管理」的「通用组件」和「通用平台」, 提供统一的「配置管理服务」
@@ -90,12 +92,10 @@ Disconf的功能特点描述图：
 
 ## 群·联系·讨论
 
-- 赞助作者: http://disconf.readthedocs.io/zh_CN/latest/others/src/sponsor.html
-- disconf技术QQ群: 239203866 
-- disconf技术QQ二群: 280712860
-- 有态度无广告的搜索引擎: https://www.sov5.com
-- 微读 - 高品质阅读: http://www.100weidu.com
-- Python中国社区: http://www.python88.com
+- 招聘：我的团队开始招聘啦！ https://shimo.im/docs/mOqakWapJlMh91WP
+- 搜索引擎: https://www.sov5.cn
+- 内容开放平台: http://open.sov5.cn
+- 今天看啥 - 高品质阅读: http://www.jintiankansha.me
 - Disconf - 分布式配置管理平台: http://github.com/knightliao/disconf
 - CanalX - 基于 `Canal` 的数据感知服务框架: http://github.com/knightliao/canalX
 - jutf - Java Unit Test Framework: https://github.com/knightliao/jutf
