@@ -90,9 +90,11 @@ Disconf的功能特点描述图：
 
 ![http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg](http://ww4.sinaimg.cn/bmiddle/60c9620fjw1est6pzqo68j208k05tjrm.jpg)
 
-## 群·联系·讨论
+## 团队招聘
 
 - 招聘：我的团队开始招聘啦！ https://shimo.im/docs/mOqakWapJlMh91WP
+
+## 我的其它作品
 - 搜索引擎: https://www.sov5.cn
 - 内容开放平台: http://open.sov5.cn
 - 今天看啥 - 高品质阅读: http://www.jintiankansha.me
