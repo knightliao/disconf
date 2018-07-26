@@ -122,7 +122,8 @@ public class StaticScannerItemMgrImpl extends StaticScannerMgrImplBase implement
 
         //
         // disConfCommonModel
-        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(disconfItem.env(), disconfItem.version());
+        DisConfCommonModel disConfCommonModel = makeDisConfCommonModel(disconfItem.app(), disconfItem.env(),
+                disconfItem.version());
         disconfCenterItem.setDisConfCommonModel(disConfCommonModel);
 
         // Disconf-web url

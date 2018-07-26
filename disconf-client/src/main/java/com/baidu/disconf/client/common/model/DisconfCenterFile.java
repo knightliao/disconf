@@ -41,8 +41,8 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     // 文件名
     private String fileName;
 
-    // 复制到指定的路径下
-    private String copy2TargetDirPath;
+    // 配置文件 指定路径下
+    private String targetDirPath;
 
     // 文件类型
     private SupportFileTypeEnum supportFileTypeEnum = SupportFileTypeEnum.ANY;
@@ -95,18 +95,18 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
         this.isTaggedWithNonAnnotationFile = isTaggedWithNonAnnotationFile;
     }
 
-    public String getCopy2TargetDirPath() {
-        return copy2TargetDirPath;
+    public String getTargetDirPath() {
+        return targetDirPath;
     }
 
-    public void setCopy2TargetDirPath(String copy2TargetDirPath) {
-        this.copy2TargetDirPath = copy2TargetDirPath;
+    public void setTargetDirPath(String targetDirPath) {
+        this.targetDirPath = targetDirPath;
     }
 
     @Override
     public String toString() {
         return "\n\tDisconfCenterFile [\n\tkeyMaps=" + keyMaps + "\n\tcls=" + cls + "\n\tfileName=" + fileName
-                + "\n\tcopy2TargetDirPath=" + copy2TargetDirPath +
+                + "\n\ttargetDirPath=" + targetDirPath +
                 super.toString() + "]";
     }
 
@@ -141,17 +141,19 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
      * 配置文件的路径
      */
     public String getFilePath() {
+
+        // 不放到classpath, 则文件路径根据 userDefineDownloadDir 来设置
         if (!DisClientConfig.getInstance().enableLocalDownloadDirInClassPath) {
             return OsUtil.pathJoin(DisClientConfig.getInstance().userDefineDownloadDir, fileName);
         }
 
-        if (copy2TargetDirPath != null) {
+        if (targetDirPath != null) {
 
-            if (copy2TargetDirPath.startsWith("/")) {
-                return OsUtil.pathJoin(copy2TargetDirPath, fileName);
+            if (targetDirPath.startsWith("/")) {
+                return OsUtil.pathJoin(targetDirPath, fileName);
             }
 
-            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), copy2TargetDirPath, fileName);
+            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), targetDirPath, fileName);
         }
 
         return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), fileName);
@@ -163,13 +165,13 @@ public class DisconfCenterFile extends DisconfCenterBaseModel {
     public String getFileDir() {
 
         // 获取相对于classpath的路径
-        if (copy2TargetDirPath != null) {
+        if (targetDirPath != null) {
 
-            if (copy2TargetDirPath.startsWith("/")) {
-                return OsUtil.pathJoin(copy2TargetDirPath);
+            if (targetDirPath.startsWith("/")) {
+                return OsUtil.pathJoin(targetDirPath);
             }
 
-            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), copy2TargetDirPath);
+            return OsUtil.pathJoin(ClassLoaderUtil.getClassPath(), targetDirPath);
         }
 
         return ClassLoaderUtil.getClassPath();

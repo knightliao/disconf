@@ -33,6 +33,11 @@ public @interface DisconfItem {
     String env() default "";
 
     /**
+     * 版本,默认为用户指定的app
+     */
+    String app() default "";
+
+    /**
      * 版本,默认为用户指定的版本
      */
     String version() default "";

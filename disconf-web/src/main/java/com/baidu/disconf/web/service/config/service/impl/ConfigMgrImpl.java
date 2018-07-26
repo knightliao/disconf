@@ -16,8 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.baidu.disconf.core.common.constants.DisConfigTypeEnum;
 import com.baidu.disconf.web.common.Constants;
@@ -113,7 +111,8 @@ public class ConfigMgrImpl implements ConfigMgr {
     public List<File> getDisconfFileList(ConfListForm confListForm) {
 
         List<Config> configList =
-                configDao.getConfigList(confListForm.getAppId(), confListForm.getEnvId(), confListForm.getVersion(),true);
+                configDao.getConfigList(confListForm.getAppId(), confListForm.getEnvId(), confListForm.getVersion(),
+                        true);
 
         // 时间作为当前文件夹
         String curTime = DateUtils.format(new Date(), DataFormatConstants.COMMON_TIME_FORMAT);
@@ -203,154 +202,6 @@ public class ConfigMgrImpl implements ConfigMgr {
     }
 
     /**
-     * 获取ZK data
-     */
-    private MachineListVo getZkData(List<ZkDisconfDataItem> datalist, Config config) {
-
-        int errorNum = 0;
-        for (ZkDisconfDataItem zkDisconfDataItem : datalist) {
-
-            if (config.getType().equals(DisConfigTypeEnum.FILE.getType())) {
-
-                List<String> errorKeyList = compareConfig(zkDisconfDataItem.getValue(), config.getValue());
-
-                if (errorKeyList.size() != 0) {
-                    zkDisconfDataItem.setErrorList(errorKeyList);
-                    errorNum++;
-                }
-            } else {
-
-                //
-                // 配置项
-                //
-
-                if (zkDisconfDataItem.getValue().trim().equals(config.getValue().trim())) {
-
-                } else {
-                    List<String> errorKeyList = new ArrayList<String>();
-                    errorKeyList.add(config.getValue().trim());
-                    zkDisconfDataItem.setErrorList(errorKeyList);
-                    errorNum++;
-                }
-            }
-        }
-
-        MachineListVo machineListVo = new MachineListVo();
-        machineListVo.setDatalist(datalist);
-        machineListVo.setErrorNum(errorNum);
-        machineListVo.setMachineSize(datalist.size());
-
-        return machineListVo;
-    }
-
-    /**
-     * 转换成配置返回
-     *
-     * @param config
-     *
-     * @return
-     */
-    private ConfListVo convert(Config config, String appNameString, String envName, ZkDisconfData zkDisconfData) {
-
-        ConfListVo confListVo = new ConfListVo();
-
-        confListVo.setConfigId(config.getId());
-        confListVo.setAppId(config.getAppId());
-        confListVo.setAppName(appNameString);
-        confListVo.setEnvName(envName);
-        confListVo.setEnvId(config.getEnvId());
-        confListVo.setCreateTime(config.getCreateTime());
-        confListVo.setModifyTime(config.getUpdateTime().substring(0, 12));
-        confListVo.setKey(config.getName());
-        // StringEscapeUtils.escapeHtml escape
-        confListVo.setValue(CodeUtils.unicodeToUtf8(config.getValue()));
-        confListVo.setVersion(config.getVersion());
-        confListVo.setType(DisConfigTypeEnum.getByType(config.getType()).getModelName());
-        confListVo.setTypeId(config.getType());
-
-        //
-        //
-        //
-        if (zkDisconfData != null) {
-
-            confListVo.setMachineSize(zkDisconfData.getData().size());
-
-            List<ZkDisconfDataItem> datalist = zkDisconfData.getData();
-
-            MachineListVo machineListVo = getZkData(datalist, config);
-
-            confListVo.setErrorNum(machineListVo.getErrorNum());
-            confListVo.setMachineList(machineListVo.getDatalist());
-            confListVo.setMachineSize(machineListVo.getMachineSize());
-        }
-
-        return confListVo;
-    }
-
-    /**
-     *
-     */
-    private List<String> compareConfig(String zkData, String dbData) {
-
-        List<String> errorKeyList = new ArrayList<String>();
-
-        Properties prop = new Properties();
-        try {
-            prop.load(IOUtils.toInputStream(dbData));
-        } catch (Exception e) {
-            LOG.error(e.toString());
-            errorKeyList.add(zkData);
-            return errorKeyList;
-        }
-
-        Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
-        for (String keyInZk : zkMap.keySet()) {
-
-            Object valueInDb = prop.get(keyInZk);
-            String zkDataStr = zkMap.get(keyInZk);
-
-            // convert zk data to utf-8
-            //zkMap.put(keyInZk, CodeUtils.unicodeToUtf8(zkDataStr));
-
-            try {
-
-                if ((zkDataStr == null && valueInDb != null) || (zkDataStr != null && valueInDb == null)) {
-                    errorKeyList.add(keyInZk);
-
-                } else {
-
-                    zkDataStr = zkDataStr.trim();
-                    boolean isEqual = true;
-
-                    if (MyStringUtils.isDouble(zkDataStr) && MyStringUtils.isDouble(valueInDb.toString())) {
-
-                        if (Math.abs(Double.parseDouble(zkDataStr) - Double.parseDouble(valueInDb.toString())) >
-                                0.001d) {
-                            isEqual = false;
-                        }
-
-                    } else {
-                        if (!zkDataStr.equals(valueInDb.toString().trim())) {
-                            isEqual = false;
-                        }
-                    }
-
-                    if (!isEqual) {
-                        errorKeyList
-                                .add(keyInZk + "\t" + DiffUtils.getDiffSimple(zkDataStr, valueInDb.toString().trim()));
-                    }
-                }
-
-            } catch (Exception e) {
-
-                LOG.warn(e.toString() + " ; " + keyInZk + " ; " + zkMap.get(keyInZk) + " ; " + valueInDb);
-            }
-        }
-
-        return errorKeyList;
-    }
-
-    /**
      * 根据 配置ID获取配置返回
      */
     @Override
@@ -407,7 +258,6 @@ public class ConfigMgrImpl implements ConfigMgr {
      * 更新 配置项/配置文件 的值
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
     public String updateItemValue(Long configId, String value) {
 
         Config config = getConfigById(configId);
@@ -438,35 +288,6 @@ public class ConfigMgrImpl implements ConfigMgr {
         }
 
         return "修改成功";
-    }
-
-    /**
-     * 主要用于邮箱发送
-     *
-     * @return
-     */
-    private String getConfigUrlHtml(Config config) {
-
-        return "<br/>点击<a href='http://" + applicationPropertyConfig.getDomain() + "/modifyFile.html?configId=" +
-                config.getId() + "'> 这里 </a> 进入查看<br/>";
-    }
-
-    /**
-     * 主要用于邮箱发送
-     *
-     * @param newValue
-     * @param identify
-     *
-     * @return
-     */
-    private String getNewValue(String newValue, String identify, String htmlClick) {
-
-        String contentString = StringEscapeUtils.escapeHtml4(identify) + "<br/>" + htmlClick + "<br/><br/> ";
-
-        String data = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>";
-        contentString = contentString + data + StringEscapeUtils.escapeHtml4(newValue);
-
-        return contentString;
     }
 
     /**
@@ -546,4 +367,180 @@ public class ConfigMgrImpl implements ConfigMgr {
         configDao.deleteItem(configId);
     }
 
+    /**
+     * 主要用于邮箱发送
+     *
+     * @return
+     */
+    private String getConfigUrlHtml(Config config) {
+
+        return "<br/>点击<a href='http://" + applicationPropertyConfig.getDomain() + "/modifyFile.html?configId=" +
+                config.getId() + "'> 这里 </a> 进入查看<br/>";
+    }
+
+    /**
+     * 主要用于邮箱发送
+     *
+     * @param newValue
+     * @param identify
+     *
+     * @return
+     */
+    private String getNewValue(String newValue, String identify, String htmlClick) {
+
+        String contentString = StringEscapeUtils.escapeHtml4(identify) + "<br/>" + htmlClick + "<br/><br/> ";
+
+        String data = "<br/><br/><br/><span style='color:#FF0000'>New value:</span><br/>";
+        contentString = contentString + data + StringEscapeUtils.escapeHtml4(newValue);
+
+        return contentString;
+    }
+
+    /**
+     *
+     */
+    private List<String> compareConfig(String zkData, String dbData) {
+
+        List<String> errorKeyList = new ArrayList<String>();
+
+        Properties prop = new Properties();
+        try {
+            prop.load(IOUtils.toInputStream(dbData));
+        } catch (Exception e) {
+            LOG.error(e.toString());
+            errorKeyList.add(zkData);
+            return errorKeyList;
+        }
+
+        Map<String, String> zkMap = GsonUtils.parse2Map(zkData);
+        for (String keyInZk : zkMap.keySet()) {
+
+            Object valueInDb = prop.get(keyInZk);
+            String zkDataStr = zkMap.get(keyInZk);
+
+            // convert zk data to utf-8
+            //zkMap.put(keyInZk, CodeUtils.unicodeToUtf8(zkDataStr));
+
+            try {
+
+                if ((zkDataStr == null && valueInDb != null) || (zkDataStr != null && valueInDb == null)) {
+                    errorKeyList.add(keyInZk);
+
+                } else {
+
+                    zkDataStr = zkDataStr.trim();
+                    boolean isEqual = true;
+
+                    if (MyStringUtils.isDouble(zkDataStr) && MyStringUtils.isDouble(valueInDb.toString())) {
+
+                        if (Math.abs(Double.parseDouble(zkDataStr) - Double.parseDouble(valueInDb.toString())) >
+                                0.001d) {
+                            isEqual = false;
+                        }
+
+                    } else {
+                        if (!zkDataStr.equals(valueInDb.toString().trim())) {
+                            isEqual = false;
+                        }
+                    }
+
+                    if (!isEqual) {
+                        errorKeyList
+                                .add(keyInZk + "\t" + DiffUtils.getDiffSimple(zkDataStr, valueInDb.toString().trim()));
+                    }
+                }
+
+            } catch (Exception e) {
+
+                LOG.warn(e.toString() + " ; " + keyInZk + " ; " + zkMap.get(keyInZk) + " ; " + valueInDb);
+            }
+        }
+
+        return errorKeyList;
+    }
+
+    /**
+     * 转换成配置返回
+     *
+     * @param config
+     *
+     * @return
+     */
+    private ConfListVo convert(Config config, String appNameString, String envName, ZkDisconfData zkDisconfData) {
+
+        ConfListVo confListVo = new ConfListVo();
+
+        confListVo.setConfigId(config.getId());
+        confListVo.setAppId(config.getAppId());
+        confListVo.setAppName(appNameString);
+        confListVo.setEnvName(envName);
+        confListVo.setEnvId(config.getEnvId());
+        confListVo.setCreateTime(config.getCreateTime());
+        confListVo.setModifyTime(config.getUpdateTime().substring(0, 12));
+        confListVo.setKey(config.getName());
+        // StringEscapeUtils.escapeHtml escape
+        confListVo.setValue(CodeUtils.unicodeToUtf8(config.getValue()));
+        confListVo.setVersion(config.getVersion());
+        confListVo.setType(DisConfigTypeEnum.getByType(config.getType()).getModelName());
+        confListVo.setTypeId(config.getType());
+
+        //
+        //
+        //
+        if (zkDisconfData != null) {
+
+            confListVo.setMachineSize(zkDisconfData.getData().size());
+
+            List<ZkDisconfDataItem> datalist = zkDisconfData.getData();
+
+            MachineListVo machineListVo = getZkData(datalist, config);
+
+            confListVo.setErrorNum(machineListVo.getErrorNum());
+            confListVo.setMachineList(machineListVo.getDatalist());
+            confListVo.setMachineSize(machineListVo.getMachineSize());
+        }
+
+        return confListVo;
+    }
+
+    /**
+     * 获取ZK data
+     */
+    private MachineListVo getZkData(List<ZkDisconfDataItem> datalist, Config config) {
+
+        int errorNum = 0;
+        for (ZkDisconfDataItem zkDisconfDataItem : datalist) {
+
+            if (config.getType().equals(DisConfigTypeEnum.FILE.getType())) {
+
+                List<String> errorKeyList = compareConfig(zkDisconfDataItem.getValue(), config.getValue());
+
+                if (errorKeyList.size() != 0) {
+                    zkDisconfDataItem.setErrorList(errorKeyList);
+                    errorNum++;
+                }
+            } else {
+
+                //
+                // 配置项
+                //
+
+                if (zkDisconfDataItem.getValue().trim().equals(config.getValue().trim())) {
+
+                } else {
+                    List<String> errorKeyList = new ArrayList<String>();
+                    errorKeyList.add(config.getValue().trim());
+                    zkDisconfDataItem.setErrorList(errorKeyList);
+                    errorNum++;
+                }
+            }
+        }
+
+        MachineListVo machineListVo = new MachineListVo();
+        machineListVo.setDatalist(datalist);
+        machineListVo.setErrorNum(errorNum);
+        machineListVo.setMachineSize(datalist.size());
+
+        return machineListVo;
+    }
 }

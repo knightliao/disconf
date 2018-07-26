@@ -84,7 +84,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                     }
                     addDependency(dynamic, placeholder);
                 } else {
-                    logger.warn("dynamic property outside bean property value - ignored: " + strVal);
+                    logger.debug("dynamic property outside bean property value - ignored: " + strVal);
                 }
                 startIndex = endIndex - this.placeholderPrefix.length() + this.placeholderPrefix.length() +
                         this.placeholderSuffix.length();

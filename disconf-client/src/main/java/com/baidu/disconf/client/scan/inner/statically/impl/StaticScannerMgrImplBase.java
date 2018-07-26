@@ -12,12 +12,16 @@ public class StaticScannerMgrImplBase {
     /**
      * env/version 默认是应用整合设置的，但用户可以在配置中更改它
      */
-    protected static DisConfCommonModel makeDisConfCommonModel(String env, String version) {
+    protected static DisConfCommonModel makeDisConfCommonModel(String app, String env, String version) {
 
         DisConfCommonModel disConfCommonModel = new DisConfCommonModel();
 
         // app
-        disConfCommonModel.setApp(DisClientConfig.getInstance().APP);
+        if (!app.isEmpty()) {
+            disConfCommonModel.setApp(app);
+        } else {
+            disConfCommonModel.setApp(DisClientConfig.getInstance().APP);
+        }
 
         // env
         if (!env.isEmpty()) {
