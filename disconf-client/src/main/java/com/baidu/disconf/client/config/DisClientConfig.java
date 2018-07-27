@@ -1,15 +1,14 @@
 package com.baidu.disconf.client.config;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
 import com.baidu.disconf.client.support.DisconfAutowareConfig;
 import com.baidu.disconf.core.common.constants.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Disconf Client的用户配置文件
@@ -78,6 +77,13 @@ public final class DisClientConfig {
 
         isLoaded = true;
     }
+
+    ///**
+    // * 本地使用的host，暂时不用。
+    // */
+    //public static final String HOST_NAME = "disconf.host";
+    //@DisInnerConfigAnnotation(name = DisClientConfig.HOST_NAME)
+    //public String HOST;
 
     /**
      * 配置文件服务器 HOST
