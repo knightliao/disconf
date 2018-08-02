@@ -1,0 +1,38 @@
+/************************* 页码 ***************************/
+.page-box{
+    height: 50px;
+    text-align: center;
+    font-size: 12px;
+    overflow: hidden;
+}
+.page-box .page-list{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.page-box li{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.page-box .pages,
+.page-box .turnPage,
+.page-box .go{
+    border: 1px solid #dcdcdc;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.page-box .total_num{
+    margin-right: 10px;
+}
+.page-box .pages.hover{
+    background: #dcdcdc;
+    color: #FFF;
+}
+.page-box .page-input{
+    width: 30px;
+    height: 28px;
+    text-align: center;
+}
+
+/**** layer弹出层padding *****/
+.layui-layer-content{padding: 20px;}

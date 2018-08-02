@@ -12,6 +12,7 @@
                 <value>classpath:messages/config-controller-info</value>
                 <value>classpath:messages/app-service-info</value>
                 <value>classpath:messages/app-controller-info</value>
+                <value>classpath:messages/user-service-info</value>
             </list>
         </property>
         <property name="useCodeAsDefaultMessage" value="false"/>

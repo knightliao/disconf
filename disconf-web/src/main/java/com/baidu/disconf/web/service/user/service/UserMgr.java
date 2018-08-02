@@ -1,10 +1,14 @@
 package com.baidu.disconf.web.service.user.service;
 
-import java.util.List;
-
 import com.baidu.disconf.web.service.user.bo.User;
 import com.baidu.disconf.web.service.user.dto.Visitor;
+import com.baidu.disconf.web.service.user.form.UserAddForm;
+import com.baidu.disconf.web.service.user.form.UserListForm;
+import com.baidu.disconf.web.service.user.form.UserModifyForm;
+import com.baidu.disconf.web.service.user.form.UserProfileForm;
+import com.baidu.disconf.web.service.user.vo.UserListVo;
 import com.baidu.disconf.web.service.user.vo.VisitorVo;
+import com.baidu.ub.common.db.DaoPageResult;
 
 /**
  * @author liaoqiqi
@@ -21,23 +25,22 @@ public interface UserMgr {
 
     VisitorVo getCurVisitor();
 
-    User getUser(Long userId);
+    UserListVo getUser(Long userId);
+    User getUserByName(String name);
 
     /**
      * @return
      */
-    Long create(User user);
+    Long create(UserAddForm userAddForm);
 
-    /**
-     * @param user
-     */
-    void create(List<User> user);
 
+    boolean delete(Long userId);
+    void update(UserModifyForm userModifyForm);
+    void updateProfile(UserProfileForm userProfileForm);
     /**
      * @return
      */
-    List<User> getAll();
-
+    DaoPageResult<UserListVo> getUserList(UserListForm userListForm);
     /**
      * 为某个user添加一个app
      *

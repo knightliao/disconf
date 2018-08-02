@@ -29,14 +29,8 @@ public class RedisLoginImplMock implements RedisLogin {
 
         Long userId = 1L;
 
-        User user = userMgr.getUser(userId);
+        return userMgr.getVisitor(userId);
 
-        Visitor visitor = new Visitor();
-        visitor.setId(userId);
-        visitor.setLoginUserId(userId);
-        visitor.setLoginUserName(user.getName());
-
-        return visitor;
     }
 
     @Override

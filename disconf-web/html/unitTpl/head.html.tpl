@@ -11,10 +11,11 @@
         <![endif]>
         <link rel="stylesheet" href="dep/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/project.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/common.css" />
     </head>
 
     <body>
-        
+
         <div class="navbar navbar-fixed-top clearfix">
             <div class="navbar-inner zu-top">
                 <div class="container">
@@ -33,13 +34,25 @@
                                 <i class="icon-circle-arrow-up  icon-white"></i> <b>GitHub</b>
                             </button>
                         </form>
-                        
+
                         <ul class="nav pull-right" >
-                            
+
                             <div class="login-yes"  style="display:none;padding:10px;">
+                                <li style="display:none;" id="userRoleManage">
+                                    <a href="/user_role_manage.html">
+                                        <span class="zu-top-nav-link">用户权限管理</span>
+                                    </a>
+                                </li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <li style="display:inline;">
-                                    <a href="#">
+                                    <a href="/user_profile_modify.html">
                                         <span class="zu-top-nav-link loginName" id="username"></span>
+                                    </a>
+                                </li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <li style="display:inline;">
+                                    <a href="/config_history.html">
+                                        <span class="zu-top-nav-link">历史配置记录</span>
                                     </a>
                                 </li>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -66,17 +79,16 @@
                                     </a>
                                 </li>
                             </div>
-                            
+
                             <div class="login-no"  style="padding:10px;">
                                 <li style="display:inline;">
                                     <a href="/login.html"><span class="zu-top-nav-link">登录</span></a>
-                                </li>   
+                                </li>
                             </div>
-                            
+
                         </ul>
                     </div>
                 </div>
-                
+
             </div>
         </div>
-    

@@ -437,7 +437,14 @@ Util.param.getConfigId = function () {
     var id = ids ? ids[1] : '';
     return id;
 };
-
+/*
+ * 获取location中search的值 @return {string} value 返回configId
+ */
+Util.param.getUserId = function () {
+    var ids = /userId=(\d+)&?/.exec(location.search);
+    var id = ids ? ids[1] : '';
+    return id;
+};
 /*
  * 获取location中path的值 @return {string} value 返回pageName
  */

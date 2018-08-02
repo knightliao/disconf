@@ -12,7 +12,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  * @author liaoqiqi
  * @version 2013-11-28
  */
-@Table(db = DB.DB_NAME, name = "user", keyColumn = Columns.USER_ID)
+@Table(db = DB.DB_NAME, name = "user_role", keyColumn = Columns.USER_ID)
 public class User extends BaseObject<Long> {
 
     private static final long serialVersionUID = 1L;
@@ -22,8 +22,8 @@ public class User extends BaseObject<Long> {
     private String name;
 
     // token
-    @Column(value = Columns.TOKEN)
-    private String token;
+//    @Column(value = Columns.TOKEN)
+//    private String token;
 
     // 密码
     @Column(value = Columns.PASSWORD)
@@ -47,13 +47,13 @@ public class User extends BaseObject<Long> {
         this.name = name;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+//    public String getToken() {
+//        return token;
+//    }
+//
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 
     public String getPassword() {
         return password;
@@ -83,8 +83,6 @@ public class User extends BaseObject<Long> {
     public String toString() {
         return "User{" +
                    "name='" + name + '\'' +
-                   ", token='" + token + '\'' +
-                   ", password='" + password + '\'' +
                    ", ownApps='" + ownApps + '\'' +
                    ", roleId=" + roleId +
                    '}';

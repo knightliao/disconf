@@ -1,0 +1,78 @@
+<%= page.basehead %>
+
+<title>Disconf - 分布式配置管理平台</title>
+
+<%= page.head %>
+
+
+    <div id="Wrapper" class="clearfix">
+    <div id="Main" style="margin-top:50px;">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <ul class="breadcrumb" style="background-color:#fff;">
+                    <li>
+                        <a href="/main.html">主页</a> /
+                    </li>
+                    <li>
+                        <span id="currentData"></span>
+                    </li>
+                    <li class="active">
+                        用户资料修改
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <div class="content">
+
+                        <form id="form" class="private-form clearfix">
+                            <h2 class="autoPush-detail-title">用户资料修改</h2>
+                            <input id="userId" type="hidden"/>
+                            <p class="private-item">
+                                <span class="private-item-key">用户名：</span>
+                                <span id="name" class="private-item-value"></span>
+                            </p>
+
+                            <div class="private-item">
+                                <span class="private-item-key">密码:</span>
+                                <input id="password" type="password" class="private-item-value"/>
+                            </div>
+                            <div class="private-item">
+                                <span class="private-item-key">确认密码:</span>
+                                <input id="passwordConfirm" type="password" class="private-item-value"/>
+                            </div>
+                            <div id="error" class="alert alert-warning hide" role="alert">
+                                表单选项不能为空或填写格式错误！
+                            </div>
+                            <div>
+                                <button id="submit" class="private-submit" onclick="return false;">
+                                    保存
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 详细信息单行模板-->
+<div id="tItemTpl" class="hide">
+    <li style="font-size:13px;overflow-wrap: break-word;word-wrap: break-word;" class="{2}">
+        <a href="{1}">{0}</a>
+    </li>
+</div>
+
+
+<%= page.foot %>
+
+        <script src="assets/js/userProfileModify.js"></script>
+
+<%= page.basefoot %>
+
