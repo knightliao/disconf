@@ -10,6 +10,8 @@ public class CodeUtils {
 
     protected static final Logger LOG = LoggerFactory.getLogger(CodeUtils.class);
 
+    private static final int SHIFT = 4;
+
     /**
      * utf-8 转换成 unicode
      */
@@ -26,10 +28,17 @@ public class CodeUtils {
                 int j = (int) myBuffer[i] - 65248;
                 sb.append((char) j);
             } else {
-                int chr1 = (char) myBuffer[i];
-                String hexS = Integer.toHexString(chr1);
-                String unicode = "\\u" + hexS;
-                sb.append(unicode.toLowerCase());
+                int chr1 = myBuffer[i] & 0x0FFFF;
+
+                //@see Integer::toUnsignedString0
+                int mag   = Integer.SIZE - Integer.numberOfLeadingZeros(chr1);
+                int chars = Math.max(((mag + (SHIFT - 1)) / SHIFT), 1);
+
+                sb.append("\\u");
+                for (int j = 0; j < SHIFT - chars; j++) {
+                    sb.append('0');
+                }
+                sb.append(Integer.toHexString(chr1).toLowerCase());
             }
         }
         return sb.toString();

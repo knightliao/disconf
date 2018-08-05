@@ -511,9 +511,10 @@ public class ConfigMgrImpl implements ConfigMgr {
         int errorNum = 0;
         for (ZkDisconfDataItem zkDisconfDataItem : datalist) {
 
+            String value = CodeUtils.unicodeToUtf8(config.getValue());
             if (config.getType().equals(DisConfigTypeEnum.FILE.getType())) {
 
-                List<String> errorKeyList = compareConfig(zkDisconfDataItem.getValue(), config.getValue());
+                List<String> errorKeyList = compareConfig(zkDisconfDataItem.getValue(), value);
 
                 if (errorKeyList.size() != 0) {
                     zkDisconfDataItem.setErrorList(errorKeyList);
@@ -525,11 +526,11 @@ public class ConfigMgrImpl implements ConfigMgr {
                 // 配置项
                 //
 
-                if (zkDisconfDataItem.getValue().trim().equals(config.getValue().trim())) {
+                if (zkDisconfDataItem.getValue().trim().equals(value.trim())) {
 
                 } else {
                     List<String> errorKeyList = new ArrayList<String>();
-                    errorKeyList.add(config.getValue().trim());
+                    errorKeyList.add(value.trim());
                     zkDisconfDataItem.setErrorList(errorKeyList);
                     errorNum++;
                 }
