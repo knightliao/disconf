@@ -65,7 +65,8 @@
    (整个公司所有产品线均在使用)
 -  新东方在线
 -  深圳斯凯荣科技
--  `更多 <https://github.com/knightliao/disconf/issues/18>`__
+-  `轻轻家教<https://www.changingedu.com>`_（一对一家教辅导）
+-  `更多 <https://github.com/knightliao/disconf/issues/18>`__
 
 正在关注的公司列表
 ------------------
