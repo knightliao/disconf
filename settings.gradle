@@ -1,0 +1,4 @@
+rootProject.name = 'disconf-base'
+include ':disconf-client'
+include ':disconf-core'
+

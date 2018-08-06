@@ -13,7 +13,7 @@ public enum SupportFileTypeEnum {
     /**
      * 支持properties 特殊处理，支持非properties任意处理
      */
-    PROPERTIES(0, "properties"), XML(1, "xml"), ANY(3, "*");
+    PROPERTIES(0, "properties"), XML(1, "xml"), YML(2, "yml"), ANY(3, "*");
 
     private int type = 0;
     private String modelName = null;
