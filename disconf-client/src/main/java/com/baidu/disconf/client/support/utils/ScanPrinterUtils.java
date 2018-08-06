@@ -33,13 +33,12 @@ public class ScanPrinterUtils {
         LOGGER.info("Now we will print store map......");
 
         Store store = reflections.getStore();
-        Map<String/* indexName */, Multimap<String, String>> storeMap = store.getStoreMap();
-        for (String indexName : storeMap.keySet()) {
+        for (String indexName : store.keySet()) {
 
             LOGGER.info("====================================");
             LOGGER.info("indexName:" + indexName);
 
-            Multimap<String, String> multimap = storeMap.get(indexName);
+            Multimap<String, String> multimap = store.get(indexName);
 
             for (String firstName : multimap.keySet()) {
                 Collection<String> lastNames = multimap.get(firstName);

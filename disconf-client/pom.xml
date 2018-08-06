@@ -77,7 +77,7 @@
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.9.9-RC1</version>
+            <version>0.9.10</version>
         </dependency>
 
         <dependency>
@@ -128,7 +128,7 @@
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock</artifactId>
             <scope>test</scope>
-            <!-- Include this if you have dependency conflicts for Guava, 
+            <!-- Include this if you have dependency conflicts for Guava,
                 Jetty, Jackson or Apache HTTP Client -->
             <classifier>standalone</classifier>
         </dependency>
