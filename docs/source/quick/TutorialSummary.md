@@ -172,7 +172,7 @@ TutorialSummary 分布式配置系统功能概述
 - 支持 自动化校验配置一致性。
 - 简单权限控制
 
-详见：[Tutorial6](../../tutorial-web/Tutorial6.html)
+详见：[Tutorial6](../../tutorial-web/src/Tutorial6.html)
 
 ![](http://ww3.sinaimg.cn/mw1024/60c9620fgw1ekdeid28pmj20rc0fkdj9.jpg)
 

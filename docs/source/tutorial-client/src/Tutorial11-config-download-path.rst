@@ -47,7 +47,7 @@ Tutorial 11 配置文件下载地址讨论
    disconf.user\_define\_download\_dir 目录 和 classpath 两个目录下。
 #. targetDirPath
    值说明：以"/"开头则是系统的全路径，否则则是相对于classpath的路径，默认是classpath根路径。注意：根路径要注意是否有权限，否则会出现找不到路径，推荐采用相对路径。
-#. 配置说明看这里 `config <../../config/client-config.html>`__
+#. 配置说明看这里 `config <../../config/src/client-config.html>`__
 
 问题二 不想下载到classpath目录下
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
