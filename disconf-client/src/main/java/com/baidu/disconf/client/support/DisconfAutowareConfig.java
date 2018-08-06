@@ -19,14 +19,18 @@ import com.baidu.disconf.client.support.utils.ConfigLoaderUtils;
  * @version 2014-6-6
  */
 public final class DisconfAutowareConfig {
-
+	
     private DisconfAutowareConfig() {
-
+    	
     }
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(DisconfAutowareConfig.class);
-
-    /**
+    
+    private static PlaceholderResolver resolver = new PropertyPlaceholderConfigurerResolver();
+    
+    private static PropertyPlaceholderHelper propertyPlaceholderHelper = new PropertyPlaceholderHelper();
+    
+	/**
      * 先用TOMCAT模式进行导入配置文件，若找不到，则用项目目录模式进行导入
      */
     private static Properties getProperties(final String propertyFilePath) throws Exception {
@@ -127,7 +131,7 @@ public final class DisconfAutowareConfig {
 
                         String defaultValue = config.defaultValue();
                         value = prop.getProperty(name, defaultValue);
-
+                        value = propertyPlaceholderHelper.parseStringValue(value, resolver);
                         // using disconf as prefix to avoid env confusion
                         if (value.equals(defaultValue) && name != null) {
                             if (name.contains("disconf.")) {
