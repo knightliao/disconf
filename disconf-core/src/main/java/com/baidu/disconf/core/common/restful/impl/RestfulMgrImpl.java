@@ -1,5 +1,7 @@
 package com.baidu.disconf.core.common.restful.impl;
 
+import com.google.common.base.Strings;
+
 import java.io.File;
 import java.net.URL;
 
@@ -12,7 +14,6 @@ import com.baidu.disconf.core.common.restful.core.UnreliableInterface;
 import com.baidu.disconf.core.common.restful.retry.RetryStrategy;
 import com.baidu.disconf.core.common.restful.type.FetchConfFile;
 import com.baidu.disconf.core.common.restful.type.RestfulGet;
-import com.baidu.disconf.core.common.utils.ClassLoaderUtil;
 import com.baidu.disconf.core.common.utils.MyStringUtils;
 import com.baidu.disconf.core.common.utils.OsUtil;
 import com.baidu.disconf.core.common.utils.http.HttpClientUtil;
@@ -103,20 +104,16 @@ public class RestfulMgrImpl implements RestfulMgr {
         try {
 
             // 可重试的下载
-            File tmpFilePathUniqueFile = retryDownload(localFileDirTemp, fileName, remoteUrl, retryTimes,
-                    retrySleepSeconds);
+            File tmpFilePathUniqueFile = retryDownload(localFileDirTemp, fileName, remoteUrl, retryTimes, retrySleepSeconds);
 
-            // 将 tmp file copy localFileDir
-            localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, localFileDir, fileName, false);
+            // 拷贝配置文件至用户自定义路径
+            if (!Strings.isNullOrEmpty(localFileDir) && new File(localFileDir).exists()) {
+                localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, localFileDir, fileName, false);
+            }
 
-            // mv 到指定目录
-            if (targetDirPath != null) {
-
-                //
-                if (enableLocalDownloadDirInClassPath || !targetDirPath.equals(ClassLoaderUtil.getClassPath
-                        ())) {
-                    localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, targetDirPath, fileName, true);
-                }
+            // 移动配置文件到应用CLASSPATH路径下
+            if (targetDirPath != null && enableLocalDownloadDirInClassPath) {
+                localFile = transfer2SpecifyDir(tmpFilePathUniqueFile, targetDirPath, fileName, true);
             }
 
             LOGGER.debug("Move to: " + localFile.getAbsolutePath());
@@ -169,6 +166,7 @@ public class RestfulMgrImpl implements RestfulMgr {
             retrySleepSeconds)
             throws Exception {
 
+        //default disconf temp file path
         if (localFileDirTemp == null) {
             localFileDirTemp = "./disconf/download";
         }

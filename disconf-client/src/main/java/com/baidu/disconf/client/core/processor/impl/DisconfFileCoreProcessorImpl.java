@@ -129,7 +129,7 @@ public class DisconfFileCoreProcessorImpl implements DisconfCoreProcessor {
         }
 
         //
-        // 注入到仓库中
+        // 注入到仓库中，Reload非注解形式bean属性值
         //
         disconfStoreProcessor.inject2Store(fileName, new DisconfValue(null, dataMap));
         LOGGER.debug("inject ok.");

@@ -49,9 +49,8 @@ public class FetcherMgrImpl implements FetcherMgr {
     // 创建对象
     //
     public FetcherMgrImpl(RestfulMgr restfulMgr, int retryTime, int retrySleepSeconds,
-                          boolean enableLocalDownloadDirInClassPath, String localDownloadDir, String
-                                  localDownloadDirTemp, List<String>
-                                  hostList) {
+                          boolean enableLocalDownloadDirInClassPath, String localDownloadDir,
+                          String localDownloadDirTemp, List<String> hostList) {
 
         this.restfulMgr = restfulMgr;
 

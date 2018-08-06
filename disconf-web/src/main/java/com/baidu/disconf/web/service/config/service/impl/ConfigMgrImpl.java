@@ -22,6 +22,7 @@ import com.baidu.disconf.web.common.Constants;
 import com.baidu.disconf.web.config.ApplicationPropertyConfig;
 import com.baidu.disconf.web.innerapi.zookeeper.ZooKeeperDriver;
 import com.baidu.disconf.web.service.app.bo.App;
+import com.baidu.disconf.web.service.app.dao.AppDao;
 import com.baidu.disconf.web.service.app.service.AppMgr;
 import com.baidu.disconf.web.service.config.bo.Config;
 import com.baidu.disconf.web.service.config.dao.ConfigDao;
@@ -32,6 +33,7 @@ import com.baidu.disconf.web.service.config.service.ConfigMgr;
 import com.baidu.disconf.web.service.config.vo.ConfListVo;
 import com.baidu.disconf.web.service.config.vo.MachineListVo;
 import com.baidu.disconf.web.service.env.bo.Env;
+import com.baidu.disconf.web.service.env.dao.EnvDao;
 import com.baidu.disconf.web.service.env.service.EnvMgr;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData;
 import com.baidu.disconf.web.service.zookeeper.dto.ZkDisconfData.ZkDisconfDataItem;
@@ -59,6 +61,12 @@ public class ConfigMgrImpl implements ConfigMgr {
 
     @Autowired
     private ConfigDao configDao;
+
+    @Autowired
+    private AppDao appDao;
+
+    @Autowired
+    private EnvDao envDao;
 
     @Autowired
     private AppMgr appMgr;
@@ -263,6 +271,9 @@ public class ConfigMgrImpl implements ConfigMgr {
         Config config = getConfigById(configId);
         String oldValue = config.getValue();
 
+        App app = appDao.get(config.getAppId());
+        Env env = envDao.get(config.getEnvId());
+
         //
         // 配置数据库的值 encode to db
         //
@@ -276,7 +287,7 @@ public class ConfigMgrImpl implements ConfigMgr {
 
         if (applicationPropertyConfig.isEmailMonitorOn()) {
             boolean isSendSuccess = logMailBean.sendHtmlEmail(toEmails,
-                    " config update", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
+                    " [" +File.separator + app.getName() + File.separator + env.getName() + File.separator + config.getVersion() + File.separator + config.getName() + "] update !", DiffUtils.getDiff(CodeUtils.unicodeToUtf8(oldValue),
                             value,
                             config.toString(),
                             getConfigUrlHtml(config)));

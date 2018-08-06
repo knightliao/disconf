@@ -9,7 +9,6 @@
         <property name="clientList">
             <list>
                 <ref bean="redisClientDsp1"/>
-                <ref bean="redisClientDsp2"/>
             </list>
         </property>
         <property name="retryTimes">   <!-- 多写随机读策略重试次数 -->
@@ -50,28 +49,28 @@
         </constructor-arg>
     </bean>
 
-    <bean id="redisClientConfig2" class="com.github.knightliao.apollo.redis.config.RedisHAClientConfig">
-        <property name="cacheName">
-            <value>${redis.group1.client2.name}</value>
-        </property>
-        <property name="redisServerHost">
-            <value>${redis.group1.client2.host}</value>
-        </property>
-        <property name="redisServerPort">
-            <value>${redis.group1.client2.port}</value>
-        </property>
-        <property name="timeout">
-            <value>${redis.group1.client2.timeout}</value>
-        </property>
-        <property name="redisAuthKey">
-            <value>${redis.group1.client2.password}</value>
-        </property>
-    </bean>
+    <!--<bean id="redisClientConfig2" class="com.github.knightliao.apollo.redis.config.RedisHAClientConfig">-->
+        <!--<property name="cacheName">-->
+            <!--<value>${redis.group1.client2.name}</value>-->
+        <!--</property>-->
+        <!--<property name="redisServerHost">-->
+            <!--<value>${redis.group1.client2.host}</value>-->
+        <!--</property>-->
+        <!--<property name="redisServerPort">-->
+            <!--<value>${redis.group1.client2.port}</value>-->
+        <!--</property>-->
+        <!--<property name="timeout">-->
+            <!--<value>${redis.group1.client2.timeout}</value>-->
+        <!--</property>-->
+        <!--<property name="redisAuthKey">-->
+            <!--<value>${redis.group1.client2.password}</value>-->
+        <!--</property>-->
+    <!--</bean>-->
 
-    <bean id="redisClientDsp2" class="com.github.knightliao.apollo.redis.RedisClient">
-        <constructor-arg>
-            <ref bean="redisClientConfig2"/>
-        </constructor-arg>
-    </bean>
+    <!--<bean id="redisClientDsp2" class="com.github.knightliao.apollo.redis.RedisClient">-->
+        <!--<constructor-arg>-->
+            <!--<ref bean="redisClientConfig2"/>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
 
 </beans>

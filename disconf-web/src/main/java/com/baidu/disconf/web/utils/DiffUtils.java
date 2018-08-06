@@ -88,7 +88,8 @@ public class DiffUtils {
                     }
                 }
 
-                return contentString + diff + oldValue + newValue;
+//                return contentString + diff + oldValue + newValue;
+                return diff + oldValue + newValue + htmlClick;
             }
 
         } catch (IOException e) {

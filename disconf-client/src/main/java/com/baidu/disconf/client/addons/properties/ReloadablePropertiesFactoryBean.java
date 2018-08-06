@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,14 +60,16 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
             filename = filename.trim();
 
             String realFileName = getFileName(filename);
+            String relativeFilePath = getFileRelativePath(filename);
 
             //
             // register to disconf
             //
-            DisconfMgr.getInstance().reloadableScan(realFileName);
+            DisconfMgr.getInstance().reloadableScan(realFileName,relativeFilePath);
 
             //
             // only properties will reload
+            // TODO 是否可以考虑支持多类型配置文件
             //
             String ext = FilenameUtils.getExtension(filename);
             if (ext.equals("properties")) {
@@ -114,6 +117,30 @@ public class ReloadablePropertiesFactoryBean extends PropertiesFactoryBean imple
                 }
 
             }
+        }
+        return null;
+    }
+
+    private String getFileRelativePath(String fileName){
+        if (fileName != null) {
+            int index = fileName.indexOf(':');
+            if (index < 0) {
+                return fileName;
+            } else {
+                fileName = fileName.substring(index + 1);
+            }
+            //配置文件应该使用相对路径，此操作避免读取系统绝对路径
+            if(fileName.startsWith("/")){
+                fileName = fileName.substring(1);
+            }
+            //判断是否包含目录
+            if(fileName.indexOf("/") > 0){
+                fileName = fileName.substring(0,fileName.lastIndexOf("/"));
+            }else{
+                return "";
+            }
+
+            return fileName;
         }
         return null;
     }

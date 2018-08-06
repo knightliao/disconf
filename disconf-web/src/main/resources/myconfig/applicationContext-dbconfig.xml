@@ -12,32 +12,52 @@
     <!-- onedb configure start -->
 
     <bean id="onedbDataSource" abstract="true"
-          class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass">
-            <value>${jdbc.driverClassName}</value>
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+
+        <property name="filters">
+            <value>${jdbc.filters}</value>
         </property>
-        <property name="initialPoolSize">
-            <value>${jdbc.initialPoolSize}</value>
+        <property name="maxActive">
+            <value>${jdbc.maxActive}</value>
         </property>
-        <property name="maxPoolSize">
-            <value>${jdbc.maxPoolSize}</value>
+        <property name="initialSize">
+            <value>${jdbc.initialSize}</value>
         </property>
-        <property name="minPoolSize">
-            <value>${jdbc.minPoolSize}</value>
+        <property name="maxWait">
+            <value>${jdbc.maxWait}</value>
         </property>
-        <property name="idleConnectionTestPeriod">
-            <value>${jdbc.idleConnectionTestPeriod}</value>
+        <property name="minIdle">
+            <value>${jdbc.minIdle}</value>
         </property>
-        <property name="maxIdleTime">
-            <value>${jdbc.maxIdleTime}</value>
+        <property name="timeBetweenEvictionRunsMillis">
+            <value>${jdbc.timeBetweenEvictionRunsMillis}</value>
         </property>
+        <property name="minEvictableIdleTimeMillis">
+            <value>${jdbc.minEvictableIdleTimeMillis}</value>
+        </property>
+        <property name="testWhileIdle">
+            <value>${jdbc.testWhileIdle}</value>
+        </property>
+        <property name="testOnBorrow">
+            <value>${jdbc.testOnBorrow}</value>
+        </property>
+        <property name="testOnReturn">
+            <value>${jdbc.testOnReturn}</value>
+        </property>
+        <property name="poolPreparedStatements">
+            <value>${jdbc.poolPreparedStatements}</value>
+        </property>
+        <property name="maxOpenPreparedStatements">
+            <value>${jdbc.maxOpenPreparedStatements}</value>
+        </property>
+
     </bean>
 
     <bean id="onedb_0" parent="onedbDataSource">
-        <property name="jdbcUrl">
+        <property name="url">
             <value>${jdbc.db_0.url}</value>
         </property>
-        <property name="user">
+        <property name="username">
             <value>${jdbc.db_0.username}</value>
         </property>
         <property name="password">
