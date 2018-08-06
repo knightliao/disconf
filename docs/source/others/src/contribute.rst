@@ -65,6 +65,7 @@
    (整个公司所有产品线均在使用)
 -  新东方在线
 -  深圳斯凯荣科技
+-  `盒子支付 <http://www.iboxpay.com>`__
 -  `更多 <https://github.com/knightliao/disconf/issues/18>`__
 
 正在关注的公司列表
