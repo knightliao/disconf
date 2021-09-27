@@ -1,14 +1,13 @@
 /**
- *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,13 +19,14 @@ package org.apache.zookeeper.recipes.lock;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.log4j.Logger;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A base class for protocol implementations which provides a number of higher
@@ -35,7 +35,7 @@ import org.apache.zookeeper.data.Stat;
  * {@link #retryOperation(ZooKeeperOperation)}
  */
 class ProtocolSupport {
-    private static final Logger LOG = Logger.getLogger(ProtocolSupport.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProtocolSupport.class);
 
     protected final ZooKeeper zookeeper;
     private AtomicBoolean closed = new AtomicBoolean(false);
@@ -128,7 +128,7 @@ class ProtocolSupport {
                     exception = e;
                 }
                 LOG.debug("Attempt " + i + " failed with connection loss so " +
-                              "attempting to reconnect: " + e, e);
+                        "attempting to reconnect: " + e, e);
                 retryDelay(i);
             }
         }

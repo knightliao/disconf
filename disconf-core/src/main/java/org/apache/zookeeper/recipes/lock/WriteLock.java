@@ -1,14 +1,13 @@
 /**
- *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,13 +22,14 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.log4j.Logger;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A <a href="package.html">protocol to implement an exclusive
@@ -40,7 +40,7 @@ import org.apache.zookeeper.data.Stat;
  * by calling {@link #isOwner()}
  */
 public class WriteLock extends ProtocolSupport {
-    private static final Logger LOG = Logger.getLogger(WriteLock.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WriteLock.class);
 
     private final String dir;
     private String id;
@@ -132,7 +132,7 @@ public class WriteLock extends ProtocolSupport {
             } catch (KeeperException e) {
                 LOG.warn("Caught: " + e, e);
                 throw (RuntimeException) new RuntimeException(e.getMessage()).
-                                                                                 initCause(e);
+                        initCause(e);
             } finally {
                 if (callback != null) {
                     callback.lockReleased();
@@ -151,7 +151,7 @@ public class WriteLock extends ProtocolSupport {
         public void process(WatchedEvent event) {
             // lets either become the leader or watch the new/updated node
             LOG.debug("Watcher fired on path: " + event.getPath() + " state: " +
-                          event.getState() + " type " + event.getType());
+                    event.getState() + " type " + event.getType());
             try {
                 lock();
             } catch (Exception e) {
@@ -177,7 +177,7 @@ public class WriteLock extends ProtocolSupport {
          * @throws InterruptedException
          */
         private void findPrefixInChildren(String prefix, ZooKeeper zookeeper, String dir)
-            throws KeeperException, InterruptedException {
+                throws KeeperException, InterruptedException {
             List<String> names = zookeeper.getChildren(dir, false);
             for (String name : names) {
                 if (name.startsWith(prefix)) {
@@ -218,7 +218,7 @@ public class WriteLock extends ProtocolSupport {
                     List<String> names = zookeeper.getChildren(dir, false);
                     if (names.isEmpty()) {
                         LOG.warn("No children in: " + dir + " when we've just " +
-                                     "created one! Lets recreate it...");
+                                "created one! Lets recreate it...");
                         // lets force the recreation of the id
                         id = null;
                     } else {
@@ -240,7 +240,7 @@ public class WriteLock extends ProtocolSupport {
                                 return Boolean.FALSE;
                             } else {
                                 LOG.warn("Could not find the" +
-                                             " stats for less than me: " + lastChildName.getName());
+                                        " stats for less than me: " + lastChildName.getName());
                             }
                         } else {
                             if (isOwner()) {

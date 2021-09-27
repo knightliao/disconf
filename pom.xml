@@ -5,12 +5,13 @@
 
     <groupId>com.baidu.disconf</groupId>
     <artifactId>disconf-base</artifactId>
-    <version>2.6.35</version>
+    <version>2.6.36</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>disconf-client</module>
         <module>disconf-core</module>
+        <module>disconf-web</module>
     </modules>
 
     <inceptionYear>2015</inceptionYear>
@@ -25,9 +26,9 @@
 
     <properties>
         <!-- 模块版本号 -->
-        <disconf-core.version>2.6.35</disconf-core.version>
-        <disconf-client.version>2.6.35</disconf-client.version>
-        <disconf-client-spring.version>2.6.35</disconf-client-spring.version>
+        <disconf-core.version>2.6.36</disconf-core.version>
+        <disconf-client.version>2.6.36</disconf-client.version>
+        <disconf-client-spring.version>2.6.36</disconf-client-spring.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
@@ -35,12 +36,12 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
         <!-- JAVA环境 -->
-        <java.version>1.6</java.version>
-        <source.version>1.6</source.version>
-        <target.version>1.6</target.version>
-        <spring.version>4.1.7.RELEASE</spring.version>
+        <java.version>1.7</java.version>
+        <source.version>1.7</source.version>
+        <target.version>1.7</target.version>
+        <spring.version>4.3.26.RELEASE</spring.version>
         <spring.amqp.version>1.4.5.RELEASE</spring.amqp.version>
-        <junit.version>4.10</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jsp.version>2.0</jsp.version>
         <servlet.version>2.5</servlet.version>
         <cglib.version>2.2.2</cglib.version>
@@ -95,13 +96,13 @@
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.6</version>
+                <version>1.9.4</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
-                <version>3.2</version>
+                <version>3.2.2</version>
             </dependency>
 
             <dependency>
@@ -119,13 +120,13 @@
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.2.1</version>
+                <version>1.3.3</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>1.4</version>
+                <version>2.7</version>
             </dependency>
 
             <dependency>
@@ -151,7 +152,7 @@
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
-                <version>3.3.6</version>
+                <version>3.4.14</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.sun.jmx</groupId>
@@ -225,13 +226,13 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.6.0</version>
+                <version>2.9.10.7</version>
             </dependency>
 
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.6</version>
+                <version>8.0.16</version>
             </dependency>
 
             <dependency>
@@ -273,7 +274,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>19.0-rc2</version>
+                <version>30.0-jre</version>
             </dependency>
 
             <dependency>
@@ -464,46 +465,14 @@
 
             <dependency>
                 <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-nop</artifactId>
-                <version>1.7.6</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.6</version>
-            </dependency>
-
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>1.0.9</version>
+                <version>1.7.25</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.0.9</version>
-            </dependency>
-
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.14</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.sun.jmx</groupId>
-                        <artifactId>jmxri</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.sun.jdmk</groupId>
-                        <artifactId>jmxtools</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>javax.jms</groupId>
-                        <artifactId>jms</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>1.2.5</version>
             </dependency>
 
             <dependency>
@@ -514,12 +483,6 @@
                 <!-- Include this if you have dependency conflicts for Guava,
                     Jetty, Jackson or Apache HTTP Client -->
                 <classifier>standalone</classifier>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.4.3</version>
             </dependency>
 
         </dependencies>
@@ -545,226 +508,18 @@
 
         <finalName>disconf-base</finalName>
 
-        <pluginManagement>
-            <!-- 覆盖率 mvn test -->
-            <plugins>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <formats>
-                            <format>xml</format>
-                        </formats>
-                        <aggregate>true</aggregate>
-                        <instrumentation>
-                            <excludes>
-                                <exclude>**/*Proto.class</exclude>
-                                <exclude>**/*Proto$*.class</exclude>
-                                <exclude>**/*Test.class</exclude>
-                                <exclude>**/*Controller.class</exclude>
-                                <exclude>**/*Vo.class</exclude>
-                                <exclude>**/*Form.class</exclude>
-                                <exclude>**/baidu/ub/**/*.class</exclude>
-                            </excludes>
-                        </instrumentation>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>cobertura</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- 编译 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.1</version>
-                    <configuration>
-                        <source>${source.version}</source>
-                        <target>${target.version}</target>
-                        <encoding>${encoding}</encoding>
-                        <failOnError>true</failOnError>
-                        <showDeprecation>true</showDeprecation>
-                        <showWarnings>true</showWarnings>
-                        <compilerArguments>
-                            <verbose/>
-                            <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>
-                        </compilerArguments>
-                    </configuration>
-
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.codehaus.plexus</groupId>
-                            <artifactId>plexus-compiler-javac</artifactId>
-                            <version>1.8.1</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <!-- JAR包 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-
-                <!-- war包 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.1.1</version>
-                    <configuration>
-                        <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-                    </configuration>
-                </plugin>
-
-                <!-- embedded web servers -->
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
-                    <version>6.1.10</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat6-maven-plugin</artifactId>
-                    <version>2.0</version>
-                </plugin>
-
-                <!-- auto deploy plugin -->
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>1.2.0</version>
-                </plugin>
-
-                <!-- 单测 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.5</version>
-                    <configuration>
-                        <argLine>-Dfile.encoding=UTF-8</argLine>
-                        <includes>
-                            <include>**/*TestCase.java</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/*ServiceTest.java</exclude>
-                            <exclude>**/TempDaoTest.java</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- 为了github的测试覆盖率 -->
-                <plugin>
-                    <groupId>org.eluder.coveralls</groupId>
-                    <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-            </plugins>
-        </pluginManagement>
-    </build>
-
-    <!-- TEST 報告 mvn site -->
-    <reporting>
+        <!-- 覆盖率 mvn test -->
         <plugins>
-
-            <!-- checkstyle -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.9.1</version>
-            </plugin>
-
-            <!-- pmd -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <aggregate>true</aggregate>
-                    <targetJdk>1.6</targetJdk>
-                </configuration>
-            </plugin>
-
-            <!-- 定义Site生成的Index -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.7</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>index</report>
-                            <report>summary</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <!-- site UT 插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <aggregate>true</aggregate>
-                    <argLine>-Dfile.encoding=UTF-8</argLine>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <!-- 单测RUN一次，其它地方都可以用 -->
-                            <report>report-only</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-
-            <!-- 覆盖率 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
-                    <aggregate>true</aggregate>
                     <formats>
                         <format>xml</format>
                         <format>html</format>
                     </formats>
+                    <aggregate>true</aggregate>
                     <instrumentation>
                         <excludes>
                             <exclude>**/*Proto.class</exclude>
@@ -775,29 +530,139 @@
                             <exclude>**/*Form.class</exclude>
                         </excludes>
                     </instrumentation>
-                    <check/>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 编译 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <source>${source.version}</source>
+                    <target>${target.version}</target>
+                    <encoding>${encoding}</encoding>
+                    <failOnError>true</failOnError>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <compilerArguments>
+                        <verbose/>
+                        <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>
+                    </compilerArguments>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.plexus</groupId>
+                        <artifactId>plexus-compiler-javac</artifactId>
+                        <version>1.8.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- JAR包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+
+            <!-- war包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
 
-            <!-- findbugs -->
+            <!-- embedded web servers -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.5.2</version>
-                <configuration>
-                    <aggregate>true</aggregate>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.10</version>
+            </plugin>
 
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+
+            <!-- auto deploy plugin -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.2.0</version>
+            </plugin>
+
+            <!-- 单测 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <includes>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*ServiceTest.java</exclude>
+                        <exclude>**/TempDaoTest.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 为了github的测试覆盖率 -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <!-- jdk1.8要加上，1.7要去掉，否则会报错 -->
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
-    </reporting>
+    </build>
 
     <developers>
         <developer>

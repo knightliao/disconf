@@ -13,6 +13,7 @@ Distributed Configuration Management Platform(分布式配置管理平台)
 
 - 有态度无广告的搜索引擎: https://www.sov5.com
 - 高质量的微信公众号阅读: http://www.100weidu.com
+- Python中国社区: http://www.python88.com
 
 .. toctree::
    :maxdepth: 2
@@ -26,4 +27,5 @@ Distributed Configuration Management Platform(分布式配置管理平台)
    question/index
    others/src/contribute
    others/src/sponsor
+   others/src/update
    design/index
