@@ -232,7 +232,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.6</version>
+                <version>8.0.16</version>
             </dependency>
 
             <dependency>
@@ -274,7 +274,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>19.0-rc2</version>
+                <version>30.0-jre</version>
             </dependency>
 
             <dependency>
