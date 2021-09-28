@@ -29,6 +29,7 @@
                             + '</a></li>';
                     });
                 $("#applist").html(html);
+                doAutoComplete();
             }
         });
     $("#applist").on('click', 'li a', function (e) {
@@ -407,5 +408,60 @@
         $("#zk_deploy_info").toggle();
         fetchZkDeploy();
     });
+
+    /*
+    添加自动完成查询功能
+     */
+    function doAutoComplete() {
+
+        var txtList = [];
+        var relList = {};
+        lst = $("a[rel]");
+
+        var j = 0;
+        var myUi;
+        for (var i = 0; i < lst.length; i++) {
+
+            var ele = lst[i];
+            var rel = ele.rel;
+            var text = ele.text;
+            if (rel) {
+                var t = text.replace("APP: ", "");
+                txtList[j] = t;
+                relList[t] = rel;
+                j++;
+            }
+        }
+
+
+        $("#appAutoList").autocomplete({
+            minLength:0,
+            source: txtList,
+            select: function (event, ui) {
+                myUi = ui;
+                if (ui.item) {
+                    var stext = ui.item.label;
+                    //console.log("data=" + stext);
+                    var relId = relList[stext];
+                    if (relId) {
+                        //console.log("relId=" + relId);
+                        appId = relId;
+                        $("#app_info").html(", " + stext);
+                        $("#appDropdownMenuTitle").text(stext);
+                        version = "#";
+                        fetchVersion(appId, envId);
+                    }
+                }
+
+            }
+        });
+
+        $("#appAutoList").dblclick(function () {
+            $("#appAutoList").val("");
+        });
+
+    }
+
+
 
 })(jQuery);
