@@ -1,10 +1,8 @@
 package com.baidu.disconf.client.config;
 
+import com.baidu.disconf.client.config.inner.DisInnerConfigHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.baidu.disconf.client.config.inner.DisClientComConfig;
-import com.baidu.disconf.client.config.inner.DisInnerConfigHelper;
 
 /**
  * 配置模块
@@ -27,8 +25,8 @@ public class ConfigMgr {
 
         LOGGER.info("--------------- LOAD CONFIG START ---------------");
 
-        //
-        LOGGER.info("Finer print: " + DisClientComConfig.getInstance().getInstanceFingerprint());
+        // 在使用时才初始化指纹，保证在Zookeeper链接初始化之后进行指纹获取操作。
+        //LOGGER.info("Finer print: " + DisClientComConfig.getInstance().getInstanceFingerprint());
 
         // 导入系统配置
         DisClientSysConfig.getInstance().loadConfig(null);

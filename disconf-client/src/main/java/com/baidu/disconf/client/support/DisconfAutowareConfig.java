@@ -1,16 +1,15 @@
 package com.baidu.disconf.client.support;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Properties;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.baidu.disconf.client.common.annotations.DisconfFileItem;
 import com.baidu.disconf.client.config.inner.DisInnerConfigAnnotation;
 import com.baidu.disconf.client.support.utils.ClassUtils;
 import com.baidu.disconf.client.support.utils.ConfigLoaderUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Properties;
 
 /**
  * 配置导入工具
@@ -64,6 +63,10 @@ public final class DisconfAutowareConfig {
 
                     // 优先使用 系统参数或命令行导入
                     value = System.getProperty(name);
+                    // 如果通过-D注入的参数为空的话，则检查系统Env变量。并且将.转换为_，如disconf.env转换为disconf_env
+                    if (value == null) {
+                        value = System.getenv(name.replace(".", "_"));
+                    }
                     field.setAccessible(true);
 
                     if (null != value) {
@@ -103,8 +106,7 @@ public final class DisconfAutowareConfig {
 
             for (Field field : fields) {
 
-                if (field.isAnnotationPresent(DisconfFileItem.class)
-                        || field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
+                if (field.isAnnotationPresent(DisconfFileItem.class) || field.isAnnotationPresent(DisInnerConfigAnnotation.class)) {
 
                     if (Modifier.isStatic(field.getModifiers())) {
                         continue;
@@ -193,7 +195,7 @@ public final class DisconfAutowareConfig {
 
                 if (field.isAnnotationPresent(DisconfFileItem.class)) {
 
-                    if (!Modifier.isStatic(field.getModifiers())) {
+                    if (! Modifier.isStatic(field.getModifiers())) {
                         continue;
                     }
 

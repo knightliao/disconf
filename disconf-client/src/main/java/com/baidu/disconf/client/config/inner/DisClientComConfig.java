@@ -1,14 +1,14 @@
 package com.baidu.disconf.client.config.inner;
 
+import com.baidu.disconf.client.common.model.InstanceFingerprint;
+import com.baidu.disconf.core.common.utils.ZooUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.baidu.disconf.client.common.model.InstanceFingerprint;
 
 /**
  * 一些通用的数据
@@ -27,22 +27,28 @@ public class DisClientComConfig {
     }
 
     private DisClientComConfig() {
-
-        initInstanceFingerprint();
     }
 
     /**
      * 初始化实例指纹<br/>
      * 以IP和PORT为指紋，如果找不到则以本地IP为指纹
      */
-    private void initInstanceFingerprint() {
-
+    private synchronized void initInstanceFingerprint() {
+        // 单例
+        if (instanceFingerprint != null) {
+            return;
+        }
         Properties properties = System.getProperties();
 
         int port = 0;
 
+        String VCAP_APP_HOST = properties.getProperty("VCAP_APP_HOST");
+        if (VCAP_APP_HOST == null) {
+            VCAP_APP_HOST = System.getenv("VCAP_APP_HOST");
+        }
+
         // get host
-        String host = properties.getProperty("VCAP_APP_HOST");
+        String host = ZooUtils.getNonLocalIp(VCAP_APP_HOST);
         if (host == null) {
 
             InetAddress addr;
@@ -52,17 +58,18 @@ public class DisClientComConfig {
             } catch (UnknownHostException e) {
                 LOGGER.info("");
             }
-
         } else {
             // get port
             try {
-                port = Integer.parseInt(properties.getProperty("VCAP_APP_HOST"));
+                port = Integer.parseInt(VCAP_APP_HOST);
             } catch (Exception e) {
                 LOGGER.info("");
             }
         }
 
         instanceFingerprint = new InstanceFingerprint(host, port, UUID.randomUUID().toString());
+        // 初始化后打印指纹信息
+        LOGGER.info("Finer print: " + DisClientComConfig.getInstance().getInstanceFingerprint());
     }
 
     private InstanceFingerprint instanceFingerprint;
@@ -71,7 +78,10 @@ public class DisClientComConfig {
      * 获取指纹
      */
     public String getInstanceFingerprint() {
-        return instanceFingerprint.getHost() + "_" + String.valueOf(instanceFingerprint.getPort()) + "_" +
-                instanceFingerprint.getUuid();
+        // 单例
+        if (instanceFingerprint == null) {
+            initInstanceFingerprint();
+        }
+        return instanceFingerprint.getHost() + "_" + String.valueOf(instanceFingerprint.getPort()) + "_" + instanceFingerprint.getUuid();
     }
 }
