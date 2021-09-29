@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.gson.Gson;
+
 /**
  * 类工具
  *
@@ -114,7 +116,7 @@ public class ClassUtils {
         }
 
         // trim
-        String dataValue = (String) value;
+        String dataValue = String.valueOf(value);
         dataValue = dataValue.trim();
 
         // process
@@ -124,7 +126,7 @@ public class ClassUtils {
         if (typeName.equals("int") || typeName.equals("java.lang.integer")) {
 
             if (value.equals("")) {
-                value = "0";
+            		return 0;
             }
 
             return Integer.valueOf(dataValue);
@@ -132,7 +134,7 @@ public class ClassUtils {
         } else if (typeName.equals("long") || typeName.equals("java.lang.long")) {
 
             if (value.equals("")) {
-                value = "0";
+            		return 0L;
             }
 
             return Long.valueOf(dataValue);
@@ -141,7 +143,7 @@ public class ClassUtils {
                 || typeName.equals("java.lang.boolean")) {
 
             if (value.equals("")) {
-                value = "false";
+            		return false;
             }
 
             return Boolean.valueOf(dataValue);
@@ -150,14 +152,26 @@ public class ClassUtils {
                 || typeName.equals("java.lang.double")) {
 
             if (value.equals("")) {
-                value = "0.0";
+            		return 0.0D;
             }
 
             return Double.valueOf(dataValue);
 
-        } else {
+        }  else if (typeName.equals("string")
+                || typeName.equals("java.lang.string")) {
 
-            return value;
+            return dataValue;
+        } 
+        else {
+			try {
+				// 其他类型尝试JSON解析
+				Gson gson = new Gson();
+				return gson.fromJson(value.toString(), type);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			// JSON解析异常的情况下，返回null，防止待会转换继续抛异常
+			return null;
         }
     }
 
