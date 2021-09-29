@@ -205,10 +205,6 @@ public final class OsUtil {
                         } catch (IOException e) {
                             logger.warn(e.toString());
                         }
-
-                        if (lockFile != null) {
-                            lockFile.delete();
-                        }
                     }
                     if (outStream != null) {
                         try {
@@ -216,6 +212,9 @@ public final class OsUtil {
                         } catch (IOException e) {
                             logger.warn(e.toString());
                         }
+                    }
+                    if (lockFile != null) {
+                      	lockFile.delete();
                     }
                 }
 
