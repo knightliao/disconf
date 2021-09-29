@@ -14,7 +14,7 @@ Tutorial 10 实现一个配置更新下载器agent
 
 | 可以修改一下 disconf-demos/disconf-standalone-demo
   这个项目，让其变成一个 长驻进程，并指定
-| `disconf.user\_define\_download\_dir <../../config/client-config.html>`__
+| `disconf.user\_define\_download\_dir <../../config/src/client-config.html>`__
   这个配置到你想指定的路径。
 
 done.

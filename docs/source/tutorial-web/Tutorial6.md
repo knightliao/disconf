@@ -3,7 +3,7 @@ Tutorial 6 disconf-web 功能详解
 
 ## UI及架构 ##
 
-[disconf-web](../install/02.html)
+[disconf-web](../install/src/02.html)
 
 ## 主要功能
 
