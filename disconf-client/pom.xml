@@ -139,6 +139,20 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.netflix.curator/curator-test -->
+        <dependency>
+            <groupId>com.netflix.curator</groupId>
+            <artifactId>curator-test</artifactId>
+            <version>1.0.20</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>1.0.20</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- ================ provided ================ -->
 
         <dependency>
