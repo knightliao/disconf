@@ -41,7 +41,7 @@ Disconf-client详细设计文档
 |image1|
 
 [点击查看大图
-](\ http://ww3.sinaimg.cn/mw1024/60c9620fjw1eqj81no7shj20l50h2q65.jpg
+](\ http://ww3.sinaimg.cn/mw1024/60c9620fjw1eqj81no7shj20l50h2q65.jpg)
 
 **运行流程详细介绍：**
 
