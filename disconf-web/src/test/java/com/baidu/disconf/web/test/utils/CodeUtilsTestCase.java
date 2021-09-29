@@ -15,6 +15,20 @@ import com.baidu.disconf.web.utils.CodeUtils;
 public class CodeUtilsTestCase {
 
     @Test
+    public void utf8ToUnicodeTest() {
+        String code = CodeUtils.utf8ToUnicode("syserror.paramtype=请求参数解析错误");
+        System.out.println(code);
+        Assert.assertEquals("syserror.paramtype=\\u8bf7\\u6c42\\u53c2\\u6570\\u89e3\\u6790\\u9519\\u8bef", code);
+    }
+
+    @Test
+    public void utf8ToUnicodeTest2() {
+        String code = CodeUtils.utf8ToUnicode("·");
+        System.out.println(code);
+        Assert.assertEquals("\\u00b7", code);
+    }
+
+    @Test
     public void unicodeToUtf8Test() {
 
         String code =
