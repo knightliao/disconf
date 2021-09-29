@@ -203,9 +203,26 @@ public class DisconfStoreFileProcessorImpl implements DisconfStoreProcessor {
 
                 Object object = disconfValue.getFileData().get(fileItem);
                 if (object == null) {
-                    LOGGER.error("cannot find {} to be injected. file content is: {}", fileItem,
-                            disconfValue.getFileData().toString());
-                    continue;
+                    //bug fix by liujing  if list map set condition
+
+                    Map<String,Object> map = disconfValue.getFileData();
+                    int jcount = 0;
+                    for(Map.Entry<String,Object> entry : map.entrySet()){
+                        String key = entry.getKey();
+                        if(key != null && key.startsWith(fileItem)){
+                            if(jcount==0){
+                                object = new ArrayList<String>();
+                            }
+                            ((List)object).add(entry.getValue());
+                            jcount++;
+                        }
+                    }
+
+                    if(object==null){
+                        LOGGER.error("cannot find {} to be injected. file content is: {}", fileItem,
+                                disconfValue.getFileData().toString());
+                        continue;
+                    }
                 }
 
                 // 根据类型设置值
