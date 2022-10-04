@@ -2,6 +2,7 @@ package com.baidu.disconf.client.test.support.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * @author liaoqiqi
@@ -13,15 +14,7 @@ public class DirUtils {
 
         final File temp;
 
-        temp = File.createTempFile("temp", Long.toString(System.nanoTime()));
-
-        if (!(temp.delete())) {
-            throw new IOException("Could not delete temp file: " + temp.getAbsolutePath());
-        }
-
-        if (!(temp.mkdir())) {
-            throw new IOException("Could not create temp directory: " + temp.getAbsolutePath());
-        }
+        temp = Files.createTempDirectory("temp" + Long.toString(System.nanoTime())).toFile();
 
         return (temp);
     }
